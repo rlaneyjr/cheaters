@@ -1,0 +1,216 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="../../../rdx/css/rdx.css" rel="stylesheet" type="text/css"/>
+    <link href="../../../index.css" rel="stylesheet" type="text/css"/><title>nsconnectiontable</title>
+</head>
+<body class="ns_body">
+<p class="ns_wp_header">nsconnectiontable</p>
+<P>Configuration for TCP/IP connection table resource.</P><p class="heading">Read/write properties</p><p class="property_name">filterexpression<span class="property_type">&lt;String&gt;</span></p><p class="property_description">The maximum length of filter expression is 255 and it can be of following format:
+  &lt;expression&gt; [&lt;relop&gt; &lt;expression&gt;]
+
+    &lt;relop&gt; = ( &amp;&amp; | || )
+
+    connectiontable supports two types of filter expressions:
+
+    Classic Expressions:
+
+    &lt;expression&gt; = the expression string in the format:
+    &lt;qualifier&gt; &lt;operator&gt; &lt;qualifier-value&gt;
+
+    &lt;qualifier&gt; = SOURCEIP.
+    &lt;qualifier-value&gt; = A valid IP address.
+    &lt;qualifier&gt; = SOURCEPORT.
+    &lt;qualifier-value&gt; = A valid port number.
+    &lt;qualifier&gt; = DESTIP.
+    &lt;qualifier-value&gt; = A valid IP address.
+    &lt;qualifier&gt; = DESTPORT.
+    &lt;qualifier-value&gt; = A valid port number.
+    &lt;qualifier&gt; = IP.
+    &lt;qualifier-value&gt; = A valid IP address.
+    &lt;qualifier&gt; = PORT.
+    &lt;qualifier-value&gt; = A valid port number.
+    &lt;qualifier&gt; = IDLETIME.
+    &lt;qualifier-value&gt; = A positive integer indicating the idle time.
+    &lt;qualifier&gt; = SVCNAME.
+    &lt;qualifier-value&gt; = The name of a service.
+    &lt;qualifier&gt; = VSVRNAME.
+    &lt;qualifier-value&gt; = The name of a vserver.
+    &lt;qualifier&gt; = CONNID
+    &lt;qualifier-value&gt; = A valid PCB dev number.
+    &lt;qualifier&gt; = INTF
+    &lt;qualifier-value&gt; = A valid interface id in the form of x/y
+                (n/x/y in case of cluster interface).
+    &lt;qualifier&gt; = VLAN
+    &lt;qualifier-value&gt; = A valid VLAN ID.
+    &lt;qualifier&gt; = STATE.
+    &lt;qualifier-value&gt; = ( CLOSE_WAIT | CLOSED | CLOSING | ESTABLISHED |
+        FIN_WAIT_1 | FIN_WAIT_2 | LAST_ACK | LISTEN |
+        SYN_RECEIVED | SYN_SENT | TIME_WAIT )
+    &lt;qualifier&gt; = SVCTYPE.
+    &lt;qualifier-value&gt; = ( HTTP | FTP | TCP | UDP | SSL |
+        SSL_BRIDGE | SSL_TCP | NNTP | RPCSVR | RPCSVRS |
+        RPCCLNT | DNS | ADNS | SNMP | RTSP | DHCPRA | ANY |
+        MONITOR | MONITOR_UDP | MONITOR_PING | SIP_UDP | MYSQL | MSSQL | UNKNOWN )
+
+    &lt;operator&gt; = ( == | eq | != | neq | &gt; | gt | &lt; | lt | &gt;= |
+        ge | &lt;= | le | BETWEEN )
+
+    Default Expressions:
+
+    &lt;expression&gt; =:
+    CONNECTION.&lt;qualifier&gt;.&lt;qualifier-method&gt;.(&lt;qualifier-value&gt;)
+
+    &lt;qualifier&gt; = SRCIP
+    &lt;qualifier-method&gt; = [ EQ | NE ]
+    &lt;qualifier-value&gt;  = A valid IPv4 address
+    example = CONNECTION.SRCIP.EQ(127.0.0.1)
+
+    &lt;qualifier&gt; = DSTIP
+    &lt;qualifier-method&gt; = [ EQ | NE ]
+    &lt;qualifier-value&gt;  = A valid IPv4 address.
+    example = CONNECTION.DSTIP.EQ(127.0.0.1)
+
+    &lt;qualifier&gt; = IP
+    &lt;qualifier-method&gt; = [ EQ | NE ]
+    &lt;qualifier-value&gt;  = A valid IPv4 address.
+    example = CONNECTION.IP.EQ(127.0.0.1)
+
+    &lt;qualifier&gt; = SRCIPv6
+    &lt;qualifier-method&gt; = [ EQ | NE ]
+    &lt;qualifier-value&gt;  = A valid IPv6 address.
+    example = CONNECTION.SRCIPv6.EQ(2001:db8:0:0:1::1)
+
+    &lt;qualifier&gt; = DSTIPv6
+    &lt;qualifier-method&gt; = [ EQ | NE ]
+    &lt;qualifier-value&gt;  = A valid IPv6 address.
+    example = CONNECTION.DSTIPv6.EQ(2001:db8:0:0:1::1)
+
+    &lt;qualifier&gt; = IPv6
+    &lt;qualifier-method&gt; = [ EQ | NE ]
+    &lt;qualifier-value&gt;  = A valid IPv6 address.
+    example = CONNECTION.IPv6.EQ(2001:db8:0:0:1::1)
+
+    &lt;qualifier&gt; = SRCPORT
+    &lt;qualifier-method&gt; = [ EQ | NE | GT | GE | LT | LE
+                        | BETWEEN ]
+    &lt;qualifier-value&gt;  = A valid port number.
+    example = CONNECTION.SRCPORT.EQ(80)
+
+    &lt;qualifier&gt; = DSTPORT
+    &lt;qualifier-method&gt; = [ EQ | NE | GT | GE | LT | LE
+                        | BETWEEN ]
+    &lt;qualifier-value&gt;  = A valid port number.
+    example = CONNECTION.DSTPORT.EQ(80)
+
+    &lt;qualifier&gt; = PORT
+    &lt;qualifier-method&gt; = [ EQ | NE | GT | GE | LT | LE
+                        | BETWEEN ]
+    &lt;qualifier-value&gt;  = A valid port number.
+    example = CONNECTION.PORT.EQ(80)
+
+    &lt;qualifier&gt; = SVCNAME
+    &lt;qualifier-method&gt; = [ EQ | NE | CONTAINS | STARTSWITH
+                        | ENDSWITH ]
+    &lt;qualifier-value&gt;  = service name.
+    example = CONNECTION.SVCNAME.EQ(&quot;name&quot;)
+
+    &lt;qualifier&gt; = LB_VSERVER.NAME
+    &lt;qualifier-method&gt; = [ EQ | NE | CONTAINS | STARTSWITH
+                        | ENDSWITH ]
+    &lt;qualifier-value&gt;  = LB vserver name.
+    example = CONNECTION.LB_VSERVER.NAME.EQ(&quot;name&quot;)
+
+    &lt;qualifier&gt; = CS_VSERVER.NAME
+    &lt;qualifier-method&gt; = [ EQ | NE | CONTAINS | STARTSWITH
+                        | ENDSWITH ]
+    &lt;qualifier-value&gt;  = CS vserver name.
+    example = CONNECTION.CS_VSERVER.NAME.EQ(&quot;name&quot;)
+
+    &lt;qualifier&gt; = INTF
+    &lt;qualifier-method&gt; = [ EQ | NE ]
+    &lt;qualifier-value&gt;  = A valid interface id in the form of
+                x/y (n/x/y in case of cluster interface).
+    examle = CONNECTION.INTF.EQ(&quot;0/1/1&quot;)
+
+    &lt;qualifier&gt; = VLANID
+    &lt;qualifier-method&gt; = [ EQ | NE | GT | GE | LT | LE
+                        | BETWEEN ]
+    &lt;qualifier-value&gt;  = A valid VLAN ID.
+    example = CONNECTION.VLANID.EQ(0)
+
+    &lt;qualifier&gt; = CONNID
+    &lt;qualifier-method&gt; = [ EQ | NE | GT | GE | LT | LE
+                        | BETWEEN ]
+    &lt;qualifier-value&gt;  = A valid PCB dev number.
+    example = CONNECTION.CONNID.EQ(0)
+
+    &lt;qualifier&gt; = PPEID
+    &lt;qualifier-method&gt; = [ EQ | NE | GT | GE | LT | LE
+                        | BETWEEN ]
+    &lt;qualifier-value&gt;  = A valid core ID.
+      example = CONNECTION.PPEID.EQ(0)
+
+    &lt;qualifier&gt; = IDLETIME
+    &lt;qualifier-method&gt; = [ EQ | NE | GT | GE | LT | LE
+                        | BETWEEN ]
+    &lt;qualifier-value&gt;  = A positive integer indicating the
+                   idletime.
+    example = CONNECTION.IDLETIME.LT(100)
+
+    &lt;qualifier&gt; = TCPSTATE
+    &lt;qualifier-method&gt; = [ EQ | NE ]
+    &lt;qualifier-value&gt;  = ( CLOSE_WAIT | CLOSED | CLOSING |
+           ESTABLISHED | FIN_WAIT_1 | FIN_WAIT_2 | LAST_ACK |
+        LISTEN | SYN_RECEIVED | SYN_SENT | TIME_WAIT |
+        NOT_APPLICABLE)
+    example = CONNECTION.TCPSTATE.EQ(LISTEN)
+
+    &lt;qualifier&gt; = SERVICE_TYPE
+    &lt;qualifier-method&gt; = [ EQ | NE ]
+    &lt;qualifier-value&gt;  = ( SVC_HTTP | FTP | TCP | UDP | SSL |
+        SSL_BRIDGE | SSL_TCP | NNTP | RPCSVR | RPCSVRS |
+        RPCCLNT | SVC_DNS | ADNS | SNMP | RTSP | DHCPRA | ANY|
+        MONITOR | MONITOR_UDP | MONITOR_PING | SIP_UDP |
+        SVC_MYSQL | SVC_MSSQL | SERVICE_UNKNOWN )
+    example = CONNECTION.SERVICE_TYPE.EQ(ANY)
+
+    &lt;qualifier&gt; = TRAFFIC_DOMAIN_ID
+    &lt;qualifier-method&gt; = [ EQ | NE | GT | GE | LT | LE
+                        | BETWEEN ]
+    &lt;qualifier-value&gt;  = A valid traffic domain ID.
+    example = CONNECTION.TRAFFIC_DOMAIN_ID.EQ(0)
+
+    common usecases:
+    Filtering out loopback connections and view present
+    connections through netsclaer
+    show connectiontable &quot;CONNECTION.IP.NEQ(127.0.0.1) &amp;&amp;
+    CONNECTION.TCPSTATE.EQ(ESTABLISHED)&quot; -detail full
+
+    show connections from a particular sourceip and targeted
+    to port 80
+    show connectiontable &quot;CONNECTION.SRCIP.EQ(10.102.1.91) &amp;&amp;
+    CONNECTION.DSTPORT.EQ(80)&quot;
+
+    show connection particular to a service and its linked
+    client connections
+    show connectiontable &quot;CONNECTION.SVCNAME.EQ(&quot;S1&quot;)&quot;
+    -detail link
+
+    show connections for a particular servicetype(e.g.http)
+    show connectiontable &quot;CONNECTION.SERVICE_TYPE.EQ(TCP)&quot;
+
+    viewing connections that have been idle for a long time
+    show connectiontable &quot;CONNECTION.IDLETIME.GT(100)&quot;
+
+    show connections for a particular interface and vlan
+    show connectiontable &quot;CONNECTION.INTF.EQ(&quot;1/1&quot;) &amp;&amp;
+    CONNECTION.VLANID.EQ(1)&quot;
+.</p><p class="property_name">link<span class="property_type">&lt;Boolean&gt;</span></p><p class="property_description">Display link information if available.</p><p class="property_name">name<span class="property_type">&lt;Boolean&gt;</span></p><p class="property_description">Display name instead of IP for local entities.</p><p class="property_name">detail<span class="property_type">&lt;String[]&gt;</span></p><p class="property_description">Specify display options for the connection table.
+* LINK - Displays the linked PCB (Protocol Control Block).
+* NAME - Displays along with the service name.
+* CONNFAILOVER - Displays PCB with connection failover.
+* FULL - Displays all available details.<br/>Possible values = LINK, NAME, CONNFAILOVER, FULL, NNM</p><p class="heading">Read only properties</p><p class="property_name">sourceip<span class="property_type">&lt;String&gt;</span></p><p class="property_description">Source IP of the connection.</p><p class="property_name">sourceport<span class="property_type">&lt;Integer&gt;</span></p><p class="property_description">Source port of the connection.<br/>Range 1 - 65535</p><p class="property_name">destip<span class="property_type">&lt;String&gt;</span></p><p class="property_description">Destination IP of the connection.</p><p class="property_name">destport<span class="property_type">&lt;Integer&gt;</span></p><p class="property_description">Destination port of the connection.<br/>Range 1 - 65535</p><p class="property_name">svctype<span class="property_type">&lt;String&gt;</span></p><p class="property_description">Protocol supported by the connection.<br/>Possible values = HTTP, FTP, TCP, UDP, SSL, SSL_BRIDGE, SSL_TCP, NNTP, RPCSVR, DNS, ADNS, SNMP, RTSP, DHCPRA, ANY, SIP_UDP, DNS_TCP, ADNS_TCP, HTTPSVR, HTTPCLIENT, NAT, HA, AAA, SINCTCP, VPN AFTP, MONITORS, SSLVPN UDP, SINCUDP, RIP, UDP CLNT, SASP, RPCCLNTS, ROUTE, AUDIT, STA HTTP, STA SSL, DNS RESOLVE, RDP, MYSQL, MSSQL, DIAMETER, SSL_DIAMETER, TFTP, ORACLE, ICA, RADIUS, TFTP_DATA</p><p class="property_name">idletime<span class="property_type">&lt;Integer&gt;</span></p><p class="property_description">Time since last activity was detected on the connection.</p><p class="property_name">state<span class="property_type">&lt;String&gt;</span></p><p class="property_description">Current TCP/IP state of the connection.<br/>Possible values = CLOSED, LISTEN, SYN_SENT, SYN_RECEIVED, ESTABLISHED, CLOSE_WAIT, FIN_WAIT_1, CLOSING, LAST_ACK, FIN_WAIT_2, TIME_WAIT, NA</p><p class="property_name">linksourceip<span class="property_type">&lt;String&gt;</span></p><p class="property_description">Source IP of the link connection.</p><p class="property_name">linksourceport<span class="property_type">&lt;Integer&gt;</span></p><p class="property_description">Source port of the link connection.<br/>Range 1 - 65535</p><p class="property_name">linkdestip<span class="property_type">&lt;String&gt;</span></p><p class="property_description">Destination IP of the link connection.</p><p class="property_name">linkdestport<span class="property_type">&lt;Integer&gt;</span></p><p class="property_description">Destination port of the link connection.<br/>Range 1 - 65535</p><p class="property_name">linkservicetype<span class="property_type">&lt;String&gt;</span></p><p class="property_description">Protocol supported by the link connection.<br/>Possible values = HTTP, FTP, TCP, UDP, SSL, SSL_BRIDGE, SSL_TCP, NNTP, RPCSVR, DNS, ADNS, SNMP, RTSP, DHCPRA, ANY, SIP_UDP, DNS_TCP, ADNS_TCP, HTTPSVR, HTTPCLIENT, NAT, HA, AAA, SINCTCP, VPN AFTP, MONITORS, SSLVPN UDP, SINCUDP, RIP, UDP CLNT, SASP, RPCCLNTS, ROUTE, AUDIT, STA HTTP, STA SSL, DNS RESOLVE, RDP, MYSQL, MSSQL, DIAMETER, SSL_DIAMETER, TFTP, ORACLE, ICA, RADIUS, TFTP_DATA</p><p class="property_name">linkidletime<span class="property_type">&lt;Integer&gt;</span></p><p class="property_description">Time since last activity was detected on link connection.</p><p class="property_name">linkstate<span class="property_type">&lt;String&gt;</span></p><p class="property_description">TCP/IP current state of link connection.<br/>Possible values = CLOSED, LISTEN, SYN_SENT, SYN_RECEIVED, ESTABLISHED, CLOSE_WAIT, FIN_WAIT_1, CLOSING, LAST_ACK, FIN_WAIT_2, TIME_WAIT, NA</p><p class="property_name">entityname<span class="property_type">&lt;String&gt;</span></p><p class="property_description">NetScaler entity name for the connection.</p><p class="property_name">linkentityname<span class="property_type">&lt;String&gt;</span></p><p class="property_description">NetScaler entity name for link connection.</p><p class="property_name">connid<span class="property_type">&lt;Double&gt;</span></p><p class="property_description">Unique transaction number for the connection.</p><p class="property_name">linkconnid<span class="property_type">&lt;Double&gt;</span></p><p class="property_description">Unique transaction number for the peer connection.</p><p class="property_name">optionflags<span class="property_type">&lt;String[]&gt;</span></p><p class="property_description">flags used to store TCP options like Sack, WS.<br/>Possible values = sack, timstmp, ws</p><p class="property_name">nswsvalue<span class="property_type">&lt;Double&gt;</span></p><p class="property_description">netscaler window scaling value.</p><p class="property_name">peerwsvalue<span class="property_type">&lt;Double&gt;</span></p><p class="property_description">peer window scaling value.</p><p class="property_name">mss<span class="property_type">&lt;Integer&gt;</span></p><p class="property_description">Client side MSS for the connection - used in server SYN.</p><p class="property_name">retxretrycnt<span class="property_type">&lt;Integer&gt;</span></p><p class="property_description">Retransmission retry count for the connection.</p><p class="property_name">rcvwnd<span class="property_type">&lt;Integer&gt;</span></p><p class="property_description">Received Advertised Window for the connection.</p><p class="property_name">advwnd<span class="property_type">&lt;Integer&gt;</span></p><p class="property_description">Sent advertised window for the connection.</p><p class="property_name">sndcwnd<span class="property_type">&lt;Integer&gt;</span></p><p class="property_description">sent congestion window for the connection.</p><p class="property_name">iss<span class="property_type">&lt;Integer&gt;</span></p><p class="property_description">Initial send sequence number for the connection.</p><p class="property_name">irs<span class="property_type">&lt;Integer&gt;</span></p><p class="property_description">Initial receive sequence number for the connection.</p><p class="property_name">rcvnxt<span class="property_type">&lt;Integer&gt;</span></p><p class="property_description">next expecting seq number for the connection.</p><p class="property_name">maxack<span class="property_type">&lt;Integer&gt;</span></p><p class="property_description">current running max ack sent for the connection.</p><p class="property_name">sndnxt<span class="property_type">&lt;Integer&gt;</span></p><p class="property_description">next bytes seq number for the connection.</p><p class="property_name">sndunack<span class="property_type">&lt;Integer&gt;</span></p><p class="property_description">Most recently received ACK for the connection.</p><p class="property_name">httpendseq<span class="property_type">&lt;Integer&gt;</span></p><p class="property_description">HTTP parsing tracking seq number for the connection.</p><p class="property_name">httpstate<span class="property_type">&lt;String&gt;</span></p><p class="property_description">HTTP Protocol  state for the connection.<br/>Possible values = INITIALIZED, CONTENT_LENGTH, CHUNKED, WAIT_FINAL_ACK, UNKNOWN, DONE, WAIT_FIN</p><p class="property_name">trcount<span class="property_type">&lt;Integer&gt;</span></p><p class="property_description">Max reuests allowed per connection.</p><p class="property_name">priority<span class="property_type">&lt;String&gt;</span></p><p class="property_description">priority of the connection.<br/>Possible values = SC Priority, Priority queue1, priority queue2, priority queue3, DoS Priority, Surge Priority</p><p class="property_name">httpreqver<span class="property_type">&lt;String&gt;</span></p><p class="property_description">current HTTP request version on the connection.<br/>Possible values = HTTP_1_0, HTTP_1_1, HTTP_0_9, RTSP_1_0, SIP_2_0, VPN_ICA_SOCKS, VPN_ICA_CGP</p><p class="property_name">httprequest<span class="property_type">&lt;String&gt;</span></p><p class="property_description">current HTTP request type on the connection.<br/>Possible values = OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT, RPCCONNECT</p><p class="property_name">httprspcode<span class="property_type">&lt;Integer&gt;</span></p><p class="property_description">current response type on the connection.</p><p class="property_name">rttsmoothed<span class="property_type">&lt;Integer&gt;</span></p><p class="property_description">smoothed RTT value of the connection.</p><p class="property_name">rttvariance<span class="property_type">&lt;Integer&gt;</span></p><p class="property_description">RTT variance for the connection.</p><p class="property_name">outoforderpkts<span class="property_type">&lt;Integer&gt;</span></p><p class="property_description">held packets on the connection.</p><p class="property_name">linkoptionflag<span class="property_type">&lt;String[]&gt;</span></p><p class="property_description">Link connection&#39;s TCP option flag for Sack and WS.<br/>Possible values = sack, timstmp, ws</p><p class="property_name">linknswsvalue<span class="property_type">&lt;Double&gt;</span></p><p class="property_description">Link connection-s netscaler window scaling value.</p><p class="property_name">linkpeerwsvalue<span class="property_type">&lt;Double&gt;</span></p><p class="property_description">Link connection-s peer netscaler window scaling value.</p><p class="property_name">targetnodeidnnm<span class="property_type">&lt;Integer&gt;</span></p><p class="property_description">NNM connection target node ID.</p><p class="property_name">sourcenodeidnnm<span class="property_type">&lt;Integer&gt;</span></p><p class="property_description">NNM connection source node ID.</p><p class="property_name">channelidnnm<span class="property_type">&lt;Double&gt;</span></p><p class="property_description">NNM connection channel ID.</p><p class="property_name">msgversionnnm<span class="property_type">&lt;Double&gt;</span></p><p class="property_description">nnm message version.</p><p class="property_name">td<span class="property_type">&lt;Double&gt;</span></p><p class="property_description">Traffic Domain Id.</p><p class="property_name">__count<span class="property_type">&lt;Double&gt;</span></p>
+	<p class="property_description">count parameter</p>
+<p class="heading">Operations</p><p class="property_name">NOTE: In request payload, Mandatory parameters are marked red and bold.<br /><br />The following parameters can be used in the nitro request :</p><p class="property_name">warning<span class="property_type">&nbsp;&nbsp;&nbsp;&lt;String_value&gt;</span></p><p class="property_description">Specify to get warnings in nitro response. If this field is set to YES, warning message will be sent in 'message' field and 'WARNING' value is set in severity field of the response in case there is a warning.<br />Other possible values for severity are ERROR, INFO and NONE.<br />Default value: NO<br />Possible values = YES, NO</p><p class="property_name">onerror<span class="property_type">&nbsp;&nbsp;&nbsp;&lt;String_value&gt;</span></p><p class="property_description"> Use this parameter to set the onerror status for nitro request. Applicable only for bulk requests.<br />Default value: EXIT<br />Possible values = EXIT, CONTINUE, ROLLBACK</p><a href="#get" class="operation">get (all)</a><a href="#count" class="operation">count</a><p class="heading"><a name="get">get (all)</a></p><p class="key">URL:<span class="url_value">http://&lt;NSIP&gt;/nitro/v1/config/nsconnectiontable</span></p><p class="key">Query-parameters:</p><p class="property_description"><b>args</b></p><p class="property_description"><span class="url_value">http://&lt;NSIP&gt;/nitro/v1/config/nsconnectiontable?<b>args=<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"filterexpression":&lt;String_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"link":&lt;Boolean_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name":&lt;Boolean_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"detail":&lt;String[]_value&gt;,<br/></b></span></p><p class="property_description"><span class="value">Use this query-parameter to get nsconnectiontable resources based on additional properties.</span></p><p class="property_description"><b>filter</b></p><p class="property_description"><span class="url_value">http://&lt;NSIP&gt;/nitro/v1/config/nsconnectiontable?<b>filter=property-name1:property-val1,property-name2:property-val2</b></span></p><p class="property_description"><span class="value">Use this query-parameter to get the filtered set of nsconnectiontable resources configured on NetScaler.Filtering can be done on any of the properties of the resource.</span></p><p class="property_description"><b>view</b></p><p class="property_description"><span class="url_value">http://&lt;NS_IP&gt;/nitro/v1/config/nsconnectiontable?<b>view=summary</b></span></p><p class="property_description"><span class="value">Use this query-parameter to get the summary output of nsconnectiontable resources configured on NetScaler.</span></p><p class="property_description"><b>pagesize=#no&amp;pageno=#no</b></p><p class="property_description"><span class="url_value">http://&lt;NS_IP&gt;/nitro/v1/config/nsconnectiontable?<b>pagesize=#no&amp;pageno=#no</b></span></p><p class="property_description"><span class="value">Use this query-parameter to get the nsconnectiontable resources in chunks.</span></p><p class="property_description"><b>warning</b></p><p class="property_description"><span class="url_value">http://&lt;NS_IP&gt;/nitro/v1/config/nsconnectiontable?<b>warning=yes</b></span></p><p class="property_description"><span class="value">Use this query parameter to get warnings in nitro response. If this field is set to YES, warning message will be sent in 'message' field and 'WARNING' value is set in severity field of the response in case there is a </span><span class="value">warning. Other possible values for severity are ERROR, INFO and NONE.</span></p><p class="key">HTTP Method:<span class="value">GET</span></p><p class="key">Response Payload:<span class="value">JSON</span></p><p class="payload">{ "errorcode": 0, "message": "Done", "severity": &lt;String_value&gt;, "nsconnectiontable": [ {<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"filterexpression":&lt;String_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"link":&lt;Boolean_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name":&lt;Boolean_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"detail":&lt;String[]_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"sourceip":&lt;String_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"sourceport":&lt;Integer_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"destip":&lt;String_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"destport":&lt;Integer_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"svctype":&lt;String_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"idletime":&lt;Integer_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"state":&lt;String_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"linksourceip":&lt;String_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"linksourceport":&lt;Integer_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"linkdestip":&lt;String_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"linkdestport":&lt;Integer_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"linkservicetype":&lt;String_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"linkidletime":&lt;Integer_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"linkstate":&lt;String_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"entityname":&lt;String_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"linkentityname":&lt;String_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"connectionnumber":&lt;Integer_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"linkconnectionnumber":&lt;Integer_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"connid":&lt;Double_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"linkconnid":&lt;Double_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"optionflags":&lt;String[]_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"nswsvalue":&lt;Double_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"peerwsvalue":&lt;Double_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"mss":&lt;Integer_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"retxretrycnt":&lt;Integer_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"rcvwnd":&lt;Integer_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"advwnd":&lt;Integer_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"sndcwnd":&lt;Integer_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"iss":&lt;Integer_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"irs":&lt;Integer_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"rcvnxt":&lt;Integer_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"maxack":&lt;Integer_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"sndnxt":&lt;Integer_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"sndunack":&lt;Integer_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"httpendseq":&lt;Integer_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"httpstate":&lt;String_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"trcount":&lt;Integer_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"priority":&lt;String_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"httpreqver":&lt;String_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"httprequest":&lt;String_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"httprspcode":&lt;Integer_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"rttsmoothed":&lt;Integer_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"rttvariance":&lt;Integer_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"outoforderpkts":&lt;Integer_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"linkoptionflag":&lt;String[]_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"linknswsvalue":&lt;Double_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"linkpeerwsvalue":&lt;Double_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"targetnodeidnnm":&lt;Integer_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"sourcenodeidnnm":&lt;Integer_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"channelidnnm":&lt;Double_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"msgversionnnm":&lt;Double_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"td":&lt;Double_value&gt;<br/><br/>}]}</p><p class="heading"><a name="count">count</a></p><p class="key">URL:<span class="url_value">http://&lt;NS_IP&gt;/nitro/v1/config/nsconnectiontable?count=yes</span></p><p class="key">HTTP Method:<span class="value">GET</span></p><p class="key">Response Payload:<span class="value">JSON</span></p><p class="payload">{ "errorcode": 0, "message": "Done",nsconnectiontable: [ { "__count": "#no"} ] }</p></body></html>

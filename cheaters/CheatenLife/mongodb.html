@@ -1,0 +1,1318 @@
+domoAdmin
+LetMeMongo49
+mongod    2017  2.1 22.1 7822484 7273024 ?     Sl   Feb11 367:37 /usr/bin/mongod -f /etc/mongod.conf
+
+MongoDB shell version: 3.2.1
+connecting to: test
+> help
+        db.help()                    help on db methods
+        db.mycoll.help()             help on collection methods
+        sh.help()                    sharding helpers
+        rs.help()                    replica set helpers
+        help admin                   administrative help
+        help connect                 connecting to a db help
+        help keys                    key shortcuts
+        help misc                    misc things to know
+        help mr                      mapreduce
+
+        show dbs                     show database names
+        show collections             show collections in current database
+        show users                   show users in current database
+        show profile                 show most recent system.profile entries with time >= 1ms
+        show logs                    show the accessible logger names
+        show log [name]              prints out the last segment of log in memory, 'global' is default
+        use <db_name>                set current database
+        db.foo.find()                list objects in collection foo
+        db.foo.find( { a : 1 } )     list objects in foo where a == 1
+        it                           result of the last line evaluated; use to further iterate
+        DBQuery.shellBatchSize = x   set default number of items to display on shell
+        exit                         quit the mongo shell
+
+> help admin
+        ls([path])                      list files
+        pwd()                           returns current directory
+        listFiles([path])               returns file list
+        hostname()                      returns name of this host
+        cat(fname)                      returns contents of text file as a string
+        removeFile(f)                   delete a file or directory
+        load(jsfilename)                load and execute a .js file
+        run(program[, args...])         spawn a program and wait for its completion
+        runProgram(program[, args...])  same as run(), above
+        sleep(m)                        sleep m milliseconds
+        getMemInfo()                    diagnostic
+
+> help connect
+
+Normally one specifies the server on the mongo shell command line.  Run mongo --help to see those options.
+Additional connections may be opened:
+
+    var x = new Mongo('host[:port]');
+    var mydb = x.getDB('mydb');
+  or
+    var mydb = connect('host[:port]/mydb');
+
+Note: the REPL prompt only auto-reports getLastError() for the shell command line connection.
+
+> help keys
+Tab completion and command history is available at the command prompt.
+
+Some emacs keystrokes are available too:
+  Ctrl-A start of line
+  Ctrl-E end of line
+  Ctrl-K del to end of line
+
+Multi-line commands
+You can enter a multi line javascript expression.  If parens, braces, etc. are not closed, you will see a new line
+beginning with '...' characters.  Type the rest of your expression.  Press Ctrl-C to abort the data entry if you
+get stuck.
+
+> help misc
+        b = new BinData(subtype,base64str)  create a BSON BinData value
+        b.subtype()                         the BinData subtype (0..255)
+        b.length()                          length of the BinData data in bytes
+        b.hex()                             the data as a hex encoded string
+        b.base64()                          the data as a base 64 encoded string
+        b.toString()
+
+        b = HexData(subtype,hexstr)         create a BSON BinData value from a hex string
+        b = UUID(hexstr)                    create a BSON BinData value of UUID subtype
+        b = MD5(hexstr)                     create a BSON BinData value of MD5 subtype
+        "hexstr"                            string, sequence of hex characters (no 0x prefix)
+
+        o = new ObjectId()                  create a new ObjectId
+        o.getTimestamp()                    return timestamp derived from first 32 bits of the OID
+        o.isObjectId
+        o.toString()
+        o.equals(otherid)
+
+        d = ISODate()                       like Date() but behaves more intuitively when used
+        d = ISODate('YYYY-MM-DD hh:mm:ss')    without an explicit "new " prefix on construction
+> help mr
+
+See also http://dochub.mongodb.org/core/mapreduce
+
+function mapf() {
+  // 'this' holds current document to inspect
+  emit(key, value);
+}
+
+function reducef(key,value_array) {
+  return reduced_value;
+}
+
+db.mycollection.mapReduce(mapf, reducef[, options])
+
+options
+{[query : <query filter object>]
+ [, sort : <sort the query.  useful for optimization>]
+ [, limit : <number of objects to return from collection>]
+ [, out : <output-collection name>]
+ [, keeptemp: <true|false>]
+ [, finalize : <finalizefunction>]
+ [, scope : <object where fields go into javascript global scope >]
+ [, verbose : true]}
+
+> db.help()
+DB methods:
+        db.adminCommand(nameOrDocument) - switches to 'admin' db, and runs command [ just calls db.runCommand(...) ]
+        db.auth(username, password)
+        db.cloneDatabase(fromhost)
+        db.commandHelp(name) returns the help for the command
+        db.copyDatabase(fromdb, todb, fromhost)
+        db.createCollection(name, { size : ..., capped : ..., max : ... } )
+        db.createUser(userDocument)
+        db.currentOp() displays currently executing operations in the db
+        db.dropDatabase()
+        db.eval() - deprecated
+        db.fsyncLock() flush data to disk and lock server for backups
+        db.fsyncUnlock() unlocks server following a db.fsyncLock()
+        db.getCollection(cname) same as db['cname'] or db.cname
+        db.getCollectionInfos([filter]) - returns a list that contains the names and options of the db's collections
+        db.getCollectionNames()
+        db.getLastError() - just returns the err msg string
+        db.getLastErrorObj() - return full status object
+        db.getLogComponents()
+        db.getMongo() get the server connection object
+        db.getMongo().setSlaveOk() allow queries on a replication slave server
+        db.getName()
+        db.getPrevError()
+        db.getProfilingLevel() - deprecated
+        db.getProfilingStatus() - returns if profiling is on and slow threshold
+        db.getReplicationInfo()
+        db.getSiblingDB(name) get the db at the same server as this one
+        db.getWriteConcern() - returns the write concern used for any operations on this db, inherited from server object if set
+        db.hostInfo() get details about the server's host
+        db.isMaster() check replica primary status
+        db.killOp(opid) kills the current operation in the db
+        db.listCommands() lists all the db commands
+        db.loadServerScripts() loads all the scripts in db.system.js
+        db.logout()
+        db.printCollectionStats()
+        db.printReplicationInfo()
+        db.printShardingStatus()
+        db.printSlaveReplicationInfo()
+        db.dropUser(username)
+        db.repairDatabase()
+        db.resetError()
+        db.runCommand(cmdObj) run a database command.  if cmdObj is a string, turns it into { cmdObj : 1 }
+        db.serverStatus()
+        db.setLogLevel(level,<component>)
+        db.setProfilingLevel(level,<slowms>) 0=off 1=slow 2=all
+        db.setWriteConcern( <write concern doc> ) - sets the write concern for writes to the db
+        db.unsetWriteConcern( <write concern doc> ) - unsets the write concern for writes to the db
+        db.setVerboseShell(flag) display extra information in shell output
+        db.shutdownServer()
+        db.stats()
+        db.version() current version of the server
+
+> db.mycoll.help()
+DBCollection help
+        db.mycoll.find().help() - show DBCursor help
+        db.mycoll.bulkWrite( operations, <optional params> ) - bulk execute write operations, optional parameters are: w, wtimeout, j
+        db.mycoll.count( query = {}, <optional params> ) - count the number of documents that matches the query, optional parameters are: limit, skip, hint, maxTimeMS
+        db.mycoll.copyTo(newColl) - duplicates collection by copying all documents to newColl; no indexes are copied.
+        db.mycoll.convertToCapped(maxBytes) - calls {convertToCapped:'mycoll', size:maxBytes}} command
+        db.mycoll.createIndex(keypattern[,options])
+        db.mycoll.createIndexes([keypatterns], <options>)
+        db.mycoll.dataSize()
+        db.mycoll.deleteOne( filter, <optional params> ) - delete first matching document, optional parameters are: w, wtimeout, j
+        db.mycoll.deleteMany( filter, <optional params> ) - delete all matching documents, optional parameters are: w, wtimeout, j
+        db.mycoll.distinct( key, query, <optional params> ) - e.g. db.mycoll.distinct( 'x' ), optional parameters are: maxTimeMS
+        db.mycoll.drop() drop the collection
+        db.mycoll.dropIndex(index) - e.g. db.mycoll.dropIndex( "indexName" ) or db.mycoll.dropIndex( { "indexKey" : 1 } )
+        db.mycoll.dropIndexes()
+        db.mycoll.ensureIndex(keypattern[,options]) - DEPRECATED, use createIndex() instead
+        db.mycoll.explain().help() - show explain help
+        db.mycoll.reIndex()
+        db.mycoll.find([query],[fields]) - query is an optional query filter. fields is optional set of fields to return.
+                                                      e.g. db.mycoll.find( {x:77} , {name:1, x:1} )
+        db.mycoll.find(...).count()
+        db.mycoll.find(...).limit(n)
+        db.mycoll.find(...).skip(n)
+        db.mycoll.find(...).sort(...)
+        db.mycoll.findOne([query], [fields], [options], [readConcern])
+        db.mycoll.findOneAndDelete( filter, <optional params> ) - delete first matching document, optional parameters are: projection, sort, maxTimeMS
+        db.mycoll.findOneAndReplace( filter, replacement, <optional params> ) - replace first matching document, optional parameters are: projection, sort, maxTimeMS, upsert, returnNewDocument
+        db.mycoll.findOneAndUpdate( filter, update, <optional params> ) - update first matching document, optional parameters are: projection, sort, maxTimeMS, upsert, returnNewDocument
+        db.mycoll.getDB() get DB object associated with collection
+        db.mycoll.getPlanCache() get query plan cache associated with collection
+        db.mycoll.getIndexes()
+        db.mycoll.group( { key : ..., initial: ..., reduce : ...[, cond: ...] } )
+        db.mycoll.insert(obj)
+        db.mycoll.insertOne( obj, <optional params> ) - insert a document, optional parameters are: w, wtimeout, j
+        db.mycoll.insertMany( [objects], <optional params> ) - insert multiple documents, optional parameters are: w, wtimeout, j
+        db.mycoll.mapReduce( mapFunction , reduceFunction , <optional params> )
+        db.mycoll.aggregate( [pipeline], <optional params> ) - performs an aggregation on a collection; returns a cursor
+        db.mycoll.remove(query)
+        db.mycoll.replaceOne( filter, replacement, <optional params> ) - replace the first matching document, optional parameters are: upsert, w, wtimeout, j
+        db.mycoll.renameCollection( newName , <dropTarget> ) renames the collection.
+        db.mycoll.runCommand( name , <options> ) runs a db command with the given name where the first param is the collection name
+        db.mycoll.save(obj)
+        db.mycoll.stats({scale: N, indexDetails: true/false, indexDetailsKey: <index key>, indexDetailsName: <index name>})
+        db.mycoll.storageSize() - includes free space allocated to this collection
+        db.mycoll.totalIndexSize() - size in bytes of all the indexes
+        db.mycoll.totalSize() - storage allocated for all data and indexes
+        db.mycoll.update( query, object[, upsert_bool, multi_bool] ) - instead of two flags, you can pass an object with fields: upsert, multi
+        db.mycoll.updateOne( filter, update, <optional params> ) - update the first matching document, optional parameters are: upsert, w, wtimeout, j
+        db.mycoll.updateMany( filter, update, <optional params> ) - update all matching documents, optional parameters are: upsert, w, wtimeout, j
+        db.mycoll.validate( <full> ) - SLOW
+        db.mycoll.getShardVersion() - only for use with sharding
+        db.mycoll.getShardDistribution() - prints statistics about data distribution in the cluster
+        db.mycoll.getSplitKeysForChunks( <maxChunkSize> ) - calculates split points over all chunks and returns splitter function
+        db.mycoll.getWriteConcern() - returns the write concern used for any operations on this collection, inherited from server/db if set
+        db.mycoll.setWriteConcern( <write concern doc> ) - sets the write concern for writes to the collection
+        db.mycoll.unsetWriteConcern( <write concern doc> ) - unsets the write concern for writes to the collection
+
+> sh.help()
+        sh.addShard( host )                       server:port OR setname/server:port
+        sh.enableSharding(dbname)                 enables sharding on the database dbname
+        sh.shardCollection(fullName,key,unique)   shards the collection
+        sh.splitFind(fullName,find)               splits the chunk that find is in at the median
+        sh.splitAt(fullName,middle)               splits the chunk that middle is in at middle
+        sh.moveChunk(fullName,find,to)            move the chunk where 'find' is to 'to' (name of shard)
+        sh.setBalancerState( <bool on or not> )   turns the balancer on or off true=on, false=off
+        sh.getBalancerState()                     return true if enabled
+        sh.isBalancerRunning()                    return true if the balancer has work in progress on any mongos
+        sh.disableBalancing(coll)                 disable balancing on one collection
+        sh.enableBalancing(coll)                  re-enable balancing on one collection
+        sh.addShardTag(shard,tag)                 adds the tag to the shard
+        sh.removeShardTag(shard,tag)              removes the tag from the shard
+        sh.addTagRange(fullName,min,max,tag)      tags the specified range of the given collection
+        sh.removeTagRange(fullName,min,max,tag)   removes the tagged range of the given collection
+        sh.status()                               prints a general overview of the cluster
+
+> rs.help()
+        rs.status()                                { replSetGetStatus : 1 } checks repl set status
+        rs.initiate()                              { replSetInitiate : null } initiates set with default settings
+        rs.initiate(cfg)                           { replSetInitiate : cfg } initiates set with configuration cfg
+        rs.conf()                                  get the current configuration object from local.system.replset
+        rs.reconfig(cfg)                           updates the configuration of a running replica set with cfg (disconnects)
+        rs.add(hostportstr)                        add a new member to the set with default attributes (disconnects)
+        rs.add(membercfgobj)                       add a new member to the set with extra attributes (disconnects)
+        rs.addArb(hostportstr)                     add a new member which is arbiterOnly:true (disconnects)
+        rs.stepDown([stepdownSecs, catchUpSecs])   step down as primary (disconnects)
+        rs.syncFrom(hostportstr)                   make a secondary sync from the given member
+        rs.freeze(secs)                            make a node ineligible to become primary for the time specified
+        rs.remove(hostportstr)                     remove a host from the replica set (disconnects)
+        rs.slaveOk()                               allow queries on secondary nodes
+
+        rs.printReplicationInfo()                  check oplog size and time range
+        rs.printSlaveReplicationInfo()             check replica set members and replication lag
+        db.isMaster()                              check who is primary
+
+        reconfiguration helpers disconnect from the database so the shell will display
+        an error, even if the command succeeds.
+
+---------- Basics & Setup ----------
+
+1. A database name can't contain spaces, /, \, ., * <, >, ", |, ?, $, or : and normally are lowercase characters that are case sensitive
+
+2. You start the server by typing this in the terminal or command prompt mongod or mongod.exe on Windows
+
+3. You start the shell for interacting with the database by typing mongo or mongo.exe
+
+4. You can run JavaScript code in the shell
+
+a. function times2(num){
+... return num * 2;
+... }
+> times2(5); // Returns 10
+
+5. Show all databases with show dbs
+
+6. Show the current database by typing db in the shell
+
+7. Select a database with use test_1
+
+8. Create a MongoDB document and insert it in the database
+
+a. derekbanas = {"name" : "Derek Banas",
+... "position" : "Programmer",
+... "email" : "db@aol.com",
+... "hiredate" : new Date()}
+
+db.test_1.insert(derekbanas)
+
+9. Show the document with db.test_1.find()
+
+10. Update the database to allow a list of references
+
+derekbanas.references = [ ]
+db.test_1.update({"name" : "Derek Banas"}, derekbanas)
+
+db.test_1.find() // Shows the updated document
+
+11. Use remove on its own to delete all documents or with a parameter to delete just the one that matches
+
+db.test_1.remove({"name" : "Derek Banas"})
+
+db.test_1.find() // Shows no results
+
+12. Data Types
+
+a. null : {"name" : null}
+b. boolean : {"over20" : true}
+c. number : (64 bit float) : {"height" : 6.25}
+	1. 4 byte Int : {"bigint" : 4294967295}
+	2. 8 byte Long : {"bigLong" : 18446744073709551616}
+d. string : {"address" : "123 Main St"}
+e. An array can contain multiple data types : array : {"grades" : ["a", "b", "c", "d", "f"]}
+f. date object : {"hiredate" : new Date()}
+g. regular expression : {"streetregex" : /^[A-Za-z0-9\.\' \-]{5,30}$/}
+h. embedded document : {"info" : {"name" : "Sue Smith"}}
+i. object id (Unique for every document) : 12 Byte ID for documents
+
+j. randomdata = {"name" : null, "over20" : true, "height" : 6.25,
+"bigint" : 4294967295, "bigLong" : 18446744073709551616, 
+"address" : "123 Main St", "grades" : ["a", "b", "c", "d", "f"],
+"hiredate" : new Date(), "streetregex" : '/^[A-Za-z0-9\.\' \-]{5,30}$/',
+"info" : {"name" : "Sue Smith"}}
+
+k. db.test_1.insert(randomdata)
+
+13. By typing help you'll receive a list of MongoDB commands
+
+14. You can type commands without parentheses or parameters to see what the function does like -> db.test_1.find
+
+15. exit closes the Mongo session
+
+16. Type ulimit -n 2048 before running mongod to eliminate the error "soft rlimits too low. Number of files is 256" which will allocate more memory for the process.
+
+17. You can execute JS scripts in MongoDB like this
+a. Create file DefSelectDB.js
+	i. var selectDB = function(port, dbName) {
+	if(!port){
+		port = 27017;
+	}
+	
+	if(!dbName){
+		dbName = "test_1";
+	}
+	
+	db = connect("localhost:" + port + "/" + dbName);
+	
+	return db;
+	}
+	
+b. Load the script in the Mongo shell : load('DefSelectDB.js')
+
+c. Execute the function : selectDB()
+
+d. Switch to another database like this : selectDB(27017,"test")
+
+18. .mongorc.js is executed every time you run your shell command
+a. On Windows it is at c:\Users\derekbanas\.mongorc.js
+
+b. On Mac show all files by putting this in the terminal : defaults write com.apple.finder AppleShowAllFiles YES
+
+c. Then open .mongorc.js from the finder on Mac
+
+d. You can protect the DB, change the prompt and add an editor by adding these lines
+var protectDB = function() { 
+	db.dropDatabase = DB.prototype.dropDatabase = no; 
+	DBCollection.prototype.drop = no; 
+	DBCollection.prototype.dropIndex = no;
+	print("Database Protected"); 
+}; 
+
+operationCount = 1;
+prompt = function(){
+	if (typeof db == 'undefined'){
+		return 'nodb > ';
+	}
+	
+	return db + " " + (operationCount++) + " > ";
+	
+};
+
+EDITOR="vim"
+
+e. Then execute protectDB() in the Mongo shell
+
+f. This is the code on Windows
+
+	i. var protectDB = function() { 
+	db.dropDatabase = DB.prototype.dropDatabase = no; 
+	DBCollection.prototype.drop = no; 
+	DBCollection.prototype.dropIndex = no;
+	print("Database Protected"); 
+	}; 
+
+	operationCount = 1;
+	prompt = function(){
+		if (typeof db == 'undefined'){
+			return 'nodb > ';
+		}
+	
+		return db + " " + (operationCount++) + " > ";
+	
+	};
+
+	EDITOR="C:\\PROGRA~1\\SUBLIM~1\\sublime_text.exe" 
+	
+g. Now you can put this in the terminal : susysmith = {"name" : "Susy Smith"}
+and then edit it with : edit susysmith
+
+---------- Inserting, Updating and Deleting Documents ----------
+
+1. We covered inserting like this db.testdb.insert({"name" : "Barry Bonds"})
+
+2. We can also insert arrays of documents
+db.testdb.insert([{"name" : "Babe Ruth"}, {"name" : "Hank Aaron"}])
+
+3. Object IDs or _id is a unique key made up of 24 hexadecimal numbers, or 2 digits for each byte
+
+a. The first 4 bytes make up a time stamp
+
+b. The next 3 represent a unique id for the computer that generated the id
+
+c. The next 2 bytes represent a unique id based on the process for the computer
+
+d. The last 3 bytes are incrementing numbers for each generated id
+
+4. Delete a document like this : db.testdb.remove({"name" : "Babe Ruth"})
+
+5. We can receive well formatted results with pretty()
+db.testdb.find().pretty()
+
+6. We can update a document like this 
+db.testdb.update({"name" : "Hank Aaron"},
+{$set:{"name" : "Hank Louis Aaron", "Home Runs" : 755}})
+
+7. You can update multiple documents like this
+
+a. db.testdb.insert([{"name" : "Babe Ruth", "Hall Of Fame" : "Inductee"}, 
+{"name" : "Ty Cobb", "Hall Of Fame" : "Inductee"}, 
+{"name" : "Walter Johnson", "Hall Of Fame" : "Inductee"}, 
+{"name" : "Christy Mathewson", "Hall Of Fame" : "Inductee"},
+{"name" : "Honus Wagner", "Hall Of Fame" : "Inductee"}])
+
+b. db.testdb.update({"Hall Of Fame" : "Inductee"},
+{$set:{"Hall Of Fame" : "Inducted in 1936"}}, {multi:true})
+
+8. You can also replace a document like this
+db.testdb.save({
+"Name" : "Hank Louis Aaron",
+"Home Runs" : 755,
+"Hall Of Fame" : "Inducted in 1988"})
+
+9. We can increment a value in a document like this
+db.testdb.update({"name" : "Hank Louis Aaron"},
+{"$inc" : {"Home Runs" : 1}})
+
+10. You can decrement like this
+db.testdb.update({"name" : "Hank Louis Aaron"},
+{"$inc" : {"Home Runs" : -1}})
+
+11. We can multiply values
+db.testdb.update({"name" : "Hank Louis Aaron"},
+{"$mul" : {"Home Runs" : 1.04}})
+
+12. We can add to an array or create one if it doesn't exist
+db.testdb.update({"name" : "Barry Bonds"},
+{"$push" : {"Records" :
+{"Single Season HRs" : 73,
+"HRs Career" : 762,
+"Walks" : 232}}})
+
+13. You can push multiple values in one operation
+db.testdb.update({"name" : "Barry Bonds"},
+{"$push" : {"Batting Average" : {"$each" : [.223, .261, .283, .248, .301]}}})
+
+14. You can set the maximum number of items an array can have with slice
+db.testdb.update({"name" : "Barry Bonds"},
+{"$push" : {"Best Home Run Years" : {"$each" : [45, 45, 46, 46, 49, 73],
+"$slice" : -5}}})
+
+15. addToSet adds a value only if it doesn't already exist
+db.testdb.update({"name" : "Barry Bonds"},
+{"$addToSet" : {"Best Home Run Years" : 47}})
+
+16. Remove the last item added to an array
+db.testdb.update({"name" : "Barry Bonds"},
+{"$pop" : {"Best Home Run Years" : 1}})
+
+17. You can also remove the first item
+db.testdb.update({"name" : "Barry Bonds"},
+{"$pop" : {"Best Home Run Years" : -1}})
+
+18. Pull can remove a specific value
+db.testdb.update({"name" : "Barry Bonds"},
+{"$pull" : {"Best Home Run Years" : 73}})
+
+---------- Querying the Database ---------- 
+
+1. db.testdb.find() is the most basic query which returns everything
+
+2. You can restrict the results by passing key value pairs
+db.testdb.find({"name" : "Ty Cobb"})
+
+3. Drop the collection with db.testdb.drop() and Insert
+db.testdb.insert([{"name" : "Dale Cooper", "street" : "123 Main St", "city" : "Yakima", "state" : "WA", "dob" : new Date(1959, 2, 22), "sex" : "M", "gpa" : 3.5, "status" : "student", "tests" : [10, 9, 8], "contact info" : {"email" : "dc@aol.com", "phone" : "792-223-8901"}}, 
+{"name" : "Harry Truman", "street" : "202 South St", "city" : "Vancouver", "state" : "WA", "dob" : new Date(1946, 1, 24), "sex" : "M", "gpa" : 3.4, "status" : "student", "tests" : [8, 9, 8], "contact info" : {"email" : "ht@aol.com", "phone" : "792-223-9810"}},
+{"name" : "Shelly Johnson", "street" : "9 Pond Rd", "city" : "Sparks", "state" : "NV", "dob" : new Date(1970, 12, 12), "sex" : "F", "gpa" : 2.9, "status" : "dropout", "tests" : [10, 8, 0], "contact info" : {"email" : "sj@aol.com", "phone" : "792-223-6734"}},
+{"name" : "Bobby Briggs", "street" : "14 12th St", "city" : "San Diego", "state" : "CA", "dob" : new Date(1967, 5, 24), "sex" : "M", "gpa" : 2.0, "status" : "student", "tests" : [5, 4, 6], "contact info" : {"email" : "bb@aol.com", "phone" : "792-223-6178"}},
+{"name" : "Donna Hayward", "street" : "120 16th St", "city" : "Davenport", "state" : "IA", "dob" : new Date(1970, 3, 24), "sex" : "F", "gpa" : 3.7, "status" : "student", "tests" : [10, 8, 8], "contact info" : {"email" : "dh@aol.com", "phone" : "792-223-2001"}},
+{"name" : "Audrey Horne", "street" : "342 19th St", "city" : "Detroit", "state" : "MI", "dob" : new Date(1965, 2, 1), "sex" : "F", "gpa" : 3.0, "status" : "student", "tests" : [9, 9, 8], "contact info" : {"email" : "ah@aol.com", "phone" : "792-223-2002"}},
+{"name" : "James Hurley", "street" : "2578 Cliff St", "city" : "Queens", "state" : "NY", "dob" : new Date(1967, 1, 2), "sex" : "M", "gpa" : 2.9, "status" : "dropout", "tests" : [8, 9, 0], "contact info" : {"email" : "jh@aol.com", "phone" : "792-223-1890"}},
+{"name" : "Lucy Moran", "street" : "178 Dover St", "city" : "Hollywood", "state" : "CA", "dob" : new Date(1954, 11, 27), "sex" : "F", "gpa" : 3.0, "status" : "student", "tests" : [9, 9, 8], "contact info" : {"email" : "lm@aol.com", "phone" : "792-223-9678"}},
+{"name" : "Tommy Hill", "street" : "672 High Plains", "city" : "Tucson", "state" : "AZ", "dob" : new Date(1951, 12, 21), "sex" : "M", "gpa" : 3.7, "status" : "student", "tests" : [10, 9, 9], "contact info" : {"email" : "th@aol.com", "phone" : "792-223-1115"}},
+{"name" : "Andy Brennan", "street" : "281 4th St", "city" : "Jacksonville", "state" : "NC", "dob" : new Date(1960, 12, 27), "sex" : "M", "gpa" : 2.5, "status" : "student", "tests" : [7, 9, 8], "contact info" : {"email" : "ab@aol.com", "phone" : "792-223-8902"}},
+])
+
+4. You can search for multiple key / value pairs by separating them with a comma 
+db.testdb.find({"state" : "WA", "sex" : "M"}).pretty()
+
+5. You can limit the results returned by specifying the keys to return
+db.testdb.find({"state" : "WA", "sex" : "M"}, {"name" : 1, "dob" : 1})
+
+6. You can force the id to not be returned 
+db.testdb.find({"state" : "WA", "sex" : "M"}, {"name" : 1, "dob" : 1, "_id" : 0})
+
+7. We can find people with a GPA in a range between 3.0 and 3.5
+$lt = Less Then, $gt = Greater Then, $gte = Greater Then or Equal, 
+$lte = Less Then or Equal,
+db.testdb.find({"gpa" : {"$gte" : 3.0, "$lte" : 3.5}}, {"name" : 1, "gpa" : 1, "_id" : 0})
+
+8. We can search for people born after Jan 1, 1969
+year1969 = new Date("01/01/1969")
+db.testdb.find({"dob" : {"$gt" : year1969}}, {"name" : 1, "dob" : 1, "_id" : 0})
+
+9. Return any student that is not a male
+db.testdb.find({"sex" : {"$ne" : "M"}, "status" : "student"}, {"name" : 1, "_id" : 0})
+
+10. Find GPAs of 3.4, 3.5, 3.6, or 3.7
+db.testdb.find({"gpa" : {"$in" : [3.4, 3.5, 3.6, 3.7]}}, {"name" : 1, "_id" : 0})
+
+11. Find all GPAs except for 3.4 - 3.7 that are active students
+db.testdb.find({"gpa" : {"$nin" : [3.4, 3.5, 3.6, 3.7]}, "status" : "student"}, {"name" : 1, "_id" : 0})
+
+12. To do an or check with multiple keys use $or
+db.testdb.find({"$or" : [{"status" : "dropout"}, {"gpa" : {"$lt" : 3.0}}]}, {"name" : 1, "_id" : 0})
+
+13. $not can be used to find every gpa not greater then 3.0 
+db.testdb.find({"gpa": {$not : {$gt : 3.0}}}, {"name" : 1, "_id" : 0})
+
+a. You can just get the first 3 results with
+db.testdb.find({"gpa": {$not : {$gt : 3.0}}}, {"name" : 1, "_id" : 0}).limit(3)
+
+b. You could skip the first 2 with
+db.testdb.find({"gpa": {$not : {$gt : 3.0}}}, {"name" : 1, "_id" : 0}).skip(2)
+
+c. You can sort them by name 
+db.testdb.find({"gpa": {$not : {$gt : 3.0}}}, {"name" : 1, "_id" : 0}).sort({"name" : 1})
+
+14. We can use a regular expression to search for everyone whose name starts with D
+^ Match the beginning of the line
+. Followed by * means match any character (.), any number of times (*)
+$ Match the end of the line
+db.testdb.find({"name" : /^D.*$/}, {"name" : 1, "_id" : 0})
+
+15. We can check for every student that got a 0 on a test
+db.testdb.find({"tests" : 0}, {"name" : 1, "_id" : 0})
+
+16. Find students with a 10 and a 0 on tests
+db.testdb.find({"tests" : {$all : [0, 10]}}, {"name" : 1, "_id" : 0})
+
+17. Students that got a 10 on the first test (Arrays are 0 Indexed)
+db.testdb.find({"tests.0" : 10}, {"name" : 1, "_id" : 0})
+
+18. Find arrays of a certain size
+
+a. First add an extra test to a student array
+db.testdb.update({"name" : "Dale Cooper"}, {"$push" : {"tests" : 9}})
+
+b. Check for students that have taken 4 tests
+db.testdb.find({"tests" : {"$size" : 4}}, {"name" : 1, "_id" : 0})
+
+19. Get the first 2 tests with $slice
+db.testdb.find({"name" : "Dale Cooper"}, {"tests" : {"$slice" : 2}}).pretty()
+
+20. Get the last 2 tests with $slice
+db.testdb.find({"name" : "Dale Cooper"}, {"tests" : {"$slice" : -2}}).pretty()
+
+21. Get the 2nd and 3rd tests with $slice by skipping the first and returning the next 2 in line
+db.testdb.find({"name" : "Dale Cooper"}, {"tests" : {"$slice" : [1,2]}}).pretty()
+
+22. Get the email for Lucy Moran with the dot operator
+db.testdb.find({"name" : "Lucy Moran"}, {"name" : 1, "contact info.email" : 1, "_id" : 0})
+
+23. Search for a match using the dot operator
+db.testdb.find({"contact info.phone" : "792-223-1115"}, {"name" : 1, "_id" : 0})
+
+---------- Indexing ---------- 
+
+1. Drop the collection with db.testdb.drop()
+
+2. Indexing a database is like creating an index for a book. This makes it much quicker to look up data. Here I'll create a large set of documents and then analyze execution time. This can take a minute to generate 500,000 documents so wait.
+
+a. for(i= 0; i < 500000; i++){
+db.testdb.insert(
+{"account":"account"+i,
+"age":Math.floor(Math.random() * 90)});}
+
+3. We can see how long this query took 
+db.testdb.find({"age": 50}).explain("executionStats")
+
+a. executionTimeMillis tells us how long the search took (155 milliseconds on my machine)
+
+b. totalDocsExamined shows that all 500,000 documents were examined
+
+4. Lets create a compound index based on first age and then account. We start with age because we plan on querying for age. Indexing should be based on improving the performance of a query. 
+
+a. Cardinality defines the number of distinct values a field may have. Sex for example would be either M or F which would be a low cardinality. Email would be different for every user and hence would have a high cardinality. The higher the cardinality the more valuable an index on that field would be, however basing indexes on grouping to improve queries is most important.
+
+b. db.testdb.ensureIndex({"age" : 1, "account" : 1})
+
+c. Now executionTimeMillis is 0
+
+d. totalDocsExamined dropped from 500,000 to 5674
+
+e. This query is quicker because it can search directly for the age 50 and ignore everything else
+
+f. You can see here that the index was used indexName : "age_1_account_1" 
+
+g. Indexes are useful when you are returning a small subset of the data and less so when you are receiving a large percentage.
+
+h. You can see all your indexes with the command
+db.testdb.getIndexes()
+
+i. You can delete indexing with the command
+db.testdb.dropIndex("age_1_account_1")
+
+5. Indexing something that is unique to each document can be helpful if you use limits which avoids searching further after the limit has been reached. It can also be helpful is you force the item to be unique.
+
+a. db.testdb.find({"account" : "account100"}).explain("executionStats")
+
+	i. executionTimeMillis : 124
+
+b. db.testdb.ensureIndex({"account" : 1}, {"unique" : true})
+
+	i. db.testdb.find({"account" : "account100"}).explain("executionStats")
+
+	ii. executionTimeMillisEstimate" : 0
+
+	iii. If you use db.testdb.ensureIndex({"account" : 1}, {"unique" : true, "dropdups" : true}) duplicate documents will be deleted which may be good or bad?
+
+	iv. At times you may wish to index a field that may have null as a value for many documents. Sparse can be used in those situations
+	db.testdb.ensureIndex({"account" : 1}, {"unique" : true, "sparse" : true})
+
+---------- Aggregations ---------- 
+
+1. Can be used to perform operations on multiple documents
+
+2. Drop the collection with db.testdb.drop()
+
+3. db.testdb.insert([{"recipe" : "Chipotle Sofrita", "author" : "Sally Smith", "likes" : 205, "dislikes" : 2, "type" : "latin", "datePosted" : new Date(2014, 12, 27)}, 
+{"recipe" : "Black Beans", "author" : "Paul Smith", "likes" : 108, "dislikes" : 4, "type" : "latin", "datePosted" : new Date(2015, 1, 3)},
+{"recipe" : "Cilantro Lime Rice", "author" : "Sally Smith", "likes" : 190, "dislikes" : 4, "type" : "latin", "datePosted" : new Date(2015, 1, 12)}, 
+{"recipe" : "Tomato Salsa", "author" : "Tim Smith", "likes" : 105, "dislikes" : 5, "type" : "latin", "datePosted" : new Date(2015, 1, 24)}, 
+{"recipe" : "Tortillas", "author" : "Sam Smith", "likes" : 208, "dislikes" : 2, "type" : "latin", "datePosted" : new Date(2015, 2, 10)}, 
+{"recipe" : "Tomatillo Green Chili", "author" : "Mark Smith", "likes" : 118, "dislikes" : 8, "type" : "latin", "datePosted" : new Date(2015, 2, 12)}, 
+{"recipe" : "Barbecue Seitan", "author" : "Paul Smith", "likes" : 178, "dislikes" : 1, "type" : "vegan", "datePosted" : new Date(2015, 2, 16)}, 
+{"recipe" : "Vegan Sloppy Joes", "author" : "Sally Smith", "likes" : 123, "dislikes" : 7, "type" : "vegan", "datePosted" : new Date(2015, 2, 21)}, 
+{"recipe" : "Sweet Potato Fries", "author" : "Paul Smith", "likes" : 176, "dislikes" : 5, "type" : "vegan", "datePosted" : new Date(2015, 3, 8)}, 
+{"recipe" : "Pita Bread", "author" : "Tim Smith", "likes" : 116, "dislikes" : 1, "type" : "arabic", "datePosted" : new Date(2015, 3, 12) }, 
+{"recipe" : "Sundried Tomato Hummus", "author" : "Tony Smith", "likes" : 119, "dislikes" : 5, "type" : "arabic", "datePosted" : new Date(2015, 3, 27)}])
+
+4. Group documents by the field author and each time author the same authors name is found increment sum for it and display results 
+db.testdb.aggregate([{$group : {_id : "$author", num_recipes : {$sum : 1}}}])
+
+5. We can sort results from highest to lowest
+db.testdb.aggregate([{$group : {_id : "$author", num_recipes : {$sum : 1}}}, {$sort : {num_recipes : -1}}])
+
+6. We can get the total number of likes for each author 
+db.testdb.aggregate([{$group : {_id : "$author", num_likes : {$sum : "$likes"}}}, {$sort : {num_likes : -1}}])
+
+7. We can get the average number of likes
+db.testdb.aggregate([{$group : {_id : "$author", num_likes : {$avg : "$likes"}}}, {$sort : {num_likes : -1}}])
+
+8. Get the minimum number of likes versus all recipes
+db.testdb.aggregate([{$group : {_id : "$author", num_likes : {$min : "$likes"}}}, {$sort : {num_likes : -1}}])
+
+9.  Get the maximum number of likes versus all recipes and limit results to the top 3
+db.testdb.aggregate([{$group : {_id : "$author", num_likes : {$max : "$likes"}}}, {$sort : {num_likes : -1}}, {$limit : 3}])
+
+10. $match is used to filter out documents that don't match the condition which is to only count latin recipes
+db.testdb.aggregate([{$match : {"type" : "latin"}}, {$group : {_id : "$author", num_recipes : {$sum : 1}}}])
+
+11. $project can provide fields from subdocuments and it also allows for renaming fields. Here we get a list of the recipes using the name Recipe instead of recipe and not returning the _id
+db.testdb.aggregate({"$project" : {"Recipe" : "$recipe", "_id" : 0}})
+
+12. Add the dislikes with the likes 
+db.testdb.aggregate({"$project" : {"Strong Impressions" : {
+"$add" : ["$likes", "$dislikes"]}, "_id" : 0}})
+
+13. Subtract the dislikes from the likes
+db.testdb.aggregate({"$project" : {"Strong Impressions" : {
+"$subtract" : ["$likes", "$dislikes"]}, "_id" : 0}})
+
+14. Multiply
+db.testdb.aggregate({"$project" : {"Strong Impressions" : {
+"$multiply" : ["$likes", "$dislikes"]}, "_id" : 0}})
+
+15. Divide
+db.testdb.aggregate({"$project" : {"Strong Impressions" : {
+"$divide" : ["$likes", "$dislikes"]}, "_id" : 0}})
+
+16. You can extract date information like month, year, week, dayOfMonth, dayOfWeek, dayOfYear, hour, minute, second
+db.testdb.aggregate({"$project" : {"Month Posted" : {"$month" : "$datePosted"}, "recipe" : 1, "_id" : 0}})
+
+17. There are string operators as well substr, concat, toLower, and toUpper
+
+a. List each recipe type using substring of the type
+db.testdb.aggregate({"$project" : {"Type" : {
+"$substr" : ["$type", 0, 3]}, "_id" : 0}})
+
+b. Concat strings to make a title and uppercase it
+db.testdb.aggregate({
+	"$project" : { 
+		"Title" : {
+			"$concat" : [{ $toUpper : "$recipe" }, " by ", "$author"]
+		}
+, "_id" : 0}})
+
+18. We can return different output based on conditions
+db.testdb.aggregate({
+	"$project" : { 
+		"Score" : {
+			"$cond" : { if : {$gte : ["$likes", 200] }, then : "Great", else : "Ok" }
+}, "recipe" : 1, "_id" : 0}})
+
+19. We can compare values
+db.testdb.aggregate({
+	"$project" : { 
+		"Compare to 200" : {
+			$cmp : ["$likes", 200]
+		}
+, "recipe" : 1, "_id" : 0}})
+
+---------- Map / Reduce ----------
+
+1. Map/Reduce allows you to split a large problem into smaller parts.
+The Map excepts data and transforms it into key / value pairs by applying
+multiple JavaScript functions. 
+The Reduce excepts the key / value pairs and reduces them into a
+smaller aggregation of key / value pairs.
+
+2. Why is Map useful?
+var students = [
+	{name : "Dale Cooper", class: "Calculus", tests: [30, 28, 45]},
+	{name : "Harry Truman", class: "Geometry", tests: [28, 26, 44]},
+	{name : "Shelly Johnson", class: "Calculus", tests: [27, 26, 43]},
+	{name : "Bobby Briggs", class: "College Algebra, tests: [20, 18, 35]"},
+	{name : "Donna Heyward", class: "Geometry", tests: [28, 28, 44]},
+	{name : "Audrey Horne", class: "College Algebra", tests: [22, 26, 44]},
+	{name : "James Hurley", class: "Calculus", tests: [20, 20, 38]},
+	{name : "Lucy Moran", class: "College Algebra", tests: [26, 24, 40]},
+	{name : "Tommy Hill", class: "College Algebra", tests: [30, 29, 46]},
+	{name : "Andy Brennan", class: "Geometry", tests: [20, 21, 38]}
+	];
+
+var studNames = [];
+
+for( i=0; i < students.length; i++){
+	studNames.push(students[i].name)
+}
+
+studNames
+
+// With Map you can cycle the values through a callback function
+
+var studInfo = students.map(function(x) {
+	return x.name + ' is in ' + x.class;
+});
+
+studInfo
+
+Why is Reduce useful?
+
+var tests = [
+	{score: 30}, 
+	{score: 28},
+	{score: 45}
+]
+
+// Reduce receives an object and a starting object
+// Sum is our final value and tests is the thing we iterate
+var testSum = tests.reduce(function(sum, tests){
+	return sum + tests.score;
+}, 0)
+
+testSum
+
+3. Delete a database by switching to it and dropping it
+use testdb
+db.dropDatabase()
+
+4. Add to classes collection
+db.classes.insert({
+class : "Philosophy 101",
+startDate : new Date(2016, 1, 10),
+students : [
+	{fName : "Dale", lName : "Cooper", age : 42},
+	{fName : "Lucy", lName : "Moran", age : 35},
+	{fName : "Tommy", lName : "Hill", age : 44}
+],
+cost : 1600, 
+professor : "Paul Slugman",
+topics : "Socrates,Plato,Aristotle,Francis Bacon",
+book:
+{
+	isbn: "1133612105",
+	title: "Philosophy : A Text With Readings",
+	price: 165.42
+}
+})
+
+db.classes.insert({
+class : "College Algebra",
+startDate : new Date(2016, 1, 11),
+students : [
+	{fName : "Dale", lName : "Cooper", age : 42},
+	{fName : "Laura", lName : "Palmer", age : 22},
+	{fName : "Donna", lName : "Hayward", age : 21},
+	{fName : "Shelly", lName : "Johnson", age : 24}
+],
+cost : 1500, 
+professor : "Rhonda Smith",
+topics : "Rational Expressions,Linear Equations,Quadratic Equations",
+book:
+{
+	isbn: "0321671791",
+	title: "College Algebra",
+	price: 179.40
+}
+})
+
+db.classes.insert({
+class : "Astronomy 101",
+startDate : new Date(2016, 1, 11),
+students : [
+	{fName : "Bobby", lName : "Briggs", age : 21},
+	{fName : "Laura", lName : "Palmer", age : 22},
+	{fName : "Audrey", lName : "Horne", age : 20}
+],
+cost : 1650, 
+professor : "Paul Slugman",
+topics : "Sun,Mercury,Venus,Earth,Moon,Mars",
+book:
+{
+	isbn: "0321815351",
+	title: "Astronomy: Beginning Guide to Univ",
+	price: 129.45
+}
+})
+
+db.classes.insert({
+class : "Geology 101",
+startDate : new Date(2016, 1, 12),
+students : [
+	{fName : "Andy", lName : "Brennan", age : 36},
+	{fName : "Laura", lName : "Palmer", age : 22},
+	{fName : "Audrey", lName : "Horne", age : 20}
+],
+cost : 1450, 
+professor : "Alice Jones",
+topics : "Earth,Moon,Elements,Minerals",
+book:
+{
+	isbn: "0321814061",
+	title: "Earth : An Introduction to Physical Geology",
+	price: 130.65
+}
+})
+
+db.classes.insert({
+class : "Biology 101",
+startDate : new Date(2016, 1, 11),
+students : [
+	{fName : "Andy", lName : "Brennan", age : 36},
+	{fName : "James", lName : "Hurley", age : 25},
+	{fName : "Harry", lName : "Truman", age : 41}
+],
+cost : 1550, 
+professor : "Alice Jones",
+topics : "Earth,Cell,Energy,Genetics,DNA",
+book:
+{
+	isbn: "0547219474",
+	title: "Holt McDougal Biology",
+	price: 104.30
+}
+})
+
+db.classes.insert({
+class : "Chemistry 101",
+startDate : new Date(2016, 1, 13),
+students : [
+	{fName : "Bobby", lName : "Briggs", age : 21},
+	{fName : "Donna", lName : "Hayward", age : 21},
+	{fName : "Audrey", lName : "Horne", age : 20},
+	{fName : "James", lName : "Hurley", age : 25}
+],
+cost : 1600, 
+professor : "Alice Jones",
+topics : "Matter,Energy,Atom,Periodic Table",
+book:
+{
+	isbn: "0547219474",
+	title: "Chemistry : Matter and Change",
+	price: 104.30
+}
+})
+
+4. Map is called for every document in the collection. Map sends the total student name list to reduce.
+var mapFunc = function() {
+	for(i = 0; i < this.students.length; i++){
+		var student = this.students[i];
+
+		// Emit gets 2 arguments being the key on which you want to group the 
+		// data and the data itself
+		emit(student.fName + " " + student.lName, 1);
+	}
+};
+
+5. Reduce is called by map and receives all the values for the given key. Then we add how many times the student name shows up in the collection of documents.
+var reduceFunc = function(student, values) {
+	count = 0;
+
+	for(i = 0; i < values.length; i++){
+		count += values[i];
+	}
+	return count;
+};
+
+6. Define the map and reduce functions and where to output the results
+db.classes.mapReduce(
+	mapFunc,
+	reduceFunc,
+	{ out: "map_ex" }
+)
+
+7. "counts" : {
+		"input" : 6, // 6 Classes sent to map
+		"emit" : 20, // 20 total students input with duplicates
+		"reduce" : 7, // 7 students are in more then 1 class
+		"output" : 11 // Output all 11 students their classes
+	}
+
+8. Show the results db.map_ex.find()
+
+9. Get all the professors
+var mapFunc2 = function(){
+	emit(this.professor,1);
+}
+
+10. Sum the number of times they appear
+var reduceFunc2 = function(professor, count){
+	return Array.sum(count);
+}
+
+11. With query only output data for Alice Jones
+db.classes.mapReduce(
+	mapFunc2,
+	reduceFunc2,{ 
+	query:{professor: "Alice Jones"},
+	out: "map_ex_2" 
+	}
+)
+
+12. Output every topic to be reduced
+var mapFunc3 = function(){
+	var topics = this.topics.split(',');
+	for(i in topics){
+		emit(topics[i], 1);
+	}
+}
+
+13. Count up the total times each topic is covered across all classes
+var reduceFunc3 = function(key, values){
+	var count = 0;
+	for(i in values){
+		count += values[i];
+	}
+	return count;
+}
+
+db.classes.mapReduce(
+	mapFunc3,
+	reduceFunc3,
+	{ out: "map_ex_3" }
+)
+
+14. Send the cost to attend each of the professors classes to reduce
+var mapFunc4 = function(){
+	emit(this.professor, { count: 1, cost: this.cost });
+}
+
+15. Reduce down to professor and cost
+var reduceFunc4 = function(professor, values){
+	var value = { count: 0, cost: 0 };
+
+	for(i = 0; i < values.length; i++){
+		value.count += values[i].count;
+		value.cost += values[i].cost;
+	}
+	return value;
+}
+
+16. Condense the results down to show the average of all the professors classes
+var finalizeFunc4 = function(professor, value) {
+	value.average = (value.cost / value.count);
+	return value;
+}
+
+17. 
+db.classes.mapReduce(
+    mapFunc4,
+    reduceFunc4,
+    { out: "map_ex_4", 
+    finalize: finalizeFunc4
+    }
+)
+
+---------- Random Database Commands ----------
+
+1. Distinct returns all distinct values for a given key
+db.runCommand({"distinct" : "classes", "key" : "professor"})
+
+2. Group allows you to perform complex aggregations and then separate the results into groups. Let's get every book title that costs more then $110
+db.runCommand(
+   {
+     group:
+       {
+       	 // The collection
+         ns: 'classes',
+         // Keys to retrieve
+         key: { 'book.price': 1, 'book.title': 1 },
+         // Condition that must be met
+         cond: { 'book.price': { $gt: 110 } },
+         // Not reducing the results
+         $reduce: function ( curr, result ) { },
+         // Stores the initial value the first time reduce is called
+         initial: { }
+       }
+   }
+)
+
+3. Calculate the total cost of books for each class
+db.runCommand(
+   { group:
+       {
+         ns: 'classes',
+         key: { 'book.price': 1, 'book.title': 1 },
+         cond: {  },
+         $reduce: function ( curr, result ) {
+                     result.total += (curr.book.price * curr.students.length);
+                  },
+         initial: { total : 0 }
+       }
+    }
+)
+
+############################################################
+package.json
+{
+  "name": "sampsite",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "~1.13.2",
+    "cookie-parser": "~1.3.5",
+    "debug": "~2.2.0",
+    "express": "~4.13.1",
+    "jade": "~1.11.0",
+    "kerberos": "~0.0.17",
+    "mongodb": "~2.0.33",
+    "morgan": "~1.6.1",
+    "serve-favicon": "~2.3.0"
+  }
+}
+
+app.js
+// Imports all the modules needed
+var express = require('express');
+var path = require('path');
+var favicon = require('serve-favicon');
+var logger = require('morgan');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
+
+// Used to connect to the MongoDB database
+var mongo = require('mongodb')
+
+var routes = require('./routes/index');
+var users = require('./routes/users');
+
+var app = express();
+
+// Define the directory with the views and to use Jade
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
+
+// uncomment after placing your favicon in /public
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Define what route files to use being routes/index.js for /
+// routes/users.js for /users
+// The route files then render the page
+app.use('/', routes);
+app.use('/users', users);
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
+});
+
+// error handlers
+
+// development error handler
+// will print stacktrace
+if (app.get('env') === 'development') {
+  app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+      message: err.message,
+      error: err
+    });
+  });
+}
+
+// production error handler
+// no stacktraces leaked to user
+app.use(function(err, req, res, next) {
+  res.status(err.status || 500);
+  res.render('error', {
+    message: err.message,
+    error: {}
+  });
+});
+
+module.exports = app;
+
+index.js
+var express = require('express');
+var router = express.Router();
+var mongodb = require('mongodb');
+
+/* GET home page. */
+// Defines the root route. router.get receives a path and a function
+// The req object represents the HTTP request and contains
+// the query string, parameters, body, header
+// The res object is the response Express sends when it receives
+// a request
+// render says to use the views/index.jade file for the layout
+// and to set the value for title to 'Express'
+router.get('/', function(req, res, next) {
+  res.render('index', { title: 'Express' });
+});
+
+router.get('/thelist', function(req, res){
+
+  // Get a Mongo client to work with the Mongo server
+  var MongoClient = mongodb.MongoClient;
+
+  // Define where the MongoDB server is
+  var url = 'mongodb://localhost:27017/sampsite';
+
+  // Connect to the server
+  MongoClient.connect(url, function (err, db) {
+  if (err) {
+    console.log('Unable to connect to the Server', err);
+  } else {
+    // We are connected
+    console.log('Connection established to', url);
+
+    // Get the documents collection
+    var collection = db.collection('students');
+
+    // Find all students
+    collection.find({}).toArray(function (err, result) {
+      if (err) {
+        res.send(err);
+      } else if (result.length) {
+        res.render('studentlist',{
+
+          // Pass the returned database documents to Jade
+          "studentlist" : result
+        });
+      } else {
+        res.send('No documents found');
+      }
+      //Close connection
+      db.close();
+    });
+  }
+  });
+});
+
+// Route to the page we can add students from using newstudent.jade
+router.get('/newstudent', function(req, res){
+    res.render('newstudent', {title: 'Add Student' });
+});
+
+router.post('/addstudent', function(req, res){
+
+    // Get a Mongo client to work with the Mongo server
+    var MongoClient = mongodb.MongoClient;
+
+    // Define where the MongoDB server is
+    var url = 'mongodb://localhost:27017/sampsite';
+
+    // Connect to the server
+    MongoClient.connect(url, function(err, db){
+      if (err) {
+        console.log('Unable to connect to the Server:', err);
+      } else {
+        console.log('Connected to Server');
+
+        // Get the documents collection
+        var collection = db.collection('students');
+
+        // Get the student data passed from the form
+        var student1 = {student: req.body.student, street: req.body.street,
+          city: req.body.city, state: req.body.state, sex: req.body.sex,
+          gpa: req.body.gpa};
+
+        // Insert the student data into the database
+        collection.insert([student1], function (err, result){
+          if (err) {
+            console.log(err);
+          } else {
+
+            // Redirect to the updated student list
+            res.redirect("thelist");
+          }
+
+          // Close the database
+          db.close();
+        });
+
+      }
+    });
+
+  });
+
+module.exports = router;
+
+newstudent.jade
+extends layout
+
+block content
+  h3= title
+  form#form_add_student(name="addstudent", method="post", action="/addstudent")
+    span Name
+    span &nbsp;
+    input#input_name(type="text", placeholder="student", name="student")
+    br
+    br
+    span Street
+    span &nbsp;
+    input#input_street(type="text", placeholder="street", name="street")
+    br
+    br
+    span City
+    span &nbsp;
+    input#input_city(type="text", placeholder="city", name="city")
+    br
+    br
+    span State
+    span &nbsp;
+    input#input_state(type="text", placeholder="state", name="state")
+    br
+    br
+    span Sex
+    span &nbsp;
+    input#input_sex(type="text", placeholder="sex", name="sex")
+    br
+    br
+    span GPA
+    span &nbsp;
+    input#input_gpa(type="text", placeholder="gpa", name="gpa")
+    br
+    br
+    button#submit_student(type="submit") submit
+
+studentlist.jade
+extends layout
+
+block content
+  h3.
+    Students
+  ul
+    each student, i in studentlist
+      li#student_list_item
+        a(href='#') #{student.student} lives at #{student.street} #{student.city}, #{student.state}
+
+

@@ -1,0 +1,246 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>Citrix NetScaler XML API User&#39;s Guide - Structure Definition</title>
+<link rel="stylesheet" type="text/css" href="help_ns.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body onload="initial()" class="ns_body">
+<div class="ns_content"><table cellpadding="0" cellspacing="0"><script type="text/javascript">
+function changeContext(id,lang,flag){
+	parent.banner.document.language.select.value = lang;
+	if( lang == "C" ){
+		if(flag == "1"){
+			showContent(cfirstcontent,id,lang);
+		}
+		else{
+			showContent(csecondcontent,id,lang);
+		}
+	}
+	if( lang == "Perl" ){
+		if(flag == "1"){
+			showContent(perlfirstcontent,id,lang);
+		}
+		else{
+			showContent(perlsecondcontent,id,lang);
+		}
+	}
+	if( lang == "Java" ){
+		if(flag == "1"){
+			showContent(javafirstcontent,id,lang);	
+		}
+		else{
+			showContent(javasecondcontent,id,lang);
+		}
+	}
+	if( lang == "C#" ){
+		if(flag == "1"){
+			showContent(csharpfirstcontent,id,lang);
+		}
+		else{
+			showContent(csharpsecondcontent,id,lang);
+		}
+	}
+	if( lang == "VB" ){
+		if(flag == "1"){
+			showContent(vbfirstcontent,id,lang);
+		}
+		else{
+			showContent(vbsecondcontent,id,lang);
+		}
+	}
+	if(flag == "1"){
+		showInside(lang,"0");
+	}
+	else{
+		showOutside(lang);
+	}
+}
+function showContent(content,id,lang){
+	if(ie4){
+	   showContentObj=document.all.id;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById(id);
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+  showLangSelect(lang);
+}
+function showInside(str,cond){
+	if(str == "C"){
+ 		var inside_content = csecondcontent;
+ 	}
+ 	if(str == "Perl"){
+ 		var inside_content = perlsecondcontent;
+ 	}
+ 	if(str == "Java"){
+ 		var inside_content = javasecondcontent;
+ 	}
+ 	if(str == "C#"){
+		var inside_content = csharpsecondcontent;
+ 	}
+ 	if(str == "VB"){
+		var inside_content = vbsecondcontent;
+ 	}
+	showContent(inside_content,'qiksearch_div1',str);
+ 	if ( cond == "1" ){
+ 		var page = 'apidoc/docs/statprotocolicmpv6Result.html#icmpv6List';
+ 		document.location.href = page;
+ 	}
+}
+function showOutside(str){
+	if(str == "C" ){
+ 		var inside_content = cfirstcontent;
+ 	}
+ 	if(str == "Perl" ){
+ 		var inside_content = perlfirstcontent;
+ 	}
+ 	if(str == "Java" ){
+ 		var inside_content = javafirstcontent;
+ 	}
+ 	if(str == "C#" ){
+ 		var inside_content = csharpfirstcontent;
+ 	}
+ 	if(str == "VB" ){
+ 		var inside_content = vbfirstcontent;
+ 	}
+ 	showContent(inside_content,'qiksearch_div',str);
+}
+function initial(){
+	ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+	ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+	ns4=document.layers;
+	langSelected = parent.banner.document.language.select.value
+	var plink = parent.banner.document.language.plink.value
+	var my_array=plink.split("&");
+	var temp = my_array[0];
+ 	var grp = temp.split("@");
+	var cmd = my_array[1];
+	var regex = /^stat/i;
+	if( cmd.match(regex) != null ){
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex_stat.html\">Statistics</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > statprotocolicmpv6Result");
+	}
+	else{
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex.htm\">Configuration</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > statprotocolicmpv6Result");
+	}
+	if( langSelected == "C" ){
+ 		var content = cfirstcontent;
+	}
+	else if( langSelected == "Perl" ){
+		var content = perlfirstcontent;
+	}
+	else if( langSelected == "Java" ){
+		var content = javafirstcontent;
+	}
+	else if( langSelected == "C#" ){
+		var content = csharpfirstcontent;
+	}
+	else if( langSelected == "VB" ){
+		var content = vbfirstcontent;
+	}
+	else{
+		var content = cfirstcontent;
+		langSelected="C";
+	}
+	showContent(content,'qiksearch_div',langSelected);
+	showInside(langSelected,"0");
+}
+function showPLink(content){
+	if(ie4){
+	   showContentObj=document.all.progressive_link;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById("progressive_link");
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+}
+function showLangSelect(id){
+	   if(ie4)
+       {
+       	showObj=document.all.first_url;
+       	showObj1=document.all.second_url;
+       }
+       if(ns6)
+       {
+       	showObj=document.getElementById("first_url");
+       	showObj1=document.getElementById("second_url");
+       }
+       if( id == "C" ){
+       	newlink = "<b>C</b>";
+       	newlink1 = "<b>C</b>";
+       }
+       else{
+       	newlink = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C','1');\"><b>C</b></a>";
+       	newlink1 = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C','0');\"><b>C</b></a>";
+       }
+       if( id == "Perl" ){
+       	newlink = newlink + " | <b>Perl</b>";
+       	newlink1 = newlink1 + " | <b>Perl</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Perl','1');\"><b>Perl</b></a>";
+      	       newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Perl','0');\"><b>Perl</b></a>";
+       }
+       if( id == "Java" ){
+       	newlink = newlink + " | <b>Java</b>";
+       	newlink1 = newlink1 + " | <b>Java</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Java','1');\"><b>Java</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Java','0');\"><b>Java</b></a>";
+       }
+       if( id == "C#" ){
+       	newlink = newlink + " | <b>C#</b>";
+       	newlink1 = newlink1 + " | <b>C#</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C#','1');\"><b>C#</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C#','0');\"><b>C#</b></a>";
+       }
+       showObj.innerHTML = newlink;
+       showObj1.innerHTML = newlink1;
+}
+</script>
+<tr><td><div><div id="progressive_link"></div></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>statprotocolicmpv6Result Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>statprotocolicmpv6Result</b> structure defines the return type for statprotocolicmpv6 API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="first_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+cfirstcontent = "<pre>struct statprotocolicmpv6Result {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; struct <a href=\'statprotocolicmpv6Result.html\#protocolicmpv6stats\'>protocolicmpv6stats</a> protocolicmpv6statsList[];<br> };<br></pre></td></tr></table></div>"
+perlfirstcontent = "<pre>$statprotocolicmpv6Result = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rc => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; message => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'statprotocolicmpv6Result.html\#protocolicmpv6stats\'>protocolicmpv6stats</a> => \'@\',<br> };<br></pre></td></tr></table></div>"
+javafirstcontent = "<pre>class statprotocolicmpv6Result {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; class <a href=\'statprotocolicmpv6Result.html\#protocolicmpv6stats\'>protocolicmpv6stats</a> protocolicmpv6statsList[];<br> };<br></pre></td></tr></table></div>"
+csharpfirstcontent = "<pre>class statprotocolicmpv6Result {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; class <a href=\'statprotocolicmpv6Result.html\#protocolicmpv6stats\'>protocolicmpv6stats</a> protocolicmpv6statsList[];<br> };<br></pre></td></tr></table></div>"
+vbfirstcontent = "<pre>Public <b>Structure</b> statprotocolicmpv6Result <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rc As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public message As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public  endprotocolicmpv6List() As  <a href=\'statprotocolicmpv6Result.html\#protocolicmpv6stats\'>protocolicmpv6statsList</a><br> <b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rc</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, rc is 0 else rc > 0. Values above 0x8000 indicate Warnings.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>message</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, message is NULL else message contains <a href="errorlisting.html">Error/Warning</a> message.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>protocolicmpv6List</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Pointer to the protocolicmpv6 List.</div></td></tr><tr><td><br></td></tr><tr><td><div><a name="protocolicmpv6stats"></a></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>protocolicmpv6stats  Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>protocolicmpv6stats</b> structure defines the actual return type values for statprotocolicmpv6 API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="second_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div1" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+csecondcontent = "<pre>struct protocolicmpv6stats {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char *   clearstats;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int icmpv6totrxpkts;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int icmpv6rxpktsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int icmpv6totrxbytes;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int icmpv6rxbytesrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int icmpv6tottxpkts;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int icmpv6txpktsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int icmpv6tottxbytes;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int icmpv6txbytesrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int icmpv6totrxna;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int icmpv6rxnarate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int icmpv6totrxns;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int icmpv6rxnsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int icmpv6totrxra;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int icmpv6rxrarate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int icmpv6totrxrs;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int icmpv6rxrsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int icmpv6totrxechoreq;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int icmpv6rxechoreqrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int icmpv6totrxechoreply;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int icmpv6rxechoreplyrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int icmpv6tottxna;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int icmpv6txnarate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int icmpv6tottxns;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int icmpv6txnsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int icmpv6tottxra;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int icmpv6txrarate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int icmpv6tottxrs;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int icmpv6txrsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int icmpv6tottxechoreq;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int icmpv6txechoreqrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int icmpv6tottxechoreply;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int icmpv6txechoreplyrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int icmpv6errra;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int icmpv6errna;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int icmpv6errns;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int icmpv6badchecksums;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int icmpv6unspt;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int icmpv6rtthsld;<br> };<br></pre></td></tr></table></div>"
+perlsecondcontent = "<pre>$protocolicmpv6stats = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; clearstats => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; icmpv6totrxpkts => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; icmpv6rxpktsrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; icmpv6totrxbytes => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; icmpv6rxbytesrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; icmpv6tottxpkts => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; icmpv6txpktsrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; icmpv6tottxbytes => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; icmpv6txbytesrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; icmpv6totrxna => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; icmpv6rxnarate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; icmpv6totrxns => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; icmpv6rxnsrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; icmpv6totrxra => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; icmpv6rxrarate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; icmpv6totrxrs => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; icmpv6rxrsrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; icmpv6totrxechoreq => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; icmpv6rxechoreqrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; icmpv6totrxechoreply => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; icmpv6rxechoreplyrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; icmpv6tottxna => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; icmpv6txnarate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; icmpv6tottxns => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; icmpv6txnsrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; icmpv6tottxra => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; icmpv6txrarate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; icmpv6tottxrs => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; icmpv6txrsrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; icmpv6tottxechoreq => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; icmpv6txechoreqrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; icmpv6tottxechoreply => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; icmpv6txechoreplyrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; icmpv6errra => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; icmpv6errna => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; icmpv6errns => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; icmpv6badchecksums => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; icmpv6unspt => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; icmpv6rtthsld => \'$\',<br> };<br></pre></td></tr></table></div>"
+javasecondcontent = "<pre>class protocolicmpv6stats {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String  clearstats;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt icmpv6totrxpkts;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt icmpv6rxpktsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt icmpv6totrxbytes;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt icmpv6rxbytesrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt icmpv6tottxpkts;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt icmpv6txpktsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt icmpv6tottxbytes;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt icmpv6txbytesrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt icmpv6totrxna;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt icmpv6rxnarate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt icmpv6totrxns;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt icmpv6rxnsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt icmpv6totrxra;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt icmpv6rxrarate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt icmpv6totrxrs;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt icmpv6rxrsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt icmpv6totrxechoreq;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt icmpv6rxechoreqrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt icmpv6totrxechoreply;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt icmpv6rxechoreplyrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt icmpv6tottxna;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt icmpv6txnarate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt icmpv6tottxns;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt icmpv6txnsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt icmpv6tottxra;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt icmpv6txrarate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt icmpv6tottxrs;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt icmpv6txrsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt icmpv6tottxechoreq;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt icmpv6txechoreqrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt icmpv6tottxechoreply;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt icmpv6txechoreplyrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt icmpv6errra;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt icmpv6errna;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt icmpv6errns;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt icmpv6badchecksums;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt icmpv6unspt;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt icmpv6rtthsld;<br> };<br></pre></td></tr></table></div>"
+csharpsecondcontent = "<pre>class protocolicmpv6stats {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string  clearstats;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 icmpv6totrxpkts;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 icmpv6rxpktsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 icmpv6totrxbytes;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 icmpv6rxbytesrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 icmpv6tottxpkts;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 icmpv6txpktsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 icmpv6tottxbytes;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 icmpv6txbytesrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 icmpv6totrxna;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 icmpv6rxnarate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 icmpv6totrxns;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 icmpv6rxnsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 icmpv6totrxra;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 icmpv6rxrarate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 icmpv6totrxrs;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 icmpv6rxrsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 icmpv6totrxechoreq;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 icmpv6rxechoreqrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 icmpv6totrxechoreply;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 icmpv6rxechoreplyrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 icmpv6tottxna;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 icmpv6txnarate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 icmpv6tottxns;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 icmpv6txnsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 icmpv6tottxra;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 icmpv6txrarate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 icmpv6tottxrs;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 icmpv6txrsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 icmpv6tottxechoreq;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 icmpv6txechoreqrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 icmpv6tottxechoreply;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 icmpv6txechoreplyrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 icmpv6errra;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 icmpv6errna;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 icmpv6errns;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 icmpv6badchecksums;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 icmpv6unspt;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 icmpv6rtthsld;<br> };<br></pre></td></tr></table></div>"
+vbsecondcontent = "<pre>Public <b>Structure</b> protocolicmpv6stats <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public clearstats As String  <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public icmpv6totrxpkts As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public icmpv6rxpktsrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public icmpv6totrxbytes As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public icmpv6rxbytesrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public icmpv6tottxpkts As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public icmpv6txpktsrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public icmpv6tottxbytes As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public icmpv6txbytesrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public icmpv6totrxna As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public icmpv6rxnarate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public icmpv6totrxns As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public icmpv6rxnsrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public icmpv6totrxra As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public icmpv6rxrarate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public icmpv6totrxrs As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public icmpv6rxrsrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public icmpv6totrxechoreq As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public icmpv6rxechoreqrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public icmpv6totrxechoreply As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public icmpv6rxechoreplyrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public icmpv6tottxna As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public icmpv6txnarate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public icmpv6tottxns As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public icmpv6txnsrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public icmpv6tottxra As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public icmpv6txrarate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public icmpv6tottxrs As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public icmpv6txrsrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public icmpv6tottxechoreq As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public icmpv6txechoreqrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public icmpv6tottxechoreply As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public icmpv6txechoreplyrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public icmpv6errra As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public icmpv6errna As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public icmpv6errns As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public icmpv6badchecksums As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public icmpv6unspt As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public icmpv6rtthsld As UInteger <br><b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>clearstats</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Clear the statsistics / counters</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>icmpv6totrxpkts</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">ICMPv6 packets received.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>icmpv6rxpktsrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">ICMPv6 packets received.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>icmpv6totrxbytes</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Bytes of ICMPv6 data received.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>icmpv6rxbytesrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Bytes of ICMPv6 data received.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>icmpv6tottxpkts</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">ICMPv6 packets transmitted.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>icmpv6txpktsrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">ICMPv6 packets transmitted.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>icmpv6tottxbytes</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Bytes of ICMPv6 data transmitted.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>icmpv6txbytesrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Bytes of ICMPv6 data transmitted.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>icmpv6totrxna</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">ICMPv6 neighbor advertisement packets received. These packets are received in response to a neighbor solicitation message sent out by this node, or if the link layer address of a neighbor has changed.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>icmpv6rxnarate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">ICMPv6 neighbor advertisement packets received. These packets are received in response to a neighbor solicitation message sent out by this node, or if the link layer address of a neighbor has changed.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>icmpv6totrxns</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">ICMPv6 neighbor solicitation packets received. These packets are received if the link layer address of a neighbor has changed, or in response to a neighbor solicitation message sent out by this node.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>icmpv6rxnsrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">ICMPv6 neighbor solicitation packets received. These packets are received if the link layer address of a neighbor has changed, or in response to a neighbor solicitation message sent out by this node.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>icmpv6totrxra</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">ICMPv6 router advertisement packets received. These are received at defined intervals or in response to a router solicitation message.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>icmpv6rxrarate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">ICMPv6 router advertisement packets received. These are received at defined intervals or in response to a router solicitation message.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>icmpv6totrxrs</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">ICMPv6 router solicitation packets received. These could be sent by a neighboring router to initiate address resolution.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>icmpv6rxrsrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">ICMPv6 router solicitation packets received. These could be sent by a neighboring router to initiate address resolution.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>icmpv6totrxechoreq</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">ICMPv6 Ping Echo Request packets received.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>icmpv6rxechoreqrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">ICMPv6 Ping Echo Request packets received.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>icmpv6totrxechoreply</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">ICMPv6 Ping Echo Reply packets received.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>icmpv6rxechoreplyrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">ICMPv6 Ping Echo Reply packets received.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>icmpv6tottxna</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">ICMPv6 neighbor advertisement packets transmitted. These packets are sent in response to a neighbor solicitation packet, or if the link layer address of this node has changed.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>icmpv6txnarate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">ICMPv6 neighbor advertisement packets transmitted. These packets are sent in response to a neighbor solicitation packet, or if the link layer address of this node has changed.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>icmpv6tottxns</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">ICMPv6 neighbor solicitation packets transmitted. These packets are sent to get the link layer addresses of neighboring nodes or to confirm that they are reachable.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>icmpv6txnsrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">ICMPv6 neighbor solicitation packets transmitted. These packets are sent to get the link layer addresses of neighboring nodes or to confirm that they are reachable.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>icmpv6tottxra</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">ICMPv6 router advertisement packets transmitted. These packets are sent at regular intervals or in response to a router solicitation packet from a neighbor.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>icmpv6txrarate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">ICMPv6 router advertisement packets transmitted. These packets are sent at regular intervals or in response to a router solicitation packet from a neighbor.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>icmpv6tottxrs</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">ICMPv6 router solicitation packets transmitted. These packets are sent to request neighboring routers to generate router advertisements immediately rather than wait for the next defined time.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>icmpv6txrsrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">ICMPv6 router solicitation packets transmitted. These packets are sent to request neighboring routers to generate router advertisements immediately rather than wait for the next defined time.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>icmpv6tottxechoreq</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">ICMPv6 Ping Echo Request packets transmitted.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>icmpv6txechoreqrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">ICMPv6 Ping Echo Request packets transmitted.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>icmpv6tottxechoreply</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">ICMP Ping Echo Reply packets transmitted.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>icmpv6txechoreplyrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">ICMP Ping Echo Reply packets transmitted.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>icmpv6errra</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">ICMPv6 router advertisement error packets received that contain an error in the header, such as an incorrect source IP address, destination IP address, or packet length.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>icmpv6errna</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">ICMPv6 neighbor advertisement error packets received that contain an error in the header, such as an incorrect source IP address, destination IP address, or packet length.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>icmpv6errns</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">ICMPv6 neighbor solicitation error packets received that contain an error in the header, such as an incorrect source IP address, destination IP address, or packet length.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>icmpv6badchecksums</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Packets received with an ICMPv6 checksum error.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>icmpv6unspt</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">ICMPv6 packets received that are not supported by the NetScaler.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>icmpv6rtthsld</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Packets dropped because the default threshold of 100 requests per 10 milliseconds has been exceeded.
+This is a configurable value using the set rateControl command.
+</div></td></tr><tr><td><br></td></tr><tr><td><div><b>See Also</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="statprotocolicmpv6.html">statprotocolicmpv6</a></div></td></tr><tr><td><br></td></tr></table></div>
+</body>
+</html>

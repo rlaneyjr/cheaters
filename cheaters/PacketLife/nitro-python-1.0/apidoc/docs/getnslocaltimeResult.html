@@ -1,0 +1,244 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>Citrix NetScaler XML API User&#39;s Guide - Structure Definition</title>
+<link rel="stylesheet" type="text/css" href="help_ns.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body onload="initial()" class="ns_body">
+<div class="ns_content"><table cellpadding="0" cellspacing="0"><script type="text/javascript">
+function changeContext(id,lang,flag){
+	parent.banner.document.language.select.value = lang;
+	if( lang == "C" ){
+		if(flag == "1"){
+			showContent(cfirstcontent,id,lang);
+		}
+		else{
+			showContent(csecondcontent,id,lang);
+		}
+	}
+	if( lang == "Perl" ){
+		if(flag == "1"){
+			showContent(perlfirstcontent,id,lang);
+		}
+		else{
+			showContent(perlsecondcontent,id,lang);
+		}
+	}
+	if( lang == "Java" ){
+		if(flag == "1"){
+			showContent(javafirstcontent,id,lang);	
+		}
+		else{
+			showContent(javasecondcontent,id,lang);
+		}
+	}
+	if( lang == "C#" ){
+		if(flag == "1"){
+			showContent(csharpfirstcontent,id,lang);
+		}
+		else{
+			showContent(csharpsecondcontent,id,lang);
+		}
+	}
+	if( lang == "VB" ){
+		if(flag == "1"){
+			showContent(vbfirstcontent,id,lang);
+		}
+		else{
+			showContent(vbsecondcontent,id,lang);
+		}
+	}
+	if(flag == "1"){
+		showInside(lang,"0");
+	}
+	else{
+		showOutside(lang);
+	}
+}
+function showContent(content,id,lang){
+	if(ie4){
+	   showContentObj=document.all.id;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById(id);
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+  showLangSelect(lang);
+}
+function showInside(str,cond){
+	if(str == "C"){
+ 		var inside_content = csecondcontent;
+ 	}
+ 	if(str == "Perl"){
+ 		var inside_content = perlsecondcontent;
+ 	}
+ 	if(str == "Java"){
+ 		var inside_content = javasecondcontent;
+ 	}
+ 	if(str == "C#"){
+		var inside_content = csharpsecondcontent;
+ 	}
+ 	if(str == "VB"){
+		var inside_content = vbsecondcontent;
+ 	}
+	showContent(inside_content,'qiksearch_div1',str);
+ 	if ( cond == "1" ){
+ 		var page = 'apidoc/docs/getnslocaltimeResult.html#localtimeList';
+ 		document.location.href = page;
+ 	}
+}
+function showOutside(str){
+	if(str == "C" ){
+ 		var inside_content = cfirstcontent;
+ 	}
+ 	if(str == "Perl" ){
+ 		var inside_content = perlfirstcontent;
+ 	}
+ 	if(str == "Java" ){
+ 		var inside_content = javafirstcontent;
+ 	}
+ 	if(str == "C#" ){
+ 		var inside_content = csharpfirstcontent;
+ 	}
+ 	if(str == "VB" ){
+ 		var inside_content = vbfirstcontent;
+ 	}
+ 	showContent(inside_content,'qiksearch_div',str);
+}
+function initial(){
+	ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+	ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+	ns4=document.layers;
+	langSelected = parent.banner.document.language.select.value
+	var plink = parent.banner.document.language.plink.value
+	var my_array=plink.split("&");
+	var temp = my_array[0];
+ 	var grp = temp.split("@");
+	var cmd = my_array[1];
+	var regex = /^stat/i;
+	if( cmd.match(regex) != null ){
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex_stat.html\">Statistics</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getnslocaltimeResult");
+	}
+	else{
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex.htm\">Configuration</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getnslocaltimeResult");
+	}
+	if( langSelected == "C" ){
+ 		var content = cfirstcontent;
+	}
+	else if( langSelected == "Perl" ){
+		var content = perlfirstcontent;
+	}
+	else if( langSelected == "Java" ){
+		var content = javafirstcontent;
+	}
+	else if( langSelected == "C#" ){
+		var content = csharpfirstcontent;
+	}
+	else if( langSelected == "VB" ){
+		var content = vbfirstcontent;
+	}
+	else{
+		var content = cfirstcontent;
+		langSelected="C";
+	}
+	showContent(content,'qiksearch_div',langSelected);
+	showInside(langSelected,"0");
+}
+function showPLink(content){
+	if(ie4){
+	   showContentObj=document.all.progressive_link;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById("progressive_link");
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+}
+function showLangSelect(id){
+	   if(ie4)
+       {
+       	showObj=document.all.first_url;
+       	showObj1=document.all.second_url;
+       }
+       if(ns6)
+       {
+       	showObj=document.getElementById("first_url");
+       	showObj1=document.getElementById("second_url");
+       }
+       if( id == "C" ){
+       	newlink = "<b>C</b>";
+       	newlink1 = "<b>C</b>";
+       }
+       else{
+       	newlink = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C','1');\"><b>C</b></a>";
+       	newlink1 = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C','0');\"><b>C</b></a>";
+       }
+       if( id == "Perl" ){
+       	newlink = newlink + " | <b>Perl</b>";
+       	newlink1 = newlink1 + " | <b>Perl</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Perl','1');\"><b>Perl</b></a>";
+      	       newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Perl','0');\"><b>Perl</b></a>";
+       }
+       if( id == "Java" ){
+       	newlink = newlink + " | <b>Java</b>";
+       	newlink1 = newlink1 + " | <b>Java</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Java','1');\"><b>Java</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Java','0');\"><b>Java</b></a>";
+       }
+       if( id == "C#" ){
+       	newlink = newlink + " | <b>C#</b>";
+       	newlink1 = newlink1 + " | <b>C#</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C#','1');\"><b>C#</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C#','0');\"><b>C#</b></a>";
+       }
+       showObj.innerHTML = newlink;
+       showObj1.innerHTML = newlink1;
+}
+</script>
+<tr><td><div><div id="progressive_link"></div></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>getnslocaltimeResult Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>getnslocaltimeResult</b> structure defines the return type for getnslocaltime API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="first_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+cfirstcontent = "<pre>struct getnslocaltimeResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; struct <a href=\'getnslocaltimeResult.html\#nslocaltime\'>nslocaltime</a> list[];<br> };<br></pre></td></tr></table></div>"
+perlfirstcontent = "<pre>$getnslocaltimeResult = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rc => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; message => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; List => \'@<a href=\'getnslocaltimeResult.html\#nslocaltime\'>nslocaltime</a>\',<br> };<br></pre></td></tr></table></div>"
+javafirstcontent = "<pre>class getnslocaltimeResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getnslocaltimeResult.html\#nslocaltime\'>nslocaltime</a>[] list;<br> };<br></pre></td></tr></table></div>"
+csharpfirstcontent = "<pre>class getnslocaltimeResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getnslocaltimeResult.html\#nslocaltime\'>nslocaltime</a>[] list;<br> };<br></pre></td></tr></table></div>"
+vbfirstcontent = "<pre>Public <b>Structure</b> getnslocaltimeResult <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rc As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public message As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public  nslocaltimeList() As  <a href=\'getnslocaltimeResult.html\#nslocaltime\'>nslocaltime</a><br> <b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rc</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, rc is 0 else rc > 0. Values above 0x8000 indicate Warnings.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>message</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, message is NULL else message contains <a href="errorlisting.html">Error/Warning</a> message.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>nslocaltimeList</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">List of nslocaltimes</div></td></tr><tr><td><br></td></tr><tr><td><div><a name="nslocaltime"></a></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>nslocaltime  Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>nslocaltime</b> structure defines the actual return type values for getnslocaltime API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="second_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div1" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+csecondcontent = "<pre>struct nslocaltime {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int utctimestamp;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int seconds;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int minutes;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int hours;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int dayofmonth;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int month;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int year;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int dayofweek;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int dayofyear;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int daylightsavings;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int gmtoffset;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * timezone;<br> };<br></pre></td></tr></table></div>"
+perlsecondcontent = "<pre>$nslocaltime = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; utctimestamp => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; seconds => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; minutes => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; hours => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; dayofmonth => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; month => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; year => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; dayofweek => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; dayofyear => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; daylightsavings => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; gmtoffset => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; timezone => \'$\',<br> };<br></pre></td></tr></table></div>"
+javasecondcontent = "<pre>class nslocaltime {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt utctimestamp;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt seconds;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt minutes;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt hours;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt dayofmonth;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt month;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt year;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt dayofweek;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt dayofyear;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt daylightsavings;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int gmtoffset;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String timezone;<br> };<br></pre></td></tr></table></div>"
+csharpsecondcontent = "<pre>class nslocaltime {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 utctimestamp;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 seconds;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 minutes;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 hours;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 dayofmonth;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 month;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 year;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 dayofweek;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 dayofyear;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 daylightsavings;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 gmtoffset;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string timezone;<br> };<br></pre></td></tr></table></div>"
+vbsecondcontent = "<pre>Public <b>Structure</b> nslocaltime <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public utctimestamp As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public seconds As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public minutes As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public hours As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public dayofmonth As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public month As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public year As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public dayofweek As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public dayofyear As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public daylightsavings As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public gmtoffset As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public timezone As String<br><b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>utctimestamp</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">number of seconds since Jan 1, 1970, GMT</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>seconds</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">seconds</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>minutes</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">minutes</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>hours</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">hours</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>dayofmonth</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">day of the month (1-12)</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>month</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">month</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>year</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">year</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>dayofweek</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">day of the week</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>dayofyear</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">day of the year</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>daylightsavings</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">daylight savings time</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>gmtoffset</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">offset in seconds from GMT</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>timezone</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">timezone</div></td></tr><tr><td><br></td></tr><tr><td><div><b>See Also</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="getnslocaltime.html">getnslocaltime</a></div></td></tr><tr><td><br></td></tr></table></div>
+</body>
+</html>

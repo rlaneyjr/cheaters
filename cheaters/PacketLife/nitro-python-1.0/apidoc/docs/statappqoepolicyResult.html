@@ -1,0 +1,244 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>Citrix NetScaler XML API User&#39;s Guide - Structure Definition</title>
+<link rel="stylesheet" type="text/css" href="help_ns.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body onload="initial()" class="ns_body">
+<div class="ns_content"><table cellpadding="0" cellspacing="0"><script type="text/javascript">
+function changeContext(id,lang,flag){
+	parent.banner.document.language.select.value = lang;
+	if( lang == "C" ){
+		if(flag == "1"){
+			showContent(cfirstcontent,id,lang);
+		}
+		else{
+			showContent(csecondcontent,id,lang);
+		}
+	}
+	if( lang == "Perl" ){
+		if(flag == "1"){
+			showContent(perlfirstcontent,id,lang);
+		}
+		else{
+			showContent(perlsecondcontent,id,lang);
+		}
+	}
+	if( lang == "Java" ){
+		if(flag == "1"){
+			showContent(javafirstcontent,id,lang);	
+		}
+		else{
+			showContent(javasecondcontent,id,lang);
+		}
+	}
+	if( lang == "C#" ){
+		if(flag == "1"){
+			showContent(csharpfirstcontent,id,lang);
+		}
+		else{
+			showContent(csharpsecondcontent,id,lang);
+		}
+	}
+	if( lang == "VB" ){
+		if(flag == "1"){
+			showContent(vbfirstcontent,id,lang);
+		}
+		else{
+			showContent(vbsecondcontent,id,lang);
+		}
+	}
+	if(flag == "1"){
+		showInside(lang,"0");
+	}
+	else{
+		showOutside(lang);
+	}
+}
+function showContent(content,id,lang){
+	if(ie4){
+	   showContentObj=document.all.id;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById(id);
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+  showLangSelect(lang);
+}
+function showInside(str,cond){
+	if(str == "C"){
+ 		var inside_content = csecondcontent;
+ 	}
+ 	if(str == "Perl"){
+ 		var inside_content = perlsecondcontent;
+ 	}
+ 	if(str == "Java"){
+ 		var inside_content = javasecondcontent;
+ 	}
+ 	if(str == "C#"){
+		var inside_content = csharpsecondcontent;
+ 	}
+ 	if(str == "VB"){
+		var inside_content = vbsecondcontent;
+ 	}
+	showContent(inside_content,'qiksearch_div1',str);
+ 	if ( cond == "1" ){
+ 		var page = 'apidoc/docs/statappqoepolicyResult.html#appqospolicyList';
+ 		document.location.href = page;
+ 	}
+}
+function showOutside(str){
+	if(str == "C" ){
+ 		var inside_content = cfirstcontent;
+ 	}
+ 	if(str == "Perl" ){
+ 		var inside_content = perlfirstcontent;
+ 	}
+ 	if(str == "Java" ){
+ 		var inside_content = javafirstcontent;
+ 	}
+ 	if(str == "C#" ){
+ 		var inside_content = csharpfirstcontent;
+ 	}
+ 	if(str == "VB" ){
+ 		var inside_content = vbfirstcontent;
+ 	}
+ 	showContent(inside_content,'qiksearch_div',str);
+}
+function initial(){
+	ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+	ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+	ns4=document.layers;
+	langSelected = parent.banner.document.language.select.value
+	var plink = parent.banner.document.language.plink.value
+	var my_array=plink.split("&");
+	var temp = my_array[0];
+ 	var grp = temp.split("@");
+	var cmd = my_array[1];
+	var regex = /^stat/i;
+	if( cmd.match(regex) != null ){
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex_stat.html\">Statistics</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > statappqoepolicyResult");
+	}
+	else{
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex.htm\">Configuration</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > statappqoepolicyResult");
+	}
+	if( langSelected == "C" ){
+ 		var content = cfirstcontent;
+	}
+	else if( langSelected == "Perl" ){
+		var content = perlfirstcontent;
+	}
+	else if( langSelected == "Java" ){
+		var content = javafirstcontent;
+	}
+	else if( langSelected == "C#" ){
+		var content = csharpfirstcontent;
+	}
+	else if( langSelected == "VB" ){
+		var content = vbfirstcontent;
+	}
+	else{
+		var content = cfirstcontent;
+		langSelected="C";
+	}
+	showContent(content,'qiksearch_div',langSelected);
+	showInside(langSelected,"0");
+}
+function showPLink(content){
+	if(ie4){
+	   showContentObj=document.all.progressive_link;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById("progressive_link");
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+}
+function showLangSelect(id){
+	   if(ie4)
+       {
+       	showObj=document.all.first_url;
+       	showObj1=document.all.second_url;
+       }
+       if(ns6)
+       {
+       	showObj=document.getElementById("first_url");
+       	showObj1=document.getElementById("second_url");
+       }
+       if( id == "C" ){
+       	newlink = "<b>C</b>";
+       	newlink1 = "<b>C</b>";
+       }
+       else{
+       	newlink = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C','1');\"><b>C</b></a>";
+       	newlink1 = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C','0');\"><b>C</b></a>";
+       }
+       if( id == "Perl" ){
+       	newlink = newlink + " | <b>Perl</b>";
+       	newlink1 = newlink1 + " | <b>Perl</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Perl','1');\"><b>Perl</b></a>";
+      	       newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Perl','0');\"><b>Perl</b></a>";
+       }
+       if( id == "Java" ){
+       	newlink = newlink + " | <b>Java</b>";
+       	newlink1 = newlink1 + " | <b>Java</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Java','1');\"><b>Java</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Java','0');\"><b>Java</b></a>";
+       }
+       if( id == "C#" ){
+       	newlink = newlink + " | <b>C#</b>";
+       	newlink1 = newlink1 + " | <b>C#</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C#','1');\"><b>C#</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C#','0');\"><b>C#</b></a>";
+       }
+       showObj.innerHTML = newlink;
+       showObj1.innerHTML = newlink1;
+}
+</script>
+<tr><td><div><div id="progressive_link"></div></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>statappqoepolicyResult Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>statappqoepolicyResult</b> structure defines the return type for statappqoepolicy API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="first_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+cfirstcontent = "<pre>struct statappqoepolicyResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; struct <a href=\'statappqoepolicyResult.html\#appqoepolicystats\'>appqoepolicystats</a> appqoepolicystatsList[];<br> };<br></pre></td></tr></table></div>"
+perlfirstcontent = "<pre>$statappqoepolicyResult = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rc => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; message => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'statappqoepolicyResult.html\#appqoepolicystats\'>appqoepolicystats</a> => \'@\',<br> };<br></pre></td></tr></table></div>"
+javafirstcontent = "<pre>class statappqoepolicyResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; class <a href=\'statappqoepolicyResult.html\#appqoepolicystats\'>appqoepolicystats</a> appqoepolicystatsList[];<br> };<br></pre></td></tr></table></div>"
+csharpfirstcontent = "<pre>class statappqoepolicyResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; class <a href=\'statappqoepolicyResult.html\#appqoepolicystats\'>appqoepolicystats</a> appqoepolicystatsList[];<br> };<br></pre></td></tr></table></div>"
+vbfirstcontent = "<pre>Public <b>Structure</b> statappqoepolicyResult <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rc As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public message As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public  endappqoepolicyList() As  <a href=\'statappqoepolicyResult.html\#appqoepolicystats\'>appqoepolicystatsList</a><br> <b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rc</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, rc is 0 else rc > 0. Values above 0x8000 indicate Warnings.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>message</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, message is NULL else message contains <a href="errorlisting.html">Error/Warning</a> message.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>appqoepolicyList</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Pointer to the appqoepolicy List.</div></td></tr><tr><td><br></td></tr><tr><td><div><a name="appqoepolicystats"></a></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>appqoepolicystats  Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>appqoepolicystats</b> structure defines the actual return type values for statappqoepolicy API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="second_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div1" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+csecondcontent = "<pre>struct appqoepolicystats {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char *   name;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char *   clearstats;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int qostotalserverttfb;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int qostotalserverttfb;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int qosserverttfbrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int qostotalserverttlb;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int qostotalserverttlb;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int qosserverttlbrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int qostotalclientttlb;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int qostotalclientttlb;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int qosclientttlbrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int qosavgserverttfb;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int qosavgserverttfbrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int qosavgserverttlb;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int qosavgserverttlbrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int qosavgclientttlb;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int qosavgclientttlbrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int totthroughput;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int throughputrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int totsvrlinkedto;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int svrlinkedtorate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int totcltrequests;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int cltrequestsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int totrequests;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int requestsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int totrequestbytes;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int totresponse;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int responserate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int totresponsebytes;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int totjssent;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int jssentrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int totjsbytessent;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int jsbytessentrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int pipolicyhits;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int pipolicyhitsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int totclienttransaction;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int totsvrtransaction;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int totsvrtransaction;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int qostotalclientttlb;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int qosclientttlbrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int qostotalserverttlb;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int qosserverttlbrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int qostotalserverttfb;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int qosserverttfbrate;<br> };<br></pre></td></tr></table></div>"
+perlsecondcontent = "<pre>$appqoepolicystats = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; name => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; clearstats => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; qostotalserverttfb => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; qostotalserverttfb => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; qosserverttfbrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; qostotalserverttlb => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; qostotalserverttlb => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; qosserverttlbrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; qostotalclientttlb => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; qostotalclientttlb => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; qosclientttlbrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; qosavgserverttfb => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; qosavgserverttfbrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; qosavgserverttlb => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; qosavgserverttlbrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; qosavgclientttlb => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; qosavgclientttlbrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; totthroughput => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; throughputrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; totsvrlinkedto => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; svrlinkedtorate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; totcltrequests => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; cltrequestsrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; totrequests => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; requestsrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; totrequestbytes => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; totresponse => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; responserate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; totresponsebytes => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; totjssent => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; jssentrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; totjsbytessent => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; jsbytessentrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; pipolicyhits => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; pipolicyhitsrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; totclienttransaction => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; totsvrtransaction => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; totsvrtransaction => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; qostotalclientttlb => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; qosclientttlbrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; qostotalserverttlb => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; qosserverttlbrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; qostotalserverttfb => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; qosserverttfbrate => \'$\',<br> };<br></pre></td></tr></table></div>"
+javasecondcontent = "<pre>class appqoepolicystats {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String  name;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String  clearstats;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt qostotalserverttfb;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt qostotalserverttfb;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt qosserverttfbrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt qostotalserverttlb;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt qostotalserverttlb;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt qosserverttlbrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt qostotalclientttlb;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt qostotalclientttlb;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt qosclientttlbrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt qosavgserverttfb;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt qosavgserverttfbrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt qosavgserverttlb;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt qosavgserverttlbrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt qosavgclientttlb;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt qosavgclientttlbrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt totthroughput;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt throughputrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt totsvrlinkedto;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt svrlinkedtorate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt totcltrequests;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt cltrequestsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt totrequests;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt requestsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt totrequestbytes;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt totresponse;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt responserate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt totresponsebytes;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt totjssent;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt jssentrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt totjsbytessent;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt jsbytessentrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt pipolicyhits;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt pipolicyhitsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt totclienttransaction;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt totsvrtransaction;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt totsvrtransaction;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt qostotalclientttlb;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt qosclientttlbrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt qostotalserverttlb;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt qosserverttlbrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt qostotalserverttfb;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt qosserverttfbrate;<br> };<br></pre></td></tr></table></div>"
+csharpsecondcontent = "<pre>class appqoepolicystats {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string  name;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string  clearstats;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 qostotalserverttfb;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 qostotalserverttfb;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 qosserverttfbrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 qostotalserverttlb;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 qostotalserverttlb;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 qosserverttlbrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 qostotalclientttlb;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 qostotalclientttlb;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 qosclientttlbrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 qosavgserverttfb;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 qosavgserverttfbrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 qosavgserverttlb;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 qosavgserverttlbrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 qosavgclientttlb;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 qosavgclientttlbrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 totthroughput;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 throughputrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 totsvrlinkedto;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 svrlinkedtorate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 totcltrequests;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 cltrequestsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 totrequests;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 requestsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 totrequestbytes;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 totresponse;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 responserate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 totresponsebytes;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 totjssent;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 jssentrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 totjsbytessent;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 jsbytessentrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 pipolicyhits;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 pipolicyhitsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 totclienttransaction;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 totsvrtransaction;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 totsvrtransaction;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 qostotalclientttlb;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 qosclientttlbrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 qostotalserverttlb;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 qosserverttlbrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 qostotalserverttfb;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 qosserverttfbrate;<br> };<br></pre></td></tr></table></div>"
+vbsecondcontent = "<pre>Public <b>Structure</b> appqoepolicystats <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public name As String  <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public clearstats As String  <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public qostotalserverttfb As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public qostotalserverttfb As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public qosserverttfbrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public qostotalserverttlb As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public qostotalserverttlb As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public qosserverttlbrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public qostotalclientttlb As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public qostotalclientttlb As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public qosclientttlbrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public qosavgserverttfb As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public qosavgserverttfbrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public qosavgserverttlb As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public qosavgserverttlbrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public qosavgclientttlb As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public qosavgclientttlbrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public totthroughput As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public throughputrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public totsvrlinkedto As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public svrlinkedtorate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public totcltrequests As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public cltrequestsrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public totrequests As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public requestsrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public totrequestbytes As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public totresponse As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public responserate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public totresponsebytes As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public totjssent As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public jssentrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public totjsbytessent As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public jsbytessentrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public pipolicyhits As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public pipolicyhitsrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public totclienttransaction As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public totsvrtransaction As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public totsvrtransaction As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public qostotalclientttlb As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public qosclientttlbrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public qostotalserverttlb As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public qosserverttlbrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public qostotalserverttfb As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public qosserverttfbrate As ULong<br><b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>name</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">policyName</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>clearstats</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Clear the statsistics / counters</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>qostotalserverttfb</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Server Time-To-First-Byte in milliseconds calculated for this AppQoE policy.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>qostotalserverttfb</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Server Time-To-First-Byte in milliseconds calculated for this AppQoE policy.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>qosserverttfbrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Server Time-To-First-Byte in milliseconds calculated for this AppQoE policy.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>qostotalserverttlb</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Server Time-To-Last-Byte in milliseconds calculated for this AppQoE policy.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>qostotalserverttlb</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Server Time-To-Last-Byte in milliseconds calculated for this AppQoE policy.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>qosserverttlbrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Server Time-To-Last-Byte in milliseconds calculated for this AppQoE policy.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>qostotalclientttlb</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Client Time-To-Last-Byte in milliseconds calculated for this AppQoE policy.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>qostotalclientttlb</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Client Time-To-Last-Byte in milliseconds calculated for this AppQoE policy.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>qosclientttlbrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Client Time-To-Last-Byte in milliseconds calculated for this AppQoE policy.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>qosavgserverttfb</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Average Server Time-To-First-Byte in milliseconds calculated for this AppQoE policy.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>qosavgserverttfbrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Average Server Time-To-First-Byte in milliseconds calculated for this AppQoE policy.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>qosavgserverttlb</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Average Server Time-To-Last-Byte in milliseconds calculated for this AppQoE policy.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>qosavgserverttlbrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Average Server Time-To-Last-Byte in milliseconds calculated for this AppQoE policy.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>qosavgclientttlb</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Average Client Time-To-Last-Byte in milliseconds calculated for this AppQoE policy.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>qosavgclientttlbrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Average Client Time-To-Last-Byte in milliseconds calculated for this AppQoE policy.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>totthroughput</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Throughput in Kbps calculated on this AppQoE policy</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>throughputrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Throughput in Kbps calculated on this AppQoE policy</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>totsvrlinkedto</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Total number of server connections that were established through this AppQoE Policy</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>svrlinkedtorate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of server connections that were established through this AppQoE Policy</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>totcltrequests</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Total number of client connections that were requested through this AppQoE Policy</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>cltrequestsrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of client connections that were requested through this AppQoE Policy</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>totrequests</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Total number of requests that were requested through this AppQoE policy</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>requestsrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of requests that were requested through this AppQoE policy</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>totrequestbytes</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Total number of requests bytes that were requested through this AppQoE policy</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>totresponse</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Total number of responses received by this AppQoE policy</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>responserate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of responses received by this AppQoE policy</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>totresponsebytes</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Total number of response bytes received by this AppQoE policy</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>totjssent</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Total number of in-memory responses sent instead of expected responses through this AppQoE policy</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>jssentrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of in-memory responses sent instead of expected responses through this AppQoE policy</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>totjsbytessent</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Total bytes of in-memory responses sent through this AppQoE policy</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>jsbytessentrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate bytes of in-memory responses sent through this AppQoE policy</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>pipolicyhits</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of hits on the policy</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>pipolicyhitsrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of hits on the policy</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>totclienttransaction</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Total number of client transactions processed by this AppQoE policy.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>totsvrtransaction</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Total number of server transactions processed by this AppQoE policy.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>totsvrtransaction</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Total number of server transactions processed by this AppQoE policy.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>qostotalclientttlb</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Client Time-To-Last-Byte in milliseconds calculated for this AppQoE policy.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>qosclientttlbrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Client Time-To-Last-Byte in milliseconds calculated for this AppQoE policy.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>qostotalserverttlb</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Server Time-To-Last-Byte in milliseconds calculated for this AppQoE policy.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>qosserverttlbrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Server Time-To-Last-Byte in milliseconds calculated for this AppQoE policy.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>qostotalserverttfb</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Server Time-To-First-Byte in milliseconds calculated for this AppQoE policy.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>qosserverttfbrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Server Time-To-First-Byte in milliseconds calculated for this AppQoE policy.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>See Also</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="statappqoepolicy.html">statappqoepolicy</a></div></td></tr><tr><td><br></td></tr></table></div>
+</body>
+</html>

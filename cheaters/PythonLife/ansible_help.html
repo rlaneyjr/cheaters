@@ -1,0 +1,130 @@
+<div id="html5">
+<h2>Ansible</h2>
+<hr />
+<div>
+    <table>
+<caption id="ansible">
+    <h4>Ansible command help</h4>
+    <em>Usage: ansible <host-pattern> [options]</em>
+</caption>
+    <colgroup>
+        <col style="text-align:left;" "line-height:12px;"/>
+        <col style="text-align:left;" "line-height:12px;"/>
+    </colgroup>
+    <thead>
+    <tr>
+        <th>Options</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+        <tbody>
+            <tr><td><code>-a MODULE_ARGS,<wbr>--args=MODULE_ARGS</code></td>  <td>module arguments</td></tr>
+            <tr><td><code>--ask-become-pass</code></td>  <td>ask for privilege escalation password</td></tr>
+            <tr><td><code>-k, --ask-pass</code></td>  <td>ask for connection password</td></tr>
+            <tr><td><code>--ask-su-pass</code></td>  <td>ask for su password (deprecated, use become)</td></tr>
+            <tr><td><code>-K, --ask-sudo-pass</code></td>  <td>ask for sudo password (deprecated, use become)</td></tr>
+            <tr><td><code>--ask-vault-pass</code></td>  <td>ask for vault password</td></tr>
+            <tr><td><code>-B SECONDS, --background=SECONDS</code></td>  <td>run asynchronously, failing after X seconds (default=N/A)</td></tr>
+            <tr><td><code>-b, --become</code></td>  <td>run operations with become (nopasswd implied)</td></tr>
+            <tr><td><code>--become-method=BECOME_METHOD</code></td>  <td>privilege escalation method to use (default=sudo), valid choices: [ sudo | su | pbrun | pfexec | runas | doas ]</td></tr>
+            <tr><td><code>--become-user=BECOME_USER</code></td>  <td>run operations as this user (default=root)</td></tr>
+            <tr><td><code>-C, --check</code></td>  <td>don't make any changes; instead, try to predict some of the changes that may occur</td></tr>
+            <tr><td><code>-c CONNECTION, --connection=CONNECTION</code></td>  <td>connection type to use (default=smart)</td></tr>
+            <tr><td><code>-D, --diff</code></td>  <td>when changing (small) files and templates, show the differences in those files; works great with --check</td></tr>
+            <tr><td><code>-e EXTRA_VARS, --extra-vars=EXTRA_VARS</code></td>  <td>set atditional variables as key=value or YAML/JSON</td></tr>
+            <tr><td><code>-f FORKS, --forks=FORKS</code></td>  <td>specify number of parallel processes to use (default=5)</td></tr>
+            <tr><td><code>-h, --help</code></td>  <td>show this help message and exit</td></tr>
+            <tr><td><code>-i INVENTORY, --inventory-file=INVENTORY</code></td>  <td>specify inventory host path (default=/usr/local/etc/ansible/hosts) or comma separated host list</td></tr>
+            <tr><td><code>-l SUBSET, --limit=SUBSET</code></td>  <td>further limit selected hosts to an atditional pattern</td></tr>
+            <tr><td><code>--list-hosts</code></td>  <td>outputs a list of matching hosts; does not execute anything else</td></tr>
+            <tr><td><code>-m MODULE_NAME, --module-name=MODULE_NAME</code></td>  <td>module name to execute (default=command)</td></tr>
+            <tr><td><code>-M MODULE_PATH, --module-path=MODULE_PATH</code></td>  <td>specify path(s) to module library (default=None)</td></tr>
+            <tr><td><code>--new-vault-password-file=NEW_VAULT_PASSWORD_FILE</code></td>  <td>new vault password file for rekey</td></tr>
+            <tr><td><code>-o, --one-line</code></td>  <td>condense output</td></tr>
+            <tr><td><code>--output=OUTPUT_FILE</code></td>  <td>output file name for encrypt or decrypt; use - for stdout</td></tr>
+            <tr><td><code>-P POLL_INTERVAL, --poll=POLL_INTERVAL</code></td>  <td>set the poll interval if using -B (default=15)</td></tr>
+            <tr><td><code>--private-key=PRIVATE_KEY_FILE, --key-file=PRIVATE_KEY_FILE</code></td>  <td>use this file to authenticate the connection</td></tr>
+            <tr><td><code>--scp-extra-args=SCP_EXTRA_ARGS</code></td>  <td>specify extra arguments to pass to scp only (e.g. -l)</td></tr>
+            <tr><td><code>--sftp-extra-args=SFTP_EXTRA_ARGS</code></td>  <td>specify extra arguments to pass to sftp only (e.g. -f, -l)</td></tr>
+            <tr><td><code>--ssh-common-args=SSH_COMMON_ARGS</code></td>  <td>specify common arguments to pass to sftp/scp/ssh (e.g. ProxyCommand)</td></tr>
+            <tr><td><code>--ssh-extra-args=SSH_EXTRA_ARGS</code></td>  <td>specify extra arguments to pass to ssh only (e.g. -R)</td></tr>
+            <tr><td><code>-S, --su</code></td>  <td>run operations with su (deprecated, use become)</td></tr>
+            <tr><td><code>-R SU_USER, --su-user=SU_USER</code></td>  <td>run operations with su as this user (default=root) (deprecated, use become)</td></tr>
+            <tr><td><code>-s, --sudo</code></td>  <td>run operations with sudo (nopasswd) (deprecated, use become)</td></tr>
+            <tr><td><code>-U SUDO_USER, --sudo-user=SUDO_USER</code></td>  <td>desired sudo user (default=root) (deprecated, use become)</td></tr>
+            <tr><td><code>--syntax-check</code></td>  <td>perform a syntax check on the playbook, but do not execute it</td></tr>
+            <tr><td><code>-T TIMEOUT, --timeout=TIMEOUT</code></td>  <td>override the connection timeout in seconds (default=10)</td></tr>
+            <tr><td><code>-t TREE, --tree=TREE</code></td>  <td>log output to this directory</td></tr>
+            <tr><td><code>-u REMOTE_USER, --user=REMOTE_USER</code></td>  <td>connect as this user (default=None)</td></tr>
+            <tr><td><code>--vault-password-file=VAULT_PASSWORD_FILE</code></td>  <td>vault password file</td></tr>
+            <tr><td><code>-v, --verbose</code></td>  <td>verbose mode (-vvv for more, -vvvv to enable connection debugging)</td></tr>
+            <tr><td><code>--version</code></td>  <td>show program's version number and exit</td></tr>
+        </tbody>
+    </table>
+</div>
+
+<h5><a href="MayccollUtils/Ansible/README.md">Ansible Examples</a></h5>
+
+<div>
+    <table>
+        <caption id="ansible-playbook">
+            <h4>Ansible-playbook command help</h4>
+            <em>Usage: ansible-playbook playbook.yml</em>
+        </caption>
+        <colgroup>
+            <col style="text-align:left;" "line-height:16px;"/>
+            <col style="text-align:left;" "line-height:16px;"/>
+        </colgroup>
+        <thead>
+            <tr>
+                <th>Options</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><code>--ask-become-pass  ask for privilege escalation password</code></tr>
+            <tr><code>-k, --ask-pass  ask for connection password</code></tr>
+            <tr><code>--ask-su-pass  ask for su password (deprecated, use become)</code></tr>
+            <tr><code>-K, --ask-sudo-pass  ask for sudo password (deprecated, use become)</code></tr>
+            <tr><code>--ask-vault-pass  ask for vault password</code></tr>
+            <tr><code>-b, --become  run operations with become (nopasswd implied)</code></tr>
+            <tr><code>--become-method=BECOME_METHOD  privilege escalation method to use (default=sudo), valid choices: [ sudo | su | pbrun | pfexec | runas | doas ]</code></tr>
+            <tr><code>--become-user=BECOME_USER  run operations as this user (default=root)</code></tr>
+            <tr><code>-C, --check  don't make any changes; instead, try to predict some of the changes that may occur</code></tr>
+            <tr><code>-c CONNECTION, --connection=CONNECTION  connection type to use (default=smart)</code></tr>
+            <tr><code>-D, --diff  when changing (small) files and templates, show the differences in those files; works great with --check</code></tr>
+            <tr><code>-e EXTRA_VARS, --extra-vars=EXTRA_VARS  set additional variables as key=value or YAML/JSON</code></tr>
+            <tr><code>--flush-cache  clear the fact cache</code></tr>
+            <tr><code>--force-handlers  run handlers even if a task fails</code></tr>
+            <tr><code>-f FORKS, --forks=FORKS  specify number of parallel processes to use (default=5)</code></tr>
+            <tr><code>-h, --help  show this help message and exit</code></tr>
+            <tr><code>-i INVENTORY, --inventory-file=INVENTORY  specify inventory host path (default=/usr/local/etc/ansible/hosts) or comma separated host list</code></tr>
+            <tr><code>-l SUBSET, --limit=SUBSET  further limit selected hosts to an additional pattern</code></tr>
+            <tr><code>--list-hosts  outputs a list of matching hosts; does not execute anything else</code></tr>
+            <tr><code>--list-tags  list all available tags</code></tr>
+            <tr><code>--list-tasks  list all tasks that would be executed</code></tr>
+            <tr><code>-M MODULE_PATH, --module-path=MODULE_PATH  specify path(s) to module library (default=None)</code></tr>
+            <tr><code>--new-vault-password-file=NEW_VAULT_PASSWORD_FILE  new vault password file for rekey</code></tr>
+            <tr><code>--output=OUTPUT_FILE  output file name for encrypt or decrypt; use - for stdout</code></tr>
+            <tr><code>--private-key=PRIVATE_KEY_FILE, --key-file=PRIVATE_KEY_FILE  use this file to authenticate the connection</code></tr>
+            <tr><code>--scp-extra-args=SCP_EXTRA_ARGS  specify extra arguments to pass to scp only (e.g. -l)</code></tr>
+            <tr><code>--sftp-extra-args=SFTP_EXTRA_ARGS  specify extra arguments to pass to sftp only (e.g. -f, -l)</code></tr>
+            <tr><code>--skip-tags=SKIP_TAGS  only run plays and tasks whose tags do not match these values</code></tr>
+            <tr><code>--ssh-common-args=SSH_COMMON_ARGS  specify common arguments to pass to sftp/scp/ssh (e.g. ProxyCommand)</code></tr>
+            <tr><code>--ssh-extra-args=SSH_EXTRA_ARGS  specify extra arguments to pass to ssh only (e.g. -R)</code></tr>
+            <tr><code>--start-at-task=START_AT_TASK  start the playbook at the task matching this name</code></tr>
+            <tr><code>--step  one-step-at-a-time: confirm each task before running</code></tr>
+            <tr><code>-S, --su  run operations with su (deprecated, use become)</code></tr>
+            <tr><code>-R SU_USER, --su-user=SU_USER  run operations with su as this user (default=root) (deprecated, use become)</code></tr>
+            <tr><code>-s, --sudo  run operations with sudo (nopasswd) (deprecated, use become)</code></tr>
+            <tr><code>-U SUDO_USER, --sudo-user=SUDO_USER  desired sudo user (default=root) (deprecated, use become)</code></tr>
+            <tr><code>--syntax-check  perform a syntax check on the playbook, but do not execute it</code></tr>
+            <tr><code>-t TAGS, --tags=TAGS  only run plays and tasks tagged with these values</code></tr>
+            <tr><code>-T TIMEOUT, --timeout=TIMEOUT  override the connection timeout in seconds (default=10)</code></tr>
+            <tr><code>-u REMOTE_USER, --user=REMOTE_USER  connect as this user (default=None)</code></tr>
+            <tr><code>--vault-password-file=VAULT_PASSWORD_FILE  vault password file</code></tr>
+            <tr><code>-v, --verbose  verbose mode (-vvv for more, -vvvv to enable connection debugging)</code></tr>
+            <tr><code>--version  show program's version number and exit</code></tr>
+        </tbody>
+    </table>
+</div>

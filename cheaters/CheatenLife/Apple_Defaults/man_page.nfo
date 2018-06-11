@@ -1,0 +1,217 @@
+
+DEFAULTS(1)               BSD General Commands Manual              DEFAULTS(1)
+
+NNAAMMEE
+     ddeeffaauullttss -- access the Mac OS X user defaults system
+
+SSYYNNOOPPSSIISS
+     ddeeffaauullttss [--ccuurrrreennttHHoosstt | --hhoosstt _h_o_s_t_n_a_m_e] read [_d_o_m_a_i_n [_k_e_y]]
+
+     ddeeffaauullttss [--ccuurrrreennttHHoosstt | --hhoosstt _h_o_s_t_n_a_m_e] read-type _d_o_m_a_i_n _k_e_y
+
+     ddeeffaauullttss [--ccuurrrreennttHHoosstt | --hhoosstt _h_o_s_t_n_a_m_e] write _d_o_m_a_i_n { _'_p_l_i_s_t_' | _k_e_y
+              _'_v_a_l_u_e_' }
+
+     ddeeffaauullttss [--ccuurrrreennttHHoosstt | --hhoosstt _h_o_s_t_n_a_m_e] rename _d_o_m_a_i_n _o_l_d___k_e_y _n_e_w___k_e_y
+
+     ddeeffaauullttss [--ccuurrrreennttHHoosstt | --hhoosstt _h_o_s_t_n_a_m_e] delete [_d_o_m_a_i_n [_k_e_y]]
+
+     ddeeffaauullttss [--ccuurrrreennttHHoosstt | --hhoosstt _h_o_s_t_n_a_m_e] { _d_o_m_a_i_n_s | find _w_o_r_d | _h_e_l_p }
+
+DDEESSCCRRIIPPTTIIOONN
+     DDeeffaauullttss allows users to read, write, and delete Mac OS X user defaults
+     from a command-line shell. Mac OS X applications and other programs use
+     the defaults system to record user preferences and other information that
+     must be maintained when the applications aren't running (such as default
+     font for new documents, or the position of an Info panel). Much of this
+     information is accessible through an application's Preferences panel, but
+     some of it isn't, such as the position of the Info panel. You can access
+     this information with ddeeffaauullttss
+
+     NNoottee:: Since applications do access the defaults system while they're run-
+     ning, you shouldn't modify the defaults of a running application. If you
+     change a default in a domain that belongs to a running application, the
+     application won't see the change and might even overwrite the default.
+
+     User defaults belong to _d_o_m_a_i_n_s, which typically correspond to individual
+     applications. Each domain has a dictionary of keys and values represent-
+     ing its defaults; for example, "Default Font" = "Helvetica". Keys are
+     always strings, but values can be complex data structures comprising
+     arrays, dictionaries, strings, and binary data. These data structures are
+     stored as XML Property Lists.
+
+     Though all applications, system services, and other programs have their
+     own domains, they also share a domain named NNSSGGlloobbaallDDoommaaiinn.  If a default
+     isn't specified in the application's domain, but is specified in
+     NNSSGGlloobbaallDDoommaaiinn, then the application uses the value in that domain.
+
+     The commands are as follows:
+
+     rreeaadd         Prints all of the user's defaults, for every domain, to
+                  standard output.
+
+     rreeaadd _d_o_m_a_i_n  Prints all of the user's defaults for _d_o_m_a_i_n to standard
+                  output.
+
+     rreeaadd _d_o_m_a_i_n _k_e_y
+                  Prints the value for the default of _d_o_m_a_i_n identified by
+                  _k_e_y.
+
+     rreeaadd--ttyyppee _d_o_m_a_i_n _k_e_y
+                  Prints the plist type for the given _d_o_m_a_i_n identified by
+                  _k_e_y.
+
+     wwrriittee _d_o_m_a_i_n _k_e_y _'_v_a_l_u_e_'
+                  Writes _v_a_l_u_e as the value for _k_e_y in _d_o_m_a_i_n.  _v_a_l_u_e must be
+                  a property list, and must be enclosed in single quotes.  For
+                  example:
+
+                        defaults write com.companyname.appname "Default Color" '(255, 0, 0)'
+
+                  sets the value for Default Color to an array containing the
+                  strings 255, 0, 0 (the red, green, and blue components).
+                  Note that the key is enclosed in quotation marks because it
+                  contains a space.
+
+     wwrriittee _d_o_m_a_i_n _'_p_l_i_s_t_'
+                  Overwrites the defaults information in _d_o_m_a_i_n with that
+                  given as _p_l_i_s_t.  _p_l_i_s_t must be a property list representa-
+                  tion of a dictionary, and must be enclosed in single quotes.
+                  For example:
+
+                        defaults write com.companyname.appname '{ "Default Color" = (255, 0, 0);
+                                                        "Default Font" = Helvetica; }';
+
+                  erases any previous defaults for com.companyname.appname and
+                  writes the values for the two names into the defaults sys-
+                  tem.
+
+     ddeelleettee _d_o_m_a_i_n
+                  Removes all default information for _d_o_m_a_i_n.
+
+     ddeelleettee _d_o_m_a_i_n _k_e_y
+                  Removes the default named _k_e_y from _d_o_m_a_i_n.
+
+     ddoommaaiinnss      Prints the names of all domains in the user's defaults sys-
+                  tem.
+
+     ffiinndd _w_o_r_d    Searches for _w_o_r_d in the domain names, keys, and values of
+                  the user's defaults, and prints out a list of matches.
+
+     hheellpp         Prints a list of possible command formats.
+
+OOPPTTIIOONNSS
+     SSppeecciiffyyiinngg ddoommaaiinnss::
+
+     _d_o_m_a_i_n    If no flag is specified, _d_o_m_a_i_n is a domain name of the form
+               com.companyname.appname.  Example:
+
+                     defaults read com.apple.TextEdit
+
+     --aapppp _a_p_p_l_i_c_a_t_i_o_n
+               The name of an application may be provided instead of a domain
+               using the --aapppp flag. Example:
+
+                     defaults read -app TextEdit
+
+     _f_i_l_e_p_a_t_h  Domains may also be specified as a path to an arbitrary plist
+               file, with or without the '.plist' extension. For example:
+
+                     defaults read ~/Library/Containers/com.apple.TextEdit/Data/Library/Preferences/com.apple.TextEdit.plist
+
+               normally gives the same result as the two previous examples.
+               In the following example:
+
+                     defaults write ~/Desktop/TestFile foo bar
+
+               will write the key 'foo' with the value 'bar' into the plist
+               file 'TestFile.plist' that is on the user's desktop. If the
+               file does not exist, it will be created. If it does exist, the
+               key-value pair will be added, overwriting the value of 'foo' if
+               it already existed.
+
+               WARNING: The defaults command will be changed in an upcoming
+               major release to only operate on preferences domains. General
+               plist manipulation utilities will be folded into a different
+               command-line program.
+
+     --gg | --gglloobbaallDDoommaaiinn | NNSSGGlloobbaallDDoommaaiinn
+               Specify the global domain. '--gg' and '--gglloobbaallDDoommaaiinn' may be used
+               as synonyms for NNSSGGlloobbaallDDoommaaiinn.
+
+     SSppeecciiffyyiinngg vvaalluuee ttyyppeess ffoorr pprreeffeerreennccee kkeeyyss::
+
+                 If no type flag is provided, ddeeffaauullttss will assume the value
+                 is a string. For best results, use one of the type flags,
+                 listed below.
+
+     --ssttrriinngg     Allows the user to specify a string as the value for the
+                 given preference key.
+
+     --ddaattaa       Allows the user to specify a bunch of raw data bytes as the
+                 value for the given preference key.  The data must be pro-
+                 vided in hexidecimal.
+
+     --iinntt[[eeggeerr]]  Allows the user to specify an integer as the value for the
+                 given preference key.
+
+     --ffllooaatt      Allows the user to specify a floating point number as the
+                 value for the given preference key.
+
+     --bbooooll[[eeaann]]  Allows the user to specify a boolean as the value for the
+                 given preference key.  Value must be TRUE, FALSE, YES, or NO.
+
+     --ddaattee       Allows the user to specify a date as the value for the given
+                 preference key.
+
+     --aarrrraayy      Allows the user to specify an array as the value for the
+                 given preference key:
+
+                       defaults write somedomain preferenceKey -array element1 element2 element3
+
+                 The specified array overwrites the value of the key if the
+                 key was present at the time of the write. If the key was not
+                 present, it is created with the new value.
+
+     --aarrrraayy--aadddd  Allows the user to add new elements to the end of an array
+                 for a key which has an array as its value. Usage is the same
+                 as -array above. If the key was not present, it is created
+                 with the specified array as its value.
+
+     --ddiicctt       Allows the user to add a dictionary to the defaults database
+                 for a domain.  Keys and values are specified in order:
+
+                       defaults write somedomain preferenceKey -dict key1 value1 key2 value2
+
+                 The specified dictionary overwrites the value of the key if
+                 the key was present at the time of the write. If the key was
+                 not present, it is created with the new value.
+
+     --ddiicctt--aadddd   Allows the user to add new key/value pairs to a dictionary
+                 for a key which has a dictionary as its value. Usage is the
+                 same as -dict above. If the key was not present, it is cre-
+                 ated with the specified dictionary as its value.
+
+     SSppeecciiffyyiinngg aa hhoosstt ffoorr pprreeffeerreenncceess::
+
+     Operations on the defaults database normally apply to any host the user
+     may log in on, but may be restricted to apply only to a specific host.
+
+               If no host is provided, preferences operations will apply to
+               any host the user may log in on.
+
+     --ccuurrrreennttHHoosstt
+               Restricts preferences operations to the host the user is cur-
+               rently logged in on.
+
+     --hhoosstt _h_o_s_t_n_a_m_e
+               Restricts preferences operations to _h_o_s_t_n_a_m_e.
+
+BBUUGGSS
+     Defaults can be structured in very complex ways, making it difficult for
+     the user to enter them with this command.
+
+HHIISSTTOORRYY
+     First appeared in NeXTStep.
+
+Mac OS X                          Nov 3, 2003                         Mac OS X

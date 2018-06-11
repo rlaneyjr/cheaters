@@ -1,0 +1,151 @@
+SCAPY(1)                                                                                                                                                                                                      SCAPY(1)
+
+
+
+NAME
+       scapy - Interactive packet manipulation tool
+
+SYNOPSIS
+       scapy [options]
+
+DESCRIPTION
+       This manual page documents briefly the scapy tool.
+
+       scapy is a powerful interactive packet manipulation tool, packet generator, network scanner, network discovery, packet sniffer, etc. It can for the moment replace hping, parts of nmap, arpspoof, arp-sk, arp-
+       ing, tcpdump, tshark, p0f, ...
+
+       scapy uses the python interpreter as a command board. That means that you can use directly python language (assign variables, use loops, define functions, etc.) If you give a file as parameter when  you  run
+       scapy, your session (variables, functions, intances, ...) will be saved when you leave the interpretor, and restored the next time you launch scapy.
+
+       The  idea  is  simple.  Those kind of tools do two things : sending packets and receiving answers. That's what scapy does : you define a set of packets, it sends them, receives answers, matches requests with
+       answers and returns a list of packet couples (request, answer) and a list of unmatched packets. This has the big advantage over tools like nmap or hping that an answer is  not  reduced  to  (open/closed/fil-
+       tered), but is the whole packet.
+
+       On  top  of  this  can be build more high level functions, for example one that does traceroutes and give as a result only the start TTL of the request and the source IP of the answer. One that pings a whole
+       network and gives the list of machines answering. One that does a portscan and returns a LaTeX report.
+
+
+OPTIONS
+       Options for scapy are:
+
+       -h     display usage
+
+       -d     increase log verbosity. Can be used many times.
+
+       -s FILE
+              use FILE to save/load session values (variables, functions, intances, ...)
+
+       -p PRESTART_FILE
+              use PRESTART_FILE instead of $HOME/.scapy_prestart.py as pre-startup file
+
+       -P     do not run prestart file
+
+       -c STARTUP_FILE
+              use STARTUP_FILE instead of $HOME/.scapy_startup.py as startup file
+
+       -C     do not run startup file
+
+
+COMMANDS
+       Only the vital commands to begin are listed here for the moment.
+
+       ls()   lists supported protocol layers. If a protocol layer is given as parameter, lists its fields and types of fields.
+
+       lsc()  lists some user commands. If a command is given as parameter, its documentation is displayed.
+
+       conf   this object contains the configuration.
+
+
+FILES
+       $HOME/.scapy_prestart.py This file is run before scapy core is loaded. Only the is available. This file can be used to manipulate conf.load_layers list to choose which layers will be loaded:
+
+       conf.load_layers.remove("bluetooth")
+       conf.load_layers.append("new_layer")
+
+       $HOME/.scapy_startup.py This file is run after scapy is loaded. It can be used to configure some of the scapy behaviors:
+
+       conf.prog.pdfreader="xpdf"
+       split_layers(UDP,DNS)
+
+
+EXAMPLES
+       More verbose examples are available at http://www.secdev.org/projects/scapy/demo.html Just run scapy and try the following commands in the interpreter.
+
+
+       Test the robustness of a network stack with invalid packets:
+       sr(IP(dst="172.16.1.1", ihl=2, options="b$2$", version=3)/ICMP())
+
+
+       Packet sniffing and dissection (with a bpf filter or thetereal-like output):
+       a=sniff(filter="tcp port 110")
+       a=sniff(prn = lambda x: x.display)
+
+
+       Sniffed packet reemission:
+       a=sniff(filter="tcp port 110")
+       sendp(a)
+
+
+       Pcap file packet reemission:
+       sendp(rdpcap("file.cap"))
+
+
+       Manual TCP traceroute:
+       sr(IP(dst="www.google.com", ttl=(1,30))/TCP(seq=RandInt(), sport=RandShort(), dport=dport)
+
+
+       Protocol scan:
+       sr(IP(dst="172.16.1.28", proto=(1,254)))
+
+
+       ARP ping:
+       srp(Ether(dst="ff:ff:ff:ff:ff:ff")/ARP(pdst="172.16.1.1/24"))
+
+
+       ACK scan:
+       sr(IP(dst="172.16.1.28")/TCP(dport=(1,1024), flags="A"))
+
+
+       Passive OS fingerprinting:
+       sniff(prn=prnp0f)
+
+
+       Active OS fingerprinting:
+       nmap_fp("172.16.1.232")
+
+
+
+       ARP cache poisonning:
+       sendp(Ether(dst=tmac)/ARP(op="who-has", psrc=victim, pdst=target))
+
+
+       Reporting:
+       report_ports("192.168.2.34", (20,30))
+
+
+SEE ALSO
+       http://www.secdev.org/projects/scapy
+       http://trac.secdev.org/scapy
+
+
+BUGS
+       Does not give the right source IP for routes that use interface aliases.
+
+       May miss packets under heavy load.
+
+       Session saving is limited by Python ability to marshal objects. As a consequence, lambda functions and generators can't be saved, which seriously reduce usefulness of this feature.
+
+       BPF filters don't work on Point-to-point interfaces.
+
+
+
+AUTHOR
+       Philippe Biondi <phil@secdev.org>
+
+       This manual page was written by Alberto Gonzalez Iniesta <agi@agi.as> and Philippe Biondi.
+
+
+
+                                                                                                     May 12, 2003                                                                                             SCAPY(1)
+(END)
+

@@ -1,0 +1,838 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      
+      <title>Displaying the configuration -  - NSO 4.4.2.3 User Guide</title>
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+      <link rel="home" href="index.html" title="NSO 4.4.2.3 User Guide" />
+      <link rel="up" href="ug.ncs.cli.html" title="The NSO CLI" />
+      <link rel="prev" href="ug.ncs.cli.regexp.html" title="Regular expressions" />
+      <link rel="next" href="ch02s07.html" title="Range expressions" />
+      <meta xmlns="" name="Section-title" content="Displaying the configuration" /><script xmlns="" type="text/javascript">
+      //The id for tree cookie
+      var treeCookieId = "treeview-8936";
+      var language = "en";
+      var w = new Object();
+      //Localization
+      txt_filesfound = 'Results';
+      txt_enter_at_least_1_char = "You must enter at least one character.";
+      txt_browser_not_supported = "JavaScript is disabled on your browser. Please enable JavaScript to enjoy all the features of this site.";
+      txt_please_wait = "Please wait. Search in progress...";
+      txt_results_for = "Results for: ";
+    </script><link xmlns="" rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/css/positioning.css" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/jquery/theme-redmond/jquery-ui-1.8.2.custom.css" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/jquery/treeview/jquery.treeview.css" /><style xmlns="" type="text/css">
+      
+      #noscript{
+      font-weight:bold;
+      background-color: #55AA55;
+      font-weight: bold;
+      height: 25spx;
+      z-index: 3000;
+      top:0px;
+      width:100%;
+      position: relative;
+      border-bottom: solid 5px black;
+      text-align:center;
+      color: white;
+      }
+      
+      input {
+      margin-bottom: 5px;
+      margin-top: 2px;
+      }
+      .folder {
+      display: block;
+      height: 22px;
+      padding-left: 20px;
+      background: transparent url(common/jquery/treeview/images/folder.gif) 0 0px no-repeat;
+      }
+      span.contentsTab {
+      padding-left: 20px;
+      background: url(common/images/toc-icon.png) no-repeat 0 center;
+      }
+      span.searchTab {
+      padding-left: 20px;
+      background: url(common/images/search-icon.png) no-repeat 0 center;
+      }
+      
+      /* Overide jquery treeview's defaults for ul. */
+      .treeview ul {
+      background-color: transparent;
+      margin-top: 4px;
+      }		
+      #webhelp-currentid {
+      /* background-color: #D8D8D8 !important; */
+      background-color: #D8D8D8;
+      }
+      .treeview .hover { color: black; }
+      .filetree li span a { text-decoration: none; font-size: 12px; color: #517291; }
+      
+      /* Override jquery-ui's default css customizations. These are supposed to take precedence over those.*/
+      .ui-widget-content {
+      border: 0px; 
+      background: none; 
+      color: none;     
+      }
+      .ui-widget-header {
+      color: #e9e8e9;
+      border-left: 1px solid #e5e5e5;
+      border-right: 1px solid #e5e5e5;
+      border-bottom: 1px solid #bbc4c5;
+      border-top: 4px solid #e5e5e5;
+      border: medium none;
+      background: #F4F4F4; /* old browsers */
+      background: -moz-linear-gradient(top, #F4F4F4 0%, #E6E4E5 100%); /* firefox */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F4F4F4), color-stop(100%,#E6E4E5)); /* webkit */    
+      font-weight: none;
+      }
+      .ui-widget-header a { color: none; }
+      .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { 
+      border: none; background: none; font-weight: none; color: none; }
+      .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited { color: black; text-decoration: none; }
+      .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus { border: none; background: none; font-weight: none; color: none; }
+      
+      .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { border: none; background: none; font-weight: none; color: none; }
+      .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited { 
+      color: black; text-decoration: none; 	
+      background: #C6C6C6; /* old browsers */
+      background: -moz-linear-gradient(top, #C6C6C6 0%, #D8D8D8 100%); /* firefox */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#C6C6C6), color-stop(100%,#D8D8D8)); /* webkit */
+      -webkit-border-radius:15px; -moz-border-radius:10px;
+      border: 1px solid #f1f1f1;
+      }    
+      .ui-corner-all { border-radius: 0 0 0 0; }
+      
+      .ui-tabs { padding: .2em;}
+      .ui-tabs .ui-tabs-nav li { top: 0px; margin: -2px 0 1px; text-transform: uppercase; font-size: 10.5px;}
+      .ui-tabs .ui-tabs-nav li a { padding: .25em 2em .25em 1em; margin: .5em; text-shadow: 0 1px 0 rgba(255,255,255,.5); }
+      /**
+      *	Basic Layout Theme
+      * 
+      *	This theme uses the default layout class-names for all classes
+      *	Add any 'custom class-names', from options: paneClass, resizerClass, togglerClass
+      */
+      
+      .ui-layout-pane { /* all 'panes' */ 
+      background: #FFF; 
+      border: 1px solid #BBB; 
+      padding: 05x; 
+      overflow: auto;
+      } 
+      
+      .ui-layout-resizer { /* all 'resizer-bars' */ 
+      background: #DDD; 
+      top:100px
+      } 
+      
+      .ui-layout-toggler { /* all 'toggler-buttons' */ 
+      background: #AAA; 
+      } 
+      
+    </style>
+      <!--[if IE]>
+	<link rel="stylesheet" type="text/css" href="../common/css/ie.css"/>
+	<![endif]--><script xmlns="" type="text/javascript" src="common/browserDetect.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery-1.7.2.min.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery.ui.all.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery.cookie.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/treeview/jquery.treeview.min.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/layout/jquery.layout.js">
+         <!----></script><style type="text/css">
+      
+      #header {
+      /* background: url("../images/header-bg.png") scroll top left repeat-x #4d8c83; */
+      background: transparent;
+      }
+      #leftnavigation {
+      /* background-color: #ededed!important; */
+      background-color: transparent;
+      }
+      #navheader {
+      visibility: hidden;
+      }
+      #webhelp-currentid {
+      /* background-color: #D8D8D8 !important; */
+      background-color: #FFFFFF; /*but must be changed in main.js as well*/
+      }
+      .filetree span.file {
+      /* background: url(images/file.gif) 0 0 no-repeat; */
+      background: initial;
+      }
+      .filetree span.folder, .filetree span.file {
+      padding: 1px 0 1px 7px;
+      display: block;
+      }
+
+      /* borrowed from cisco: clientlib.css */
+      .footer {
+      margin: 28px 30px 0 15px;
+      font-size: 80%;
+      line-height: 120%;
+      border-top: 1px solid #ccc;
+      padding-top: 7px;
+      color: #999;
+      }
+      .footer #footer-legal{display:inline;padding-bottom:18px}
+      #framework-footer{margin:0;padding:0 0 15px 0;min-width:900px;width:100%}
+      .footer a,.footer a:visited{color:#999}
+
+      /* from ccimr.css */
+      a:active  { color: #3366CC}
+      a:hover   { color: #3366CC}
+      a:link    { color: #3366CC}
+      a:visited { color: #3366CC}
+
+      #header img {
+      float: left;
+      margin-left: 20px;
+      margin-top: 0px;
+      }
+
+      #header h1 {
+      color: #336666;
+      margin-top: 4px;
+      }
+      #content h1, #content h2 {
+      color: #336666;
+      }
+      .title {
+      color: #336666;
+      }
+      p, pre {
+      margin-left: 0.1in;
+      }
+      p, ul, ol, li {
+        font-size: 95%;
+        font-family: Arial, Helvetica, sans-serif;
+        margin-top: 1px;
+      }
+      body {
+        font: 80.5% Arial, Helvetica, sans-serif;
+      }
+      ol {
+      display: block;
+      list-style-type: decimal;
+      -webkit-margin-before: 1em;
+      -webkit-margin-after: 1em;
+      -webkit-margin-start: 0px;
+      -webkit-margin-end: 0px;
+      -webkit-padding-start: 40px;
+      border: 1;
+      }
+    </style></head>
+   <body>
+      <noscript>
+         <div id="noscript">JavaScript is disabled on your browser. Please enable JavaScript to enjoy all the features of this site.</div>
+      </noscript>
+      <div id="header"><a href="index.html"><img style="margin-right: 2px; width: 110; height: 73; padding-right: 25px; padding-top: 8px" align="right" src="common/images/logo.gif" alt="Cisco Systems, Inc." /></a><h1>NSO 4.4.2.3 User Guide<br />The NSO CLI 
+         </h1>
+         <div id="navheader">
+            <!---->
+            <table class="navLinks">
+               <tr>
+                  <td><a id="showHideButton" href="#" onclick="myLayout.toggle('west')" class="pointLeft" tabindex="5" title="Hide TOC tree">Sidebar
+                                                    </a></td>
+                  <td><a accesskey="p" class="navLinkPrevious" tabindex="5" href="ug.ncs.cli.regexp.html">Prev</a>
+                                                             |
+                                                             <a accesskey="u" class="navLinkUp" tabindex="5" href="ug.ncs.cli.html">Up</a>
+                                                         |
+                                                         <a accesskey="n" class="navLinkNext" tabindex="5" href="ch02s07.html">Next</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div id="content">
+         <div class="sect1">
+            <div xmlns="" class="titlepage">
+               <div>
+                  <div>
+                     <h2 xmlns="http://www.w3.org/1999/xhtml" class="title" style="clear: both"><a id="d0e994"></a>Displaying the configuration
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>
+                     There are several options for displaying the configuration and
+                     stats data in NSO. The most basic command consists of displaying
+                     a leaf or a subtree of the configuration by giving the path to
+                     the element.
+                   
+            </p>
+            <p>To display the configuration of a device do:</p>
+            <p>
+                   
+            </p><pre class="screen">admin@ncs# <strong class="userinput"><code>show running-config devices device ce0 config</code></strong>
+devices device ce0
+ config
+  no ios:service pad
+  no ios:ip domain-lookup
+  no ios:ip http secure-server
+  ios:ip source-route
+  ios:interface GigabitEthernet0/1
+  exit
+  ios:interface GigabitEthernet0/10
+  exit
+  ...
+ !
+ !</pre><p>
+                   
+            </p>
+            <p>
+                     This can also be done for a group of devices by substituting the
+                     instance name (ce0 in this case) with a
+                     <a class="xref" href="ug.ncs.cli.regexp.html" title="Regular expressions">the section called “Regular expressions”</a>.
+                   
+            </p>
+            <p>To display the config of all devices:</p>
+            <p>
+                   
+            </p><pre class="screen">admin@ncs# <strong class="userinput"><code>show running-config devices device * config</code></strong>
+devices device ce0
+ config
+  no ios:service pad
+  no ios:ip domain-lookup
+  no ios:ip http secure-server
+  ios:ip source-route
+  ios:interface GigabitEthernet0/1
+  exit
+  ios:interface GigabitEthernet0/10
+  exit
+  ...
+ !
+!
+devices device ce1
+ config
+  ...
+ !
+!
+...</pre><p>
+                   
+            </p>
+            <p>
+                     It is possible to limit the output even further. View only the
+                     http settings on each device:
+                   
+            </p>
+            <p>
+                   
+            </p><pre class="screen">admin@ncs# <strong class="userinput"><code>show running-config devices device * config ios:ip http</code></strong>
+devices device ce0
+ config
+  no ios:ip http secure-server
+ !
+!
+devices device ce1
+ config
+  no ios:ip http secure-server
+ !
+!
+...</pre><p>
+                   
+            </p>
+            <p>
+                     There is an alternative syntax for this using the
+                     <span class="command"><strong>select</strong></span> pipe command:
+                   
+            </p>
+            <p>
+                   
+            </p><pre class="screen">admin@ncs# <strong class="userinput"><code>show running-config devices device * | \
+    select config ios:ip http</code></strong>
+devices device ce0
+ config
+  no ios:ip http secure-server
+ !
+!
+devices device ce1
+ config
+  no ios:ip http secure-server
+ !
+!
+...</pre><p>
+                   
+            </p>
+            <p>
+                     The <span class="command"><strong>select</strong></span> pipe command can be used multiple times
+                     for adding additional content:
+                   
+            </p>
+            <p>
+                     
+            </p><pre class="screen">admin@ncs# <strong class="userinput"><code>show running-config devices device * | \
+    select config ios:ip http | \
+    select config ios:ip domain-lookup</code></strong>
+devices device ce0
+ config
+  no ios:ip domain-lookup
+  no ios:ip http secure-server
+ !
+!
+devices device ce1
+ config
+  no ios:ip domain-lookup
+  no ios:ip http secure-server
+ !
+!
+...</pre><p>
+                   
+            </p>
+            <p>
+                     There is also a <span class="command"><strong>de-select</strong></span> pipe command that can
+                     be used to instruct the CLI to not display certain parts of the
+                     config. The above printout could also be achieved by first selecting
+                     the ip container, and then de-selecting the source-route leaf:
+                   
+            </p>
+            <p>
+                   
+            </p><pre class="screen">admin@ncs# <strong class="userinput"><code>show running-config devices device * | \
+    select config ios:ip | \
+    de-select config ios:ip source-route</code></strong>
+devices device ce0
+ config
+  no ios:ip domain-lookup
+  no ios:ip http secure-server
+ !
+!
+devices device ce1
+ config
+  no ios:ip domain-lookup
+  no ios:ip http secure-server
+ !
+!
+...</pre><p>
+                   
+            </p>
+            <p>
+                     A use-case for the <span class="command"><strong>de-select</strong></span> pipe command is
+                     to de-select the config container in order to only display the
+                     device settings without actually displaying their config:
+                   
+            </p>
+            <p>
+                   
+            </p><pre class="screen">admin@ncs# <strong class="userinput"><code>show running-config devices device * | de-select config</code></strong>
+devices device ce0
+ address   127.0.0.1
+ port      10022
+ ssh host-key ssh-dss
+  ...
+ !
+ authgroup default
+ device-type cli ned-id cisco-ios
+ state admin-state unlocked
+!
+devices device ce1
+ ...
+!
+...</pre><p>
+                   
+            </p>
+            <p>
+                     The above statements also work for the <span class="command"><strong>save</strong></span>
+                     command. To save the devices managed by NSO, but not the
+                     contents of their config container:
+                   
+            </p>
+            <p>
+                   
+            </p><pre class="screen">admin@ncs# <strong class="userinput"><code>show running-config devices device * | \
+    de-select config | save /tmp/devices</code></strong></pre><p>
+                   
+            </p>
+            <p>
+                     It is possible to use the <span class="command"><strong>select</strong></span> command to
+                     select which list instances to display. To display all devices
+                     that has the interface GigabitEthernet 0/0/0/4:
+                   
+            </p>
+            <p>
+                   
+            </p><pre class="screen">admin@ncs# <strong class="userinput"><code>show running-config devices device * | \
+    select config cisco-ios-xr:interface GigabitEthernet 0/0/0/4</code></strong>
+devices device p0
+ config
+  cisco-ios-xr:interface GigabitEthernet 0/0/0/4
+   shutdown
+  exit
+ !
+!
+devices device p1
+ config
+  cisco-ios-xr:interface GigabitEthernet 0/0/0/4
+   shutdown
+  exit
+ !
+!
+...</pre><p>
+                   
+            </p>
+            <p>
+                     This means "display all device instances that has the interface
+                     GigabitEthernet 0/0/0/4". Only the subtree defined by the select path
+                     will be displayed. It is also possible to display the entire content
+                     of the config container for each instance by using an additional
+                     select statement:
+                   
+            </p>
+            <p>
+                   
+            </p><pre class="screen">admin@ncs# <strong class="userinput"><code>show running-config devices device * | \
+    select config cisco-ios-xr:interface GigabitEthernet 0/0/0/4 | \
+    select config | match-all</code></strong>
+devices device p0
+ config
+  cisco-ios-xr:hostname PE1
+  cisco-ios-xr:interface MgmtEth 0/0/CPU0/0
+  exit
+  ...
+  cisco-ios-xr:interface GigabitEthernet 0/0/0/4
+   shutdown
+  exit
+ !
+!
+devices device p1
+ config
+  ...
+  cisco-ios-xr:interface GigabitEthernet 0/0/0/4
+   shutdown
+  exit
+ !
+!
+...</pre><p>
+                   
+            </p>
+            <p>
+                     The <span class="command"><strong>match-all</strong></span> pipe command is used for telling
+                     the CLI to only display instances that matches all select commands.
+                     The default behavior is <span class="command"><strong>match-any</strong></span> which means
+                     to display instances that matches any of the given
+                     <span class="command"><strong>select</strong></span> commands.
+                   
+            </p>
+            <p>
+                     The <span class="command"><strong>display</strong></span> command is used to format
+                     configuration and statistics data. There are several
+                     output formats available, some of these are unique to specific
+                     modes, such as configuration or operational mode. The output formats
+                     <span class="command"><strong>json</strong></span>, <span class="command"><strong>keypath</strong></span>,
+                     <span class="command"><strong>xml</strong></span>, and <span class="command"><strong>xpath</strong></span>
+                     are available in most modes and CLI styles (J, I, and C).
+                   
+            </p>
+            <p>
+                     For instance, assuming we have a data model featuring a set
+                     of hosts, each containing a set of servers, we can display
+                     the configuration data as JSON. This is depicted in the example
+                     below.
+                   
+            </p><pre class="screen">admin@ncs# <strong class="userinput"><code>show running-config hosts | display json</code></strong>
+{
+  "data": {
+    "pipetargets_model:hosts": {
+      "host": [
+        {
+          "name": "host1",
+          "enabled": true,
+          "numberOfServers": 2,
+          "servers": {
+            "server": [
+              {
+                "name": "serv1",
+                "ip": "192.168.0.1",
+                "port": 5001
+              },
+              {
+                "name": "serv2",
+                "ip": "192.168.0.1",
+                "port": 5000
+              }
+            ]
+          }
+        },
+        {
+          "name": "host2",
+          "enabled": false,
+          "numberOfServers": 0
+...</pre><p>
+                     Still working with the same data model as used in the example
+                     above, we might want to see the current configuration in keypath
+                     format. The following example shows how to do that, and shows the
+                     resulting output.
+                   
+            </p><pre class="screen">admin@ncs# <strong class="userinput"><code>show running-config hosts | display keypath</code></strong>
+/hosts/host{host1} enabled
+/hosts/host{host1}/numberOfServers 2
+/hosts/host{host1}/servers/server{serv1}/ip 192.168.0.1
+/hosts/host{host1}/servers/server{serv1}/port 5001
+/hosts/host{host1}/servers/server{serv2}/ip 192.168.0.1
+/hosts/host{host1}/servers/server{serv2}/port 5000
+/hosts/host{host2} disabled
+/hosts/host{host2}/numberOfServers 0</pre></div><script type="text/javascript" src="common/main.js">
+            <!----></script><script type="text/javascript" src="common/splitterInit.js">
+            <!----></script><div class="footer" id="footer-legal">
+            <div class="footer-legal framework-footer-cq">
+               <div id="framework-footer">
+                  <div id="footer-legal"><a href="http://www.cisco.com/web/siteassets/legal/terms_condition.html">Terms &amp; Conditions</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/privacy.html">Privacy Statement</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/privacy.html#cookies">Cookie Policy</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/trademark.html">Trademarks</a></div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div id="sidebar">
+         <div id="leftnavigation" style="padding-top:3px;">
+            <div id="tabs">
+               <ul style="visibility: hidden;"></ul>
+               <div id="treeDiv"><img src="common/images/loading.gif" alt="loading table of contents..." id="tocLoading" style="display:block;" /><div id="ulTreeDiv" style="display:none">
+                     <ul id="tree" class="filetree">
+                        <li><span class="file"><a href="ncs.ug.introduction.html" tabindex="1">NSO Introduction</a></span><ul>
+                              <li><span class="file"><a href="ch01s01.html" tabindex="1">
+                                           The Orchestration Challenge</a></span></li>
+                              <li><span class="file"><a href="ch01s02.html" tabindex="1">
+                                           How NSO Addresses the Orchestration Challenge</a></span></li>
+                              <li><span class="file"><a href="ch01s03.html" tabindex="1">High-Availability and Clustering</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ug.ncs.cli.html" tabindex="1">The NSO CLI </a></span><ul>
+                              <li><span class="file"><a href="ch02s01.html" tabindex="1">CLI Quick Start</a></span></li>
+                              <li><span class="file"><a href="ch02s02.html" tabindex="1">Overview</a></span><ul>
+                                    <li><span class="file"><a href="ch02s02s01.html" tabindex="1">Two CLI modes</a></span></li>
+                                    <li><span class="file"><a href="ch02s02s02.html" tabindex="1">Operational mode</a></span></li>
+                                    <li><span class="file"><a href="ch02s02s03.html" tabindex="1">Configure mode</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch02s03.html" tabindex="1">Starting the CLI</a></span><ul>
+                                    <li><span class="file"><a href="ch02s03s01.html" tabindex="1">Basics</a></span></li>
+                                    <li><span class="file"><a href="ch02s03s02.html" tabindex="1">Two CLI styles</a></span></li>
+                                    <li><span class="file"><a href="ch02s03s03.html" tabindex="1">Starting the CLI in an overloaded system</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch02s04.html" tabindex="1">Modifying the configuration</a></span></li>
+                              <li><span class="file"><a href="ch02s05.html" tabindex="1">Command output processing</a></span><ul>
+                                    <li><span class="file"><a href="ch02s05s01.html" tabindex="1">Count the Number of Lines in the Output</a></span></li>
+                                    <li><span class="file"><a href="ch02s05s02.html" tabindex="1">Search for a String in the Output</a></span></li>
+                                    <li><span class="file"><a href="ch02s05s03.html" tabindex="1">Saving the Output to a File</a></span></li>
+                                    <li><span class="file"><a href="ug.ncs.cli.regexp.html" tabindex="1">Regular expressions</a></span></li>
+                                 </ul>
+                              </li>
+                              <li id="webhelp-currentid"><span class="file"><a href="ch02s06.html" tabindex="1">Displaying the configuration</a></span></li>
+                              <li><span class="file"><a href="ch02s07.html" tabindex="1">Range expressions</a></span></li>
+                              <li><span class="file"><a href="ch02s08.html" tabindex="1">Command history</a></span></li>
+                              <li><span class="file"><a href="ch02s09.html" tabindex="1">Command line editing</a></span><ul>
+                                    <li><span class="file"><a href="ch02s09s01.html" tabindex="1">Moving the cursor:</a></span></li>
+                                    <li><span class="file"><a href="ch02s09s02.html" tabindex="1">Delete characters:</a></span></li>
+                                    <li><span class="file"><a href="ch02s09s03.html" tabindex="1">Insert recently deleted text:</a></span></li>
+                                    <li><span class="file"><a href="ch02s09s04.html" tabindex="1">Display previous command lines:</a></span></li>
+                                    <li><span class="file"><a href="ch02s09s05.html" tabindex="1">Capitalization:</a></span></li>
+                                    <li><span class="file"><a href="ch02s09s06.html" tabindex="1">Special:</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch02s10.html" tabindex="1">Using CLI completion</a></span></li>
+                              <li><span class="file"><a href="ch02s11.html" tabindex="1">Comments, annotations and tags</a></span></li>
+                              <li><span class="file"><a href="ch02s12.html" tabindex="1">CLI messages</a></span></li>
+                              <li><span class="file"><a href="ch02s13.html" tabindex="1">ncs.conf settings</a></span></li>
+                              <li><span class="file"><a href="ch02s14.html" tabindex="1">CLI Environment</a></span></li>
+                              <li><span class="file"><a href="ch02s15.html" tabindex="1">Commands</a></span><ul>
+                                    <li><span class="file"><a href="ch02s15s01.html" tabindex="1">Operational mode commands</a></span><ul>
+                                          <li><span class="file"><a href="ch02s15s01.html#d0e1814" tabindex="1">Invoke an action</a></span></li>
+                                          <li><span class="file"><a href="ch02s15s01.html#d0e1852" tabindex="1">Builtin commands</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ch02s15s02.html" tabindex="1">Configure mode commands</a></span><ul>
+                                          <li><span class="file"><a href="ch02s15s02.html#d0e2374" tabindex="1">Configure a value</a></span></li>
+                                          <li><span class="file"><a href="ch02s15s02.html#d0e2419" tabindex="1">Builtin commands</a></span></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch02s16.html" tabindex="1">Customizing the CLI</a></span><ul>
+                                    <li><span class="file"><a href="ch02s16s01.html" tabindex="1">Adding new commands</a></span></li>
+                                    <li><span class="file"><a href="ch02s16s02.html" tabindex="1">File access</a></span></li>
+                                    <li><span class="file"><a href="ch02s16s03.html" tabindex="1">Help texts</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch02s17.html" tabindex="1">Quoting and escaping scheme</a></span><ul>
+                                    <li><span class="file"><a href="ch02s17s01.html" tabindex="1">Canonical quoting scheme</a></span></li>
+                                    <li><span class="file"><a href="ch02s17s02.html" tabindex="1">Escape backslash handling</a></span></li>
+                                    <li><span class="file"><a href="ch02s17s03.html" tabindex="1">Octal numbers handling</a></span></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="user_guide.devicemanager.html" tabindex="1">The NSO Device Manager</a></span><ul>
+                              <li><span class="file"><a href="user_guide.devicemanager.introduction.html" tabindex="1">Introduction</a></span></li>
+                              <li><span class="file"><a href="user_guide.devicemanager.device-tree.html" tabindex="1">The Managed Device Tree</a></span></li>
+                              <li><span class="file"><a href="user_guide.devicemanager.ned-packages.html" tabindex="1">The NED Packages</a></span></li>
+                              <li><span class="file"><a href="user_guide.devicemanager.starting-ncs.html" tabindex="1">Starting the NSO Daemon</a></span></li>
+                              <li><span class="file"><a href="user_guide.devicemanager.sync.html" tabindex="1">Synchronizing Devices</a></span><ul>
+                                    <li><span class="file"><a href="ch03s05s01.html" tabindex="1">TAB Completion</a></span></li>
+                                    <li><span class="file"><a href="ch03s05s02.html" tabindex="1">Partial sync-from</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="user_guide.devicemanager.configuring-devices.html" tabindex="1">Configuring Devices</a></span></li>
+                              <li><span class="file"><a href="user_guide.devicemanager.connection-mgmt.html" tabindex="1">Connection Management</a></span></li>
+                              <li><span class="file"><a href="user_guide.devicemanager.authgroups.html" tabindex="1">Authentication Groups</a></span></li>
+                              <li><span class="file"><a href="user_guide.devicemanager.pooling.html" tabindex="1">Device Session Pooling</a></span></li>
+                              <li><span class="file"><a href="user_guide.devicemanager.tracing.html" tabindex="1">Tracing Device Communication</a></span></li>
+                              <li><span class="file"><a href="user_guide.devicemanager.cheap-synch-check.html" tabindex="1">Checking Device Configuration</a></span></li>
+                              <li><span class="file"><a href="user_guide.devicemanager.comparing.html" tabindex="1">Comparing Device Configurations</a></span></li>
+                              <li><span class="file"><a href="user_guide.devicemanager.initialize-device.html" tabindex="1">Initialize Device</a></span><ul>
+                                    <li><span class="file"><a href="user_guide.devicemanager.initialize-from-other.html" tabindex="1">From other</a></span></li>
+                                    <li><span class="file"><a href="user_guide.devicemanager.initialize-with-template.html" tabindex="1">By Template</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ncs.user_guide.devicemanager.device.templates.html" tabindex="1">Device Templates</a></span><ul>
+                                    <li><span class="file"><a href="ch03s14s01.html" tabindex="1">Tags</a></span></li>
+                                    <li><span class="file"><a href="ch03s14s02.html" tabindex="1">Debug</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="user_guide.devicemanager.state.html" tabindex="1">Oper State and Admin State</a></span></li>
+                              <li><span class="file"><a href="user_guide.devicemanager.source.html" tabindex="1">Configuration Source</a></span></li>
+                              <li><span class="file"><a href="user_guide.devicemanager.capas.html" tabindex="1">Capabilities, Modules and Revision Management</a></span></li>
+                              <li><span class="file"><a href="user_guide.devicemanager.candidate.html" tabindex="1">Candidate Datastore Support</a></span></li>
+                              <li><span class="file"><a href="user_guide.devicemanager.action_proxy.html" tabindex="1">Action Proxy</a></span></li>
+                              <li><span class="file"><a href="user_guide.devicemanager.device_groups.html" tabindex="1">Device Groups</a></span></li>
+                              <li><span class="file"><a href="user_guide.devicemanager.policies.html" tabindex="1">Policies</a></span></li>
+                              <li><span class="file"><a href="user_guide.devicemanager.commit-queue.html" tabindex="1">Commit Queue</a></span><ul>
+                                    <li><span class="file"><a href="ch03s22s01.html" tabindex="1">Commit Queue Scheduling</a></span></li>
+                                    <li><span class="file"><a href="ch03s22s02.html" tabindex="1">Viewing and Manipulating the Commit Queue</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch03s23.html" tabindex="1">NETCONF Notifications</a></span><ul>
+                                    <li><span class="file"><a href="ch03s23s01.html" tabindex="1">An Example Session</a></span></li>
+                                    <li><span class="file"><a href="ch03s23s02.html" tabindex="1">Subscription Status</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch03s24.html" tabindex="1">SNMP Notifications</a></span></li>
+                              <li><span class="file"><a href="ch03s25.html" tabindex="1">Inactive configuration</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ug.ssh_keys.html" tabindex="1">SSH Key Management</a></span><ul>
+                              <li><span class="file"><a href="ug.ssh_keys.general.html" tabindex="1">General</a></span></li>
+                              <li><span class="file"><a href="ug.ssh_keys.server.html" tabindex="1">NSO as SSH Server</a></span><ul>
+                                    <li><span class="file"><a href="ch04s02s01.html" tabindex="1">Host Keys</a></span></li>
+                                    <li><span class="file"><a href="ch04s02s02.html" tabindex="1">Publickey Authentication</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.ssh_keys.client.html" tabindex="1">NSO as SSH Client</a></span><ul>
+                                    <li><span class="file"><a href="ug.ssh_keys.client.host_keys.html" tabindex="1">Host Key Verification</a></span><ul>
+                                          <li><span class="file"><a href="ug.ssh_keys.client.host_keys.html#d0e5863" tabindex="1">Verification level</a></span></li>
+                                          <li><span class="file"><a href="ug.ssh_keys.client.host_keys.html#d0e5915" tabindex="1">Connection to a Managed Device</a></span></li>
+                                          <li><span class="file"><a href="ug.ssh_keys.client.host_keys.html#d0e5995" tabindex="1">Connection to an NSO Cluster Node</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.ssh_keys.client.publickey.html" tabindex="1">Publickey Authentication</a></span><ul>
+                                          <li><span class="file"><a href="ug.ssh_keys.client.publickey.html#d0e6035" tabindex="1">Private Key Selection</a></span></li>
+                                          <li><span class="file"><a href="ug.ssh_keys.client.publickey.html#d0e6054" tabindex="1">Connection to a Managed Device</a></span></li>
+                                          <li><span class="file"><a href="ug.ssh_keys.client.publickey.html#d0e6115" tabindex="1">Connection to an NSO Cluster Node</a></span></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ch05.html" tabindex="1">Managing Network Services</a></span><ul>
+                              <li><span class="file"><a href="ch05s01.html" tabindex="1">Overview</a></span></li>
+                              <li><span class="file"><a href="ch05s02.html" tabindex="1">A Service Example</a></span></li>
+                              <li><span class="file"><a href="ch05s03.html" tabindex="1">Running the example</a></span></li>
+                              <li><span class="file"><a href="ch05s04.html" tabindex="1">Service-Life Cycle Management</a></span><ul>
+                                    <li><span class="file"><a href="ch05s04s01.html" tabindex="1">Service Changes</a></span></li>
+                                    <li><span class="file"><a href="ch05s04s02.html" tabindex="1">Service Impacting out-of-band changes</a></span></li>
+                                    <li><span class="file"><a href="ch05s04s03.html" tabindex="1">Service Deletion</a></span></li>
+                                    <li><span class="file"><a href="ch05s04s04.html" tabindex="1">Viewing service configurations</a></span></li>
+                                    <li><span class="file"><a href="ch05s04s05.html" tabindex="1">Using Commit queues</a></span></li>
+                                    <li><span class="file"><a href="ch05s04s06.html" tabindex="1">Un-deploying Services</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch05s05.html" tabindex="1">Advanced Services Orchestration</a></span><ul>
+                                    <li><span class="file"><a href="ch05s05s01.html" tabindex="1">RFM service plans</a></span></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ug.alarmmgr.html" tabindex="1">The Alarm Manager</a></span><ul>
+                              <li><span class="file"><a href="ug.alarmmgr.intro.html" tabindex="1">Alarm Manager Introduction</a></span></li>
+                              <li><span class="file"><a href="ug.alarmmgr.alarms.html" tabindex="1">Overview of the alarm concepts</a></span></li>
+                              <li><span class="file"><a href="ug.alarmmgr.model.html" tabindex="1">The Alarm Model</a></span></li>
+                              <li><span class="file"><a href="ch06s04.html" tabindex="1">Alarm handling</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ug.scripting_using.html" tabindex="1">Plug-and-play scripting</a></span><ul>
+                              <li><span class="file"><a href="ch07s01.html" tabindex="1">Introduction</a></span></li>
+                              <li><span class="file"><a href="ch07s02.html" tabindex="1">Script storage</a></span></li>
+                              <li><span class="file"><a href="ch07s03.html" tabindex="1">Script interface</a></span></li>
+                              <li><span class="file"><a href="ch07s04.html" tabindex="1">Loading of scripts</a></span></li>
+                              <li><span class="file"><a href="ch07s05.html" tabindex="1">Command scripts</a></span><ul>
+                                    <li><span class="file"><a href="ch07s05s01.html" tabindex="1">Command section</a></span></li>
+                                    <li><span class="file"><a href="ch07s05s02.html" tabindex="1">Param section</a></span></li>
+                                    <li><span class="file"><a href="ch07s05s03.html" tabindex="1">Full command example</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch07s06.html" tabindex="1">Policy scripts</a></span><ul>
+                                    <li><span class="file"><a href="ch07s06s01.html" tabindex="1">Policy section</a></span></li>
+                                    <li><span class="file"><a href="ch07s06s02.html" tabindex="1">Validation</a></span></li>
+                                    <li><span class="file"><a href="ch07s06s03.html" tabindex="1">Full policy example</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch07s07.html" tabindex="1">Post-commit scripts</a></span><ul>
+                                    <li><span class="file"><a href="ch07s07s01.html" tabindex="1">Post-commit section</a></span></li>
+                                    <li><span class="file"><a href="ch07s07s02.html" tabindex="1">Full post-commit example</a></span></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ug.ncs.complrep.html" tabindex="1">Compliance reporting</a></span><ul>
+                              <li><span class="file"><a href="ch08s01.html" tabindex="1">Introduction</a></span></li>
+                              <li><span class="file"><a href="ch08s02.html" tabindex="1">Creating compliance
+                                           report definitions</a></span></li>
+                              <li><span class="file"><a href="ch08s03.html" tabindex="1">Running compliance reports</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ncsnwe.packages.html" tabindex="1">NSO Packages</a></span><ul>
+                              <li><span class="file"><a href="ch09s01.html" tabindex="1">Overview</a></span></li>
+                              <li><span class="file"><a href="ch09s02.html" tabindex="1">Listing Packages</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ug.lifecycle.html" tabindex="1">
+                                     Life-cycle Operations - how to manipulate existing services and
+                                     devices
+                                   </a></span><ul>
+                              <li><span class="file"><a href="ch10s01.html" tabindex="1">
+                                             Commit flags and device &amp; service actions
+                                           </a></span></li>
+                              <li><span class="file"><a href="ch10s02.html" tabindex="1">Commit flags</a></span></li>
+                              <li><span class="file"><a href="ch10s03.html" tabindex="1">Device Actions</a></span></li>
+                              <li><span class="file"><a href="ch10s04.html" tabindex="1">Service Actions</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ncsnwe.webui.html" tabindex="1">The Web User Interface</a></span><ul>
+                              <li><span class="file"><a href="ch11s01.html" tabindex="1">Overview</a></span></li>
+                              <li><span class="file"><a href="ch11s02.html" tabindex="1">Using the Web UI</a></span></li>
+                              <li><span class="file"><a href="ch11s03.html" tabindex="1">Transactions and "Commit"</a></span></li>
+                              <li><span class="file"><a href="ch11s04.html" tabindex="1">Service Device Navigation</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ug.netsim.html" tabindex="1">The Network Simulator</a></span><ul>
+                              <li><span class="file"><a href="ug.netsim.overview.html" tabindex="1">Overview</a></span></li>
+                              <li><span class="file"><a href="ug.netsim.using.html" tabindex="1">Using Netsim</a></span></li>
+                              <li><span class="file"><a href="ug.netsim.learnmore.html" tabindex="1">Learn more</a></span></li>
+                           </ul>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

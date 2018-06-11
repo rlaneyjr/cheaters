@@ -1,0 +1,101 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>Citrix NetScaler XML API User&#39;s Guide - getdnsaaaarecEx</title>
+<link rel="stylesheet" type="text/css" href="help_ns.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body onload="initial()" class="ns_body">
+<div class="ns_content"><table cellpadding="0" cellspacing="0"><script type="text/javascript">
+function showContent(content,lang){
+			if(ie4){
+				showContentObj=document.all.qiksearch_div;
+			}
+			if(ns6){
+				showContentObj=document.getElementById("qiksearch_div");
+			}
+			if(ie4||ns6){
+				if(showContentObj.innerHTML!=content){
+					showContentObj.innerHTML=content;
+				}
+				else{
+					showContentObj.innerHTML="";
+				}
+			}
+			if(ns4){
+				document.nsdiv.document.write(content);
+				document.nsdiv.document.close();
+			}
+}
+function showLangSelect(id){
+		ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+		ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+		ns4=document.layers;
+		if(ie4){
+			showObj=document.all.first_url;
+		}
+		if(ns6){
+			showObj=document.getElementById("first_url");
+		}
+		if( id == "C" ){
+			newlink = "<b>C</b>";
+		}
+		else{
+			newlink = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('C');\"><b>C</b></a>";
+		}
+		if( id == "Perl" ){
+			newlink = newlink + " | <b>Perl</b>";
+		}
+		else{
+			newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('Perl');\"><b>Perl</b></a>";
+		}
+		if( id == "Java" ){
+			newlink = newlink + " | <b>Java</b>";
+		}
+		else{
+			newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('Java');\"><b>Java</b></a>";
+		}
+		if( id == "C#" ){
+			newlink = newlink + " | <b>C#</b>";
+		}
+		else{
+			newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('C#');\"><b>C#</b></a>";
+		}
+		showObj.innerHTML = newlink;
+}
+function initial(){
+		ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+		ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+		ns4=document.layers;
+		langSelected = parent.banner.document.language.select.value
+		parent.banner.document.language.plink.value = "Domain Name Service@dns.html&getdnsaaaarecEx";
+		changeContext(langSelected);
+}
+function changeContext(lang){
+parent.banner.document.language.select.value = lang;
+if( lang == "C" ){
+showContent('<table><tr><td><pre><a href=\'getdnsaaaarecResult.html\'>getdnsaaaarecResult</a><b> getdnsaaaarec</b>(<br> &nbsp;&nbsp;&nbsp;&nbsp;char * <i>hostname</i>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char * <i>ipv6address</i>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href=\'arectypeEnum.html\'>arectypeEnum</a> <i>type</i> <br>);</pre></td></tr></table>','C');
+}
+if( lang == "Perl" ){
+showContent('<table><tr><td><pre><a href=\'getdnsaaaarecResult.html\'>getdnsaaaarecResult</a><b> getdnsaaaarec</b>(<br>&nbsp;&nbsp;&nbsp;&nbsp;name(\'hostname\' => value),<br>&nbsp;&nbsp;&nbsp;&nbsp;name(\'ipv6address\' => value),<br>&nbsp;&nbsp;&nbsp;&nbsp;name(\'type\' => <a href=\'arectypeEnum.html\'>Values</a>)<br>);</pre></td></tr></table>','Perl')
+}
+if( lang == "Java" ){
+showContent('<table><tr><td><pre>public <a href=\'getdnsaaaarecResult.html\'>getdnsaaaarecResult</a><b> getdnsaaaarec</b>(<br> &nbsp;&nbsp;&nbsp;&nbsp;String <i>hostname</i>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String <i>ipv6address</i>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href=\'arectypeEnum.html\'>arectypeEnum</a> <i>type</i> <br>);</pre></td></tr></table>','Java');
+}
+if( lang == "C#" ){
+showContent('<table><tr><td><pre>public <a href=\'getdnsaaaarecResult.html\'>getdnsaaaarecResult</a><b> getdnsaaaarec</b>(<br> &nbsp;&nbsp;&nbsp;&nbsp;string <i>hostname</i>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string <i>ipv6address</i>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href=\'arectypeEnum.html\'>arectypeEnum</a> <i>type</i> <br>);</pre></td></tr></table>','C#');
+}
+if( lang == "VB" ){
+showContent('<table><tr><td><pre>Public Function<b> getdnsaaaarec</b>(<br> &nbsp;&nbsp;&nbsp;&nbsp;ByVal <i>hostname</i> As String ,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ByVal <i>ipv6address</i> As String ,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ByVal <i>type</i> As <a href=\'arectypeEnum.html\'>arectypeEnum</a> <br>) As <a href=\'getdnsaaaarecResult.html\'>getdnsaaaarecResult</a> </pre></td></tr></table>','VB');
+}
+showLangSelect(lang);
+}
+</script>
+<tr><td><div><a href='introduction.html'>Home</a> > <a href="APIIndex.htm">Configuration</a> > <a href="dns.html">Domain Name Service</a> > getdnsaaaarecEx</div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>getdnsaaaarecEx</td></tr><tr><td><br></td></tr><tr><td><div>Use this method to get  the AAAA (IPv6) address record for the specified host name. If a hostname is not specified, all configured AAAA records are shown.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="first_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><b>Parameters</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><i>hostname</i></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Domain name.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><i>ipv6address</i></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">One or more IPv6 addresses to assign to the domain name.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><i>type</i></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Type of records to display. Available settings function as follows:
+* ADNS - Display all authoritative address records.
+* PROXY - Display all proxy address records.
+* ALL - Display all address records.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Return Value</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left">Returns <a href="getdnsaaaarecResult.html">getdnsaaaarecResult</a></div></td></tr><tr><td><br></td></tr><tr><td><div><b>See Also</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="adddnsaaaarec.html">adddnsaaaarec</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="rmdnsaaaarec.html">rmdnsaaaarec</a></div></td></tr><tr><td><br></td></tr></table></div>
+</body>
+</html>

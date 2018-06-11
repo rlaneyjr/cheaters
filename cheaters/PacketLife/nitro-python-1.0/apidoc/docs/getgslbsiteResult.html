@@ -1,0 +1,251 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>Citrix NetScaler XML API User&#39;s Guide - Structure Definition</title>
+<link rel="stylesheet" type="text/css" href="help_ns.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body onload="initial()" class="ns_body">
+<div class="ns_content"><table cellpadding="0" cellspacing="0"><script type="text/javascript">
+function changeContext(id,lang,flag){
+	parent.banner.document.language.select.value = lang;
+	if( lang == "C" ){
+		if(flag == "1"){
+			showContent(cfirstcontent,id,lang);
+		}
+		else{
+			showContent(csecondcontent,id,lang);
+		}
+	}
+	if( lang == "Perl" ){
+		if(flag == "1"){
+			showContent(perlfirstcontent,id,lang);
+		}
+		else{
+			showContent(perlsecondcontent,id,lang);
+		}
+	}
+	if( lang == "Java" ){
+		if(flag == "1"){
+			showContent(javafirstcontent,id,lang);	
+		}
+		else{
+			showContent(javasecondcontent,id,lang);
+		}
+	}
+	if( lang == "C#" ){
+		if(flag == "1"){
+			showContent(csharpfirstcontent,id,lang);
+		}
+		else{
+			showContent(csharpsecondcontent,id,lang);
+		}
+	}
+	if( lang == "VB" ){
+		if(flag == "1"){
+			showContent(vbfirstcontent,id,lang);
+		}
+		else{
+			showContent(vbsecondcontent,id,lang);
+		}
+	}
+	if(flag == "1"){
+		showInside(lang,"0");
+	}
+	else{
+		showOutside(lang);
+	}
+}
+function showContent(content,id,lang){
+	if(ie4){
+	   showContentObj=document.all.id;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById(id);
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+  showLangSelect(lang);
+}
+function showInside(str,cond){
+	if(str == "C"){
+ 		var inside_content = csecondcontent;
+ 	}
+ 	if(str == "Perl"){
+ 		var inside_content = perlsecondcontent;
+ 	}
+ 	if(str == "Java"){
+ 		var inside_content = javasecondcontent;
+ 	}
+ 	if(str == "C#"){
+		var inside_content = csharpsecondcontent;
+ 	}
+ 	if(str == "VB"){
+		var inside_content = vbsecondcontent;
+ 	}
+	showContent(inside_content,'qiksearch_div1',str);
+ 	if ( cond == "1" ){
+ 		var page = 'apidoc/docs/getgslbsiteResult.html#gslbsiteList';
+ 		document.location.href = page;
+ 	}
+}
+function showOutside(str){
+	if(str == "C" ){
+ 		var inside_content = cfirstcontent;
+ 	}
+ 	if(str == "Perl" ){
+ 		var inside_content = perlfirstcontent;
+ 	}
+ 	if(str == "Java" ){
+ 		var inside_content = javafirstcontent;
+ 	}
+ 	if(str == "C#" ){
+ 		var inside_content = csharpfirstcontent;
+ 	}
+ 	if(str == "VB" ){
+ 		var inside_content = vbfirstcontent;
+ 	}
+ 	showContent(inside_content,'qiksearch_div',str);
+}
+function initial(){
+	ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+	ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+	ns4=document.layers;
+	langSelected = parent.banner.document.language.select.value
+	var plink = parent.banner.document.language.plink.value
+	var my_array=plink.split("&");
+	var temp = my_array[0];
+ 	var grp = temp.split("@");
+	var cmd = my_array[1];
+	var regex = /^stat/i;
+	if( cmd.match(regex) != null ){
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex_stat.html\">Statistics</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getgslbsiteResult");
+	}
+	else{
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex.htm\">Configuration</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getgslbsiteResult");
+	}
+	if( langSelected == "C" ){
+ 		var content = cfirstcontent;
+	}
+	else if( langSelected == "Perl" ){
+		var content = perlfirstcontent;
+	}
+	else if( langSelected == "Java" ){
+		var content = javafirstcontent;
+	}
+	else if( langSelected == "C#" ){
+		var content = csharpfirstcontent;
+	}
+	else if( langSelected == "VB" ){
+		var content = vbfirstcontent;
+	}
+	else{
+		var content = cfirstcontent;
+		langSelected="C";
+	}
+	showContent(content,'qiksearch_div',langSelected);
+	showInside(langSelected,"0");
+}
+function showPLink(content){
+	if(ie4){
+	   showContentObj=document.all.progressive_link;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById("progressive_link");
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+}
+function showLangSelect(id){
+	   if(ie4)
+       {
+       	showObj=document.all.first_url;
+       	showObj1=document.all.second_url;
+       }
+       if(ns6)
+       {
+       	showObj=document.getElementById("first_url");
+       	showObj1=document.getElementById("second_url");
+       }
+       if( id == "C" ){
+       	newlink = "<b>C</b>";
+       	newlink1 = "<b>C</b>";
+       }
+       else{
+       	newlink = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C','1');\"><b>C</b></a>";
+       	newlink1 = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C','0');\"><b>C</b></a>";
+       }
+       if( id == "Perl" ){
+       	newlink = newlink + " | <b>Perl</b>";
+       	newlink1 = newlink1 + " | <b>Perl</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Perl','1');\"><b>Perl</b></a>";
+      	       newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Perl','0');\"><b>Perl</b></a>";
+       }
+       if( id == "Java" ){
+       	newlink = newlink + " | <b>Java</b>";
+       	newlink1 = newlink1 + " | <b>Java</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Java','1');\"><b>Java</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Java','0');\"><b>Java</b></a>";
+       }
+       if( id == "C#" ){
+       	newlink = newlink + " | <b>C#</b>";
+       	newlink1 = newlink1 + " | <b>C#</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C#','1');\"><b>C#</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C#','0');\"><b>C#</b></a>";
+       }
+       showObj.innerHTML = newlink;
+       showObj1.innerHTML = newlink1;
+}
+</script>
+<tr><td><div><div id="progressive_link"></div></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>getgslbsiteResult Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>getgslbsiteResult</b> structure defines the return type for getgslbsite API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="first_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+cfirstcontent = "<pre>struct getgslbsiteResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; struct <a href=\'getgslbsiteResult.html\#gslbsite\'>gslbsite</a> list[];<br> };<br></pre></td></tr></table></div>"
+perlfirstcontent = "<pre>$getgslbsiteResult = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rc => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; message => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; List => \'@<a href=\'getgslbsiteResult.html\#gslbsite\'>gslbsite</a>\',<br> };<br></pre></td></tr></table></div>"
+javafirstcontent = "<pre>class getgslbsiteResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getgslbsiteResult.html\#gslbsite\'>gslbsite</a>[] list;<br> };<br></pre></td></tr></table></div>"
+csharpfirstcontent = "<pre>class getgslbsiteResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getgslbsiteResult.html\#gslbsite\'>gslbsite</a>[] list;<br> };<br></pre></td></tr></table></div>"
+vbfirstcontent = "<pre>Public <b>Structure</b> getgslbsiteResult <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rc As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public message As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public  gslbsiteList() As  <a href=\'getgslbsiteResult.html\#gslbsite\'>gslbsite</a><br> <b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rc</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, rc is 0 else rc > 0. Values above 0x8000 indicate Warnings.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>message</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, message is NULL else message contains <a href="errorlisting.html">Error/Warning</a> message.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>gslbsiteList</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">List of gslbsites</div></td></tr><tr><td><br></td></tr><tr><td><div><a name="gslbsite"></a></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>gslbsite  Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>gslbsite</b> structure defines the actual return type values for getgslbsite API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="second_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div1" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+csecondcontent = "<pre>struct gslbsite {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * sitename;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * sitetype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * siteipaddress;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * publicip;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * metricexchange;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * servicename [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * ipaddress [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int port [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * state [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * status;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * persistencemepstatus;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * servicetype [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * nwmetricexchange;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * sessionexchange;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * triggermonitor;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * parentsite;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * cnameentry [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int version;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * clip;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * publicclip;<br> };<br></pre></td></tr></table></div>"
+perlsecondcontent = "<pre>$gslbsite = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; sitename => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; sitetype => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; siteipaddress => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; publicip => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; metricexchange => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; servicename => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipaddress => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; port => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; state => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; status => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; persistencemepstatus => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; servicetype => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; nwmetricexchange => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; sessionexchange => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; triggermonitor => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; parentsite => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; cnameentry => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; version => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; clip => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; publicclip => \'$\',<br> };<br></pre></td></tr></table></div>"
+javasecondcontent = "<pre>class gslbsite {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String sitename;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String sitetype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String siteipaddress;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String publicip;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String metricexchange;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String servicename [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String ipaddress [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt port [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String state [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String status;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String persistencemepstatus;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String servicetype [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String nwmetricexchange;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String sessionexchange;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String triggermonitor;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String parentsite;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String cnameentry [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt version;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String clip;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String publicclip;<br> };<br></pre></td></tr></table></div>"
+csharpsecondcontent = "<pre>class gslbsite {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string sitename;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string sitetype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string siteipaddress;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string publicip;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string metricexchange;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string servicename [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string ipaddress [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 port [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string state [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string status;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string persistencemepstatus;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string servicetype [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string nwmetricexchange;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string sessionexchange;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string triggermonitor;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string parentsite;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string cnameentry [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 version;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string clip;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string publicclip;<br> };<br></pre></td></tr></table></div>"
+vbsecondcontent = "<pre>Public <b>Structure</b> gslbsite <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public sitename As String  <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public sitetype As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public siteipaddress As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public publicip As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public metricexchange As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public servicename As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipaddress As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public port As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public state As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public status As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public persistencemepstatus As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public servicetype As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public nwmetricexchange As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public sessionexchange As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public triggermonitor As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public parentsite As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public cnameentry As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public version As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public clip As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public publicclip As String<br><b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sitename</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the GSLB site.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sitetype</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Specifies whether the site is LOCAL or REMOTE.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>siteipaddress</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The IP address of the site.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>publicip</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The Public IP of the gslb site.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>metricexchange</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Exchange metrics with other sites. Metrics are exchanged by using Metric Exchange Protocol (MEP). The appliances in the GSLB setup exchange health information once every second. 
+
+If you disable metrics exchange, you can use only static load balancing methods (such as round robin, static proximity, or the hash-based methods), and if you disable metrics exchange when a dynamic load balancing method (such as least connection) is in operation, the appliance falls back to round robin. Also, if you disable metrics exchange, you must use a monitor to determine the state of GSLB services. Otherwise, the service is marked as DOWN.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>servicename</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Service name.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipaddress</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">IP Address of the gslb service.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>port</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Port number of the gslb service.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>state</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">State of the gslb service.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>status</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Current metric exchange status.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>persistencemepstatus</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Network metric and persistence exchange MEP connection status</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>servicetype</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Service type.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>nwmetricexchange</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Specifies whether the exchange of network metrics like RTT is enabled or disabled.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sessionexchange</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Specifies whether the exchange of persistence session entries is enabled or disabled.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>triggermonitor</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Specify the conditions under which the GSLB service must be monitored by a monitor, if one is bound. Available settings function as follows:
+* ALWAYS - Monitor the GSLB service at all times.
+* MEPDOWN - Monitor the GSLB service only when the exchange of metrics through the Metrics Exchange Protocol (MEP) is disabled.
+MEPDOWN_SVCDOWN - Monitor the service in either of the following situations: 
+* The exchange of metrics through MEP is disabled.
+* The exchange of metrics through MEP is enabled but the status of the service, learned through metrics exchange, is DOWN.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>parentsite</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Parent site of the GSLB site, in a parent-child topology.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>cnameentry</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The cname of the gslb service.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>version</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">will be true if the remote site's version is ncore compatible with the local site.(>= 9.2)</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>clip</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Cluster IP used to connect to remote cluster site for GSLB autosync</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>publicclip</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Public cluster IP used to connect to remote cluster site for GSLB autosync if the remote cluster is behind a NAT</div></td></tr><tr><td><br></td></tr><tr><td><div><b>See Also</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="getgslbsite.html">getgslbsite</a></div></td></tr><tr><td><br></td></tr></table></div>
+</body>
+</html>

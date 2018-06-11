@@ -1,0 +1,244 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>Citrix NetScaler XML API User&#39;s Guide - Structure Definition</title>
+<link rel="stylesheet" type="text/css" href="help_ns.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body onload="initial()" class="ns_body">
+<div class="ns_content"><table cellpadding="0" cellspacing="0"><script type="text/javascript">
+function changeContext(id,lang,flag){
+	parent.banner.document.language.select.value = lang;
+	if( lang == "C" ){
+		if(flag == "1"){
+			showContent(cfirstcontent,id,lang);
+		}
+		else{
+			showContent(csecondcontent,id,lang);
+		}
+	}
+	if( lang == "Perl" ){
+		if(flag == "1"){
+			showContent(perlfirstcontent,id,lang);
+		}
+		else{
+			showContent(perlsecondcontent,id,lang);
+		}
+	}
+	if( lang == "Java" ){
+		if(flag == "1"){
+			showContent(javafirstcontent,id,lang);	
+		}
+		else{
+			showContent(javasecondcontent,id,lang);
+		}
+	}
+	if( lang == "C#" ){
+		if(flag == "1"){
+			showContent(csharpfirstcontent,id,lang);
+		}
+		else{
+			showContent(csharpsecondcontent,id,lang);
+		}
+	}
+	if( lang == "VB" ){
+		if(flag == "1"){
+			showContent(vbfirstcontent,id,lang);
+		}
+		else{
+			showContent(vbsecondcontent,id,lang);
+		}
+	}
+	if(flag == "1"){
+		showInside(lang,"0");
+	}
+	else{
+		showOutside(lang);
+	}
+}
+function showContent(content,id,lang){
+	if(ie4){
+	   showContentObj=document.all.id;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById(id);
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+  showLangSelect(lang);
+}
+function showInside(str,cond){
+	if(str == "C"){
+ 		var inside_content = csecondcontent;
+ 	}
+ 	if(str == "Perl"){
+ 		var inside_content = perlsecondcontent;
+ 	}
+ 	if(str == "Java"){
+ 		var inside_content = javasecondcontent;
+ 	}
+ 	if(str == "C#"){
+		var inside_content = csharpsecondcontent;
+ 	}
+ 	if(str == "VB"){
+		var inside_content = vbsecondcontent;
+ 	}
+	showContent(inside_content,'qiksearch_div1',str);
+ 	if ( cond == "1" ){
+ 		var page = 'apidoc/docs/getarpResult.html#arpeList';
+ 		document.location.href = page;
+ 	}
+}
+function showOutside(str){
+	if(str == "C" ){
+ 		var inside_content = cfirstcontent;
+ 	}
+ 	if(str == "Perl" ){
+ 		var inside_content = perlfirstcontent;
+ 	}
+ 	if(str == "Java" ){
+ 		var inside_content = javafirstcontent;
+ 	}
+ 	if(str == "C#" ){
+ 		var inside_content = csharpfirstcontent;
+ 	}
+ 	if(str == "VB" ){
+ 		var inside_content = vbfirstcontent;
+ 	}
+ 	showContent(inside_content,'qiksearch_div',str);
+}
+function initial(){
+	ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+	ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+	ns4=document.layers;
+	langSelected = parent.banner.document.language.select.value
+	var plink = parent.banner.document.language.plink.value
+	var my_array=plink.split("&");
+	var temp = my_array[0];
+ 	var grp = temp.split("@");
+	var cmd = my_array[1];
+	var regex = /^stat/i;
+	if( cmd.match(regex) != null ){
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex_stat.html\">Statistics</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getarpResult");
+	}
+	else{
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex.htm\">Configuration</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getarpResult");
+	}
+	if( langSelected == "C" ){
+ 		var content = cfirstcontent;
+	}
+	else if( langSelected == "Perl" ){
+		var content = perlfirstcontent;
+	}
+	else if( langSelected == "Java" ){
+		var content = javafirstcontent;
+	}
+	else if( langSelected == "C#" ){
+		var content = csharpfirstcontent;
+	}
+	else if( langSelected == "VB" ){
+		var content = vbfirstcontent;
+	}
+	else{
+		var content = cfirstcontent;
+		langSelected="C";
+	}
+	showContent(content,'qiksearch_div',langSelected);
+	showInside(langSelected,"0");
+}
+function showPLink(content){
+	if(ie4){
+	   showContentObj=document.all.progressive_link;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById("progressive_link");
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+}
+function showLangSelect(id){
+	   if(ie4)
+       {
+       	showObj=document.all.first_url;
+       	showObj1=document.all.second_url;
+       }
+       if(ns6)
+       {
+       	showObj=document.getElementById("first_url");
+       	showObj1=document.getElementById("second_url");
+       }
+       if( id == "C" ){
+       	newlink = "<b>C</b>";
+       	newlink1 = "<b>C</b>";
+       }
+       else{
+       	newlink = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C','1');\"><b>C</b></a>";
+       	newlink1 = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C','0');\"><b>C</b></a>";
+       }
+       if( id == "Perl" ){
+       	newlink = newlink + " | <b>Perl</b>";
+       	newlink1 = newlink1 + " | <b>Perl</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Perl','1');\"><b>Perl</b></a>";
+      	       newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Perl','0');\"><b>Perl</b></a>";
+       }
+       if( id == "Java" ){
+       	newlink = newlink + " | <b>Java</b>";
+       	newlink1 = newlink1 + " | <b>Java</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Java','1');\"><b>Java</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Java','0');\"><b>Java</b></a>";
+       }
+       if( id == "C#" ){
+       	newlink = newlink + " | <b>C#</b>";
+       	newlink1 = newlink1 + " | <b>C#</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C#','1');\"><b>C#</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C#','0');\"><b>C#</b></a>";
+       }
+       showObj.innerHTML = newlink;
+       showObj1.innerHTML = newlink1;
+}
+</script>
+<tr><td><div><div id="progressive_link"></div></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>getarpResult Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>getarpResult</b> structure defines the return type for getarp API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="first_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+cfirstcontent = "<pre>struct getarpResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; struct <a href=\'getarpResult.html\#arp\'>arp</a> list[];<br> };<br></pre></td></tr></table></div>"
+perlfirstcontent = "<pre>$getarpResult = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rc => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; message => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; List => \'@<a href=\'getarpResult.html\#arp\'>arp</a>\',<br> };<br></pre></td></tr></table></div>"
+javafirstcontent = "<pre>class getarpResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getarpResult.html\#arp\'>arp</a>[] list;<br> };<br></pre></td></tr></table></div>"
+csharpfirstcontent = "<pre>class getarpResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getarpResult.html\#arp\'>arp</a>[] list;<br> };<br></pre></td></tr></table></div>"
+vbfirstcontent = "<pre>Public <b>Structure</b> getarpResult <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rc As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public message As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public  arpList() As  <a href=\'getarpResult.html\#arp\'>arp</a><br> <b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rc</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, rc is 0 else rc > 0. Values above 0x8000 indicate Warnings.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>message</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, message is NULL else message contains <a href="errorlisting.html">Error/Warning</a> message.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>arpList</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">List of arps</div></td></tr><tr><td><br></td></tr><tr><td><div><a name="arp"></a></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>arp  Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>arp</b> structure defines the actual return type values for getarp API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="second_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div1" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+csecondcontent = "<pre>struct arp {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * ipaddress;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ownernode;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * mac;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * ifnum;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int timeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int state;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int flags;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * type;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int vlan;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int vxlan;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * vtep;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int channel;<br> };<br></pre></td></tr></table></div>"
+perlsecondcontent = "<pre>$arp = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipaddress => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ownernode => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; mac => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ifnum => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; timeout => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; state => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; flags => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; type => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; vlan => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; vxlan => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; vtep => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; channel => \'$\',<br> };<br></pre></td></tr></table></div>"
+javasecondcontent = "<pre>class arp {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String ipaddress;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt ownernode;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String mac;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String ifnum;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt timeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt state;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt flags;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String type;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt vlan;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt vxlan;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String vtep;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt channel;<br> };<br></pre></td></tr></table></div>"
+csharpsecondcontent = "<pre>class arp {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string ipaddress;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 ownernode;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string mac;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string ifnum;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 timeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 state;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 flags;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string type;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 vlan;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 vxlan;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string vtep;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 channel;<br> };<br></pre></td></tr></table></div>"
+vbsecondcontent = "<pre>Public <b>Structure</b> arp <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipaddress As String  <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ownernode As UInteger  <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public mac As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ifnum As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public timeout As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public state As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public flags As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public type As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public vlan As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public vxlan As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public vtep As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public channel As UInteger<br><b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipaddress</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The IP address corresponding to an ARP entry.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ownernode</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The cluster node which owns the ARP entry.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>mac</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The MAC address corresponding to an ARP entry.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ifnum</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The interface on which this MAC address resides.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>timeout</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The time, in seconds, after which the entry times out.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>state</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The state of the ARP entry.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>flags</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The flags for the entry.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>type</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Indicates whether this ARP entry was added manually or dynamically. When you manually add an ARP entry, the value for this parameter is STATIC. Otherwise, it is DYNAMIC. For the NSIP and loopback IP addresses, the value is PERMANENT.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>vlan</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The VLAN ID through which packets are to be sent after matching the ARP entry. This is a numeric value.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>vxlan</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">ID of the VXLAN on which the IP address of this ARP entry is reachable.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>vtep</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">IP address of the VXLAN tunnel endpoint (VTEP) through which the IP address of this ARP entry is reachable.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>channel</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The tunnel, channel, or physical interface through which the ARP entry is identified.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>See Also</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="getarp.html">getarp</a></div></td></tr><tr><td><br></td></tr></table></div>
+</body>
+</html>

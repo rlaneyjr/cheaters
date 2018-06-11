@@ -1,0 +1,244 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>Citrix NetScaler XML API User&#39;s Guide - Structure Definition</title>
+<link rel="stylesheet" type="text/css" href="help_ns.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body onload="initial()" class="ns_body">
+<div class="ns_content"><table cellpadding="0" cellspacing="0"><script type="text/javascript">
+function changeContext(id,lang,flag){
+	parent.banner.document.language.select.value = lang;
+	if( lang == "C" ){
+		if(flag == "1"){
+			showContent(cfirstcontent,id,lang);
+		}
+		else{
+			showContent(csecondcontent,id,lang);
+		}
+	}
+	if( lang == "Perl" ){
+		if(flag == "1"){
+			showContent(perlfirstcontent,id,lang);
+		}
+		else{
+			showContent(perlsecondcontent,id,lang);
+		}
+	}
+	if( lang == "Java" ){
+		if(flag == "1"){
+			showContent(javafirstcontent,id,lang);	
+		}
+		else{
+			showContent(javasecondcontent,id,lang);
+		}
+	}
+	if( lang == "C#" ){
+		if(flag == "1"){
+			showContent(csharpfirstcontent,id,lang);
+		}
+		else{
+			showContent(csharpsecondcontent,id,lang);
+		}
+	}
+	if( lang == "VB" ){
+		if(flag == "1"){
+			showContent(vbfirstcontent,id,lang);
+		}
+		else{
+			showContent(vbsecondcontent,id,lang);
+		}
+	}
+	if(flag == "1"){
+		showInside(lang,"0");
+	}
+	else{
+		showOutside(lang);
+	}
+}
+function showContent(content,id,lang){
+	if(ie4){
+	   showContentObj=document.all.id;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById(id);
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+  showLangSelect(lang);
+}
+function showInside(str,cond){
+	if(str == "C"){
+ 		var inside_content = csecondcontent;
+ 	}
+ 	if(str == "Perl"){
+ 		var inside_content = perlsecondcontent;
+ 	}
+ 	if(str == "Java"){
+ 		var inside_content = javasecondcontent;
+ 	}
+ 	if(str == "C#"){
+		var inside_content = csharpsecondcontent;
+ 	}
+ 	if(str == "VB"){
+		var inside_content = vbsecondcontent;
+ 	}
+	showContent(inside_content,'qiksearch_div1',str);
+ 	if ( cond == "1" ){
+ 		var page = 'apidoc/docs/statprotocolipv6Result.html#ipv6List';
+ 		document.location.href = page;
+ 	}
+}
+function showOutside(str){
+	if(str == "C" ){
+ 		var inside_content = cfirstcontent;
+ 	}
+ 	if(str == "Perl" ){
+ 		var inside_content = perlfirstcontent;
+ 	}
+ 	if(str == "Java" ){
+ 		var inside_content = javafirstcontent;
+ 	}
+ 	if(str == "C#" ){
+ 		var inside_content = csharpfirstcontent;
+ 	}
+ 	if(str == "VB" ){
+ 		var inside_content = vbfirstcontent;
+ 	}
+ 	showContent(inside_content,'qiksearch_div',str);
+}
+function initial(){
+	ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+	ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+	ns4=document.layers;
+	langSelected = parent.banner.document.language.select.value
+	var plink = parent.banner.document.language.plink.value
+	var my_array=plink.split("&");
+	var temp = my_array[0];
+ 	var grp = temp.split("@");
+	var cmd = my_array[1];
+	var regex = /^stat/i;
+	if( cmd.match(regex) != null ){
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex_stat.html\">Statistics</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > statprotocolipv6Result");
+	}
+	else{
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex.htm\">Configuration</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > statprotocolipv6Result");
+	}
+	if( langSelected == "C" ){
+ 		var content = cfirstcontent;
+	}
+	else if( langSelected == "Perl" ){
+		var content = perlfirstcontent;
+	}
+	else if( langSelected == "Java" ){
+		var content = javafirstcontent;
+	}
+	else if( langSelected == "C#" ){
+		var content = csharpfirstcontent;
+	}
+	else if( langSelected == "VB" ){
+		var content = vbfirstcontent;
+	}
+	else{
+		var content = cfirstcontent;
+		langSelected="C";
+	}
+	showContent(content,'qiksearch_div',langSelected);
+	showInside(langSelected,"0");
+}
+function showPLink(content){
+	if(ie4){
+	   showContentObj=document.all.progressive_link;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById("progressive_link");
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+}
+function showLangSelect(id){
+	   if(ie4)
+       {
+       	showObj=document.all.first_url;
+       	showObj1=document.all.second_url;
+       }
+       if(ns6)
+       {
+       	showObj=document.getElementById("first_url");
+       	showObj1=document.getElementById("second_url");
+       }
+       if( id == "C" ){
+       	newlink = "<b>C</b>";
+       	newlink1 = "<b>C</b>";
+       }
+       else{
+       	newlink = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C','1');\"><b>C</b></a>";
+       	newlink1 = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C','0');\"><b>C</b></a>";
+       }
+       if( id == "Perl" ){
+       	newlink = newlink + " | <b>Perl</b>";
+       	newlink1 = newlink1 + " | <b>Perl</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Perl','1');\"><b>Perl</b></a>";
+      	       newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Perl','0');\"><b>Perl</b></a>";
+       }
+       if( id == "Java" ){
+       	newlink = newlink + " | <b>Java</b>";
+       	newlink1 = newlink1 + " | <b>Java</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Java','1');\"><b>Java</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Java','0');\"><b>Java</b></a>";
+       }
+       if( id == "C#" ){
+       	newlink = newlink + " | <b>C#</b>";
+       	newlink1 = newlink1 + " | <b>C#</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C#','1');\"><b>C#</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C#','0');\"><b>C#</b></a>";
+       }
+       showObj.innerHTML = newlink;
+       showObj1.innerHTML = newlink1;
+}
+</script>
+<tr><td><div><div id="progressive_link"></div></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>statprotocolipv6Result Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>statprotocolipv6Result</b> structure defines the return type for statprotocolipv6 API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="first_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+cfirstcontent = "<pre>struct statprotocolipv6Result {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; struct <a href=\'statprotocolipv6Result.html\#protocolipv6stats\'>protocolipv6stats</a> protocolipv6statsList[];<br> };<br></pre></td></tr></table></div>"
+perlfirstcontent = "<pre>$statprotocolipv6Result = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rc => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; message => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'statprotocolipv6Result.html\#protocolipv6stats\'>protocolipv6stats</a> => \'@\',<br> };<br></pre></td></tr></table></div>"
+javafirstcontent = "<pre>class statprotocolipv6Result {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; class <a href=\'statprotocolipv6Result.html\#protocolipv6stats\'>protocolipv6stats</a> protocolipv6statsList[];<br> };<br></pre></td></tr></table></div>"
+csharpfirstcontent = "<pre>class statprotocolipv6Result {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; class <a href=\'statprotocolipv6Result.html\#protocolipv6stats\'>protocolipv6stats</a> protocolipv6statsList[];<br> };<br></pre></td></tr></table></div>"
+vbfirstcontent = "<pre>Public <b>Structure</b> statprotocolipv6Result <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rc As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public message As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public  endprotocolipv6List() As  <a href=\'statprotocolipv6Result.html\#protocolipv6stats\'>protocolipv6statsList</a><br> <b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rc</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, rc is 0 else rc > 0. Values above 0x8000 indicate Warnings.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>message</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, message is NULL else message contains <a href="errorlisting.html">Error/Warning</a> message.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>protocolipv6List</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Pointer to the protocolipv6 List.</div></td></tr><tr><td><br></td></tr><tr><td><div><a name="protocolipv6stats"></a></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>protocolipv6stats  Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>protocolipv6stats</b> structure defines the actual return type values for statprotocolipv6 API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="second_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div1" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+csecondcontent = "<pre>struct protocolipv6stats {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char *   clearstats;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ipv6totrxpkts;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ipv6rxpktsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ipv6totrxbytes;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ipv6rxbytesrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ipv6tottxpkts;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ipv6txpktsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ipv6tottxbytes;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ipv6txbytesrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ipv6totroutepkts;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ipv6routepktsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ipv6totroutembits;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ipv6routembitsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ipv6fragtotrxpkts;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ipv6fragrxpktsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ipv6fragtottcpreassembled;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ipv6fragtcpreassembledrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ipv6fragtotudpreassembled;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ipv6fragudpreassembledrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ipv6fragtotpktsprocessnoreass;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ipv6fragpktsprocessnoreassrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ipv6fragtotpktsforward;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ipv6fragpktsforwardrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ipv6errhdr;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ipv6nextheadererr;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ipv6landattack;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ipv6fragpkttoobig;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ipv6fragzerolenpkt;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ipv6toticmpnarx;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ipv6icmpnarxrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ipv6toticmpnsrx;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ipv6icmpnsrxrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ipv6toticmpnatx;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ipv6icmpnatxrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ipv6toticmpnstx;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ipv6icmpnstxrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ipv6toticmprarx;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ipv6icmprarxrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ipv6toticmprstx;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ipv6icmprstxrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ipv6toticmprx;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ipv6icmprxrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ipv6toticmptx;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ipv6icmptxrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ipv6errrxhdr;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ipv6errrxpkt;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ipv6badcksum;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int icmpv6error;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int icmpv6unspt;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int icmpv6rtthsld;<br> };<br></pre></td></tr></table></div>"
+perlsecondcontent = "<pre>$protocolipv6stats = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; clearstats => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipv6totrxpkts => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipv6rxpktsrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipv6totrxbytes => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipv6rxbytesrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipv6tottxpkts => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipv6txpktsrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipv6tottxbytes => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipv6txbytesrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipv6totroutepkts => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipv6routepktsrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipv6totroutembits => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipv6routembitsrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipv6fragtotrxpkts => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipv6fragrxpktsrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipv6fragtottcpreassembled => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipv6fragtcpreassembledrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipv6fragtotudpreassembled => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipv6fragudpreassembledrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipv6fragtotpktsprocessnoreass => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipv6fragpktsprocessnoreassrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipv6fragtotpktsforward => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipv6fragpktsforwardrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipv6errhdr => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipv6nextheadererr => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipv6landattack => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipv6fragpkttoobig => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipv6fragzerolenpkt => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipv6toticmpnarx => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipv6icmpnarxrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipv6toticmpnsrx => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipv6icmpnsrxrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipv6toticmpnatx => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipv6icmpnatxrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipv6toticmpnstx => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipv6icmpnstxrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipv6toticmprarx => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipv6icmprarxrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipv6toticmprstx => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipv6icmprstxrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipv6toticmprx => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipv6icmprxrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipv6toticmptx => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipv6icmptxrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipv6errrxhdr => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipv6errrxpkt => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipv6badcksum => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; icmpv6error => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; icmpv6unspt => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; icmpv6rtthsld => \'$\',<br> };<br></pre></td></tr></table></div>"
+javasecondcontent = "<pre>class protocolipv6stats {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String  clearstats;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt ipv6totrxpkts;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt ipv6rxpktsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt ipv6totrxbytes;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt ipv6rxbytesrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt ipv6tottxpkts;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt ipv6txpktsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt ipv6tottxbytes;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt ipv6txbytesrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt ipv6totroutepkts;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt ipv6routepktsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt ipv6totroutembits;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt ipv6routembitsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt ipv6fragtotrxpkts;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt ipv6fragrxpktsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt ipv6fragtottcpreassembled;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt ipv6fragtcpreassembledrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt ipv6fragtotudpreassembled;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt ipv6fragudpreassembledrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt ipv6fragtotpktsprocessnoreass;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt ipv6fragpktsprocessnoreassrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt ipv6fragtotpktsforward;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt ipv6fragpktsforwardrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt ipv6errhdr;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt ipv6nextheadererr;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt ipv6landattack;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt ipv6fragpkttoobig;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt ipv6fragzerolenpkt;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt ipv6toticmpnarx;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt ipv6icmpnarxrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt ipv6toticmpnsrx;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt ipv6icmpnsrxrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt ipv6toticmpnatx;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt ipv6icmpnatxrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt ipv6toticmpnstx;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt ipv6icmpnstxrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt ipv6toticmprarx;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt ipv6icmprarxrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt ipv6toticmprstx;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt ipv6icmprstxrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt ipv6toticmprx;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt ipv6icmprxrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt ipv6toticmptx;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt ipv6icmptxrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt ipv6errrxhdr;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt ipv6errrxpkt;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt ipv6badcksum;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt icmpv6error;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt icmpv6unspt;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt icmpv6rtthsld;<br> };<br></pre></td></tr></table></div>"
+csharpsecondcontent = "<pre>class protocolipv6stats {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string  clearstats;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 ipv6totrxpkts;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 ipv6rxpktsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 ipv6totrxbytes;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 ipv6rxbytesrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 ipv6tottxpkts;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 ipv6txpktsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 ipv6tottxbytes;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 ipv6txbytesrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 ipv6totroutepkts;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 ipv6routepktsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 ipv6totroutembits;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 ipv6routembitsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 ipv6fragtotrxpkts;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 ipv6fragrxpktsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 ipv6fragtottcpreassembled;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 ipv6fragtcpreassembledrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 ipv6fragtotudpreassembled;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 ipv6fragudpreassembledrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 ipv6fragtotpktsprocessnoreass;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 ipv6fragpktsprocessnoreassrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 ipv6fragtotpktsforward;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 ipv6fragpktsforwardrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 ipv6errhdr;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 ipv6nextheadererr;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 ipv6landattack;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 ipv6fragpkttoobig;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 ipv6fragzerolenpkt;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 ipv6toticmpnarx;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 ipv6icmpnarxrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 ipv6toticmpnsrx;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 ipv6icmpnsrxrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 ipv6toticmpnatx;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 ipv6icmpnatxrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 ipv6toticmpnstx;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 ipv6icmpnstxrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 ipv6toticmprarx;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 ipv6icmprarxrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 ipv6toticmprstx;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 ipv6icmprstxrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 ipv6toticmprx;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 ipv6icmprxrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 ipv6toticmptx;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 ipv6icmptxrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 ipv6errrxhdr;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 ipv6errrxpkt;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 ipv6badcksum;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 icmpv6error;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 icmpv6unspt;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 icmpv6rtthsld;<br> };<br></pre></td></tr></table></div>"
+vbsecondcontent = "<pre>Public <b>Structure</b> protocolipv6stats <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public clearstats As String  <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipv6totrxpkts As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipv6rxpktsrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipv6totrxbytes As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipv6rxbytesrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipv6tottxpkts As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipv6txpktsrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipv6tottxbytes As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipv6txbytesrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipv6totroutepkts As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipv6routepktsrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipv6totroutembits As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipv6routembitsrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipv6fragtotrxpkts As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipv6fragrxpktsrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipv6fragtottcpreassembled As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipv6fragtcpreassembledrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipv6fragtotudpreassembled As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipv6fragudpreassembledrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipv6fragtotpktsprocessnoreass As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipv6fragpktsprocessnoreassrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipv6fragtotpktsforward As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipv6fragpktsforwardrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipv6errhdr As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipv6nextheadererr As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipv6landattack As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipv6fragpkttoobig As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipv6fragzerolenpkt As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipv6toticmpnarx As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipv6icmpnarxrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipv6toticmpnsrx As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipv6icmpnsrxrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipv6toticmpnatx As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipv6icmpnatxrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipv6toticmpnstx As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipv6icmpnstxrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipv6toticmprarx As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipv6icmprarxrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipv6toticmprstx As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipv6icmprstxrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipv6toticmprx As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipv6icmprxrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipv6toticmptx As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipv6icmptxrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipv6errrxhdr As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipv6errrxpkt As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipv6badcksum As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public icmpv6error As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public icmpv6unspt As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public icmpv6rtthsld As UInteger <br><b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>clearstats</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Clear the statsistics / counters</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipv6totrxpkts</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">IPv6 packets received.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipv6rxpktsrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">IPv6 packets received.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipv6totrxbytes</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Bytes of IPv6 data received.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipv6rxbytesrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Bytes of IPv6 data received.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipv6tottxpkts</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">IPv6 packets transmitted</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipv6txpktsrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">IPv6 packets transmitted</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipv6tottxbytes</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Bytes of IPv6 data transmitted.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipv6txbytesrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Bytes of IPv6 data transmitted.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipv6totroutepkts</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">IPv6 packets routed.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipv6routepktsrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">IPv6 packets routed.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipv6totroutembits</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">IPv6 total Mbits.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipv6routembitsrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">IPv6 Rate Mbits.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipv6fragtotrxpkts</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">IPv6 fragments received.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipv6fragrxpktsrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">IPv6 fragments received.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipv6fragtottcpreassembled</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">TCP fragments processed after reassembly.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipv6fragtcpreassembledrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">TCP fragments processed after reassembly.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipv6fragtotudpreassembled</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">UDP fragments processed after reassembly.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipv6fragudpreassembledrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">UDP fragments processed after reassembly.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipv6fragtotpktsprocessnoreass</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">IPv6 fragments processed without reassembly.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipv6fragpktsprocessnoreassrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">IPv6 fragments processed without reassembly.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipv6fragtotpktsforward</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">IPv6 fragments forwarded to the client or server without reassembly.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipv6fragpktsforwardrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">IPv6 fragments forwarded to the client or server without reassembly.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipv6errhdr</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Packets received that contain an error in one or more components of the IPv6 header.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipv6nextheadererr</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Packets received that contain an unsupported next header. The supported next headers are TCP, ICMP, UDP, OSPF, and FRAGMENT.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipv6landattack</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Land-attack packets received. The source and destination addresses are the same. If not dropped, these packets can lock up the appliance.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipv6fragpkttoobig</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Packets received for which the reassembled data exceeds the Ethernet packet data length of 1500 bytes.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipv6fragzerolenpkt</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Packets received with a fragment length of 0 bytes.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipv6toticmpnarx</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of ICMPv6 NA packets received by NetScaler (OBSOLETE).</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipv6icmpnarxrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of ICMPv6 NA packets received by NetScaler (OBSOLETE).</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipv6toticmpnsrx</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of ICMPv6 NS packets received by NetScaler (OBSOLETE).</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipv6icmpnsrxrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of ICMPv6 NS packets received by NetScaler (OBSOLETE).</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipv6toticmpnatx</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of ICMPv6 NA packets transmitted by NetScaler (OBSOLETE).</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipv6icmpnatxrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of ICMPv6 NA packets transmitted by NetScaler (OBSOLETE).</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipv6toticmpnstx</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of ICMPv6 NS packets transmitted by NetScaler (OBSOLETE).</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipv6icmpnstxrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of ICMPv6 NS packets transmitted by NetScaler (OBSOLETE).</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipv6toticmprarx</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of ICMPv6 RA packets received by NetScaler (OBSOLETE).</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipv6icmprarxrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of ICMPv6 RA packets received by NetScaler (OBSOLETE).</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipv6toticmprstx</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of ICMPv6 RS packets transmitted by NetScaler (OBSOLETE).</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipv6icmprstxrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of ICMPv6 RS packets transmitted by NetScaler (OBSOLETE).</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipv6toticmprx</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of ICMPv6 packets received by NetScaler (OBSOLETE).</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipv6icmprxrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of ICMPv6 packets received by NetScaler (OBSOLETE).</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipv6toticmptx</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of ICMPv6 packets transmitted by NetScaler (OBSOLETE).</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipv6icmptxrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of ICMPv6 packets transmitted by NetScaler (OBSOLETE).</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipv6errrxhdr</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of erroneous header packets received (OBSOLETE).</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipv6errrxpkt</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of erroneous packets received (OBSOLETE).</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipv6badcksum</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of bad checksum packets received (OBSOLETE).</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>icmpv6error</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of erroneous ICMPv6 packets received (OBSOLETE).</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>icmpv6unspt</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of ICMPv6 unsupported packets received (OBSOLETE).</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>icmpv6rtthsld</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of ICMPv6 packets dropped for rate threshold exceeded (OBSOLETE).</div></td></tr><tr><td><br></td></tr><tr><td><div><b>See Also</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="statprotocolipv6.html">statprotocolipv6</a></div></td></tr><tr><td><br></td></tr></table></div>
+</body>
+</html>

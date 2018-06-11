@@ -1,0 +1,271 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>Citrix NetScaler XML API User&#39;s Guide - Structure Definition</title>
+<link rel="stylesheet" type="text/css" href="help_ns.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body onload="initial()" class="ns_body">
+<div class="ns_content"><table cellpadding="0" cellspacing="0"><script type="text/javascript">
+function changeContext(id,lang,flag){
+	parent.banner.document.language.select.value = lang;
+	if( lang == "C" ){
+		if(flag == "1"){
+			showContent(cfirstcontent,id,lang);
+		}
+		else{
+			showContent(csecondcontent,id,lang);
+		}
+	}
+	if( lang == "Perl" ){
+		if(flag == "1"){
+			showContent(perlfirstcontent,id,lang);
+		}
+		else{
+			showContent(perlsecondcontent,id,lang);
+		}
+	}
+	if( lang == "Java" ){
+		if(flag == "1"){
+			showContent(javafirstcontent,id,lang);	
+		}
+		else{
+			showContent(javasecondcontent,id,lang);
+		}
+	}
+	if( lang == "C#" ){
+		if(flag == "1"){
+			showContent(csharpfirstcontent,id,lang);
+		}
+		else{
+			showContent(csharpsecondcontent,id,lang);
+		}
+	}
+	if( lang == "VB" ){
+		if(flag == "1"){
+			showContent(vbfirstcontent,id,lang);
+		}
+		else{
+			showContent(vbsecondcontent,id,lang);
+		}
+	}
+	if(flag == "1"){
+		showInside(lang,"0");
+	}
+	else{
+		showOutside(lang);
+	}
+}
+function showContent(content,id,lang){
+	if(ie4){
+	   showContentObj=document.all.id;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById(id);
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+  showLangSelect(lang);
+}
+function showInside(str,cond){
+	if(str == "C"){
+ 		var inside_content = csecondcontent;
+ 	}
+ 	if(str == "Perl"){
+ 		var inside_content = perlsecondcontent;
+ 	}
+ 	if(str == "Java"){
+ 		var inside_content = javasecondcontent;
+ 	}
+ 	if(str == "C#"){
+		var inside_content = csharpsecondcontent;
+ 	}
+ 	if(str == "VB"){
+		var inside_content = vbsecondcontent;
+ 	}
+	showContent(inside_content,'qiksearch_div1',str);
+ 	if ( cond == "1" ){
+ 		var page = 'apidoc/docs/getcrvserverResult.html#crvserverList';
+ 		document.location.href = page;
+ 	}
+}
+function showOutside(str){
+	if(str == "C" ){
+ 		var inside_content = cfirstcontent;
+ 	}
+ 	if(str == "Perl" ){
+ 		var inside_content = perlfirstcontent;
+ 	}
+ 	if(str == "Java" ){
+ 		var inside_content = javafirstcontent;
+ 	}
+ 	if(str == "C#" ){
+ 		var inside_content = csharpfirstcontent;
+ 	}
+ 	if(str == "VB" ){
+ 		var inside_content = vbfirstcontent;
+ 	}
+ 	showContent(inside_content,'qiksearch_div',str);
+}
+function initial(){
+	ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+	ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+	ns4=document.layers;
+	langSelected = parent.banner.document.language.select.value
+	var plink = parent.banner.document.language.plink.value
+	var my_array=plink.split("&");
+	var temp = my_array[0];
+ 	var grp = temp.split("@");
+	var cmd = my_array[1];
+	var regex = /^stat/i;
+	if( cmd.match(regex) != null ){
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex_stat.html\">Statistics</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getcrvserverResult");
+	}
+	else{
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex.htm\">Configuration</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getcrvserverResult");
+	}
+	if( langSelected == "C" ){
+ 		var content = cfirstcontent;
+	}
+	else if( langSelected == "Perl" ){
+		var content = perlfirstcontent;
+	}
+	else if( langSelected == "Java" ){
+		var content = javafirstcontent;
+	}
+	else if( langSelected == "C#" ){
+		var content = csharpfirstcontent;
+	}
+	else if( langSelected == "VB" ){
+		var content = vbfirstcontent;
+	}
+	else{
+		var content = cfirstcontent;
+		langSelected="C";
+	}
+	showContent(content,'qiksearch_div',langSelected);
+	showInside(langSelected,"0");
+}
+function showPLink(content){
+	if(ie4){
+	   showContentObj=document.all.progressive_link;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById("progressive_link");
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+}
+function showLangSelect(id){
+	   if(ie4)
+       {
+       	showObj=document.all.first_url;
+       	showObj1=document.all.second_url;
+       }
+       if(ns6)
+       {
+       	showObj=document.getElementById("first_url");
+       	showObj1=document.getElementById("second_url");
+       }
+       if( id == "C" ){
+       	newlink = "<b>C</b>";
+       	newlink1 = "<b>C</b>";
+       }
+       else{
+       	newlink = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C','1');\"><b>C</b></a>";
+       	newlink1 = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C','0');\"><b>C</b></a>";
+       }
+       if( id == "Perl" ){
+       	newlink = newlink + " | <b>Perl</b>";
+       	newlink1 = newlink1 + " | <b>Perl</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Perl','1');\"><b>Perl</b></a>";
+      	       newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Perl','0');\"><b>Perl</b></a>";
+       }
+       if( id == "Java" ){
+       	newlink = newlink + " | <b>Java</b>";
+       	newlink1 = newlink1 + " | <b>Java</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Java','1');\"><b>Java</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Java','0');\"><b>Java</b></a>";
+       }
+       if( id == "C#" ){
+       	newlink = newlink + " | <b>C#</b>";
+       	newlink1 = newlink1 + " | <b>C#</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C#','1');\"><b>C#</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C#','0');\"><b>C#</b></a>";
+       }
+       showObj.innerHTML = newlink;
+       showObj1.innerHTML = newlink1;
+}
+</script>
+<tr><td><div><div id="progressive_link"></div></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>getcrvserverResult Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>getcrvserverResult</b> structure defines the return type for getcrvserver API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="first_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+cfirstcontent = "<pre>struct getcrvserverResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; struct <a href=\'getcrvserverResult.html\#crvserver\'>crvserver</a> list[];<br> };<br></pre></td></tr></table></div>"
+perlfirstcontent = "<pre>$getcrvserverResult = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rc => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; message => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; List => \'@<a href=\'getcrvserverResult.html\#crvserver\'>crvserver</a>\',<br> };<br></pre></td></tr></table></div>"
+javafirstcontent = "<pre>class getcrvserverResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getcrvserverResult.html\#crvserver\'>crvserver</a>[] list;<br> };<br></pre></td></tr></table></div>"
+csharpfirstcontent = "<pre>class getcrvserverResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getcrvserverResult.html\#crvserver\'>crvserver</a>[] list;<br> };<br></pre></td></tr></table></div>"
+vbfirstcontent = "<pre>Public <b>Structure</b> getcrvserverResult <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rc As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public message As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public  crvserverList() As  <a href=\'getcrvserverResult.html\#crvserver\'>crvserver</a><br> <b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rc</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, rc is 0 else rc > 0. Values above 0x8000 indicate Warnings.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>message</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, message is NULL else message contains <a href="errorlisting.html">Error/Warning</a> message.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>crvserverList</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">List of crvservers</div></td></tr><tr><td><br></td></tr><tr><td><div><a name="crvserver"></a></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>crvserver  Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>crvserver</b> structure defines the actual return type values for getcrvserver API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="second_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div1" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+csecondcontent = "<pre>struct crvserver {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * name;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * ipaddress;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * ipaddress2;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * value;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int port;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int range;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * servicetype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * ngname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * type;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * state;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int status;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * cachetype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * redirect;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * onpolicymatch;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * precedence;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * redirecturl;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * authentication;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * homepage;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * dnsvservername;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * domain;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * rule;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * policyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int hits [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * servicename;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int weight;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * cachevserver;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * targetvserver;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * backupvserver;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int priority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int clttimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * somethod;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * sopersistence;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int sopersistencetimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int sothreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * reuse;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * arp;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * destinationvserver;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * via;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * downstateflush;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * disableprimaryondown;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * l2conn;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * backendssl;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * comment;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * listenpolicy;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int listenpriority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * tcpprofilename;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * httpprofilename;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * srcipexpr;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * originusip;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * useportrange;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * appflowlog;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * netprofile;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * icmpvsrresponse;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * rhistate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * lbvserver;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * inherited [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * cswpolicyname []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * cswtargetserver []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int cswpriority []   ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int cswpolicyhits []   ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * crdpolicyname []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int crdpolicypriority []   ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int crdpolicyhits []   ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * maptable []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * mttargetserver []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * filterpolicyname []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int filterpolicypriority []   ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * cmppolicyname []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int cmppolicypriority []   ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * defaultlb []  ;<br> };<br></pre></td></tr></table></div>"
+perlsecondcontent = "<pre>$crvserver = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; name => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipaddress => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipaddress2 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; value => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; port => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; range => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; servicetype => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ngname => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; type => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; state => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; status => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; cachetype => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; redirect => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; onpolicymatch => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; precedence => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; redirecturl => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; authentication => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; homepage => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; dnsvservername => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; domain => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rule => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; policyname => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; hits => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; servicename => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; weight => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; cachevserver => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; targetvserver => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; backupvserver => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; priority => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; clttimeout => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; somethod => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; sopersistence => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; sopersistencetimeout => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; sothreshold => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; reuse => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; arp => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; destinationvserver => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; via => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; downstateflush => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; disableprimaryondown => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; l2conn => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; backendssl => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; comment => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; listenpolicy => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; listenpriority => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; tcpprofilename => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpprofilename => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; srcipexpr => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; originusip => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; useportrange => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; appflowlog => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; netprofile => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; icmpvsrresponse => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rhistate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; lbvserver => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; inherited => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; cswpolicyname => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; cswtargetserver => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; cswpriority => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; cswpolicyhits => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; crdpolicyname => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; crdpolicypriority => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; crdpolicyhits => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; maptable => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; mttargetserver => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; filterpolicyname => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; filterpolicypriority => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; cmppolicyname => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; cmppolicypriority => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; defaultlb => \'@\',<br> };<br></pre></td></tr></table></div>"
+javasecondcontent = "<pre>class crvserver {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String name;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String ipaddress;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String ipaddress2;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String value;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt port;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt range;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String servicetype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String ngname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String type;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String state;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int status;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String cachetype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String redirect;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String onpolicymatch;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String precedence;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String redirecturl;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String authentication;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String homepage;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String dnsvservername;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String domain;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String rule;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String policyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt hits [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String servicename;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt weight;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String cachevserver;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String targetvserver;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String backupvserver;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt priority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt clttimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String somethod;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String sopersistence;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt sopersistencetimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt sothreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String reuse;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String arp;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String destinationvserver;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String via;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String downstateflush;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String disableprimaryondown;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String l2conn;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String backendssl;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String comment;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String listenpolicy;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt listenpriority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String tcpprofilename;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String httpprofilename;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String srcipexpr;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String originusip;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String useportrange;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String appflowlog;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String netprofile;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String icmpvsrresponse;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String rhistate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String lbvserver;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String inherited [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] cswpolicyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] cswtargetserver;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt [] cswpriority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt [] cswpolicyhits;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] crdpolicyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt [] crdpolicypriority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt [] crdpolicyhits;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] maptable;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] mttargetserver;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] filterpolicyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt [] filterpolicypriority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] cmppolicyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt [] cmppolicypriority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] defaultlb;<br> };<br></pre></td></tr></table></div>"
+csharpsecondcontent = "<pre>class crvserver {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string name;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string ipaddress;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string ipaddress2;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string value;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 port;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 range;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string servicetype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string ngname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string type;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string state;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 status;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string cachetype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string redirect;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string onpolicymatch;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string precedence;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string redirecturl;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string authentication;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string homepage;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string dnsvservername;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string domain;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string rule;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string policyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 hits [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string servicename;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 weight;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string cachevserver;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string targetvserver;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string backupvserver;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 priority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 clttimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string somethod;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string sopersistence;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 sopersistencetimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 sothreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string reuse;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string arp;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string destinationvserver;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string via;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string downstateflush;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string disableprimaryondown;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string l2conn;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string backendssl;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string comment;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string listenpolicy;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 listenpriority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string tcpprofilename;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string httpprofilename;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string srcipexpr;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string originusip;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string useportrange;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string appflowlog;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string netprofile;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string icmpvsrresponse;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string rhistate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string lbvserver;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string inherited [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] cswpolicyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] cswtargetserver;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 [] cswpriority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 [] cswpolicyhits;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] crdpolicyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 [] crdpolicypriority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 [] crdpolicyhits;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] maptable;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] mttargetserver;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] filterpolicyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 [] filterpolicypriority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] cmppolicyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 [] cmppolicypriority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] defaultlb;<br> };<br></pre></td></tr></table></div>"
+vbsecondcontent = "<pre>Public <b>Structure</b> crvserver <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public name As String  <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipaddress As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipaddress2 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public value As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public port As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public range As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public servicetype As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ngname As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public type As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public state As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public status As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public cachetype As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public redirect As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public onpolicymatch As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public precedence As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public redirecturl As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public authentication As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public homepage As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public dnsvservername As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public domain As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rule As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public policyname As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public hits As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public servicename As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public weight As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public cachevserver As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public targetvserver As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public backupvserver As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public priority As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public clttimeout As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public somethod As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public sopersistence As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public sopersistencetimeout As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public sothreshold As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public reuse As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public arp As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public destinationvserver As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public via As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public downstateflush As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public disableprimaryondown As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public l2conn As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public backendssl As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public comment As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public listenpolicy As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public listenpriority As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public tcpprofilename As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpprofilename As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public srcipexpr As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public originusip As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public useportrange As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public appflowlog As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public netprofile As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public icmpvsrresponse As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rhistate As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public lbvserver As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public inherited As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public cswpolicyname As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public cswtargetserver As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public cswpriority As UInteger()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public cswpolicyhits As UInteger()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public crdpolicyname As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public crdpolicypriority As UInteger()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public crdpolicyhits As UInteger()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public maptable As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public mttargetserver As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public filterpolicyname As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public filterpolicypriority As UInteger()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public cmppolicyname As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public cmppolicypriority As UInteger()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public defaultlb As String()<br><b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>name</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of a cache redirection virtual server about which to display detailed information.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipaddress</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipaddress2</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The IP address of the virtual server.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>value</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The ssl card status for the transparent ssl cr vserver.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>port</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Port number of the virtual server.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>range</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of consecutive IP addresses, starting with the address specified by the IP Address parameter, to include in a range of addresses assigned to this virtual server.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>servicetype</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Protocol (type of service) handled by the virtual server.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ngname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Nodegroup devno to which this crvserver belongs to</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>type</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Virtual server type.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>state</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The state of the cr vserver.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>status</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Status.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>cachetype</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Mode of operation for the cache redirection virtual server. Available settings function as follows:
+* TRANSPARENT - Intercept all traffic flowing to the appliance and apply cache redirection policies to determine whether content should be served from the cache or from the origin server.
+* FORWARD - Resolve the hostname of the incoming request, by using a DNS server, and forward requests for non-cacheable content to the resolved origin servers. Cacheable requests are sent to the configured cache servers.
+* REVERSE - Configure reverse proxy caches for specific origin servers. Incoming traffic directed to the reverse proxy can either be served from a cache server or be sent to the origin server with or without modification to the URL.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>redirect</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Type of cache server to which to redirect HTTP requests. Available settings function as follows:
+* CACHE - Direct all requests to the cache.
+* POLICY - Apply the cache redirection policy to determine whether the request should be directed to the cache or to the origin.
+* ORIGIN - Direct all requests to the origin server.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>onpolicymatch</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Redirect requests that match the policy to either the cache or the origin server, as specified.
+Note: For this option to work, you must set the cache redirection type to POLICY.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>precedence</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Type of policy (URL or RULE) that takes precedence on the cache redirection virtual server. Applies only to cache redirection virtual servers that have both URL and RULE based policies. If you specify URL, URL based policies are applied first, in the following order:
+1.   Domain and exact URL
+2.   Domain, prefix and suffix
+3.   Domain and suffix
+4.   Domain and prefix
+5.   Domain only
+6.   Exact URL
+7.   Prefix and suffix
+8.   Suffix only
+9.   Prefix only
+10.  Default
+If you specify RULE, the rule based policies are applied before URL based policies are applied.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>redirecturl</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">URL of the server to which to redirect traffic if the cache redirection virtual server configured on the NetScaler appliance becomes unavailable.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>authentication</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Authentication.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>homepage</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Home page.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>dnsvservername</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the DNS virtual server that resolves domain names arriving at the forward proxy virtual server.
+Note: This parameter applies only to forward proxy virtual servers, not reverse or transparent.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>domain</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Default domain for reverse proxies. Domains are configured to direct an incoming request from a specified source domain to a specified target domain. There can be several configured pairs of source and target domains. You can select one pair to be the default. If the host header or URL of an incoming request does not include a source domain, this option sends the request to the specified target domain.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rule</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rule.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>policyname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Policies bound to this vserver.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>hits</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The hits of default LB vserver</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>servicename</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Service name.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>weight</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Weight for this service.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>cachevserver</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the default cache virtual server to which to redirect requests (the default target of the cache redirection virtual server).<br> NOTE: This attribute is deprecated.<br>The functionality is intact, but we advise to use bind method to do default binding for CR</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>targetvserver</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The CSW target server names.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>backupvserver</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the backup virtual server to which traffic is forwarded if the active server becomes unavailable.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>priority</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The priority for the policy.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>clttimeout</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Time-out value, in seconds, after which to terminate an idle client connection.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>somethod</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The spillover factor. When the main virtual server reaches this spillover threshold, it will give further traffic to the backupvserver.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sopersistence</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The state of spillover persistence.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sopersistencetimeout</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The spillover persistence entry timeout.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sothreshold</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The spillover threshold value.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>reuse</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Reuse TCP connections to the origin server across client connections. Do not set this parameter unless the Service Type parameter is set to HTTP. If you set this parameter to OFF, the possible settings of the Redirect parameter function as follows:
+* CACHE - TCP connections to the cache servers are not reused.
+* ORIGIN - TCP connections to the origin servers are not reused. 
+* POLICY - TCP connections to the origin servers are not reused.
+If you set the Reuse parameter to ON, connections to origin servers and connections to cache servers are reused.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>arp</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Use ARP to determine the destination MAC address.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>destinationvserver</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Destination virtual server for a transparent or forward proxy cache redirection virtual server.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>via</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Insert a via header in each HTTP request. In the case of a cache miss, the request is redirected from the cache server to the origin server. This header indicates whether the request is being sent from a cache server.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>downstateflush</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Perform delayed clean up of connections on this vserver.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>disableprimaryondown</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Tells whether traffic will continue reaching backup vservers even after primary comes UP from DOWN state.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>l2conn</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Use L2 parameters, such as MAC, VLAN, and channel to identify a connection.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>backendssl</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Decides whether the backend connection made by NS to the origin server will be HTTP or SSL. Applicable only for SSL type CR Forward proxy vserver.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>comment</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Comments associated with this virtual server.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>listenpolicy</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The string is listenpolicy configured for CR vserver</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>listenpriority</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">This parameter is the priority for listen policy of CR Vserver.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>tcpprofilename</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the profile containing TCP configuration information for the cache redirection virtual server.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpprofilename</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the profile containing HTTP configuration information for cache redirection virtual server.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>srcipexpr</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Expression used to extract the source IP addresses from the requests originating from the cache. Can be either an in-line expression or the name of a named expression.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>originusip</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Use the client’s IP address as the source IP address in requests sent to the origin server.  
+Note: You can enable this parameter to implement fully transparent CR deployment.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>useportrange</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Use a port number from the port range (set by using the set ns param method, or in the Create Virtual Server (Cache Redirection) dialog box) as the source port in the requests sent to the origin server.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>appflowlog</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Enable logging of AppFlow information.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>netprofile</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the network profile containing network configurations for the cache redirection virtual server.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>icmpvsrresponse</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Criterion for responding to PING requests sent to this virtual server. If ACTIVE, respond only if the virtual server is available. If PASSIVE, respond even if the virtual server is not available.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rhistate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">A host route is injected according to the setting on the virtual servers
+            * If set to PASSIVE on all the virtual servers that share the IP address, the appliance always injects the hostroute.
+            * If set to ACTIVE on all the virtual servers that share the IP address, the appliance injects even if one virtual server is UP.
+            * If set to ACTIVE on some virtual servers and PASSIVE on the others, the appliance, injects even if one virtual server set to ACTIVE is UP.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>lbvserver</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The Default target server name.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>inherited</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">On State describes that policy bound is inherited from global binding.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>cswpolicyname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The bound CSW policy names.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>cswtargetserver</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The CSW target server names.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>cswpriority</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The priorities of bound CSW policies.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>cswpolicyhits</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The hits of bound CSW policies.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>crdpolicyname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The bound CRD policy names.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>crdpolicypriority</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>crdpolicyhits</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The hits of bound CRD policies.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>maptable</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The map table names.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>mttargetserver</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The MT target server names.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>filterpolicyname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>filterpolicypriority</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>cmppolicyname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>cmppolicypriority</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>defaultlb</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The default target LB Vserver.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>See Also</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="getcrvserver.html">getcrvserver</a></div></td></tr><tr><td><br></td></tr></table></div>
+</body>
+</html>

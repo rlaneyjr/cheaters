@@ -1,0 +1,582 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      
+      <title>Deviations -  - NSO 4.4.2.3 Northbound APIs</title>
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+      <link rel="home" href="index.html" title="NSO 4.4.2.3 Northbound APIs" />
+      <link rel="up" href="ncs.northbound.restconf.html" title="The RESTCONF API" />
+      <link rel="prev" href="ch04s03s03.html" title="The RESTCONF Query API" />
+      <link rel="next" href="ch04s04s01.html" title="Notifications" />
+      <meta xmlns="" name="Section-title" content="Deviations" /><script xmlns="" type="text/javascript">
+      //The id for tree cookie
+      var treeCookieId = "treeview-5781";
+      var language = "en";
+      var w = new Object();
+      //Localization
+      txt_filesfound = 'Results';
+      txt_enter_at_least_1_char = "You must enter at least one character.";
+      txt_browser_not_supported = "JavaScript is disabled on your browser. Please enable JavaScript to enjoy all the features of this site.";
+      txt_please_wait = "Please wait. Search in progress...";
+      txt_results_for = "Results for: ";
+    </script><link xmlns="" rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/css/positioning.css" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/jquery/theme-redmond/jquery-ui-1.8.2.custom.css" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/jquery/treeview/jquery.treeview.css" /><style xmlns="" type="text/css">
+      
+      #noscript{
+      font-weight:bold;
+      background-color: #55AA55;
+      font-weight: bold;
+      height: 25spx;
+      z-index: 3000;
+      top:0px;
+      width:100%;
+      position: relative;
+      border-bottom: solid 5px black;
+      text-align:center;
+      color: white;
+      }
+      
+      input {
+      margin-bottom: 5px;
+      margin-top: 2px;
+      }
+      .folder {
+      display: block;
+      height: 22px;
+      padding-left: 20px;
+      background: transparent url(common/jquery/treeview/images/folder.gif) 0 0px no-repeat;
+      }
+      span.contentsTab {
+      padding-left: 20px;
+      background: url(common/images/toc-icon.png) no-repeat 0 center;
+      }
+      span.searchTab {
+      padding-left: 20px;
+      background: url(common/images/search-icon.png) no-repeat 0 center;
+      }
+      
+      /* Overide jquery treeview's defaults for ul. */
+      .treeview ul {
+      background-color: transparent;
+      margin-top: 4px;
+      }		
+      #webhelp-currentid {
+      /* background-color: #D8D8D8 !important; */
+      background-color: #D8D8D8;
+      }
+      .treeview .hover { color: black; }
+      .filetree li span a { text-decoration: none; font-size: 12px; color: #517291; }
+      
+      /* Override jquery-ui's default css customizations. These are supposed to take precedence over those.*/
+      .ui-widget-content {
+      border: 0px; 
+      background: none; 
+      color: none;     
+      }
+      .ui-widget-header {
+      color: #e9e8e9;
+      border-left: 1px solid #e5e5e5;
+      border-right: 1px solid #e5e5e5;
+      border-bottom: 1px solid #bbc4c5;
+      border-top: 4px solid #e5e5e5;
+      border: medium none;
+      background: #F4F4F4; /* old browsers */
+      background: -moz-linear-gradient(top, #F4F4F4 0%, #E6E4E5 100%); /* firefox */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F4F4F4), color-stop(100%,#E6E4E5)); /* webkit */    
+      font-weight: none;
+      }
+      .ui-widget-header a { color: none; }
+      .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { 
+      border: none; background: none; font-weight: none; color: none; }
+      .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited { color: black; text-decoration: none; }
+      .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus { border: none; background: none; font-weight: none; color: none; }
+      
+      .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { border: none; background: none; font-weight: none; color: none; }
+      .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited { 
+      color: black; text-decoration: none; 	
+      background: #C6C6C6; /* old browsers */
+      background: -moz-linear-gradient(top, #C6C6C6 0%, #D8D8D8 100%); /* firefox */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#C6C6C6), color-stop(100%,#D8D8D8)); /* webkit */
+      -webkit-border-radius:15px; -moz-border-radius:10px;
+      border: 1px solid #f1f1f1;
+      }    
+      .ui-corner-all { border-radius: 0 0 0 0; }
+      
+      .ui-tabs { padding: .2em;}
+      .ui-tabs .ui-tabs-nav li { top: 0px; margin: -2px 0 1px; text-transform: uppercase; font-size: 10.5px;}
+      .ui-tabs .ui-tabs-nav li a { padding: .25em 2em .25em 1em; margin: .5em; text-shadow: 0 1px 0 rgba(255,255,255,.5); }
+      /**
+      *	Basic Layout Theme
+      * 
+      *	This theme uses the default layout class-names for all classes
+      *	Add any 'custom class-names', from options: paneClass, resizerClass, togglerClass
+      */
+      
+      .ui-layout-pane { /* all 'panes' */ 
+      background: #FFF; 
+      border: 1px solid #BBB; 
+      padding: 05x; 
+      overflow: auto;
+      } 
+      
+      .ui-layout-resizer { /* all 'resizer-bars' */ 
+      background: #DDD; 
+      top:100px
+      } 
+      
+      .ui-layout-toggler { /* all 'toggler-buttons' */ 
+      background: #AAA; 
+      } 
+      
+    </style>
+      <!--[if IE]>
+	<link rel="stylesheet" type="text/css" href="../common/css/ie.css"/>
+	<![endif]--><script xmlns="" type="text/javascript" src="common/browserDetect.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery-1.7.2.min.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery.ui.all.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery.cookie.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/treeview/jquery.treeview.min.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/layout/jquery.layout.js">
+         <!----></script><style type="text/css">
+      
+      #header {
+      /* background: url("../images/header-bg.png") scroll top left repeat-x #4d8c83; */
+      background: transparent;
+      }
+      #leftnavigation {
+      /* background-color: #ededed!important; */
+      background-color: transparent;
+      }
+      #navheader {
+      visibility: hidden;
+      }
+      #webhelp-currentid {
+      /* background-color: #D8D8D8 !important; */
+      background-color: #FFFFFF; /*but must be changed in main.js as well*/
+      }
+      .filetree span.file {
+      /* background: url(images/file.gif) 0 0 no-repeat; */
+      background: initial;
+      }
+      .filetree span.folder, .filetree span.file {
+      padding: 1px 0 1px 7px;
+      display: block;
+      }
+
+      /* borrowed from cisco: clientlib.css */
+      .footer {
+      margin: 28px 30px 0 15px;
+      font-size: 80%;
+      line-height: 120%;
+      border-top: 1px solid #ccc;
+      padding-top: 7px;
+      color: #999;
+      }
+      .footer #footer-legal{display:inline;padding-bottom:18px}
+      #framework-footer{margin:0;padding:0 0 15px 0;min-width:900px;width:100%}
+      .footer a,.footer a:visited{color:#999}
+
+      /* from ccimr.css */
+      a:active  { color: #3366CC}
+      a:hover   { color: #3366CC}
+      a:link    { color: #3366CC}
+      a:visited { color: #3366CC}
+
+      #header img {
+      float: left;
+      margin-left: 20px;
+      margin-top: 0px;
+      }
+
+      #header h1 {
+      color: #336666;
+      margin-top: 4px;
+      }
+      #content h1, #content h2 {
+      color: #336666;
+      }
+      .title {
+      color: #336666;
+      }
+      p, pre {
+      margin-left: 0.1in;
+      }
+      p, ul, ol, li {
+        font-size: 95%;
+        font-family: Arial, Helvetica, sans-serif;
+        margin-top: 1px;
+      }
+      body {
+        font: 80.5% Arial, Helvetica, sans-serif;
+      }
+      ol {
+      display: block;
+      list-style-type: decimal;
+      -webkit-margin-before: 1em;
+      -webkit-margin-after: 1em;
+      -webkit-margin-start: 0px;
+      -webkit-margin-end: 0px;
+      -webkit-padding-start: 40px;
+      border: 1;
+      }
+    </style></head>
+   <body>
+      <noscript>
+         <div id="noscript">JavaScript is disabled on your browser. Please enable JavaScript to enjoy all the features of this site.</div>
+      </noscript>
+      <div id="header"><a href="index.html"><img style="margin-right: 2px; width: 110; height: 73; padding-right: 25px; padding-top: 8px" align="right" src="common/images/logo.gif" alt="Cisco Systems, Inc." /></a><h1>NSO 4.4.2.3 Northbound APIs
+                <br />The RESTCONF API
+         </h1>
+         <div id="navheader">
+            <!---->
+            <table class="navLinks">
+               <tr>
+                  <td><a id="showHideButton" href="#" onclick="myLayout.toggle('west')" class="pointLeft" tabindex="5" title="Hide TOC tree">Sidebar
+                                                    </a></td>
+                  <td><a accesskey="p" class="navLinkPrevious" tabindex="5" href="ch04s03s03.html">Prev</a>
+                                                             |
+                                                             <a accesskey="u" class="navLinkUp" tabindex="5" href="ncs.northbound.restconf.html">Up</a>
+                                                         |
+                                                         <a accesskey="n" class="navLinkNext" tabindex="5" href="ch04s04s01.html">Next</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div id="content">
+         <div class="sect1">
+            <div xmlns="" class="titlepage">
+               <div>
+                  <div>
+                     <h2 xmlns="http://www.w3.org/1999/xhtml" class="title" style="clear: both"><a id="d0e5259"></a>Deviations
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="toc">
+               <dl class="toc">
+                  <dt><span class="sect2"><a href="ch04s04s01.html">Notifications</a></span></dt>
+                  <dt><span class="sect2"><a href="ch04s04s02.html">Query Parameters</a></span></dt>
+               </dl>
+            </div>
+            <p>
+                     The NSO RESTCONF server support all the mandatory parts of the
+                     specification and some optional parts. This chapter describes what is
+                     currently not supported and/or any other deviations from the
+                     specification.
+                   
+            </p>
+         </div><script type="text/javascript" src="common/main.js">
+            <!----></script><script type="text/javascript" src="common/splitterInit.js">
+            <!----></script><div class="footer" id="footer-legal">
+            <div class="footer-legal framework-footer-cq">
+               <div id="framework-footer">
+                  <div id="footer-legal"><a href="http://www.cisco.com/web/siteassets/legal/terms_condition.html">Terms &amp; Conditions</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/privacy.html">Privacy Statement</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/privacy.html#cookies">Cookie Policy</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/trademark.html">Trademarks</a></div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div id="sidebar">
+         <div id="leftnavigation" style="padding-top:3px;">
+            <div id="tabs">
+               <ul style="visibility: hidden;"></ul>
+               <div id="treeDiv"><img src="common/images/loading.gif" alt="loading table of contents..." id="tocLoading" style="display:block;" /><div id="ulTreeDiv" style="display:none">
+                     <ul id="tree" class="filetree">
+                        <li><span class="file"><a href="ch01.html" tabindex="1">Introduction</a></span><ul>
+                              <li><span class="file"><a href="ch01s01.html" tabindex="1">Integrating an External System with NSO</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ug.netconf_agent.html" tabindex="1">The NCS NETCONF Server</a></span><ul>
+                              <li><span class="file"><a href="ch02s01.html" tabindex="1">Introduction</a></span></li>
+                              <li><span class="file"><a href="ch02s02.html" tabindex="1">Capabilities</a></span><ul>
+                                    <li><span class="file"><a href="ch02s02s01.html" tabindex="1">Advertising Capabilities and YANG Modules</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.netconf_agent.transport.html" tabindex="1">NETCONF Transport Protocols</a></span><ul>
+                                    <li><span class="file"><a href="ch02s03s01.html" tabindex="1">Using OpenSSH</a></span></li>
+                                    <li><span class="file"><a href="ch02s03s02.html" tabindex="1">Internal TCP Transport</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch02s04.html" tabindex="1">Configuration of the NETCONF Server</a></span><ul>
+                                    <li><span class="file"><a href="ch02s04s01.html" tabindex="1">Error Handling</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.netconf_agent.extend.html" tabindex="1">Extending the NETCONF Server</a></span><ul>
+                                    <li><span class="file"><a href="ch02s05s01.html" tabindex="1">RPC as an Executable, ConfD does not Translate the XML</a></span></li>
+                                    <li><span class="file"><a href="ch02s05s02.html" tabindex="1">RPC as an Executable, ConfD Translates the XML</a></span></li>
+                                    <li><span class="file"><a href="ch02s05s03.html" tabindex="1">RPC as a Callback Function</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.netconf_agent.monitoring.html" tabindex="1">Monitoring of the NETCONF Server</a></span></li>
+                              <li><span class="file"><a href="ug.netconf_agent.notif.html" tabindex="1">Notification Capability</a></span><ul>
+                                    <li><span class="file"><a href="ch02s07s01.html" tabindex="1">Notification Streams</a></span></li>
+                                    <li><span class="file"><a href="ch02s07s02.html" tabindex="1">Built-in Notification Streams</a></span></li>
+                                    <li><span class="file"><a href="ch02s07s03.html" tabindex="1">Defining Notification Streams</a></span></li>
+                                    <li><span class="file"><a href="ch02s07s04.html" tabindex="1">Automatic Replay</a></span></li>
+                                    <li><span class="file"><a href="ch02s07s05.html" tabindex="1">Implementing Custom Replay</a></span></li>
+                                    <li><span class="file"><a href="ch02s07s06.html" tabindex="1">Sending Notifications from an Application</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.netconf_agent.netconf_console.html" tabindex="1">Using netconf-console</a></span></li>
+                              <li><span class="file"><a href="ug.netconf_agent.actions.html" tabindex="1">Actions Capability</a></span><ul>
+                                    <li><span class="file"><a href="ch02s09s01.html" tabindex="1">Overview</a></span></li>
+                                    <li><span class="file"><a href="ch02s09s02.html" tabindex="1">Capability Identifier</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.netconf_agent.actions.html" tabindex="1">Actions Capability</a></span><ul>
+                                    <li><span class="file"><a href="ch02s10s01.html" tabindex="1">Overview</a></span></li>
+                                    <li><span class="file"><a href="ch02s10s02.html" tabindex="1">Motivation</a></span></li>
+                                    <li><span class="file"><a href="ch02s10s03.html" tabindex="1">Dependencies</a></span></li>
+                                    <li><span class="file"><a href="ch02s10s04.html" tabindex="1">Capability Identifier</a></span></li>
+                                    <li><span class="file"><a href="ch02s10s05.html" tabindex="1">New Operation: &lt;action&gt;</a></span><ul>
+                                          <li><span class="file"><a href="ch02s10s05.html#d0e1472" tabindex="1">Description</a></span></li>
+                                          <li><span class="file"><a href="ch02s10s05.html#d0e1477" tabindex="1">Parameters</a></span></li>
+                                          <li><span class="file"><a href="ch02s10s05.html#d0e1490" tabindex="1">Positive Response</a></span></li>
+                                          <li><span class="file"><a href="ch02s10s05.html#d0e1495" tabindex="1">Negative Response</a></span></li>
+                                          <li><span class="file"><a href="ch02s10s05.html#d0e1500" tabindex="1">Example</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ch02s10s06.html" tabindex="1">Modifications to Existing Operations</a></span></li>
+                                    <li><span class="file"><a href="ch02s10s07.html" tabindex="1">XML Schema</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.netconf_agent.transactions.html" tabindex="1">Transactions Capability</a></span><ul>
+                                    <li><span class="file"><a href="ch02s11s01.html" tabindex="1">Overview</a></span></li>
+                                    <li><span class="file"><a href="ch02s11s02.html" tabindex="1">Dependencies</a></span></li>
+                                    <li><span class="file"><a href="ch02s11s03.html" tabindex="1">Capability Identifier</a></span></li>
+                                    <li><span class="file"><a href="ch02s11s04.html" tabindex="1">New Operation: &lt;start-transaction&gt;</a></span><ul>
+                                          <li><span class="file"><a href="ch02s11s04.html#d0e1557" tabindex="1">Description</a></span></li>
+                                          <li><span class="file"><a href="ch02s11s04.html#d0e1570" tabindex="1">Parameters</a></span></li>
+                                          <li><span class="file"><a href="ch02s11s04.html#d0e1588" tabindex="1">Positive Response</a></span></li>
+                                          <li><span class="file"><a href="ch02s11s04.html#d0e1593" tabindex="1">Negative Response</a></span></li>
+                                          <li><span class="file"><a href="ch02s11s04.html#d0e1600" tabindex="1">Example</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ch02s11s05.html" tabindex="1">New Operation: &lt;prepare-transaction&gt;</a></span><ul>
+                                          <li><span class="file"><a href="ch02s11s05.html#d0e1609" tabindex="1">Description</a></span></li>
+                                          <li><span class="file"><a href="ch02s11s05.html#d0e1618" tabindex="1">Parameters</a></span></li>
+                                          <li><span class="file"><a href="ch02s11s05.html#d0e1623" tabindex="1">Positive Response</a></span></li>
+                                          <li><span class="file"><a href="ch02s11s05.html#d0e1628" tabindex="1">Negative Response</a></span></li>
+                                          <li><span class="file"><a href="ch02s11s05.html#d0e1635" tabindex="1">Example</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ch02s11s06.html" tabindex="1">New Operation: &lt;commit-transaction&gt;</a></span><ul>
+                                          <li><span class="file"><a href="ch02s11s06.html#d0e1644" tabindex="1">Description</a></span></li>
+                                          <li><span class="file"><a href="ch02s11s06.html#d0e1649" tabindex="1">Parameters</a></span></li>
+                                          <li><span class="file"><a href="ch02s11s06.html#d0e1654" tabindex="1">Positive Response</a></span></li>
+                                          <li><span class="file"><a href="ch02s11s06.html#d0e1659" tabindex="1">Negative Response</a></span></li>
+                                          <li><span class="file"><a href="ch02s11s06.html#d0e1666" tabindex="1">Example</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ch02s11s07.html" tabindex="1">New Operation: &lt;abort-transaction&gt;</a></span><ul>
+                                          <li><span class="file"><a href="ch02s11s07.html#d0e1675" tabindex="1">Description</a></span></li>
+                                          <li><span class="file"><a href="ch02s11s07.html#d0e1680" tabindex="1">Parameters</a></span></li>
+                                          <li><span class="file"><a href="ch02s11s07.html#d0e1685" tabindex="1">Positive Response</a></span></li>
+                                          <li><span class="file"><a href="ch02s11s07.html#d0e1690" tabindex="1">Negative Response</a></span></li>
+                                          <li><span class="file"><a href="ch02s11s07.html#d0e1697" tabindex="1">Example</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ch02s11s08.html" tabindex="1">Modifications to Existing Operations</a></span></li>
+                                    <li><span class="file"><a href="ch02s11s09.html" tabindex="1">XML Schema</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.netconf_agent.proxy.html" tabindex="1">Proxy Forwarding Capability</a></span><ul>
+                                    <li><span class="file"><a href="ch02s12s01.html" tabindex="1">Overview</a></span><ul>
+                                          <li><span class="file"><a href="ch02s12s01.html#d0e1739" tabindex="1">Client Elements of Procedure</a></span></li>
+                                          <li><span class="file"><a href="ch02s12s01.html#d0e1775" tabindex="1">Server Elements of Procedure</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ch02s12s02.html" tabindex="1">Dependencies</a></span></li>
+                                    <li><span class="file"><a href="ch02s12s03.html" tabindex="1">Capability Identifier</a></span></li>
+                                    <li><span class="file"><a href="ch02s12s04.html" tabindex="1">New Operation: &lt;forward&gt;</a></span><ul>
+                                          <li><span class="file"><a href="ch02s12s04.html#d0e1843" tabindex="1">Description</a></span></li>
+                                          <li><span class="file"><a href="ch02s12s04.html#d0e1850" tabindex="1">Parameters</a></span></li>
+                                          <li><span class="file"><a href="ch02s12s04.html#d0e1877" tabindex="1">Positive Response</a></span></li>
+                                          <li><span class="file"><a href="ch02s12s04.html#d0e1884" tabindex="1">Negative Response</a></span></li>
+                                          <li><span class="file"><a href="ch02s12s04.html#d0e1899" tabindex="1">Example 1.</a></span></li>
+                                          <li><span class="file"><a href="ch02s12s04.html#d0e1907" tabindex="1">Example 2.  Client needs to authenticate to the target:</a></span></li>
+                                          <li><span class="file"><a href="ch02s12s04.html#d0e1918" tabindex="1">Example 3.  Client needs to authenticate to the proxy target, but fails:</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ch02s12s05.html" tabindex="1">New Operation: &lt;challenge-response&gt;</a></span><ul>
+                                          <li><span class="file"><a href="ch02s12s05.html#d0e1932" tabindex="1">Description</a></span></li>
+                                          <li><span class="file"><a href="ch02s12s05.html#d0e1937" tabindex="1">Parameters</a></span></li>
+                                          <li><span class="file"><a href="ch02s12s05.html#d0e1948" tabindex="1">Positive Response</a></span></li>
+                                          <li><span class="file"><a href="ch02s12s05.html#d0e1955" tabindex="1">Negative Response</a></span></li>
+                                          <li><span class="file"><a href="ch02s12s05.html#d0e1964" tabindex="1">Example</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ch02s12s06.html" tabindex="1">Modifications to Existing Operations</a></span></li>
+                                    <li><span class="file"><a href="ch02s12s07.html" tabindex="1">Interactions with Other Capabilities</a></span></li>
+                                    <li><span class="file"><a href="ch02s12s08.html" tabindex="1">XSD Schema</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.netconf_agent.inactive.html" tabindex="1">Inactive Capability</a></span><ul>
+                                    <li><span class="file"><a href="ch02s13s01.html" tabindex="1">Overview</a></span></li>
+                                    <li><span class="file"><a href="ch02s13s02.html" tabindex="1">Dependencies</a></span></li>
+                                    <li><span class="file"><a href="ch02s13s03.html" tabindex="1">Capability Identifier</a></span></li>
+                                    <li><span class="file"><a href="ch02s13s04.html" tabindex="1">New Operations</a></span></li>
+                                    <li><span class="file"><a href="ch02s13s05.html" tabindex="1">Modifications to Existing Operations</a></span><ul>
+                                          <li><span class="file"><a href="ch02s13s05.html#d0e2041" tabindex="1">Example</a></span></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.netconf_agent.identification-capability.html" tabindex="1">Tail-f Identification Capability</a></span><ul>
+                                    <li><span class="file"><a href="ch02s14s01.html" tabindex="1">Overview</a></span></li>
+                                    <li><span class="file"><a href="ch02s14s02.html" tabindex="1">Dependencies</a></span></li>
+                                    <li><span class="file"><a href="ch02s14s03.html" tabindex="1">Capability Identifier</a></span></li>
+                                    <li><span class="file"><a href="ch02s14s04.html" tabindex="1">Example</a></span></li>
+                                    <li><span class="file"><a href="ch02s14s05.html" tabindex="1">ConfD</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch02s15.html" tabindex="1">NETCONF extensions in NCS</a></span></li>
+                              <li><span class="file"><a href="ch02s16.html" tabindex="1">The Query API</a></span></li>
+                              <li><span class="file"><a href="ug.netconf_agent.attributes.html" tabindex="1">Meta-data in Attributes</a></span></li>
+                              <li><span class="file"><a href="ch02s18.html" tabindex="1">Namespace for Additional Error Information</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ncs.northbound.rest.html" tabindex="1">The REST API</a></span><ul>
+                              <li><span class="file"><a href="ch03s01.html" tabindex="1">Introduction</a></span></li>
+                              <li><span class="file"><a href="ncs.northbound.rest.gettingstarted.html" tabindex="1">Getting started</a></span><ul>
+                                    <li><span class="file"><a href="ch03s02s01.html" tabindex="1">Request URI structure</a></span></li>
+                                    <li><span class="file"><a href="ch03s02s02.html" tabindex="1">Accessing the REST API</a></span></li>
+                                    <li><span class="file"><a href="ch03s02s03.html" tabindex="1">GET</a></span></li>
+                                    <li><span class="file"><a href="ch03s02s04.html" tabindex="1">POST</a></span></li>
+                                    <li><span class="file"><a href="ch03s02s05.html" tabindex="1">PUT</a></span></li>
+                                    <li><span class="file"><a href="ch03s02s06.html" tabindex="1">PATCH</a></span></li>
+                                    <li><span class="file"><a href="ch03s02s07.html" tabindex="1">DELETE</a></span></li>
+                                    <li><span class="file"><a href="ch03s02s08.html" tabindex="1">OPTIONS</a></span></li>
+                                    <li><span class="file"><a href="ch03s02s09.html" tabindex="1">HEAD</a></span></li>
+                                    <li><span class="file"><a href="ncs.northbound.rest.query.params.html" tabindex="1">Query Parameters</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ncs.northbound.rest.resource.examples.html" tabindex="1">Resource Examples</a></span><ul>
+                                    <li><span class="file"><a href="ncs.northbound.rest.get.html" tabindex="1">GET and Query examples</a></span><ul>
+                                          <li><span class="file"><a href="ncs.northbound.rest.get.html#d0e3284" tabindex="1">Retrieve Data Resources</a></span></li>
+                                          <li><span class="file"><a href="ncs.northbound.rest.get.html#ncs.northbound.rest.partial.get" tabindex="1">Partial Responses</a></span></li>
+                                          <li><span class="file"><a href="ncs.northbound.rest.get.html#ncs.northbound.rest.hidden" tabindex="1">Hidden Nodes</a></span></li>
+                                          <li><span class="file"><a href="ncs.northbound.rest.get.html#ncs.northbound.rest.withdefaults" tabindex="1">Displaying Default Data</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ch03s03s02.html" tabindex="1">Examples using POST, PUT and PATCH</a></span><ul>
+                                          <li><span class="file"><a href="ch03s03s02.html#ncs.northbound.rest.create" tabindex="1">Create a List Instance with POST</a></span></li>
+                                          <li><span class="file"><a href="ch03s03s02.html#ncs.northbound.rest.create.pcontainer" tabindex="1">Create a Presence Container, within a list, with POST</a></span></li>
+                                          <li><span class="file"><a href="ch03s03s02.html#ncs.northbound.rest.put" tabindex="1">Create and Replace a List Instance with PUT</a></span></li>
+                                          <li><span class="file"><a href="ch03s03s02.html#ncs.northbound.rest.create.putpcontainer" tabindex="1">Create and Replace Presence Container with PUT</a></span></li>
+                                          <li><span class="file"><a href="ch03s03s02.html#ncs.northbound.rest.create.putnpcontainer" tabindex="1">Replace Non-Presence Container with PUT</a></span></li>
+                                          <li><span class="file"><a href="ch03s03s02.html#ncs.northbound.rest.patch" tabindex="1">Update Existing List Instance with PATCH</a></span></li>
+                                          <li><span class="file"><a href="ch03s03s02.html#ncs.northbound.rest.create.patchpcontainer" tabindex="1">Update Presence Container with PATCH</a></span></li>
+                                          <li><span class="file"><a href="ch03s03s02.html#ncs.northbound.rest.create.patchnpcontainer" tabindex="1">Update Non-Presence Container with PATCH</a></span></li>
+                                          <li><span class="file"><a href="ch03s03s02.html#ncs.northbound.rest.insert" tabindex="1">Insert Data into Resources</a></span></li>
+                                          <li><span class="file"><a href="ch03s03s02.html#ncs.northbound.rest.commit.flags" tabindex="1">Making use of the commit flags</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ncs.northbound.rest.operation.html" tabindex="1">Invoke Operations</a></span></li>
+                                    <li><span class="file"><a href="ncs.northbound.rest.delete.html" tabindex="1">Delete Data Resources</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ncs.northbound.rest.resources.html" tabindex="1">Resources</a></span><ul>
+                                    <li><span class="file"><a href="ch03s04s01.html" tabindex="1">Representation</a></span><ul>
+                                          <li><span class="file"><a href="ch03s04s01.html#d0e3989" tabindex="1">XML representation</a></span></li>
+                                          <li><span class="file"><a href="ch03s04s01.html#d0e4001" tabindex="1">JSON representation</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ch03s04s02.html" tabindex="1">API Resource (/api)</a></span><ul>
+                                          <li><span class="file"><a href="ch03s04s02.html#d0e4080" tabindex="1">The version Field</a></span></li>
+                                          <li><span class="file"><a href="ch03s04s02.html#d0e4085" tabindex="1">The config Resource</a></span></li>
+                                          <li><span class="file"><a href="ch03s04s02.html#d0e4095" tabindex="1">The running Resource</a></span></li>
+                                          <li><span class="file"><a href="ch03s04s02.html#d0e4102" tabindex="1">The operational Resource</a></span></li>
+                                          <li><span class="file"><a href="ch03s04s02.html#d0e4115" tabindex="1">The transaction Resource</a></span></li>
+                                          <li><span class="file"><a href="ch03s04s02.html#d0e4122" tabindex="1">The operations Container</a></span></li>
+                                          <li><span class="file"><a href="ch03s04s02.html#d0e4127" tabindex="1">The rollbacks Container</a></span></li>
+                                          <li><span class="file"><a href="ch03s04s02.html#d0e4132" tabindex="1">The logout Resource</a></span></li>
+                                          <li><span class="file"><a href="ch03s04s02.html#d0e4137" tabindex="1">Examples</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ch03s04s03.html" tabindex="1">Datastore Resource (/api/&lt;datastore&gt;)</a></span><ul>
+                                          <li><span class="file"><a href="ch03s04s03.html#d0e4236" tabindex="1">Examples</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ch03s04s04.html" tabindex="1">Data Resource (/api/&lt;datastore&gt;/&lt;data&gt;)</a></span></li>
+                                    <li><span class="file"><a href="ncs.northbound.rest.operations.actions.html" tabindex="1">Operations and Actions</a></span></li>
+                                    <li><span class="file"><a href="ch03s04s06.html" tabindex="1">The Rollback Resource</a></span><ul>
+                                          <li><span class="file"><a href="ch03s04s06.html#d0e4301" tabindex="1">Listing and Inspecting Rollback Files</a></span></li>
+                                          <li><span class="file"><a href="ch03s04s06.html#d0e4336" tabindex="1">Applying Rollback Files</a></span></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch03s05.html" tabindex="1">Configuration Meta-Data</a></span></li>
+                              <li><span class="file"><a href="ncs.northbound.rest.headers.html" tabindex="1">Request/Response headers</a></span><ul>
+                                    <li><span class="file"><a href="ch03s06s01.html" tabindex="1">Response headers</a></span></li>
+                                    <li><span class="file"><a href="ch03s06s02.html" tabindex="1">Request headers</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch03s07.html" tabindex="1">Special characters</a></span><ul>
+                                    <li><span class="file"><a href="ch03s07s01.html" tabindex="1">XML representation of special characters</a></span></li>
+                                    <li><span class="file"><a href="ch03s07s02.html" tabindex="1">JSON representation of special characters</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch03s08.html" tabindex="1">Error Responses</a></span><ul>
+                                    <li><span class="file"><a href="ch03s08s01.html" tabindex="1">User extended error messages</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ncs.northbound.rest.query.api.html" tabindex="1">The REST Query API</a></span></li>
+                              <li><span class="file"><a href="ch03s10.html" tabindex="1">Custom Response HTTP Headers</a></span></li>
+                              <li><span class="file"><a href="ch03s11.html" tabindex="1">HTTP Status Codes</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ncs.northbound.restconf.html" tabindex="1">The RESTCONF API</a></span><ul>
+                              <li><span class="file"><a href="ch04s01.html" tabindex="1">Introduction</a></span></li>
+                              <li><span class="file"><a href="ch04s02.html" tabindex="1">Getting started</a></span><ul>
+                                    <li><span class="file"><a href="ch04s02s01.html" tabindex="1">Root resource discovery</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch04s03.html" tabindex="1">Extensions</a></span><ul>
+                                    <li><span class="file"><a href="ch04s03s01.html" tabindex="1">Collections</a></span></li>
+                                    <li><span class="file"><a href="ch04s03s02.html" tabindex="1">Commit queue</a></span></li>
+                                    <li><span class="file"><a href="ch04s03s03.html" tabindex="1">The RESTCONF Query API</a></span></li>
+                                 </ul>
+                              </li>
+                              <li id="webhelp-currentid"><span class="file"><a href="ch04s04.html" tabindex="1">Deviations</a></span><ul>
+                                    <li><span class="file"><a href="ch04s04s01.html" tabindex="1">Notifications</a></span></li>
+                                    <li><span class="file"><a href="ch04s04s02.html" tabindex="1">Query Parameters</a></span></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ncs.northbound.snmp.html" tabindex="1">The NSO SNMP Agent</a></span><ul>
+                              <li><span class="file"><a href="ch05s01.html" tabindex="1">Introduction</a></span></li>
+                              <li><span class="file"><a href="ch05s02.html" tabindex="1">Configuring the SNMP Agent</a></span></li>
+                              <li><span class="file"><a href="ch05s03.html" tabindex="1">The Alarm MIB</a></span><ul>
+                                    <li><span class="file"><a href="ch05s03s01.html" tabindex="1"> SNMP Object Identifiers </a></span></li>
+                                    <li><span class="file"><a href="ch05s03s02.html" tabindex="1"> Using the SNMP Alarm MIB</a></span></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="nb_ncs_alarms.html" tabindex="1">NSO Alarms</a></span><ul>
+                              <li><span class="file"><a href="ug.ncs_sys_mgmt.alarm.html" tabindex="1">Overview</a></span></li>
+                              <li><span class="file"><a href="ch06s02.html" tabindex="1">Alarm type structure</a></span></li>
+                              <li><span class="file"><a href="ch06s03.html" tabindex="1">Alarm type descriptions</a></span></li>
+                           </ul>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

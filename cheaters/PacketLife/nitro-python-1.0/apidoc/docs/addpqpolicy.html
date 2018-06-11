@@ -1,0 +1,104 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>Citrix NetScaler XML API User&#39;s Guide - addpqpolicy</title>
+<link rel="stylesheet" type="text/css" href="help_ns.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body onload="initial()" class="ns_body">
+<div class="ns_content"><table cellpadding="0" cellspacing="0"><script type="text/javascript">
+function showContent(content,lang){
+			if(ie4){
+				showContentObj=document.all.qiksearch_div;
+			}
+			if(ns6){
+				showContentObj=document.getElementById("qiksearch_div");
+			}
+			if(ie4||ns6){
+				if(showContentObj.innerHTML!=content){
+					showContentObj.innerHTML=content;
+				}
+				else{
+					showContentObj.innerHTML="";
+				}
+			}
+			if(ns4){
+				document.nsdiv.document.write(content);
+				document.nsdiv.document.close();
+			}
+}
+function showLangSelect(id){
+		ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+		ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+		ns4=document.layers;
+		if(ie4){
+			showObj=document.all.first_url;
+		}
+		if(ns6){
+			showObj=document.getElementById("first_url");
+		}
+		if( id == "C" ){
+			newlink = "<b>C</b>";
+		}
+		else{
+			newlink = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('C');\"><b>C</b></a>";
+		}
+		if( id == "Perl" ){
+			newlink = newlink + " | <b>Perl</b>";
+		}
+		else{
+			newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('Perl');\"><b>Perl</b></a>";
+		}
+		if( id == "Java" ){
+			newlink = newlink + " | <b>Java</b>";
+		}
+		else{
+			newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('Java');\"><b>Java</b></a>";
+		}
+		if( id == "C#" ){
+			newlink = newlink + " | <b>C#</b>";
+		}
+		else{
+			newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('C#');\"><b>C#</b></a>";
+		}
+		showObj.innerHTML = newlink;
+}
+function initial(){
+		ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+		ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+		ns4=document.layers;
+		langSelected = parent.banner.document.language.select.value
+		parent.banner.document.language.plink.value = "Priority Queuing@pq.html&addpqpolicy";
+		changeContext(langSelected);
+}
+function changeContext(lang){
+parent.banner.document.language.select.value = lang;
+if( lang == "C" ){
+showContent('<table><tr><td><pre><a href=\'simpleResult_struct.html\'>simpleResult</a><b> addpqpolicy</b>(<br> &nbsp;&nbsp;&nbsp;&nbsp;char * <i>policyname</i>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char * <i>rule</i>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unsigned int <i>priority</i> <br>);</pre></td></tr></table>','C');
+}
+if( lang == "Perl" ){
+showContent('<table><tr><td><pre><a href=\'simpleResult_struct.html\'>simpleResult</a><b> addpqpolicy</b>(<br>&nbsp;&nbsp;&nbsp;&nbsp;name(\'policyname\' => value),<br>&nbsp;&nbsp;&nbsp;&nbsp;name(\'rule\' => value),<br>&nbsp;&nbsp;&nbsp;&nbsp;name(\'priority\' => value)<br>);</pre></td></tr></table>','Perl')
+}
+if( lang == "Java" ){
+showContent('<table><tr><td><pre>public <a href=\'simpleResult_struct.html\'>simpleResult</a><b> addpqpolicy</b>(<br> &nbsp;&nbsp;&nbsp;&nbsp;String <i>policyname</i>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String <i>rule</i>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unsigned int <i>priority</i> <br>);</pre></td></tr></table>','Java');
+}
+if( lang == "C#" ){
+showContent('<table><tr><td><pre>public <a href=\'simpleResult_struct.html\'>simpleResult</a><b> addpqpolicy</b>(<br> &nbsp;&nbsp;&nbsp;&nbsp;string <i>policyname</i>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string <i>rule</i>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.UInt64 <i>priority</i> <br>);</pre></td></tr></table>','C#');
+}
+if( lang == "VB" ){
+showContent('<table><tr><td><pre>Public Function<b> addpqpolicy</b>(<br> &nbsp;&nbsp;&nbsp;&nbsp;ByVal <i>policyname</i> As String ,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ByVal <i>rule</i> As String ,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ByVal <i>priority</i> As UInteger  <br>) As <a href=\'simpleResult_struct.html\'>simpleResult</a> </pre></td></tr></table>','VB');
+}
+showLangSelect(lang);
+}
+</script>
+<tr><td><div><a href='introduction.html'>Home</a> > <a href="APIIndex.htm">Configuration</a> > <a href="pq.html">Priority Queuing</a> > addpqpolicy</div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>addpqpolicy</td></tr><tr><td><br></td></tr><tr><td><div>Use this method to adds a priority queuing policy to the appliance.<br>Note: To use the priority queuing policy on a virtual server, the virtual server must have priority queuing enabled and the priority queuing policy must be bound to the load balancing virtual server. To enable priority queuing on the virtual server and to bind the policy, use the set lb vserver and bind lb vserver methods.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="first_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><b>Parameters</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><i>policyname</i></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name for the priority queuing policy. Must begin with a letter, number, or the underscore symbol (_). Other characters allowed, after the first character, are the hyphen (-), period (.) hash (#), space ( ), at (@), equals (=), and colon (:) characters.<br>This is mandatory parameter.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><i>rule</i></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Expression or name of a named expression, against which the request is evaluated. The priority queuing policy is applied if the rule evaluates to true.
+
+Note:
+* On the method line interface, if the expression includes blank spaces, the entire expression must be enclosed in double quotation marks.
+* If the expression itself includes double quotation marks, you must escape the quotations by using the \ character. 
+* Alternatively, you can use single quotation marks to enclose the rule, in which case you will not have to escape the double quotation marks.
+* Maximum length of a string literal in the expression is 255 characters. A longer string can be split into smaller strings of up to 255 characters each, and the smaller strings concatenated with the + operator. For example, you can create a 500-character string as follows: '"<string of 255 characters>" + "<string of 245 characters>"'.<br>This is mandatory parameter.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><i>priority</i></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Priority for queuing the request. If server resources are not available for a request that matches the configured rule, this option specifies a priority for queuing the request until the server resources are available again. Enter the value of positive_integer as 1, 2 or 3. The highest priority level is 1 and the lowest priority value is 3.<br>This is mandatory parameter.<br> Minimum value =  1.<br> Maximum value =  3.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Return Value</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left">Returns <a href="simpleResult_struct.html">simpleResult</a></div></td></tr><tr><td><br></td></tr><tr><td><div><b>See Also</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="getpqpolicy.html">getpqpolicy</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="rmpqpolicy.html">rmpqpolicy</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="setpqpolicy_polqdepth.html">setpqpolicy_polqdepth</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="setpqpolicy_qdepth.html">setpqpolicy_qdepth</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="setpqpolicy_weight.html">setpqpolicy_weight</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="statpqpolicy.html">statpqpolicy</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="unsetpqpolicy_polqdepth.html">unsetpqpolicy_polqdepth</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="unsetpqpolicy_qdepth.html">unsetpqpolicy_qdepth</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="unsetpqpolicy_weight.html">unsetpqpolicy_weight</a></div></td></tr><tr><td><br></td></tr></table></div>
+</body>
+</html>

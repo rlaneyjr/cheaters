@@ -1,0 +1,192 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="../../../rdx/css/rdx.css" rel="stylesheet" type="text/css"/>
+    <link href="../../../index.css" rel="stylesheet" type="text/css"/><title>nstrace</title>
+</head>
+<body class="ns_body">
+<p class="ns_wp_header">nstrace</p>
+<P>Configuration for nstrace operations resource.</P><p class="heading">Read/write properties</p><p class="property_name">nf<span class="property_type">&lt;Double&gt;</span></p><p class="property_description">Number of files to be generated in cycle.<br/>Default value: 24<br/>Minimum value =  1<br/>Maximum value =  100</p><p class="property_name">time<span class="property_type">&lt;Double&gt;</span></p><p class="property_description">Time per file (sec).<br/>Default value: 3600<br/>Minimum value =  1</p><p class="property_name">size<span class="property_type">&lt;Double&gt;</span></p><p class="property_description">Size of the captured data. Set 0 for full packet trace.<br/>Default value: 164<br/>Minimum value =  0<br/>Maximum value =  1514</p><p class="property_name">mode<span class="property_type">&lt;String[]&gt;</span></p><p class="property_description">Capturing mode for trace. Mode can be any of the following values or combination of these values:
+      RX          Received packets before NIC pipelining (Filter does not work when RX capturing mode is ON)
+      NEW_RX      Received packets after NIC pipelining
+      TX          Transmitted packets
+      TXB         Packets buffered for transmission
+      IPV6        Translated IPv6 packets
+      C2C         Capture C2C message
+      NS_FR_TX    TX/TXB packets are not captured in flow receiver.
+      Default mode: NEW_RX TXB .<br/>Default value: DEFAULT_MODE<br/>Possible values = TX, TXB, RX, IPV6, NEW_RX, C2C, NS_FR_TX</p><p class="property_name">tcpdump<span class="property_type">&lt;String&gt;</span></p><p class="property_description">Trace is captured in TCPDUMP(.pcap) format. Default capture format is NSTRACE(.cap).<br/>Default value: DISABLED<br/>Possible values = ENABLED, DISABLED</p><p class="property_name">pernic<span class="property_type">&lt;String&gt;</span></p><p class="property_description">Use separate trace files for each interface. Works only with tcpdump format.<br/>Default value: DISABLED<br/>Possible values = ENABLED, DISABLED</p><p class="property_name">filename<span class="property_type">&lt;String&gt;</span></p><p class="property_description">Name of the trace file.</p><p class="property_name">fileid<span class="property_type">&lt;String&gt;</span></p><p class="property_description">ID for the trace file name for uniqueness. Should be used only with -name option.</p><p class="property_name">filter<span class="property_type">&lt;String&gt;</span></p><p class="property_description">Filter expression for nstrace. Maximum length of filter is 255 and it can be of following format:
+     &lt;expression&gt; [&lt;relop&gt; &lt;expression&gt;]
+
+     &lt;relop&gt; = ( &amp;&amp; | || )
+
+     nstrace supports two types of filter expressions:
+
+     Classic Expressions:
+
+     &lt;expression&gt; = the expression string in the format:
+     &lt;qualifier&gt; &lt;operator&gt; &lt;qualifier-value&gt;
+
+     &lt;qualifier&gt; = SOURCEIP.
+     &lt;qualifier-value&gt; = A valid IP address
+     &lt;qualifier&gt; = SOURCEPORT.
+     &lt;qualifier-value&gt; = A valid port number.
+     &lt;qualifier&gt; = DESTIP.
+     &lt;qualifier-value&gt; = A valid IP address.
+     &lt;qualifier&gt; = DESTPORT.
+     &lt;qualifier-value&gt; = A valid port number.
+     &lt;qualifier&gt; = IP.
+     &lt;qualifier-value&gt; = A valid IP address.
+     &lt;qualifier&gt; = PORT.
+     &lt;qualifier-value&gt; = A valid port number.
+     &lt;qualifier&gt; = SVCNAME.
+     &lt;qualifier-value&gt; = The name of a service.
+     &lt;qualifier&gt; = VSVRNAME.
+     &lt;qualifier-value&gt; = The name of a vserver.
+     &lt;qualifier&gt; = CONNID
+     &lt;qualifier-value&gt; = A valid PCB dev number.
+     &lt;qualifier&gt; = VLAN
+     &lt;qualifier-value&gt; = A valid VLAN ID.
+     &lt;qualifier&gt; = INTF
+     &lt;qualifier-value&gt; = A valid interface id in the form of x/y 
+                 (n/x/y in case of cluster interface).
+
+     &lt;operator&gt; = ( == | eq | != | neq | &gt; | gt
+     | &lt; | lt | &gt;= | ge | &lt;= | le | BETWEEN )
+     eg: start nstrace -filter &quot;SOURCEIP == 10.102.34.201 || (SVCNAME != s1 &amp;&amp; SOURCEPORT &gt; 80)&quot;
+     The filter expression should be given in double quotes.
+     
+     Default Expressions:
+
+     &lt;expression&gt; =:
+     CONNECTION.&lt;qualifier&gt;.&lt;qualifier-method&gt;.(&lt;qualifier-value&gt;)
+
+     &lt;qualifier&gt; = SRCIP
+     &lt;qualifier-method&gt; = [ EQ | NE ]
+     &lt;qualifier-value&gt;  = A valid IPv4 address.
+     example = CONNECTION.SRCIP.EQ(127.0.0.1)
+
+     &lt;qualifier&gt; = DSTIP
+     &lt;qualifier-method&gt; = [ EQ | NE ]
+     &lt;qualifier-value&gt;  = A valid IPv4 address.
+     example = CONNECTION.DSTIP.EQ(127.0.0.1)
+
+     &lt;qualifier&gt; = IP
+     &lt;qualifier-method&gt; = [ EQ | NE ]
+     &lt;qualifier-value&gt;  = A valid IPv4 address.
+     example = CONNECTION.IP.EQ(127.0.0.1)
+
+     &lt;qualifier&gt; = SRCIPv6
+     &lt;qualifier-method&gt; = [ EQ | NE ]
+     &lt;qualifier-value&gt;  = A valid IPv6 address.
+     example = CONNECTION.SRCIPv6.EQ(2001:db8:0:0:1::1)
+
+     &lt;qualifier&gt; = DSTIPv6
+     &lt;qualifier-method&gt; = [ EQ | NE ]
+     &lt;qualifier-value&gt;  = A valid IPv6 address.
+     example = CONNECTION.DSTIPv6.EQ(2001:db8:0:0:1::1)
+
+     &lt;qualifier&gt; = IPv6
+     &lt;qualifier-method&gt; = [ EQ | NE ]
+     &lt;qualifier-value&gt;  = A valid IPv6 address.
+     example = CONNECTION.IPv6.EQ(2001:db8:0:0:1::1)
+
+     &lt;qualifier&gt; = SRCPORT
+     &lt;qualifier-method&gt; = [ EQ | NE | GT | GE | LT | LE
+                         | BETWEEN ]
+     &lt;qualifier-value&gt;  = A valid port number.
+     example = CONNECTION.SRCPORT.EQ(80)
+
+     &lt;qualifier&gt; = DSTPORT
+     &lt;qualifier-method&gt; = [ EQ | NE | GT | GE | LT | LE
+                         | BETWEEN ]
+     &lt;qualifier-value&gt;  = A valid port number.
+     example = CONNECTION.DSTPORT.EQ(80)
+
+     &lt;qualifier&gt; = PORT
+     &lt;qualifier-method&gt; = [ EQ | NE | GT | GE | LT | LE
+                         | BETWEEN ]
+     &lt;qualifier-value&gt;  = A valid port number.
+     example = CONNECTION.PORT.EQ(80)
+
+     &lt;qualifier&gt; = VLANID
+     &lt;qualifier-method&gt; = [ EQ | NE | GT | GE | LT | LE
+                         | BETWEEN ]
+     &lt;qualifier-value&gt;  = A valid VLAN ID.
+     example = CONNECTION.VLANID.EQ(0)
+
+     &lt;qualifier&gt; = CONNID
+     &lt;qualifier-method&gt; = [ EQ | NE | GT | GE | LT | LE
+                         | BETWEEN ]
+     &lt;qualifier-value&gt;  = A valid PCB dev number.
+     example = CONNECTION.CONNID.EQ(0)
+
+     &lt;qualifier&gt; = PPEID
+     &lt;qualifier-method&gt; = [ EQ | NE | GT | GE | LT | LE
+                         | BETWEEN ]
+     &lt;qualifier-value&gt;  = A valid core ID.
+       example = CONNECTION.PPEID.EQ(0)    
+
+     &lt;qualifier&gt; = SVCNAME
+     &lt;qualifier-method&gt; = [ EQ | NE | CONTAINS | STARTSWITH 
+                         | ENDSWITH ] 
+     &lt;qualifier-value&gt;  = A valid text string.
+     example = CONNECTION.SVCNAME.EQ(&quot;name&quot;)
+
+     &lt;qualifier&gt; = LB_VSERVER.NAME
+     &lt;qualifier-method&gt; = [ EQ | NE | CONTAINS | STARTSWITH
+                        | ENDSWITH ]
+     &lt;qualifier-value&gt;  = LB vserver name.
+     example = CONNECTION.LB_VSERVER.NAME.EQ(&quot;name&quot;)
+
+     &lt;qualifier&gt; = CS_VSERVER.NAME
+     &lt;qualifier-method&gt; = [ EQ | NE | CONTAINS | STARTSWITH
+                        | ENDSWITH ]
+     &lt;qualifier-value&gt;  = CS vserver name.
+     example = CONNECTION.CS_VSERVER.NAME.EQ(&quot;name&quot;)
+
+     &lt;qualifier&gt; = INTF
+     &lt;qualifier-method&gt; = [ EQ | NE ]
+     &lt;qualifier-value&gt;  =  A valid interface id in the
+                    form of x/y.
+     example = CONNECTION.INTF.EQ(&quot;x/y&quot;)
+
+     &lt;qualifier&gt; = SERVICE_TYPE
+     &lt;qualifier-method&gt; = [ EQ | NE ]
+     &lt;qualifier-value&gt;  = ( SVC_HTTP | FTP | TCP | UDP | SSL |
+        SSL_BRIDGE | SSL_TCP | NNTP | RPCSVR | RPCSVRS |
+        RPCCLNT | SVC_DNS | ADNS | SNMP | RTSP | DHCPRA | ANY|
+        MONITOR | MONITOR_UDP | MONITOR_PING | SIP_UDP |
+        SVC_MYSQL | SVC_MSSQL | SERVICE_UNKNOWN )
+     example = CONNECTION.SERVICE_TYPE.EQ(ANY)
+
+     &lt;qualifier&gt; = TRAFFIC_DOMAIN_ID
+     &lt;qualifier-method&gt; = [ EQ | NE | GT | GE | LT | LE
+                         | BETWEEN ]
+     &lt;qualifier-value&gt;  = A valid traffic domain ID.
+     example = CONNECTION.TRAFFIC_DOMAIN_ID.EQ(0)
+
+     eg: start nstrace -filter &quot;CONNECTION.SRCIP.EQ(127.0.0.1) || (CONNECTION.SVCNAME.NE(&quot;s1&quot;) &amp;&amp; CONNECTION.SRCPORT.EQ(80))&quot;
+     The filter expression should be given in double quotes. 
+
+common use cases:
+
+Trace capturing full sized traffic from/to ip 10.102.44.111, excluding loopback traffic
+start nstrace -size 0 -filter &quot;CONNECTION.IP.NE(127.0.0.1) &amp;&amp; CONNECTION.IP.EQ(10.102.44.111)&quot;
+
+Trace capturing all traffic to (terminating at) port 80 or 443 
+start nstrace -size 0 -filter &quot;CONNECTION.DSTPORT.EQ(443) || CONNECTION.DSTPORT.EQ(80)&quot;
+
+Trace capturing all backend traffic specific to service service1 along with corresponding client side traffic
+start nstrace -size 0 -filter &quot;CONNECTION.SVCNAME.EQ(&quot;service1&quot;)&quot; -link ENABLED
+
+Trace capturing all traffic through NS interface 1/1
+start nstrace -filter &quot;CONNECTION.INTF.EQ(&quot;1/1&quot;)&quot;
+
+Trace capturing all traffic specific through vlan 2
+start nstrace -filter &quot;CONNECTION.VLANID.EQ(2)&quot;
+
+Trace capturing all frontend (client side) traffic specific to lb vserver vserver1 along with corresponding server side traffic
+start nstrace -size 0 -filter &quot;CONNECTION.LB_VSERVER.NAME.EQ(&quot;vserver1&quot;)&quot; -link ENABLED .</p><p class="property_name">link<span class="property_type">&lt;String&gt;</span></p><p class="property_description">Includes filtered connection&#39;s peer traffic.<br/>Default value: DISABLED<br/>Possible values = ENABLED, DISABLED</p><p class="property_name">nodes<span class="property_type">&lt;Double[]&gt;</span></p><p class="property_description">Nodes on which tracing is started.
+<br/>Minimum value =  0<br/>Maximum value =  32</p><p class="property_name">doruntimemerge<span class="property_type">&lt;String&gt;</span></p><p class="property_description">Enable or disable runtime merge.<br/>Default value: ENABLED<br/>Possible values = ENABLED, DISABLED</p><p class="property_name">doruntimecleanup<span class="property_type">&lt;String&gt;</span></p><p class="property_description">Enable or disable runtime temp file cleanup.<br/>Default value: ENABLED<br/>Possible values = ENABLED, DISABLED</p><p class="property_name">tracebuffers<span class="property_type">&lt;Double&gt;</span></p><p class="property_description">Number of 16KB trace buffers.<br/>Default value: 5000<br/>Minimum value =  1000</p><p class="property_name">skiprpc<span class="property_type">&lt;String&gt;</span></p><p class="property_description">skip RPC packets.<br/>Default value: DISABLED<br/>Possible values = ENABLED, DISABLED</p><p class="property_name">inmemorytrace<span class="property_type">&lt;String&gt;</span></p><p class="property_description">Logs packets in appliance&#39;s memory and dumps the trace file on stopping the nstrace operation.<br/>Default value: DISABLED<br/>Possible values = ENABLED, DISABLED</p><p class="heading">Read only properties</p><p class="property_name">state<span class="property_type">&lt;String&gt;</span></p><p class="property_description">Current running state of trace.<br/>Default value: 0<br/>Possible values = RUNNING, STOPPED</p><p class="property_name">scope<span class="property_type">&lt;String&gt;</span></p><p class="property_description">Scope of started trace, local or cluster level.<br/>Default value: 0<br/>Possible values = CLUSTER, LOCAL</p><p class="property_name">tracelocation<span class="property_type">&lt;String&gt;</span></p><p class="property_description">Directory where current trace files are saved.</p>
+<p class="heading">Operations</p><p class="property_name">NOTE: In request payload, Mandatory parameters are marked red and bold.<br /><br />The following parameters can be used in the nitro request :</p><p class="property_name">warning<span class="property_type">&nbsp;&nbsp;&nbsp;&lt;String_value&gt;</span></p><p class="property_description">Specify to get warnings in nitro response. If this field is set to YES, warning message will be sent in 'message' field and 'WARNING' value is set in severity field of the response in case there is a warning.<br />Other possible values for severity are ERROR, INFO and NONE.<br />Default value: NO<br />Possible values = YES, NO</p><p class="property_name">onerror<span class="property_type">&nbsp;&nbsp;&nbsp;&lt;String_value&gt;</span></p><p class="property_description"> Use this parameter to set the onerror status for nitro request. Applicable only for bulk requests.<br />Default value: EXIT<br />Possible values = EXIT, CONTINUE, ROLLBACK</p><a href="#get" class="operation">get (all)</a><p class="heading"><a name="get">get (all)</a></p><p class="key">URL:<span class="url_value">http://&lt;NSIP&gt;/nitro/v1/config/nstrace</span></p><p class="key">Query-parameters:</p><p class="key">HTTP Method:<span class="value">GET</span></p><p class="key">Response Payload:<span class="value">JSON</span></p><p class="payload">{ "errorcode": 0, "message": "Done", "severity": &lt;String_value&gt;, "nstrace": [ {<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"state":&lt;String_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"scope":&lt;String_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"tracelocation":&lt;String_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"nf":&lt;Double_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"time":&lt;Double_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"size":&lt;Double_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"mode":&lt;String[]_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"tcpdump":&lt;String_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"pernic":&lt;String_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"filename":&lt;String_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"fileid":&lt;String_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"filter":&lt;String_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"link":&lt;String_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"nodes":&lt;Double[]_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"doruntimemerge":&lt;String_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"doruntimecleanup":&lt;String_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"tracebuffers":&lt;Double_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"skiprpc":&lt;String_value&gt;,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"inmemorytrace":&lt;String_value&gt;<br/><br/>}]}</p></body></html>

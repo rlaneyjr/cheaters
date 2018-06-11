@@ -1,0 +1,558 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Speed &mdash; The Hitchhiker&#39;s Guide to Python</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="The Hitchhiker&#39;s Guide to Python" href="../index.html" />
+    <link rel="next" title="Scientific Applications" href="scientific.html" />
+    <link rel="prev" title="Continuous Integration" href="ci.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="speed">
+<h1>Speed<a class="headerlink" href="#speed" title="Permalink to this headline">¶</a></h1>
+<p>CPython, the most commonly used implementation of Python, is slow for CPU bound
+tasks. <a class="reference external" href="http://pypy.org">PyPy</a> is fast.</p>
+<p>Using a slightly modified version of <a class="reference external" href="http://www.dabeaz.com/GIL/gilvis/measure2.py">David Beazley&#8217;s</a> CPU bound test code
+(added loop for multiple tests), you can see the difference between CPython
+and PyPy&#8217;s processing.</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> PyPy
+<span class="gp">$</span> ./pypy -V
+<span class="go">Python 2.7.1 (7773f8fc4223, Nov 18 2011, 18:47:10)</span>
+<span class="go">[PyPy 1.7.0 with GCC 4.4.3]</span>
+<span class="gp">$</span> ./pypy measure2.py
+<span class="go">0.0683999061584</span>
+<span class="go">0.0483210086823</span>
+<span class="go">0.0388588905334</span>
+<span class="go">0.0440690517426</span>
+<span class="go">0.0695300102234</span>
+</pre></div>
+</div>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> CPython
+<span class="gp">$</span> ./python -V
+<span class="go">Python 2.7.1</span>
+<span class="gp">$</span> ./python measure2.py
+<span class="go">1.06774401665</span>
+<span class="go">1.45412397385</span>
+<span class="go">1.51485204697</span>
+<span class="go">1.54693889618</span>
+<span class="go">1.60109114647</span>
+</pre></div>
+</div>
+<div class="section" id="context">
+<h2>Context<a class="headerlink" href="#context" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="the-gil">
+<h3>The GIL<a class="headerlink" href="#the-gil" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="http://wiki.python.org/moin/GlobalInterpreterLock">The GIL</a> (Global Interpreter Lock) is how Python allows multiple threads to
+operate at the same time. Python&#8217;s memory management isn&#8217;t entirely thread-safe,
+so the GIL is required to prevent multiple threads from running the same
+Python code at once.</p>
+<p>David Beazley has a great <a class="reference external" href="http://www.dabeaz.com/python/UnderstandingGIL.pdf">guide</a> on how the GIL operates. He also covers the
+<a class="reference external" href="http://www.dabeaz.com/python/NewGIL.pdf">new GIL</a> in Python 3.2. His results show that maximizing performance in a
+Python application requires a strong understanding of the GIL, how it affects
+your specific application, how many cores you have, and where your application
+bottlenecks are.</p>
+</div>
+<div class="section" id="c-extensions">
+<h3>C Extensions<a class="headerlink" href="#c-extensions" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="id1">
+<h3>The GIL<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="http://docs.python.org/c-api/init.html#threads">Special care</a> must be taken when writing C extensions to make sure you
+register your threads with the interpreter.</p>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>C Extensions<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="cython">
+<h3>Cython<a class="headerlink" href="#cython" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="http://cython.org/">Cython</a> implements a superset of the Python language
+with which you are able to write C and C++ modules for Python. Cython also
+allows you to call functions from compiled C libraries. Using Cython allows
+you to take advantage of Python&#8217;s strong typing of variables and operations.</p>
+<p>Here&#8217;s an example of strong typing with Cython:</p>
+<div class="highlight-cython"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">primes</span><span class="p">(</span><span class="nb">int</span> <span class="n">kmax</span><span class="p">):</span>
+<span class="sd">&quot;&quot;&quot;Calculation of prime numbers with additional</span>
+<span class="sd">Cython keywords&quot;&quot;&quot;</span>
+
+    <span class="k">cdef</span> <span class="kt">int</span> <span class="nf">n</span><span class="p">,</span> <span class="nf">k</span><span class="p">,</span> <span class="nf">i</span>
+    <span class="k">cdef</span> <span class="kt">int</span> <span class="kt">p</span>[1000]
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">kmax</span> <span class="o">&gt;</span> <span class="mf">1000</span><span class="p">:</span>
+        <span class="n">kmax</span> <span class="o">=</span> <span class="mf">1000</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="mf">0</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="mf">2</span>
+    <span class="k">while</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">kmax</span><span class="p">:</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mf">0</span>
+        <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">k</span> <span class="ow">and</span> <span class="n">n</span> <span class="o">%</span> <span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="mf">0</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mf">1</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">k</span><span class="p">:</span>
+            <span class="n">p</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">n</span>
+            <span class="n">k</span> <span class="o">=</span> <span class="n">k</span> <span class="o">+</span> <span class="mf">1</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="o">+</span> <span class="mf">1</span>
+    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</div>
+<p>This implementation of an algorithm to find prime numbers has some additional
+keywords compared to the next one, which is implemented in pure Python:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">primes</span><span class="p">(</span><span class="n">kmax</span><span class="p">):</span>
+<span class="sd">&quot;&quot;&quot;Calculation of prime numbers in standard Python syntax&quot;&quot;&quot;</span>
+
+    <span class="n">p</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">kmax</span> <span class="o">&gt;</span> <span class="mi">1000</span><span class="p">:</span>
+        <span class="n">kmax</span> <span class="o">=</span> <span class="mi">1000</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="k">while</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">kmax</span><span class="p">:</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">k</span> <span class="ow">and</span> <span class="n">n</span> <span class="o">%</span> <span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">k</span><span class="p">:</span>
+            <span class="n">p</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">n</span>
+            <span class="n">k</span> <span class="o">=</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</div>
+<p>Notice that in the Cython version you declare integers and integer arrays
+to be compiled into C types while also creating a Python list:</p>
+<div class="highlight-cython"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">primes</span><span class="p">(</span><span class="nb">int</span> <span class="n">kmax</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Calculation of prime numbers with additional</span>
+<span class="sd">    Cython keywords&quot;&quot;&quot;</span>
+
+    <span class="k">cdef</span> <span class="kt">int</span> <span class="nf">n</span><span class="p">,</span> <span class="nf">k</span><span class="p">,</span> <span class="nf">i</span>
+    <span class="k">cdef</span> <span class="kt">int</span> <span class="kt">p</span>[1000]
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">primes</span><span class="p">(</span><span class="n">kmax</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Calculation of prime numbers in standard Python syntax&quot;&quot;&quot;</span>
+
+    <span class="n">p</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+</pre></div>
+</div>
+<p>What is the difference? In the upper Cython version you can see the
+declaration of the variable types and the integer array in a similar way as
+in standard C. For example <cite>cdef int n,k,i</cite> in line 3. This additional type
+declaration (i.e. integer) allows the Cython compiler to generate more
+efficient C code from the second version. While standard Python code is saved
+in <code class="file docutils literal"><span class="pre">*.py</span></code> files, Cython code is saved in <code class="file docutils literal"><span class="pre">*.pyx</span></code> files.</p>
+<p>What&#8217;s the difference in speed? Let&#8217;s try it!</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="c1">#activate pyx compiler</span>
+<span class="kn">import</span> <span class="nn">pyximport</span>
+<span class="n">pyximport</span><span class="o">.</span><span class="n">install</span><span class="p">()</span>
+<span class="c1">#primes implemented with Cython</span>
+<span class="kn">import</span> <span class="nn">primesCy</span>
+<span class="c1">#primes implemented with Python</span>
+<span class="kn">import</span> <span class="nn">primes</span>
+
+<span class="k">print</span> <span class="s2">&quot;Cython:&quot;</span>
+<span class="n">t1</span><span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="k">print</span> <span class="n">primesCy</span><span class="o">.</span><span class="n">primes</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>
+<span class="n">t2</span><span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="k">print</span> <span class="s2">&quot;Cython time: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="n">t2</span><span class="o">-</span><span class="n">t1</span><span class="p">)</span>
+<span class="k">print</span> <span class="s2">&quot;&quot;</span>
+<span class="k">print</span> <span class="s2">&quot;Python&quot;</span>
+<span class="n">t1</span><span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="k">print</span> <span class="n">primes</span><span class="o">.</span><span class="n">primes</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>
+<span class="n">t2</span><span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="k">print</span> <span class="s2">&quot;Python time: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="n">t2</span><span class="o">-</span><span class="n">t1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>These lines both need a remark:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyximport</span>
+<span class="n">pyximport</span><span class="o">.</span><span class="n">install</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The <cite>pyximport</cite> module allows you to import <code class="file docutils literal"><span class="pre">*.pyx</span></code> files (e.g.,
+<code class="file docutils literal"><span class="pre">primesCy.pyx</span></code>) with the Cython-compiled version of the <cite>primes</cite>
+function. The <cite>pyximport.install()</cite> command allows the Python interpreter to
+start the Cython compiler directly to generate C-code, which is automatically
+compiled to a <code class="file docutils literal"><span class="pre">*.so</span></code> C-library. Cython is then able to import this
+library for you in your Python code, easily and efficiently. With the
+<cite>time.time()</cite> function you are able to compare the time between these 2
+different calls to find 500 prime numbers. On a standard notebook (dual core
+AMD E-450 1.6 GHz), the measured values are:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">Cython time: 0.0054 seconds</span>
+
+<span class="go">Python time: 0.0566 seconds</span>
+</pre></div>
+</div>
+<p>And here the output of an embedded <a class="reference external" href="http://beagleboard.org/Products/BeagleBone">ARM beaglebone</a> machine:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">Cython time: 0.0196 seconds</span>
+
+<span class="go">Python time: 0.3302 seconds</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="pyrex">
+<h3>Pyrex<a class="headerlink" href="#pyrex" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="shedskin">
+<h3>Shedskin?<a class="headerlink" href="#shedskin" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="numba">
+<h3>Numba<a class="headerlink" href="#numba" title="Permalink to this headline">¶</a></h3>
+<div class="admonition-todo admonition" id="index-0">
+<p class="first admonition-title">Todo</p>
+<p class="last">Write about Numba and the autojit compiler for NumPy</p>
+</div>
+</div>
+</div>
+<div class="section" id="concurrency">
+<h2>Concurrency<a class="headerlink" href="#concurrency" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="concurrent-futures">
+<h3>Concurrent.futures<a class="headerlink" href="#concurrent-futures" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference external" href="https://docs.python.org/3/library/concurrent.futures.html">concurrent.futures</a> module is a module in the standard library that
+provides a &#8220;high-level interface for asynchronously executing callables&#8221;. It
+abstracts away a lot of the more complicated details about using multiple
+threads or processes for concurrency, and allows the user to focus on
+accomplishing the task at hand.</p>
+<p>The <a class="reference external" href="https://docs.python.org/3/library/concurrent.futures.html">concurrent.futures</a> module exposes two main classes, the
+<cite>ThreadPoolExecutor</cite> and the <cite>ProcessPoolExecutor</cite>. The ThreadPoolExecutor
+will create a pool of worker threads that a user can submit jobs to. These jobs
+will then be executed in another thread when the next worker thread becomes
+available.</p>
+<p>The ProcessPoolExecutor works in the same way, except instead of using multiple
+threads for its workers, it will use multiple processes. This makes it possible
+to side-step the GIL, however because of the way things are passed to worker
+processes, only picklable objects can be executed and returned.</p>
+<p>Because of the way the GIL works, a good rule of thumb is to use a
+ThreadPoolExecutor when the task being executed involves a lot of blocking
+(i.e. making requests over the network) and to use a ProcessPoolExecutor
+executor when the task is computationally expensive.</p>
+<p>There are two main ways of executing things in parallel using the two
+Executors. One way is with the <cite>map(func, iterables)</cite> method. This works
+almost exactly like the builtin <cite>map()</cite> function, except it will execute
+everything in parallel. :</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">concurrent.futures</span> <span class="kn">import</span> <span class="n">ThreadPoolExecutor</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="k">def</span> <span class="nf">get_webpage</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="n">page</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">page</span>
+
+<span class="n">pool</span> <span class="o">=</span> <span class="n">ThreadPoolExecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="n">my_urls</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;http://google.com/&#39;</span><span class="p">]</span><span class="o">*</span><span class="mi">10</span>  <span class="c1"># Create a list of urls</span>
+
+<span class="k">for</span> <span class="n">page</span> <span class="ow">in</span> <span class="n">pool</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">get_webpage</span><span class="p">,</span> <span class="n">my_urls</span><span class="p">):</span>
+    <span class="c1"># Do something with the result</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For even more control, the <cite>submit(func, *args, **kwargs)</cite> method will schedule
+a callable to be executed ( as <cite>func(*args, **kwargs)</cite>) and returns a <a class="reference external" href="https://docs.python.org/3/library/concurrent.futures.html#concurrent.futures.Future">Future</a>
+object that represents the execution of the callable.</p>
+<p>The Future object provides various methods that can be used to check on the
+progress of the scheduled callable. These include:</p>
+<dl class="docutils">
+<dt>cancel()</dt>
+<dd>Attempt to cancel the call.</dd>
+<dt>cancelled()</dt>
+<dd>Return True if the call was successfully cancelled.</dd>
+<dt>running()</dt>
+<dd>Return True if the call is currently being executed and cannot be
+cancelled.</dd>
+<dt>done()</dt>
+<dd>Return True if the call was successfully cancelled or finished running.</dd>
+<dt>result()</dt>
+<dd>Return the value returned by the call. Note that this call will block until
+the scheduled callable returns by default.</dd>
+<dt>exception()</dt>
+<dd>Return the exception raised by the call. If no exception was raised then
+this returns <cite>None</cite>. Note that this will block just like <cite>result()</cite>.</dd>
+<dt>add_done_callback(fn)</dt>
+<dd>Attach a callback function that will be executed (as <cite>fn(future)</cite>) when the
+scheduled callable returns.</dd>
+</dl>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">concurrent.futures</span> <span class="kn">import</span> <span class="n">ProcessPoolExecutor</span><span class="p">,</span> <span class="n">as_completed</span>
+
+<span class="k">def</span> <span class="nf">is_prime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">n</span><span class="p">,</span> <span class="bp">False</span>
+
+    <span class="n">sqrt_n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">sqrt_n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">n</span><span class="p">,</span> <span class="bp">False</span>
+    <span class="k">return</span> <span class="n">n</span><span class="p">,</span> <span class="bp">True</span>
+
+<span class="n">PRIMES</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="mi">112272535095293</span><span class="p">,</span>
+    <span class="mi">112582705942171</span><span class="p">,</span>
+    <span class="mi">112272535095293</span><span class="p">,</span>
+    <span class="mi">115280095190773</span><span class="p">,</span>
+    <span class="mi">115797848077099</span><span class="p">,</span>
+    <span class="mi">1099726899285419</span><span class="p">]</span>
+
+<span class="n">futures</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">with</span> <span class="n">ProcessPoolExecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span> <span class="k">as</span> <span class="n">pool</span><span class="p">:</span>
+    <span class="c1"># Schedule the ProcessPoolExecutor to check if a number is prime</span>
+    <span class="c1"># and add the returned Future to our list of futures</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">PRIMES</span><span class="p">:</span>
+        <span class="n">fut</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">is_prime</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+        <span class="n">futures</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fut</span><span class="p">)</span>
+
+<span class="c1"># As the jobs are completed, print out the results</span>
+<span class="k">for</span> <span class="n">number</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">as_completed</span><span class="p">(</span><span class="n">futures</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">result</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;{} is prime&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">number</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;{} is not prime&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">number</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>The <a class="reference external" href="https://docs.python.org/3/library/concurrent.futures.html">concurrent.futures</a> module contains two helper functions for working with
+Futures. The <cite>as_completed(futures)</cite> function returns an iterator over the list
+of futures, yielding the futures as they complete.</p>
+<p>The <cite>wait(futures)</cite> function will simply block until all futures in the list of
+futures provided have completed.</p>
+<p>For more information, on using the <a class="reference external" href="https://docs.python.org/3/library/concurrent.futures.html">concurrent.futures</a> module, consult the
+official documentation.</p>
+</div>
+<div class="section" id="threading">
+<h3>Threading<a class="headerlink" href="#threading" title="Permalink to this headline">¶</a></h3>
+<p>The standard library comes with a <a class="reference external" href="https://docs.python.org/3/library/threading.html">threading</a> module that allows a user to
+work with multiple threads manually.</p>
+<p>Running a function in another thread is as simple as passing a callable and
+it&#8217;s arguments to <cite>Thread</cite>&#8216;s constructor and then calling <cite>start()</cite>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">Thread</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="k">def</span> <span class="nf">get_webpage</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="n">page</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">page</span>
+
+<span class="n">some_thread</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span><span class="n">get_webpage</span><span class="p">,</span> <span class="s1">&#39;http://google.com/&#39;</span><span class="p">)</span>
+<span class="n">some_thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>To wait until the thread has terminated, call <cite>join()</cite>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">some_thread</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>After calling <cite>join()</cite>, it is always a good idea to check whether the thread is
+still alive (because the join call timed out):</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">some_thread</span><span class="o">.</span><span class="n">is_alive</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;join() must have timed out.&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Our thread has terminated.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Because multiple threads have access to the same section of memory, sometimes
+there might be situations where two or more threads are trying to write to the
+same resource at the same time or where the output is dependent on the sequence
+or timing of certain events. This is called a <a class="reference external" href="https://en.wikipedia.org/wiki/Race_condition">data race</a> or race condition.
+When this happens, the output will be garbled or you may encounter problems
+which are difficult to debug. A good example is this <a class="reference external" href="http://stackoverflow.com/questions/26688424/python-threads-are-printing-at-the-same-time-messing-up-the-text-output">stackoverflow post</a>.</p>
+<p>The way this can be avoided is by using a <a href="#id7"><span class="problematic" id="id8">`Lock`_</span></a> that each thread needs to
+acquire before writing to a shared resource. Locks can be acquired and released
+through either the contextmanager protocol (<cite>with</cite> statement), or by using
+<cite>acquire()</cite> and <cite>release()</cite> directly. Here is a (rather contrived) example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">Lock</span><span class="p">,</span> <span class="n">Thread</span>
+
+<span class="n">file_lock</span> <span class="o">=</span> <span class="n">Lock</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">log</span><span class="p">(</span><span class="n">msg</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">file_lock</span><span class="p">:</span>
+        <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;website_changes.log&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">changes</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">monitor_website</span><span class="p">(</span><span class="n">some_website</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Monitor a website and then if there are any changes,</span>
+<span class="sd">    log them to disk.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">changes</span> <span class="o">=</span> <span class="n">check_for_changes</span><span class="p">(</span><span class="n">some_website</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">changes</span><span class="p">:</span>
+            <span class="n">log</span><span class="p">(</span><span class="n">changes</span><span class="p">)</span>
+
+<span class="n">websites</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;http://google.com/&#39;</span><span class="p">,</span> <span class="o">...</span> <span class="p">]</span>
+<span class="k">for</span> <span class="n">website</span> <span class="ow">in</span> <span class="n">websites</span><span class="p">:</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span><span class="n">monitor_website</span><span class="p">,</span> <span class="n">website</span><span class="p">)</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Here, we have a bunch of threads checking for changes on a list of sites and
+whenever there are any changes, they attempt to write those changes to a file
+by calling <cite>log(changes)</cite>. When <cite>log()</cite> is called, it will wait to acquire
+the lock with <cite>with file_lock:</cite>. This ensures that at any one time, only one
+thread is writing to the file.</p>
+</div>
+<div class="section" id="spawning-processes">
+<h3>Spawning Processes<a class="headerlink" href="#spawning-processes" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="multiprocessing">
+<h3>Multiprocessing<a class="headerlink" href="#multiprocessing" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><p class="logo">
+  <a href="../index.html">
+    <img class="logo" src="../_static/python-guide-logo.png" title="The Hitchhiker's Guide to Python"/>
+  </a>
+</p>
+
+<p>
+  This opinionated guide exists to provide both novice and expert Python developers a best practice handbook to the installation, configuration, and usage of Python on a daily basis.
+</p>
+
+
+<h3>Get Updates</h3>
+<p>Receive updates on new releases and upcoming projects.</p>
+
+<p><iframe src="http://ghbtns.com/github-btn.html?user=kennethreitz&type=follow&count=false"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200" height="20"></iframe></p>
+
+<p><a href="https://twitter.com/kennethreitz" class="twitter-follow-button" data-show-count="false">Follow @kennethreitz</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></p>
+
+<p><a href="http://tinyletter.com/kennethreitz">Join Mailing List</a>.</p>
+
+<h3>O'Reilly Book</h3>
+
+<p>This guide is now available in tangible book form!</p>
+
+<a href="https://www.amazon.com/Hitchhikers-Guide-Python-Practices-Development/dp/1491933178/ref=as_li_ss_il?ie=UTF8&linkCode=li2&tag=bookforkind-20&linkId=804806ebdacaf3b56567347f3afbdbca" target="_blank"><img border="0" src="https://ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=1491933178&Format=_SL160_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag=bookforkind-20" ></a><img src="//ir-na.amazon-adsystem.com/e/ir?t=bookforkind-20&l=li2&o=1&a=1491933178" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+
+<p>All proceeds are being directly donated to the <a href="https://djangogirls.org">DjangoGirls</a> organization.</p>
+
+<h3>Other Projects</h3>
+
+<p>More <a href="http://kennethreitz.org/">Kenneth Reitz</a> projects:</p>
+<ul>
+    <li><a href="http://pep8.org/">pep8.org</a></li>
+    <li><a href="http://python-requests.org">Requests: HTTP for Humans</a></li>
+    <li><a href="https://github.com/kennethreitz/records">Records: SQL for Humans</a></li>
+    <li><a href="http://www.git-legit.org">Legit: Git for Humans</a></li>
+    <li><a href="http://docs.python-tablib.org/en/latest/">Tablib: Tabular Datasets</a></li>
+    <li><a href="http://markdownplease.com">Markdown, Please!</a></li>
+</ul>
+
+<h3>Translations</h3>
+<ul>
+  <li><a href="http://docs.python-guide.org/en/latest/">English</a></li>
+  <li><a href="https://python-guide-fr.readthedocs.io/fr/latest/">French</a></li>
+  <li><a href="https://pythonguidecn.readthedocs.io/zh/latest/">Chinese</a></li>
+  <li><a href="https://python-guide-ja.readthedocs.io/en/latest/">Japanese</a></li>
+  <li><a href="https://python-guide-kr.readthedocs.io/ko/latest/">Korean</a></li>
+</ul>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Speed</a><ul>
+<li><a class="reference internal" href="#context">Context</a><ul>
+<li><a class="reference internal" href="#the-gil">The GIL</a></li>
+<li><a class="reference internal" href="#c-extensions">C Extensions</a></li>
+<li><a class="reference internal" href="#id1">The GIL</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id2">C Extensions</a><ul>
+<li><a class="reference internal" href="#cython">Cython</a></li>
+<li><a class="reference internal" href="#pyrex">Pyrex</a></li>
+<li><a class="reference internal" href="#shedskin">Shedskin?</a></li>
+<li><a class="reference internal" href="#numba">Numba</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#concurrency">Concurrency</a><ul>
+<li><a class="reference internal" href="#concurrent-futures">Concurrent.futures</a></li>
+<li><a class="reference internal" href="#threading">Threading</a></li>
+<li><a class="reference internal" href="#spawning-processes">Spawning Processes</a></li>
+<li><a class="reference internal" href="#multiprocessing">Multiprocessing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="ci.html" title="previous chapter">Continuous Integration</a></li>
+      <li>Next: <a href="scientific.html" title="next chapter">Scientific Applications</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script><script type="text/javascript">
+  var _gauges = _gauges || [];
+  (function() {
+    var t   = document.createElement('script');
+    t.type  = 'text/javascript';
+    t.async = true;
+    t.id    = 'gauges-tracker';
+    t.setAttribute('data-site-id', '56ca79a64b2ffa7a470027ea');
+    t.setAttribute('data-track-path', 'https://track.gaug.es/track.gif');
+    t.src = 'https://d36ee2fcip1434.cloudfront.net/track.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(t, s);
+  })();
+</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016. A <a href="http://kennethreitz.com/pages/open-projects.html">Kenneth Reitz</a> Project. <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">CC BY-NC-SA 3.0</a>.
+      
+    </div>
+
+    
+    <a href="https://github.com/kennethreitz/python-guide" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

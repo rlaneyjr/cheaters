@@ -1,0 +1,244 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>Citrix NetScaler XML API User&#39;s Guide - Structure Definition</title>
+<link rel="stylesheet" type="text/css" href="help_ns.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body onload="initial()" class="ns_body">
+<div class="ns_content"><table cellpadding="0" cellspacing="0"><script type="text/javascript">
+function changeContext(id,lang,flag){
+	parent.banner.document.language.select.value = lang;
+	if( lang == "C" ){
+		if(flag == "1"){
+			showContent(cfirstcontent,id,lang);
+		}
+		else{
+			showContent(csecondcontent,id,lang);
+		}
+	}
+	if( lang == "Perl" ){
+		if(flag == "1"){
+			showContent(perlfirstcontent,id,lang);
+		}
+		else{
+			showContent(perlsecondcontent,id,lang);
+		}
+	}
+	if( lang == "Java" ){
+		if(flag == "1"){
+			showContent(javafirstcontent,id,lang);	
+		}
+		else{
+			showContent(javasecondcontent,id,lang);
+		}
+	}
+	if( lang == "C#" ){
+		if(flag == "1"){
+			showContent(csharpfirstcontent,id,lang);
+		}
+		else{
+			showContent(csharpsecondcontent,id,lang);
+		}
+	}
+	if( lang == "VB" ){
+		if(flag == "1"){
+			showContent(vbfirstcontent,id,lang);
+		}
+		else{
+			showContent(vbsecondcontent,id,lang);
+		}
+	}
+	if(flag == "1"){
+		showInside(lang,"0");
+	}
+	else{
+		showOutside(lang);
+	}
+}
+function showContent(content,id,lang){
+	if(ie4){
+	   showContentObj=document.all.id;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById(id);
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+  showLangSelect(lang);
+}
+function showInside(str,cond){
+	if(str == "C"){
+ 		var inside_content = csecondcontent;
+ 	}
+ 	if(str == "Perl"){
+ 		var inside_content = perlsecondcontent;
+ 	}
+ 	if(str == "Java"){
+ 		var inside_content = javasecondcontent;
+ 	}
+ 	if(str == "C#"){
+		var inside_content = csharpsecondcontent;
+ 	}
+ 	if(str == "VB"){
+		var inside_content = vbsecondcontent;
+ 	}
+	showContent(inside_content,'qiksearch_div1',str);
+ 	if ( cond == "1" ){
+ 		var page = 'apidoc/docs/getappflowparamResult.html#appflow_paramList';
+ 		document.location.href = page;
+ 	}
+}
+function showOutside(str){
+	if(str == "C" ){
+ 		var inside_content = cfirstcontent;
+ 	}
+ 	if(str == "Perl" ){
+ 		var inside_content = perlfirstcontent;
+ 	}
+ 	if(str == "Java" ){
+ 		var inside_content = javafirstcontent;
+ 	}
+ 	if(str == "C#" ){
+ 		var inside_content = csharpfirstcontent;
+ 	}
+ 	if(str == "VB" ){
+ 		var inside_content = vbfirstcontent;
+ 	}
+ 	showContent(inside_content,'qiksearch_div',str);
+}
+function initial(){
+	ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+	ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+	ns4=document.layers;
+	langSelected = parent.banner.document.language.select.value
+	var plink = parent.banner.document.language.plink.value
+	var my_array=plink.split("&");
+	var temp = my_array[0];
+ 	var grp = temp.split("@");
+	var cmd = my_array[1];
+	var regex = /^stat/i;
+	if( cmd.match(regex) != null ){
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex_stat.html\">Statistics</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getappflowparamResult");
+	}
+	else{
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex.htm\">Configuration</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getappflowparamResult");
+	}
+	if( langSelected == "C" ){
+ 		var content = cfirstcontent;
+	}
+	else if( langSelected == "Perl" ){
+		var content = perlfirstcontent;
+	}
+	else if( langSelected == "Java" ){
+		var content = javafirstcontent;
+	}
+	else if( langSelected == "C#" ){
+		var content = csharpfirstcontent;
+	}
+	else if( langSelected == "VB" ){
+		var content = vbfirstcontent;
+	}
+	else{
+		var content = cfirstcontent;
+		langSelected="C";
+	}
+	showContent(content,'qiksearch_div',langSelected);
+	showInside(langSelected,"0");
+}
+function showPLink(content){
+	if(ie4){
+	   showContentObj=document.all.progressive_link;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById("progressive_link");
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+}
+function showLangSelect(id){
+	   if(ie4)
+       {
+       	showObj=document.all.first_url;
+       	showObj1=document.all.second_url;
+       }
+       if(ns6)
+       {
+       	showObj=document.getElementById("first_url");
+       	showObj1=document.getElementById("second_url");
+       }
+       if( id == "C" ){
+       	newlink = "<b>C</b>";
+       	newlink1 = "<b>C</b>";
+       }
+       else{
+       	newlink = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C','1');\"><b>C</b></a>";
+       	newlink1 = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C','0');\"><b>C</b></a>";
+       }
+       if( id == "Perl" ){
+       	newlink = newlink + " | <b>Perl</b>";
+       	newlink1 = newlink1 + " | <b>Perl</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Perl','1');\"><b>Perl</b></a>";
+      	       newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Perl','0');\"><b>Perl</b></a>";
+       }
+       if( id == "Java" ){
+       	newlink = newlink + " | <b>Java</b>";
+       	newlink1 = newlink1 + " | <b>Java</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Java','1');\"><b>Java</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Java','0');\"><b>Java</b></a>";
+       }
+       if( id == "C#" ){
+       	newlink = newlink + " | <b>C#</b>";
+       	newlink1 = newlink1 + " | <b>C#</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C#','1');\"><b>C#</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C#','0');\"><b>C#</b></a>";
+       }
+       showObj.innerHTML = newlink;
+       showObj1.innerHTML = newlink1;
+}
+</script>
+<tr><td><div><div id="progressive_link"></div></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>getappflowparamResult Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>getappflowparamResult</b> structure defines the return type for getappflowparam API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="first_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+cfirstcontent = "<pre>struct getappflowparamResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; struct <a href=\'getappflowparamResult.html\#appflowparam\'>appflowparam</a> list[];<br> };<br></pre></td></tr></table></div>"
+perlfirstcontent = "<pre>$getappflowparamResult = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rc => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; message => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; List => \'@<a href=\'getappflowparamResult.html\#appflowparam\'>appflowparam</a>\',<br> };<br></pre></td></tr></table></div>"
+javafirstcontent = "<pre>class getappflowparamResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getappflowparamResult.html\#appflowparam\'>appflowparam</a>[] list;<br> };<br></pre></td></tr></table></div>"
+csharpfirstcontent = "<pre>class getappflowparamResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getappflowparamResult.html\#appflowparam\'>appflowparam</a>[] list;<br> };<br></pre></td></tr></table></div>"
+vbfirstcontent = "<pre>Public <b>Structure</b> getappflowparamResult <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rc As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public message As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public  appflowparamList() As  <a href=\'getappflowparamResult.html\#appflowparam\'>appflowparam</a><br> <b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rc</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, rc is 0 else rc > 0. Values above 0x8000 indicate Warnings.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>message</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, message is NULL else message contains <a href="errorlisting.html">Error/Warning</a> message.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>appflowparamList</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">List of appflowparams</div></td></tr><tr><td><br></td></tr><tr><td><div><a name="appflowparam"></a></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>appflowparam  Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>appflowparam</b> structure defines the actual return type values for getappflowparam API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="second_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div1" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+csecondcontent = "<pre>struct appflowparam {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int templaterefresh;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int appnamerefresh;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int flowrecordinterval;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int udppmtu;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * httpurl;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * aaausername;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * httpcookie;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * httpreferer;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * httpmethod;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * httphost;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * httpuseragent;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * clienttrafficonly;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * httpcontenttype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * httpauthorization;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * httpvia;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * httpxforwardedfor;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * httplocation;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * httpsetcookie;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * httpsetcookie2;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * connectionchaining;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * httpdomain;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * skipcacheredirectionhttptransaction;<br> };<br></pre></td></tr></table></div>"
+perlsecondcontent = "<pre>$appflowparam = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; templaterefresh => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; appnamerefresh => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; flowrecordinterval => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; udppmtu => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpurl => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; aaausername => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpcookie => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpreferer => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpmethod => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httphost => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpuseragent => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; clienttrafficonly => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpcontenttype => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpauthorization => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpvia => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpxforwardedfor => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httplocation => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpsetcookie => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpsetcookie2 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; connectionchaining => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpdomain => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; skipcacheredirectionhttptransaction => \'$\',<br> };<br></pre></td></tr></table></div>"
+javasecondcontent = "<pre>class appflowparam {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt templaterefresh;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt appnamerefresh;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt flowrecordinterval;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt udppmtu;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String httpurl;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String aaausername;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String httpcookie;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String httpreferer;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String httpmethod;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String httphost;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String httpuseragent;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String clienttrafficonly;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String httpcontenttype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String httpauthorization;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String httpvia;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String httpxforwardedfor;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String httplocation;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String httpsetcookie;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String httpsetcookie2;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String connectionchaining;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String httpdomain;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String skipcacheredirectionhttptransaction;<br> };<br></pre></td></tr></table></div>"
+csharpsecondcontent = "<pre>class appflowparam {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 templaterefresh;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 appnamerefresh;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 flowrecordinterval;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 udppmtu;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string httpurl;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string aaausername;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string httpcookie;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string httpreferer;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string httpmethod;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string httphost;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string httpuseragent;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string clienttrafficonly;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string httpcontenttype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string httpauthorization;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string httpvia;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string httpxforwardedfor;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string httplocation;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string httpsetcookie;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string httpsetcookie2;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string connectionchaining;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string httpdomain;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string skipcacheredirectionhttptransaction;<br> };<br></pre></td></tr></table></div>"
+vbsecondcontent = "<pre>Public <b>Structure</b> appflowparam <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public templaterefresh As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public appnamerefresh As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public flowrecordinterval As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public udppmtu As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpurl As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public aaausername As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpcookie As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpreferer As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpmethod As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httphost As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpuseragent As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public clienttrafficonly As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpcontenttype As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpauthorization As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpvia As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpxforwardedfor As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httplocation As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpsetcookie As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpsetcookie2 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public connectionchaining As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpdomain As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public skipcacheredirectionhttptransaction As String<br><b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>templaterefresh</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Refresh interval, in seconds, at which to export the template data. Because data transmission is in UDP, the templates must be resent at regular intervals.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>appnamerefresh</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Interval, in seconds, at which to send Appnames to the configured collectors. Appname refers to the name of an entity (virtual server, service, or service group) in the NetScaler appliance.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>flowrecordinterval</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Interval, in seconds, at which to send flow records to the configured collectors.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>udppmtu</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">MTU, in bytes, for IPFIX UDP packets.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpurl</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">State of AppFlow HTTP URL logging.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>aaausername</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">State of AppFlow AAA User logging.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpcookie</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">State of AppFlow HTTP cookie logging.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpreferer</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">State of AppFlow HTTP referer logging.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpmethod</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">State of AppFlow HTTP method logging.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httphost</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">State of AppFlow HTTP host logging.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpuseragent</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">State of AppFlow HTTP user-agent logging.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>clienttrafficonly</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Generate AppFlow records for only the traffic from the client.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpcontenttype</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">State of AppFlow HTTP Content-Type header logging</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpauthorization</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">State of AppFlow HTTP Authorization header logging</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpvia</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">State of AppFlow HTTP Via header logging</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpxforwardedfor</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">State of AppFlow HTTP X-Forwarded-For header logging</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httplocation</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">State of AppFlow HTTP Location header logging</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpsetcookie</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">State of AppFlow HTTP Setcookie header logging</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpsetcookie2</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">State of AppFlow HTTP Setcookie2 header logging</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>connectionchaining</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">State of connection-chaining feature</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpdomain</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">State of AppFlow HTTP Domain name logging</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>skipcacheredirectionhttptransaction</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Skip Cache http transaction. This HTTP transaction is specific to Cache Redirection module. In Case of Cache Miss there will be another HTTP transaction initiated by the cache server.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>See Also</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="getappflowparam.html">getappflowparam</a></div></td></tr><tr><td><br></td></tr></table></div>
+</body>
+</html>

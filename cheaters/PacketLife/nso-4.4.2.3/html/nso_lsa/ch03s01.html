@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      
+      <title>LSA compared to NSO clustering -  - NSO Layered Service Architecture</title>
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+      <link rel="home" href="index.html" title="NSO Layered Service Architecture" />
+      <link rel="up" href="ncs_lsa.lsa_cluster_comp.html" title="LSA compared to NSO clustering" />
+      <link rel="prev" href="ncs_lsa.lsa_cluster_comp.html" title="LSA compared to NSO clustering" />
+      <meta xmlns="" name="Section-title" content="LSA compared to NSO clustering" /><script xmlns="" type="text/javascript">
+      //The id for tree cookie
+      var treeCookieId = "treeview-557";
+      var language = "en";
+      var w = new Object();
+      //Localization
+      txt_filesfound = 'Results';
+      txt_enter_at_least_1_char = "You must enter at least one character.";
+      txt_browser_not_supported = "JavaScript is disabled on your browser. Please enable JavaScript to enjoy all the features of this site.";
+      txt_please_wait = "Please wait. Search in progress...";
+      txt_results_for = "Results for: ";
+    </script><link xmlns="" rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/css/positioning.css" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/jquery/theme-redmond/jquery-ui-1.8.2.custom.css" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/jquery/treeview/jquery.treeview.css" /><style xmlns="" type="text/css">
+      
+      #noscript{
+      font-weight:bold;
+      background-color: #55AA55;
+      font-weight: bold;
+      height: 25spx;
+      z-index: 3000;
+      top:0px;
+      width:100%;
+      position: relative;
+      border-bottom: solid 5px black;
+      text-align:center;
+      color: white;
+      }
+      
+      input {
+      margin-bottom: 5px;
+      margin-top: 2px;
+      }
+      .folder {
+      display: block;
+      height: 22px;
+      padding-left: 20px;
+      background: transparent url(common/jquery/treeview/images/folder.gif) 0 0px no-repeat;
+      }
+      span.contentsTab {
+      padding-left: 20px;
+      background: url(common/images/toc-icon.png) no-repeat 0 center;
+      }
+      span.searchTab {
+      padding-left: 20px;
+      background: url(common/images/search-icon.png) no-repeat 0 center;
+      }
+      
+      /* Overide jquery treeview's defaults for ul. */
+      .treeview ul {
+      background-color: transparent;
+      margin-top: 4px;
+      }		
+      #webhelp-currentid {
+      /* background-color: #D8D8D8 !important; */
+      background-color: #D8D8D8;
+      }
+      .treeview .hover { color: black; }
+      .filetree li span a { text-decoration: none; font-size: 12px; color: #517291; }
+      
+      /* Override jquery-ui's default css customizations. These are supposed to take precedence over those.*/
+      .ui-widget-content {
+      border: 0px; 
+      background: none; 
+      color: none;     
+      }
+      .ui-widget-header {
+      color: #e9e8e9;
+      border-left: 1px solid #e5e5e5;
+      border-right: 1px solid #e5e5e5;
+      border-bottom: 1px solid #bbc4c5;
+      border-top: 4px solid #e5e5e5;
+      border: medium none;
+      background: #F4F4F4; /* old browsers */
+      background: -moz-linear-gradient(top, #F4F4F4 0%, #E6E4E5 100%); /* firefox */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F4F4F4), color-stop(100%,#E6E4E5)); /* webkit */    
+      font-weight: none;
+      }
+      .ui-widget-header a { color: none; }
+      .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { 
+      border: none; background: none; font-weight: none; color: none; }
+      .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited { color: black; text-decoration: none; }
+      .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus { border: none; background: none; font-weight: none; color: none; }
+      
+      .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { border: none; background: none; font-weight: none; color: none; }
+      .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited { 
+      color: black; text-decoration: none; 	
+      background: #C6C6C6; /* old browsers */
+      background: -moz-linear-gradient(top, #C6C6C6 0%, #D8D8D8 100%); /* firefox */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#C6C6C6), color-stop(100%,#D8D8D8)); /* webkit */
+      -webkit-border-radius:15px; -moz-border-radius:10px;
+      border: 1px solid #f1f1f1;
+      }    
+      .ui-corner-all { border-radius: 0 0 0 0; }
+      
+      .ui-tabs { padding: .2em;}
+      .ui-tabs .ui-tabs-nav li { top: 0px; margin: -2px 0 1px; text-transform: uppercase; font-size: 10.5px;}
+      .ui-tabs .ui-tabs-nav li a { padding: .25em 2em .25em 1em; margin: .5em; text-shadow: 0 1px 0 rgba(255,255,255,.5); }
+      /**
+      *	Basic Layout Theme
+      * 
+      *	This theme uses the default layout class-names for all classes
+      *	Add any 'custom class-names', from options: paneClass, resizerClass, togglerClass
+      */
+      
+      .ui-layout-pane { /* all 'panes' */ 
+      background: #FFF; 
+      border: 1px solid #BBB; 
+      padding: 05x; 
+      overflow: auto;
+      } 
+      
+      .ui-layout-resizer { /* all 'resizer-bars' */ 
+      background: #DDD; 
+      top:100px
+      } 
+      
+      .ui-layout-toggler { /* all 'toggler-buttons' */ 
+      background: #AAA; 
+      } 
+      
+    </style>
+      <!--[if IE]>
+	<link rel="stylesheet" type="text/css" href="../common/css/ie.css"/>
+	<![endif]--><script xmlns="" type="text/javascript" src="common/browserDetect.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery-1.7.2.min.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery.ui.all.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery.cookie.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/treeview/jquery.treeview.min.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/layout/jquery.layout.js">
+         <!----></script><style type="text/css">
+      
+      #header {
+      /* background: url("../images/header-bg.png") scroll top left repeat-x #4d8c83; */
+      background: transparent;
+      }
+      #leftnavigation {
+      /* background-color: #ededed!important; */
+      background-color: transparent;
+      }
+      #navheader {
+      visibility: hidden;
+      }
+      #webhelp-currentid {
+      /* background-color: #D8D8D8 !important; */
+      background-color: #FFFFFF; /*but must be changed in main.js as well*/
+      }
+      .filetree span.file {
+      /* background: url(images/file.gif) 0 0 no-repeat; */
+      background: initial;
+      }
+      .filetree span.folder, .filetree span.file {
+      padding: 1px 0 1px 7px;
+      display: block;
+      }
+
+      /* borrowed from cisco: clientlib.css */
+      .footer {
+      margin: 28px 30px 0 15px;
+      font-size: 80%;
+      line-height: 120%;
+      border-top: 1px solid #ccc;
+      padding-top: 7px;
+      color: #999;
+      }
+      .footer #footer-legal{display:inline;padding-bottom:18px}
+      #framework-footer{margin:0;padding:0 0 15px 0;min-width:900px;width:100%}
+      .footer a,.footer a:visited{color:#999}
+
+      /* from ccimr.css */
+      a:active  { color: #3366CC}
+      a:hover   { color: #3366CC}
+      a:link    { color: #3366CC}
+      a:visited { color: #3366CC}
+
+      #header img {
+      float: left;
+      margin-left: 20px;
+      margin-top: 0px;
+      }
+
+      #header h1 {
+      color: #336666;
+      margin-top: 4px;
+      }
+      #content h1, #content h2 {
+      color: #336666;
+      }
+      .title {
+      color: #336666;
+      }
+      p, pre {
+      margin-left: 0.1in;
+      }
+      p, ul, ol, li {
+        font-size: 95%;
+        font-family: Arial, Helvetica, sans-serif;
+        margin-top: 1px;
+      }
+      body {
+        font: 80.5% Arial, Helvetica, sans-serif;
+      }
+      ol {
+      display: block;
+      list-style-type: decimal;
+      -webkit-margin-before: 1em;
+      -webkit-margin-after: 1em;
+      -webkit-margin-start: 0px;
+      -webkit-margin-end: 0px;
+      -webkit-padding-start: 40px;
+      border: 1;
+      }
+    </style></head>
+   <body>
+      <noscript>
+         <div id="noscript">JavaScript is disabled on your browser. Please enable JavaScript to enjoy all the features of this site.</div>
+      </noscript>
+      <div id="header"><a href="index.html"><img style="margin-right: 2px; width: 110; height: 73; padding-right: 25px; padding-top: 8px" align="right" src="common/images/logo.gif" alt="Cisco Systems, Inc." /></a><h1>NSO Layered Service Architecture<br />LSA compared to NSO clustering
+         </h1>
+         <div id="navheader">
+            <!---->
+            <table class="navLinks">
+               <tr>
+                  <td><a id="showHideButton" href="#" onclick="myLayout.toggle('west')" class="pointLeft" tabindex="5" title="Hide TOC tree">Sidebar
+                                                    </a></td>
+                  <td><a accesskey="p" class="navLinkPrevious" tabindex="5" href="ncs_lsa.lsa_cluster_comp.html">Prev</a>
+                                                             |
+                                                             <a accesskey="u" class="navLinkUp" tabindex="5" href="ncs_lsa.lsa_cluster_comp.html">Up</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div id="content">
+         <div class="sect1">
+            <div xmlns="" class="titlepage">
+               <div>
+                  <div>
+                     <h2 xmlns="http://www.w3.org/1999/xhtml" class="title" style="clear: both"><a id="d0e473"></a>LSA compared to NSO clustering
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>
+                     The NSO clustering technology, as described in
+                     <a href="../nso_admin_guide/ug.cluster.html" class="olink">
+                                    <em xmlns:xi="http://www.w3.org/2001/XInclude">NSO Clustering</em>
+                                  </a> in <span class="olinkdocname">
+                        NSO 4.4.2.3 Administration Guide
+                      </span> is a technique to build larger
+                     scale NSO installations. However, experience with clustering over the
+                     years has taught us that clustering didn't work as well as we thought it
+                     would. In this section we will try to list some of the characteristics
+                     that the clustering technique has and compare them to LSA.
+                   
+            </p>
+            <p>
+                     Clustering works well when we only wish to manage a large number
+                     of devices through the device manager, however it doesn't always
+                     work that well together with NSO services and FastMap, especially
+                     when some of the managed devices have very large configurations.
+                   
+            </p>
+            <p>
+                     With clustering, the devices are remotely mounted at the top node,
+                     and they are fully visible there. If the operator executes from the
+                     CLI:
+                     
+            </p>
+            <div class="informalexample"><pre class="screen">admin@upper-nso&gt; show configuration devices device x config interfaces interface</pre></div>
+            <p>
+                   
+            </p>
+            <p>
+                     This is internally executed in the NSO transaction manager as a
+                     series of data provider API calls to functions <code class="code">get_next()</code>
+                     <code class="code">get_elem()</code> and <code class="code">exists()</code>.
+                   
+            </p>
+            <p>
+                     For example, the NSO transaction manager would execute a call:
+                     
+            </p>
+            <div class="informalexample"><pre class="screen">get_next(transaction, "/devices/device[name='x']/config/interfaces/interface")</pre></div>
+            <p>
+                     Since the <code class="code">interfaces/interface</code> part is remotely mounted
+                     at the NSO device node, the call will be transformed into a NETCONF
+                     call to the NSO device node to execute the
+                     <code class="code">get_next(trans, "/interfaces/interface")</code> remotely. And so
+                     forth for all the calls required to show the configuration. Each low level
+                     call is transformed to the equivalent NETCONF call.
+                   
+            </p>
+            <p>
+                     The advantage of this scheme is scalability, very little data is stored
+                     at the upper NSO node for each  managed device and we can thus from the
+                     same NSO node see and manage a very large number of devices. The obvious
+                     disadvantage is performance, a call like the <code class="code">show configuration</code>
+                     above can potentially translate into a very large number of NETCONF RPCs.
+                   
+            </p>
+            <p>
+                     If you have performance problems with a clustered NSO installation, it's
+                     a good idea to first investigate the number of RPCs getting executed for
+                     the operations you perform. This can be done by turning on traffic trace
+                     for the clustered node and simply count the number of NETCONF RPCs that
+                     occur in the trace log. Obviously, network latency between the upper and
+                     the lower NSO nodes is important here too.
+                   
+            </p>
+            <p>
+                     The solution for performance problems with clustered NSO installations
+                     is to turn on the cluster cache, paying with memory for performance.
+                     This is configured under <code class="code">/cluster/global-settings/caching</code>.
+                     The cluster cache will make the NSO transaction manager order the
+                     cluster code to cache the <span class="emphasis"><em>entire</em></span> configuration of
+                     a device. The above <code class="code">show configuration</code> call would then
+                     initially issue a command to get the entire configuration of device
+                     <code class="code">x</code> and then issue all the remaining data provider API
+                     calls towards that cache. Note, the call is executed from the upper
+                     NSO node to the lower NSO node, thus we do not get the configuration from
+                     the device itself. The lower NSO node already has a complete copy
+                     of the device configuration. Usually NSO is much faster than
+                     the typical managed device
+                     to produce the full configuration.
+                   
+            </p>
+            <p>
+                     Remember how FastMap works for NSO services. When the service is
+                     modified or re-deployed the entire output result of the service code
+                     is deleted,
+                     and then the FastMap <code class="code">create()</code> code is once again invoked.
+                   
+            </p>
+            <p>
+                     Typically the FastMap code modifies the device tree, this is usually the
+                     purpose of NSO services, to implement a higher level service in the
+                     network. These FastMap operations, deleting the previous output
+                     and also re-creating the same (or similar) output from the
+                     <code class="code">create()</code> code, operates on the device tree. The device
+                     tree is remotely mounted, thus typically FastMap results in a massive
+                     amount of NETCONF RPCs, usually unacceptably many. Hence, if we combine
+                     FastMap and clustering, it's almost always required to turn on the
+                     cluster cache.
+                   
+            </p>
+            <p>
+                     So, to conclude, we have the following scenarios and configuration
+                     combinations:
+                   
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>
+                                  The case with large number of devices, and no FastMap
+                                  services at all. This will work just fine with clustering.
+                                  The provisioning system works directly towards the
+                                  <code class="code">/devices</code> tree.
+                                
+                     </p>
+                     <p>
+                                  The cache may or may not be turned on, depending on
+                                  performance/memory considerations.
+                                
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                                  The case with large number of devices, and FastMap services.
+                                  If FastMap is used we must always turn on the cache, if
+                                  the cache is not used, the number of RPCs will be excessive.
+                                  If all managed devices are small, this will still work fine, however
+                                  if some of the devices have very large configurations, populating
+                                  the cache for those devices can be too time consuming.
+                                
+                     </p>
+                     <p>
+                                  Thus, if your service code modifies devices that have large
+                                  configuration, the LSA architecture is better. Cluster architecture
+                                  will be too slow due to the time to populate the cache. Luckily
+                                  it's not an impossible task to change an NSO clustered solution into
+                                  an LSA solution as described above.
+                        
+                                
+                     </p>
+                  </li>
+               </ul>
+            </div>
+         </div><script type="text/javascript" src="common/main.js">
+            <!----></script><script type="text/javascript" src="common/splitterInit.js">
+            <!----></script><div class="footer" id="footer-legal">
+            <div class="footer-legal framework-footer-cq">
+               <div id="framework-footer">
+                  <div id="footer-legal"><a href="http://www.cisco.com/web/siteassets/legal/terms_condition.html">Terms &amp; Conditions</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/privacy.html">Privacy Statement</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/privacy.html#cookies">Cookie Policy</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/trademark.html">Trademarks</a></div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div id="sidebar">
+         <div id="leftnavigation" style="padding-top:3px;">
+            <div id="tabs">
+               <ul style="visibility: hidden;"></ul>
+               <div id="treeDiv"><img src="common/images/loading.gif" alt="loading table of contents..." id="tocLoading" style="display:block;" /><div id="ulTreeDiv" style="display:none">
+                     <ul id="tree" class="filetree">
+                        <li><span class="file"><a href="ncs_lsa.intro.html" tabindex="1">Going big - Layered service architecture</a></span><ul>
+                              <li><span class="file"><a href="ch01s01.html" tabindex="1">Introduction to the layered service architecture</a></span></li>
+                              <li><span class="file"><a href="ch01s02.html" tabindex="1">Separating the service into CFS and RFS</a></span><ul>
+                                    <li><span class="file"><a href="ch01s02s01.html" tabindex="1">New design - green field</a></span></li>
+                                    <li><span class="file"><a href="ch01s02s02.html" tabindex="1">Existing monolithic application</a></span></li>
+                                    <li><span class="file"><a href="ch01s02s03.html" tabindex="1">Existing monolithic application with stacked services</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch01s03.html" tabindex="1">Dispatching</a></span></li>
+                              <li><span class="file"><a href="ch01s04.html" tabindex="1">Scalability and performance aspects</a></span></li>
+                              <li><span class="file"><a href="ch01s05.html" tabindex="1">Multiple CFS nodes</a></span></li>
+                              <li><span class="file"><a href="ch01s06.html" tabindex="1">Pros and cons of layered service architecture</a></span><ul>
+                                    <li><span class="file"><a href="ch01s06s01.html" tabindex="1">Pros</a></span></li>
+                                    <li><span class="file"><a href="ch01s06s02.html" tabindex="1">Cons</a></span></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ncs_lsa.lsa.html" tabindex="1">LSA examples</a></span><ul>
+                              <li><span class="file"><a href="ch02s01.html" tabindex="1">Greenfield LSA application</a></span></li>
+                              <li><span class="file"><a href="ch02s02.html" tabindex="1">Rearchitecting an existing monolithic application into LSA</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ncs_lsa.lsa_cluster_comp.html" tabindex="1">LSA compared to NSO clustering</a></span><ul>
+                              <li id="webhelp-currentid"><span class="file"><a href="ch03s01.html" tabindex="1">LSA compared to NSO clustering</a></span></li>
+                           </ul>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

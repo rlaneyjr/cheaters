@@ -1,0 +1,250 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>Citrix NetScaler XML API User&#39;s Guide - Structure Definition</title>
+<link rel="stylesheet" type="text/css" href="help_ns.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body onload="initial()" class="ns_body">
+<div class="ns_content"><table cellpadding="0" cellspacing="0"><script type="text/javascript">
+function changeContext(id,lang,flag){
+	parent.banner.document.language.select.value = lang;
+	if( lang == "C" ){
+		if(flag == "1"){
+			showContent(cfirstcontent,id,lang);
+		}
+		else{
+			showContent(csecondcontent,id,lang);
+		}
+	}
+	if( lang == "Perl" ){
+		if(flag == "1"){
+			showContent(perlfirstcontent,id,lang);
+		}
+		else{
+			showContent(perlsecondcontent,id,lang);
+		}
+	}
+	if( lang == "Java" ){
+		if(flag == "1"){
+			showContent(javafirstcontent,id,lang);	
+		}
+		else{
+			showContent(javasecondcontent,id,lang);
+		}
+	}
+	if( lang == "C#" ){
+		if(flag == "1"){
+			showContent(csharpfirstcontent,id,lang);
+		}
+		else{
+			showContent(csharpsecondcontent,id,lang);
+		}
+	}
+	if( lang == "VB" ){
+		if(flag == "1"){
+			showContent(vbfirstcontent,id,lang);
+		}
+		else{
+			showContent(vbsecondcontent,id,lang);
+		}
+	}
+	if(flag == "1"){
+		showInside(lang,"0");
+	}
+	else{
+		showOutside(lang);
+	}
+}
+function showContent(content,id,lang){
+	if(ie4){
+	   showContentObj=document.all.id;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById(id);
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+  showLangSelect(lang);
+}
+function showInside(str,cond){
+	if(str == "C"){
+ 		var inside_content = csecondcontent;
+ 	}
+ 	if(str == "Perl"){
+ 		var inside_content = perlsecondcontent;
+ 	}
+ 	if(str == "Java"){
+ 		var inside_content = javasecondcontent;
+ 	}
+ 	if(str == "C#"){
+		var inside_content = csharpsecondcontent;
+ 	}
+ 	if(str == "VB"){
+		var inside_content = vbsecondcontent;
+ 	}
+	showContent(inside_content,'qiksearch_div1',str);
+ 	if ( cond == "1" ){
+ 		var page = 'apidoc/docs/getcachecontentgroupResult.html#contentgroupList';
+ 		document.location.href = page;
+ 	}
+}
+function showOutside(str){
+	if(str == "C" ){
+ 		var inside_content = cfirstcontent;
+ 	}
+ 	if(str == "Perl" ){
+ 		var inside_content = perlfirstcontent;
+ 	}
+ 	if(str == "Java" ){
+ 		var inside_content = javafirstcontent;
+ 	}
+ 	if(str == "C#" ){
+ 		var inside_content = csharpfirstcontent;
+ 	}
+ 	if(str == "VB" ){
+ 		var inside_content = vbfirstcontent;
+ 	}
+ 	showContent(inside_content,'qiksearch_div',str);
+}
+function initial(){
+	ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+	ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+	ns4=document.layers;
+	langSelected = parent.banner.document.language.select.value
+	var plink = parent.banner.document.language.plink.value
+	var my_array=plink.split("&");
+	var temp = my_array[0];
+ 	var grp = temp.split("@");
+	var cmd = my_array[1];
+	var regex = /^stat/i;
+	if( cmd.match(regex) != null ){
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex_stat.html\">Statistics</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getcachecontentgroupResult");
+	}
+	else{
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex.htm\">Configuration</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getcachecontentgroupResult");
+	}
+	if( langSelected == "C" ){
+ 		var content = cfirstcontent;
+	}
+	else if( langSelected == "Perl" ){
+		var content = perlfirstcontent;
+	}
+	else if( langSelected == "Java" ){
+		var content = javafirstcontent;
+	}
+	else if( langSelected == "C#" ){
+		var content = csharpfirstcontent;
+	}
+	else if( langSelected == "VB" ){
+		var content = vbfirstcontent;
+	}
+	else{
+		var content = cfirstcontent;
+		langSelected="C";
+	}
+	showContent(content,'qiksearch_div',langSelected);
+	showInside(langSelected,"0");
+}
+function showPLink(content){
+	if(ie4){
+	   showContentObj=document.all.progressive_link;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById("progressive_link");
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+}
+function showLangSelect(id){
+	   if(ie4)
+       {
+       	showObj=document.all.first_url;
+       	showObj1=document.all.second_url;
+       }
+       if(ns6)
+       {
+       	showObj=document.getElementById("first_url");
+       	showObj1=document.getElementById("second_url");
+       }
+       if( id == "C" ){
+       	newlink = "<b>C</b>";
+       	newlink1 = "<b>C</b>";
+       }
+       else{
+       	newlink = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C','1');\"><b>C</b></a>";
+       	newlink1 = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C','0');\"><b>C</b></a>";
+       }
+       if( id == "Perl" ){
+       	newlink = newlink + " | <b>Perl</b>";
+       	newlink1 = newlink1 + " | <b>Perl</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Perl','1');\"><b>Perl</b></a>";
+      	       newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Perl','0');\"><b>Perl</b></a>";
+       }
+       if( id == "Java" ){
+       	newlink = newlink + " | <b>Java</b>";
+       	newlink1 = newlink1 + " | <b>Java</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Java','1');\"><b>Java</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Java','0');\"><b>Java</b></a>";
+       }
+       if( id == "C#" ){
+       	newlink = newlink + " | <b>C#</b>";
+       	newlink1 = newlink1 + " | <b>C#</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C#','1');\"><b>C#</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C#','0');\"><b>C#</b></a>";
+       }
+       showObj.innerHTML = newlink;
+       showObj1.innerHTML = newlink1;
+}
+</script>
+<tr><td><div><div id="progressive_link"></div></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>getcachecontentgroupResult Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>getcachecontentgroupResult</b> structure defines the return type for getcachecontentgroup API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="first_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+cfirstcontent = "<pre>struct getcachecontentgroupResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; struct <a href=\'getcachecontentgroupResult.html\#cachecontentgroup\'>cachecontentgroup</a> list[];<br> };<br></pre></td></tr></table></div>"
+perlfirstcontent = "<pre>$getcachecontentgroupResult = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rc => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; message => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; List => \'@<a href=\'getcachecontentgroupResult.html\#cachecontentgroup\'>cachecontentgroup</a>\',<br> };<br></pre></td></tr></table></div>"
+javafirstcontent = "<pre>class getcachecontentgroupResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getcachecontentgroupResult.html\#cachecontentgroup\'>cachecontentgroup</a>[] list;<br> };<br></pre></td></tr></table></div>"
+csharpfirstcontent = "<pre>class getcachecontentgroupResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getcachecontentgroupResult.html\#cachecontentgroup\'>cachecontentgroup</a>[] list;<br> };<br></pre></td></tr></table></div>"
+vbfirstcontent = "<pre>Public <b>Structure</b> getcachecontentgroupResult <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rc As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public message As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public  cachecontentgroupList() As  <a href=\'getcachecontentgroupResult.html\#cachecontentgroup\'>cachecontentgroup</a><br> <b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rc</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, rc is 0 else rc > 0. Values above 0x8000 indicate Warnings.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>message</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, message is NULL else message contains <a href="errorlisting.html">Error/Warning</a> message.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>cachecontentgroupList</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">List of cachecontentgroups</div></td></tr><tr><td><br></td></tr><tr><td><div><a name="cachecontentgroup"></a></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>cachecontentgroup  Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>cachecontentgroup</b> structure defines the actual return type values for getcachecontentgroup API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="second_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div1" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+csecondcontent = "<pre>struct cachecontentgroup {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * name;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int flags;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * type;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int relexpiry;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int relexpirymillisec;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * absexpiry[];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * absexpirygmt[];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int heurexpiryparam;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int weakposrelexpiry;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int weaknegrelexpiry;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * hitparams[];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * invalparams[];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * ignoreparamvaluecase;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * matchcookies;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * invalrestrictedtohost;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * polleverytime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * ignorereloadreq;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * removecookies;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * prefetch;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int prefetchperiod;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int prefetchperiodmillisec;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int prefetchcur;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int prefetchmaxpending;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * flashcache;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * expireatlastbyte;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * insertvia;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * insertage;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * insertetag;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * cachecontrol;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int quickabortsize;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int minressize;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int maxressize;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int memusage;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int memdusage;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int disklimit;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int memlimit;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * ignorereqcachinghdrs;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int cachenon304hits;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int cache304hits;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int cachecells;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int cachegroupincarnation;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int minhits;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * alwaysevalpolicies;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * persist;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * persistha;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * pinned;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * lazydnsresolve;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * hitselector;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * invalselector;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * policyname[];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int cachenuminvalpolicy;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int markercells;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * builtin[];<br> };<br></pre></td></tr></table></div>"
+perlsecondcontent = "<pre>$cachecontentgroup = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; name => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; flags => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; type => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; relexpiry => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; relexpirymillisec => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; absexpiry => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; absexpirygmt => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; heurexpiryparam => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; weakposrelexpiry => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; weaknegrelexpiry => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; hitparams => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; invalparams => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ignoreparamvaluecase => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; matchcookies => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; invalrestrictedtohost => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; polleverytime => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ignorereloadreq => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; removecookies => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; prefetch => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; prefetchperiod => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; prefetchperiodmillisec => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; prefetchcur => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; prefetchmaxpending => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; flashcache => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; expireatlastbyte => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; insertvia => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; insertage => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; insertetag => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; cachecontrol => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; quickabortsize => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; minressize => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; maxressize => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; memusage => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; memdusage => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; disklimit => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; memlimit => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ignorereqcachinghdrs => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; cachenon304hits => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; cache304hits => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; cachecells => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; cachegroupincarnation => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; minhits => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; alwaysevalpolicies => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; persist => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; persistha => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; pinned => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; lazydnsresolve => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; hitselector => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; invalselector => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; policyname => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; cachenuminvalpolicy => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; markercells => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; builtin => \'@\',<br> };<br></pre></td></tr></table></div>"
+javasecondcontent = "<pre>class cachecontentgroup {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String name;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt flags;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String type;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt relexpiry;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt relexpirymillisec;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String absexpiry[];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String absexpirygmt[];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt heurexpiryparam;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt weakposrelexpiry;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt weaknegrelexpiry;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String hitparams[];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String invalparams[];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String ignoreparamvaluecase;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String matchcookies;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String invalrestrictedtohost;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String polleverytime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String ignorereloadreq;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String removecookies;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String prefetch;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt prefetchperiod;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt prefetchperiodmillisec;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt prefetchcur;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt prefetchmaxpending;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String flashcache;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String expireatlastbyte;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String insertvia;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String insertage;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String insertetag;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String cachecontrol;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt quickabortsize;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt minressize;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt maxressize;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt memusage;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt memdusage;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt disklimit;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt memlimit;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String ignorereqcachinghdrs;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt cachenon304hits;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt cache304hits;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt cachecells;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt cachegroupincarnation;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int minhits;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String alwaysevalpolicies;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String persist;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String persistha;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String pinned;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String lazydnsresolve;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String hitselector;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String invalselector;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String policyname[];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt cachenuminvalpolicy;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt markercells;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String builtin[];<br> };<br></pre></td></tr></table></div>"
+csharpsecondcontent = "<pre>class cachecontentgroup {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string name;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 flags;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string type;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 relexpiry;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 relexpirymillisec;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string absexpiry[];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string absexpirygmt[];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 heurexpiryparam;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 weakposrelexpiry;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 weaknegrelexpiry;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string hitparams[];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string invalparams[];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string ignoreparamvaluecase;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string matchcookies;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string invalrestrictedtohost;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string polleverytime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string ignorereloadreq;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string removecookies;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string prefetch;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 prefetchperiod;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 prefetchperiodmillisec;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 prefetchcur;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 prefetchmaxpending;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string flashcache;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string expireatlastbyte;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string insertvia;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string insertage;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string insertetag;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string cachecontrol;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 quickabortsize;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 minressize;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 maxressize;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 memusage;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 memdusage;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 disklimit;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 memlimit;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string ignorereqcachinghdrs;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 cachenon304hits;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 cache304hits;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 cachecells;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 cachegroupincarnation;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 minhits;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string alwaysevalpolicies;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string persist;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string persistha;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string pinned;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string lazydnsresolve;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string hitselector;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string invalselector;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string policyname[];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 cachenuminvalpolicy;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 markercells;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string builtin[];<br> };<br></pre></td></tr></table></div>"
+vbsecondcontent = "<pre>Public <b>Structure</b> cachecontentgroup <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public name As String  <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public flags As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public type As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public relexpiry As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public relexpirymillisec As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public absexpiry() As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public absexpirygmt() As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public heurexpiryparam As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public weakposrelexpiry As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public weaknegrelexpiry As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public hitparams() As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public invalparams() As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ignoreparamvaluecase As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public matchcookies As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public invalrestrictedtohost As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public polleverytime As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ignorereloadreq As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public removecookies As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public prefetch As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public prefetchperiod As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public prefetchperiodmillisec As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public prefetchcur As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public prefetchmaxpending As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public flashcache As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public expireatlastbyte As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public insertvia As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public insertage As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public insertetag As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public cachecontrol As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public quickabortsize As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public minressize As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public maxressize As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public memusage As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public memdusage As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public disklimit As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public memlimit As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ignorereqcachinghdrs As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public cachenon304hits As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public cache304hits As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public cachecells As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public cachegroupincarnation As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public minhits As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public alwaysevalpolicies As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public persist As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public persistha As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public pinned As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public lazydnsresolve As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public hitselector As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public invalselector As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public policyname() As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public cachenuminvalpolicy As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public markercells As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public builtin() As String<br><b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>name</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the content group about which to display information.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>flags</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Flags.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>type</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The type of the content group.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>relexpiry</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The relative expiry time in seconds.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>relexpirymillisec</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Relative expiry time, in milliseconds, after which to expire an object cached in this content group.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>absexpiry</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Local time, up to 4 times a day, at which all objects in the content group must expire. 
+
+CLI Users:
+For example, to specify that the objects in the content group should expire by 11:00 PM, type the following method: add cache contentgroup <contentgroup name> -absexpiry 23:00 
+To specify that the objects in the content group should expire at 10:00 AM, 3 PM, 6 PM, and 11:00 PM, type: add cache contentgroup <contentgroup name> -absexpiry 10:00 15:00 18:00 23:00</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>absexpirygmt</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Coordinated Universal Time (GMT), up to 4 times a day, when all objects in the content group must expire.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>heurexpiryparam</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Heuristic expiry time, in percent of the duration, since the object was last modified.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>weakposrelexpiry</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Relative expiry time, in seconds, for expiring positive responses with response codes between 200 and 399. Cannot be used in combination with other Expiry attributes. Similar to -relExpiry but has lower precedence.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>weaknegrelexpiry</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Relative expiry time, in seconds, for expiring negative responses. This value is used only if the expiry time cannot be determined from any other source. It is applicable only to the following status codes: 307, 403, 404, and 410.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>hitparams</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Parameters to use for parameterized hit evaluation of an object. Up to 128 parameters can be specified. Mutually exclusive with the Hit Selector parameter.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>invalparams</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Parameters for parameterized invalidation of an object. You can specify up to 8 parameters. Mutually exclusive with invalSelector.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ignoreparamvaluecase</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Ignore case when comparing parameter values during parameterized hit evaluation. (Parameter value case is ignored by default during parameterized invalidation.)</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>matchcookies</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Evaluate for parameters in the cookie header also.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>invalrestrictedtohost</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Take the host header into account during parameterized invalidation.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>polleverytime</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Always poll for the objects in this content group. That is, retrieve the objects from the origin server whenever they are requested.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ignorereloadreq</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Ignore any request to reload a cached object from the origin server.
+To guard against Denial of Service attacks, set this parameter to YES. For RFC-compliant behavior, set it to NO.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>removecookies</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Remove cookies from responses.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>prefetch</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Attempt to refresh objects that are about to go stale.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>prefetchperiod</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Time period, in seconds before an object's calculated expiry time, during which to attempt prefetch.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>prefetchperiodmillisec</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Time period, in milliseconds before an object's calculated expiry time, during which to attempt prefetch.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>prefetchcur</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Current outstanding prefetches.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>prefetchmaxpending</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Maximum number of outstanding prefetches that can be queued for the content group.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>flashcache</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Perform flash cache. Mutually exclusive with Poll Every Time (PET) on the same content group.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>expireatlastbyte</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Force expiration of the content immediately after the response is downloaded (upon receipt of the last byte of the response body). Applicable only to positive responses.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>insertvia</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Insert a Via header into the response.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>insertage</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Insert an Age header into the response. An Age header contains information about the age of the object, in seconds, as calculated by the integrated cache.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>insertetag</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Insert an ETag header in the response. With ETag header insertion, the integrated cache does not serve full responses on repeat requests.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>cachecontrol</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Insert a Cache-Control header into the response.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>quickabortsize</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the size of an object that is being downloaded is less than or equal to the quick abort value, and a client aborts during the download, the cache stops downloading the response. If the object is larger than the quick abort size, the cache continues to download the response.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>minressize</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Minimum size of a response that can be cached in this content group.
+ Default minimum response size is 0.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>maxressize</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Maximum size of a response that can be cached in this content group.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>memusage</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Current memory usage.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>memdusage</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Current disk memory usage.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>disklimit</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Maximum amount of disk that the cache can use. The effective limit is based on the available memory of the NetScaler appliance.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>memlimit</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Maximum amount of memory that the cache can use. The effective limit is based on the available memory of the NetScaler appliance.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ignorereqcachinghdrs</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Ignore Cache-Control and Pragma headers in the incoming request.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>cachenon304hits</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Cache non 304 hits.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>cache304hits</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Cache 304 hits.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>cachecells</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of cells.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>cachegroupincarnation</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Cache group incarnation.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>minhits</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of hits that qualifies a response for storage in this content group.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>alwaysevalpolicies</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Force policy evaluation for each response arriving from the origin server. Cannot be set to YES if the Prefetch parameter is also set to YES.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>persist</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Setting persist to YES causes IC to save objects in contentgroup to disk.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>persistha</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Setting persistHA to YES causes IC to save objects in contentgroup to Secondary node in HA deployment.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>pinned</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Do not flush objects from this content group under memory pressure.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>lazydnsresolve</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Perform DNS resolution for responses only if the destination IP address in the request does not match the destination IP address of the cached response.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>hitselector</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Selector for evaluating whether an object gets stored in a particular content group. A selector is an abstraction for a collection of PIXL expressions.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>invalselector</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Selector for invalidating objects in the content group. A selector is an abstraction for a collection of PIXL expressions.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>policyname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Active cache policies refering to this group.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>cachenuminvalpolicy</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of active Invalidation policies refering to this group.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>markercells</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Numbers of marker cells in this group.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>builtin</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div><b>See Also</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="getcachecontentgroup.html">getcachecontentgroup</a></div></td></tr><tr><td><br></td></tr></table></div>
+</body>
+</html>

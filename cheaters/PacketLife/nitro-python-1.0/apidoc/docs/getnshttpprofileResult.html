@@ -1,0 +1,247 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>Citrix NetScaler XML API User&#39;s Guide - Structure Definition</title>
+<link rel="stylesheet" type="text/css" href="help_ns.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body onload="initial()" class="ns_body">
+<div class="ns_content"><table cellpadding="0" cellspacing="0"><script type="text/javascript">
+function changeContext(id,lang,flag){
+	parent.banner.document.language.select.value = lang;
+	if( lang == "C" ){
+		if(flag == "1"){
+			showContent(cfirstcontent,id,lang);
+		}
+		else{
+			showContent(csecondcontent,id,lang);
+		}
+	}
+	if( lang == "Perl" ){
+		if(flag == "1"){
+			showContent(perlfirstcontent,id,lang);
+		}
+		else{
+			showContent(perlsecondcontent,id,lang);
+		}
+	}
+	if( lang == "Java" ){
+		if(flag == "1"){
+			showContent(javafirstcontent,id,lang);	
+		}
+		else{
+			showContent(javasecondcontent,id,lang);
+		}
+	}
+	if( lang == "C#" ){
+		if(flag == "1"){
+			showContent(csharpfirstcontent,id,lang);
+		}
+		else{
+			showContent(csharpsecondcontent,id,lang);
+		}
+	}
+	if( lang == "VB" ){
+		if(flag == "1"){
+			showContent(vbfirstcontent,id,lang);
+		}
+		else{
+			showContent(vbsecondcontent,id,lang);
+		}
+	}
+	if(flag == "1"){
+		showInside(lang,"0");
+	}
+	else{
+		showOutside(lang);
+	}
+}
+function showContent(content,id,lang){
+	if(ie4){
+	   showContentObj=document.all.id;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById(id);
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+  showLangSelect(lang);
+}
+function showInside(str,cond){
+	if(str == "C"){
+ 		var inside_content = csecondcontent;
+ 	}
+ 	if(str == "Perl"){
+ 		var inside_content = perlsecondcontent;
+ 	}
+ 	if(str == "Java"){
+ 		var inside_content = javasecondcontent;
+ 	}
+ 	if(str == "C#"){
+		var inside_content = csharpsecondcontent;
+ 	}
+ 	if(str == "VB"){
+		var inside_content = vbsecondcontent;
+ 	}
+	showContent(inside_content,'qiksearch_div1',str);
+ 	if ( cond == "1" ){
+ 		var page = 'apidoc/docs/getnshttpprofileResult.html#http_profileList';
+ 		document.location.href = page;
+ 	}
+}
+function showOutside(str){
+	if(str == "C" ){
+ 		var inside_content = cfirstcontent;
+ 	}
+ 	if(str == "Perl" ){
+ 		var inside_content = perlfirstcontent;
+ 	}
+ 	if(str == "Java" ){
+ 		var inside_content = javafirstcontent;
+ 	}
+ 	if(str == "C#" ){
+ 		var inside_content = csharpfirstcontent;
+ 	}
+ 	if(str == "VB" ){
+ 		var inside_content = vbfirstcontent;
+ 	}
+ 	showContent(inside_content,'qiksearch_div',str);
+}
+function initial(){
+	ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+	ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+	ns4=document.layers;
+	langSelected = parent.banner.document.language.select.value
+	var plink = parent.banner.document.language.plink.value
+	var my_array=plink.split("&");
+	var temp = my_array[0];
+ 	var grp = temp.split("@");
+	var cmd = my_array[1];
+	var regex = /^stat/i;
+	if( cmd.match(regex) != null ){
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex_stat.html\">Statistics</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getnshttpprofileResult");
+	}
+	else{
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex.htm\">Configuration</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getnshttpprofileResult");
+	}
+	if( langSelected == "C" ){
+ 		var content = cfirstcontent;
+	}
+	else if( langSelected == "Perl" ){
+		var content = perlfirstcontent;
+	}
+	else if( langSelected == "Java" ){
+		var content = javafirstcontent;
+	}
+	else if( langSelected == "C#" ){
+		var content = csharpfirstcontent;
+	}
+	else if( langSelected == "VB" ){
+		var content = vbfirstcontent;
+	}
+	else{
+		var content = cfirstcontent;
+		langSelected="C";
+	}
+	showContent(content,'qiksearch_div',langSelected);
+	showInside(langSelected,"0");
+}
+function showPLink(content){
+	if(ie4){
+	   showContentObj=document.all.progressive_link;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById("progressive_link");
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+}
+function showLangSelect(id){
+	   if(ie4)
+       {
+       	showObj=document.all.first_url;
+       	showObj1=document.all.second_url;
+       }
+       if(ns6)
+       {
+       	showObj=document.getElementById("first_url");
+       	showObj1=document.getElementById("second_url");
+       }
+       if( id == "C" ){
+       	newlink = "<b>C</b>";
+       	newlink1 = "<b>C</b>";
+       }
+       else{
+       	newlink = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C','1');\"><b>C</b></a>";
+       	newlink1 = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C','0');\"><b>C</b></a>";
+       }
+       if( id == "Perl" ){
+       	newlink = newlink + " | <b>Perl</b>";
+       	newlink1 = newlink1 + " | <b>Perl</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Perl','1');\"><b>Perl</b></a>";
+      	       newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Perl','0');\"><b>Perl</b></a>";
+       }
+       if( id == "Java" ){
+       	newlink = newlink + " | <b>Java</b>";
+       	newlink1 = newlink1 + " | <b>Java</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Java','1');\"><b>Java</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Java','0');\"><b>Java</b></a>";
+       }
+       if( id == "C#" ){
+       	newlink = newlink + " | <b>C#</b>";
+       	newlink1 = newlink1 + " | <b>C#</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C#','1');\"><b>C#</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C#','0');\"><b>C#</b></a>";
+       }
+       showObj.innerHTML = newlink;
+       showObj1.innerHTML = newlink1;
+}
+</script>
+<tr><td><div><div id="progressive_link"></div></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>getnshttpprofileResult Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>getnshttpprofileResult</b> structure defines the return type for getnshttpprofile API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="first_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+cfirstcontent = "<pre>struct getnshttpprofileResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; struct <a href=\'getnshttpprofileResult.html\#nshttpprofile\'>nshttpprofile</a> list[];<br> };<br></pre></td></tr></table></div>"
+perlfirstcontent = "<pre>$getnshttpprofileResult = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rc => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; message => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; List => \'@<a href=\'getnshttpprofileResult.html\#nshttpprofile\'>nshttpprofile</a>\',<br> };<br></pre></td></tr></table></div>"
+javafirstcontent = "<pre>class getnshttpprofileResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getnshttpprofileResult.html\#nshttpprofile\'>nshttpprofile</a>[] list;<br> };<br></pre></td></tr></table></div>"
+csharpfirstcontent = "<pre>class getnshttpprofileResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getnshttpprofileResult.html\#nshttpprofile\'>nshttpprofile</a>[] list;<br> };<br></pre></td></tr></table></div>"
+vbfirstcontent = "<pre>Public <b>Structure</b> getnshttpprofileResult <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rc As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public message As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public  nshttpprofileList() As  <a href=\'getnshttpprofileResult.html\#nshttpprofile\'>nshttpprofile</a><br> <b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rc</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, rc is 0 else rc > 0. Values above 0x8000 indicate Warnings.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>message</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, message is NULL else message contains <a href="errorlisting.html">Error/Warning</a> message.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>nshttpprofileList</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">List of nshttpprofiles</div></td></tr><tr><td><br></td></tr><tr><td><div><a name="nshttpprofile"></a></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>nshttpprofile  Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>nshttpprofile</b> structure defines the actual return type values for getnshttpprofile API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="second_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div1" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+csecondcontent = "<pre>struct nshttpprofile {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * name;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * dropinvalreqs;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * markhttp09inval;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * markconnreqinval;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * cmponpush;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * conmultiplex;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int maxreusepool;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * websocket;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int refcnt;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * dropextracrlf;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int incomphdrdelay;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int reqtimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * adpttimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * reqtimeoutaction;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * dropextradata;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * weblog;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * clientiphdrexpr;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int maxreq;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * persistentetag;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * spdy;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int reusepooltimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int maxheaderlen;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * rtsptunnel;<br> };<br></pre></td></tr></table></div>"
+perlsecondcontent = "<pre>$nshttpprofile = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; name => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; dropinvalreqs => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; markhttp09inval => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; markconnreqinval => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; cmponpush => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; conmultiplex => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; maxreusepool => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; websocket => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; refcnt => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; dropextracrlf => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; incomphdrdelay => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; reqtimeout => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; adpttimeout => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; reqtimeoutaction => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; dropextradata => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; weblog => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; clientiphdrexpr => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; maxreq => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; persistentetag => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; spdy => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; reusepooltimeout => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; maxheaderlen => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rtsptunnel => \'$\',<br> };<br></pre></td></tr></table></div>"
+javasecondcontent = "<pre>class nshttpprofile {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String name;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String dropinvalreqs;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String markhttp09inval;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String markconnreqinval;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String cmponpush;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String conmultiplex;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt maxreusepool;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String websocket;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt refcnt;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String dropextracrlf;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt incomphdrdelay;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt reqtimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String adpttimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String reqtimeoutaction;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String dropextradata;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String weblog;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String clientiphdrexpr;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt maxreq;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String persistentetag;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String spdy;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt reusepooltimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt maxheaderlen;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String rtsptunnel;<br> };<br></pre></td></tr></table></div>"
+csharpsecondcontent = "<pre>class nshttpprofile {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string name;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string dropinvalreqs;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string markhttp09inval;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string markconnreqinval;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string cmponpush;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string conmultiplex;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 maxreusepool;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string websocket;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 refcnt;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string dropextracrlf;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 incomphdrdelay;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 reqtimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string adpttimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string reqtimeoutaction;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string dropextradata;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string weblog;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string clientiphdrexpr;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 maxreq;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string persistentetag;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string spdy;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 reusepooltimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 maxheaderlen;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string rtsptunnel;<br> };<br></pre></td></tr></table></div>"
+vbsecondcontent = "<pre>Public <b>Structure</b> nshttpprofile <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public name As String  <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public dropinvalreqs As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public markhttp09inval As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public markconnreqinval As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public cmponpush As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public conmultiplex As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public maxreusepool As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public websocket As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public refcnt As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public dropextracrlf As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public incomphdrdelay As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public reqtimeout As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public adpttimeout As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public reqtimeoutaction As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public dropextradata As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public weblog As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public clientiphdrexpr As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public maxreq As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public persistentetag As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public spdy As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public reusepooltimeout As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public maxheaderlen As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rtsptunnel As String<br><b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>name</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the HTTP profile to be displayed.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>dropinvalreqs</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Dropping of invalid HTTP requests/responses</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>markhttp09inval</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Invalidating HTTP 0.9 requests</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>markconnreqinval</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Invalidating CONNECT HTTP requests</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>cmponpush</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Compression on PUSH packet</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>conmultiplex</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Reuse server connections for requests from more than one client connections.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>maxreusepool</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Maximum connections in reusepool</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>websocket</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">HTTP connection to be upgraded to a web socket connection. Once upgraded, NetScaler does not process Layer 7 traffic on this connection.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>refcnt</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of entities using this profile</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>dropextracrlf</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Drop any extra 'CR' and 'LF' characters present after the header.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>incomphdrdelay</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Maximum time to wait, in milliseconds, between incomplete header packets. If the header packets take longer to arrive at NetScaler, the connection is silently dropped.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>reqtimeout</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Time, in seconds, within which the HTTP request must complete. If the request does not complete within this time, the specified request timeout action is executed.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>adpttimeout</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Adapts the configured request timeout based on flow conditions. The timeout is increased or decreased internally and applied on the flow.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>reqtimeoutaction</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Action to take when the HTTP request does not complete within the specified request timeout duration. You can configure the following actions:
+* RESET - Send RST (reset) to client when timeout occurs.
+* DROP - Drop silently when timeout occurs.
+* Custom responder action - Name of the responder action to trigger when timeout occurs, used to send custom message.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>dropextradata</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Drop any extra data when server sends more data than the specified content-length.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>weblog</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Disabling weblog option</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>clientiphdrexpr</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the header that contains the real client IP address.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>maxreq</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Maximum requests allowed on a single connection.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>persistentetag</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Generate the persistent NetScaler specific ETag for the HTTP response with ETag header.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>spdy</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Enable SPDYv2 or SPDYv3 or both over SSL vserver. SSL will advertise SPDY support during NPN Handshake. Both SPDY versions are enabled when this parameter is set to BOTH.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>reusepooltimeout</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Idle timeout (in seconds) for server connections in re-use pool. Connections in the re-use pool are flushed, if they remain idle for the configured timeout.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>maxheaderlen</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of bytes to be queued to look for complete header before returning error. If complete header is not obtained after queuing these many bytes, request will be marked as invalid and no L7 processing will be done for that TCP connection.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rtsptunnel</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Allow RTSP tunnel in HTTP. Once application/x-rtsp-tunnelled is seen in Accept or Content-Type header, NetScaler does not process Layer 7 traffic on this connection.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>See Also</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="getnshttpprofile.html">getnshttpprofile</a></div></td></tr><tr><td><br></td></tr></table></div>
+</body>
+</html>

@@ -1,0 +1,720 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      
+      <title>Greenfield LSA application -  - NSO Layered Service Architecture</title>
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+      <link rel="home" href="index.html" title="NSO Layered Service Architecture" />
+      <link rel="up" href="ncs_lsa.lsa.html" title="LSA examples" />
+      <link rel="prev" href="ncs_lsa.lsa.html" title="LSA examples" />
+      <link rel="next" href="ch02s02.html" title="Rearchitecting an existing monolithic application into LSA" />
+      <meta xmlns="" name="Section-title" content="Greenfield LSA application" /><script xmlns="" type="text/javascript">
+      //The id for tree cookie
+      var treeCookieId = "treeview-557";
+      var language = "en";
+      var w = new Object();
+      //Localization
+      txt_filesfound = 'Results';
+      txt_enter_at_least_1_char = "You must enter at least one character.";
+      txt_browser_not_supported = "JavaScript is disabled on your browser. Please enable JavaScript to enjoy all the features of this site.";
+      txt_please_wait = "Please wait. Search in progress...";
+      txt_results_for = "Results for: ";
+    </script><link xmlns="" rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/css/positioning.css" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/jquery/theme-redmond/jquery-ui-1.8.2.custom.css" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/jquery/treeview/jquery.treeview.css" /><style xmlns="" type="text/css">
+      
+      #noscript{
+      font-weight:bold;
+      background-color: #55AA55;
+      font-weight: bold;
+      height: 25spx;
+      z-index: 3000;
+      top:0px;
+      width:100%;
+      position: relative;
+      border-bottom: solid 5px black;
+      text-align:center;
+      color: white;
+      }
+      
+      input {
+      margin-bottom: 5px;
+      margin-top: 2px;
+      }
+      .folder {
+      display: block;
+      height: 22px;
+      padding-left: 20px;
+      background: transparent url(common/jquery/treeview/images/folder.gif) 0 0px no-repeat;
+      }
+      span.contentsTab {
+      padding-left: 20px;
+      background: url(common/images/toc-icon.png) no-repeat 0 center;
+      }
+      span.searchTab {
+      padding-left: 20px;
+      background: url(common/images/search-icon.png) no-repeat 0 center;
+      }
+      
+      /* Overide jquery treeview's defaults for ul. */
+      .treeview ul {
+      background-color: transparent;
+      margin-top: 4px;
+      }		
+      #webhelp-currentid {
+      /* background-color: #D8D8D8 !important; */
+      background-color: #D8D8D8;
+      }
+      .treeview .hover { color: black; }
+      .filetree li span a { text-decoration: none; font-size: 12px; color: #517291; }
+      
+      /* Override jquery-ui's default css customizations. These are supposed to take precedence over those.*/
+      .ui-widget-content {
+      border: 0px; 
+      background: none; 
+      color: none;     
+      }
+      .ui-widget-header {
+      color: #e9e8e9;
+      border-left: 1px solid #e5e5e5;
+      border-right: 1px solid #e5e5e5;
+      border-bottom: 1px solid #bbc4c5;
+      border-top: 4px solid #e5e5e5;
+      border: medium none;
+      background: #F4F4F4; /* old browsers */
+      background: -moz-linear-gradient(top, #F4F4F4 0%, #E6E4E5 100%); /* firefox */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F4F4F4), color-stop(100%,#E6E4E5)); /* webkit */    
+      font-weight: none;
+      }
+      .ui-widget-header a { color: none; }
+      .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { 
+      border: none; background: none; font-weight: none; color: none; }
+      .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited { color: black; text-decoration: none; }
+      .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus { border: none; background: none; font-weight: none; color: none; }
+      
+      .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { border: none; background: none; font-weight: none; color: none; }
+      .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited { 
+      color: black; text-decoration: none; 	
+      background: #C6C6C6; /* old browsers */
+      background: -moz-linear-gradient(top, #C6C6C6 0%, #D8D8D8 100%); /* firefox */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#C6C6C6), color-stop(100%,#D8D8D8)); /* webkit */
+      -webkit-border-radius:15px; -moz-border-radius:10px;
+      border: 1px solid #f1f1f1;
+      }    
+      .ui-corner-all { border-radius: 0 0 0 0; }
+      
+      .ui-tabs { padding: .2em;}
+      .ui-tabs .ui-tabs-nav li { top: 0px; margin: -2px 0 1px; text-transform: uppercase; font-size: 10.5px;}
+      .ui-tabs .ui-tabs-nav li a { padding: .25em 2em .25em 1em; margin: .5em; text-shadow: 0 1px 0 rgba(255,255,255,.5); }
+      /**
+      *	Basic Layout Theme
+      * 
+      *	This theme uses the default layout class-names for all classes
+      *	Add any 'custom class-names', from options: paneClass, resizerClass, togglerClass
+      */
+      
+      .ui-layout-pane { /* all 'panes' */ 
+      background: #FFF; 
+      border: 1px solid #BBB; 
+      padding: 05x; 
+      overflow: auto;
+      } 
+      
+      .ui-layout-resizer { /* all 'resizer-bars' */ 
+      background: #DDD; 
+      top:100px
+      } 
+      
+      .ui-layout-toggler { /* all 'toggler-buttons' */ 
+      background: #AAA; 
+      } 
+      
+    </style>
+      <!--[if IE]>
+	<link rel="stylesheet" type="text/css" href="../common/css/ie.css"/>
+	<![endif]--><script xmlns="" type="text/javascript" src="common/browserDetect.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery-1.7.2.min.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery.ui.all.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery.cookie.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/treeview/jquery.treeview.min.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/layout/jquery.layout.js">
+         <!----></script><style type="text/css">
+      
+      #header {
+      /* background: url("../images/header-bg.png") scroll top left repeat-x #4d8c83; */
+      background: transparent;
+      }
+      #leftnavigation {
+      /* background-color: #ededed!important; */
+      background-color: transparent;
+      }
+      #navheader {
+      visibility: hidden;
+      }
+      #webhelp-currentid {
+      /* background-color: #D8D8D8 !important; */
+      background-color: #FFFFFF; /*but must be changed in main.js as well*/
+      }
+      .filetree span.file {
+      /* background: url(images/file.gif) 0 0 no-repeat; */
+      background: initial;
+      }
+      .filetree span.folder, .filetree span.file {
+      padding: 1px 0 1px 7px;
+      display: block;
+      }
+
+      /* borrowed from cisco: clientlib.css */
+      .footer {
+      margin: 28px 30px 0 15px;
+      font-size: 80%;
+      line-height: 120%;
+      border-top: 1px solid #ccc;
+      padding-top: 7px;
+      color: #999;
+      }
+      .footer #footer-legal{display:inline;padding-bottom:18px}
+      #framework-footer{margin:0;padding:0 0 15px 0;min-width:900px;width:100%}
+      .footer a,.footer a:visited{color:#999}
+
+      /* from ccimr.css */
+      a:active  { color: #3366CC}
+      a:hover   { color: #3366CC}
+      a:link    { color: #3366CC}
+      a:visited { color: #3366CC}
+
+      #header img {
+      float: left;
+      margin-left: 20px;
+      margin-top: 0px;
+      }
+
+      #header h1 {
+      color: #336666;
+      margin-top: 4px;
+      }
+      #content h1, #content h2 {
+      color: #336666;
+      }
+      .title {
+      color: #336666;
+      }
+      p, pre {
+      margin-left: 0.1in;
+      }
+      p, ul, ol, li {
+        font-size: 95%;
+        font-family: Arial, Helvetica, sans-serif;
+        margin-top: 1px;
+      }
+      body {
+        font: 80.5% Arial, Helvetica, sans-serif;
+      }
+      ol {
+      display: block;
+      list-style-type: decimal;
+      -webkit-margin-before: 1em;
+      -webkit-margin-after: 1em;
+      -webkit-margin-start: 0px;
+      -webkit-margin-end: 0px;
+      -webkit-padding-start: 40px;
+      border: 1;
+      }
+    </style></head>
+   <body>
+      <noscript>
+         <div id="noscript">JavaScript is disabled on your browser. Please enable JavaScript to enjoy all the features of this site.</div>
+      </noscript>
+      <div id="header"><a href="index.html"><img style="margin-right: 2px; width: 110; height: 73; padding-right: 25px; padding-top: 8px" align="right" src="common/images/logo.gif" alt="Cisco Systems, Inc." /></a><h1>NSO Layered Service Architecture<br />LSA examples
+         </h1>
+         <div id="navheader">
+            <!---->
+            <table class="navLinks">
+               <tr>
+                  <td><a id="showHideButton" href="#" onclick="myLayout.toggle('west')" class="pointLeft" tabindex="5" title="Hide TOC tree">Sidebar
+                                                    </a></td>
+                  <td><a accesskey="p" class="navLinkPrevious" tabindex="5" href="ncs_lsa.lsa.html">Prev</a>
+                                                             |
+                                                             <a accesskey="u" class="navLinkUp" tabindex="5" href="ncs_lsa.lsa.html">Up</a>
+                                                         |
+                                                         <a accesskey="n" class="navLinkNext" tabindex="5" href="ch02s02.html">Next</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div id="content">
+         <div class="sect1">
+            <div xmlns="" class="titlepage">
+               <div>
+                  <div>
+                     <h2 xmlns="http://www.w3.org/1999/xhtml" class="title" style="clear: both"><a id="d0e254"></a>Greenfield LSA application
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>
+                     In this section we'll describe a very small Greenfield LSA application.
+                     The application we describe exists as a running example under:
+                     <code class="filename">examples.ncs/getting-started/developing-with-ncs/22-layered-service-architecture</code>
+                   
+            </p>
+            <p>
+                     This example application is a slight variation on the
+                     <code class="filename">examples.ncs/getting-started/developing-with-ncs/4-rfs-service</code>
+                     where the YANG code has been split up into an upper-layer and a
+                     lower-layer implementation.
+                     The example topology (based on netsim for the managed devices, and NSO
+                     for the upper/lower layer NSO instances) looks like:
+               
+                     
+                   
+            </p>
+            <div class="figure"><a id="d0e269"></a><p class="title"><strong>Figure 3. Example LSA architecture</strong></p>
+               <div class="figure-contents">
+                  <div class="mediaobject" align="center">
+                     <table border="0" summary="manufactured viewport for HTML img" style="cellpadding: 0; cellspacing: 0;" width="567">
+                        <tr>
+                           <td align="center"><img src="pics/lsa-example-22.png" align="middle" width="567" alt="Example LSA architecture" /></td>
+                        </tr>
+                     </table>
+                  </div>
+               </div>
+            </div>
+            <p><br class="figure-break" />
+               
+                   
+            </p>
+            <p>
+                     The upper layer of the YANG service data for this example looks as:
+                     
+            </p>
+            <div class="informalexample"><pre class="screen">module cfs-vlan {
+...
+  list cfs-vlan {
+    key name;
+    leaf name {
+      type string;
+    }
+
+    uses ncs:service-data;
+    ncs:servicepoint cfs-vlan;
+
+    leaf a-router {
+      type leafref {
+        path "/dispatch-map/router";
+      }
+      mandatory true;
+    }
+    leaf z-router {
+      type leafref {
+        path "/dispatch-map/router";
+      }
+      mandatory true;
+    }
+    leaf iface {
+      type string;
+      mandatory true;
+    }
+    leaf unit {
+      type int32;
+      mandatory true;
+    }
+    leaf vid {
+      type uint16;
+      mandatory true;
+    }
+  }
+}</pre></div>
+            <p>
+               
+               
+                   
+            </p>
+            <p>
+                     Instantiating one CFS we have:
+                     
+            </p>
+            <div class="informalexample"><pre class="screen">admin@upper-nso% show cfs-vlan
+cfs-vlan v1 {
+    a-router ex0;
+    z-router ex5;
+    iface    eth3;
+    unit     3;
+    vid      77;
+}</pre></div>
+            <p>
+               
+                     The provisioning code for this CFS has to make a decision on where to
+                     instantiate what. In this example the "what" is trivial, it's the
+                     accompanying RFS, whereas the "where" is more involved.
+                     The two underlying RFS nodes, each manage 3 netsim routers, thus the
+                     given the input, the CFS code must be able to determine which RFS node
+                     to choose. In this example we have chosen to have an explicit map,
+                     thus on the <code class="code">upper-nso</code> we also have:
+                     
+            </p>
+            <div class="informalexample"><pre class="screen">admin@upper-nso% show dispatch-map
+dispatch-map ex0 {
+    rfs-node lower-nso-1;
+}
+dispatch-map ex1 {
+    rfs-node lower-nso-1;
+}
+dispatch-map ex2 {
+    rfs-node lower-nso-1;
+}
+dispatch-map ex3 {
+    rfs-node lower-nso-2;
+}
+dispatch-map ex4 {
+    rfs-node lower-nso-2;
+}
+dispatch-map ex5 {
+    rfs-node lower-nso-2;
+}</pre></div>
+            <p>
+               
+                     So, we have template CFS code which does the dispatching to the
+                     right RFS node.
+                     
+            </p>
+            <div class="informalexample"><pre class="screen">&lt;config-template xmlns="http://tail-f.com/ns/config/1.0"
+                 servicepoint="cfs-vlan"&gt;
+  &lt;devices xmlns="http://tail-f.com/ns/ncs"&gt;
+
+    &lt;!--
+        Do this for the two leafs a-router and z-router
+    --&gt;
+    &lt;device foreach="{*[re-match(name(), 'cfs-vlan:[az]-router')]}"&gt;
+
+      &lt;!--
+      Pick up the name of the rfs-node from the dispatch-map
+      and do not change the current context thus the string()
+      --&gt;
+      &lt;name&gt;{string(deref(current())/../rfs-node)}&lt;/name&gt;
+      &lt;config&gt;
+        &lt;vlan xmlns="http://com/example/rfsvlan"&gt;
+
+          &lt;!--
+              We do not want to change the current context here either
+          --&gt;
+          &lt;name&gt;{string(/name)}&lt;/name&gt;
+
+          &lt;!--
+              current() is still a-router or z-router
+          --&gt;
+          &lt;router&gt;{current()}&lt;/router&gt;
+
+          &lt;iface&gt;{/iface}&lt;/iface&gt;
+          &lt;unit&gt;{/unit}&lt;/unit&gt;
+          &lt;vid&gt;{/vid}&lt;/vid&gt;
+          &lt;description&gt;Interface owned by CFS: {/name}&lt;/description&gt;
+        &lt;/vlan&gt;
+      &lt;/config&gt;
+    &lt;/device&gt;
+
+  &lt;/devices&gt;
+&lt;/config-template&gt;</pre></div>
+            <p>
+                   
+            </p>
+            <p>
+                     This technique for dispatching is simple, and easy to understand.
+                     The dispatching might be more complex, it might even be determined at
+                     execution time dependent on CPU load. It might be, as here inferred
+                     from input parameters or it might be computed.
+                   
+            </p>
+            <p>
+                     The result of the template based service is to instantiate the
+                     RFS, at the RFS nodes.
+                   
+            </p>
+            <p>
+                     First lets have a look at what happened in the upper-nso. Look
+                     at the modifications but ignore the fact that this is an LSA service:
+                     
+            </p>
+            <div class="informalexample"><pre class="screen">admin@upper-nso% request cfs-vlan v1 get-modifications no-lsa
+cli {
+    local-node {
+        data  devices {
+                   device lower-nso-1 {
+                       config {
+              +            rfs-vlan:vlan v1 {
+              +                router ex0;
+              +                iface eth3;
+              +                unit 3;
+              +                vid 77;
+              +                description "Interface owned by CFS: v1";
+              +            }
+                       }
+                   }
+                   device lower-nso-2 {
+                       config {
+              +            rfs-vlan:vlan v1 {
+              +                router ex5;
+              +                iface eth3;
+              +                unit 3;
+              +                vid 77;
+              +                description "Interface owned by CFS: v1";
+              +            }
+                       }
+                   }
+               }
+    }
+}</pre></div>
+            <p>
+                     Just the dispatched data is shown. As ex0 and ex5 resides on different
+                     nodes the service instance data has to be sent to both lower-nso-1
+                     and lower-nso-2.
+                   
+            </p>
+            <p>
+                     Now lets see what happened in the lower-nso. Look
+                     at the modifications and take into account these are LSA nodes
+                     (this is the default):
+                     
+            </p>
+            <div class="informalexample"><pre class="screen">admin@upper-nso% request cfs-vlan v1 get-modifications
+cli {
+  local-node {
+    .....
+  }
+  lsa-service {
+    service-id /devices/device[name='lower-nso-1']/config/rfs-vlan:vlan[name='v1']
+    data devices {
+      device ex0 {
+        config {
+          r:sys {
+            interfaces {
+   +          interface eth3 {
+   +            enabled;
+   +            unit 3 {
+   +              enabled;
+   +              description "Interface owned by CFS: v1";
+   +              vlan-id 77;
+   +            }
+   +          }
+            }
+          }
+        }
+      }
+    }
+  }
+  lsa-service {
+    service-id /devices/device[name='lower-nso-2']/config/rfs-vlan:vlan[name='v1']
+    data devices {
+      device ex5 {
+        config {
+          r:sys {
+            interfaces {
+   +          interface eth3 {
+   +            enabled;
+   +            unit 3 {
+   +              enabled;
+   +              description "Interface owned by CFS: v1";
+   +              vlan-id 77;
+   +            }
+   +          }
+            }
+          }
+        }
+      }
+    }
+  }</pre></div>
+            <p>
+                     Both the dispatched data and the modification of the remote
+                     service are shown. As ex0 and ex5 resides on different
+                     nodes the service modifications of the service rfs-vlan
+                     on both lower-nso-1 and lower-nso-2 are shown.
+                   
+            </p>
+            <p>
+                     The communication between the NSO nodes is of course NETCONF.
+                     
+            </p>
+            <div class="informalexample"><pre class="screen">admin@upper-nso% set cfs-vlan v1 a-router ex0 z-router ex5 iface eth3 unit 3 vid 78
+[ok][2016-10-20 16:52:45]
+
+[edit]
+admin@upper-nso% commit dry-run outformat native
+native {
+    device {
+        name lower-nso-1
+        data &lt;rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0"
+                  message-id="1"&gt;
+               &lt;edit-config xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"&gt;
+                 &lt;target&gt;
+                   &lt;running/&gt;
+                 &lt;/target&gt;
+                 &lt;test-option&gt;test-then-set&lt;/test-option&gt;
+                 &lt;error-option&gt;rollback-on-error&lt;/error-option&gt;
+                 &lt;with-inactive xmlns="http://tail-f.com/ns/netconf/inactive/1.0"/&gt;
+                 &lt;config&gt;
+                   &lt;vlan xmlns="http://com/example/rfsvlan"&gt;
+                     &lt;name&gt;v1&lt;/name&gt;
+                     &lt;vid&gt;78&lt;/vid&gt;
+                     &lt;private&gt;
+                       &lt;re-deploy-counter&gt;-1&lt;/re-deploy-counter&gt;
+                     &lt;/private&gt;
+                   &lt;/vlan&gt;
+                 &lt;/config&gt;
+               &lt;/edit-config&gt;
+             &lt;/rpc&gt;
+    }
+               ...........
+               ....</pre></div>
+            <p>
+                   
+            </p>
+            <p>
+                     The YANG model at the lower layer, also know as the RFS layer is
+                     similar, but different. It looks as:
+                     
+            </p>
+            <div class="informalexample"><pre class="screen">module rfs-vlan {
+
+  ...
+
+  list vlan {
+    key name;
+    leaf name {
+      tailf:cli-allow-range;
+      type string;
+    }
+
+    uses ncs:service-data;
+    ncs:servicepoint "rfs-vlan";
+
+    leaf router {
+      type string;
+    }
+    leaf iface {
+      type string;
+      mandatory true;
+    }
+    leaf unit {
+      type int32;
+      mandatory true;
+    }
+    leaf vid {
+      type uint16;
+      mandatory true;
+    }
+    leaf description {
+      type string;
+      mandatory true;
+    }
+  }
+}</pre></div>
+            <p>
+               
+                     and the task for the RFS provisioning code here is to actually provision
+                     the designated router. If we log into one of the lower layer NSO nodes,
+                     we can check.
+                   
+            </p>
+            <div class="informalexample"><pre class="screen">admin@lower-nso-1&gt; show configuration vlan
+vlan v1 {
+    router      ex0;
+    iface       eth3;
+    unit        3;
+    vid         77;
+    description "Interface owned by CFS: v1";
+}
+[ok][2016-10-20 17:01:08]
+admin@lower-nso-1&gt; request vlan v1 get-modifications
+cli {
+  local-node {
+    data  devices {
+             device ex0 {
+               config {
+                 r:sys {
+                   interfaces {
+    +                interface eth3 {
+    +                  enabled;
+    +                  unit 3 {
+    +                    enabled;
+    +                    description "Interface owned by CFS: v1";
+    +                    vlan-id 77;
+    +                  }
+    +                }
+                   }
+                 }
+               }
+             }
+    }
+  }
+}</pre></div>
+            <p>
+                     To conclude this section, the final remark here is that to design a
+                     good LSA application, the trick is to identify a good layering for the
+                     service data models. The upper layer, the CFS layer is what is exposed
+                     northbound, and thus requires a model that is as forward looking as
+                     possible since that model is what system north of NSO integrates to,
+                     whereas the lower layer models, the RFS models can be viewed as
+                     "internal system models" and they can be more easily changed.
+                   
+            </p>
+         </div><script type="text/javascript" src="common/main.js">
+            <!----></script><script type="text/javascript" src="common/splitterInit.js">
+            <!----></script><div class="footer" id="footer-legal">
+            <div class="footer-legal framework-footer-cq">
+               <div id="framework-footer">
+                  <div id="footer-legal"><a href="http://www.cisco.com/web/siteassets/legal/terms_condition.html">Terms &amp; Conditions</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/privacy.html">Privacy Statement</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/privacy.html#cookies">Cookie Policy</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/trademark.html">Trademarks</a></div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div id="sidebar">
+         <div id="leftnavigation" style="padding-top:3px;">
+            <div id="tabs">
+               <ul style="visibility: hidden;"></ul>
+               <div id="treeDiv"><img src="common/images/loading.gif" alt="loading table of contents..." id="tocLoading" style="display:block;" /><div id="ulTreeDiv" style="display:none">
+                     <ul id="tree" class="filetree">
+                        <li><span class="file"><a href="ncs_lsa.intro.html" tabindex="1">Going big - Layered service architecture</a></span><ul>
+                              <li><span class="file"><a href="ch01s01.html" tabindex="1">Introduction to the layered service architecture</a></span></li>
+                              <li><span class="file"><a href="ch01s02.html" tabindex="1">Separating the service into CFS and RFS</a></span><ul>
+                                    <li><span class="file"><a href="ch01s02s01.html" tabindex="1">New design - green field</a></span></li>
+                                    <li><span class="file"><a href="ch01s02s02.html" tabindex="1">Existing monolithic application</a></span></li>
+                                    <li><span class="file"><a href="ch01s02s03.html" tabindex="1">Existing monolithic application with stacked services</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch01s03.html" tabindex="1">Dispatching</a></span></li>
+                              <li><span class="file"><a href="ch01s04.html" tabindex="1">Scalability and performance aspects</a></span></li>
+                              <li><span class="file"><a href="ch01s05.html" tabindex="1">Multiple CFS nodes</a></span></li>
+                              <li><span class="file"><a href="ch01s06.html" tabindex="1">Pros and cons of layered service architecture</a></span><ul>
+                                    <li><span class="file"><a href="ch01s06s01.html" tabindex="1">Pros</a></span></li>
+                                    <li><span class="file"><a href="ch01s06s02.html" tabindex="1">Cons</a></span></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ncs_lsa.lsa.html" tabindex="1">LSA examples</a></span><ul>
+                              <li id="webhelp-currentid"><span class="file"><a href="ch02s01.html" tabindex="1">Greenfield LSA application</a></span></li>
+                              <li><span class="file"><a href="ch02s02.html" tabindex="1">Rearchitecting an existing monolithic application into LSA</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ncs_lsa.lsa_cluster_comp.html" tabindex="1">LSA compared to NSO clustering</a></span><ul>
+                              <li><span class="file"><a href="ch03s01.html" tabindex="1">LSA compared to NSO clustering</a></span></li>
+                           </ul>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

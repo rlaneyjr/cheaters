@@ -1,0 +1,842 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      
+      <title>nct -  - NSO 4.4.2.3 Manual Pages</title>
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+      <link rel="home" href="index.html" title="NSO 4.4.2.3 Manual Pages" />
+      <link rel="up" href="ncs.man.volume.1.html" title="NCS man-pages, Volume 1" />
+      <link rel="prev" href="man.1.nct-upgrade.html" title="nct-upgrade" />
+      <link rel="next" href="man.1.pyang.html" title="pyang" />
+      <meta xmlns="" name="Section-title" content="nct" /><script xmlns="" type="text/javascript">
+      //The id for tree cookie
+      var treeCookieId = "treeview-73142";
+      var language = "en";
+      var w = new Object();
+      //Localization
+      txt_filesfound = 'Results';
+      txt_enter_at_least_1_char = "You must enter at least one character.";
+      txt_browser_not_supported = "JavaScript is disabled on your browser. Please enable JavaScript to enjoy all the features of this site.";
+      txt_please_wait = "Please wait. Search in progress...";
+      txt_results_for = "Results for: ";
+    </script><link xmlns="" rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/css/positioning.css" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/jquery/theme-redmond/jquery-ui-1.8.2.custom.css" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/jquery/treeview/jquery.treeview.css" /><style xmlns="" type="text/css">
+      
+      #noscript{
+      font-weight:bold;
+      background-color: #55AA55;
+      font-weight: bold;
+      height: 25spx;
+      z-index: 3000;
+      top:0px;
+      width:100%;
+      position: relative;
+      border-bottom: solid 5px black;
+      text-align:center;
+      color: white;
+      }
+      
+      input {
+      margin-bottom: 5px;
+      margin-top: 2px;
+      }
+      .folder {
+      display: block;
+      height: 22px;
+      padding-left: 20px;
+      background: transparent url(common/jquery/treeview/images/folder.gif) 0 0px no-repeat;
+      }
+      span.contentsTab {
+      padding-left: 20px;
+      background: url(common/images/toc-icon.png) no-repeat 0 center;
+      }
+      span.searchTab {
+      padding-left: 20px;
+      background: url(common/images/search-icon.png) no-repeat 0 center;
+      }
+      
+      /* Overide jquery treeview's defaults for ul. */
+      .treeview ul {
+      background-color: transparent;
+      margin-top: 4px;
+      }		
+      #webhelp-currentid {
+      /* background-color: #D8D8D8 !important; */
+      background-color: #D8D8D8;
+      }
+      .treeview .hover { color: black; }
+      .filetree li span a { text-decoration: none; font-size: 12px; color: #517291; }
+      
+      /* Override jquery-ui's default css customizations. These are supposed to take precedence over those.*/
+      .ui-widget-content {
+      border: 0px; 
+      background: none; 
+      color: none;     
+      }
+      .ui-widget-header {
+      color: #e9e8e9;
+      border-left: 1px solid #e5e5e5;
+      border-right: 1px solid #e5e5e5;
+      border-bottom: 1px solid #bbc4c5;
+      border-top: 4px solid #e5e5e5;
+      border: medium none;
+      background: #F4F4F4; /* old browsers */
+      background: -moz-linear-gradient(top, #F4F4F4 0%, #E6E4E5 100%); /* firefox */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F4F4F4), color-stop(100%,#E6E4E5)); /* webkit */    
+      font-weight: none;
+      }
+      .ui-widget-header a { color: none; }
+      .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { 
+      border: none; background: none; font-weight: none; color: none; }
+      .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited { color: black; text-decoration: none; }
+      .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus { border: none; background: none; font-weight: none; color: none; }
+      
+      .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { border: none; background: none; font-weight: none; color: none; }
+      .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited { 
+      color: black; text-decoration: none; 	
+      background: #C6C6C6; /* old browsers */
+      background: -moz-linear-gradient(top, #C6C6C6 0%, #D8D8D8 100%); /* firefox */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#C6C6C6), color-stop(100%,#D8D8D8)); /* webkit */
+      -webkit-border-radius:15px; -moz-border-radius:10px;
+      border: 1px solid #f1f1f1;
+      }    
+      .ui-corner-all { border-radius: 0 0 0 0; }
+      
+      .ui-tabs { padding: .2em;}
+      .ui-tabs .ui-tabs-nav li { top: 0px; margin: -2px 0 1px; text-transform: uppercase; font-size: 10.5px;}
+      .ui-tabs .ui-tabs-nav li a { padding: .25em 2em .25em 1em; margin: .5em; text-shadow: 0 1px 0 rgba(255,255,255,.5); }
+      /**
+      *	Basic Layout Theme
+      * 
+      *	This theme uses the default layout class-names for all classes
+      *	Add any 'custom class-names', from options: paneClass, resizerClass, togglerClass
+      */
+      
+      .ui-layout-pane { /* all 'panes' */ 
+      background: #FFF; 
+      border: 1px solid #BBB; 
+      padding: 05x; 
+      overflow: auto;
+      } 
+      
+      .ui-layout-resizer { /* all 'resizer-bars' */ 
+      background: #DDD; 
+      top:100px
+      } 
+      
+      .ui-layout-toggler { /* all 'toggler-buttons' */ 
+      background: #AAA; 
+      } 
+      
+    </style>
+      <!--[if IE]>
+	<link rel="stylesheet" type="text/css" href="../common/css/ie.css"/>
+	<![endif]--><script xmlns="" type="text/javascript" src="common/browserDetect.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery-1.7.2.min.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery.ui.all.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery.cookie.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/treeview/jquery.treeview.min.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/layout/jquery.layout.js">
+         <!----></script><style type="text/css">
+      
+      #header {
+      /* background: url("../images/header-bg.png") scroll top left repeat-x #4d8c83; */
+      background: transparent;
+      }
+      #leftnavigation {
+      /* background-color: #ededed!important; */
+      background-color: transparent;
+      }
+      #navheader {
+      visibility: hidden;
+      }
+      #webhelp-currentid {
+      /* background-color: #D8D8D8 !important; */
+      background-color: #FFFFFF; /*but must be changed in main.js as well*/
+      }
+      .filetree span.file {
+      /* background: url(images/file.gif) 0 0 no-repeat; */
+      background: initial;
+      }
+      .filetree span.folder, .filetree span.file {
+      padding: 1px 0 1px 7px;
+      display: block;
+      }
+
+      /* borrowed from cisco: clientlib.css */
+      .footer {
+      margin: 28px 30px 0 15px;
+      font-size: 80%;
+      line-height: 120%;
+      border-top: 1px solid #ccc;
+      padding-top: 7px;
+      color: #999;
+      }
+      .footer #footer-legal{display:inline;padding-bottom:18px}
+      #framework-footer{margin:0;padding:0 0 15px 0;min-width:900px;width:100%}
+      .footer a,.footer a:visited{color:#999}
+
+      /* from ccimr.css */
+      a:active  { color: #3366CC}
+      a:hover   { color: #3366CC}
+      a:link    { color: #3366CC}
+      a:visited { color: #3366CC}
+
+      #header img {
+      float: left;
+      margin-left: 20px;
+      margin-top: 0px;
+      }
+
+      #header h1 {
+      color: #336666;
+      margin-top: 4px;
+      }
+      #content h1, #content h2 {
+      color: #336666;
+      }
+      .title {
+      color: #336666;
+      }
+      p, pre {
+      margin-left: 0.1in;
+      }
+      p, ul, ol, li {
+        font-size: 95%;
+        font-family: Arial, Helvetica, sans-serif;
+        margin-top: 1px;
+      }
+      body {
+        font: 80.5% Arial, Helvetica, sans-serif;
+      }
+      ol {
+      display: block;
+      list-style-type: decimal;
+      -webkit-margin-before: 1em;
+      -webkit-margin-after: 1em;
+      -webkit-margin-start: 0px;
+      -webkit-margin-end: 0px;
+      -webkit-padding-start: 40px;
+      border: 1;
+      }
+    </style></head>
+   <body>
+      <noscript>
+         <div id="noscript">JavaScript is disabled on your browser. Please enable JavaScript to enjoy all the features of this site.</div>
+      </noscript>
+      <div id="header"><a href="index.html"><img style="margin-right: 2px; width: 110; height: 73; padding-right: 25px; padding-top: 8px" align="right" src="common/images/logo.gif" alt="Cisco Systems, Inc." /></a><h1>NSO 4.4.2.3 Manual Pages
+                <br />NCS man-pages, Volume 1
+         </h1>
+         <div id="navheader">
+            <!---->
+            <table class="navLinks">
+               <tr>
+                  <td><a id="showHideButton" href="#" onclick="myLayout.toggle('west')" class="pointLeft" tabindex="5" title="Hide TOC tree">Sidebar
+                                                    </a></td>
+                  <td><a accesskey="p" class="navLinkPrevious" tabindex="5" href="man.1.nct-upgrade.html">Prev</a>
+                                                             |
+                                                             <a accesskey="u" class="navLinkUp" tabindex="5" href="ncs.man.volume.1.html">Up</a>
+                                                         |
+                                                         <a accesskey="n" class="navLinkNext" tabindex="5" href="man.1.pyang.html">Next</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div id="content">
+         <div class="refentry"><a id="man.1.nct"></a><div xmlns="" class="titlepage"></div>
+            <div class="refnamediv"><a id="man.1.nct.name"></a><h2>Name</h2>
+               <p>nct — a collection of tools that can be used to install and manage NCS nodes.</p>
+            </div>
+            <div class="refsect1"><a id="man.1.nct.introduction"></a><h2>Introduction</h2>
+               <p>A host running NCS is called an <span class="emphasis"><em>NCS node</em></span>.
+                      A host can be either a physical machine or a virtual machine
+                      as long as they can be accessed via SSH. 
+               </p>
+               <p>With nct it is possible to install and
+                      manage NCS nodes. This assumes that the hosts
+                      are running Linux and are accessible via SSH.
+               </p>
+               <div class="refsect2"><a id="man.1.nct.the_hostsfile"></a><h3>The hostsfile</h3>
+                  <p>Each NCS node can be operated on independently but the main
+                           idea is that nct can operate on a set of NCS nodes.
+                           To operate on a set of NCS nodes a, so called, <span class="emphasis"><em>hostsfile</em></span>
+                           is needed. A <span class="emphasis"><em>hostsfile</em></span> consists of Host entries according
+                           to the following example:
+                  </p><pre class="screen">{"192.168.23.99", []}.
+{"192.168.23.98", []}.
+...etc...</pre><p>Each entry, called a <span class="emphasis"><em>Tuple</em></span>, begin with a ‘{’ bracket
+                           and ends with a ‘}.’
+                  </p>
+                  <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+                     <h3 class="title">Note</h3>
+                     <p>Note the ending dot after the `}.´ bracket!</p>
+                  </div>
+                  <p>Each entry consists of a <span class="emphasis"><em>Hostname/IP-Address</em></span>, enclosed in
+                           double quotes and a list of options, where the list begin
+                           with a ‘[’ bracket and ends with a corresponding ‘]’ bracket.
+                  </p>
+                  <p>In the list of options, information can be given that, in most
+                           cases, have a corresponding <span class="emphasis"><em>switch</em></span> option to the various
+                           tool commands. So instead of having to specify the SSH User
+                           to every tool command with the ‘--ssh-user’ switch; it can
+                           be specified in the <span class="emphasis"><em>hostsfile</em></span> as:
+                  </p><pre class="screen">{"192.168.23.99", [{ssh_user,"user"}]}.
+{"192.168.23.98", [{ssh_user,"user"}]}.
+...etc...</pre><p>Each such switch is represented as a <span class="emphasis"><em>Tuple</em></span> with
+                           the switch name and its value, and if it is an unary switch
+                           it is represented as just the switch name.
+                  </p>
+                  <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+                     <h3 class="title">Note</h3>
+                     <p>The: ‘-’ in a switch corresponds to a: ‘_’ in the hostsfile.
+                              So, for example, the switch ‘--ssh-user’ correspond to ‘ssh_user’
+                              in the <span class="emphasis"><em>hostsfile</em></span>.
+                     </p>
+                  </div>
+                  <p>Often it can be useful to be able to group a subset of the <span class="emphasis"><em>Hosts</em></span>
+                           in the hostsfile when you want to restrict an operation to only
+                           those <span class="emphasis"><em>Hosts</em></span>. This can be done with the group mechanism.
+                           Study the example below:
+                  </p><pre class="screen">{"192.168.23.99",[{groups,["service","london"]}, ... ]}.
+{"192.168.24.98",[{groups,["service","paris"]},  ... ]}.
+{"192.168.23.11",[{groups,["device","london"]},  ... ]}.
+{"192.168.24.12",[{groups,["device","paris"]},   ... ]}.</pre><p>In the example above, we have 4 NCS nodes grouped into two groups
+                           named: "london" and: "paris" but also two other groups named: "service"
+                           and: "device". Imagine that we may want to do certain operations
+                           only on the members in the "london" group or perhaps only on the
+                           members in the "device" group. This can easily be achived by using
+                           the ‘--group’ switch to a NCS tools command. For example:
+                  </p><pre class="screen">nct upgrade --group paris ...
+nct stop --group service ...
+nct check --group london,device --groupoper and ...</pre><p>In the last example we specify two groups and require the
+                           (to be) affected <span class="emphasis"><em>Hosts</em></span> to be member in both groups.
+                           This is controlled by the ‘--groupoper and' switch which
+                           means that the intersection of the specified groups should
+                           yield the affected 'Hosts'. The default of the group mechanism
+                           is to use the union if several groups are specified
+                           (`--groupoper or’).
+                  </p>
+                  <p>
+                             For a complete list of options available for a hostsfile, see
+                             <span class="citerefentry"><span class="refentrytitle">nct-hostsfile</span>(1)</span>
+                           
+                  </p>
+               </div>
+               <div class="refsect2"><a id="man.1.nct.the_use_of_ssh"></a><h3>The use of SSH</h3>
+                  <p>The NCS tools make heavy use of SSH for running commands and
+                           copying file on/to the <span class="emphasis"><em>Hosts</em></span>. It is
+                           possible to specify the ‘SSH User’ and ‘SSH
+                           Password’ to be used for each Host, either with a switch to a command
+                           or in the <span class="emphasis"><em>hostsfile</em></span>. It is recommended to add
+                           the ‘SSH Password’ to the
+                           <span class="emphasis"><em>hostsfile</em></span> and prohibit other users read
+                           access to the file for security reasons.
+                  </p>
+                  <p>It is also possible to use ‘SSH KEYS’ as long as
+                           they do not require a passphrase.
+                  </p>
+                  <p>Then, for each <span class="emphasis"><em>Host</em></span>, setup the SSH key authentication. This can
+                           easily be done with the ‘ssh-copy-id’ command. Example:
+                  </p><pre class="screen">ssh-copy-id user@192.168.23.99</pre><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+                     <h3 class="title">Note</h3>
+                     <p>Per default, the default filename of the SSH key pair will be used;
+                              for example <span class="emphasis"><em>id_rsa</em></span> for RSA keys. To override this behaviour
+                              you can use the ‘--ssh-key-name &lt;keyname&gt;’ switch with
+                              any NCT command. 
+                     </p>
+                  </div>
+               </div>
+            </div>
+            <div class="refsect1"><a id="man.1.nct.verify_ssh_access"></a><h2>Verify SSH access</h2>
+               <p>Assume we have a hostsfile looking like this:</p><pre class="screen">{"192.168.23.99",[{groups,["service","paris"]},{ssh_user,"user"}]}.
+{"192.168.23.98",[{groups,["service","london"]},{ssh_user,"user"}]}.
+{"192.168.23.11",[{groups,["device","paris"]},{ssh_user,"user"}]}.
+{"192.168.23.12",[{groups,["device","paris"]},{ssh_user,"user"}]}.
+{"192.168.23.21",[{groups,["device","london"]},{ssh_user,"user"}]}.
+{"192.168.23.22",[{groups,["device","london"]},{ssh_user,"user"}]}.</pre><p>where we have setup SSH key authentication on all the hosts as explained
+                      earlier. The <span class="emphasis"><em>Hosts</em></span> are running Linux and the prerequisites has been installed.
+               </p>
+               <p>We can now verify that the nct can access all the <span class="emphasis"><em>Hosts</em></span>
+                      using the following command:
+               </p><pre class="screen">nct check --hostsfile hostsfile -c ssh</pre><p>If successful, the command may return something like:</p><pre class="screen">....
+SSH Check to 192.168.23.99:22
+SSH OK : 'ssh uname' returned: Linux
+....</pre><p>We also need to verify that we can become root on the Hosts by
+                      executing the ‘sudo’ command. This can be checked like this:
+               </p><pre class="screen">nct check --hostsfile hostsfile -c ssh-sudo</pre><p>If successful, the command may return something like:</p><pre class="screen">....
+SSH+SUDO Check to 192.168.23.99:22
+SSH+SUDO OK
+....</pre><p>If you run the ‘nct check’ without the ‘-c’ switch it will actually
+                      try to verify the following:
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                                  SSH access
+                                
+                     </li>
+                     <li class="listitem">
+                                  SUDO access
+                                
+                     </li>
+                     <li class="listitem">
+                                  DISK USAGE with a configurable warning limit
+                                
+                     </li>
+                     <li class="listitem">
+                                  REST interface is up
+                                
+                     </li>
+                     <li class="listitem">
+                                  NETCONF interface is up
+                                
+                     </li>
+                     <li class="listitem">
+                                  What NCS version is running
+                                
+                     </li>
+                     <li class="listitem">
+                                  Is HA enabled
+                                
+                     </li>
+                  </ul>
+               </div>
+               <p>It can look something like this:</p><pre class="screen">....
+ALL Check to 192.168.22.99:22
+SSH OK : 'ssh uname' returned: Linux
+SSH+SUDO OK
+DISK-USAGE &lt;WARNING&gt; FileSys=/dev/sda4 (/var,/opt) Use=89%
+REST OK
+NETCONF OK
+NCS-VSN : 3.3
+HA : mode=master, node-id=master_primary, connected-slave=master_secondary
+....</pre><p>To run any Linux command on the <span class="emphasis"><em>Hosts</em></span>, use the <span class="emphasis"><em>nct ssh-cmd</em></span>.
+               </p>
+               <p>Example:</p><pre class="screen">nct ssh-cmd --hostsfile hostsfile \
+-c "sudo sh -c 'yes | /opt/ncs/current/bin/ncs-uninstall --all'"</pre></div>
+            <div class="refsect1"><a id="man.1.nct.install_ncs"></a><h2>Install NCS</h2>
+               <p>Assume we have verified that SSH access works as shown above.</p>
+               <p>We can then install NCS on all the <span class="emphasis"><em>Hosts</em></span> like this:
+               </p><pre class="screen">nct install --hostsfile hostsfile --file ncs-3.3.linux.x86_64.installer.bin</pre><p>The command will return before the installation is completed. We can now
+                      check the progress by displaying the content of the install log on each
+                      of the <span class="emphasis"><em>Hosts</em></span> like this:
+               </p><pre class="screen">nct install --hostsfile hostsfile -c check --file ncs-3.3.linux.x86_64.installer.bin</pre><p>The output, when the installation is completed will look something like this:</p><pre class="screen">....
+Check Install of NCS to 192.168.23.99:22
+&gt;&gt; Content of : /tmp/ncs-3.3.linux.x86_64.installer.bin.log
+INFO  Using temporary directory /tmp/ncs_installer.17571 to stage NCS installation bundle
+INFO  Using /opt/ncs/ncs-3.3 for static files
+INFO  Unpacked ncs-3.3 in /opt/ncs/ncs-3.3
+INFO  Found and unpacked corresponding DOCUMENTATION_PACKAGE
+INFO  Found and unpacked corresponding EXAMPLE_PACKAGE
+INFO  Generating default SSH hostkey (this may take some time)
+INFO  SSH hostkey generated
+INFO  Environment set-up generated in /opt/ncs/ncs-3.3/ncsrc
+INFO  NCS installation script finished
+INFO  Found and unpacked corresponding NETSIM_PACKAGE
+INFO  NCS installation complete
+....</pre><p>Note that the first time(s) you run the ‘-c check’ command, the installation
+                      may not yet be finished and you will only see a few of the lines above.
+                      Then wait a short while before re-run the command. When all log output
+                      show the line ‘NCS installation complete’ you’re done.
+               </p>
+               <p>If you want to limit the check to just one (or a few hosts) you can
+                      specify them on the command line like this:
+               </p><pre class="screen">nct install -h 192.168.23.99,192.168.23.98 --ssh-user user \
+c check --file ncs-3.3.linux.x86_64.installer.bin</pre><p>If the installation fail, on one or several hosts, then try the following:</p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                                  Do the log output give you any hint on what went wrong?
+                                
+                     </li>
+                     <li class="listitem">
+                                  Increase the verbosity of the command output with the <span class="emphasis"><em>-v 2</em></span> switch.
+                                
+                     </li>
+                     <li class="listitem">
+                                  Is it possible to install ncs manually on the <span class="emphasis"><em>Host</em></span> (try:
+                                  sh -c "ncs-3.3.linux.x86_64.installer.bin --system-install" ).
+                                
+                     </li>
+                  </ul>
+               </div>
+               <p>If nothing works, get in contact with the nct team for more help.</p>
+               <p>If the installations was successful you can start NCS like this:</p><pre class="screen">nct start --hostsfile hostsfile</pre><p>Finally, check that NCS actually is up and running:</p><pre class="screen">nct check --hostsfile hostfile</pre></div>
+            <div class="refsect1"><a id="man.1.nct.adding_neds_and_packages"></a><h2>Adding NEDs and packages</h2>
+               <p>When NCS is installed and is up and running, it is time to add
+                      NEDs/packages to the systems. The name of a package is defined as:
+               </p><pre class="screen">ncs-&lt;NCSVSN&gt;-&lt;PACKAGE&gt;&lt;VSN&gt;.tar.gz</pre><p>Where <span class="emphasis"><em>NCSVSN</em></span> is the major version of NCS used to build the package,
+                      <span class="emphasis"><em>PACKAGE</em></span> is the name of the package and <span class="emphasis"><em>VSN</em></span> the version of the package.
+               </p>
+               <p>First we need to put a package on each <span class="emphasis"><em>Host</em></span>:
+               </p><pre class="screen">nct packages --hostsfile hostsfile -c fetch \
+--file ncs-3.3-tailf-hcc-3.0.8.tar.gz</pre><p>If successful, the output could look like this:</p><pre class="screen">....
+Fetch Package at 192.168.23.99:8080
+OK
+....</pre><p>To check the package status we can run:</p><pre class="screen">nct packages --hostsfile hostsfile</pre><p>Which may result in the following output:</p><pre class="screen">....
+Package Info at 192.168.22.99:8080
+ncs-3.3-tailf-hcc-3.0.8 (installable)
+....</pre><p>The status information above, shown between the parentheses, can
+                      take on one of the following values:
+               </p>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt><span class="term">
+                                     installable
+                                   </span></dt>
+                     <dd>
+                                    The package is ready to be installed
+                                  
+                     </dd>
+                     <dt><span class="term">
+                                     installed
+                                   </span></dt>
+                     <dd>
+                                    The package has been installed
+                                  
+                     </dd>
+                     <dt><span class="term">
+                                     loaded
+                                   </span></dt>
+                     <dd>
+                                    The package has been loaded into the NCS node
+                                  
+                     </dd>
+                  </dl>
+               </div>
+               <p>To install the package we can run:</p><pre class="screen">nct packages --hostsfile hostsfile -c install \
+--package ncs-3.3-tailf-hcc-3.0.8</pre><p>If we again check the the status, we will see the following:</p><pre class="screen">....
+Package Info at 192.168.22.99:8080
+ncs-3.3-tailf-hcc-3.0.8 (installed)
+....</pre><p>What remains is to actually load the package into the NCS node,
+                      which we can do like this:
+               </p><pre class="screen">nct packages --hostsfile hostsfile -c reload</pre><p>And if the reload is successful we may get in return:</p><pre class="screen">....
+Reload Packages at 192.168.22.99:8080
+tailf-hcc            true
+....</pre><p>In case the the reload would fail we would get something like:</p><pre class="screen">....
+Reload Packages at 192.168.22.99:8080
+tailf-hcc            false ...some text here...
+....</pre><p>If we yet again check the the status, we will see the following:</p><pre class="screen">....
+Package Info at 192.168.22.99:8080
+tailf-hcc-3.0.8 (loaded)
+ncs-3.3-tailf-hcc-3.0.8 (installed)
+....</pre><p>It is of course possible to deinstall a package:</p><pre class="screen">nct packages --hostsfile hostsfile -c deinstall \
+--package ncs-3.3-tailf-hcc-3.0.8</pre><p>A status check will reveal the following:</p><pre class="screen">....
+Package Info at 192.168.22.99:8080
+tailf-hcc-3.0.8 (loaded)
+ncs-3.3-tailf-hcc-3.0.8 (installable)
+....</pre><p>As you can see, the package is still loaded, to unload it
+                      we need to do a <span class="emphasis"><em>reload</em></span> again:
+               </p><pre class="screen">nct packages --hostsfile hostsfile -c reload</pre><p>A final status check will now show us this:</p><pre class="screen">....
+Package Info at 192.168.22.99:8080
+ncs-3.3-tailf-hcc-3.0.8 (installable)
+....</pre><div class="refsect2"><a id="man.1.nct.upgrade_a_ned_package"></a><h3>Upgrade a NED/package</h3>
+                  <p>When to upgrade a package to a new version it is recommended
+                           to first make an NCS backup:
+                  </p><pre class="screen">nct backup --hostsfile hostsfile</pre><p>The result output may look something like:</p><pre class="screen">....
+SSH Check to 192.168.23.22:22
+SSH OK : 'ssh sudo /opt/ncs/current/bin/ncs-backup --non-interactive' \
+returned: INFO  Backup /var/opt/ncs/backups/ncs-3.3@2014-12-05T19:47:58.backup\
+created successfully
+....</pre><p>As the header of the output above reveal, the ‘nct backup’ command
+                           is really just using the versatile ‘nct check’ command to execute
+                           the NCS backup command. The important part to note however is the path
+                           to the successfully created backup file.
+                  </p>
+                  <p>After this successful NCS backup we can upgrade a NED package as:</p><pre class="screen">nct packages --hostsfile hostsfile -c deinstall \
+--package ncs-3.3-tailf-hcc-3.0.8
+
+nct packages --hostsfile hostsfile -c fetch \
+--file ncs-3.3-tailf-hcc-3.0.9.tar.gz
+
+nct packages --hostsfile hostsfile -c install \
+--package ncs-3.3-tailf-hcc-3.0.9
+
+nct packages --hostsfile hostsfile -c reload</pre></div>
+            </div>
+            <div class="refsect1"><a id="man.1.nct.upgrading_ncs"></a><h2>Upgrading NCS</h2>
+               <p>When upgrading NCS to another version we make use of the ‘nct upgrade’
+                      command. This command will perform the following actions:
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                                  Assert the given NCS version really is installed on the <span class="emphasis"><em>Host</em></span>.
+                                
+                     </li>
+                     <li class="listitem">
+                                  Assert that given NCS version isn’t already running.
+                                
+                     </li>
+                     <li class="listitem">
+                                  Make sure that there exist ‘installable’ packages that corresponds
+                                  to the (old) already installed packages.
+                                
+                     </li>
+                     <li class="listitem">
+                                  Backup NCS (default action, but optional)
+                                
+                     </li>
+                     <li class="listitem">
+                                  Deinstall the old packages, then install the new packages.
+                                
+                     </li>
+                     <li class="listitem">
+                                  Stop NCS
+                                
+                     </li>
+                     <li class="listitem">
+                                  Rearrange the symlinks under <span class="emphasis"><em>/opt/ncs</em></span>
+                                
+                     </li>
+                     <li class="listitem">
+                                  Start NCS (default is to also reload all packages, but optional)
+                                
+                     </li>
+                  </ul>
+               </div>
+               <p>Invoking it can look something like this:</p><pre class="screen">nct upgrade --hostsfile hostsfile --ncs-vsn 3.2.1.1</pre><p>and the corresponding output can look like this:</p><pre class="screen">....
+Upgrade NCS to 192.168.23.99
+OK : upgrade done
+....</pre><p>In case we do a major version upgrade, let’s say from 3.3 to 3.4,
+                      the command will make sure that all 3.3 packages are uninstalled
+                      before the upgrade can take place. Example:
+               </p><pre class="screen">$ nct upgrade --hostsfile hostsfile --ncs-vsn 3.4</pre><p>which may result in an error like this:</p><pre class="screen">....
+ERROR: packages that need to be uninstalled on 192.168.23.99:
+ncs-3.3-modok-1.0
+....</pre><p>The remedy to this is to first run the ‘nct packages’ command to
+                      ‘deinstall’ the old packages, before doing the upgrade.
+               </p>
+               <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+                  <h3 class="title">Note</h3>
+                  <p>It is very important that any corresponding new packages
+                         are installed before the upgrade is performed. If not, you will
+                         loose all the package specific configuration at reload of the
+                         NCS packages.
+                  </p>
+               </div>
+            </div>
+            <div class="refsect1"><a id="man.1.nct.installing_beam_patches"></a><h2>Installing beam patches</h2>
+               <p>It is possible to patch NCS with, so called, ‘.beam’ files that
+                      are updated versions of NCS internal (binary) program code.
+               </p>
+               <p>Let’s say we want to install a patch file named: ‘rest.beam’.
+                      It can look like this:
+               </p><pre class="screen">nct patch --hostsfile hostsfile --file rest.beam</pre><p>and the corresponding output:</p><pre class="screen">....
+Install NCS patch to 192.168.23.99
+&gt;&gt; OK
+....</pre><p>To see which patches that are installed you can use the ‘-c show’
+                      switch like this:
+               </p><pre class="screen">nct patch --hostsfile hostsfile -c show</pre><p>and the output looks something like this:</p><pre class="screen">....
+Show loaded NCS patches to 192.168.23.99
+NAME         VERSION                           COMPILE TIME
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+rest         41da353169d431bbbf5417b85e5d0d06  26-Nov-2014::12:56:11
+....</pre><p>To remove a patch (and reload the original code), use the ‘-c remove’
+                      switch like this:
+               </p><pre class="screen">nct patch --hostsfile hostsfile --file rest.beam -c remove</pre></div>
+            <div class="refsect1"><a id="man.1.nct.running_cli_commands"></a><h2>Running CLI commands</h2>
+               <p>It is possible to run any NCS CLI command over a set of NCS nodes.
+                      For example, to list all cleared alarms on a group of nodes:
+               </p><pre class="screen">nct cli-cmd --hostsfile hostsfile --group paris \
+-c "show alarms alarm-list alarm ncs * * * is-cleared"</pre></div>
+            <div class="refsect1"><a id="man.1.nct.operate_on_ha_clusters"></a><h2>Operate on HA nodes</h2>
+               <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+                  <h3 class="title">Note</h3>
+                  <p>This command requires the HA Controller: ‘tailf-hcc’, and a working
+                         HA configuration. You can read more about NCS High Availability
+                         feature in the User Guide for NCS, and in the deployment document for tailf-hcc.
+                  </p>
+               </div>
+               <p>This command allows you to preform actions available in the tailf-hcc
+                      package.
+               </p>
+               <p>For example, you can activate your HA environment
+                      with the command:
+               </p><pre class="screen">nct ha --action cluster-activate --hostsfile hostsfile --group service</pre></div>
+            <div class="refsect1"><a id="man.1.nct.move_a_device_between_ncs_nodes"></a><h2>Move a device between NCS nodes</h2>
+               <p>The ‘nct move-device’ is a command for moving a device managed by one
+                      NCS node, to another NCS node, both in a cluster setup and a non-cluster
+                      setup.
+               </p>
+               <p>This command requires a hostsfile, which must contain the (cluster)
+                      topology. Each host in the hostsfile requires the option
+                      {name,&lt;name&gt;}, each device node requires the option
+                      {service_node,&lt;name&gt;} and each service node requires the option
+                      {device_nodes,[{&lt;name&gt;,&lt;remote-name&gt;} …]}, where &lt;name&gt; is a unique
+                      identifier for the node in the hostsfile and &lt;remote-name&gt; the
+                      configured name for the cluster remote-node on the service nodes.
+               </p>
+               <p>A valid configuration for a service node and a device node would look
+                      something like this:
+               </p><pre class="screen">{"192.168.23.99",
+[{name,"pariss"},
+{device_nodes,[{"parisd1","d1"},{"parisd2","d2"}]}]}.
+
+{"192.168.23.11",
+[{name,"parisd1"},
+{service_node,"pariss"}]}.</pre><p>The command is executed like this:</p><pre class="screen">nct move-device --from parisd1 -to parisd2 \
+--device m0 --hostfile hostfile</pre><p>Node <span class="emphasis"><em>parisd1</em></span> and <span class="emphasis"><em>parisd2</em></span> are two NCS device nodes.
+               </p>
+            </div>
+            <div class="refsect1"><a id="man.1.nct.man_pages"></a><h2>Man pages</h2>
+               <p>Each nct command has a corresponding man page.</p>
+               <p>Example:</p><pre class="screen">man nct-install</pre></div>
+            <div class="refsect1"><a id="d0e16570"></a><h2>SEE ALSO</h2>
+               <p>
+                        <span class="citerefentry"><span class="refentrytitle">nct-backup</span>(1)</span>
+                      
+               </p>
+               <p>
+                        <span class="citerefentry"><span class="refentrytitle">nct-check</span>(1)</span>
+                      
+               </p>
+               <p>
+                        <span class="citerefentry"><span class="refentrytitle">nct-cli-cmd</span>(1)</span>
+                      
+               </p>
+               <p>
+                        <span class="citerefentry"><span class="refentrytitle">nct-copy</span>(1)</span>
+                      
+               </p>
+               <p>
+                        <span class="citerefentry"><span class="refentrytitle">nct-get-logs</span>(1)</span>
+                      
+               </p>
+               <p>
+                        <span class="citerefentry"><span class="refentrytitle">nct-ha</span>(1)</span>
+                      
+               </p>
+               <p>
+                        <span class="citerefentry"><span class="refentrytitle">nct-install</span>(1)</span>
+                      
+               </p>
+               <p>
+                        <span class="citerefentry"><span class="refentrytitle">nct-load-config</span>(1)</span>
+                      
+               </p>
+               <p>
+                        <span class="citerefentry"><span class="refentrytitle">nct-move-device</span>(1)</span>
+                      
+               </p>
+               <p>
+                        <span class="citerefentry"><span class="refentrytitle">nct-packages</span>(1)</span>
+                      
+               </p>
+               <p>
+                        <span class="citerefentry"><span class="refentrytitle">nct-patch</span>(1)</span>
+                      
+               </p>
+               <p>
+                        <span class="citerefentry"><span class="refentrytitle">nct-ssh-cmd</span>(1)</span>
+                      
+               </p>
+               <p>
+                        <span class="citerefentry"><span class="refentrytitle">nct-start</span>(1)</span>
+                      
+               </p>
+               <p>
+                        <span class="citerefentry"><span class="refentrytitle">nct-stop</span>(1)</span>
+                      
+               </p>
+               <p>
+                        <span class="citerefentry"><span class="refentrytitle">nct-upgrade</span>(1)</span>
+                      
+               </p>
+            </div>
+         </div><script type="text/javascript" src="common/main.js">
+            <!----></script><script type="text/javascript" src="common/splitterInit.js">
+            <!----></script><div class="footer" id="footer-legal">
+            <div class="footer-legal framework-footer-cq">
+               <div id="framework-footer">
+                  <div id="footer-legal"><a href="http://www.cisco.com/web/siteassets/legal/terms_condition.html">Terms &amp; Conditions</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/privacy.html">Privacy Statement</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/privacy.html#cookies">Cookie Policy</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/trademark.html">Trademarks</a></div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div id="sidebar">
+         <div id="leftnavigation" style="padding-top:3px;">
+            <div id="tabs">
+               <ul style="visibility: hidden;"></ul>
+               <div id="treeDiv"><img src="common/images/loading.gif" alt="loading table of contents..." id="tocLoading" style="display:block;" /><div id="ulTreeDiv" style="display:none">
+                     <ul id="tree" class="filetree">
+                        <li><span class="file"><a href="ncs.man.volume.1.html" tabindex="1">NCS man-pages, Volume 1</a></span><ul>
+                              <li><span class="file"><a href="man.1.ncs-backup.html" tabindex="1">ncs-backup</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-collect-tech-report.html" tabindex="1">ncs-collect-tech-report</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-installer.html" tabindex="1">ncs-installer</a></span></li>
+                              <li><span class="file"><a href="man.1.maapi.html" tabindex="1">ncs-maapi</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-make-package.html" tabindex="1">ncs-make-package</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-netsim.html" tabindex="1">ncs-netsim</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-project-create.html" tabindex="1">ncs-project-create</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-project-make-bundle.html" tabindex="1">ncs-project-export</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-project-git.html" tabindex="1">ncs-project-git</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-project-setup.html" tabindex="1">ncs-project-setup</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-project-update.html" tabindex="1">ncs-project-update</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-project.html" tabindex="1">ncs-project</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-setup.html" tabindex="1">ncs-setup</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-uninstall.html" tabindex="1">ncs-uninstall</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs.html" tabindex="1">ncs</a></span></li>
+                              <li><span class="file"><a href="man.1.confd_cli.html" tabindex="1">confdncs_cli</a></span></li>
+                              <li><span class="file"><a href="man.1.confd_cmd.html" tabindex="1">
+                                             confdncs_cmd</a></span></li>
+                              <li><span class="file"><a href="man.1.confd_load.html" tabindex="1">confdncs_load</a></span></li>
+                              <li><span class="file"><a href="man.1.confdc.html" tabindex="1">confdc
+                                           ncsc</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-backup.html" tabindex="1">nct-backup</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-check.html" tabindex="1">nct-check</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-cli-cmd.html" tabindex="1">nct-cli-cmd</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-copy.html" tabindex="1">nct-copy</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-get-logs.html" tabindex="1">nct-get-logs</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-ha.html" tabindex="1">nct-ha</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-hostsfile.html" tabindex="1">nct-hostsfile</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-install.html" tabindex="1">nct-install</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-load-config.html" tabindex="1">nct-load-config</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-move-device.html" tabindex="1">nct-move-device</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-packages.html" tabindex="1">nct-packages</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-patch.html" tabindex="1">nct-patch</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-ssh-cmd.html" tabindex="1">nct-ssh-cmd</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-start.html" tabindex="1">nct-start</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-stop.html" tabindex="1">nct-stop</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-upgrade.html" tabindex="1">nct-upgrade</a></span></li>
+                              <li id="webhelp-currentid"><span class="file"><a href="man.1.nct.html" tabindex="1">nct</a></span></li>
+                              <li><span class="file"><a href="man.1.pyang.html" tabindex="1">pyang</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ncs.man.volume.3.html" tabindex="1">NCS man-pages, Volume 3</a></span><ul>
+                              <li><span class="file"><a href="man.3.confd_lib.html" tabindex="1">confd_lib</a></span></li>
+                              <li><span class="file"><a href="man.3.confd_lib_cdb.html" tabindex="1">confd_lib_cdb</a></span></li>
+                              <li><span class="file"><a href="man.3.confd_lib_dp.html" tabindex="1">confd_lib_dp</a></span></li>
+                              <li><span class="file"><a href="man.3.confd_lib_events.html" tabindex="1">confd_lib_events</a></span></li>
+                              <li><span class="file"><a href="man.3.confd_lib_ha.html" tabindex="1">confd_lib_ha</a></span></li>
+                              <li><span class="file"><a href="man.3.confd_lib_lib.html" tabindex="1">confd_lib_lib</a></span></li>
+                              <li><span class="file"><a href="man.3.confd_lib_maapi.html" tabindex="1">confd_lib_maapi</a></span></li>
+                              <li><span class="file"><a href="man.3.confd_types.html" tabindex="1">confd_types</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ncs.man.volume.5.html" tabindex="1">NCS man-pages, Volume 5</a></span><ul>
+                              <li><span class="file"><a href="man.5.clispec.html" tabindex="1">clispec</a></span></li>
+                              <li><span class="file"><a href="man.5.mib_annotations.html" tabindex="1">mib_annotations</a></span></li>
+                              <li><span class="file"><a href="man.5.ncs.conf.html" tabindex="1">ncs.conf</a></span></li>
+                              <li><span class="file"><a href="man.5.tailf_yang_cli_extensions.html" tabindex="1">tailf_yang_cli_extensions</a></span></li>
+                              <li><span class="file"><a href="man.5.tailf_yang_extensions.html" tabindex="1">tailf_yang_extensions</a></span></li>
+                           </ul>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

@@ -1,0 +1,913 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      
+      <title>ncs-maapi -  - NSO 4.4.2.3 Manual Pages</title>
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+      <link rel="home" href="index.html" title="NSO 4.4.2.3 Manual Pages" />
+      <link rel="up" href="ncs.man.volume.1.html" title="NCS man-pages, Volume 1" />
+      <link rel="prev" href="man.1.ncs-installer.html" title="ncs-installer" />
+      <link rel="next" href="man.1.ncs-make-package.html" title="ncs-make-package" />
+      <meta xmlns="" name="Section-title" content="ncs-maapi" /><script xmlns="" type="text/javascript">
+      //The id for tree cookie
+      var treeCookieId = "treeview-73142";
+      var language = "en";
+      var w = new Object();
+      //Localization
+      txt_filesfound = 'Results';
+      txt_enter_at_least_1_char = "You must enter at least one character.";
+      txt_browser_not_supported = "JavaScript is disabled on your browser. Please enable JavaScript to enjoy all the features of this site.";
+      txt_please_wait = "Please wait. Search in progress...";
+      txt_results_for = "Results for: ";
+    </script><link xmlns="" rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/css/positioning.css" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/jquery/theme-redmond/jquery-ui-1.8.2.custom.css" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/jquery/treeview/jquery.treeview.css" /><style xmlns="" type="text/css">
+      
+      #noscript{
+      font-weight:bold;
+      background-color: #55AA55;
+      font-weight: bold;
+      height: 25spx;
+      z-index: 3000;
+      top:0px;
+      width:100%;
+      position: relative;
+      border-bottom: solid 5px black;
+      text-align:center;
+      color: white;
+      }
+      
+      input {
+      margin-bottom: 5px;
+      margin-top: 2px;
+      }
+      .folder {
+      display: block;
+      height: 22px;
+      padding-left: 20px;
+      background: transparent url(common/jquery/treeview/images/folder.gif) 0 0px no-repeat;
+      }
+      span.contentsTab {
+      padding-left: 20px;
+      background: url(common/images/toc-icon.png) no-repeat 0 center;
+      }
+      span.searchTab {
+      padding-left: 20px;
+      background: url(common/images/search-icon.png) no-repeat 0 center;
+      }
+      
+      /* Overide jquery treeview's defaults for ul. */
+      .treeview ul {
+      background-color: transparent;
+      margin-top: 4px;
+      }		
+      #webhelp-currentid {
+      /* background-color: #D8D8D8 !important; */
+      background-color: #D8D8D8;
+      }
+      .treeview .hover { color: black; }
+      .filetree li span a { text-decoration: none; font-size: 12px; color: #517291; }
+      
+      /* Override jquery-ui's default css customizations. These are supposed to take precedence over those.*/
+      .ui-widget-content {
+      border: 0px; 
+      background: none; 
+      color: none;     
+      }
+      .ui-widget-header {
+      color: #e9e8e9;
+      border-left: 1px solid #e5e5e5;
+      border-right: 1px solid #e5e5e5;
+      border-bottom: 1px solid #bbc4c5;
+      border-top: 4px solid #e5e5e5;
+      border: medium none;
+      background: #F4F4F4; /* old browsers */
+      background: -moz-linear-gradient(top, #F4F4F4 0%, #E6E4E5 100%); /* firefox */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F4F4F4), color-stop(100%,#E6E4E5)); /* webkit */    
+      font-weight: none;
+      }
+      .ui-widget-header a { color: none; }
+      .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { 
+      border: none; background: none; font-weight: none; color: none; }
+      .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited { color: black; text-decoration: none; }
+      .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus { border: none; background: none; font-weight: none; color: none; }
+      
+      .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { border: none; background: none; font-weight: none; color: none; }
+      .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited { 
+      color: black; text-decoration: none; 	
+      background: #C6C6C6; /* old browsers */
+      background: -moz-linear-gradient(top, #C6C6C6 0%, #D8D8D8 100%); /* firefox */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#C6C6C6), color-stop(100%,#D8D8D8)); /* webkit */
+      -webkit-border-radius:15px; -moz-border-radius:10px;
+      border: 1px solid #f1f1f1;
+      }    
+      .ui-corner-all { border-radius: 0 0 0 0; }
+      
+      .ui-tabs { padding: .2em;}
+      .ui-tabs .ui-tabs-nav li { top: 0px; margin: -2px 0 1px; text-transform: uppercase; font-size: 10.5px;}
+      .ui-tabs .ui-tabs-nav li a { padding: .25em 2em .25em 1em; margin: .5em; text-shadow: 0 1px 0 rgba(255,255,255,.5); }
+      /**
+      *	Basic Layout Theme
+      * 
+      *	This theme uses the default layout class-names for all classes
+      *	Add any 'custom class-names', from options: paneClass, resizerClass, togglerClass
+      */
+      
+      .ui-layout-pane { /* all 'panes' */ 
+      background: #FFF; 
+      border: 1px solid #BBB; 
+      padding: 05x; 
+      overflow: auto;
+      } 
+      
+      .ui-layout-resizer { /* all 'resizer-bars' */ 
+      background: #DDD; 
+      top:100px
+      } 
+      
+      .ui-layout-toggler { /* all 'toggler-buttons' */ 
+      background: #AAA; 
+      } 
+      
+    </style>
+      <!--[if IE]>
+	<link rel="stylesheet" type="text/css" href="../common/css/ie.css"/>
+	<![endif]--><script xmlns="" type="text/javascript" src="common/browserDetect.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery-1.7.2.min.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery.ui.all.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery.cookie.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/treeview/jquery.treeview.min.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/layout/jquery.layout.js">
+         <!----></script><style type="text/css">
+      
+      #header {
+      /* background: url("../images/header-bg.png") scroll top left repeat-x #4d8c83; */
+      background: transparent;
+      }
+      #leftnavigation {
+      /* background-color: #ededed!important; */
+      background-color: transparent;
+      }
+      #navheader {
+      visibility: hidden;
+      }
+      #webhelp-currentid {
+      /* background-color: #D8D8D8 !important; */
+      background-color: #FFFFFF; /*but must be changed in main.js as well*/
+      }
+      .filetree span.file {
+      /* background: url(images/file.gif) 0 0 no-repeat; */
+      background: initial;
+      }
+      .filetree span.folder, .filetree span.file {
+      padding: 1px 0 1px 7px;
+      display: block;
+      }
+
+      /* borrowed from cisco: clientlib.css */
+      .footer {
+      margin: 28px 30px 0 15px;
+      font-size: 80%;
+      line-height: 120%;
+      border-top: 1px solid #ccc;
+      padding-top: 7px;
+      color: #999;
+      }
+      .footer #footer-legal{display:inline;padding-bottom:18px}
+      #framework-footer{margin:0;padding:0 0 15px 0;min-width:900px;width:100%}
+      .footer a,.footer a:visited{color:#999}
+
+      /* from ccimr.css */
+      a:active  { color: #3366CC}
+      a:hover   { color: #3366CC}
+      a:link    { color: #3366CC}
+      a:visited { color: #3366CC}
+
+      #header img {
+      float: left;
+      margin-left: 20px;
+      margin-top: 0px;
+      }
+
+      #header h1 {
+      color: #336666;
+      margin-top: 4px;
+      }
+      #content h1, #content h2 {
+      color: #336666;
+      }
+      .title {
+      color: #336666;
+      }
+      p, pre {
+      margin-left: 0.1in;
+      }
+      p, ul, ol, li {
+        font-size: 95%;
+        font-family: Arial, Helvetica, sans-serif;
+        margin-top: 1px;
+      }
+      body {
+        font: 80.5% Arial, Helvetica, sans-serif;
+      }
+      ol {
+      display: block;
+      list-style-type: decimal;
+      -webkit-margin-before: 1em;
+      -webkit-margin-after: 1em;
+      -webkit-margin-start: 0px;
+      -webkit-margin-end: 0px;
+      -webkit-padding-start: 40px;
+      border: 1;
+      }
+    </style></head>
+   <body>
+      <noscript>
+         <div id="noscript">JavaScript is disabled on your browser. Please enable JavaScript to enjoy all the features of this site.</div>
+      </noscript>
+      <div id="header"><a href="index.html"><img style="margin-right: 2px; width: 110; height: 73; padding-right: 25px; padding-top: 8px" align="right" src="common/images/logo.gif" alt="Cisco Systems, Inc." /></a><h1>NSO 4.4.2.3 Manual Pages
+                <br />NCS man-pages, Volume 1
+         </h1>
+         <div id="navheader">
+            <!---->
+            <table class="navLinks">
+               <tr>
+                  <td><a id="showHideButton" href="#" onclick="myLayout.toggle('west')" class="pointLeft" tabindex="5" title="Hide TOC tree">Sidebar
+                                                    </a></td>
+                  <td><a accesskey="p" class="navLinkPrevious" tabindex="5" href="man.1.ncs-installer.html">Prev</a>
+                                                             |
+                                                             <a accesskey="u" class="navLinkUp" tabindex="5" href="ncs.man.volume.1.html">Up</a>
+                                                         |
+                                                         <a accesskey="n" class="navLinkNext" tabindex="5" href="man.1.ncs-make-package.html">Next</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div id="content">
+         <div class="refentry"><a id="man.1.maapi"></a><div xmlns="" class="titlepage"></div>
+            <div class="refnamediv"><a id="man.1.maapi.name"></a><h2>Name</h2>
+               <p><span class="phrase">ncs-</span>maapi — command to access an ongoing transaction
+               </p>
+            </div>
+            <div class="refsynopsisdiv"><a id="man.1.maapi.synopsis"></a><h2>Synopsis</h2>
+               <div class="cmdsynopsis">
+                  <p><code class="command"><span class="phrase">ncs-</span>maapi</code>   --get    <em class="replaceable"><code>Path</code></em>... 
+                  </p>
+               </div>
+               <div class="cmdsynopsis">
+                  <p><code class="command"><span class="phrase">ncs-</span>maapi</code>   --set    <em class="replaceable"><code>Path</code></em>   <em class="replaceable"><code>Value</code></em>  [ <em class="replaceable"><code>Path</code></em>   <em class="replaceable"><code>Value</code></em>... ]
+                  </p>
+               </div>
+               <div class="cmdsynopsis">
+                  <p><code class="command"><span class="phrase">ncs-</span>maapi</code>   --keys    <em class="replaceable"><code>Path</code></em>... 
+                  </p>
+               </div>
+               <div class="cmdsynopsis">
+                  <p><code class="command"><span class="phrase">ncs-</span>maapi</code>   --exists    <em class="replaceable"><code>Path</code></em>... 
+                  </p>
+               </div>
+               <div class="cmdsynopsis">
+                  <p><code class="command"><span class="phrase">ncs-</span>maapi</code>   --delete    <em class="replaceable"><code>Path</code></em>... 
+                  </p>
+               </div>
+               <div class="cmdsynopsis">
+                  <p><code class="command"><span class="phrase">ncs-</span>maapi</code>   --create    <em class="replaceable"><code>Path</code></em>... 
+                  </p>
+               </div>
+               <div class="cmdsynopsis">
+                  <p><code class="command"><span class="phrase">ncs-</span>maapi</code>   --insert    <em class="replaceable"><code>Path</code></em>... 
+                  </p>
+               </div>
+               <div class="cmdsynopsis">
+                  <p><code class="command"><span class="phrase">ncs-</span>maapi</code>   --revert 
+                  </p>
+               </div>
+               <div class="cmdsynopsis">
+                  <p><code class="command"><span class="phrase">ncs-</span>maapi</code>   --msg    <em class="replaceable"><code>To</code></em>   <em class="replaceable"><code>Message</code></em>   <em class="replaceable"><code>Sender</code></em> <br />  --priomsg    <em class="replaceable"><code>To</code></em>   <em class="replaceable"><code>Message</code></em> <br />  --sysmsg    <em class="replaceable"><code>To</code></em>   <em class="replaceable"><code>Message</code></em> 
+                  </p>
+               </div>
+               <div class="cmdsynopsis">
+                  <p><code class="command"><span class="phrase">ncs-</span>maapi</code>   --cliget    <em class="replaceable"><code>Param</code></em>... 
+                  </p>
+               </div>
+               <div class="cmdsynopsis">
+                  <p><code class="command"><span class="phrase">ncs-</span>maapi</code>   --cliset    <em class="replaceable"><code>Param</code></em>   <em class="replaceable"><code>Value</code></em>  [ <em class="replaceable"><code>Param</code></em>   <em class="replaceable"><code>Value</code></em>... ]
+                  </p>
+               </div>
+               <div class="cmdsynopsis">
+                  <p><code class="command"><span class="phrase">ncs-</span>maapi</code>   --cmd2path    <em class="replaceable"><code>Cmd</code></em>  [ <em class="replaceable"><code>Cmd</code></em> ]
+                  </p>
+               </div>
+               <div class="cmdsynopsis">
+                  <p><code class="command"><span class="phrase">ncs-</span>maapi</code>   --cmd-path   [--is-deleta ] [--emit-parents ] [--non-recursive ]  <em class="replaceable"><code>Path</code></em>  [ <em class="replaceable"><code>Path</code></em> ]
+                  </p>
+               </div>
+               <div class="cmdsynopsis">
+                  <p><code class="command"><span class="phrase">ncs-</span>maapi</code>   --cmd-diff    <em class="replaceable"><code>Path</code></em>  [ <em class="replaceable"><code>Path</code></em> ]
+                  </p>
+               </div>
+               <div class="cmdsynopsis">
+                  <p><code class="command"><span class="phrase">ncs-</span>maapi</code>   --keypath-diff    <em class="replaceable"><code>Path</code></em> 
+                  </p>
+               </div>
+               <div class="cmdsynopsis">
+                  <p><code class="command"><span class="phrase">ncs-</span>maapi</code>   --clicmd   [--get-io ] [--no-hidden ] [--no-error ] [--no-aaa ] [--no-fullpath ] [--unhide <em class="replaceable"><code>&lt;group&gt;</code></em>]  <em class="replaceable"><code>Cli</code></em>   <em class="replaceable"><code>command</code></em>... <br /></p>
+               </div>
+            </div>
+            <div class="refsect1"><a id="man.1.maapi.description"></a><h2>DESCRIPTION</h2>
+               <p>This command is intended to be used from inside a CLI command
+                      or a NETCONF extension RPC. These can be implemented in several
+                      ways, as an action callback or as an executable.
+               </p>
+               <p>It is sometimes convenient to use a shell script to
+                      implement a CLI command and then invoke the script as an
+                      executable from the CLI. The <span class="phrase">ncs-</span>maapi program makes it possible to
+                      manipulate the transaction in which the script was invoked.
+               </p>
+               <p>Using the <span class="phrase">ncs-</span>maapi command
+                      it is possible to, for example,
+                      write configuration wizards and custom show commands.
+               </p>
+            </div>
+            <div class="refsect1"><a id="man.1.maapi.options"></a><h2>OPTIONS</h2>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt><span class="term"><code class="option">-g</code>, </span><span class="term"><code class="option">--get</code> <em class="replaceable"><code>Path</code></em> ...</span></dt>
+                     <dd>
+                        <p>Read element value at Path and display
+                                     result. Multiple values can be read by giving more than one
+                                     Path as argument to get.
+                        </p>
+                     </dd>
+                     <dt><span class="term"><code class="option">-s</code>, </span><span class="term">
+                                     <code class="option">--set</code>
+                                     <em class="replaceable"><code>Path</code></em> <em class="replaceable"><code>Value</code></em> ...
+                                   </span></dt>
+                     <dd>
+                        <p>Set the value of Path to Value. Multiple values can be
+                                     set by giving multiple Path Value pairs as arguments to
+                                     set.
+                        </p>
+                     </dd>
+                     <dt><span class="term"><code class="option">-k</code>, </span><span class="term"><code class="option">--keys</code> <em class="replaceable"><code>Path</code></em> ...</span></dt>
+                     <dd>
+                        <p>Display all instances found at path. Multiple Paths
+                                     can be specified.
+                        </p>
+                     </dd>
+                     <dt><span class="term"><code class="option">-e</code>, </span><span class="term"><code class="option">--exists</code> <em class="replaceable"><code>Path</code></em> ...</span></dt>
+                     <dd>
+                        <p>Exit with exit code 0 if Path exists (if multiple
+                                     paths are given all must exist for the exit code to be
+                                     0).
+                        </p>
+                     </dd>
+                     <dt><span class="term"><code class="option">-d</code>, </span><span class="term"><code class="option">--delete</code> <em class="replaceable"><code>Path</code></em> ...</span></dt>
+                     <dd>
+                        <p>Delete element found at Path.</p>
+                     </dd>
+                     <dt><span class="term"><code class="option">-c</code>, </span><span class="term">
+                                     <code class="option">--create</code> <em class="replaceable"><code>Path</code></em> ...
+                                   </span></dt>
+                     <dd>
+                        <p>Create the element Path.</p>
+                     </dd>
+                     <dt><span class="term"><code class="option">-i</code>, </span><span class="term">
+                                     <code class="option">--insert</code> <em class="replaceable"><code>Path</code></em> ...
+                                   </span></dt>
+                     <dd>
+                        <p>Insert the element at Path. This is only possible if
+                                     the elem has the 'indexed-view' attribute set.
+                        </p>
+                     </dd>
+                     <dt><span class="term"><code class="option">-z</code>, </span><span class="term">
+                                     <code class="option">--revert</code>
+                                   </span></dt>
+                     <dd>
+                        <p>Remove all changes in the transaction.</p>
+                     </dd>
+                     <dt><span class="term"><code class="option">-m</code>, </span><span class="term">
+                                     <code class="option">--msg</code>
+                                     <em class="replaceable"><code>To</code></em>
+                                     <em class="replaceable"><code>Message</code></em>
+                                     <em class="replaceable"><code>Sender</code></em>
+                                   </span></dt>
+                     <dd>
+                        <p>Send message to a user logged on to the system.</p>
+                     </dd>
+                     <dt><span class="term"><code class="option">-Q</code>, </span><span class="term">
+                                     <code class="option">--priomsg</code>
+                                     <em class="replaceable"><code>To</code></em> <em class="replaceable"><code>Message</code></em>
+                                   </span></dt>
+                     <dd>
+                        <p>Send prio message to a user logged on to the
+                                     system.
+                        </p>
+                     </dd>
+                     <dt><span class="term"><code class="option">-M</code>, </span><span class="term">
+                                     <code class="option">--sysmsg</code>
+                                     <em class="replaceable"><code>To</code></em> <em class="replaceable"><code>Message</code></em>
+                                   </span></dt>
+                     <dd>
+                        <p>Send system message to a user logged on to the
+                                     system.
+                        </p>
+                     </dd>
+                     <dt><span class="term"><code class="option">-G</code>, </span><span class="term">
+                                     <code class="option">--cliget</code> <em class="replaceable"><code>Param</code></em> ...
+                                   </span></dt>
+                     <dd>
+                        <p>
+                                       Read and display CLI session parameter or attribute.
+                                       Multiple params can be read by giving more than one Param
+                                       as argument to cliget. Possible params are
+                                       <span class="phrase">
+                                            for C and I-style: complete-on-space, idle-timeout,
+                                            ignore-leading-space, paginate, output-file,
+                                            screen-length, screen-width, history, terminal,
+                                            autowizard, "service prompt config" , show-defaults,
+                                            and if enabled, display-level. And for J-style:
+                                          </span>
+                                       complete-on-space, idle-timeout, ignore-leading-space,
+                                       paginate, "output file", "screen length", "screen width",
+                                       terminal, history, autowizard, "show defaults", and if
+                                       enabled, display-level. In addition to this the attributes
+                                       called annotation, tags and inactive can be read.
+                                     
+                        </p>
+                     </dd>
+                     <dt><span class="term"><code class="option">-S</code>, </span><span class="term">
+                                     <code class="option">--cliset</code>
+                                     <em class="replaceable"><code>Param</code></em>
+                                     <em class="replaceable"><code>Value</code></em> ...
+                                   </span></dt>
+                     <dd>
+                        <p>
+                                       Set CLI session parameter to Value. Multiple params
+                                       can be set by giving more than one Param-Value pair as
+                                       argument to cliset. Possible params are
+                                       <span class="phrase">
+                                            for C and I-style: complete-on-space, idle-timeout,
+                                            ignore-leading-space, paginate, output-file,
+                                            screen-length, screen-width, history, terminal,
+                                            autowizard, "service prompt config", show-defaults,
+                                            and if enabled, display-level. And for J-style:
+                                          </span>
+                                       complete-on-space, idle-timeout, ignore-leading-space,
+                                       paginate, "output file", "screen length", "screen width",
+                                       terminal, history, autowizard, "show defaults", and if
+                                       enabled, display-level.
+                                     
+                        </p>
+                     </dd>
+                     <dt><span class="term"><code class="option">-E</code>, </span><span class="term">
+                                     <code class="option">--cmd-path</code>
+                                     [<code class="option">--is-delete</code>]
+                                     [<code class="option">--emit-parents</code>]
+                                     [<code class="option">--non-recursive</code>]
+                                     <em class="replaceable"><code>Path</code></em>
+                                   </span></dt>
+                     <dd>
+                        <p>
+                                       Display the C- and I-style command for a given path. Optionally
+                                       display the command to delete the path, and optionally emit
+                                       the parents, ie the commands to reach the submode of the path.
+                                     
+                        </p>
+                     </dd>
+                     <dt><span class="term"><code class="option">-L</code>, </span><span class="term">
+                                     <code class="option">--cmd-diff</code>
+                                     <em class="replaceable"><code>Path</code></em>
+                                   </span></dt>
+                     <dd>
+                        <p>
+                                       Display the C- and I-style command for going from the
+                                       running configuration to the current configuration.
+                                     
+                        </p>
+                     </dd>
+                     <dt><span class="term"><code class="option">-q</code>, </span><span class="term">
+                                     <code class="option">--keypath-diff</code>
+                                     <em class="replaceable"><code>Path</code></em>
+                                   </span></dt>
+                     <dd>
+                        <p>
+                                       Display the difference between the current state in the
+                                       attached transaction and the running configuration. One
+                                       line is emitted for each difference. Each such line begins
+                                       with the type of the change, followed by a colon (':')
+                                       character and lastly the keypath. The type of the change
+                                       is one of the following: "created", "deleted", "modified",
+                                       "value set", "moved after" and "attr set".
+                                     
+                        </p>
+                     </dd>
+                     <dt><span class="term"><code class="option">-T</code>, </span><span class="term">
+                                     <code class="option">--cmd2path</code>
+                                     <em class="replaceable"><code>Cmd</code></em>
+                                   </span></dt>
+                     <dd>
+                        <p>
+                                       Attempts to derive an aaa-style namespace and path from
+                                       a C-/I-style command path.
+                                     
+                        </p>
+                     </dd>
+                     <dt><span class="term"><code class="option">-C</code>, </span><span class="term">
+                                     <code class="option">--clicmd</code>
+                                     [<code class="option">--get-io</code>]
+                                     [<code class="option">--no-hidden</code>]
+                                     [<code class="option">--no-error</code>]
+                                     [<code class="option">--no-aaa</code>]
+                                     [<code class="option">--no-fullpath</code>]
+                                     [<code class="option">--unhide</code> <em class="replaceable"><code>group</code></em>]
+                                     <em class="replaceable"><code>Cli command to execute</code></em>
+                                   </span></dt>
+                     <dd>
+                        <p>Execute cli command in ongoing session, optionally
+                                     ignoring that a command is hidden, unhiding a specific hide
+                                     group, or ignoring the fullpath check of the argument to the
+                                     show command. Multiple hide groups may be unhidden using the
+                                     --unhide parameter multiple times.
+                        </p>
+                     </dd>
+                  </dl>
+               </div>
+            </div>
+            <div class="refsect1"><a id="man.1.maapi.example"></a><h2>EXAMPLE</h2>
+               <p>Suppose we want to create an add-user wizard as a shell
+                      script.  We would add the command in the clispec file
+                      <code class="filename"><span class="phrase">confd</span><span class="phrase">ncs</span>.cli</code> as follows:
+               </p>
+               <div class="informalexample"><pre class="programlisting"> ...
+  &lt;configureMode&gt;
+    &lt;cmd name="wizard"&gt;
+      &lt;info&gt;Configuration wizards&lt;/info&gt;
+      &lt;help&gt;Configuration wizards&lt;/help&gt;
+      &lt;cmd name="adduser"&gt;
+        &lt;info&gt;Create a user&lt;/info&gt;
+        &lt;help&gt;Create a user&lt;/help&gt;
+        &lt;callback&gt;
+          &lt;exec&gt;
+            &lt;osCommand&gt;./adduser.sh&lt;/osCommand&gt;
+          &lt;/exec&gt;
+        &lt;/callback&gt;
+      &lt;/cmd&gt;
+    &lt;/cmd&gt;
+  &lt;/configureMode&gt;
+ ...</pre></div>
+               <p>And have the following script
+                      <code class="filename">adduser.sh</code>:
+               </p>
+               <div class="informalexample"><pre class="programlisting">#!/bin/bash 
+
+## Ask for user name
+while true; do
+    echo -n "Enter user name: "
+    read user
+
+    if [ ! -n "${user}" ]; then
+	echo "You failed to supply a user name."
+    elif maapi --exists "/aaa:aaa/authentication/users/user{${user}}"; then
+	echo "The user already exists."
+    else
+	break
+    fi
+done
+
+## Ask for password
+while true; do
+    echo -n "Enter password: "
+    read -s pass1
+    echo
+
+    if [ "${pass1:0:1}" == "$" ]; then
+	echo -n "The password must not start with $. Please choose a "
+	echo    "different password."
+    else
+	echo -n "Confirm password: "
+	read -s pass2
+	echo
+
+	if [ "${pass1}" != "${pass2}" ]; then
+	    echo "Passwords do not match."
+	else
+	    break
+	fi
+    fi
+done
+
+groups=`maapi --keys "/aaa:aaa/authentication/groups/group"`
+while true; do
+    echo "Choose a group for the user."
+    echo -n "Available groups are: "
+    for i in ${groups}; do echo -n "${i} "; done    
+    echo
+    echo -n "Enter group for user: "
+    read group
+
+    if [ ! -n "${group}" ]; then
+	echo "You must enter a valid group."
+    else
+	for i in ${groups}; do
+	    if [ "${i}" == "${group}" ]; then
+		# valid group found
+		break 2;
+	    fi
+	done
+	echo "You entered an invalid group."
+    fi
+    echo
+done
+
+echo
+echo "Creating user"
+echo
+maapi --create "/aaa:aaa/authentication/users/user{${user}}"
+maapi --set "/aaa:aaa/authentication/users/user{${user}}/password" \
+	"${pass1}"
+
+echo "Setting home directory to: /var/confd/homes/${user}"
+maapi --set "/aaa:aaa/authentication/users/user{${user}}/homedir" \
+            "/var/confd/homes/${user}"
+echo
+
+echo "Setting ssh key directory to: "
+echo "/var/confd/homes/${user}/ssh_keydir"
+maapi --set "/aaa:aaa/authentication/users/user{${user}}/ssh_keydir" \
+            "/var/confd/homes/${user}/ssh_keydir"
+echo
+
+maapi --set "/aaa:aaa/authentication/users/user{${user}}/uid" "1000"
+maapi --set "/aaa:aaa/authentication/users/user{${user}}/gid" "100"
+
+echo "Adding user to the ${group} group."
+gusers=`maapi --get "/aaa:aaa/authentication/groups/group{${group}}/users"`
+
+for i in ${gusers}; do
+    if [ "${i}" == "${user}" ]; then
+	echo "User already in group"
+	exit 0
+    fi
+done
+maapi --set "/aaa:aaa/authentication/groups/group{${group}}/users" \
+            "${gusers} ${user}"
+echo
+exit 0</pre><pre class="programlisting">#!/bin/bash 
+
+## Ask for user name
+while true; do
+    echo -n "Enter user name: "
+    read user
+
+    if [ ! -n "${user}" ]; then
+	echo "You failed to supply a user name."
+    elif ncs-maapi --exists "/aaa:aaa/authentication/users/user{${user}}"; then
+	echo "The user already exists."
+    else
+	break
+    fi
+done
+
+## Ask for password
+while true; do
+    echo -n "Enter password: "
+    read -s pass1
+    echo
+
+    if [ "${pass1:0:1}" == "$" ]; then
+	echo -n "The password must not start with $. Please choose a "
+	echo    "different password."
+    else
+	echo -n "Confirm password: "
+	read -s pass2
+	echo
+
+	if [ "${pass1}" != "${pass2}" ]; then
+	    echo "Passwords do not match."
+	else
+	    break
+	fi
+    fi
+done
+
+groups=`ncs-maapi --keys "/aaa:aaa/authentication/groups/group"`
+while true; do
+    echo "Choose a group for the user."
+    echo -n "Available groups are: "
+    for i in ${groups}; do echo -n "${i} "; done    
+    echo
+    echo -n "Enter group for user: "
+    read group
+
+    if [ ! -n "${group}" ]; then
+	echo "You must enter a valid group."
+    else
+	for i in ${groups}; do
+	    if [ "${i}" == "${group}" ]; then
+		# valid group found
+		break 2;
+	    fi
+	done
+	echo "You entered an invalid group."
+    fi
+    echo
+done
+
+echo
+echo "Creating user"
+echo
+ncs-maapi --create "/aaa:aaa/authentication/users/user{${user}}"
+ncs-maapi --set "/aaa:aaa/authentication/users/user{${user}}/password" \
+	"${pass1}"
+
+echo "Setting home directory to: /var/ncs/homes/${user}"
+ncs-maapi --set "/aaa:aaa/authentication/users/user{${user}}/homedir" \
+            "/var/ncs/homes/${user}"
+echo
+
+echo "Setting ssh key directory to: "
+echo "/var/ncs/homes/${user}/ssh_keydir"
+ncs-maapi --set "/aaa:aaa/authentication/users/user{${user}}/ssh_keydir" \
+            "/var/ncs/homes/${user}/ssh_keydir"
+echo
+
+ncs-maapi --set "/aaa:aaa/authentication/users/user{${user}}/uid" "1000"
+ncs-maapi --set "/aaa:aaa/authentication/users/user{${user}}/gid" "100"
+
+echo "Adding user to the ${group} group."
+gusers=`ncs-maapi --get "/aaa:aaa/authentication/groups/group{${group}}/users"`
+
+for i in ${gusers}; do
+    if [ "${i}" == "${user}" ]; then
+	echo "User already in group"
+	exit 0
+    fi
+done
+ncs-maapi --set "/aaa:aaa/authentication/groups/group{${group}}/users" \
+            "${gusers} ${user}"
+echo
+exit 0</pre></div>
+            </div>
+            <div class="refsect1"><a id="man.1.maapi.diagnostics"></a><h2>DIAGNOSTICS</h2>
+               <p>On success exit status is 0. On failure 1 or 2. Any error
+                      message is printed to stderr.
+               </p>
+            </div>
+            <div class="refsect1"><a id="man.1.maapi.environment_variables"></a><h2>ENVIRONMENT VARIABLES</h2>
+               <p>Environment variables are used for determining which user
+                      session and transaction should be used when performing the
+                      operations. The <span class="phrase">CONFD</span><span class="phrase">NCS</span>_MAAPI_USID and <span class="phrase">CONFD</span><span class="phrase">NCS</span>_MAAPI_THANDLE environment variables are
+                      automatically set by <span class="phrase">ConfD</span><span class="phrase">NCS</span> when invoking a CLI command, but when a
+                      NETCONF extension RPC is invoked, only <span class="phrase">CONFD</span><span class="phrase">NCS</span>_MAAPI_USID is set, since there is no
+                      transaction associated with such an invocation.
+               </p>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt><span class="term"><code class="envar"><span class="phrase">CONFD</span><span class="phrase">NCS</span>_MAAPI_USID</code></span></dt>
+                     <dd>
+                        <p>User session to use.</p>
+                     </dd>
+                     <dt><span class="term"><code class="envar"><span class="phrase">CONFD</span><span class="phrase">NCS</span>_MAAPI_THANDLE</code></span></dt>
+                     <dd>
+                        <p>The transaction to use when performing the
+                                     operations.
+                        </p>
+                     </dd>
+                     <dt><span class="term"><code class="envar"><span class="phrase">CONFD</span><span class="phrase">NCS</span>_MAAPI_DEBUG</code></span></dt>
+                     <dd>
+                        <p>Maapi debug information will be printed if this
+                                     variable is defined.
+                        </p>
+                     </dd>
+                     <dt><span class="term"><code class="envar"><span class="phrase">CONFD</span><span class="phrase">NCS</span>_IPC_ADDR</code>, </span><span class="term"><code class="envar">CONFD_IPC_EXTADDR</code></span></dt>
+                     <dd>
+                        <p>The address used to connect to the NSO daemon,
+                                     overrides the compiled in default.
+                        </p>
+                     </dd>
+                     <dt><span class="term"><code class="envar"><span class="phrase">CONFD</span><span class="phrase">NCS</span>_IPC_PORT</code></span></dt>
+                     <dd>
+                        <p>The port number to connect to the NSO daemon on,
+                                     overrides the compiled in default.
+                        </p>
+                     </dd>
+                     <dt><span class="term"><code class="envar">CONFD_IPC_EXTSOPATH</code></span></dt>
+                     <dd>
+                        <p>The absolute path to the shared object to use for a
+                                     connection using external IPC when
+                                     <code class="envar">CONFD_IPC_EXTADDR</code> is given.
+                        </p>
+                     </dd>
+                  </dl>
+               </div>
+            </div>
+            <div class="refsect1"><a id="man.1.maapi.see_also"></a><h2>SEE ALSO</h2>
+               <p>The NSO User Guide</p>
+               <p><span class="citerefentry"><span class="refentrytitle"><span class="phrase">confd</span><span class="phrase">ncs</span></span>(1)</span>
+                      - command to start and control the NSO daemon
+               </p>
+               <p><span class="citerefentry"><span class="refentrytitle"><span class="phrase">confdc</span><span class="phrase">ncsc</span></span>(1)</span>
+                      - YANG compiler
+               </p>
+               <p><span class="citerefentry"><span class="refentrytitle"><span class="phrase">confd</span><span class="phrase">ncs</span>.conf</span>(5)</span>
+                      - NSO daemon configuration file format
+               </p>
+               <p><span class="citerefentry"><span class="refentrytitle">clispec</span>(5)</span> -  CLI specification file format
+               </p>
+            </div>
+         </div><script type="text/javascript" src="common/main.js">
+            <!----></script><script type="text/javascript" src="common/splitterInit.js">
+            <!----></script><div class="footer" id="footer-legal">
+            <div class="footer-legal framework-footer-cq">
+               <div id="framework-footer">
+                  <div id="footer-legal"><a href="http://www.cisco.com/web/siteassets/legal/terms_condition.html">Terms &amp; Conditions</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/privacy.html">Privacy Statement</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/privacy.html#cookies">Cookie Policy</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/trademark.html">Trademarks</a></div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div id="sidebar">
+         <div id="leftnavigation" style="padding-top:3px;">
+            <div id="tabs">
+               <ul style="visibility: hidden;"></ul>
+               <div id="treeDiv"><img src="common/images/loading.gif" alt="loading table of contents..." id="tocLoading" style="display:block;" /><div id="ulTreeDiv" style="display:none">
+                     <ul id="tree" class="filetree">
+                        <li><span class="file"><a href="ncs.man.volume.1.html" tabindex="1">NCS man-pages, Volume 1</a></span><ul>
+                              <li><span class="file"><a href="man.1.ncs-backup.html" tabindex="1">ncs-backup</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-collect-tech-report.html" tabindex="1">ncs-collect-tech-report</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-installer.html" tabindex="1">ncs-installer</a></span></li>
+                              <li id="webhelp-currentid"><span class="file"><a href="man.1.maapi.html" tabindex="1">ncs-maapi</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-make-package.html" tabindex="1">ncs-make-package</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-netsim.html" tabindex="1">ncs-netsim</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-project-create.html" tabindex="1">ncs-project-create</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-project-make-bundle.html" tabindex="1">ncs-project-export</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-project-git.html" tabindex="1">ncs-project-git</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-project-setup.html" tabindex="1">ncs-project-setup</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-project-update.html" tabindex="1">ncs-project-update</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-project.html" tabindex="1">ncs-project</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-setup.html" tabindex="1">ncs-setup</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-uninstall.html" tabindex="1">ncs-uninstall</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs.html" tabindex="1">ncs</a></span></li>
+                              <li><span class="file"><a href="man.1.confd_cli.html" tabindex="1">confdncs_cli</a></span></li>
+                              <li><span class="file"><a href="man.1.confd_cmd.html" tabindex="1">
+                                             confdncs_cmd</a></span></li>
+                              <li><span class="file"><a href="man.1.confd_load.html" tabindex="1">confdncs_load</a></span></li>
+                              <li><span class="file"><a href="man.1.confdc.html" tabindex="1">confdc
+                                           ncsc</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-backup.html" tabindex="1">nct-backup</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-check.html" tabindex="1">nct-check</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-cli-cmd.html" tabindex="1">nct-cli-cmd</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-copy.html" tabindex="1">nct-copy</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-get-logs.html" tabindex="1">nct-get-logs</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-ha.html" tabindex="1">nct-ha</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-hostsfile.html" tabindex="1">nct-hostsfile</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-install.html" tabindex="1">nct-install</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-load-config.html" tabindex="1">nct-load-config</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-move-device.html" tabindex="1">nct-move-device</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-packages.html" tabindex="1">nct-packages</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-patch.html" tabindex="1">nct-patch</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-ssh-cmd.html" tabindex="1">nct-ssh-cmd</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-start.html" tabindex="1">nct-start</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-stop.html" tabindex="1">nct-stop</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-upgrade.html" tabindex="1">nct-upgrade</a></span></li>
+                              <li><span class="file"><a href="man.1.nct.html" tabindex="1">nct</a></span></li>
+                              <li><span class="file"><a href="man.1.pyang.html" tabindex="1">pyang</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ncs.man.volume.3.html" tabindex="1">NCS man-pages, Volume 3</a></span><ul>
+                              <li><span class="file"><a href="man.3.confd_lib.html" tabindex="1">confd_lib</a></span></li>
+                              <li><span class="file"><a href="man.3.confd_lib_cdb.html" tabindex="1">confd_lib_cdb</a></span></li>
+                              <li><span class="file"><a href="man.3.confd_lib_dp.html" tabindex="1">confd_lib_dp</a></span></li>
+                              <li><span class="file"><a href="man.3.confd_lib_events.html" tabindex="1">confd_lib_events</a></span></li>
+                              <li><span class="file"><a href="man.3.confd_lib_ha.html" tabindex="1">confd_lib_ha</a></span></li>
+                              <li><span class="file"><a href="man.3.confd_lib_lib.html" tabindex="1">confd_lib_lib</a></span></li>
+                              <li><span class="file"><a href="man.3.confd_lib_maapi.html" tabindex="1">confd_lib_maapi</a></span></li>
+                              <li><span class="file"><a href="man.3.confd_types.html" tabindex="1">confd_types</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ncs.man.volume.5.html" tabindex="1">NCS man-pages, Volume 5</a></span><ul>
+                              <li><span class="file"><a href="man.5.clispec.html" tabindex="1">clispec</a></span></li>
+                              <li><span class="file"><a href="man.5.mib_annotations.html" tabindex="1">mib_annotations</a></span></li>
+                              <li><span class="file"><a href="man.5.ncs.conf.html" tabindex="1">ncs.conf</a></span></li>
+                              <li><span class="file"><a href="man.5.tailf_yang_cli_extensions.html" tabindex="1">tailf_yang_cli_extensions</a></span></li>
+                              <li><span class="file"><a href="man.5.tailf_yang_extensions.html" tabindex="1">tailf_yang_extensions</a></span></li>
+                           </ul>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

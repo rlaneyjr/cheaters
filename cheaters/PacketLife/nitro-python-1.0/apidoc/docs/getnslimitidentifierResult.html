@@ -1,0 +1,267 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>Citrix NetScaler XML API User&#39;s Guide - Structure Definition</title>
+<link rel="stylesheet" type="text/css" href="help_ns.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body onload="initial()" class="ns_body">
+<div class="ns_content"><table cellpadding="0" cellspacing="0"><script type="text/javascript">
+function changeContext(id,lang,flag){
+	parent.banner.document.language.select.value = lang;
+	if( lang == "C" ){
+		if(flag == "1"){
+			showContent(cfirstcontent,id,lang);
+		}
+		else{
+			showContent(csecondcontent,id,lang);
+		}
+	}
+	if( lang == "Perl" ){
+		if(flag == "1"){
+			showContent(perlfirstcontent,id,lang);
+		}
+		else{
+			showContent(perlsecondcontent,id,lang);
+		}
+	}
+	if( lang == "Java" ){
+		if(flag == "1"){
+			showContent(javafirstcontent,id,lang);	
+		}
+		else{
+			showContent(javasecondcontent,id,lang);
+		}
+	}
+	if( lang == "C#" ){
+		if(flag == "1"){
+			showContent(csharpfirstcontent,id,lang);
+		}
+		else{
+			showContent(csharpsecondcontent,id,lang);
+		}
+	}
+	if( lang == "VB" ){
+		if(flag == "1"){
+			showContent(vbfirstcontent,id,lang);
+		}
+		else{
+			showContent(vbsecondcontent,id,lang);
+		}
+	}
+	if(flag == "1"){
+		showInside(lang,"0");
+	}
+	else{
+		showOutside(lang);
+	}
+}
+function showContent(content,id,lang){
+	if(ie4){
+	   showContentObj=document.all.id;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById(id);
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+  showLangSelect(lang);
+}
+function showInside(str,cond){
+	if(str == "C"){
+ 		var inside_content = csecondcontent;
+ 	}
+ 	if(str == "Perl"){
+ 		var inside_content = perlsecondcontent;
+ 	}
+ 	if(str == "Java"){
+ 		var inside_content = javasecondcontent;
+ 	}
+ 	if(str == "C#"){
+		var inside_content = csharpsecondcontent;
+ 	}
+ 	if(str == "VB"){
+		var inside_content = vbsecondcontent;
+ 	}
+	showContent(inside_content,'qiksearch_div1',str);
+ 	if ( cond == "1" ){
+ 		var page = 'apidoc/docs/getnslimitidentifierResult.html#rate_lmt_identifierList';
+ 		document.location.href = page;
+ 	}
+}
+function showOutside(str){
+	if(str == "C" ){
+ 		var inside_content = cfirstcontent;
+ 	}
+ 	if(str == "Perl" ){
+ 		var inside_content = perlfirstcontent;
+ 	}
+ 	if(str == "Java" ){
+ 		var inside_content = javafirstcontent;
+ 	}
+ 	if(str == "C#" ){
+ 		var inside_content = csharpfirstcontent;
+ 	}
+ 	if(str == "VB" ){
+ 		var inside_content = vbfirstcontent;
+ 	}
+ 	showContent(inside_content,'qiksearch_div',str);
+}
+function initial(){
+	ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+	ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+	ns4=document.layers;
+	langSelected = parent.banner.document.language.select.value
+	var plink = parent.banner.document.language.plink.value
+	var my_array=plink.split("&");
+	var temp = my_array[0];
+ 	var grp = temp.split("@");
+	var cmd = my_array[1];
+	var regex = /^stat/i;
+	if( cmd.match(regex) != null ){
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex_stat.html\">Statistics</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getnslimitidentifierResult");
+	}
+	else{
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex.htm\">Configuration</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getnslimitidentifierResult");
+	}
+	if( langSelected == "C" ){
+ 		var content = cfirstcontent;
+	}
+	else if( langSelected == "Perl" ){
+		var content = perlfirstcontent;
+	}
+	else if( langSelected == "Java" ){
+		var content = javafirstcontent;
+	}
+	else if( langSelected == "C#" ){
+		var content = csharpfirstcontent;
+	}
+	else if( langSelected == "VB" ){
+		var content = vbfirstcontent;
+	}
+	else{
+		var content = cfirstcontent;
+		langSelected="C";
+	}
+	showContent(content,'qiksearch_div',langSelected);
+	showInside(langSelected,"0");
+}
+function showPLink(content){
+	if(ie4){
+	   showContentObj=document.all.progressive_link;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById("progressive_link");
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+}
+function showLangSelect(id){
+	   if(ie4)
+       {
+       	showObj=document.all.first_url;
+       	showObj1=document.all.second_url;
+       }
+       if(ns6)
+       {
+       	showObj=document.getElementById("first_url");
+       	showObj1=document.getElementById("second_url");
+       }
+       if( id == "C" ){
+       	newlink = "<b>C</b>";
+       	newlink1 = "<b>C</b>";
+       }
+       else{
+       	newlink = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C','1');\"><b>C</b></a>";
+       	newlink1 = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C','0');\"><b>C</b></a>";
+       }
+       if( id == "Perl" ){
+       	newlink = newlink + " | <b>Perl</b>";
+       	newlink1 = newlink1 + " | <b>Perl</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Perl','1');\"><b>Perl</b></a>";
+      	       newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Perl','0');\"><b>Perl</b></a>";
+       }
+       if( id == "Java" ){
+       	newlink = newlink + " | <b>Java</b>";
+       	newlink1 = newlink1 + " | <b>Java</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Java','1');\"><b>Java</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Java','0');\"><b>Java</b></a>";
+       }
+       if( id == "C#" ){
+       	newlink = newlink + " | <b>C#</b>";
+       	newlink1 = newlink1 + " | <b>C#</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C#','1');\"><b>C#</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C#','0');\"><b>C#</b></a>";
+       }
+       showObj.innerHTML = newlink;
+       showObj1.innerHTML = newlink1;
+}
+</script>
+<tr><td><div><div id="progressive_link"></div></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>getnslimitidentifierResult Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>getnslimitidentifierResult</b> structure defines the return type for getnslimitidentifier API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="first_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+cfirstcontent = "<pre>struct getnslimitidentifierResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; struct <a href=\'getnslimitidentifierResult.html\#nslimitidentifier\'>nslimitidentifier</a> list[];<br> };<br></pre></td></tr></table></div>"
+perlfirstcontent = "<pre>$getnslimitidentifierResult = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rc => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; message => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; List => \'@<a href=\'getnslimitidentifierResult.html\#nslimitidentifier\'>nslimitidentifier</a>\',<br> };<br></pre></td></tr></table></div>"
+javafirstcontent = "<pre>class getnslimitidentifierResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getnslimitidentifierResult.html\#nslimitidentifier\'>nslimitidentifier</a>[] list;<br> };<br></pre></td></tr></table></div>"
+csharpfirstcontent = "<pre>class getnslimitidentifierResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getnslimitidentifierResult.html\#nslimitidentifier\'>nslimitidentifier</a>[] list;<br> };<br></pre></td></tr></table></div>"
+vbfirstcontent = "<pre>Public <b>Structure</b> getnslimitidentifierResult <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rc As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public message As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public  nslimitidentifierList() As  <a href=\'getnslimitidentifierResult.html\#nslimitidentifier\'>nslimitidentifier</a><br> <b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rc</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, rc is 0 else rc > 0. Values above 0x8000 indicate Warnings.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>message</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, message is NULL else message contains <a href="errorlisting.html">Error/Warning</a> message.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>nslimitidentifierList</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">List of nslimitidentifiers</div></td></tr><tr><td><br></td></tr><tr><td><div><a name="nslimitidentifier"></a></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>nslimitidentifier  Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>nslimitidentifier</b> structure defines the actual return type values for getnslimitidentifier API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="second_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div1" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+csecondcontent = "<pre>struct nslimitidentifier {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * limitidentifier;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * ngname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int threshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int timeslice;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * mode;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * limittype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * selectorname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int hits;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int drop;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * rule[];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int time;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int total;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int maxbandwidth;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int trapsintimeslice;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int trapscomputedintimeslice;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int computedtraptimeslice;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int referencecount;<br> };<br></pre></td></tr></table></div>"
+perlsecondcontent = "<pre>$nslimitidentifier = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; limitidentifier => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ngname => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; threshold => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; timeslice => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; mode => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; limittype => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; selectorname => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; hits => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; drop => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rule => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; time => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; total => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; maxbandwidth => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; trapsintimeslice => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; trapscomputedintimeslice => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; computedtraptimeslice => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; referencecount => \'$\',<br> };<br></pre></td></tr></table></div>"
+javasecondcontent = "<pre>class nslimitidentifier {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String limitidentifier;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String ngname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt threshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt timeslice;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String mode;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String limittype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String selectorname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt hits;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt drop;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String rule[];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt time;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt total;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt maxbandwidth;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt trapsintimeslice;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt trapscomputedintimeslice;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt computedtraptimeslice;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt referencecount;<br> };<br></pre></td></tr></table></div>"
+csharpsecondcontent = "<pre>class nslimitidentifier {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string limitidentifier;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string ngname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 threshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 timeslice;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string mode;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string limittype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string selectorname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 hits;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 drop;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string rule[];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 time;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 total;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 maxbandwidth;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 trapsintimeslice;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 trapscomputedintimeslice;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 computedtraptimeslice;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 referencecount;<br> };<br></pre></td></tr></table></div>"
+vbsecondcontent = "<pre>Public <b>Structure</b> nslimitidentifier <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public limitidentifier As String  <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ngname As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public threshold As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public timeslice As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public mode As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public limittype As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public selectorname As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public hits As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public drop As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rule() As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public time As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public total As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public maxbandwidth As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public trapsintimeslice As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public trapscomputedintimeslice As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public computedtraptimeslice As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public referencecount As UInteger<br><b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>limitidentifier</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the rate limit identifier about which to display information.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ngname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Nodegroup name to which this identifier belongs to.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>threshold</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Maximum number of requests that are allowed in the given timeslice when requests (mode is set as REQUEST_RATE) are tracked per timeslice.
+When connections (mode is set as CONNECTION) are tracked, it is the total number of connections that would be let through.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>timeslice</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Defines the time interval in msecs specified in multiples of 10 msec during which the requests are tracked to see if they cross the threshold. It is used and displayed only when the mode is REQUEST_RATE while tracking request rate and for defining the trap timeslice.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>mode</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Defines the type of traffic to be tracked.
+* REQUEST_RATE - Tracks requests/timeslice.
+* CONNECTION - Tracks active transactions.
+
+Examples
+
+1. To permit 20 requests in 10 ms and 2 traps in 10 ms:
+add limitidentifier limit_req -mode request_rate -limitType smooth -timeslice 1000 -Threshold 2000 -trapsInTimeSlice 200
+
+2. To permit 50 requests in 10 ms:
+set  limitidentifier limit_req -mode request_rate -timeslice 1000 -Threshold 5000 -limitType smooth
+
+3. To permit 1 request in 40 ms:
+set limitidentifier limit_req -mode request_rate -timeslice 2000 -Threshold 50 -limitType smooth
+
+4. To permit 1 request in 200 ms and 1 trap in 130 ms:
+set limitidentifier limit_req -mode request_rate -timeslice 1000 -Threshold 5 -limitType smooth -trapsInTimeSlice 8
+
+5. To permit 5000 requests in 1000 ms and 200 traps in 1000 ms:
+set limitidentifier limit_req  -mode request_rate -timeslice 1000 -Threshold 5000 -limitType BURSTY</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>limittype</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Smooth or bursty request type.
+* SMOOTH - When you want the permitted number of requests in a given interval of time to be spread evenly across the timeslice
+* BURSTY - When you want the permitted number of requests to exhaust the quota anytime within the timeslice.
+This argument is needed only when the mode is set to REQUEST_RATE.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>selectorname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the rate limit selector. If this argument is NULL, rate limiting will be applied on all traffic received by the virtual server or the NetScaler (depending on whether the limit identifier is bound to a virtual server or globally) without any filtering.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>hits</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The number of times this identifier was evaluated.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>drop</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The number of times action was taken.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rule</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rule.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>time</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Time interval considered for rate limiting</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>total</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Maximum number of requests permitted in the computed timeslice</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>maxbandwidth</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The maximum bandwidth in kbps permitted</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>trapsintimeslice</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The maximum bandwidth permitted in kbps</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>trapscomputedintimeslice</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The number of traps that would be sent in the timeslice configured. </div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>computedtraptimeslice</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The time interval computed for sending traps.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>referencecount</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Total number of transactions pointing to this entry.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>See Also</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="getnslimitidentifier.html">getnslimitidentifier</a></div></td></tr><tr><td><br></td></tr></table></div>
+</body>
+</html>

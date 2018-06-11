@@ -1,0 +1,244 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>Citrix NetScaler XML API User&#39;s Guide - Structure Definition</title>
+<link rel="stylesheet" type="text/css" href="help_ns.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body onload="initial()" class="ns_body">
+<div class="ns_content"><table cellpadding="0" cellspacing="0"><script type="text/javascript">
+function changeContext(id,lang,flag){
+	parent.banner.document.language.select.value = lang;
+	if( lang == "C" ){
+		if(flag == "1"){
+			showContent(cfirstcontent,id,lang);
+		}
+		else{
+			showContent(csecondcontent,id,lang);
+		}
+	}
+	if( lang == "Perl" ){
+		if(flag == "1"){
+			showContent(perlfirstcontent,id,lang);
+		}
+		else{
+			showContent(perlsecondcontent,id,lang);
+		}
+	}
+	if( lang == "Java" ){
+		if(flag == "1"){
+			showContent(javafirstcontent,id,lang);	
+		}
+		else{
+			showContent(javasecondcontent,id,lang);
+		}
+	}
+	if( lang == "C#" ){
+		if(flag == "1"){
+			showContent(csharpfirstcontent,id,lang);
+		}
+		else{
+			showContent(csharpsecondcontent,id,lang);
+		}
+	}
+	if( lang == "VB" ){
+		if(flag == "1"){
+			showContent(vbfirstcontent,id,lang);
+		}
+		else{
+			showContent(vbsecondcontent,id,lang);
+		}
+	}
+	if(flag == "1"){
+		showInside(lang,"0");
+	}
+	else{
+		showOutside(lang);
+	}
+}
+function showContent(content,id,lang){
+	if(ie4){
+	   showContentObj=document.all.id;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById(id);
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+  showLangSelect(lang);
+}
+function showInside(str,cond){
+	if(str == "C"){
+ 		var inside_content = csecondcontent;
+ 	}
+ 	if(str == "Perl"){
+ 		var inside_content = perlsecondcontent;
+ 	}
+ 	if(str == "Java"){
+ 		var inside_content = javasecondcontent;
+ 	}
+ 	if(str == "C#"){
+		var inside_content = csharpsecondcontent;
+ 	}
+ 	if(str == "VB"){
+		var inside_content = vbsecondcontent;
+ 	}
+	showContent(inside_content,'qiksearch_div1',str);
+ 	if ( cond == "1" ){
+ 		var page = 'apidoc/docs/statlbvserverResult.html#lbvserverList';
+ 		document.location.href = page;
+ 	}
+}
+function showOutside(str){
+	if(str == "C" ){
+ 		var inside_content = cfirstcontent;
+ 	}
+ 	if(str == "Perl" ){
+ 		var inside_content = perlfirstcontent;
+ 	}
+ 	if(str == "Java" ){
+ 		var inside_content = javafirstcontent;
+ 	}
+ 	if(str == "C#" ){
+ 		var inside_content = csharpfirstcontent;
+ 	}
+ 	if(str == "VB" ){
+ 		var inside_content = vbfirstcontent;
+ 	}
+ 	showContent(inside_content,'qiksearch_div',str);
+}
+function initial(){
+	ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+	ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+	ns4=document.layers;
+	langSelected = parent.banner.document.language.select.value
+	var plink = parent.banner.document.language.plink.value
+	var my_array=plink.split("&");
+	var temp = my_array[0];
+ 	var grp = temp.split("@");
+	var cmd = my_array[1];
+	var regex = /^stat/i;
+	if( cmd.match(regex) != null ){
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex_stat.html\">Statistics</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > statlbvserverResult");
+	}
+	else{
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex.htm\">Configuration</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > statlbvserverResult");
+	}
+	if( langSelected == "C" ){
+ 		var content = cfirstcontent;
+	}
+	else if( langSelected == "Perl" ){
+		var content = perlfirstcontent;
+	}
+	else if( langSelected == "Java" ){
+		var content = javafirstcontent;
+	}
+	else if( langSelected == "C#" ){
+		var content = csharpfirstcontent;
+	}
+	else if( langSelected == "VB" ){
+		var content = vbfirstcontent;
+	}
+	else{
+		var content = cfirstcontent;
+		langSelected="C";
+	}
+	showContent(content,'qiksearch_div',langSelected);
+	showInside(langSelected,"0");
+}
+function showPLink(content){
+	if(ie4){
+	   showContentObj=document.all.progressive_link;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById("progressive_link");
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+}
+function showLangSelect(id){
+	   if(ie4)
+       {
+       	showObj=document.all.first_url;
+       	showObj1=document.all.second_url;
+       }
+       if(ns6)
+       {
+       	showObj=document.getElementById("first_url");
+       	showObj1=document.getElementById("second_url");
+       }
+       if( id == "C" ){
+       	newlink = "<b>C</b>";
+       	newlink1 = "<b>C</b>";
+       }
+       else{
+       	newlink = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C','1');\"><b>C</b></a>";
+       	newlink1 = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C','0');\"><b>C</b></a>";
+       }
+       if( id == "Perl" ){
+       	newlink = newlink + " | <b>Perl</b>";
+       	newlink1 = newlink1 + " | <b>Perl</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Perl','1');\"><b>Perl</b></a>";
+      	       newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Perl','0');\"><b>Perl</b></a>";
+       }
+       if( id == "Java" ){
+       	newlink = newlink + " | <b>Java</b>";
+       	newlink1 = newlink1 + " | <b>Java</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Java','1');\"><b>Java</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Java','0');\"><b>Java</b></a>";
+       }
+       if( id == "C#" ){
+       	newlink = newlink + " | <b>C#</b>";
+       	newlink1 = newlink1 + " | <b>C#</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C#','1');\"><b>C#</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C#','0');\"><b>C#</b></a>";
+       }
+       showObj.innerHTML = newlink;
+       showObj1.innerHTML = newlink1;
+}
+</script>
+<tr><td><div><div id="progressive_link"></div></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>statlbvserverResult Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>statlbvserverResult</b> structure defines the return type for statlbvserver API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="first_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+cfirstcontent = "<pre>struct statlbvserverResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; struct <a href=\'statlbvserverResult.html\#lbvserverstats\'>lbvserverstats</a> lbvserverstatsList[];<br> };<br></pre></td></tr></table></div>"
+perlfirstcontent = "<pre>$statlbvserverResult = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rc => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; message => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'statlbvserverResult.html\#lbvserverstats\'>lbvserverstats</a> => \'@\',<br> };<br></pre></td></tr></table></div>"
+javafirstcontent = "<pre>class statlbvserverResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; class <a href=\'statlbvserverResult.html\#lbvserverstats\'>lbvserverstats</a> lbvserverstatsList[];<br> };<br></pre></td></tr></table></div>"
+csharpfirstcontent = "<pre>class statlbvserverResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; class <a href=\'statlbvserverResult.html\#lbvserverstats\'>lbvserverstats</a> lbvserverstatsList[];<br> };<br></pre></td></tr></table></div>"
+vbfirstcontent = "<pre>Public <b>Structure</b> statlbvserverResult <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rc As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public message As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public  endlbvserverList() As  <a href=\'statlbvserverResult.html\#lbvserverstats\'>lbvserverstatsList</a><br> <b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rc</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, rc is 0 else rc > 0. Values above 0x8000 indicate Warnings.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>message</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, message is NULL else message contains <a href="errorlisting.html">Error/Warning</a> message.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>lbvserverList</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Pointer to the lbvserver List.</div></td></tr><tr><td><br></td></tr><tr><td><div><a name="lbvserverstats"></a></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>lbvserverstats  Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>lbvserverstats</b> structure defines the actual return type values for statlbvserver API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="second_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div1" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+csecondcontent = "<pre>struct lbvserverstats {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char *   name;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char *   clearstats;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char *   sortby;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char *   sortorder;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int vsvrsurgecount;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int establishedconn;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int inactsvcs;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int vslbhealth;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int primaryipaddress;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int primaryport;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * type;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * state;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int actsvcs;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int tothits;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int hitsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int totalrequests;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int requestsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int totalresponses;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int responsesrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int totalrequestbytes;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int requestbytesrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int totalresponsebytes;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int responsebytesrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int totalpktsrecvd;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int pktsrecvdrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int totalpktssent;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int pktssentrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int curclntconnections;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int cursrvrconnections;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int surgecount;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int svcsurgecount;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int sothreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int totspillovers;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int labelledconn;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int pushlabel;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int deferredreq;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int deferredreqrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int invalidrequestresponse;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int invalidrequestresponsedropped;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int svrestablishedconn;<br> };<br></pre></td></tr></table></div>"
+perlsecondcontent = "<pre>$lbvserverstats = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; name => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; clearstats => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; sortby => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; sortorder => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; vsvrsurgecount => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; establishedconn => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; inactsvcs => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; vslbhealth => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; primaryipaddress => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; primaryport => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; type => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; state => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; actsvcs => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; tothits => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; hitsrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; totalrequests => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; requestsrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; totalresponses => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; responsesrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; totalrequestbytes => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; requestbytesrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; totalresponsebytes => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; responsebytesrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; totalpktsrecvd => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; pktsrecvdrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; totalpktssent => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; pktssentrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; curclntconnections => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; cursrvrconnections => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; surgecount => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; svcsurgecount => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; sothreshold => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; totspillovers => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; labelledconn => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; pushlabel => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; deferredreq => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; deferredreqrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; invalidrequestresponse => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; invalidrequestresponsedropped => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; svrestablishedconn => \'$\',<br> };<br></pre></td></tr></table></div>"
+javasecondcontent = "<pre>class lbvserverstats {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String  name;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String  clearstats;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String  sortby;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String  sortorder;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt vsvrsurgecount;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt establishedconn;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt inactsvcs;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt vslbhealth;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt primaryipaddress;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt primaryport;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String type;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String state;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt actsvcs;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt tothits;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt hitsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt totalrequests;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt requestsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt totalresponses;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt responsesrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt totalrequestbytes;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt requestbytesrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt totalresponsebytes;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt responsebytesrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt totalpktsrecvd;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt pktsrecvdrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt totalpktssent;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt pktssentrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt curclntconnections;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt cursrvrconnections;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt surgecount;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt svcsurgecount;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt sothreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt totspillovers;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt labelledconn;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt pushlabel;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt deferredreq;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt deferredreqrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt invalidrequestresponse;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt invalidrequestresponsedropped;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt svrestablishedconn;<br> };<br></pre></td></tr></table></div>"
+csharpsecondcontent = "<pre>class lbvserverstats {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string  name;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string  clearstats;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string  sortby;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string  sortorder;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 vsvrsurgecount;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 establishedconn;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 inactsvcs;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 vslbhealth;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 primaryipaddress;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 primaryport;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string type;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string state;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 actsvcs;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 tothits;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 hitsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 totalrequests;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 requestsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 totalresponses;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 responsesrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 totalrequestbytes;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 requestbytesrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 totalresponsebytes;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 responsebytesrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 totalpktsrecvd;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 pktsrecvdrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 totalpktssent;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 pktssentrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 curclntconnections;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 cursrvrconnections;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 surgecount;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 svcsurgecount;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 sothreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 totspillovers;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 labelledconn;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 pushlabel;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 deferredreq;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 deferredreqrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 invalidrequestresponse;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 invalidrequestresponsedropped;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 svrestablishedconn;<br> };<br></pre></td></tr></table></div>"
+vbsecondcontent = "<pre>Public <b>Structure</b> lbvserverstats <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public name As String  <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public clearstats As String  <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public sortby As String  <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public sortorder As String  <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public vsvrsurgecount As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public establishedconn As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public inactsvcs As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public vslbhealth As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public primaryipaddress As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public primaryport As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public type As String <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public state As String <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public actsvcs As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public tothits As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public hitsrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public totalrequests As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public requestsrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public totalresponses As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public responsesrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public totalrequestbytes As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public requestbytesrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public totalresponsebytes As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public responsebytesrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public totalpktsrecvd As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public pktsrecvdrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public totalpktssent As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public pktssentrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public curclntconnections As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public cursrvrconnections As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public surgecount As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public svcsurgecount As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public sothreshold As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public totspillovers As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public labelledconn As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public pushlabel As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public deferredreq As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public deferredreqrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public invalidrequestresponse As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public invalidrequestresponsedropped As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public svrestablishedconn As UInteger <br><b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>name</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the virtual server. If no name is provided, statistical data of all configured virtual servers is displayed.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>clearstats</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Clear the statsistics / counters</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sortby</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">use this argument to sort by specific key</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sortorder</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">use this argument to specify sort order</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>vsvrsurgecount</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of requests waiting on this vserver. </div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>establishedconn</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of client connections in ESTABLISHED state.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>inactsvcs</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">number of INACTIVE services bound to a vserver</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>vslbhealth</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Health of the vserver. This gives percentage of UP services bound to this vserver.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>primaryipaddress</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">IP address of the vserver</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>primaryport</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The port on which the service is running.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>type</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Protocol associated with the vserver<br>Possible Values : HTTP, FTP, TCP, UDP, SSL, SSL_BRIDGE, SSL_TCP, DTLS, NNTP, DNS, DHCPRA, ANY, SIP_UDP, DNS_TCP, RTSP, PUSH, SSL_PUSH, RADIUS, RDP, MYSQL, MSSQL, DIAMETER, SSL_DIAMETER, TFTP, ORACLE.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>state</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Current state of the server. Possible values are UP, DOWN, UNKNOWN, OFS(Out of Service), TROFS(Transition Out of Service), TROFS_DOWN(Down When going Out of Service)<br>Possible Values : UP, DOWN, UNKNOWN, BUSY, OUT OF SERVICE, GOING OUT OF SERVICE, DOWN WHEN GOING OUT OF SERVICE, NS_EMPTY_STR, Unknown, DISABLED.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>actsvcs</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">number of ACTIVE services bound to a vserver</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>tothits</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Total vserver hits</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>hitsrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate vserver hits</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>totalrequests</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Total number of requests received on this service or virtual server. (This applies to HTTP/SSL services and servers.)</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>requestsrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of requests received on this service or virtual server. (This applies to HTTP/SSL services and servers.)</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>totalresponses</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of responses received on this service or virtual server. (This applies to HTTP/SSL services and servers.)</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>responsesrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of responses received on this service or virtual server. (This applies to HTTP/SSL services and servers.)</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>totalrequestbytes</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Total number of request bytes received on this service or virtual server.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>requestbytesrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of request bytes received on this service or virtual server.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>totalresponsebytes</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of response bytes received by this service or virtual server.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>responsebytesrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of response bytes received by this service or virtual server.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>totalpktsrecvd</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Total number of packets received by this service or virtual server.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>pktsrecvdrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of packets received by this service or virtual server.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>totalpktssent</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Total number of packets sent.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>pktssentrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of packets sent.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>curclntconnections</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of current client connections.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>cursrvrconnections</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of current connections to the actual servers behind the virtual server.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>surgecount</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of requests in the surge queue.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>svcsurgecount</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Total number of requests in the surge queues of all the services bound to this LB-vserver.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sothreshold</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Spill Over Threshold set on the VServer.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>totspillovers</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of times vserver experienced spill over.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>labelledconn</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of Labeled connection on this vserver</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>pushlabel</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of labels for this push vserver.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>deferredreq</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of deferred request on this vserver</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>deferredreqrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of deferred request on this vserver</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>invalidrequestresponse</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number invalid requests/responses on this vserver</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>invalidrequestresponsedropped</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number invalid requests/responses dropped on this vserver</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>svrestablishedconn</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of server connections in ESTABLISHED state.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>See Also</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="statlbvserver.html">statlbvserver</a></div></td></tr><tr><td><br></td></tr></table></div>
+</body>
+</html>

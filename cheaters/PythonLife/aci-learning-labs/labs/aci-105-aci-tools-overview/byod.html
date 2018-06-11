@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+</head>
+<body>
+<h2 id="setting-up-the-environment">Setting up the environment</h2>
+<p>There are no excercises in this particular tutorial, but it does provide instruction on downloading and installing the acitoolkit, which will be used in a subsequent lab. This will itself require Python and the Git application which must be installed and available on the client. The download locations for each of these applications is given below.</p>
+<h3 id="prerequisites">Prerequisites</h3>
+<h4 id="git">Git</h4>
+<p>You will be performing a 'git clone' of the code from the Git Repository. There are a number of ways of achieving this. For example, an IDE, such as Eclipse, can do this for you. Otherwise, if you don't already have the command line version, you can download and install it from here:</p>
+<p>http://git-scm.com/downloads</p>
+<h4 id="python">Python</h4>
+<p>The Python website offers two major versions of Python: 3.x.x and 2.x.x, and you will need 2.x.x for all ACI labs. If you already have Python installed, you can check the version by simply running it from a terminal or shell:</p>
+<pre><code>C:\Users\Cisco&gt;python
+Python 2.7.9 (default, Dec 10 2014, 12:28:03) ...</code></pre>
+<p>Otherwise, you can download and install it from here:</p>
+<p>https://www.python.org/downloads</p>
+<h3 id="get-the-acitoolkit-library-and-tutorial">Get the acitoolkit library and tutorial</h3>
+<p>Next, you can download the the acitoolkit into a directory of your choice. This is done using the git utility installed above:</p>
+<pre><code>  git clone https://github.com/datacenter/acitoolkit.git</code></pre>
+<h4 id="install">Install</h4>
+<p>Next, cd into the created directory and install the acitoolkit::</p>
+<pre><code>  cd acitoolkit
+  python setup.py install</code></pre>
+<p>Note that when installing on Mac or Linux, you will likely need to run this as root so preface the command with the <code>sudo</code> keyword as follows::</p>
+<pre><code>  sudo python setup.py install</code></pre>
+<h4 id="setting-login-credentials">Setting login credentials</h4>
+<p>In the acitoolkit/samples directory there is a <code>credentials.py</code> file that contains the login credentials for the APIC and is shown (post edits) in its entirety below. It contains the following variables: <code>LOGIN</code>, <code>PASSWORD</code>, and <code>IPADDR</code>. These variables should be modified to the settings of your particular APIC.</p>
+<pre><code>   LOGIN = &#39;admin&#39;
+   PASSWORD = &#39;cisco123&#39;
+   IPADDR = &#39;10.10.20.57&#39;
+   URL = &#39;https://&#39; + IPADDR</code></pre>
+<p><strong>Note: There may be another credentials.py file in the parent acitoolkit directory that is ignored and can be deleted. You should be modifying acitoolkit/samples/credentials.py.</strong></p>
+</body>
+</html>

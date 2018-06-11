@@ -1,0 +1,255 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>Citrix NetScaler XML API User&#39;s Guide - Structure Definition</title>
+<link rel="stylesheet" type="text/css" href="help_ns.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body onload="initial()" class="ns_body">
+<div class="ns_content"><table cellpadding="0" cellspacing="0"><script type="text/javascript">
+function changeContext(id,lang,flag){
+	parent.banner.document.language.select.value = lang;
+	if( lang == "C" ){
+		if(flag == "1"){
+			showContent(cfirstcontent,id,lang);
+		}
+		else{
+			showContent(csecondcontent,id,lang);
+		}
+	}
+	if( lang == "Perl" ){
+		if(flag == "1"){
+			showContent(perlfirstcontent,id,lang);
+		}
+		else{
+			showContent(perlsecondcontent,id,lang);
+		}
+	}
+	if( lang == "Java" ){
+		if(flag == "1"){
+			showContent(javafirstcontent,id,lang);	
+		}
+		else{
+			showContent(javasecondcontent,id,lang);
+		}
+	}
+	if( lang == "C#" ){
+		if(flag == "1"){
+			showContent(csharpfirstcontent,id,lang);
+		}
+		else{
+			showContent(csharpsecondcontent,id,lang);
+		}
+	}
+	if( lang == "VB" ){
+		if(flag == "1"){
+			showContent(vbfirstcontent,id,lang);
+		}
+		else{
+			showContent(vbsecondcontent,id,lang);
+		}
+	}
+	if(flag == "1"){
+		showInside(lang,"0");
+	}
+	else{
+		showOutside(lang);
+	}
+}
+function showContent(content,id,lang){
+	if(ie4){
+	   showContentObj=document.all.id;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById(id);
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+  showLangSelect(lang);
+}
+function showInside(str,cond){
+	if(str == "C"){
+ 		var inside_content = csecondcontent;
+ 	}
+ 	if(str == "Perl"){
+ 		var inside_content = perlsecondcontent;
+ 	}
+ 	if(str == "Java"){
+ 		var inside_content = javasecondcontent;
+ 	}
+ 	if(str == "C#"){
+		var inside_content = csharpsecondcontent;
+ 	}
+ 	if(str == "VB"){
+		var inside_content = vbsecondcontent;
+ 	}
+	showContent(inside_content,'qiksearch_div1',str);
+ 	if ( cond == "1" ){
+ 		var page = 'apidoc/docs/getauthenticationldapactionResult.html#ldapactionList';
+ 		document.location.href = page;
+ 	}
+}
+function showOutside(str){
+	if(str == "C" ){
+ 		var inside_content = cfirstcontent;
+ 	}
+ 	if(str == "Perl" ){
+ 		var inside_content = perlfirstcontent;
+ 	}
+ 	if(str == "Java" ){
+ 		var inside_content = javafirstcontent;
+ 	}
+ 	if(str == "C#" ){
+ 		var inside_content = csharpfirstcontent;
+ 	}
+ 	if(str == "VB" ){
+ 		var inside_content = vbfirstcontent;
+ 	}
+ 	showContent(inside_content,'qiksearch_div',str);
+}
+function initial(){
+	ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+	ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+	ns4=document.layers;
+	langSelected = parent.banner.document.language.select.value
+	var plink = parent.banner.document.language.plink.value
+	var my_array=plink.split("&");
+	var temp = my_array[0];
+ 	var grp = temp.split("@");
+	var cmd = my_array[1];
+	var regex = /^stat/i;
+	if( cmd.match(regex) != null ){
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex_stat.html\">Statistics</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getauthenticationldapactionResult");
+	}
+	else{
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex.htm\">Configuration</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getauthenticationldapactionResult");
+	}
+	if( langSelected == "C" ){
+ 		var content = cfirstcontent;
+	}
+	else if( langSelected == "Perl" ){
+		var content = perlfirstcontent;
+	}
+	else if( langSelected == "Java" ){
+		var content = javafirstcontent;
+	}
+	else if( langSelected == "C#" ){
+		var content = csharpfirstcontent;
+	}
+	else if( langSelected == "VB" ){
+		var content = vbfirstcontent;
+	}
+	else{
+		var content = cfirstcontent;
+		langSelected="C";
+	}
+	showContent(content,'qiksearch_div',langSelected);
+	showInside(langSelected,"0");
+}
+function showPLink(content){
+	if(ie4){
+	   showContentObj=document.all.progressive_link;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById("progressive_link");
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+}
+function showLangSelect(id){
+	   if(ie4)
+       {
+       	showObj=document.all.first_url;
+       	showObj1=document.all.second_url;
+       }
+       if(ns6)
+       {
+       	showObj=document.getElementById("first_url");
+       	showObj1=document.getElementById("second_url");
+       }
+       if( id == "C" ){
+       	newlink = "<b>C</b>";
+       	newlink1 = "<b>C</b>";
+       }
+       else{
+       	newlink = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C','1');\"><b>C</b></a>";
+       	newlink1 = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C','0');\"><b>C</b></a>";
+       }
+       if( id == "Perl" ){
+       	newlink = newlink + " | <b>Perl</b>";
+       	newlink1 = newlink1 + " | <b>Perl</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Perl','1');\"><b>Perl</b></a>";
+      	       newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Perl','0');\"><b>Perl</b></a>";
+       }
+       if( id == "Java" ){
+       	newlink = newlink + " | <b>Java</b>";
+       	newlink1 = newlink1 + " | <b>Java</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Java','1');\"><b>Java</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Java','0');\"><b>Java</b></a>";
+       }
+       if( id == "C#" ){
+       	newlink = newlink + " | <b>C#</b>";
+       	newlink1 = newlink1 + " | <b>C#</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C#','1');\"><b>C#</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C#','0');\"><b>C#</b></a>";
+       }
+       showObj.innerHTML = newlink;
+       showObj1.innerHTML = newlink1;
+}
+</script>
+<tr><td><div><div id="progressive_link"></div></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>getauthenticationldapactionResult Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>getauthenticationldapactionResult</b> structure defines the return type for getauthenticationldapaction API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="first_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+cfirstcontent = "<pre>struct getauthenticationldapactionResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; struct <a href=\'getauthenticationldapactionResult.html\#authenticationldapaction\'>authenticationldapaction</a> list[];<br> };<br></pre></td></tr></table></div>"
+perlfirstcontent = "<pre>$getauthenticationldapactionResult = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rc => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; message => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; List => \'@<a href=\'getauthenticationldapactionResult.html\#authenticationldapaction\'>authenticationldapaction</a>\',<br> };<br></pre></td></tr></table></div>"
+javafirstcontent = "<pre>class getauthenticationldapactionResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getauthenticationldapactionResult.html\#authenticationldapaction\'>authenticationldapaction</a>[] list;<br> };<br></pre></td></tr></table></div>"
+csharpfirstcontent = "<pre>class getauthenticationldapactionResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getauthenticationldapactionResult.html\#authenticationldapaction\'>authenticationldapaction</a>[] list;<br> };<br></pre></td></tr></table></div>"
+vbfirstcontent = "<pre>Public <b>Structure</b> getauthenticationldapactionResult <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rc As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public message As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public  authenticationldapactionList() As  <a href=\'getauthenticationldapactionResult.html\#authenticationldapaction\'>authenticationldapaction</a><br> <b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rc</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, rc is 0 else rc > 0. Values above 0x8000 indicate Warnings.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>message</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, message is NULL else message contains <a href="errorlisting.html">Error/Warning</a> message.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>authenticationldapactionList</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">List of authenticationldapactions</div></td></tr><tr><td><br></td></tr><tr><td><div><a name="authenticationldapaction"></a></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>authenticationldapaction  Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>authenticationldapaction</b> structure defines the actual return type values for getauthenticationldapaction API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="second_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div1" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+csecondcontent = "<pre>struct authenticationldapaction {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * name;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * serverip;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * servername;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int serverport;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int authtimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * ldapbinddn;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * ldapbinddnpassword;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * ldaploginname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * ldapbase;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * searchfilter;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * groupattrname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * subattributename;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * sectype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * svrtype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * ssonameattribute;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * authentication;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * requireuser;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int success;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int failure;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * nestedgroupextraction;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int maxnestinglevel;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * followreferrals;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int maxldapreferrals;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * validateservercert;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * ldaphostname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * groupnameidentifier;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * groupsearchattribute;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * groupsearchsubattribute;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * groupsearchfilter;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * passwdchange;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * defaultauthenticationgroup;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * attribute1;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * attribute2;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * attribute3;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * attribute4;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * attribute5;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * attribute6;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * attribute7;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * attribute8;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * attribute9;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * attribute10;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * attribute11;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * attribute12;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * attribute13;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * attribute14;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * attribute15;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * attribute16;<br> };<br></pre></td></tr></table></div>"
+perlsecondcontent = "<pre>$authenticationldapaction = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; name => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; serverip => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; servername => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; serverport => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; authtimeout => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ldapbinddn => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ldapbinddnpassword => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ldaploginname => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ldapbase => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; searchfilter => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; groupattrname => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; subattributename => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; sectype => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; svrtype => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ssonameattribute => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; authentication => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; requireuser => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; success => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; failure => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; nestedgroupextraction => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; maxnestinglevel => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; followreferrals => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; maxldapreferrals => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; validateservercert => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ldaphostname => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; groupnameidentifier => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; groupsearchattribute => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; groupsearchsubattribute => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; groupsearchfilter => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; passwdchange => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; defaultauthenticationgroup => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; attribute1 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; attribute2 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; attribute3 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; attribute4 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; attribute5 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; attribute6 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; attribute7 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; attribute8 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; attribute9 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; attribute10 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; attribute11 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; attribute12 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; attribute13 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; attribute14 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; attribute15 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; attribute16 => \'$\',<br> };<br></pre></td></tr></table></div>"
+javasecondcontent = "<pre>class authenticationldapaction {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String name;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String serverip;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String servername;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt serverport;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt authtimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String ldapbinddn;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String ldapbinddnpassword;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String ldaploginname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String ldapbase;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String searchfilter;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String groupattrname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String subattributename;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String sectype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String svrtype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String ssonameattribute;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String authentication;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String requireuser;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt success;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt failure;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String nestedgroupextraction;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt maxnestinglevel;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String followreferrals;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt maxldapreferrals;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String validateservercert;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String ldaphostname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String groupnameidentifier;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String groupsearchattribute;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String groupsearchsubattribute;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String groupsearchfilter;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String passwdchange;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String defaultauthenticationgroup;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String attribute1;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String attribute2;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String attribute3;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String attribute4;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String attribute5;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String attribute6;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String attribute7;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String attribute8;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String attribute9;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String attribute10;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String attribute11;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String attribute12;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String attribute13;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String attribute14;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String attribute15;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String attribute16;<br> };<br></pre></td></tr></table></div>"
+csharpsecondcontent = "<pre>class authenticationldapaction {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string name;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string serverip;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string servername;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 serverport;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 authtimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string ldapbinddn;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string ldapbinddnpassword;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string ldaploginname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string ldapbase;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string searchfilter;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string groupattrname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string subattributename;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string sectype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string svrtype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string ssonameattribute;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string authentication;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string requireuser;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 success;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 failure;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string nestedgroupextraction;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 maxnestinglevel;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string followreferrals;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 maxldapreferrals;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string validateservercert;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string ldaphostname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string groupnameidentifier;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string groupsearchattribute;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string groupsearchsubattribute;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string groupsearchfilter;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string passwdchange;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string defaultauthenticationgroup;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string attribute1;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string attribute2;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string attribute3;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string attribute4;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string attribute5;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string attribute6;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string attribute7;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string attribute8;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string attribute9;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string attribute10;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string attribute11;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string attribute12;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string attribute13;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string attribute14;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string attribute15;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string attribute16;<br> };<br></pre></td></tr></table></div>"
+vbsecondcontent = "<pre>Public <b>Structure</b> authenticationldapaction <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public name As String  <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public serverip As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public servername As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public serverport As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public authtimeout As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ldapbinddn As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ldapbinddnpassword As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ldaploginname As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ldapbase As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public searchfilter As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public groupattrname As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public subattributename As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public sectype As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public svrtype As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ssonameattribute As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public authentication As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public requireuser As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public success As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public failure As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public nestedgroupextraction As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public maxnestinglevel As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public followreferrals As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public maxldapreferrals As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public validateservercert As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ldaphostname As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public groupnameidentifier As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public groupsearchattribute As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public groupsearchsubattribute As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public groupsearchfilter As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public passwdchange As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public defaultauthenticationgroup As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public attribute1 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public attribute2 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public attribute3 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public attribute4 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public attribute5 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public attribute6 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public attribute7 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public attribute8 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public attribute9 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public attribute10 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public attribute11 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public attribute12 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public attribute13 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public attribute14 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public attribute15 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public attribute16 As String<br><b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>name</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the LDAP profile.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>serverip</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">IP address assigned to the LDAP server.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>servername</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">LDAP server name as a FQDN.  Mutually exclusive with LDAP IP address.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>serverport</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Port on which the LDAP server accepts connections.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>authtimeout</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of seconds the NetScaler appliance waits for a response from the RADIUS server.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ldapbinddn</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Full distinguished name (DN) that is used to bind to the LDAP server. 
+Default: cn=Manager,dc=netscaler,dc=com</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ldapbinddnpassword</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Password used to bind to the LDAP server.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ldaploginname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">LDAP login name attribute. 
+The NetScaler appliance uses the LDAP login name to query external LDAP servers or Active Directories.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ldapbase</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Base (node) from which to start LDAP searches. 
+If the LDAP server is running locally, the default value of base is dc=netscaler, dc=com.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>searchfilter</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">String to be combined with the default LDAP user search string to form the search value. For example, if the search filter “"vpnallowed=true"” is combined with the LDAP login name “"samaccount"” and the user-supplied username is “"bob"”, the result is the LDAP search string ""(&(vpnallowed=true)(samaccount=bob)"" (Be sure to enclose the search string in two sets of double quotation marks; both sets are needed.).</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>groupattrname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">LDAP group attribute name.
+Used for group extraction on the LDAP server.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>subattributename</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">LDAP group sub-attribute name. 
+Used for group extraction from the LDAP server.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sectype</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Type of security used for communications between the NetScaler appliance and the LDAP server. For the PLAINTEXT setting, no encryption is required.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>svrtype</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The type of LDAP server.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ssonameattribute</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">LDAP single signon (SSO) attribute. 
+The NetScaler appliance uses the SSO name attribute to query external LDAP servers or Active Directories for an alternate username.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>authentication</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Perform LDAP authentication.
+If authentication is disabled, any LDAP authentication attempt returns authentication success if the user is found. 
+CAUTION! Authentication should be disabled only for authorization group extraction or where other (non-LDAP) authentication methods are in use and either bound to a primary list or flagged as secondary.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>requireuser</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Require a successful user search for authentication.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>success</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>failure</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>nestedgroupextraction</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Allow nested group extraction, in which the NetScaler appliance queries external LDAP servers to determine whether a group is part of another group.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>maxnestinglevel</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If nested group extraction is ON, specifies the number of levels up to which group extraction is performed.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>followreferrals</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Setting this option to ON enables following LDAP referrals received from the LDAP server.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>maxldapreferrals</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Specifies the maximum number of nested referrals to follow.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>validateservercert</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">When to validate LDAP server certs</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ldaphostname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Hostname for the LDAP server.  If -validateServerCert is ON then this must be the host name on the certificate from the LDAP server.
+A hostname mismatch will cause a connection failure.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>groupnameidentifier</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name that uniquely identifies a group in LDAP or Active Directory.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>groupsearchattribute</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">LDAP group search attribute. 
+Used to determine to which groups a group belongs.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>groupsearchsubattribute</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">LDAP group search subattribute. 
+Used to determine to which groups a group belongs.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>groupsearchfilter</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">String to be combined with the default LDAP group search string to form the search value.  For example, the group search filter ""vpnallowed=true"" when combined with the group identifier ""samaccount"" and the group name ""g1"" yields the LDAP search string ""(&(vpnallowed=true)(samaccount=g1)"". (Be sure to enclose the search string in two sets of double quotation marks; both sets are needed.)</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>passwdchange</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Allow password change requests.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>defaultauthenticationgroup</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">This is the default group that is chosen when the authentication succeeds in addition to extracted groups.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>attribute1</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Expression that would be evaluated to extract attribute1 from the ldap response</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>attribute2</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Expression that would be evaluated to extract attribute2 from the ldap response</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>attribute3</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Expression that would be evaluated to extract attribute3 from the ldap response</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>attribute4</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Expression that would be evaluated to extract attribute4 from the ldap response</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>attribute5</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Expression that would be evaluated to extract attribute5 from the ldap response</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>attribute6</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Expression that would be evaluated to extract attribute6 from the ldap response</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>attribute7</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Expression that would be evaluated to extract attribute7 from the ldap response</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>attribute8</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Expression that would be evaluated to extract attribute8 from the ldap response</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>attribute9</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Expression that would be evaluated to extract attribute9 from the ldap response</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>attribute10</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Expression that would be evaluated to extract attribute10 from the ldap response</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>attribute11</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Expression that would be evaluated to extract attribute11 from the ldap response</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>attribute12</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Expression that would be evaluated to extract attribute12 from the ldap response</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>attribute13</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Expression that would be evaluated to extract attribute13 from the ldap response</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>attribute14</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Expression that would be evaluated to extract attribute14 from the ldap response</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>attribute15</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Expression that would be evaluated to extract attribute15 from the ldap response</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>attribute16</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Expression that would be evaluated to extract attribute16 from the ldap response</div></td></tr><tr><td><br></td></tr><tr><td><div><b>See Also</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="getauthenticationldapaction.html">getauthenticationldapaction</a></div></td></tr><tr><td><br></td></tr></table></div>
+</body>
+</html>

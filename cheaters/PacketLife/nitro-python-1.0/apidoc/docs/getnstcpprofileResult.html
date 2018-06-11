@@ -1,0 +1,246 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>Citrix NetScaler XML API User&#39;s Guide - Structure Definition</title>
+<link rel="stylesheet" type="text/css" href="help_ns.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body onload="initial()" class="ns_body">
+<div class="ns_content"><table cellpadding="0" cellspacing="0"><script type="text/javascript">
+function changeContext(id,lang,flag){
+	parent.banner.document.language.select.value = lang;
+	if( lang == "C" ){
+		if(flag == "1"){
+			showContent(cfirstcontent,id,lang);
+		}
+		else{
+			showContent(csecondcontent,id,lang);
+		}
+	}
+	if( lang == "Perl" ){
+		if(flag == "1"){
+			showContent(perlfirstcontent,id,lang);
+		}
+		else{
+			showContent(perlsecondcontent,id,lang);
+		}
+	}
+	if( lang == "Java" ){
+		if(flag == "1"){
+			showContent(javafirstcontent,id,lang);	
+		}
+		else{
+			showContent(javasecondcontent,id,lang);
+		}
+	}
+	if( lang == "C#" ){
+		if(flag == "1"){
+			showContent(csharpfirstcontent,id,lang);
+		}
+		else{
+			showContent(csharpsecondcontent,id,lang);
+		}
+	}
+	if( lang == "VB" ){
+		if(flag == "1"){
+			showContent(vbfirstcontent,id,lang);
+		}
+		else{
+			showContent(vbsecondcontent,id,lang);
+		}
+	}
+	if(flag == "1"){
+		showInside(lang,"0");
+	}
+	else{
+		showOutside(lang);
+	}
+}
+function showContent(content,id,lang){
+	if(ie4){
+	   showContentObj=document.all.id;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById(id);
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+  showLangSelect(lang);
+}
+function showInside(str,cond){
+	if(str == "C"){
+ 		var inside_content = csecondcontent;
+ 	}
+ 	if(str == "Perl"){
+ 		var inside_content = perlsecondcontent;
+ 	}
+ 	if(str == "Java"){
+ 		var inside_content = javasecondcontent;
+ 	}
+ 	if(str == "C#"){
+		var inside_content = csharpsecondcontent;
+ 	}
+ 	if(str == "VB"){
+		var inside_content = vbsecondcontent;
+ 	}
+	showContent(inside_content,'qiksearch_div1',str);
+ 	if ( cond == "1" ){
+ 		var page = 'apidoc/docs/getnstcpprofileResult.html#tcp_profileList';
+ 		document.location.href = page;
+ 	}
+}
+function showOutside(str){
+	if(str == "C" ){
+ 		var inside_content = cfirstcontent;
+ 	}
+ 	if(str == "Perl" ){
+ 		var inside_content = perlfirstcontent;
+ 	}
+ 	if(str == "Java" ){
+ 		var inside_content = javafirstcontent;
+ 	}
+ 	if(str == "C#" ){
+ 		var inside_content = csharpfirstcontent;
+ 	}
+ 	if(str == "VB" ){
+ 		var inside_content = vbfirstcontent;
+ 	}
+ 	showContent(inside_content,'qiksearch_div',str);
+}
+function initial(){
+	ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+	ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+	ns4=document.layers;
+	langSelected = parent.banner.document.language.select.value
+	var plink = parent.banner.document.language.plink.value
+	var my_array=plink.split("&");
+	var temp = my_array[0];
+ 	var grp = temp.split("@");
+	var cmd = my_array[1];
+	var regex = /^stat/i;
+	if( cmd.match(regex) != null ){
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex_stat.html\">Statistics</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getnstcpprofileResult");
+	}
+	else{
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex.htm\">Configuration</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getnstcpprofileResult");
+	}
+	if( langSelected == "C" ){
+ 		var content = cfirstcontent;
+	}
+	else if( langSelected == "Perl" ){
+		var content = perlfirstcontent;
+	}
+	else if( langSelected == "Java" ){
+		var content = javafirstcontent;
+	}
+	else if( langSelected == "C#" ){
+		var content = csharpfirstcontent;
+	}
+	else if( langSelected == "VB" ){
+		var content = vbfirstcontent;
+	}
+	else{
+		var content = cfirstcontent;
+		langSelected="C";
+	}
+	showContent(content,'qiksearch_div',langSelected);
+	showInside(langSelected,"0");
+}
+function showPLink(content){
+	if(ie4){
+	   showContentObj=document.all.progressive_link;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById("progressive_link");
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+}
+function showLangSelect(id){
+	   if(ie4)
+       {
+       	showObj=document.all.first_url;
+       	showObj1=document.all.second_url;
+       }
+       if(ns6)
+       {
+       	showObj=document.getElementById("first_url");
+       	showObj1=document.getElementById("second_url");
+       }
+       if( id == "C" ){
+       	newlink = "<b>C</b>";
+       	newlink1 = "<b>C</b>";
+       }
+       else{
+       	newlink = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C','1');\"><b>C</b></a>";
+       	newlink1 = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C','0');\"><b>C</b></a>";
+       }
+       if( id == "Perl" ){
+       	newlink = newlink + " | <b>Perl</b>";
+       	newlink1 = newlink1 + " | <b>Perl</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Perl','1');\"><b>Perl</b></a>";
+      	       newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Perl','0');\"><b>Perl</b></a>";
+       }
+       if( id == "Java" ){
+       	newlink = newlink + " | <b>Java</b>";
+       	newlink1 = newlink1 + " | <b>Java</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Java','1');\"><b>Java</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Java','0');\"><b>Java</b></a>";
+       }
+       if( id == "C#" ){
+       	newlink = newlink + " | <b>C#</b>";
+       	newlink1 = newlink1 + " | <b>C#</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C#','1');\"><b>C#</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C#','0');\"><b>C#</b></a>";
+       }
+       showObj.innerHTML = newlink;
+       showObj1.innerHTML = newlink1;
+}
+</script>
+<tr><td><div><div id="progressive_link"></div></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>getnstcpprofileResult Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>getnstcpprofileResult</b> structure defines the return type for getnstcpprofile API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="first_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+cfirstcontent = "<pre>struct getnstcpprofileResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; struct <a href=\'getnstcpprofileResult.html\#nstcpprofile\'>nstcpprofile</a> list[];<br> };<br></pre></td></tr></table></div>"
+perlfirstcontent = "<pre>$getnstcpprofileResult = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rc => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; message => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; List => \'@<a href=\'getnstcpprofileResult.html\#nstcpprofile\'>nstcpprofile</a>\',<br> };<br></pre></td></tr></table></div>"
+javafirstcontent = "<pre>class getnstcpprofileResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getnstcpprofileResult.html\#nstcpprofile\'>nstcpprofile</a>[] list;<br> };<br></pre></td></tr></table></div>"
+csharpfirstcontent = "<pre>class getnstcpprofileResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getnstcpprofileResult.html\#nstcpprofile\'>nstcpprofile</a>[] list;<br> };<br></pre></td></tr></table></div>"
+vbfirstcontent = "<pre>Public <b>Structure</b> getnstcpprofileResult <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rc As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public message As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public  nstcpprofileList() As  <a href=\'getnstcpprofileResult.html\#nstcpprofile\'>nstcpprofile</a><br> <b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rc</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, rc is 0 else rc > 0. Values above 0x8000 indicate Warnings.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>message</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, message is NULL else message contains <a href="errorlisting.html">Error/Warning</a> message.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>nstcpprofileList</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">List of nstcpprofiles</div></td></tr><tr><td><br></td></tr><tr><td><div><a name="nstcpprofile"></a></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>nstcpprofile  Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>nstcpprofile</b> structure defines the actual return type values for getnstcpprofile API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="second_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div1" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+csecondcontent = "<pre>struct nstcpprofile {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * name;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * ws;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * sack;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int wsval;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * nagle;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * ackonpush;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int mss;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int maxburst;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int initialcwnd;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int delayedack;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int oooqsize;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int maxpktpermss;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int pktperretx;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int minrto;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int slowstartincr;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int buffersize;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * flavor;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int refcnt;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * syncookie;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * kaprobeupdatelastactivity;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * dynamicreceivebuffering;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * ka;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int kaconnidletime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int kamaxprobes;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int kaprobeinterval;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int sendbuffsize;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * mptcp;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * establishclientconn;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * tcpsegoffload;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * rstwindowattenuate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * rstmaxack;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * timestamp;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * spoofsyndrop;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * ecn;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * mptcpdropdataonpreestsf;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * mptcpfastopen;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int mptcpsessiontimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * dsack;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * ackaggregation;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * frto;<br> };<br></pre></td></tr></table></div>"
+perlsecondcontent = "<pre>$nstcpprofile = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; name => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ws => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; sack => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; wsval => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; nagle => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ackonpush => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; mss => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; maxburst => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; initialcwnd => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; delayedack => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; oooqsize => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; maxpktpermss => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; pktperretx => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; minrto => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; slowstartincr => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; buffersize => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; flavor => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; refcnt => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; syncookie => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; kaprobeupdatelastactivity => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; dynamicreceivebuffering => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ka => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; kaconnidletime => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; kamaxprobes => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; kaprobeinterval => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; sendbuffsize => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; mptcp => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; establishclientconn => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; tcpsegoffload => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rstwindowattenuate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rstmaxack => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; timestamp => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; spoofsyndrop => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ecn => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; mptcpdropdataonpreestsf => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; mptcpfastopen => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; mptcpsessiontimeout => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; dsack => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ackaggregation => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; frto => \'$\',<br> };<br></pre></td></tr></table></div>"
+javasecondcontent = "<pre>class nstcpprofile {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String name;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String ws;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String sack;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt wsval;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String nagle;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String ackonpush;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt mss;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt maxburst;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt initialcwnd;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt delayedack;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt oooqsize;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt maxpktpermss;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt pktperretx;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt minrto;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt slowstartincr;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt buffersize;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String flavor;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt refcnt;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String syncookie;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String kaprobeupdatelastactivity;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String dynamicreceivebuffering;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String ka;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt kaconnidletime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt kamaxprobes;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt kaprobeinterval;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt sendbuffsize;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String mptcp;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String establishclientconn;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String tcpsegoffload;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String rstwindowattenuate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String rstmaxack;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String timestamp;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String spoofsyndrop;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String ecn;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String mptcpdropdataonpreestsf;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String mptcpfastopen;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt mptcpsessiontimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String dsack;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String ackaggregation;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String frto;<br> };<br></pre></td></tr></table></div>"
+csharpsecondcontent = "<pre>class nstcpprofile {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string name;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string ws;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string sack;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 wsval;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string nagle;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string ackonpush;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 mss;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 maxburst;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 initialcwnd;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 delayedack;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 oooqsize;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 maxpktpermss;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 pktperretx;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 minrto;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 slowstartincr;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 buffersize;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string flavor;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 refcnt;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string syncookie;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string kaprobeupdatelastactivity;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string dynamicreceivebuffering;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string ka;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 kaconnidletime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 kamaxprobes;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 kaprobeinterval;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 sendbuffsize;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string mptcp;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string establishclientconn;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string tcpsegoffload;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string rstwindowattenuate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string rstmaxack;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string timestamp;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string spoofsyndrop;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string ecn;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string mptcpdropdataonpreestsf;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string mptcpfastopen;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 mptcpsessiontimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string dsack;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string ackaggregation;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string frto;<br> };<br></pre></td></tr></table></div>"
+vbsecondcontent = "<pre>Public <b>Structure</b> nstcpprofile <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public name As String  <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ws As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public sack As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public wsval As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public nagle As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ackonpush As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public mss As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public maxburst As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public initialcwnd As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public delayedack As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public oooqsize As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public maxpktpermss As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public pktperretx As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public minrto As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public slowstartincr As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public buffersize As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public flavor As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public refcnt As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public syncookie As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public kaprobeupdatelastactivity As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public dynamicreceivebuffering As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ka As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public kaconnidletime As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public kamaxprobes As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public kaprobeinterval As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public sendbuffsize As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public mptcp As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public establishclientconn As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public tcpsegoffload As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rstwindowattenuate As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rstmaxack As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public timestamp As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public spoofsyndrop As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ecn As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public mptcpdropdataonpreestsf As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public mptcpfastopen As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public mptcpsessiontimeout As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public dsack As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ackaggregation As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public frto As String<br><b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>name</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the TCP profile to be displayed.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ws</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Enable or disable window scaling.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sack</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Enable or disable Selective ACKnowledgement (SACK).</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>wsval</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Factor used to calculate the new window size.
+This argument is needed only when window scaling is enabled.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>nagle</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Enable or disable the Nagle algorithm on TCP connections.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ackonpush</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Send immediate positive acknowledgement (ACK) on receipt of TCP packets when doing Web 2.0 PUSH.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>mss</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Maximum Segment Size(MSS) to use for TCP Connection(0 forces use of global setting)</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>maxburst</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Maximum number of TCP segments allowed in a burst.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>initialcwnd</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Initial maximum upper limit on the number of TCP packets that can be outstanding on the TCP link to the server.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>delayedack</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Timeout for TCP delayed ACK, in milliseconds.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>oooqsize</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Maximum size of out-of-order packets queue. A value of 0 means no limit.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>maxpktpermss</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Maximum packet per MSS value</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>pktperretx</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Maximum limit on the number of packets that should be retransmitted on receiving a partial ACK.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>minrto</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">TCP minimum RTO (in millisec)</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>slowstartincr</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">TCP slowstart increment factor</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>buffersize</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">TCP Buffer size</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>flavor</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">TCP algorithm</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>refcnt</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of entities using this profile</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>syncookie</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Enable or disable the SYNCOOKIE mechanism for TCP handshake with clients. Disabling SYNCOOKIE prevents SYN attack protection on the NetScaler appliance.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>kaprobeupdatelastactivity</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Update last activity for the connection after receiving keep-alive (KA) probes.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>dynamicreceivebuffering</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Enable or disable dynamic receive buffering. When enabled, allows the receive buffer to be adjusted dynamically based on memory and network conditions.
+Note: The buffer size argument must be set for dynamic adjustments to take place.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ka</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Send periodic TCP keep-alive (KA) probes to check if peer is still up.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>kaconnidletime</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Duration, in seconds, for the connection to be idle, before sending a keep-alive (KA) probe.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>kamaxprobes</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of keep-alive (KA) probes to be sent when not acknowledged, before assuming the peer to be down.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>kaprobeinterval</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Time interval, in seconds, before the next keep-alive (KA) probe, if the peer does not respond.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sendbuffsize</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">TCP Send Buffer size</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>mptcp</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Enable/Disable Multi-Path TCP</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>establishclientconn</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Allocating Client Conn on</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>tcpsegoffload</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">TCP Segmentation Offload</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rstwindowattenuate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">RST Window Attenuation</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rstmaxack</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">accept RST with max ACK</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>timestamp</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">TCP Timestamp Option</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>spoofsyndrop</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">drop invalid SYN packets</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ecn</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Explicit Congestion Notification</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>mptcpdropdataonpreestsf</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Enable or disable dropping data on pre established subflow.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>mptcpfastopen</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Enable or disable MPTCP fastopen.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>mptcpsessiontimeout</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">MPTCP session timeout.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>dsack</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Enable or disable DSACK.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ackaggregation</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Enable or disable ACK Aggregation.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>frto</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Enable or disable FRTO (Forward RTO-Recovery).</div></td></tr><tr><td><br></td></tr><tr><td><div><b>See Also</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="getnstcpprofile.html">getnstcpprofile</a></div></td></tr><tr><td><br></td></tr></table></div>
+</body>
+</html>

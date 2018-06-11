@@ -1,0 +1,1305 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      
+      <title>Examples using POST, PUT and PATCH -  - NSO 4.4.2.3 Northbound APIs</title>
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+      <link rel="home" href="index.html" title="NSO 4.4.2.3 Northbound APIs" />
+      <link rel="up" href="ncs.northbound.rest.resource.examples.html" title="Resource Examples" />
+      <link rel="prev" href="ncs.northbound.rest.get.html" title="GET and Query examples" />
+      <link rel="next" href="ncs.northbound.rest.operation.html" title="Invoke Operations" />
+      <meta xmlns="" name="Section-title" content="Examples using POST, PUT and PATCH" /><script xmlns="" type="text/javascript">
+      //The id for tree cookie
+      var treeCookieId = "treeview-5781";
+      var language = "en";
+      var w = new Object();
+      //Localization
+      txt_filesfound = 'Results';
+      txt_enter_at_least_1_char = "You must enter at least one character.";
+      txt_browser_not_supported = "JavaScript is disabled on your browser. Please enable JavaScript to enjoy all the features of this site.";
+      txt_please_wait = "Please wait. Search in progress...";
+      txt_results_for = "Results for: ";
+    </script><link xmlns="" rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/css/positioning.css" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/jquery/theme-redmond/jquery-ui-1.8.2.custom.css" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/jquery/treeview/jquery.treeview.css" /><style xmlns="" type="text/css">
+      
+      #noscript{
+      font-weight:bold;
+      background-color: #55AA55;
+      font-weight: bold;
+      height: 25spx;
+      z-index: 3000;
+      top:0px;
+      width:100%;
+      position: relative;
+      border-bottom: solid 5px black;
+      text-align:center;
+      color: white;
+      }
+      
+      input {
+      margin-bottom: 5px;
+      margin-top: 2px;
+      }
+      .folder {
+      display: block;
+      height: 22px;
+      padding-left: 20px;
+      background: transparent url(common/jquery/treeview/images/folder.gif) 0 0px no-repeat;
+      }
+      span.contentsTab {
+      padding-left: 20px;
+      background: url(common/images/toc-icon.png) no-repeat 0 center;
+      }
+      span.searchTab {
+      padding-left: 20px;
+      background: url(common/images/search-icon.png) no-repeat 0 center;
+      }
+      
+      /* Overide jquery treeview's defaults for ul. */
+      .treeview ul {
+      background-color: transparent;
+      margin-top: 4px;
+      }		
+      #webhelp-currentid {
+      /* background-color: #D8D8D8 !important; */
+      background-color: #D8D8D8;
+      }
+      .treeview .hover { color: black; }
+      .filetree li span a { text-decoration: none; font-size: 12px; color: #517291; }
+      
+      /* Override jquery-ui's default css customizations. These are supposed to take precedence over those.*/
+      .ui-widget-content {
+      border: 0px; 
+      background: none; 
+      color: none;     
+      }
+      .ui-widget-header {
+      color: #e9e8e9;
+      border-left: 1px solid #e5e5e5;
+      border-right: 1px solid #e5e5e5;
+      border-bottom: 1px solid #bbc4c5;
+      border-top: 4px solid #e5e5e5;
+      border: medium none;
+      background: #F4F4F4; /* old browsers */
+      background: -moz-linear-gradient(top, #F4F4F4 0%, #E6E4E5 100%); /* firefox */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F4F4F4), color-stop(100%,#E6E4E5)); /* webkit */    
+      font-weight: none;
+      }
+      .ui-widget-header a { color: none; }
+      .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { 
+      border: none; background: none; font-weight: none; color: none; }
+      .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited { color: black; text-decoration: none; }
+      .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus { border: none; background: none; font-weight: none; color: none; }
+      
+      .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { border: none; background: none; font-weight: none; color: none; }
+      .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited { 
+      color: black; text-decoration: none; 	
+      background: #C6C6C6; /* old browsers */
+      background: -moz-linear-gradient(top, #C6C6C6 0%, #D8D8D8 100%); /* firefox */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#C6C6C6), color-stop(100%,#D8D8D8)); /* webkit */
+      -webkit-border-radius:15px; -moz-border-radius:10px;
+      border: 1px solid #f1f1f1;
+      }    
+      .ui-corner-all { border-radius: 0 0 0 0; }
+      
+      .ui-tabs { padding: .2em;}
+      .ui-tabs .ui-tabs-nav li { top: 0px; margin: -2px 0 1px; text-transform: uppercase; font-size: 10.5px;}
+      .ui-tabs .ui-tabs-nav li a { padding: .25em 2em .25em 1em; margin: .5em; text-shadow: 0 1px 0 rgba(255,255,255,.5); }
+      /**
+      *	Basic Layout Theme
+      * 
+      *	This theme uses the default layout class-names for all classes
+      *	Add any 'custom class-names', from options: paneClass, resizerClass, togglerClass
+      */
+      
+      .ui-layout-pane { /* all 'panes' */ 
+      background: #FFF; 
+      border: 1px solid #BBB; 
+      padding: 05x; 
+      overflow: auto;
+      } 
+      
+      .ui-layout-resizer { /* all 'resizer-bars' */ 
+      background: #DDD; 
+      top:100px
+      } 
+      
+      .ui-layout-toggler { /* all 'toggler-buttons' */ 
+      background: #AAA; 
+      } 
+      
+    </style>
+      <!--[if IE]>
+	<link rel="stylesheet" type="text/css" href="../common/css/ie.css"/>
+	<![endif]--><script xmlns="" type="text/javascript" src="common/browserDetect.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery-1.7.2.min.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery.ui.all.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery.cookie.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/treeview/jquery.treeview.min.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/layout/jquery.layout.js">
+         <!----></script><style type="text/css">
+      
+      #header {
+      /* background: url("../images/header-bg.png") scroll top left repeat-x #4d8c83; */
+      background: transparent;
+      }
+      #leftnavigation {
+      /* background-color: #ededed!important; */
+      background-color: transparent;
+      }
+      #navheader {
+      visibility: hidden;
+      }
+      #webhelp-currentid {
+      /* background-color: #D8D8D8 !important; */
+      background-color: #FFFFFF; /*but must be changed in main.js as well*/
+      }
+      .filetree span.file {
+      /* background: url(images/file.gif) 0 0 no-repeat; */
+      background: initial;
+      }
+      .filetree span.folder, .filetree span.file {
+      padding: 1px 0 1px 7px;
+      display: block;
+      }
+
+      /* borrowed from cisco: clientlib.css */
+      .footer {
+      margin: 28px 30px 0 15px;
+      font-size: 80%;
+      line-height: 120%;
+      border-top: 1px solid #ccc;
+      padding-top: 7px;
+      color: #999;
+      }
+      .footer #footer-legal{display:inline;padding-bottom:18px}
+      #framework-footer{margin:0;padding:0 0 15px 0;min-width:900px;width:100%}
+      .footer a,.footer a:visited{color:#999}
+
+      /* from ccimr.css */
+      a:active  { color: #3366CC}
+      a:hover   { color: #3366CC}
+      a:link    { color: #3366CC}
+      a:visited { color: #3366CC}
+
+      #header img {
+      float: left;
+      margin-left: 20px;
+      margin-top: 0px;
+      }
+
+      #header h1 {
+      color: #336666;
+      margin-top: 4px;
+      }
+      #content h1, #content h2 {
+      color: #336666;
+      }
+      .title {
+      color: #336666;
+      }
+      p, pre {
+      margin-left: 0.1in;
+      }
+      p, ul, ol, li {
+        font-size: 95%;
+        font-family: Arial, Helvetica, sans-serif;
+        margin-top: 1px;
+      }
+      body {
+        font: 80.5% Arial, Helvetica, sans-serif;
+      }
+      ol {
+      display: block;
+      list-style-type: decimal;
+      -webkit-margin-before: 1em;
+      -webkit-margin-after: 1em;
+      -webkit-margin-start: 0px;
+      -webkit-margin-end: 0px;
+      -webkit-padding-start: 40px;
+      border: 1;
+      }
+    </style></head>
+   <body>
+      <noscript>
+         <div id="noscript">JavaScript is disabled on your browser. Please enable JavaScript to enjoy all the features of this site.</div>
+      </noscript>
+      <div id="header"><a href="index.html"><img style="margin-right: 2px; width: 110; height: 73; padding-right: 25px; padding-top: 8px" align="right" src="common/images/logo.gif" alt="Cisco Systems, Inc." /></a><h1>NSO 4.4.2.3 Northbound APIs
+                <br />Resource Examples
+         </h1>
+         <div id="navheader">
+            <!---->
+            <table class="navLinks">
+               <tr>
+                  <td><a id="showHideButton" href="#" onclick="myLayout.toggle('west')" class="pointLeft" tabindex="5" title="Hide TOC tree">Sidebar
+                                                    </a></td>
+                  <td><a accesskey="p" class="navLinkPrevious" tabindex="5" href="ncs.northbound.rest.get.html">Prev</a>
+                                                             |
+                                                             <a accesskey="u" class="navLinkUp" tabindex="5" href="ncs.northbound.rest.resource.examples.html">Up</a>
+                                                         |
+                                                         <a accesskey="n" class="navLinkNext" tabindex="5" href="ncs.northbound.rest.operation.html">Next</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div id="content">
+         <div class="sect2">
+            <div xmlns="" class="titlepage">
+               <div>
+                  <div>
+                     <h3 xmlns="http://www.w3.org/1999/xhtml" class="title"><a id="d0e3452"></a>Examples using POST, PUT and PATCH
+                     </h3>
+                  </div>
+               </div>
+            </div>
+            <div class="toc">
+               <dl class="toc">
+                  <dt><span class="sect3"><a href="ch03s03s02.html#ncs.northbound.rest.create">Create a List Instance with POST</a></span></dt>
+                  <dt><span class="sect3"><a href="ch03s03s02.html#ncs.northbound.rest.create.pcontainer">Create a Presence Container, within a list, with POST</a></span></dt>
+                  <dt><span class="sect3"><a href="ch03s03s02.html#ncs.northbound.rest.put">Create and Replace a List Instance with PUT</a></span></dt>
+                  <dt><span class="sect3"><a href="ch03s03s02.html#ncs.northbound.rest.create.putpcontainer">Create and Replace Presence Container with PUT</a></span></dt>
+                  <dt><span class="sect3"><a href="ch03s03s02.html#ncs.northbound.rest.create.putnpcontainer">Replace Non-Presence Container with PUT</a></span></dt>
+                  <dt><span class="sect3"><a href="ch03s03s02.html#ncs.northbound.rest.patch">Update Existing List Instance with PATCH</a></span></dt>
+                  <dt><span class="sect3"><a href="ch03s03s02.html#ncs.northbound.rest.create.patchpcontainer">Update Presence Container with PATCH</a></span></dt>
+                  <dt><span class="sect3"><a href="ch03s03s02.html#ncs.northbound.rest.create.patchnpcontainer">Update Non-Presence Container with PATCH</a></span></dt>
+                  <dt><span class="sect3"><a href="ch03s03s02.html#ncs.northbound.rest.insert">Insert Data into Resources</a></span></dt>
+                  <dt><span class="sect3"><a href="ch03s03s02.html#ncs.northbound.rest.commit.flags">Making use of the commit flags</a></span></dt>
+               </dl>
+            </div>
+            <div class="sect3">
+               <div xmlns="" class="titlepage">
+                  <div>
+                     <div>
+                        <h4 xmlns="http://www.w3.org/1999/xhtml" class="title"><a id="ncs.northbound.rest.create"></a>Create a List Instance with POST
+                        </h4>
+                     </div>
+                  </div>
+               </div>
+               <p>
+                            POST can be used to create a child resource to the resource specified by the
+                            uri. In this example a "route" list entry is created. The URI points to
+                            the parent container of the list. The payload in the POST request
+                            contain a "route" node that, at least, contain the list keys.
+                          
+               </p>
+               <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+                  <h3 class="title">Note</h3>
+                  <p>
+                                 When creating a list entry all keys must be given in the
+                                 payload.
+                               
+                  </p>
+               </div>
+               <p><a id="ncs.northbound.rest.postxmlcreate.example"></a>
+                            
+               </p>
+               <div class="example"><a id="d0e3465"></a><p class="title"><strong>Example 20. Creating a "sys/routes/inet/route" resource</strong></p>
+                  <div class="example-contents"><pre class="screen"><strong class="userinput"><code>
+POST /running/devices/device/ex0/config/sys/routes/inet
+Content-Type: application/vnd.yang.data+xml
+
+</code></strong></pre><pre class="screen">&lt;route&gt;
+  &lt;name&gt;10.20.3.0&lt;/name&gt;
+  &lt;prefix-length&gt;24&lt;/prefix-length&gt;
+&lt;/route&gt;</pre><p>The server might respond:</p><pre class="screen">HTTP/1.1 201</pre></div>
+               </div>
+               <p><br class="example-break" />
+                          
+               </p>
+               <p>
+                            When an element is successfully created the HTTP status response is
+                            201. If the element already existed the status response is 409.
+                          
+               </p>
+            </div>
+            <div class="sect3">
+               <div xmlns="" class="titlepage">
+                  <div>
+                     <div>
+                        <h4 xmlns="http://www.w3.org/1999/xhtml" class="title"><a id="ncs.northbound.rest.create.pcontainer"></a>Create a Presence Container, within a list, with POST
+                        </h4>
+                     </div>
+                  </div>
+               </div>
+               <p>
+                            In this example "multilink" presence container is created.
+                            The URI points to the list instance that contains the
+                            presence container, i.e the URI ends with the key(s).
+                            The payload in the POST request contain a "multilink" node
+                            that contain a value for the leaf node "group".
+                          
+               </p>
+               <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+                  <h3 class="title">Note</h3>
+                  <p>
+                                 It is not possible to create a non-presence container with
+                                 POST, as non-presence containers per definition always
+                                 exists.
+                               
+                  </p>
+               </div>
+               <p><a id="ncs.northbound.rest.postxmlcreatepcontainer.example"></a>
+                            
+               </p>
+               <div class="example"><a id="d0e3490"></a><p class="title"><strong>Example 21. Creating a "sys/interfaces/serial/ppp0/multilink" resource</strong></p>
+                  <div class="example-contents"><pre class="screen"><strong class="userinput"><code>
+POST /running/devices/device/ex0/config/sys/interfaces/serial/ppp0
+Content-Type: application/vnd.yang.data+xml | egrep 
+'(HTTP.*Created.*|Locat*)'
+
+</code></strong></pre><pre class="screen">&lt;multilink&gt;
+  &lt;group&gt;1&lt;/group&gt;
+&lt;/multilink&gt;</pre><p>The server might respond:</p><pre class="screen">HTTP/1.1 201 Created
+Location: 
+http://127.0.0.1:8080/api/running/devices/device/ex0/config/r:sys/inte
+rfaces/ex:serial/ppp0/multilink</pre></div>
+               </div>
+               <p><br class="example-break" />
+                          
+               </p>
+            </div>
+            <div class="sect3">
+               <div xmlns="" class="titlepage">
+                  <div>
+                     <div>
+                        <h4 xmlns="http://www.w3.org/1999/xhtml" class="title"><a id="ncs.northbound.rest.put"></a>Create and Replace a List Instance with PUT
+                        </h4>
+                     </div>
+                  </div>
+               </div>
+               <p>
+                            PUT can be used to create or replace a resource. No distinction is
+                            made in the prerequisites for PUT. If no resource existed it is
+                            created, but if it existed it is replaced. In the example, note
+                            how the URI ends with the keys.
+                          
+               </p>
+               <p><a id="ncs.northbound.rest.putcreate.example"></a>
+                            
+               </p>
+               <div class="example"><a id="d0e3510"></a><p class="title"><strong>Example 22. Creating a "route" resource using PUT</strong></p>
+                  <div class="example-contents"><pre class="screen"><strong class="userinput"><code>
+PUT 
+/running/devices/device/ex0/config/sys/routes/inet/route/10.30.3.0,24
+Content-Type: application/vnd.yang.data+xml
+
+</code></strong></pre><pre class="screen">&lt;route&gt;
+  &lt;name&gt;10.30.3.0&lt;/name&gt;
+  &lt;prefix-length&gt;24&lt;/prefix-length&gt;
+  &lt;next-hop&gt;
+    &lt;name&gt;192.168.4.4&lt;/name&gt;
+    &lt;metric&gt;100&lt;/metric&gt;
+  &lt;/next-hop&gt;
+&lt;/route&gt;</pre><p>The server might respond:</p><pre class="screen">HTTP/1.1 201</pre></div>
+               </div>
+               <p><br class="example-break" />
+                          
+               </p>
+               <p>
+                            When an element is successfully created the HTTP status response is 201.
+                            Make a GET to verify the "route" list after the PUT of the element.
+                          
+               </p>
+               <p><a id="ncs.northbound.rest.putcreateget.example"></a>
+                            
+               </p>
+               <div class="example"><a id="d0e3527"></a><p class="title"><strong>Example 23. The "route" resource after creation</strong></p>
+                  <div class="example-contents"><pre class="screen"><strong class="userinput"><code>
+GET 
+/running/devices/device/ex0/config/sys/routes/inet/route/10.30.3.0,24
+
+</code></strong></pre><pre class="screen">&lt;route xmlns="http://example.com/router" 
+xmlns:y="http://tail-f.com/ns/rest"  
+xmlns:r="http://example.com/router"  
+xmlns:ncs="http://tail-f.com/ns/ncs"&gt;
+  &lt;name&gt;10.30.3.0&lt;/name&gt;
+  &lt;prefix-length&gt;24&lt;/prefix-length&gt;
+  &lt;next-hop&gt;
+    &lt;name&gt;192.168.4.4&lt;/name&gt;
+  &lt;/next-hop&gt;
+&lt;/route&gt;</pre></div>
+               </div>
+               <p><br class="example-break" />
+                          
+               </p>
+               <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+                  <h3 class="title">Note</h3>
+                  <p>
+                                 The "metric" node was not in the above result
+                                 from the GET! This has to do with the (non) use of "deep"
+                                 and "shallow",
+                                 see: <a class="xref" href="ncs.northbound.rest.query.params.html#ncs.northbound.rest.deep.vs.shallow">the section called “Query Parameters”</a>
+                               
+                  </p>
+               </div>
+               <p>
+                           A replace of the same "route" element:
+                          
+               </p>
+               <p><a id="ncs.northbound.rest.putreplace.example"></a>
+                            
+               </p>
+               <div class="example"><a id="d0e3545"></a><p class="title"><strong>Example 24. Replacing a "route" resource using PUT</strong></p>
+                  <div class="example-contents"><pre class="screen"><strong class="userinput"><code>
+PUT 
+/running/devices/device/ex0/config/sys/routes/inet/route/10.30.3.0,24
+Content-Type: application/vnd.yang.data+xml
+
+</code></strong></pre><pre class="screen">&lt;route&gt;
+  &lt;name&gt;10.30.3.0&lt;/name&gt;
+  &lt;prefix-length&gt;24&lt;/prefix-length&gt;
+  &lt;next-hop&gt;
+    &lt;name&gt;192.168.3.1&lt;/name&gt;
+    &lt;metric&gt;100&lt;/metric&gt;
+  &lt;/next-hop&gt;
+  &lt;next-hop&gt;
+    &lt;name&gt;192.168.4.2&lt;/name&gt;
+    &lt;metric&gt;200&lt;/metric&gt;
+  &lt;/next-hop&gt;
+&lt;/route&gt;</pre><p>The server might respond:</p><pre class="screen">HTTP/1.1 204</pre></div>
+               </div>
+               <p><br class="example-break" />
+                          
+               </p>
+               <p>
+                            The resource was replaced, not created, hence the 204
+                            response. To verify that the element is replaced:
+                          
+               </p>
+               <p><a id="ncs.northbound.rest.putreplaceget.example"></a>
+                            
+               </p>
+               <div class="example"><a id="d0e3562"></a><p class="title"><strong>Example 25. The "route" resource after replace</strong></p>
+                  <div class="example-contents"><pre class="screen"><strong class="userinput"><code>
+GET 
+/running/devices/device/ex0/config/sys/routes/inet/route/10.30.3.0,24
+
+</code></strong></pre><pre class="screen">&lt;route xmlns="http://example.com/router" 
+xmlns:y="http://tail-f.com/ns/rest"  
+xmlns:r="http://example.com/router"  
+xmlns:ncs="http://tail-f.com/ns/ncs"&gt;
+  &lt;name&gt;10.30.3.0&lt;/name&gt;
+  &lt;prefix-length&gt;24&lt;/prefix-length&gt;
+  &lt;next-hop&gt;
+    &lt;name&gt;192.168.3.1&lt;/name&gt;
+  &lt;/next-hop&gt;
+  &lt;next-hop&gt;
+    &lt;name&gt;192.168.4.2&lt;/name&gt;
+  &lt;/next-hop&gt;
+&lt;/route&gt;</pre></div>
+               </div>
+               <p><br class="example-break" />
+                          
+               </p>
+            </div>
+            <div class="sect3">
+               <div xmlns="" class="titlepage">
+                  <div>
+                     <div>
+                        <h4 xmlns="http://www.w3.org/1999/xhtml" class="title"><a id="ncs.northbound.rest.create.putpcontainer"></a>Create and Replace Presence Container with PUT
+                        </h4>
+                     </div>
+                  </div>
+               </div>
+               <p>
+                            In this example a "multilink" presence container is created. The uri points to
+                            the not yet existing URI for the presence container "multilink".
+                            The payload in the PUT request contain a "multilink" node
+                            that contain a value for the leaf node 'group'.
+                          
+               </p>
+               <p><a id="ncs.northbound.rest.putxmlcreatepcontainer.example"></a>
+                            
+               </p>
+               <div class="example"><a id="d0e3578"></a><p class="title"><strong>Example 26. Creating a "sys/interfaces/serial/ppp0/multilink" resource</strong></p>
+                  <div class="example-contents"><pre class="screen"><strong class="userinput"><code>
+PUT 
+/running/devices/device/ex0/config/sys/interfaces/serial/ppp0/multilin
+k
+Content-Type: application/vnd.yang.data+xml
+
+</code></strong></pre><pre class="screen">&lt;multilink&gt;
+  &lt;group&gt;1&lt;/group&gt;
+&lt;/multilink&gt;</pre><p>The server might respond:</p><pre class="screen">HTTP/1.1 201</pre></div>
+               </div>
+               <p><br class="example-break" />
+                          
+               </p>
+               <p>
+                            Any subsequent request to the same URI will replace the
+                            content of "multilink" with the new payload. But the
+                            response code will instead be 204, since the resource
+                            already exists.
+                          
+               </p>
+               <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+                  <h3 class="title">Note</h3>
+                  <p>
+                                 Have in mind that PUT will replace everything with the
+                                 provided payload. So in the example above, if the
+                                 container "multilink" contained additional subnodes, other
+                                 than "group", they would have been deleted as they were
+                                 not present in the payload.
+                               
+                  </p>
+               </div>
+            </div>
+            <div class="sect3">
+               <div xmlns="" class="titlepage">
+                  <div>
+                     <div>
+                        <h4 xmlns="http://www.w3.org/1999/xhtml" class="title"><a id="ncs.northbound.rest.create.putnpcontainer"></a>Replace Non-Presence Container with PUT
+                        </h4>
+                     </div>
+                  </div>
+               </div>
+               <p>
+                            In this example a non-presence container is populated
+                            with subnode data. The URI points to the existing URI
+                            for the non-presence container "authentication",
+                            since a non-presence container always exist if its parent exist.
+                          
+               </p>
+               <p><a id="ncs.northbound.rest.putxmlcreatenpcontainer.example"></a>
+                            
+               </p>
+               <div class="example"><a id="d0e3603"></a><p class="title"><strong>Example 27. Creating a "sys/interfaces/serial/ppp0/authentication" resource</strong></p>
+                  <div class="example-contents"><pre class="screen"><strong class="userinput"><code>
+PUT 
+/running/devices/device/ex0/config/sys/interfaces/serial/ppp0/authenti
+cation
+Content-Type: application/vnd.yang.data+xml
+
+</code></strong></pre><pre class="screen">&lt;authentication&gt;
+  &lt;method&gt;pap&lt;/method&gt;
+  &lt;list-name&gt;foobar&lt;/list-name&gt;
+&lt;/authentication&gt;</pre><p>The server might respond:</p><pre class="screen">HTTP/1.1 204</pre></div>
+               </div>
+               <p><br class="example-break" />
+                          
+               </p>
+               <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+                  <h3 class="title">Note</h3>
+                  <p>
+                                 Have in mind that PUT will replace everything with the
+                                 provided payload. So in the example above, if the
+                                 container "authentication" contained additional subnodes,
+                                 they would have been deleted as they were not present in
+                                 the payload.
+                               
+                  </p>
+               </div>
+               <p><a id="ncs.northbound.rest.putgetnpcontainer.example"></a>
+                            
+               </p>
+               <div class="example"><a id="d0e3621"></a><p class="title"><strong>Example 28. The "authentication" resource after replace</strong></p>
+                  <div class="example-contents"><pre class="screen"><strong class="userinput"><code>
+GET 
+/running/devices/device/ex0/config/sys/interfaces/serial/ppp0/authenti
+cation
+
+</code></strong></pre><pre class="screen">&lt;authentication xmlns="http://example.com/example-serial" 
+xmlns:y="http://tail-f.com/ns/rest"  
+xmlns:ex="http://example.com/example-serial"  
+xmlns:r="http://example.com/router"  
+xmlns:ncs="http://tail-f.com/ns/ncs"&gt;
+  &lt;method&gt;pap&lt;/method&gt;
+  &lt;list-name&gt;foobar&lt;/list-name&gt;
+&lt;/authentication&gt;</pre></div>
+               </div>
+               <p><br class="example-break" />
+                          
+               </p>
+            </div>
+            <div class="sect3">
+               <div xmlns="" class="titlepage">
+                  <div>
+                     <div>
+                        <h4 xmlns="http://www.w3.org/1999/xhtml" class="title"><a id="ncs.northbound.rest.patch"></a>Update Existing List Instance with PATCH
+                        </h4>
+                     </div>
+                  </div>
+               </div>
+               <p>
+                            To update an existing resource the PATCH method can be used.
+                            PATCH is only allowed on existing resources.
+                            When using PATCH the payload should only contain the data that
+                            should be modified.
+                          
+               </p>
+               <p><a id="ncs.northbound.rest.patchupdate.example"></a>
+                            
+               </p>
+               <div class="example"><a id="d0e3637"></a><p class="title"><strong>Example 29. Updating a "route" resource using PATCH</strong></p>
+                  <div class="example-contents"><pre class="screen"><strong class="userinput"><code>
+PATCH 
+/running/devices/device/ex0/config/sys/routes/inet/route/10.30.3.0,24
+Content-Type: application/vnd.yang.data+xml
+
+</code></strong></pre><pre class="screen">&lt;route&gt;
+  &lt;next-hop&gt;
+    &lt;name&gt;192.168.5.1&lt;/name&gt;
+    &lt;metric&gt;400&lt;/metric&gt;
+  &lt;/next-hop&gt;
+&lt;/route&gt;</pre><p>The server might respond:</p><pre class="screen">HTTP/1.1 204</pre></div>
+               </div>
+               <p><br class="example-break" />
+                          
+               </p>
+               <p>
+                            The response status 204 indicated successful update. To
+                            verify that a new next-hop entry has been added to the route:
+                          
+               </p>
+               <p><a id="ncs.northbound.rest.patchafterupdateget.example"></a>
+                            
+               </p>
+               <div class="example"><a id="d0e3654"></a><p class="title"><strong>Example 30. The "route" resource after update</strong></p>
+                  <div class="example-contents"><pre class="screen"><strong class="userinput"><code>
+GET 
+/running/devices/device/ex0/config/sys/routes/inet/route/10.30.3.0,24
+
+</code></strong></pre><pre class="screen">&lt;route xmlns="http://example.com/router" 
+xmlns:y="http://tail-f.com/ns/rest"  
+xmlns:r="http://example.com/router"  
+xmlns:ncs="http://tail-f.com/ns/ncs"&gt;
+  &lt;name&gt;10.30.3.0&lt;/name&gt;
+  &lt;prefix-length&gt;24&lt;/prefix-length&gt;
+  &lt;next-hop&gt;
+    &lt;name&gt;192.168.3.1&lt;/name&gt;
+  &lt;/next-hop&gt;
+  &lt;next-hop&gt;
+    &lt;name&gt;192.168.4.2&lt;/name&gt;
+  &lt;/next-hop&gt;
+  &lt;next-hop&gt;
+    &lt;name&gt;192.168.5.1&lt;/name&gt;
+  &lt;/next-hop&gt;
+&lt;/route&gt;</pre></div>
+               </div>
+               <p><br class="example-break" />
+                          
+               </p>
+            </div>
+            <div class="sect3">
+               <div xmlns="" class="titlepage">
+                  <div>
+                     <div>
+                        <h4 xmlns="http://www.w3.org/1999/xhtml" class="title"><a id="ncs.northbound.rest.create.patchpcontainer"></a>Update Presence Container with PATCH
+                        </h4>
+                     </div>
+                  </div>
+               </div>
+               <p>
+                            PATCH can not be used to create new resources directly, since it
+                            must operate on existing resources. PATCH, in contrast to
+                            PUT, only merges the provided payload with the existing
+                            configuration, which makes it possible to create child
+                            resources within the target resource.
+                            In this example a "multilink" presence container is created. The uri points to
+                            the existing parent resource for the presence container "multilink".
+                          
+               </p>
+               <p><a id="ncs.northbound.rest.patchxmlcreatepcontainer.example"></a>
+                            
+               </p>
+               <div class="example"><a id="d0e3670"></a><p class="title"><strong>Example 31. Creating a "sys/interfaces/serial/ppp0/multilink" resource</strong></p>
+                  <div class="example-contents"><pre class="screen"><strong class="userinput"><code>
+PATCH /running/devices/device/ex0/config/sys/interfaces/serial/ppp0
+Content-Type: application/vnd.yang.data+xml
+
+</code></strong></pre><pre class="screen">&lt;serial&gt;
+  &lt;multilink&gt;
+    &lt;group&gt;1&lt;/group&gt;
+  &lt;/multilink&gt;
+&lt;/serial&gt;</pre><p>The server might respond:</p><pre class="screen">HTTP/1.1 204</pre></div>
+               </div>
+               <p><br class="example-break" />
+                          
+               </p>
+            </div>
+            <div class="sect3">
+               <div xmlns="" class="titlepage">
+                  <div>
+                     <div>
+                        <h4 xmlns="http://www.w3.org/1999/xhtml" class="title"><a id="ncs.northbound.rest.create.patchnpcontainer"></a>Update Non-Presence Container with PATCH
+                        </h4>
+                     </div>
+                  </div>
+               </div>
+               <p>
+                            In this example a non-presence container is populated
+                            with subnode data. The URI points to the existing URI
+                            for the non-presence container "authentication",
+                            since a non-presence container always exist if its parent exist.
+                          
+               </p>
+               <p><a id="ncs.northbound.rest.patchxmlcreatenpcontainer.example"></a>
+                            
+               </p>
+               <div class="example"><a id="d0e3690"></a><p class="title"><strong>Example 32. Creating a "sys/interfaces/serial/ppp0/authentication" resource</strong></p>
+                  <div class="example-contents"><pre class="screen"><strong class="userinput"><code>
+PATCH 
+/running/devices/device/ex0/config/sys/interfaces/serial/ppp0/authenti
+cation
+Content-Type: application/vnd.yang.data+xml
+
+</code></strong></pre><pre class="screen">&lt;authentication&gt;
+  &lt;method&gt;eap&lt;/method&gt;
+&lt;/authentication&gt;</pre><p>The server might respond:</p><pre class="screen">HTTP/1.1 204</pre></div>
+               </div>
+               <p><br class="example-break" />
+                          
+               </p>
+               <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+                  <h3 class="title">Note</h3>
+                  <p>
+                                 Have in mind that PATCH will merge the existing
+                                 configuration with the provided payload. So in the example
+                                 above, if the container "authentication" contained
+                                 additional subnodes not present in the payload, they will
+                                 remain in the resulting configuration. Below the node
+                                 'list-name' was not present in the payload, but is still
+                                 present in the resulting configuration.
+                               
+                  </p>
+               </div>
+               <p><a id="ncs.northbound.rest.patchgetnpcontainer.example"></a>
+                            
+               </p>
+               <div class="example"><a id="d0e3708"></a><p class="title"><strong>Example 33. The "authentication" resource after update</strong></p>
+                  <div class="example-contents"><pre class="screen">GET 
+/running/devices/device/ex0/config/sys/interfaces/serial/ppp0/authenti
+cation</pre><pre class="screen">&lt;authentication xmlns="http://example.com/example-serial" 
+xmlns:y="http://tail-f.com/ns/rest"  
+xmlns:ex="http://example.com/example-serial"  
+xmlns:r="http://example.com/router"  
+xmlns:ncs="http://tail-f.com/ns/ncs"&gt;
+  &lt;method&gt;eap&lt;/method&gt;
+  &lt;list-name&gt;foobar&lt;/list-name&gt;
+&lt;/authentication&gt;</pre></div>
+               </div>
+               <p><br class="example-break" />
+                          
+               </p>
+            </div>
+            <div class="sect3">
+               <div xmlns="" class="titlepage">
+                  <div>
+                     <div>
+                        <h4 xmlns="http://www.w3.org/1999/xhtml" class="title"><a id="ncs.northbound.rest.insert"></a>Insert Data into Resources
+                        </h4>
+                     </div>
+                  </div>
+               </div>
+               <p>
+                            For an ordered-by user list, the POST request can include
+                            the query parameters  <span class="emphasis"><em>insert</em></span> and
+                            <span class="emphasis"><em>resource</em></span>.
+                          
+               </p>
+               <p>
+                            The <span class="emphasis"><em>insert</em></span> parameter indicated where
+                            the new element should be created. Legal values are:
+                            
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>
+                                           <span class="emphasis"><em>first</em></span>: insert on top of list.
+                                         
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>
+                                           <span class="emphasis"><em>last</em></span>: insert on bottom of list.
+                                         
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>
+                                           <span class="emphasis"><em>before</em></span>: insert before the element
+                                           indicated by the <span class="emphasis"><em>resource</em></span> parameter.
+                                         
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>
+                                           <span class="emphasis"><em>after</em></span>: insert after the element
+                                           indicated by the <span class="emphasis"><em>resource</em></span> parameter.
+                                         
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <p>
+                          
+               </p>
+               <p>
+                            The <span class="emphasis"><em>resource</em></span> parameter contains the uri
+                            to an existing element in the list.
+                          
+               </p>
+               <p>
+                            Verify this functionality by first retrieving the
+                            "sys/dns/server" list:
+                          
+               </p>
+               <p><a id="ncs.northbound.rest.beforeinsert.example"></a>
+                            
+               </p>
+               <div class="example"><a id="d0e3773"></a><p class="title"><strong>Example 34. The "sys/dns/server" list before insert</strong></p>
+                  <div class="example-contents"><pre class="screen"><strong class="userinput"><code>
+GET /running/devices/device/ex0/config/sys/dns
+
+</code></strong></pre><pre class="screen">&lt;dns xmlns="http://example.com/router" 
+xmlns:y="http://tail-f.com/ns/rest"  
+xmlns:r="http://example.com/router"  
+xmlns:ncs="http://tail-f.com/ns/ncs"&gt;
+  &lt;server&gt;
+    &lt;address&gt;10.2.3.4&lt;/address&gt;
+  &lt;/server&gt;
+&lt;/dns&gt;</pre></div>
+               </div>
+               <p><br class="example-break" />
+                          
+               </p>
+               <p>
+                            Insert a new element before the existing element:
+                          
+               </p>
+               <p><a id="ncs.northbound.rest.insert.example"></a>
+                            
+               </p>
+               <div class="example"><a id="d0e3786"></a><p class="title"><strong>Example 35. Insert=before in the "sys/dns/server" list</strong></p>
+                  <div class="example-contents"><pre class="screen"><strong class="userinput"><code>
+POST 
+/running/devices/device/ex0/config/sys/dns?insert=before&amp;resource=/api
+/running/devices/device/ex0/config/sys/dns/server/10.2.3.4
+Content-Type: application/vnd.yang.data+xml
+
+</code></strong></pre><pre class="screen">&lt;server&gt;
+  &lt;address&gt;10.1.1.2&lt;/address&gt;
+&lt;/server&gt;</pre><p>The server might respond:</p><pre class="screen">HTTP/1.1 201</pre></div>
+               </div>
+               <p><br class="example-break" />
+                          
+               </p>
+               <p>
+                            When an element is successfully created the HTTP status response is 201
+                            To verify the result by retreiving the list again:
+                          
+               </p>
+               <p><a id="ncs.northbound.rest.afterinsert.example"></a>
+                            
+               </p>
+               <div class="example"><a id="d0e3803"></a><p class="title"><strong>Example 36. The "sys/dns/server" list after insert</strong></p>
+                  <div class="example-contents"><pre class="screen"><strong class="userinput"><code>
+GET /running/devices/device/ex0/config/sys/dns
+
+</code></strong></pre><pre class="screen">&lt;dns xmlns="http://example.com/router" 
+xmlns:y="http://tail-f.com/ns/rest"  
+xmlns:r="http://example.com/router"  
+xmlns:ncs="http://tail-f.com/ns/ncs"&gt;
+  &lt;server&gt;
+    &lt;address&gt;10.1.1.2&lt;/address&gt;
+  &lt;/server&gt;
+  &lt;server&gt;
+    &lt;address&gt;10.2.3.4&lt;/address&gt;
+  &lt;/server&gt;
+&lt;/dns&gt;</pre></div>
+               </div>
+               <p><br class="example-break" />
+                          
+               </p>
+            </div>
+            <div class="sect3">
+               <div xmlns="" class="titlepage">
+                  <div>
+                     <div>
+                        <h4 xmlns="http://www.w3.org/1999/xhtml" class="title"><a id="ncs.northbound.rest.commit.flags"></a>Making use of the commit flags
+                        </h4>
+                     </div>
+                  </div>
+               </div>
+               <p>
+                            The query parameters: "no-networking" ,
+                            "no-overwrite" , "no-out-of-sync-check" and
+                            "async-commit-queue"
+                            doesn't take any values.
+                          
+               </p>
+               <p>
+                            The "async-commit-queue" parameter
+                            will result in the client getting
+                            a commit queue <code class="code">Id</code> in return.
+                          
+               </p>
+               <p>
+                            The "sync-commit-queue" parameter may take an
+                            optional timeout value in form of a positive integer.
+                            This value represents the number of seconds to
+                            wait for the transaction to be committed. If the timeout
+                            expires, a commit queue <code class="code">Id</code> in will be return.
+                          
+               </p>
+               <p>
+                            The commit queue <code class="code">Id</code> can be used for retrieving
+                            information about the commit queue item or to delete the
+                            item from the commit queue.
+                          
+               </p>
+               <p><a id="ncs.northbound.rest.asynccommitq.example"></a>
+                            
+               </p>
+               <div class="example"><a id="d0e3834"></a><p class="title"><strong>Example 37. Using the async-commit-queue flag</strong></p>
+                  <div class="example-contents"><pre class="screen"><strong class="userinput"><code>
+POST 
+/running/devices/device/ex0/config/sys/routes/inet?async-commit-queue
+Content-Type: application/vnd.yang.data+json
+
+</code></strong></pre><pre class="screen">HTTP/1.1 100 Continue
+Server: 
+Allow: GET, POST, OPTIONS, HEAD
+Content-Length: 0
+
+HTTP/1.1 201 Created
+Server: 
+Location: 
+http://127.0.0.1:8080/api/running/devices/device/ex0/config/r:sys/rout
+es/inet/route/10.20.1.0,24
+Date: Wed, 12 Aug 2015 11:51:00 GMT
+Allow: GET, POST, OPTIONS, HEAD
+Last-Modified: Wed, 12 Aug 2015 11:51:00 GMT
+Cache-Control: private, no-cache, must-revalidate, proxy-revalidate
+Etag: 1439-380260-995039
+Content-Length: 64
+Content-Type: text/json
+Vary: Accept-Encoding
+Pragma: no-cache
+
+{"commit-queue": {
+  "id":25377281470,
+  "status":"async"
+  }
+}</pre></div>
+               </div>
+               <p><br class="example-break" />
+                          
+               </p>
+            </div>
+         </div><script type="text/javascript" src="common/main.js">
+            <!----></script><script type="text/javascript" src="common/splitterInit.js">
+            <!----></script><div class="footer" id="footer-legal">
+            <div class="footer-legal framework-footer-cq">
+               <div id="framework-footer">
+                  <div id="footer-legal"><a href="http://www.cisco.com/web/siteassets/legal/terms_condition.html">Terms &amp; Conditions</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/privacy.html">Privacy Statement</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/privacy.html#cookies">Cookie Policy</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/trademark.html">Trademarks</a></div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div id="sidebar">
+         <div id="leftnavigation" style="padding-top:3px;">
+            <div id="tabs">
+               <ul style="visibility: hidden;"></ul>
+               <div id="treeDiv"><img src="common/images/loading.gif" alt="loading table of contents..." id="tocLoading" style="display:block;" /><div id="ulTreeDiv" style="display:none">
+                     <ul id="tree" class="filetree">
+                        <li><span class="file"><a href="ch01.html" tabindex="1">Introduction</a></span><ul>
+                              <li><span class="file"><a href="ch01s01.html" tabindex="1">Integrating an External System with NSO</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ug.netconf_agent.html" tabindex="1">The NCS NETCONF Server</a></span><ul>
+                              <li><span class="file"><a href="ch02s01.html" tabindex="1">Introduction</a></span></li>
+                              <li><span class="file"><a href="ch02s02.html" tabindex="1">Capabilities</a></span><ul>
+                                    <li><span class="file"><a href="ch02s02s01.html" tabindex="1">Advertising Capabilities and YANG Modules</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.netconf_agent.transport.html" tabindex="1">NETCONF Transport Protocols</a></span><ul>
+                                    <li><span class="file"><a href="ch02s03s01.html" tabindex="1">Using OpenSSH</a></span></li>
+                                    <li><span class="file"><a href="ch02s03s02.html" tabindex="1">Internal TCP Transport</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch02s04.html" tabindex="1">Configuration of the NETCONF Server</a></span><ul>
+                                    <li><span class="file"><a href="ch02s04s01.html" tabindex="1">Error Handling</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.netconf_agent.extend.html" tabindex="1">Extending the NETCONF Server</a></span><ul>
+                                    <li><span class="file"><a href="ch02s05s01.html" tabindex="1">RPC as an Executable, ConfD does not Translate the XML</a></span></li>
+                                    <li><span class="file"><a href="ch02s05s02.html" tabindex="1">RPC as an Executable, ConfD Translates the XML</a></span></li>
+                                    <li><span class="file"><a href="ch02s05s03.html" tabindex="1">RPC as a Callback Function</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.netconf_agent.monitoring.html" tabindex="1">Monitoring of the NETCONF Server</a></span></li>
+                              <li><span class="file"><a href="ug.netconf_agent.notif.html" tabindex="1">Notification Capability</a></span><ul>
+                                    <li><span class="file"><a href="ch02s07s01.html" tabindex="1">Notification Streams</a></span></li>
+                                    <li><span class="file"><a href="ch02s07s02.html" tabindex="1">Built-in Notification Streams</a></span></li>
+                                    <li><span class="file"><a href="ch02s07s03.html" tabindex="1">Defining Notification Streams</a></span></li>
+                                    <li><span class="file"><a href="ch02s07s04.html" tabindex="1">Automatic Replay</a></span></li>
+                                    <li><span class="file"><a href="ch02s07s05.html" tabindex="1">Implementing Custom Replay</a></span></li>
+                                    <li><span class="file"><a href="ch02s07s06.html" tabindex="1">Sending Notifications from an Application</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.netconf_agent.netconf_console.html" tabindex="1">Using netconf-console</a></span></li>
+                              <li><span class="file"><a href="ug.netconf_agent.actions.html" tabindex="1">Actions Capability</a></span><ul>
+                                    <li><span class="file"><a href="ch02s09s01.html" tabindex="1">Overview</a></span></li>
+                                    <li><span class="file"><a href="ch02s09s02.html" tabindex="1">Capability Identifier</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.netconf_agent.actions.html" tabindex="1">Actions Capability</a></span><ul>
+                                    <li><span class="file"><a href="ch02s10s01.html" tabindex="1">Overview</a></span></li>
+                                    <li><span class="file"><a href="ch02s10s02.html" tabindex="1">Motivation</a></span></li>
+                                    <li><span class="file"><a href="ch02s10s03.html" tabindex="1">Dependencies</a></span></li>
+                                    <li><span class="file"><a href="ch02s10s04.html" tabindex="1">Capability Identifier</a></span></li>
+                                    <li><span class="file"><a href="ch02s10s05.html" tabindex="1">New Operation: &lt;action&gt;</a></span><ul>
+                                          <li><span class="file"><a href="ch02s10s05.html#d0e1472" tabindex="1">Description</a></span></li>
+                                          <li><span class="file"><a href="ch02s10s05.html#d0e1477" tabindex="1">Parameters</a></span></li>
+                                          <li><span class="file"><a href="ch02s10s05.html#d0e1490" tabindex="1">Positive Response</a></span></li>
+                                          <li><span class="file"><a href="ch02s10s05.html#d0e1495" tabindex="1">Negative Response</a></span></li>
+                                          <li><span class="file"><a href="ch02s10s05.html#d0e1500" tabindex="1">Example</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ch02s10s06.html" tabindex="1">Modifications to Existing Operations</a></span></li>
+                                    <li><span class="file"><a href="ch02s10s07.html" tabindex="1">XML Schema</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.netconf_agent.transactions.html" tabindex="1">Transactions Capability</a></span><ul>
+                                    <li><span class="file"><a href="ch02s11s01.html" tabindex="1">Overview</a></span></li>
+                                    <li><span class="file"><a href="ch02s11s02.html" tabindex="1">Dependencies</a></span></li>
+                                    <li><span class="file"><a href="ch02s11s03.html" tabindex="1">Capability Identifier</a></span></li>
+                                    <li><span class="file"><a href="ch02s11s04.html" tabindex="1">New Operation: &lt;start-transaction&gt;</a></span><ul>
+                                          <li><span class="file"><a href="ch02s11s04.html#d0e1557" tabindex="1">Description</a></span></li>
+                                          <li><span class="file"><a href="ch02s11s04.html#d0e1570" tabindex="1">Parameters</a></span></li>
+                                          <li><span class="file"><a href="ch02s11s04.html#d0e1588" tabindex="1">Positive Response</a></span></li>
+                                          <li><span class="file"><a href="ch02s11s04.html#d0e1593" tabindex="1">Negative Response</a></span></li>
+                                          <li><span class="file"><a href="ch02s11s04.html#d0e1600" tabindex="1">Example</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ch02s11s05.html" tabindex="1">New Operation: &lt;prepare-transaction&gt;</a></span><ul>
+                                          <li><span class="file"><a href="ch02s11s05.html#d0e1609" tabindex="1">Description</a></span></li>
+                                          <li><span class="file"><a href="ch02s11s05.html#d0e1618" tabindex="1">Parameters</a></span></li>
+                                          <li><span class="file"><a href="ch02s11s05.html#d0e1623" tabindex="1">Positive Response</a></span></li>
+                                          <li><span class="file"><a href="ch02s11s05.html#d0e1628" tabindex="1">Negative Response</a></span></li>
+                                          <li><span class="file"><a href="ch02s11s05.html#d0e1635" tabindex="1">Example</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ch02s11s06.html" tabindex="1">New Operation: &lt;commit-transaction&gt;</a></span><ul>
+                                          <li><span class="file"><a href="ch02s11s06.html#d0e1644" tabindex="1">Description</a></span></li>
+                                          <li><span class="file"><a href="ch02s11s06.html#d0e1649" tabindex="1">Parameters</a></span></li>
+                                          <li><span class="file"><a href="ch02s11s06.html#d0e1654" tabindex="1">Positive Response</a></span></li>
+                                          <li><span class="file"><a href="ch02s11s06.html#d0e1659" tabindex="1">Negative Response</a></span></li>
+                                          <li><span class="file"><a href="ch02s11s06.html#d0e1666" tabindex="1">Example</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ch02s11s07.html" tabindex="1">New Operation: &lt;abort-transaction&gt;</a></span><ul>
+                                          <li><span class="file"><a href="ch02s11s07.html#d0e1675" tabindex="1">Description</a></span></li>
+                                          <li><span class="file"><a href="ch02s11s07.html#d0e1680" tabindex="1">Parameters</a></span></li>
+                                          <li><span class="file"><a href="ch02s11s07.html#d0e1685" tabindex="1">Positive Response</a></span></li>
+                                          <li><span class="file"><a href="ch02s11s07.html#d0e1690" tabindex="1">Negative Response</a></span></li>
+                                          <li><span class="file"><a href="ch02s11s07.html#d0e1697" tabindex="1">Example</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ch02s11s08.html" tabindex="1">Modifications to Existing Operations</a></span></li>
+                                    <li><span class="file"><a href="ch02s11s09.html" tabindex="1">XML Schema</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.netconf_agent.proxy.html" tabindex="1">Proxy Forwarding Capability</a></span><ul>
+                                    <li><span class="file"><a href="ch02s12s01.html" tabindex="1">Overview</a></span><ul>
+                                          <li><span class="file"><a href="ch02s12s01.html#d0e1739" tabindex="1">Client Elements of Procedure</a></span></li>
+                                          <li><span class="file"><a href="ch02s12s01.html#d0e1775" tabindex="1">Server Elements of Procedure</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ch02s12s02.html" tabindex="1">Dependencies</a></span></li>
+                                    <li><span class="file"><a href="ch02s12s03.html" tabindex="1">Capability Identifier</a></span></li>
+                                    <li><span class="file"><a href="ch02s12s04.html" tabindex="1">New Operation: &lt;forward&gt;</a></span><ul>
+                                          <li><span class="file"><a href="ch02s12s04.html#d0e1843" tabindex="1">Description</a></span></li>
+                                          <li><span class="file"><a href="ch02s12s04.html#d0e1850" tabindex="1">Parameters</a></span></li>
+                                          <li><span class="file"><a href="ch02s12s04.html#d0e1877" tabindex="1">Positive Response</a></span></li>
+                                          <li><span class="file"><a href="ch02s12s04.html#d0e1884" tabindex="1">Negative Response</a></span></li>
+                                          <li><span class="file"><a href="ch02s12s04.html#d0e1899" tabindex="1">Example 1.</a></span></li>
+                                          <li><span class="file"><a href="ch02s12s04.html#d0e1907" tabindex="1">Example 2.  Client needs to authenticate to the target:</a></span></li>
+                                          <li><span class="file"><a href="ch02s12s04.html#d0e1918" tabindex="1">Example 3.  Client needs to authenticate to the proxy target, but fails:</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ch02s12s05.html" tabindex="1">New Operation: &lt;challenge-response&gt;</a></span><ul>
+                                          <li><span class="file"><a href="ch02s12s05.html#d0e1932" tabindex="1">Description</a></span></li>
+                                          <li><span class="file"><a href="ch02s12s05.html#d0e1937" tabindex="1">Parameters</a></span></li>
+                                          <li><span class="file"><a href="ch02s12s05.html#d0e1948" tabindex="1">Positive Response</a></span></li>
+                                          <li><span class="file"><a href="ch02s12s05.html#d0e1955" tabindex="1">Negative Response</a></span></li>
+                                          <li><span class="file"><a href="ch02s12s05.html#d0e1964" tabindex="1">Example</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ch02s12s06.html" tabindex="1">Modifications to Existing Operations</a></span></li>
+                                    <li><span class="file"><a href="ch02s12s07.html" tabindex="1">Interactions with Other Capabilities</a></span></li>
+                                    <li><span class="file"><a href="ch02s12s08.html" tabindex="1">XSD Schema</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.netconf_agent.inactive.html" tabindex="1">Inactive Capability</a></span><ul>
+                                    <li><span class="file"><a href="ch02s13s01.html" tabindex="1">Overview</a></span></li>
+                                    <li><span class="file"><a href="ch02s13s02.html" tabindex="1">Dependencies</a></span></li>
+                                    <li><span class="file"><a href="ch02s13s03.html" tabindex="1">Capability Identifier</a></span></li>
+                                    <li><span class="file"><a href="ch02s13s04.html" tabindex="1">New Operations</a></span></li>
+                                    <li><span class="file"><a href="ch02s13s05.html" tabindex="1">Modifications to Existing Operations</a></span><ul>
+                                          <li><span class="file"><a href="ch02s13s05.html#d0e2041" tabindex="1">Example</a></span></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.netconf_agent.identification-capability.html" tabindex="1">Tail-f Identification Capability</a></span><ul>
+                                    <li><span class="file"><a href="ch02s14s01.html" tabindex="1">Overview</a></span></li>
+                                    <li><span class="file"><a href="ch02s14s02.html" tabindex="1">Dependencies</a></span></li>
+                                    <li><span class="file"><a href="ch02s14s03.html" tabindex="1">Capability Identifier</a></span></li>
+                                    <li><span class="file"><a href="ch02s14s04.html" tabindex="1">Example</a></span></li>
+                                    <li><span class="file"><a href="ch02s14s05.html" tabindex="1">ConfD</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch02s15.html" tabindex="1">NETCONF extensions in NCS</a></span></li>
+                              <li><span class="file"><a href="ch02s16.html" tabindex="1">The Query API</a></span></li>
+                              <li><span class="file"><a href="ug.netconf_agent.attributes.html" tabindex="1">Meta-data in Attributes</a></span></li>
+                              <li><span class="file"><a href="ch02s18.html" tabindex="1">Namespace for Additional Error Information</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ncs.northbound.rest.html" tabindex="1">The REST API</a></span><ul>
+                              <li><span class="file"><a href="ch03s01.html" tabindex="1">Introduction</a></span></li>
+                              <li><span class="file"><a href="ncs.northbound.rest.gettingstarted.html" tabindex="1">Getting started</a></span><ul>
+                                    <li><span class="file"><a href="ch03s02s01.html" tabindex="1">Request URI structure</a></span></li>
+                                    <li><span class="file"><a href="ch03s02s02.html" tabindex="1">Accessing the REST API</a></span></li>
+                                    <li><span class="file"><a href="ch03s02s03.html" tabindex="1">GET</a></span></li>
+                                    <li><span class="file"><a href="ch03s02s04.html" tabindex="1">POST</a></span></li>
+                                    <li><span class="file"><a href="ch03s02s05.html" tabindex="1">PUT</a></span></li>
+                                    <li><span class="file"><a href="ch03s02s06.html" tabindex="1">PATCH</a></span></li>
+                                    <li><span class="file"><a href="ch03s02s07.html" tabindex="1">DELETE</a></span></li>
+                                    <li><span class="file"><a href="ch03s02s08.html" tabindex="1">OPTIONS</a></span></li>
+                                    <li><span class="file"><a href="ch03s02s09.html" tabindex="1">HEAD</a></span></li>
+                                    <li><span class="file"><a href="ncs.northbound.rest.query.params.html" tabindex="1">Query Parameters</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ncs.northbound.rest.resource.examples.html" tabindex="1">Resource Examples</a></span><ul>
+                                    <li><span class="file"><a href="ncs.northbound.rest.get.html" tabindex="1">GET and Query examples</a></span><ul>
+                                          <li><span class="file"><a href="ncs.northbound.rest.get.html#d0e3284" tabindex="1">Retrieve Data Resources</a></span></li>
+                                          <li><span class="file"><a href="ncs.northbound.rest.get.html#ncs.northbound.rest.partial.get" tabindex="1">Partial Responses</a></span></li>
+                                          <li><span class="file"><a href="ncs.northbound.rest.get.html#ncs.northbound.rest.hidden" tabindex="1">Hidden Nodes</a></span></li>
+                                          <li><span class="file"><a href="ncs.northbound.rest.get.html#ncs.northbound.rest.withdefaults" tabindex="1">Displaying Default Data</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li id="webhelp-currentid"><span class="file"><a href="ch03s03s02.html" tabindex="1">Examples using POST, PUT and PATCH</a></span><ul>
+                                          <li><span class="file"><a href="ch03s03s02.html#ncs.northbound.rest.create" tabindex="1">Create a List Instance with POST</a></span></li>
+                                          <li><span class="file"><a href="ch03s03s02.html#ncs.northbound.rest.create.pcontainer" tabindex="1">Create a Presence Container, within a list, with POST</a></span></li>
+                                          <li><span class="file"><a href="ch03s03s02.html#ncs.northbound.rest.put" tabindex="1">Create and Replace a List Instance with PUT</a></span></li>
+                                          <li><span class="file"><a href="ch03s03s02.html#ncs.northbound.rest.create.putpcontainer" tabindex="1">Create and Replace Presence Container with PUT</a></span></li>
+                                          <li><span class="file"><a href="ch03s03s02.html#ncs.northbound.rest.create.putnpcontainer" tabindex="1">Replace Non-Presence Container with PUT</a></span></li>
+                                          <li><span class="file"><a href="ch03s03s02.html#ncs.northbound.rest.patch" tabindex="1">Update Existing List Instance with PATCH</a></span></li>
+                                          <li><span class="file"><a href="ch03s03s02.html#ncs.northbound.rest.create.patchpcontainer" tabindex="1">Update Presence Container with PATCH</a></span></li>
+                                          <li><span class="file"><a href="ch03s03s02.html#ncs.northbound.rest.create.patchnpcontainer" tabindex="1">Update Non-Presence Container with PATCH</a></span></li>
+                                          <li><span class="file"><a href="ch03s03s02.html#ncs.northbound.rest.insert" tabindex="1">Insert Data into Resources</a></span></li>
+                                          <li><span class="file"><a href="ch03s03s02.html#ncs.northbound.rest.commit.flags" tabindex="1">Making use of the commit flags</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ncs.northbound.rest.operation.html" tabindex="1">Invoke Operations</a></span></li>
+                                    <li><span class="file"><a href="ncs.northbound.rest.delete.html" tabindex="1">Delete Data Resources</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ncs.northbound.rest.resources.html" tabindex="1">Resources</a></span><ul>
+                                    <li><span class="file"><a href="ch03s04s01.html" tabindex="1">Representation</a></span><ul>
+                                          <li><span class="file"><a href="ch03s04s01.html#d0e3989" tabindex="1">XML representation</a></span></li>
+                                          <li><span class="file"><a href="ch03s04s01.html#d0e4001" tabindex="1">JSON representation</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ch03s04s02.html" tabindex="1">API Resource (/api)</a></span><ul>
+                                          <li><span class="file"><a href="ch03s04s02.html#d0e4080" tabindex="1">The version Field</a></span></li>
+                                          <li><span class="file"><a href="ch03s04s02.html#d0e4085" tabindex="1">The config Resource</a></span></li>
+                                          <li><span class="file"><a href="ch03s04s02.html#d0e4095" tabindex="1">The running Resource</a></span></li>
+                                          <li><span class="file"><a href="ch03s04s02.html#d0e4102" tabindex="1">The operational Resource</a></span></li>
+                                          <li><span class="file"><a href="ch03s04s02.html#d0e4115" tabindex="1">The transaction Resource</a></span></li>
+                                          <li><span class="file"><a href="ch03s04s02.html#d0e4122" tabindex="1">The operations Container</a></span></li>
+                                          <li><span class="file"><a href="ch03s04s02.html#d0e4127" tabindex="1">The rollbacks Container</a></span></li>
+                                          <li><span class="file"><a href="ch03s04s02.html#d0e4132" tabindex="1">The logout Resource</a></span></li>
+                                          <li><span class="file"><a href="ch03s04s02.html#d0e4137" tabindex="1">Examples</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ch03s04s03.html" tabindex="1">Datastore Resource (/api/&lt;datastore&gt;)</a></span><ul>
+                                          <li><span class="file"><a href="ch03s04s03.html#d0e4236" tabindex="1">Examples</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ch03s04s04.html" tabindex="1">Data Resource (/api/&lt;datastore&gt;/&lt;data&gt;)</a></span></li>
+                                    <li><span class="file"><a href="ncs.northbound.rest.operations.actions.html" tabindex="1">Operations and Actions</a></span></li>
+                                    <li><span class="file"><a href="ch03s04s06.html" tabindex="1">The Rollback Resource</a></span><ul>
+                                          <li><span class="file"><a href="ch03s04s06.html#d0e4301" tabindex="1">Listing and Inspecting Rollback Files</a></span></li>
+                                          <li><span class="file"><a href="ch03s04s06.html#d0e4336" tabindex="1">Applying Rollback Files</a></span></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch03s05.html" tabindex="1">Configuration Meta-Data</a></span></li>
+                              <li><span class="file"><a href="ncs.northbound.rest.headers.html" tabindex="1">Request/Response headers</a></span><ul>
+                                    <li><span class="file"><a href="ch03s06s01.html" tabindex="1">Response headers</a></span></li>
+                                    <li><span class="file"><a href="ch03s06s02.html" tabindex="1">Request headers</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch03s07.html" tabindex="1">Special characters</a></span><ul>
+                                    <li><span class="file"><a href="ch03s07s01.html" tabindex="1">XML representation of special characters</a></span></li>
+                                    <li><span class="file"><a href="ch03s07s02.html" tabindex="1">JSON representation of special characters</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch03s08.html" tabindex="1">Error Responses</a></span><ul>
+                                    <li><span class="file"><a href="ch03s08s01.html" tabindex="1">User extended error messages</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ncs.northbound.rest.query.api.html" tabindex="1">The REST Query API</a></span></li>
+                              <li><span class="file"><a href="ch03s10.html" tabindex="1">Custom Response HTTP Headers</a></span></li>
+                              <li><span class="file"><a href="ch03s11.html" tabindex="1">HTTP Status Codes</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ncs.northbound.restconf.html" tabindex="1">The RESTCONF API</a></span><ul>
+                              <li><span class="file"><a href="ch04s01.html" tabindex="1">Introduction</a></span></li>
+                              <li><span class="file"><a href="ch04s02.html" tabindex="1">Getting started</a></span><ul>
+                                    <li><span class="file"><a href="ch04s02s01.html" tabindex="1">Root resource discovery</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch04s03.html" tabindex="1">Extensions</a></span><ul>
+                                    <li><span class="file"><a href="ch04s03s01.html" tabindex="1">Collections</a></span></li>
+                                    <li><span class="file"><a href="ch04s03s02.html" tabindex="1">Commit queue</a></span></li>
+                                    <li><span class="file"><a href="ch04s03s03.html" tabindex="1">The RESTCONF Query API</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch04s04.html" tabindex="1">Deviations</a></span><ul>
+                                    <li><span class="file"><a href="ch04s04s01.html" tabindex="1">Notifications</a></span></li>
+                                    <li><span class="file"><a href="ch04s04s02.html" tabindex="1">Query Parameters</a></span></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ncs.northbound.snmp.html" tabindex="1">The NSO SNMP Agent</a></span><ul>
+                              <li><span class="file"><a href="ch05s01.html" tabindex="1">Introduction</a></span></li>
+                              <li><span class="file"><a href="ch05s02.html" tabindex="1">Configuring the SNMP Agent</a></span></li>
+                              <li><span class="file"><a href="ch05s03.html" tabindex="1">The Alarm MIB</a></span><ul>
+                                    <li><span class="file"><a href="ch05s03s01.html" tabindex="1"> SNMP Object Identifiers </a></span></li>
+                                    <li><span class="file"><a href="ch05s03s02.html" tabindex="1"> Using the SNMP Alarm MIB</a></span></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="nb_ncs_alarms.html" tabindex="1">NSO Alarms</a></span><ul>
+                              <li><span class="file"><a href="ug.ncs_sys_mgmt.alarm.html" tabindex="1">Overview</a></span></li>
+                              <li><span class="file"><a href="ch06s02.html" tabindex="1">Alarm type structure</a></span></li>
+                              <li><span class="file"><a href="ch06s03.html" tabindex="1">Alarm type descriptions</a></span></li>
+                           </ul>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

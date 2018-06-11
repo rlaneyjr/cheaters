@@ -1,0 +1,98 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>Citrix NetScaler XML API User&#39;s Guide - addrnat6</title>
+<link rel="stylesheet" type="text/css" href="help_ns.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body onload="initial()" class="ns_body">
+<div class="ns_content"><table cellpadding="0" cellspacing="0"><script type="text/javascript">
+function showContent(content,lang){
+			if(ie4){
+				showContentObj=document.all.qiksearch_div;
+			}
+			if(ns6){
+				showContentObj=document.getElementById("qiksearch_div");
+			}
+			if(ie4||ns6){
+				if(showContentObj.innerHTML!=content){
+					showContentObj.innerHTML=content;
+				}
+				else{
+					showContentObj.innerHTML="";
+				}
+			}
+			if(ns4){
+				document.nsdiv.document.write(content);
+				document.nsdiv.document.close();
+			}
+}
+function showLangSelect(id){
+		ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+		ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+		ns4=document.layers;
+		if(ie4){
+			showObj=document.all.first_url;
+		}
+		if(ns6){
+			showObj=document.getElementById("first_url");
+		}
+		if( id == "C" ){
+			newlink = "<b>C</b>";
+		}
+		else{
+			newlink = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('C');\"><b>C</b></a>";
+		}
+		if( id == "Perl" ){
+			newlink = newlink + " | <b>Perl</b>";
+		}
+		else{
+			newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('Perl');\"><b>Perl</b></a>";
+		}
+		if( id == "Java" ){
+			newlink = newlink + " | <b>Java</b>";
+		}
+		else{
+			newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('Java');\"><b>Java</b></a>";
+		}
+		if( id == "C#" ){
+			newlink = newlink + " | <b>C#</b>";
+		}
+		else{
+			newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('C#');\"><b>C#</b></a>";
+		}
+		showObj.innerHTML = newlink;
+}
+function initial(){
+		ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+		ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+		ns4=document.layers;
+		langSelected = parent.banner.document.language.select.value
+		parent.banner.document.language.plink.value = "Network@network.html&addrnat6";
+		changeContext(langSelected);
+}
+function changeContext(lang){
+parent.banner.document.language.select.value = lang;
+if( lang == "C" ){
+showContent('<table><tr><td><pre><a href=\'simpleResult_struct.html\'>simpleResult</a><b> addrnat6</b>(<br> &nbsp;&nbsp;&nbsp;&nbsp;char * <i>name</i>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char * <i>network</i>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char * <i>acl6name</i>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unsigned int <i>redirectport</i> <br>);</pre></td></tr></table>','C');
+}
+if( lang == "Perl" ){
+showContent('<table><tr><td><pre><a href=\'simpleResult_struct.html\'>simpleResult</a><b> addrnat6</b>(<br>&nbsp;&nbsp;&nbsp;&nbsp;name(\'name\' => value),<br>&nbsp;&nbsp;&nbsp;&nbsp;name(\'network\' => value),<br>&nbsp;&nbsp;&nbsp;&nbsp;name(\'acl6name\' => value),<br>&nbsp;&nbsp;&nbsp;&nbsp;name(\'redirectport\' => value)<br>);</pre></td></tr></table>','Perl')
+}
+if( lang == "Java" ){
+showContent('<table><tr><td><pre>public <a href=\'simpleResult_struct.html\'>simpleResult</a><b> addrnat6</b>(<br> &nbsp;&nbsp;&nbsp;&nbsp;String <i>name</i>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String <i>network</i>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String <i>acl6name</i>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unsigned int <i>redirectport</i> <br>);</pre></td></tr></table>','Java');
+}
+if( lang == "C#" ){
+showContent('<table><tr><td><pre>public <a href=\'simpleResult_struct.html\'>simpleResult</a><b> addrnat6</b>(<br> &nbsp;&nbsp;&nbsp;&nbsp;string <i>name</i>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string <i>network</i>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string <i>acl6name</i>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.UInt64 <i>redirectport</i> <br>);</pre></td></tr></table>','C#');
+}
+if( lang == "VB" ){
+showContent('<table><tr><td><pre>Public Function<b> addrnat6</b>(<br> &nbsp;&nbsp;&nbsp;&nbsp;ByVal <i>name</i> As String ,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ByVal <i>network</i> As String ,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ByVal <i>acl6name</i> As String ,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ByVal <i>redirectport</i> As UInteger  <br>) As <a href=\'simpleResult_struct.html\'>simpleResult</a> </pre></td></tr></table>','VB');
+}
+showLangSelect(lang);
+}
+</script>
+<tr><td><div><a href='introduction.html'>Home</a> > <a href="APIIndex.htm">Configuration</a> > <a href="network.html">Network</a> > addrnat6</div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>addrnat6</td></tr><tr><td><br></td></tr><tr><td><div>Use this method to adds a Reverse Network Address Translation (RNAT6) rule for IPv6 traffic. When an IPv6 packet generated by a server matches the conditions specified in the RNAT6 rule, the appliance replaces the source IPv6 address of the IPv6 packet with a configured NAT IPv6 address before forwarding it to the destination.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="first_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><b>Parameters</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><i>name</i></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name for the RNAT6 rule. Must begin with a letter, number, or the underscore character (_), and can consist of letters, numbers, and the hyphen (-), period (.) pound (#), space ( ), at sign (@), equals (=), colon (:), and underscore characters. Cannot be changed after the rule is created. Choose a name that helps identify the RNAT6 rule.<br>This is mandatory parameter.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><i>network</i></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">IPv6 address of the network on whose traffic you want the NetScaler appliance to do RNAT processing.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><i>acl6name</i></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of any configured ACL6 whose action is ALLOW. The rule of the ACL6 is used as an RNAT6 rule.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><i>redirectport</i></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Port number to which the IPv6 packets are redirected. Applicable to TCP and UDP protocols.<br> Minimum value =  1.<br> Maximum value =  65535.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Return Value</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left">Returns <a href="simpleResult_struct.html">simpleResult</a></div></td></tr><tr><td><br></td></tr><tr><td><div><b>See Also</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="bindrnat6_natip6.html">bindrnat6_natip6</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="clearrnat6.html">clearrnat6</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="getrnat6.html">getrnat6</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="setrnat6_srcippersistency.html">setrnat6_srcippersistency</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="unbindrnat6_natip6.html">unbindrnat6_natip6</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="unsetrnat6_srcippersistency.html">unsetrnat6_srcippersistency</a></div></td></tr><tr><td><br></td></tr></table></div>
+</body>
+</html>

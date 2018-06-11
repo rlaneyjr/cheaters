@@ -1,0 +1,244 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>Citrix NetScaler XML API User&#39;s Guide - Structure Definition</title>
+<link rel="stylesheet" type="text/css" href="help_ns.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body onload="initial()" class="ns_body">
+<div class="ns_content"><table cellpadding="0" cellspacing="0"><script type="text/javascript">
+function changeContext(id,lang,flag){
+	parent.banner.document.language.select.value = lang;
+	if( lang == "C" ){
+		if(flag == "1"){
+			showContent(cfirstcontent,id,lang);
+		}
+		else{
+			showContent(csecondcontent,id,lang);
+		}
+	}
+	if( lang == "Perl" ){
+		if(flag == "1"){
+			showContent(perlfirstcontent,id,lang);
+		}
+		else{
+			showContent(perlsecondcontent,id,lang);
+		}
+	}
+	if( lang == "Java" ){
+		if(flag == "1"){
+			showContent(javafirstcontent,id,lang);	
+		}
+		else{
+			showContent(javasecondcontent,id,lang);
+		}
+	}
+	if( lang == "C#" ){
+		if(flag == "1"){
+			showContent(csharpfirstcontent,id,lang);
+		}
+		else{
+			showContent(csharpsecondcontent,id,lang);
+		}
+	}
+	if( lang == "VB" ){
+		if(flag == "1"){
+			showContent(vbfirstcontent,id,lang);
+		}
+		else{
+			showContent(vbsecondcontent,id,lang);
+		}
+	}
+	if(flag == "1"){
+		showInside(lang,"0");
+	}
+	else{
+		showOutside(lang);
+	}
+}
+function showContent(content,id,lang){
+	if(ie4){
+	   showContentObj=document.all.id;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById(id);
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+  showLangSelect(lang);
+}
+function showInside(str,cond){
+	if(str == "C"){
+ 		var inside_content = csecondcontent;
+ 	}
+ 	if(str == "Perl"){
+ 		var inside_content = perlsecondcontent;
+ 	}
+ 	if(str == "Java"){
+ 		var inside_content = javasecondcontent;
+ 	}
+ 	if(str == "C#"){
+		var inside_content = csharpsecondcontent;
+ 	}
+ 	if(str == "VB"){
+		var inside_content = vbsecondcontent;
+ 	}
+	showContent(inside_content,'qiksearch_div1',str);
+ 	if ( cond == "1" ){
+ 		var page = 'apidoc/docs/statpqpolicyResult.html#pqpolicyList';
+ 		document.location.href = page;
+ 	}
+}
+function showOutside(str){
+	if(str == "C" ){
+ 		var inside_content = cfirstcontent;
+ 	}
+ 	if(str == "Perl" ){
+ 		var inside_content = perlfirstcontent;
+ 	}
+ 	if(str == "Java" ){
+ 		var inside_content = javafirstcontent;
+ 	}
+ 	if(str == "C#" ){
+ 		var inside_content = csharpfirstcontent;
+ 	}
+ 	if(str == "VB" ){
+ 		var inside_content = vbfirstcontent;
+ 	}
+ 	showContent(inside_content,'qiksearch_div',str);
+}
+function initial(){
+	ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+	ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+	ns4=document.layers;
+	langSelected = parent.banner.document.language.select.value
+	var plink = parent.banner.document.language.plink.value
+	var my_array=plink.split("&");
+	var temp = my_array[0];
+ 	var grp = temp.split("@");
+	var cmd = my_array[1];
+	var regex = /^stat/i;
+	if( cmd.match(regex) != null ){
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex_stat.html\">Statistics</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > statpqpolicyResult");
+	}
+	else{
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex.htm\">Configuration</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > statpqpolicyResult");
+	}
+	if( langSelected == "C" ){
+ 		var content = cfirstcontent;
+	}
+	else if( langSelected == "Perl" ){
+		var content = perlfirstcontent;
+	}
+	else if( langSelected == "Java" ){
+		var content = javafirstcontent;
+	}
+	else if( langSelected == "C#" ){
+		var content = csharpfirstcontent;
+	}
+	else if( langSelected == "VB" ){
+		var content = vbfirstcontent;
+	}
+	else{
+		var content = cfirstcontent;
+		langSelected="C";
+	}
+	showContent(content,'qiksearch_div',langSelected);
+	showInside(langSelected,"0");
+}
+function showPLink(content){
+	if(ie4){
+	   showContentObj=document.all.progressive_link;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById("progressive_link");
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+}
+function showLangSelect(id){
+	   if(ie4)
+       {
+       	showObj=document.all.first_url;
+       	showObj1=document.all.second_url;
+       }
+       if(ns6)
+       {
+       	showObj=document.getElementById("first_url");
+       	showObj1=document.getElementById("second_url");
+       }
+       if( id == "C" ){
+       	newlink = "<b>C</b>";
+       	newlink1 = "<b>C</b>";
+       }
+       else{
+       	newlink = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C','1');\"><b>C</b></a>";
+       	newlink1 = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C','0');\"><b>C</b></a>";
+       }
+       if( id == "Perl" ){
+       	newlink = newlink + " | <b>Perl</b>";
+       	newlink1 = newlink1 + " | <b>Perl</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Perl','1');\"><b>Perl</b></a>";
+      	       newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Perl','0');\"><b>Perl</b></a>";
+       }
+       if( id == "Java" ){
+       	newlink = newlink + " | <b>Java</b>";
+       	newlink1 = newlink1 + " | <b>Java</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Java','1');\"><b>Java</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Java','0');\"><b>Java</b></a>";
+       }
+       if( id == "C#" ){
+       	newlink = newlink + " | <b>C#</b>";
+       	newlink1 = newlink1 + " | <b>C#</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C#','1');\"><b>C#</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C#','0');\"><b>C#</b></a>";
+       }
+       showObj.innerHTML = newlink;
+       showObj1.innerHTML = newlink1;
+}
+</script>
+<tr><td><div><div id="progressive_link"></div></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>statpqpolicyResult Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>statpqpolicyResult</b> structure defines the return type for statpqpolicy API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="first_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+cfirstcontent = "<pre>struct statpqpolicyResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; struct <a href=\'statpqpolicyResult.html\#pqpolicystats\'>pqpolicystats</a> pqpolicystatsList[];<br> };<br></pre></td></tr></table></div>"
+perlfirstcontent = "<pre>$statpqpolicyResult = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rc => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; message => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'statpqpolicyResult.html\#pqpolicystats\'>pqpolicystats</a> => \'@\',<br> };<br></pre></td></tr></table></div>"
+javafirstcontent = "<pre>class statpqpolicyResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; class <a href=\'statpqpolicyResult.html\#pqpolicystats\'>pqpolicystats</a> pqpolicystatsList[];<br> };<br></pre></td></tr></table></div>"
+csharpfirstcontent = "<pre>class statpqpolicyResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; class <a href=\'statpqpolicyResult.html\#pqpolicystats\'>pqpolicystats</a> pqpolicystatsList[];<br> };<br></pre></td></tr></table></div>"
+vbfirstcontent = "<pre>Public <b>Structure</b> statpqpolicyResult <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rc As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public message As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public  endpqpolicyList() As  <a href=\'statpqpolicyResult.html\#pqpolicystats\'>pqpolicystatsList</a><br> <b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rc</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, rc is 0 else rc > 0. Values above 0x8000 indicate Warnings.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>message</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, message is NULL else message contains <a href="errorlisting.html">Error/Warning</a> message.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>pqpolicyList</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Pointer to the pqpolicy List.</div></td></tr><tr><td><br></td></tr><tr><td><div><a name="pqpolicystats"></a></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>pqpolicystats  Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>pqpolicystats</b> structure defines the actual return type values for statpqpolicy API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="second_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div1" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+csecondcontent = "<pre>struct pqpolicystats {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char *   policyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char *   clearstats;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int pqtotqueuewaittime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int pqtotqueuewaittime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int pqqueuewaittimerate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int pqtotavgqueuewaittime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int pqavgqueuewaittimerate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int pqavgclienttransactiontimems;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int pqavgclienttransactiontimemsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int pqvserverip;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int pqvserverport;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int pqqdepth;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int pqqdepthrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int pqcurrentclientconnections;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int pqcurrentclientconnectionsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int pqtotclientconnections;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int pqdropped;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int pqdroppedrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int totclienttransactions;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int clienttransactionsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int pqtotqueuedepth;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int pqqueuedepthrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int pqavgclienttransactiontime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int pqavgclienttransactiontimerate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int pqtotqueuewaittime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int pqqueuewaittimerate;<br> };<br></pre></td></tr></table></div>"
+perlsecondcontent = "<pre>$pqpolicystats = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; policyname => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; clearstats => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; pqtotqueuewaittime => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; pqtotqueuewaittime => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; pqqueuewaittimerate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; pqtotavgqueuewaittime => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; pqavgqueuewaittimerate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; pqavgclienttransactiontimems => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; pqavgclienttransactiontimemsrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; pqvserverip => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; pqvserverport => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; pqqdepth => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; pqqdepthrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; pqcurrentclientconnections => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; pqcurrentclientconnectionsrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; pqtotclientconnections => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; pqdropped => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; pqdroppedrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; totclienttransactions => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; clienttransactionsrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; pqtotqueuedepth => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; pqqueuedepthrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; pqavgclienttransactiontime => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; pqavgclienttransactiontimerate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; pqtotqueuewaittime => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; pqqueuewaittimerate => \'$\',<br> };<br></pre></td></tr></table></div>"
+javasecondcontent = "<pre>class pqpolicystats {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String  policyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String  clearstats;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt pqtotqueuewaittime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt pqtotqueuewaittime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt pqqueuewaittimerate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt pqtotavgqueuewaittime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt pqavgqueuewaittimerate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt pqavgclienttransactiontimems;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt pqavgclienttransactiontimemsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt pqvserverip;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt pqvserverport;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt pqqdepth;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt pqqdepthrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt pqcurrentclientconnections;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt pqcurrentclientconnectionsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt pqtotclientconnections;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt pqdropped;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt pqdroppedrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt totclienttransactions;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt clienttransactionsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt pqtotqueuedepth;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt pqqueuedepthrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt pqavgclienttransactiontime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt pqavgclienttransactiontimerate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt pqtotqueuewaittime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt pqqueuewaittimerate;<br> };<br></pre></td></tr></table></div>"
+csharpsecondcontent = "<pre>class pqpolicystats {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string  policyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string  clearstats;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 pqtotqueuewaittime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 pqtotqueuewaittime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 pqqueuewaittimerate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 pqtotavgqueuewaittime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 pqavgqueuewaittimerate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 pqavgclienttransactiontimems;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 pqavgclienttransactiontimemsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 pqvserverip;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 pqvserverport;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 pqqdepth;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 pqqdepthrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 pqcurrentclientconnections;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 pqcurrentclientconnectionsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 pqtotclientconnections;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 pqdropped;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 pqdroppedrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 totclienttransactions;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 clienttransactionsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 pqtotqueuedepth;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 pqqueuedepthrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 pqavgclienttransactiontime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 pqavgclienttransactiontimerate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 pqtotqueuewaittime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 pqqueuewaittimerate;<br> };<br></pre></td></tr></table></div>"
+vbsecondcontent = "<pre>Public <b>Structure</b> pqpolicystats <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public policyname As String  <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public clearstats As String  <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public pqtotqueuewaittime As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public pqtotqueuewaittime As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public pqqueuewaittimerate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public pqtotavgqueuewaittime As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public pqavgqueuewaittimerate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public pqavgclienttransactiontimems As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public pqavgclienttransactiontimemsrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public pqvserverip As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public pqvserverport As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public pqqdepth As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public pqqdepthrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public pqcurrentclientconnections As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public pqcurrentclientconnectionsrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public pqtotclientconnections As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public pqdropped As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public pqdroppedrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public totclienttransactions As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public clienttransactionsrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public pqtotqueuedepth As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public pqqueuedepthrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public pqavgclienttransactiontime As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public pqavgclienttransactiontimerate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public pqtotqueuewaittime As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public pqqueuewaittimerate As ULong<br><b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>policyname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the priority queuing policy whose statistics must be displayed. If a name is not provided, statistics of all priority queuing policies are shown.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>clearstats</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Clear the statsistics / counters</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>pqtotqueuewaittime</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Amount of time spent by priority queuing clients waiting in the priority queue.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>pqtotqueuewaittime</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Amount of time spent by priority queuing clients waiting in the priority queue.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>pqqueuewaittimerate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Amount of time spent by priority queuing clients waiting in the priority queue.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>pqtotavgqueuewaittime</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Average wait time for clients for this priority queuing policy.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>pqavgqueuewaittimerate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Average wait time for clients for this priority queuing policy.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>pqavgclienttransactiontimems</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Average time taken by a priority queuing client to complete its transaction for this  priority queuing policy.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>pqavgclienttransactiontimemsrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Average time taken by a priority queuing client to complete its transaction for this  priority queuing policy.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>pqvserverip</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">IP address of the virtual server to which this priority queuing policy is bound.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>pqvserverport</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Port number of the virtual server to which this priority queuing policy is bound.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>pqqdepth</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of clients waiting currently for this priority queuing policy.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>pqqdepthrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of clients waiting currently for this priority queuing policy.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>pqcurrentclientconnections</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Current number of server connections established for serving clients for this priority queuing policy.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>pqcurrentclientconnectionsrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Current Rate of server connections established for serving clients for this priority queuing policy.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>pqtotclientconnections</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Total number of server connections established for serving clients for this priority queuing policy.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>pqdropped</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Total number of dropped transactions for this priority queuing policy.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>pqdroppedrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of dropped transactions for this priority queuing policy.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>totclienttransactions</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Total number of client transactions for this priority queuing policy.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>clienttransactionsrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of client transactions for this priority queuing policy.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>pqtotqueuedepth</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Total number of waiting clients for this priority queuing policy.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>pqqueuedepthrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of waiting clients for this priority queuing policy.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>pqavgclienttransactiontime</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Average time taken by a priority queuing client to complete its transaction for this priority queuing policy.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>pqavgclienttransactiontimerate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Average time taken by a priority queuing client to complete its transaction for this priority queuing policy.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>pqtotqueuewaittime</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Amount of time spent by priority queuing clients waiting in the priority queue.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>pqqueuewaittimerate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Amount of time spent by priority queuing clients waiting in the priority queue.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>See Also</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="statpqpolicy.html">statpqpolicy</a></div></td></tr><tr><td><br></td></tr></table></div>
+</body>
+</html>

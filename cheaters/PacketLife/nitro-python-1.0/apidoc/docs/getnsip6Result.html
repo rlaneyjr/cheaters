@@ -1,0 +1,253 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>Citrix NetScaler XML API User&#39;s Guide - Structure Definition</title>
+<link rel="stylesheet" type="text/css" href="help_ns.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body onload="initial()" class="ns_body">
+<div class="ns_content"><table cellpadding="0" cellspacing="0"><script type="text/javascript">
+function changeContext(id,lang,flag){
+	parent.banner.document.language.select.value = lang;
+	if( lang == "C" ){
+		if(flag == "1"){
+			showContent(cfirstcontent,id,lang);
+		}
+		else{
+			showContent(csecondcontent,id,lang);
+		}
+	}
+	if( lang == "Perl" ){
+		if(flag == "1"){
+			showContent(perlfirstcontent,id,lang);
+		}
+		else{
+			showContent(perlsecondcontent,id,lang);
+		}
+	}
+	if( lang == "Java" ){
+		if(flag == "1"){
+			showContent(javafirstcontent,id,lang);	
+		}
+		else{
+			showContent(javasecondcontent,id,lang);
+		}
+	}
+	if( lang == "C#" ){
+		if(flag == "1"){
+			showContent(csharpfirstcontent,id,lang);
+		}
+		else{
+			showContent(csharpsecondcontent,id,lang);
+		}
+	}
+	if( lang == "VB" ){
+		if(flag == "1"){
+			showContent(vbfirstcontent,id,lang);
+		}
+		else{
+			showContent(vbsecondcontent,id,lang);
+		}
+	}
+	if(flag == "1"){
+		showInside(lang,"0");
+	}
+	else{
+		showOutside(lang);
+	}
+}
+function showContent(content,id,lang){
+	if(ie4){
+	   showContentObj=document.all.id;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById(id);
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+  showLangSelect(lang);
+}
+function showInside(str,cond){
+	if(str == "C"){
+ 		var inside_content = csecondcontent;
+ 	}
+ 	if(str == "Perl"){
+ 		var inside_content = perlsecondcontent;
+ 	}
+ 	if(str == "Java"){
+ 		var inside_content = javasecondcontent;
+ 	}
+ 	if(str == "C#"){
+		var inside_content = csharpsecondcontent;
+ 	}
+ 	if(str == "VB"){
+		var inside_content = vbsecondcontent;
+ 	}
+	showContent(inside_content,'qiksearch_div1',str);
+ 	if ( cond == "1" ){
+ 		var page = 'apidoc/docs/getnsip6Result.html#ip6List';
+ 		document.location.href = page;
+ 	}
+}
+function showOutside(str){
+	if(str == "C" ){
+ 		var inside_content = cfirstcontent;
+ 	}
+ 	if(str == "Perl" ){
+ 		var inside_content = perlfirstcontent;
+ 	}
+ 	if(str == "Java" ){
+ 		var inside_content = javafirstcontent;
+ 	}
+ 	if(str == "C#" ){
+ 		var inside_content = csharpfirstcontent;
+ 	}
+ 	if(str == "VB" ){
+ 		var inside_content = vbfirstcontent;
+ 	}
+ 	showContent(inside_content,'qiksearch_div',str);
+}
+function initial(){
+	ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+	ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+	ns4=document.layers;
+	langSelected = parent.banner.document.language.select.value
+	var plink = parent.banner.document.language.plink.value
+	var my_array=plink.split("&");
+	var temp = my_array[0];
+ 	var grp = temp.split("@");
+	var cmd = my_array[1];
+	var regex = /^stat/i;
+	if( cmd.match(regex) != null ){
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex_stat.html\">Statistics</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getnsip6Result");
+	}
+	else{
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex.htm\">Configuration</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getnsip6Result");
+	}
+	if( langSelected == "C" ){
+ 		var content = cfirstcontent;
+	}
+	else if( langSelected == "Perl" ){
+		var content = perlfirstcontent;
+	}
+	else if( langSelected == "Java" ){
+		var content = javafirstcontent;
+	}
+	else if( langSelected == "C#" ){
+		var content = csharpfirstcontent;
+	}
+	else if( langSelected == "VB" ){
+		var content = vbfirstcontent;
+	}
+	else{
+		var content = cfirstcontent;
+		langSelected="C";
+	}
+	showContent(content,'qiksearch_div',langSelected);
+	showInside(langSelected,"0");
+}
+function showPLink(content){
+	if(ie4){
+	   showContentObj=document.all.progressive_link;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById("progressive_link");
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+}
+function showLangSelect(id){
+	   if(ie4)
+       {
+       	showObj=document.all.first_url;
+       	showObj1=document.all.second_url;
+       }
+       if(ns6)
+       {
+       	showObj=document.getElementById("first_url");
+       	showObj1=document.getElementById("second_url");
+       }
+       if( id == "C" ){
+       	newlink = "<b>C</b>";
+       	newlink1 = "<b>C</b>";
+       }
+       else{
+       	newlink = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C','1');\"><b>C</b></a>";
+       	newlink1 = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C','0');\"><b>C</b></a>";
+       }
+       if( id == "Perl" ){
+       	newlink = newlink + " | <b>Perl</b>";
+       	newlink1 = newlink1 + " | <b>Perl</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Perl','1');\"><b>Perl</b></a>";
+      	       newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Perl','0');\"><b>Perl</b></a>";
+       }
+       if( id == "Java" ){
+       	newlink = newlink + " | <b>Java</b>";
+       	newlink1 = newlink1 + " | <b>Java</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Java','1');\"><b>Java</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Java','0');\"><b>Java</b></a>";
+       }
+       if( id == "C#" ){
+       	newlink = newlink + " | <b>C#</b>";
+       	newlink1 = newlink1 + " | <b>C#</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C#','1');\"><b>C#</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C#','0');\"><b>C#</b></a>";
+       }
+       showObj.innerHTML = newlink;
+       showObj1.innerHTML = newlink1;
+}
+</script>
+<tr><td><div><div id="progressive_link"></div></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>getnsip6Result Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>getnsip6Result</b> structure defines the return type for getnsip6 API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="first_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+cfirstcontent = "<pre>struct getnsip6Result {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; struct <a href=\'getnsip6Result.html\#nsip6\'>nsip6</a> list[];<br> };<br></pre></td></tr></table></div>"
+perlfirstcontent = "<pre>$getnsip6Result = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rc => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; message => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; List => \'@<a href=\'getnsip6Result.html\#nsip6\'>nsip6</a>\',<br> };<br></pre></td></tr></table></div>"
+javafirstcontent = "<pre>class getnsip6Result {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getnsip6Result.html\#nsip6\'>nsip6</a>[] list;<br> };<br></pre></td></tr></table></div>"
+csharpfirstcontent = "<pre>class getnsip6Result {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getnsip6Result.html\#nsip6\'>nsip6</a>[] list;<br> };<br></pre></td></tr></table></div>"
+vbfirstcontent = "<pre>Public <b>Structure</b> getnsip6Result <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rc As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public message As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public  nsip6List() As  <a href=\'getnsip6Result.html\#nsip6\'>nsip6</a><br> <b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rc</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, rc is 0 else rc > 0. Values above 0x8000 indicate Warnings.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>message</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, message is NULL else message contains <a href="errorlisting.html">Error/Warning</a> message.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>nsip6List</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">List of nsip6s</div></td></tr><tr><td><br></td></tr><tr><td><div><a name="nsip6"></a></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>nsip6  Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>nsip6</b> structure defines the actual return type values for getnsip6 API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="second_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div1" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+csecondcontent = "<pre>struct nsip6 {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * ipv6address;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * scope;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * type;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * iptype[];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int vlan;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * nd;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * icmp;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * vserver;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * telnet;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * ssh;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * gui;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * snmp;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * ftp;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * mgmtaccess;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * restrictaccess;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * state;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * state2;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * map;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * dynamicrouting;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * hostroute;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * ip6hostrtgw;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int metric;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * vserverrhilevel;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * viprtadv2bsd;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int vipvsercount;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int vipvserdowncount;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * ospf6lsatype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ospfarea;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ownernode;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * systemtype;<br> };<br></pre></td></tr></table></div>"
+perlsecondcontent = "<pre>$nsip6 = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipv6address => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; scope => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; type => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; iptype => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; vlan => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; nd => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; icmp => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; vserver => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; telnet => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ssh => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; gui => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; snmp => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ftp => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; mgmtaccess => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; restrictaccess => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; state => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; state2 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; map => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; dynamicrouting => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; hostroute => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ip6hostrtgw => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; metric => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; vserverrhilevel => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; viprtadv2bsd => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; vipvsercount => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; vipvserdowncount => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ospf6lsatype => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ospfarea => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ownernode => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; systemtype => \'$\',<br> };<br></pre></td></tr></table></div>"
+javasecondcontent = "<pre>class nsip6 {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String ipv6address;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String scope;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String type;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String iptype[];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt vlan;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String nd;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String icmp;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String vserver;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String telnet;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String ssh;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String gui;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String snmp;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String ftp;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String mgmtaccess;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String restrictaccess;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String state;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String state2;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String map;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String dynamicrouting;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String hostroute;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String ip6hostrtgw;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int metric;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String vserverrhilevel;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String viprtadv2bsd;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt vipvsercount;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt vipvserdowncount;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String ospf6lsatype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt ospfarea;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt ownernode;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String systemtype;<br> };<br></pre></td></tr></table></div>"
+csharpsecondcontent = "<pre>class nsip6 {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string ipv6address;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string scope;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string type;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string iptype[];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 vlan;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string nd;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string icmp;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string vserver;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string telnet;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string ssh;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string gui;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string snmp;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string ftp;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string mgmtaccess;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string restrictaccess;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string state;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string state2;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string map;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string dynamicrouting;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string hostroute;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string ip6hostrtgw;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 metric;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string vserverrhilevel;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string viprtadv2bsd;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 vipvsercount;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 vipvserdowncount;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string ospf6lsatype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 ospfarea;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 ownernode;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string systemtype;<br> };<br></pre></td></tr></table></div>"
+vbsecondcontent = "<pre>Public <b>Structure</b> nsip6 <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipv6address As String  <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public scope As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public type As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public iptype() As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public vlan As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public nd As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public icmp As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public vserver As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public telnet As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ssh As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public gui As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public snmp As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ftp As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public mgmtaccess As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public restrictaccess As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public state As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public state2 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public map As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public dynamicrouting As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public hostroute As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ip6hostrtgw As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public metric As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public vserverrhilevel As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public viprtadv2bsd As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public vipvsercount As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public vipvserdowncount As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ospf6lsatype As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ospfarea As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ownernode As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public systemtype As String<br><b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipv6address</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">IPv6 address whose settings you want the NetScaler appliance to display.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>scope</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Scope of the IPv6 address to be created. Cannot be changed after the IP address is created.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>type</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The type of the IPV6 address<br> NOTE: This attribute is deprecated.<br>This option is deprecated in favour of ip6_type</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>iptype</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The type of the IPv6 address</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>vlan</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The VLAN number.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>nd</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Whether ND is enabled or disabled.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>icmp</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Whether icmp is enabled or disabled.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>vserver</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Whether vserver is enabled or disabled.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>telnet</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Whether telnet is enabled or disabled.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ssh</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Whether ssh is enabled or disabled.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>gui</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Whether gui is (enabled|SecureOnly|disabled).</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>snmp</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Whether snmp is enabled or disabled.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ftp</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Whether ftp is enabled or disabled.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>mgmtaccess</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Whether management access is enabled or disabled.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>restrictaccess</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Blocking of all ports not used for management access enabled or disabled</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>state</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The state of the IPV6 address</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>state2</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Current state of this IP.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>map</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Mapped IPV4 address for the IPV6 address.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>dynamicrouting</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Allow dynamic routing on this IP address. Specific to Subnet IPv6 (SNIP6) address.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>hostroute</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Advertise a route for the VIP6 address by using the dynamic routing protocols running on the NetScaler appliance.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ip6hostrtgw</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">IPv6 address of the gateway for the route. If Gateway is not set, VIP uses :: as the gateway.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>metric</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The metric value to be added or subtracted from the cost of the hostroute advertised for this IPv6 entity.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>vserverrhilevel</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Advertise or do not advertise the route for the Virtual IP (VIP6) address on the basis of the state of the virtual servers associated with that VIP6.
+* NONE - Advertise the route for the VIP6 address, irrespective of the state of the virtual servers associated with the address.
+* ONE VSERVER - Advertise the route for the VIP6 address if at least one of the associated virtual servers is in UP state.
+* ALL VSERVER - Advertise the route for the VIP6 address if all of the associated virtual servers are in UP state.
+* VSVR_CNTRLD.   Advertise the route for the VIP address according to the  RHIstate (RHI STATE) parameter setting on all the associated virtual servers of the VIP address along with their states.
+
+When Vserver RHI Level (RHI) parameter is set to VSVR_CNTRLD, the following are different RHI behaviors for the VIP address on the basis of RHIstate (RHI STATE) settings on the virtual servers associated with the VIP address:
+* If you set RHI STATE to PASSIVE on all virtual servers, the NetScaler ADC always advertises the route for the VIP address.
+* If you set RHI STATE to ACTIVE on all virtual servers, the NetScaler ADC advertises the route for the VIP address if at least one of the associated virtual servers is in UP state.
+*If you set RHI STATE to ACTIVE on some and PASSIVE on others, the NetScaler ADC advertises the route for the VIP address if at least one of the associated virtual servers, whose RHI STATE set to ACTIVE, is in UP state.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>viprtadv2bsd</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Whether this route is advertised to FreeBSD</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>vipvsercount</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number	of vservers	bound to this VIP</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>vipvserdowncount</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number	of vservers	bound to this VIP, which are down</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ospf6lsatype</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The OSPF's route advertisement type.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ospfarea</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The area ID of the area in which OSPF INTRA AREA PREFIX LSAs should be advertised. When ospfArea is not set, LSAs are advertised in all areas.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ownernode</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">ID of the cluster node for which you are adding the IP address. Must be used if you want the IP address to be active only on the specific node. Can be configured only through the cluster IP address. Cannot be changed after the IP address is created.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>systemtype</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The type of the System. Possible Values: Standalone, HA, Cluster. Used for display purpose.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>See Also</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="getnsip6.html">getnsip6</a></div></td></tr><tr><td><br></td></tr></table></div>
+</body>
+</html>

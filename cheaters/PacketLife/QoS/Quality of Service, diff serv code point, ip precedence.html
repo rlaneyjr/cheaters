@@ -1,0 +1,1861 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- saved from url=(0032)http://www.rhyshaden.com/qos.htm -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+<meta http-equiv="content-language" content="en-GB">
+
+<title>Quality of Service, diff serv code point, ip precedence</title>
+
+<meta name="description" content="Quality of Service tutorial covering technologies such as
+DSCP, random early detect, queuing, network congestion, ip precedence, diff serv and int serv">
+<meta name="keywords" content="qos, cos, dscp, tos, ip precedence, diff serv, 
+int serv, rtp, congestion, RED, WRED, FRED, multimedia, voice, video, jitter,
+convergence, marking, policy, cRTP, FRF.11, FRF.12, classification, LFI, tail drop,
+interleaving, fragmentation, MLP">
+<meta name="author" content="Rhys Haden">
+<meta name="MSSmartTagsPreventParsing" content="TRUE">
+<meta name="revisit-after" content="30 Days">
+
+<link rel="stylesheet" type="text/css" href="./Quality of Service, diff serv code point, ip precedence_files/datanet.css">
+<style>[touch-action="none"]{ -ms-touch-action: none; touch-action: none; }[touch-action="pan-x"]{ -ms-touch-action: pan-x; touch-action: pan-x; }[touch-action="pan-y"]{ -ms-touch-action: pan-y; touch-action: pan-y; }[touch-action="scroll"],[touch-action="pan-x pan-y"],[touch-action="pan-y pan-x"]{ -ms-touch-action: pan-x pan-y; touch-action: pan-x pan-y; }</style></head>
+
+<body link="blue" alink="blue" vlink="blue" bgcolor="white" text="black">
+
+<table border="0" cellspacing="0" cellpadding="0" width="100%" align="center">
+<tbody><tr>
+<td align="center" width="100" valign="middle" height="100">
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_xclick">
+<input type="hidden" name="business" value="rhaden@rhyshaden.com">
+<input type="hidden" name="item_name" value="Data Network Resource">
+<input type="hidden" name="item_number" value="DNR">
+<input type="hidden" name="no_shipping" value="1">
+<input type="hidden" name="return" value="http://www.rhyshaden.com">
+<input type="hidden" name="cancel_return" value="http://www.rhyshaden.com">
+<input type="hidden" name="cn" value="Comments">
+<input type="hidden" name="currency_code" value="GBP">
+<input type="hidden" name="tax" value="0">
+<input type="hidden" name="bn" value="PP-DonationsBF">
+<input type="image" src="./Quality of Service, diff serv code point, ip precedence_files/x-click-butcc-donate.gif" name="submit" alt="Make payments with PayPal - it&#39;s fast, free and secure!">
+</form>
+</td>
+
+<td>
+<div class="smalltext">
+This service is free, however donations are welcome
+</div>
+</td>
+
+<td align="left" valign="top" style="padding-top: 4px">
+<!-- BEGIN: Advert at Banner Position -->
+
+
+	 
+<!-- END: Advert at Banner Position -->
+</td>
+<td align="right" valign="middle">
+
+<!-- SiteSearch Google -->
+<form method="get" action="http://www.google.com/custom" target="google_window">
+<table border="0" bgcolor="#ffffff">
+<tbody><tr><td nowrap="nowrap" valign="top" align="left" height="32">
+<input type="hidden" name="domains" value="www.rhyshaden.com">
+<label for="sbi" style="display: none">Enter your search terms</label>
+<input type="text" name="q" size="20" maxlength="255" value="" id="sbi">
+<label for="sbb" style="display: none">Submit search form</label>
+<input type="submit" name="sa" value="Google Search" id="sbb">
+</td></tr>
+<tr>
+<td nowrap="nowrap">
+<table>
+<tbody><tr>
+<td>
+<input type="radio" name="sitesearch" value="" checked="" id="ss0">
+<label for="ss0" title="Search the Web"><font size="-1" color="black">Web</font></label></td>
+<td>
+<input type="radio" name="sitesearch" value="www.rhyshaden.com" id="ss1">
+<label for="ss1" title="Search www.rhyshaden.com"><font size="-1" color="black">www.rhyshaden.com</font></label></td>
+</tr>
+</tbody></table>
+<input type="hidden" name="client" value="pub-9819493931932596">
+<input type="hidden" name="forid" value="1">
+<input type="hidden" name="channel" value="9962998954">
+<input type="hidden" name="ie" value="ISO-8859-1">
+<input type="hidden" name="oe" value="ISO-8859-1">
+<input type="hidden" name="cof" value="GALT:#008000;GL:1;DIV:#336699;VLC:663399;AH:center;BGC:FFFFFF;LBGC:336699;ALC:0000FF;LC:0000FF;T:000000;GFNT:0000FF;GIMP:0000FF;FORID:1">
+<input type="hidden" name="hl" value="en">
+</td></tr></tbody></table>
+</form>
+<!-- SiteSearch Google -->
+
+</td>
+</tr>
+</tbody></table>
+
+<table border="0" cellspacing="0" cellpadding="0" width="100%" bgcolor="white" align="center">
+<tbody><tr>
+<td width="50%" align="center" valign="bottom">
+
+<!-- Andorra font RGB = 115,8,156 Hex 73,8,9c -->
+<a href="http://www.rhyshaden.com/index.htm"><img src="./Quality of Service, diff serv code point, ip precedence_files/titlenew.gif" alt="Data Network Resource"></a>
+
+</td>
+<td width="50%" align="right" valign="bottom">
+
+
+</td>
+</tr>
+</tbody></table>
+
+<table border="0" cellspacing="0" cellpadding="0" width="100%" bgcolor="#EEEEEE" style="border-top: 1px solid black">
+<tbody><tr>
+<td height="26">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://www.earnontheweb.com/" class="mylinks" target="_blank">Earn on the Web</a>
+</td>
+</tr>
+</tbody></table>
+
+<table border="0" cellspacing="0" cellpadding="0" width="100%" align="center" style="border-top: 1px solid black">
+<tbody><tr>
+<td width="150" height="100%" align="center" valign="top" bgcolor="#EEEEEE">
+<img src="./Quality of Service, diff serv code point, ip precedence_files/line.gif" height="1" width="150" alt=""><br>
+
+<!-- First Column Starts -->
+
+	<table border="0" width="125" style="background-color: #EEEEEE; font-size: 10px; width: 125px;">
+	<tbody><tr>
+	<td align="center">
+	<script async="" type="text/javascript" src="./Quality of Service, diff serv code point, ip precedence_files/ca-pub-9819493931932596.js"></script><script type="text/javascript"><!--
+	google_ad_client = "pub-9819493931932596";
+	google_alternate_color = "EEEEEE";
+	google_ad_width = 120;
+	google_ad_height = 90;
+	google_ad_format = "120x90_0ads_al_s";
+	//2007-06-30: rhyshaden
+	google_ad_channel = "2843943775";
+	google_color_border = "EEEEEE";
+	google_color_bg = "EEEEEE";
+	google_color_link = "0000FF";
+	google_color_text = "000000";
+	google_color_url = "008000";
+	//-->
+	</script>
+	<script type="text/javascript" src="./Quality of Service, diff serv code point, ip precedence_files/show_ads.js">
+	</script><ins id="aswift_0_expand" style="display:inline-table;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:120px;background-color:transparent"><ins id="aswift_0_anchor" style="display:block;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:120px;background-color:transparent"><iframe width="120" height="90" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;"></iframe></ins></ins>
+	</td>
+	</tr>
+
+	<tr>
+	<td height="10">
+	</td>
+	</tr>
+
+	<tr>
+	<td align="center">
+	<a href="http://www.introdelta.com/" target="_blank"><img src="./Quality of Service, diff serv code point, ip precedence_files/introdelta3.jpg" alt="Home of a wide range of data and communications products!" width="115" height="157" border="0"></a>
+	</td>
+	</tr>
+	
+	<tr>
+	<td height="10">
+	</td>
+	</tr>
+
+	</tbody></table>
+</td>
+
+<!-- Second Column Starts -->
+
+<td id="content" valign="top" bgcolor="#FFFFFF">
+			            	
+<!-- Header Include Ends Here -->
+
+	<table width="100%" cellspacing="10" cellpadding="0">
+	<tbody><tr>
+	<td width="100%" valign="top" align="left">
+		<table>
+		<tbody><tr>
+		<td width="100%" valign="top" bgcolor="#FFFFFF">
+
+<!-- Start of Content -->
+		
+
+<center>
+
+<script type="text/javascript"><!--
+google_ad_client = "pub-9819493931932596";
+google_alternate_color = "FFFFFF";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_type = "text_image";
+//2007-06-30: rhyshaden
+google_ad_channel = "2843943775";
+google_ui_features = "rc:0";
+//-->
+</script>
+<script type="text/javascript" src="./Quality of Service, diff serv code point, ip precedence_files/show_ads.js">
+</script><ins id="aswift_1_expand" style="display:inline-table;border:none;height:60px;margin:0;padding:0;position:relative;visibility:visible;width:468px;background-color:transparent"><ins id="aswift_1_anchor" style="display:block;border:none;height:60px;margin:0;padding:0;position:relative;visibility:visible;width:468px;background-color:transparent"><iframe width="468" height="60" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;"></iframe></ins></ins>
+
+<hr>
+
+<h1 class="heading1">Quality of Service</h1>
+<hr>
+</center>
+
+<br>
+
+<h2 class="heading2">1. Overview</h2>
+
+<br>
+
+<h3 class="heading3">1.1 Introduction</h3>
+
+<br>
+
+<div class="smalltext">
+Quality of Service (QoS) is where the data traffic on a network be it a LAN or a WAN,
+is subject to scrutiny and control.  Quality of Service is primarily an IP concept and uses tools that have existed
+since the early days of IP plus newer tools and protocols that are designed to aid the provision of defined 
+predictable data transfer characteristics.  Quality of Service is also relevant at layer 2 within the
+Ethernet environment and also within the WAN technologies such as Frame Relay and ATM.
+</div>
+
+<br>
+
+<div class="smalltext">
+The drive for QoS has become very strong in recent years because there has been a growth of multimedia traffic
+such as voice and video, that mixes it with more traditional data traffic such as FTP, Telnet and SMB.  Applications
+such as Voice over IP and Microsoft's Netmeeting have opened up the possibility of more interactive communications
+between users not just over the LAN but also over the WAN.
+</div>
+
+<br>
+
+<h3 class="heading3">1.2 Sensitive Traffic</h3>
+
+<br>
+
+<div class="smalltext">
+Much data traffic has been very tolerant of delays and packet drops, however voice traffic has different characteristics.
+Voice is low volume but is intolerant of jitter (delay) and packet loss.  Video is also intolerant of jitter and packet
+loss, plus it has the added complication of being very bursty at times.  This convergence of multimedia traffic with
+traditional data traffic is set to grow and therefore requires methods and tools to ensure that providers can
+deliver networks that give the users confidence to use these tools effectively.
+</div>
+
+<br>
+
+<h3 class="heading3">1.3 Where QoS is Applied</h3>
+
+<br>
+
+<div class="smalltext">
+You can often get away with introducing high bandwidth multimedia applications to a data network that
+has a well designed core and access topology, particularly if the core is based on Gigabit Ethernet
+technology and the access switches are not over-subscribed with respect to the backbone links.  Even in
+this scenario there is the issue of speed mismatches between technologies such as Gigabit Ethernet
+and Fast Ethernet.  This requires buffering and therefore leads to a requirement to queue and prioritise
+traffic.  Layer 2 switches can mark frames using <b>Class of Service (CoS)</b> marking if end devices
+do not mark the frames themselves.  These frames can then be assigned to hardware queues that
+exist on modern layer 2 switches.  Often the concept of <b>Trust Boundaries</b> is used to describe
+how far out to the endpoints a switch will trust the marking of a frame.   
+</div>
+
+<br>
+
+<div class="smalltext">
+The most significant network bottlenecks exist at the Remote Access points, the WAN access, Internet
+access and the servers.  Once a packet is on the core of the network, it generally deserves to be there,
+providing that your security is intact.  Many of the technologies involved in QoS are to do with how
+packets are dealt with as they enter and leave a network because merely adding more bandwidth at the
+edge is only a short term solution that just resolves capacity and perhaps some congestion problems.
+Adding bandwidth does not resolve jitter or add any traffic prioritisation features.
+</div>
+
+<br>
+
+<h3 class="heading3">1.4 Reasons for QoS</h3>
+
+<br>
+
+<div class="smalltext">
+Problems faced when attempting to provide QoS include:
+</div>
+
+<ul>
+<li>A shortage of bandwidth because network links are oversubscribed.</li>
+<li>Packets being lost due to congestion at bursty periods.  Modern DSPs can fill in for between
+20ms to 50ms of lost voice.</li>
+<li>End-to-End delay made up by a number of components that occur in the following order:
+	<ol>
+	<li>Fixed <b>Switch Delay</b> - as packets are layer 2 switched from the call initiator.</li>
+	<li>Fixed <b>Encoding Delay</b> - coding PCM to G.729 (5 ms look ahead then 10ms per frame,
+	with G.729 a Frame Relay packet would typically have 2 x 10ms samples),
+	G.726 (0.125us), G.723 (30ms), G.728 (2.5ms) etc.</li>
+	<li>Fixed <b>Voice Activity Detection (VAD)</b> - around 5ms. </li>
+	<li>Fixed <b>Packetisation Delay</b> - i.e. packetising samples in G.711, G.726, G.729 etc.</li>
+	<li>Variable <b>Output Queuing Delay</b> - as voice packets enter an output queue and wait for the
+	preceding frame (voice or data)	to be played out.</li>
+	<li>Fixed <b>Serialisation Delay</b> - the time it takes to get the bits on to the circuit.
+	The faster the circuit and the smaller the packet, the less this delay.</li>
+	<li>Fixed <b>Processing Delay</b> - the time it takes for the packets to be examined, routed, managed etc.</li>
+	<li>Variable <b>Network Queuing Delay</b> - due to clocking frames in and out of the different
+	network switches.</li>
+	<li>Fixed <b>Network Propagation Delay</b> - normally assumed to be 6 microseconds/km or
+	10 microseconds/mile (G.114) as the packets traverse the medium.  Across the UK this is
+	typically between 1ms and 3ms.</li>
+	<li>Variable <b>Input Queuing Delay</b> - as voice packets enter an input queue and wait for the
+	preceding frame (voice or data)	to be played out.</li>
+	<li>Fixed <b>Dejitter Buffer Delay</b> - can be up to 50ms.</li>
+	<li>Fixed <b>Switch Delay</b> - as packets are layer 2 switched to the endpoint.</li>
+	<li>Fixed <b>Decoding Delay</b> - decoding the compressed packets is trivial compared to encoding
+	and so takes less time.</li>
+	</ol></li>
+</ul>
+
+<div class="smalltext">
+The <b>Delay Budget</b> is made up of the sum of the delays.  In the UK, the total one-way delay budget
+is typically less than 100ms.
+</div>
+
+<br>
+
+<div class="smalltext">
+Given two time sensitive packets e.g. voice packets, the End-to-End delay may be different for each of
+those packets.  The difference between the delays i.e. variable delay, is known as <b>Jitter</b>. 
+Both Delay and Jitter have a significant impact on Voice and Video
+traffic, jitter often being more of a problem than delay.  In addition, both technologies can cope
+with some packet loss, you don't for instance, wish to retransmit a part
+of the conversation, instead it is better just to lose it or smooth it over.  Where video differs from voice is in its
+bandwidth requirements.  Video is bandwidth hungry and bursty compared to voice which is steady and low in its bandwidth consumption.
+</div>
+
+<br>
+
+<div class="smalltext">
+Voice requires steady access where packets are evenly spaced (without Jitter) i.e. an Isochronous data flow in the same way that SDH works
+where the cells that you want can be demuxed without the flow being stopped.  Traditional data networks do not operate
+this way, we have to make a data network appear to operate in a way similar to SDH.
+Some hardware manufacturers provide <b>Dejitter Buffers</b> that buffer packets as they are received
+and then play them out as a steady stream thereby eliminating the variable delay.  The overall delay
+is increased slightly as a result of implementing a de-jitter buffer.  Packets that arrive so late
+that they fall outside of the de-jitter buffer are discarded.  DSPs may be implemented within
+the equipment that perform an intelligent interpolation of the missing sound.  This minimises
+the distortion cause by the dropped packets.
+</div> 
+
+<br>
+
+<h3 class="heading3">1.5 Functions of QoS</h3>
+
+<br>
+
+<div class="smalltext">
+QoS needs to enable:
+</div>
+
+<ul>
+<li>Predictable Response times</li>
+<li>Management of delay sensitive applications</li>
+<li>Management of jitter sensitive applications</li>
+<li>Control of packet loss when congestion occurs during a burst (note that continuous congestion means that the link is over-subscribed)</li>
+<li>The setting of traffic priorities.</li>
+<li>Dedication of bandwidth on a per application basis.</li>
+<li>The avoidance of congestion</li>
+<li>The management of congestion when it occurs, note that this is different from trying to avoid congestion, sometimes it is not possible
+to avoid congestion.</li>
+</ul>
+
+<div class="smalltext">
+QoS can be thought of as operating on one or more of three levels:
+</div>
+
+<ul>
+<li><b>Best Effort</b></li>
+<li><b>Differentiated Service</b> - can deal with differing levels of QoS on a packet by packet basis</li>
+<li><b>Integrated Service</b> - requested level of service by an application to a network.  Data is only sent
+after confirmation that the service level is guaranteed to be available.</li>
+</ul> 
+
+<div class="smalltext">
+The order of events with respect to QoS can be described as follows:
+</div>
+
+<ol>
+<li>Mark and Classify packets according to policies and the behaviour of the traffic.  This is carried out with technologies such
+as IP Precedence and DSCP and is most effective when carried out as far to the edge of the network as possible, even at the device
+itself (e.g. a VoIP phone).</li>
+<li>Congestion management by prioritising traffic based on the marks using queuing technologies that can respond to traffic classes.</li>
+<li>Avoid congestion by dropping packets that are not a high priority using technologies such as Random Early Detection where
+low priority packets are weeded out of a queue so as to prevent indescriminant 'Tail Drop' of packets.</li>
+<li>Police traffic so that bad packets are kept at bay i.e. limit the ingress or egress traffic depending on the class/markings
+of the packets.  Also
+perform traffic shaping to maximise the use of bandwidth by specifying peak and average traffic rates.</li>
+<li>Fragment and compress packets to maximise the use of WAN bandwidths.</li>
+</ol>
+
+<br>
+
+<h2 class="heading2">2. Marking and Classifying</h2>
+
+<br>
+
+<h3 class="heading3">2.1 Layer 2 Class of Service (CoS)</h3>
+
+<br>
+
+<div class="smalltext">
+As detailed in <a href="http://www.rhyshaden.com/eth_vlan.htm#802.1p">802.1p</a>, Layer 2 Class of Service can be provided within the TCI
+field of the Ethernet frame.  The 3 bits give 8 different classes which have the values assigned as follows:
+</div>
+
+<ul>
+<li><b>000</b> (0) - Routine</li>
+<li><b>001</b> (1) - Priority</li>
+<li><b>010</b> (2) - Immediate</li>
+<li><b>011</b> (3) - Flash</li>
+<li><b>100</b> (4) - Flash Override</li>
+<li><b>101</b> (5) - Critical</li>
+<li><b>110</b> (6) - Internetwork Control</li>
+<li><b>111</b> (7) - Network Control</li>
+</ul>
+
+<div class="smalltext">
+These map to the IP Precedence values in the TOS field of the IP datagram.  Layer 2 switches can have two or maybe four
+queues per port which can be used when there is congestion, to put frames with particular CoS values into the appropriate queues
+and perform a <b>Weighted Round Robin (WRR)</b> approach to servicing these queues.
+</div>
+
+<br>
+
+<div class="smalltext">
+As illustated in <a href="http://www.rhyshaden.com/eth_vlan.htm#isl">ISL</a>, Cisco's ISL also has 3 bits allocated to priority values.
+</div>
+
+<br>
+
+<h3 class="heading3">2.2 IP Precedence and Differentiated Services (DiffServ)</h3>
+
+<br>
+
+<div class="smalltext">
+DiffServ is concerned with classifying packets as they enter the local network.  This classification then applies to 
+<b>Flow</b> of traffic where a Flow is defined by 5 elements; Source IP address, Destination IP, Source port, Destination port
+and the transport protocol.  A flow that has been classified or marked can then be acted upon by other QoS mechanisms.
+Multiple flows can therefore be dealt with in a multitude of ways depending on the requirements of each flow.  Packets
+are first Classified according to their current DSCP.  Then they are separated into queues where one queue may be routed
+via a marking mechanism and another queue may be examined more closely.  After further examination additional packets may be sent
+for marking or be sent direct to the shaping/dropping mechanisms where all packets end up before leaving the interface.
+</div>
+
+<br>
+
+<div class="smalltext">
+The IP header has a field called the <b>Type of Service (TOS)</b> that sits between the <b>Header Length</b> field and the
+<b>Total Length</b> field.
+(Refer to <a href="http://www.rhyshaden.com/ipdgram.htm#tos">IP Datagram TOS field</a> for a view of the Type Of Service field in the IP header.)
+Traditionally, <b>IP Precedence</b> has used the first three bits of the TOS field to give 8 possible precedence values.
+</div>
+
+<ul>
+<li><b>000</b> (0) - Routine</li>
+<li><b>001</b> (1) - Priority</li>
+<li><b>010</b> (2) - Immediate</li>
+<li><b>011</b> (3) - Flash</li>
+<li><b>100</b> (4) - Flash Override</li>
+<li><b>101</b> (5) - Critical</li>
+<li><b>110</b> (6) - Internetwork Control</li>
+<li><b>111</b> (7) - Network Control</li>
+</ul>
+
+<div class="smalltext">
+DiffServ introduces the concept of the <b>DiffServ Code Point (DSCP)</b> that uses the first 6 bits of the TOS field
+thereby giving 2<sup>6</sup> = <b>64</b> different values.
+<a href="http://www.ietf.org/rfc/rfc2474.txt" target="_blank">RFC 2474</a> describes the Differentiated Services (DS) field and the DiffServ Code Point
+(DSCP).
+</div>
+
+<br>
+
+<center>
+<img src="./Quality of Service, diff serv code point, ip precedence_files/dscp.gif" alt="DSCP field">
+</center>
+
+<br>
+
+<div class="smalltext">
+With DiffServ each router handles each packet differently.  The concept of <b>Per-Hop Forwarding Behaviour (PHB)</b>
+is introduced where classes are developed such as Business, Telecommuter, Residential etc. that can be offered
+by an ISP as different levels of service.  A Per-Hop Behaviour is effectively a way of forwarding a particular flow 
+or group of flows (<b>Behaviour Aggregate</b>) of traffic on a DiffServ node.
+A flow, or flows, of packets marked with a particular DSCP in the DS field will be subject to a particular method of forwarding and rules as
+encapsulated in the <b>Behaviour Aggregate</b>.  This Aggregate has three elements to it (or three colours) which determine
+whether the router interface 1) Drops the datagram, 2) Sends the datagram or 3) reclassifies it.  This three-colour
+marker is detailed in <a href="http://www.ietf.org/rfc/rfc2697.txt" target="_blank">RFC 2697</a>.  For instance 5 flows can be treated
+as a Behaviour Aggregate so they are treated similarly as a group in most respects.  Each flow is then distinguished
+by an additional <b>Drop Probability</b> and <b>Forwarding Behaviour</b>.  Be aware that as the Drop Preference value
+increases, so the probability of being dropped increases!
+</div>
+
+<br>
+
+<div class="smalltext">
+The following table illustrates the DSCP values:
+</div>
+
+<br>
+
+<center>
+<table class="tabletext" border="1" cellpadding="5" cellspacing="0">
+    <tbody><tr bgcolor="#d0d0d0">
+      <td height="42"><b>Per Hop Behaviour (PHB)</b></td>
+      <td height="42">&nbsp;</td>
+      <td height="42">&nbsp;</td>
+      <td height="42"><b>DiffServ Code Point (DSCP)</b></td>
+      <td height="42">&nbsp;</td>
+      <td height="42"><b>IP Precedence</b></td>
+    </tr>
+    <tr>
+      <td bgcolor="#ffdddd"><b>Default</b></td>
+      <td bgcolor="#ffdddd">&nbsp;</td>
+      <td bgcolor="#ffdddd">&nbsp;</td>
+      <td bgcolor="#ffdddd">&nbsp;</td>
+      <td bgcolor="#ffdddd">&nbsp;</td>
+      <td bgcolor="#ffdddd">0</td>
+    </tr>
+    <tr>
+      <td bgcolor="#ffdddd">&nbsp;</td>
+      <td bgcolor="#ffdddd">&nbsp;</td>
+      <td bgcolor="#ffdddd"><b>000</b>000</td>
+      <td bgcolor="#ffdddd">&nbsp;</td>
+      <td bgcolor="#ffdddd">&nbsp;</td>
+      <td bgcolor="#ffdddd">&nbsp;</td>
+    </tr>
+    <tr>
+      <td bgcolor="#ddffdd"><b>Assured Forwarding</b></td>
+      <td bgcolor="#ddffdd">&nbsp;</td>
+      <td bgcolor="#ddffdd"><b>Low Drop Probability</b></td>
+      <td bgcolor="#ddffdd"><b>Medium Drop Probability</b></td>
+      <td bgcolor="#ddffdd"><b>High Drop Probability</b></td>
+      <td bgcolor="#ddffdd">&nbsp;</td>
+    </tr>
+    <tr>
+      <td bgcolor="#ddffdd">&nbsp;</td>
+      <td bgcolor="#ddffdd">Class 1</td>
+      <td bgcolor="#ddffdd">AF11</td>
+      <td bgcolor="#ddffdd">AF12</td>
+      <td bgcolor="#ddffdd">AF13</td>
+      <td bgcolor="#ddffdd">1</td>
+    </tr>
+    <tr>
+      <td bgcolor="#ddffdd">&nbsp;</td>
+      <td bgcolor="#ddffdd">&nbsp;</td>
+      <td bgcolor="#ddffdd"><b>001</b>010</td>
+      <td bgcolor="#ddffdd"><b>001</b>100</td>
+      <td bgcolor="#ddffdd"><b>001</b>110</td>
+      <td bgcolor="#ddffdd">&nbsp;</td>
+    </tr>
+    <tr>
+      <td bgcolor="#ddffdd">&nbsp;</td>
+      <td bgcolor="#ddffdd">Class 2</td>
+      <td bgcolor="#ddffdd">AF21</td>
+      <td bgcolor="#ddffdd">AF22</td>
+      <td bgcolor="#ddffdd">AF23</td>
+      <td bgcolor="#ddffdd">2</td>
+    </tr>
+    <tr>
+      <td bgcolor="#ddffdd">&nbsp;</td>
+      <td bgcolor="#ddffdd">&nbsp;</td>
+      <td bgcolor="#ddffdd"><b>010</b>010</td>
+      <td bgcolor="#ddffdd"><b>010</b>100</td>
+      <td bgcolor="#ddffdd"><b>010</b>110</td>
+      <td bgcolor="#ddffdd">&nbsp;</td>
+    </tr>
+    <tr>
+      <td bgcolor="#ddffdd">&nbsp;</td>
+      <td bgcolor="#ddffdd">Class 3</td>
+      <td bgcolor="#ddffdd">AF31</td>
+      <td bgcolor="#ddffdd">AF32</td>
+      <td bgcolor="#ddffdd">AF33</td>
+      <td bgcolor="#ddffdd">3</td>
+    </tr>
+    <tr>
+      <td bgcolor="#ddffdd">&nbsp;</td>
+      <td bgcolor="#ddffdd">&nbsp;</td>
+      <td bgcolor="#ddffdd"><b>011</b>010</td>
+      <td bgcolor="#ddffdd"><b>011</b>100</td>
+      <td bgcolor="#ddffdd"><b>011</b>110</td>
+      <td bgcolor="#ddffdd">&nbsp;</td>
+    </tr>
+    <tr>
+      <td bgcolor="#ddffdd">&nbsp;</td>
+      <td bgcolor="#ddffdd">Class 4</td>
+      <td bgcolor="#ddffdd">AF41</td>
+      <td bgcolor="#ddffdd">AF42</td>
+      <td bgcolor="#ddffdd">AF43</td>
+      <td bgcolor="#ddffdd">4</td>
+    </tr>
+    <tr>
+      <td bgcolor="#ddffdd">&nbsp;</td>
+      <td bgcolor="#ddffdd">&nbsp;</td>
+      <td bgcolor="#ddffdd"><b>100</b>010</td>
+      <td bgcolor="#ddffdd"><b>100</b>100</td>
+      <td bgcolor="#ddffdd"><b>100</b>110</td>
+      <td bgcolor="#ddffdd">&nbsp;</td>
+    </tr>
+    <tr>
+      <td bgcolor="#ddddff"><b>Expedited Forwarding</b></td>
+      <td bgcolor="#ddddff">&nbsp;</td>
+      <td bgcolor="#ddddff">EF</td>
+      <td bgcolor="#ddddff">&nbsp;</td>
+      <td bgcolor="#ddddff">&nbsp;</td>
+      <td bgcolor="#ddddff">5</td>
+    </tr>
+    <tr>
+      <td bgcolor="#ddddff">&nbsp;</td>
+      <td bgcolor="#ddddff">&nbsp;</td>
+      <td bgcolor="#ddddff"><b>101</b>110</td>
+      <td bgcolor="#ddddff">&nbsp;</td>
+      <td bgcolor="#ddddff">&nbsp;</td>
+      <td bgcolor="#ddddff">&nbsp;</td>
+    </tr>
+</tbody></table>
+</center>
+
+<br>
+
+<div class="smalltext">
+The values in decimal are given in the following table:
+</div>
+
+<center>
+<table class="tabletext" border="1" cellpadding="5" cellspacing="0">
+    <tbody><tr>
+      <td><b>DSCP</b></td>
+      <td><b>Binary</b></td>
+      <td><b>Decimal</b></td>
+    </tr>
+    <tr>
+      <td>Default</td>
+      <td>000000</td>
+      <td>0</td>
+    </tr>
+    <tr bgcolor="#d0d0d0">
+      <td>CS1</td>
+      <td>001000</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>AF11</td>
+      <td>001010</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <td>AF12</td>
+      <td>001100</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <td>AF13</td>
+      <td>001110</td>
+      <td>14</td>
+    </tr>
+    <tr bgcolor="#d0d0d0">
+      <td>CS2</td>
+      <td>010000</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <td>AF21</td>
+      <td>010010</td>
+      <td>18</td>
+    </tr>
+    <tr>
+      <td>AF22</td>
+      <td>010100</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <td>AF23</td>
+      <td>010110</td>
+      <td>22</td>
+    </tr>
+    <tr bgcolor="#d0d0d0">
+      <td>CS3</td>
+      <td>011000</td>
+      <td>24</td>
+    </tr>
+    <tr>
+      <td>AF31</td>
+      <td>011010</td>
+      <td>26</td>
+    </tr>
+    <tr>
+      <td>AF32</td>
+      <td>011100</td>
+      <td>28</td>
+    </tr>
+    <tr>
+      <td>AF33</td>
+      <td>011110</td>
+      <td>30</td>
+    </tr>
+    <tr bgcolor="#d0d0d0">
+      <td>CS4</td>
+      <td>100000</td>
+      <td>32</td>
+    </tr>
+    <tr>
+      <td>AF41</td>
+      <td>100010</td>
+      <td>34</td>
+    </tr>
+    <tr>
+      <td>AF42</td>
+      <td>100100</td>
+      <td>36</td>
+    </tr>
+    <tr>
+      <td>AF43</td>
+      <td>100110</td>
+      <td>38</td>
+    </tr>
+    <tr bgcolor="#d0d0d0">
+      <td>CS5</td>
+      <td>101000</td>
+      <td>40</td>
+    </tr>
+    <tr>
+      <td>EF</td>
+      <td>101110</td>
+      <td>46</td>
+    </tr>
+    <tr bgcolor="#d0d0d0">
+      <td>CS6</td>
+      <td>110000</td>
+      <td>48</td>
+    </tr>
+    <tr bgcolor="#d0d0d0">
+      <td>CS7</td>
+      <td>111000</td>
+      <td>56</td>
+    </tr>
+</tbody></table>
+</center>
+
+<br>
+
+<div class="smalltext">
+We can observe the construction of the DSCP values by taking the example for 
+the Per Hop Behaviour AF32.  AF32 is derived from the binary
+<span class="redfont">011</span><span class="bluefont">10</span><span class="greenfont">0</span>.
+The red section is where the <span class="redfont">3</span> comes from in
+AF<span class="redfont">3</span>2 and is the <b>Behaviour Aggregate</b>.  The blue section is where the
+<span class="bluefont">2</span> comes from in AF3<span class="bluefont">2</span> and is the <b>Drop
+Probability</b>.  The final green section with the <span class="greenfont">0</span> is ignored.
+</div>
+
+<br>
+
+<div class="smalltext">
+The decimal IP Precedence value is derived from the red portion and is also called the
+<b>Class Selector (CS)</b>.  Often the DSCPs are configured in decimal.  The decimal value
+is derived from all 6 bits of the DiffServ field as you will see from the table. 
+</div>
+
+<br>
+
+<div class="smalltext">
+Notice how the three Most Significant Bits (MSB) determine the Class and map directly to the IP Precedence bits.
+The <b>Class Selector Code Points</b> all have the form <b>xxx000</b>.
+The three LSBs determine the Drop Probabilities and are ignored by IP Precedence-only devices.  Also notice that
+the LSB is always '0'.
+</div>
+
+<br>
+
+<div class="smalltext">
+Packets from different sources can have the same DSCP value and so can be grouped together as a Behaviour Aggregate and treated
+in the same manner.  A packet with a DSCP not mapped to one of the above PHB i.e. different from the recommendations, will have its DSCP
+mapped to the Default PHB of 000000.  Be aware that the table is recommending the values and different manufacturers could
+use different ones.
+</div> 
+
+<br>
+
+<div class="smalltext">
+Expedited Forwarding within DiffServ is as close as you can get to IntServ as it provides low-loss, low-latency, low-jitter
+and guaranteed bandwidth.
+</div>
+
+<br>
+
+<div class="smalltext">
+Assured Forwarding is described in <a href="http://www.ietf.org/rfc/rfc2597.txt" target="_blank">RFC 2597</a> and Expedited Forwarding is described in
+<a href="http://www.ietf.org/rfc/rfc2598.txt" target="_blank">RFC 2598</a>.
+</div>
+
+<br>
+
+<div class="smalltext">
+To manage the policies you need to use a <b>Common Open Policy Service (COPS)</b>.
+</div>
+
+<br>
+
+<h3 class="heading3">2.3 Integrated Services (IntServ)</h3>
+
+<br>
+
+<div class="smalltext">
+<b>Integrated Services (IntServ)</b> is for the internal network which is more easy to control.
+IntServ can deal with many QoS requirements at one time, the difference with IntServ wrt DiffServ, is that it specifies its
+traffic requirements and the network sets up the requirements if they are possible, before traffic is sent.
+If the network is unable to set up the transmission path then the call does not happen, so there is a form of
+<b>Call Admission Control (CAC)</b> (see later).
+</div>
+
+<br>
+
+<div class="smalltext">
+<a href="http://www.ietf.org/rfc/rfc1633.txt" target="_blank">RFC 1633</a> describes IntServ.
+</div>
+
+<br>
+
+<div class="smalltext">
+<b>Resource Reservation Protocol (RSVP)</b> fits in with the IntServ model and
+is a signalling protocol that allows applications to request bandwidth and QoS
+characteristics and provides a mechanism to tell if the network can meet the demands.  
+This mechanism uses a sort of 'scout' that checks out the network ahead of data transmission.
+Delay and Bandwidth can be reserved and flows can be signalled by the end station or the router.
+</div>
+
+<br>
+
+<div class="smalltext">
+If a host makes a reservation for a data stream then each network device through the network attempts to make
+a reservation to the next hop, this is called the Reservation Path.  A successful reservation is made if
+the user has the permission and if there are enough resources to provide the QoS.  Once the destination is reached
+the same is done for the return data stream so that there is a QoS path back.
+With traditional RSVP, if just one network node says 'no' to a reservation, then no path is set up at all.
+As well as accepting a reservation, RSVP also uses a 'Traffic Classifier' that uses DiffServ to instruct the
+routers how to mark and treat each flow.
+</div>
+
+<br>
+
+<div class="smalltext">
+Once the data stream has completed, a PATHTEAR and RESVTEAR is triggered to terminate the call and release resources
+back to the mainstream traffic.  The queues are structured such that The IntServ queue (RSVP) has the highest priority,
+over and above the highest priority DiffServ queues.  Applications can use RSVP in combination with <b>Weighted Fair
+Queuing (WFQ)</b> to provide <b>Guaranteed-Rate Service</b> so that a VoIP call can for instance reserve bandwidth.
+In addition, applications can use RSVP in conjunction with a technology such as <b>Weighted Random
+Early Detection (WRED)</b> to provide a <b>Controlled-Load Service</b> which provides low delay for video
+playback for instance, even if there is congestion.
+</div>
+
+<br>
+
+<div class="smalltext">
+It is now possible to synchronise RSVP call setup with the H.323 call setup between the <b>Originating Gateway (OGW)</b> and the
+<b>Terminating Gateway (TGW)</b>.  The H.323 setup is suspended just before the destination phone rings.  During
+this period the RSVP reservation is carried out in both directions between the OGW and the TGW because voice calls are 
+two-way and require bandwidth in both directions.  Then H.323 kicks in again with either an H.225 Alerting/Connect
+message (which causes the destination phone to ring) or an H.225 Reject/Release.
+</div>
+
+<br>
+
+<div class="smalltext">
+802.1p, ToS and RSVP can be set per packet, or per port in a switch.
+</div>
+
+<br>
+
+<div class="smalltext">
+<a href="http://www.ietf.org/rfc/rfc2205.txt" target="_blank">RFC 2205</a> describes RSVP.  In addition, Cisco have a proprietary
+version of RSVP called <b>Proxy-RSVP</b> where a best-effort RSVP path can be set up using routers that do not
+understand RSVP and would ordinarily cause the path to fail.
+</div>
+
+<br>
+
+<h2 class="heading2">3. Congestion Management</h2>
+
+<br>
+
+<h3 class="heading3">3.1 Queuing</h3>
+
+<br>
+
+<div class="smalltext">
+When congestion occurs there needs to be way of sorting the traffic out.  Packets that have been marked can be identified
+and placed in queues.  The queues can vary in how much and when they can load up the link with the packets contained
+within their queue.  The shorter the queue length; the lower the latency.  Even the fastest of
+links on the fastest of layer 2 switches can suffer from congestion if the data packets
+are large.  The simplest method of queuing is <b>Round Robin (RR)</b> where each queue is serviced
+one packet from each at a time.  Using IP precedence, higher priority traffic can be given
+a low weight thereby allowing it access to greater bandwidth.  This is called <b>Weighted Round
+Robin (WRR)</b>.  Adding a <b>Priority Queue (PQ)</b> allows you to always serve delay sensitive
+traffic first.  If the priority queue is empty then RR or WRR operates as normal.
+</div>
+
+<br>
+
+<div class="smalltext">
+Companies such as Cisco have their own methods of dealing with congestion, here we will look
+at how Cisco have developed their queuing mechanisms.
+</div>
+
+<br>
+
+<h3 class="heading3">3.2 First-in, First-out (FIFO)</h3>
+
+<br>
+
+<div class="smalltext">
+Whatever the size, the first packet to enter an interface is the first to leave that interface.  No queues are involved.
+This is often the default mechanism for receiving and sending packets on an interface.
+</div>
+
+<br>
+
+<h3 class="heading3">3.3 Weighted Fair Queuing (WFQ)</h3>
+
+<br>
+
+<div class="smalltext">
+WFQ allocates bandwidth according to IP Precedence using weightings and the number of WFQ queues depend on the number of flows.
+Routing protocols and LMI traffic bypass the WFQ mechanism.
+WFQ respects the top priority queues used for RSVP.  Any queuing mechanism based on WFQ will preserve
+'Reserved Queues' traditionally for RTP Reserve and now RSVP.  If RSVP is configured, then RSVP will use this reserved queue.
+Reserved queue traffic is given a low weight of <b>4</b> which
+means 'High priority'.  RSVP is initially given a weight of 128 whilst the reservation is set up, then the RSVP traffic is
+given a weight of 4.
+</div>
+
+<br>
+
+<div class="smalltext">
+IP traffic is classified based on source IP address and port, destination IP address and port and IP Precedence.
+Frame Relay traffic uses the DLCI to classify traffic, IPX uses MAC addresses and socket numbers.
+WFQ tries to interleave smaller packets between the larger packets.  The decision as to which packet in the queue
+is allowed to go through is based on the first packet to finish entering the queue which therefore favours the
+shorter packets, so low bandwidth traffic takes priority over high bandwidth traffic.
+</div>
+
+<br>
+
+<div class="smalltext">
+Once the priority queues have been serviced the other IP traffic is wieghted and queued accordingly.  The weighting factor is
+dependent on the IP Precedence.  The way this is calculated is as follows:
+</div>
+
+<ul>
+<li>Say you have three flows with IP precedences of P<sub>1</sub>, P<sub>2</sub> and P<sub>3</sub>.</li>
+<li>Add up (P<sub>1</sub> + 1), (P<sub>2</sub> + 1) and (P<sub>3</sub> + 1).</li>
+<li>Each flow will get a proportion of the link bandwidth e.g. the flow with P<sub>1</sub> will get the proportion
+(P<sub>1</sub> + 1) / ((P<sub>1</sub> + 1) + (P<sub>2</sub> + 1) + (P<sub>3</sub> + 1)).</li>
+</ul>
+
+<div class="smalltext">
+As an example, if the three flows had IP Precedences of 1, 3 and 5 then the flow with IP Precedence of 1 will get the 
+proportion 2/12 whereas the flow with IP Precedence of 5 will get the proportion 6/12, which is half the bandwidth being
+significantly more than 1/6 of the bandwidth.
+</div>
+
+<br>
+
+<div class="smalltext">
+The problem with WFQ is that as the number of flows increases the higher priority flows have a less significant impact
+as all the flows get served.  For instance, if there are 18 flows with IP Precedence of 1 and one each of IP Precedence
+2, 3, 4, 5, 6 and 7, then the flow with IP Precedence 5 will get 6/70 of the link and 18 flows will each get 2/70 of the link.
+There is now very little difference between the critical traffic and the lower priority traffic.
+</div> 
+
+<br>
+
+<div class="smalltext">
+WFQ across a number of interfaces is called Distributed Weighted Fair Queuing (DWFQ).
+</div>
+
+<br>
+
+<h3 class="heading3">3.4 Priority Queuing (PQ)</h3>
+
+<br>
+
+<div class="smalltext">
+This utilises <b>4</b> queues; <b>High</b>, <b>Medium</b>, <b>Normal</b> and <b>Low</b>.  Which queue a packet goes into is determined
+by whatever classification that packet belongs to.  Unclassified traffic is placed into the Normal queue.  The higher queues have to be
+emptied before the lower ones.  Potentially this could lead to lower queues being starved of time to empty, this is called <b>Protocol
+Starvation</b>.  High priority traffic would be time critical
+traffic such as DEC LAT or SNA and the packets in this queue would be forwarded before the packets in the other
+queues.  Low priority traffic may not get forwarded at all.  If a queue becomes longer than the specified limit, then subsequent
+packets trying to enter that queue are dropped indiscriminently (Tail Drop).
+Priority queuing is a method whereby the engineer
+can decide which packets are more likely to be thrown away rather than the router making indescriminant decisions.
+</div>
+
+<br>
+
+<div class="smalltext">
+The top priority queue used for RSVP is not respected by PQ.
+</div>
+
+<br>
+
+<h3 class="heading3">3.5 Custom Queuing</h3>
+
+<br>
+
+<div class="smalltext">
+Custom Queuing provides the facility for up to 16 queues with varying priorities.
+This method is used for assigning queue space per protocol.  Queue 0 is reserved for router to router communication
+whilst queues 1 to 16 are for the user.  The router deals with each queue in a Weighted Round Robin fashion allowing the
+configured amount of traffic from each so that no one queue monopolises the bandwidth.  Each queue has a default
+length of 1518 bytes.  You need to characterise the average packet sizes for each protocol and then specify the byte count
+and queue length for each queue.  If a particular queue is empty, then the extra space is dynamically shared out
+amongst the other queues.
+</div>
+
+<br>
+
+<div class="smalltext">
+The top priority queue used for RSVP is not respected by CQ.
+</div>
+
+<br>
+
+<h3 class="heading3">3.6 Class-Based Weighted Fair Queuing (CBWFQ)</h3>
+
+<br>
+
+<div class="smalltext">
+With CBWFQ you can manually define up to 64 traffic classes (including one which is the default class queue)
+that determine the exact bandwidth that is allocated to certain traffic types.  With WFQ, a large number
+of dynamic queues can still cause latency for high-priority traffic.  With CBWFQ each class is queued and dealt with
+exhaustively so you can manually ensure that certain traffic such as voice will not suffer latency.
+Classifying packets that need to be queued using WFQ does not guarantee that all packets will be serviced.
+</div>
+
+<br>
+
+<div class="smalltext">
+The class is defined using criteria to match the traffic.  These criteria could be access control lists, protocols and interfaces.
+You then add characteristics to this class of traffic by assigning bandwidth the maximum number of packets (queue limit) and a drop policy.
+The weight is derived from the bandwidth that you specify and is used by the WFQ mechanism as described above
+to provide guaranteed delivery.  Unclassified
+traffic is assumed to be in the Default Class and is acted on by WFQ and is best-effort treated.  Non-IP traffic is assigned to flow 0.
+If the number of packets from a matched flow exceed the queue limit, then by default tail drop occurs whereby the last packets get dropped.
+for the drop policy, you can instead implement <b>Weighted Random Early Detect</b> for a particular class (WRED can also be
+applied to an interface) so that certain more critical packets (higher precedence) are allowed into the queue and less criticial
+packets dropped.  Unused bandwidth for one class is shared amongst the other classes.  The recommended maximum bandwidth set aside
+within the defined classes is 75%.  This leaves room for routing protocols and layer 2 keepalives etc.
+</div>
+
+<br>
+
+<h3 class="heading3">3.7 IP RTP Priority</h3>
+
+<br>
+
+<div class="smalltext">
+This has been known as PQ/WFQ, however the PQ is strictly IP RTP priority and no other protocols, so it is not PQ as
+we have so far understood it so this method is only available for IP RTP traffic.
+IP Real Time Protocol runs over UDP and gets serviced exhaustively first once the ports have been recognised.
+The other queues are serviced by WFQ.  With IP RTP Priority
+you get the benefit of still maintaining the top priority queue.  The UDP port range (<b>16384 - 32767</b>) used by RTP traffic
+uses this top priority queue.  IP RTP Priority can also use CBWFQ as well as just WFQ which gives PQ/CBWFQ, however the PQ is strictly
+for RTP traffic only.
+</div>
+
+<br>
+
+<div class="smalltext">
+The port range 16384 to 32767 is a recommendation.  You could use other UDP ports if you wish, video traffic often does.
+</div>
+
+
+<h3 class="heading3">3.8 Frame Relay IP RTP Priority</h3>
+
+<div class="smalltext">
+This scheme uses a Frame Relay PVC to provide a strict priority queuing scheme for RTP traffic.
+</div>
+
+<br>
+
+<h3 class="heading3">3.9 Low Latency Queuing (LLQ)</h3>
+
+<br>
+
+<div class="smalltext">
+LLQ is also known as PQ/CBWFQ.  Unlike IP RTP Priority, the single Priority Queue within
+LLQ can deal with TCP exchanges as well and is therefore the preferred choice
+to use when queuing all types of traffic.  If you configure IP RTP Priority as well as LLQ, then IP RTP Priority will take precedence.
+You would then need to be careful not to put jitter sensitive traffic through both priority queues.
+</div>
+
+<br>
+
+<h2 class="heading2">4. Congestion Avoidance</h2>
+
+<br>
+
+<h3 class="heading3">4.1 Global Synchronisation</h3>
+
+<br>
+
+<div class="smalltext">
+When an interface becomes busy, queues fill up and you are more likely to suffer <b>Tail Drop</b> where packets, however
+they are marked, are dropped indiscriminently.  If there are multiple TCP flows through a congested link, then
+chances are that many flows will be dropped at the same time.  The TCP slow-start mechanism will
+then kick in at the same time for all the flows that were interrupted.  This leads to <b>Global
+Synchronisation</b> where there are waves of congestion followed by waves of under utilisation
+of the link which is not an efficient use of the link.
+</div>
+
+<br>
+
+<h3 class="heading3">4.2 Random Early Detection (RED)</h3>
+
+<br>
+
+<div class="smalltext">
+Rather than have flows dropped simultaneously a technique called Random Early Detection was developed.
+This uses the concept of queue depth which is the amount that you fill a particular queue.
+When the average queue depth reaches a <b>Minimum Threshold</b>, packets start to be dropped at a rate that is
+determined by the <b>Mark Probability Denominator</b>.  If the Mark Probability Denominator is 512, then
+if the average queue depth reaches the Minimum Threshold, 1 packet in every 512 is dropped.  As the queue
+grows even larger, then the probability increases and consequently a larger percentage of the packets are dropped
+until you reach the <b>Maximum Threshold</b> which is effectively the end of the queue where ALL
+packets are dropped.
+</div>
+
+<br>
+
+<div class="smalltext">
+The drops do not occur all at once and a session that was hit once, will not be hit again
+until it starts responding.  This thereby minimises global synchronisation
+and makes more efficient use the the link bandwidth during congestion.  An issue with RED
+is that TCP sessions become slower and as TCP traffic drops off, the queues begin to fill
+proportionally more with UDP traffic which means that there is an increased risk of UDP traffic
+being dropped.  UDP does not respond well to drops, particularly voice and video traffic!
+</div>
+
+<br>
+
+<h3 class="heading3">4.3 Weighted Random Early Detection (WRED)</h3>
+
+<br>
+
+<div class="smalltext">
+WRED is Cisco's implementation of RED and adds the use of DSCP/IP Precedence to
+enable you to weed out low-priority packets from the queue and to drop them
+by giving these packets a higher drop probability.  When using the DSCP, WRED uses the Drop
+Preference portion of the PHB to determine the Drop Probability.  This thereby
+minimising the chances of tail-dropping high-priority packets.  Using WRED does not preclude the
+chances of dropping voice packets (Class of Service/IP Precedence of <b>5</b>)
+and therefore is not a recommended technology to use within a voice network.
+</div>
+
+<br>
+
+<div class="smalltext">
+Non-IP packets are treated as if they had an IP Precedence of 0, so making these packets the most likely
+to be dropped.
+</div>
+
+<br>
+
+<div class="smalltext">
+WRED does not like non-adaptive flows such as UDP because UDP does not mind if it gets dropped whereas TCP has its own
+built in mechanisms to throttle back.
+</div>
+
+<br>
+
+<h3 class="heading3">4.4 Flow-Based Weighted Random Early Detection (FRED)</h3>
+
+<br>
+
+<div class="smalltext">
+A flow is made up of a 5-tuple of source address and port, destination address and port, and IP Precedence.
+FRED can track flows and penalise those flows that take up more than their fair share of the buffer
+space.  FRED does this by looking at each flow in turn and observing how each one uses the queues.
+FRED then allows some bursting space by scaling up the number of packets allowed for each flow
+in the queues and then waits to see if any flows exceed this number.  If a particular flow does exceed
+the number of packets allowed, FRED increases the probability of packets from that flow being dropped.
+</div>
+
+<br>
+
+<h2 class="heading2">5. Link Efficiency</h2>
+
+<br>
+
+<div class="smalltext">
+Smaller data packets used for applications such as voice and telnet are susceptible to jitter (delay
+variation)
+when large data packets are traversing the same interfaces.  <b>Link Fragmentation and Interleaving
+(LFI)</b> at layer 2
+is a mechanism whereby large packets are fragmented and the smaller data packets interleaved with the
+fragments.  You need to be able to control the serialisation delay of the data fragments so that there
+is a maximum time the delay-sensitive packets have to wait if they are caught in a queue behind a
+data fragment.
+</div>
+
+<br>
+
+<div class="smalltext">
+<b>Serialisation Delay</b> is the time it takes for an interface to push bits out on to the circuit.  
+Only one packet can be dealt with at a time (the nature of serial transmission).  If the circuit speed
+is high e.g. 768 Kbps, then a 1500 byte data frame would take 1500 x 8/768000 = 16ms to be pushed on to the circuit.
+The same size frame on a 56 Kbps modem link would take 1500 x 8/56000 = 214ms.  The maximum acceptable end-to-end delay for delay
+sensitive traffic such as voice is generally considered to be 150ms (G.114 standard) and the Serialisation delay is only one of the factors
+involved in the end-to-end delay.  On a slow link such as 56 Kbps a small packet such as 128 bytes would only take
+128 x 8/56000 = 18ms, however a large packet that is before it will hold up the smaller packet.
+This shows how damaging large packet sizes are on slow links due to the delay and jitter they incurr
+for small packets trying to get through.  Aim for a serialisation delay of not more than 10ms (20ms max).
+You do this by decreasing the packet size and/or increasing the link speed.  The following table
+is a useful guide of fragment size recommendation compared with link speed assuming a 10ms blocking
+delay.
+</div>
+
+<br>
+
+<center>
+<table class="tabletext" border="1" cellpadding="5" cellspacing="0">
+    <tbody><tr>
+      <td><b>Link Speed (kbps)</b></td>
+      <td><b>Fragment Size (bytes)</b></td>
+    </tr>
+    <tr>
+      <td>56</td>
+      <td>70</td>
+    </tr>
+    <tr>
+      <td>64</td>
+      <td>80</td>
+    </tr>
+    <tr>
+      <td>128</td>
+      <td>160</td>
+    </tr>
+    <tr>
+      <td>256</td>
+      <td>320</td>
+    </tr>
+    <tr>
+      <td>512</td>
+      <td>640</td>
+    </tr>
+    <tr>
+      <td>768</td>
+      <td>1000</td>
+    </tr>
+    <tr>
+      <td>1536</td>
+      <td>n/a</td>
+    </tr>
+</tbody></table>
+</center>
+
+<br>
+
+<div class="smalltext">
+<b>Multilink PPP (MLP) Interleaving</b> can be used to give jitter sensitive traffic priority.
+See the section on <a href="http://www.rhyshaden.com/ppp.htm#mlp">MLP Interleaving</a>.
+</div>
+
+<br>
+
+<div class="smalltext">
+<b>FRF.12</b> (for VoIP) and <b>FRF.11 Annex C</b> (for VoFR) can be used to give jitter sensitive traffic priority.
+See the section on <a href="http://www.rhyshaden.com/frame.htm#framefrag">Frame Relay Fragmentation</a>.
+</div>
+
+<br>
+
+<div class="smalltext">
+In a Voice over IP environment
+Real-Time Transport Protocol is an Internet standard (<a href="http://www.ietf.org/rfc/rfc1889.txt" target="_blank">RFC 1889</a>)
+used to transport real-time data.  Whereas TCP is used for signalling protocols such as H.323,
+RTP uses UDP for transport because if packets get lost, there is no point in re-sending the data.
+The RTP header is 12 bytes in length and follows the 8-byte UDP header and the 20-byte IP header.
+</div>
+
+<br>
+
+<div class="smalltext">
+When using RTP, a technique called <b>Compressed RTP (cRTP)</b> can be utilised whereby the IP header, UDP header and the RTP header can be
+compressed from the usual 40 bytes down to between 2-4 bytes.  This is suitable for point-to-point links, preferably
+using hardware for the compression.
+</div>
+
+<br>
+
+<div class="smalltext">
+If speech is sampled every 20ms then you end up with a VoIP payload of 20 bytes.  Comparing this to the 40-byte (12 + 8 + 20)
+VoIP header you can see that the header is twice the size of the payload.  Using cRTP compresses this 40-byte
+header to between 2 and 5 bytes.  This is useful for small payload voice protocols such as G.729 where
+a typical voice call without cRTP would be 26.4Kbps whereas with cRTP this reduces to 11.2Kbps.
+cRTP is used on an link by link basis and is typically implemented
+in software rather than hardware so the CPU is loaded heavily when using cRTP.  This, together
+with the benefits being most apparent on slow links, means that cRTP ought only to be used with slow links i.e.
+less than 768Kbps.
+</div>
+
+<br>
+
+<h2 class="heading2">6. Traffic Policing</h2>
+
+<br>
+
+<div class="smalltext">
+Conditioning traffic that enters a network can be carried out by controlling bursty traffic and making sure that designated
+traffic flows get the correct bandwidth.  This can often mean 'chopping' off the excess flows, or changing the Precedence
+of the packets that exceed the bandwidth.  Policing <b>ingress</b> traffic causes TCP resends.
+</div>
+
+<br>
+
+<div class="smalltext">
+The concept of <b>Token Bucket</b> or <b>Leaky Bucket</b> is used when looking at Traffic Policing or Traffic Shaping.
+Taking concepts from Frame Relay <b>Mean Rate (CIR) = Burst Size (B<sub>c</sub>) / Time Interval (T<sub>c</sub>)</b>.
+Imagine a bucket which is being filled with tokens at a rate.  The bucket has a capacity
+<b>B<sub>c</sub></b> + <b>B<sub>e</sub></b> and each token has permission to send a fixed number of bits.
+When a packet arrives if it matches the class for that bucket then it is added to the queue
+and released from the queue according to the specified rate if there are enough tokens available in the
+bucket.  If the bucket fills to capacity then new tokens are discarded ('leaked' out)
+and cannot be retrieved for use
+by subsequent packets.  If there are not enough tokens in the bucket, then the system may wait
+for enough tokens before sending the packet (this is traffic shaping) or
+the packet may be discarded (traffic policing).
+</div>
+
+<br>
+
+<div class="smalltext">
+The token bucket methodology means that any bursts are limited to the bucket capacity and the
+transmission rate is governed by the rate at which tokens are added to the bucket.
+</div>
+
+<br>
+
+<h2 class="heading2">7. Traffic Shaping</h2>
+
+<br>
+
+<div class="smalltext">
+Traffic can also be conditioned by 'Shaping' it rather than use more brutal policing techniques.  Shaping the traffic 
+means that traffic is 'smoothed' out using queues to hold up packets just delaying them until there is a trough.
+The leaky bucket provides a buffer of tokens that can deal with controlled bursts.
+This is done on <b>egress</b> traffic rather than ingress.
+<b>Frame Relay Traffic Shaping (FRTS)</b> is a good example where the CIR is adhered to by holding back packets
+during a burst so as to let them go during the next quiet period, maybe even allowing occasional bursting provided that the average
+utilisation is adhered to over a specified period of time.  Cisco use the concept of <b>Generic Traffic Shaping</b> 
+when applying traffic shaping principles within a much broader context such as the IP environment.  The trouble with
+Traffic Shaping is that it introduces latency.
+</div>
+
+<br>
+
+<div class="smalltext">
+Shaping traffic is important if you have mismatched link speeds at each end e.g. a Frame Relay
+hub-spoke arrangement where you do not want to oversubscribe the hub site and risk packets being dropped
+in the cloud because you exceed the CIR at one end.
+</div>
+
+<br>
+
+<div class="smalltext">
+<b>Generic Traffic Shaping (GTS)</b> can be applied to any outbound interface and operates
+with SMDS, ATM, Frame Relay and Ethernet.  Outbound traffic can be shaped to meet the requirements
+of the receiving device(s), DSCPs can be set, BECNs listened to and access lists can be used to
+determine the traffic to shape.
+</div>
+
+
+<br>
+
+<div class="smalltext">
+<b>Frame Relay Traffic Shaping (FRTS)</b> is described in the section on <a href="http://www.rhyshaden.com/frame.htm#frts">FRTS</a>.
+</div>
+
+<br>
+
+<h2 class="heading2">8. Call Admission Control (CAC)</h2>
+
+<br>
+
+<h3 class="heading3">8.1 Overview</h3>
+
+<br>
+
+<div class="smalltext">
+Voice and Video traffic, or calls, can be restricted by way of CAC tools that determine whether or not there is sufficient bandwidth.
+One too many calls on a link would cause the quality of the other calls to suffer so the extra call is prohibited.  CAC's use
+is to prevent congestion from voice and video occurring in the first place, before Quality of Service tools are called into play.
+</div>
+
+<br>
+
+<div class="smalltext">
+CAC can be implemented in a number of ways:
+</div>
+
+<ul>
+<li>Locally - i.e. at the originating gateway, by limiting the DS0s (not for IPT), the maximum number of connections,
+bandwidth on Voice over Frame Relay, Trunk Conditioning and Local Voice Busyout (LVBO).</li>
+<li>Based on measurement - PSTN Fallback or Advanced Voice Busyout (AVBO)</li>
+<li>Based on available resources - Resource Availability Indicator (RAI), H.323 Gatekeeper zone bandwidth or RSVP.</li>
+</ul>
+
+<br>
+
+<h3 class="heading3">8.2 Local CAC</h3>
+
+<br>
+
+<div class="smalltext">
+Local CAC is not aware of the topology of the network and cannot guarantee QoS.  Benefits include no messaging overhead
+and no delay.
+</div>
+
+<br>
+
+<div class="smalltext">
+Limiting DS0s (timeslots) between the PBX and the originating gateway is a simple method that applies to toll bypass
+scenarios only.
+</div>
+
+<br>
+
+<div class="smalltext">
+In a Cisco IPT environment you can limit the number of concurrent VoIP connections on a per dial peer basis so that in total
+the trunk link will have a total limit.  If a particular dial peer has calls directed to <b>477...</b> then if you limited
+the number of simultaneous calls to 5, any further calls will be 'hairpinned' back to the PBX and the PSTN would be used for
+the excess call(s).
+</div>
+
+<br>
+
+<div class="smalltext">
+In VoFR networks FRF.11 is used to packetize voice.  At layer 2 it is therefore possible to distinguish between the 
+Frame Relay data header (FRF.3.1) and the Frame Relay Voice header (FRF.11) and so provide CAC disallowing calls that exceed
+the bandwidth allocated to voice calls.
+</div>
+
+<br>
+
+<div class="smalltext">
+On a VoFR, VoATM or VoIP point-to-point connection you can nail down voice connections, this is called <b>Connection Trunk</b>.
+If the trunk link uses <b>Channel Associated Signalling (CAS)</b> (a robbed bit technology common in the US), then you use
+the A, B, C and D bits as keepalives for each channel.  On detection of a channel failing or being busy, a <b>Busy</b>
+or <b>Out of Service (OOS)</b> signal can be sent back to the PBX in a form that the PBX understands.  This is called
+<b>Trunk Conditioning</b> and does not work with Common Channel Signalling (CCS).
+</div>
+
+<br>
+
+<div class="smalltext">
+<b>Local Voice Busyout (LVBO)</b> is used to monitor LAN and WAN ports for failure and then to busy out voice ports
+or the trunk to the PBX.  This is used for analogue or CAS trunks.
+</div>
+
+<br>
+
+<h3 class="heading3">8.3 Measurement-Based CAC</h3>
+
+<br>
+
+<div class="smalltext">
+Measurement-Based CAC is not topology-aware nor does it guarantee QoS.
+</div>
+
+<br>
+
+<div class="smalltext">
+Cisco have a proprietary Client-Server (Responder) protocol called the <b>Service Assurance Agent (SAA)</b> which gives an indication of
+network conditions by generating traffic and measuring response times, jitter, connect time, packet loss, availability and
+application performance.  These indicators frequently form the basis for Service Level Agreements.  Originally designed for SNA traffic
+it has been extended to simulate VoIP and Web traffic.  An RTP/UDP header is used for VoIP simulation and the SAA operates by the
+client sending a probe to a server that responds.
+</div>
+
+<br>
+
+<div class="smalltext">
+Two factors <b>Delay</b> and <b>Packet Loss</b> are used by the SAA to calculate the ITU G.113 <b>International Calculated
+Planning Impairment Factor (ICPIF)</b> for an application on a given network.  This value can be used to make CAC
+decisions.  The ITU use the following guideline values:
+</div>
+
+<ul>
+<li><b>5</b> - Very good</li>
+<li><b>10</b> - Good</li>
+<li><b>20</b> - Adequate</li>
+<li><b>30</b> - Limiting Case</li>
+<li><b>45</b> - Exceptional limiting case</li>
+<li><b>55</b> - Customers likely to react strongly</li>
+</ul>
+
+<div class="smalltext">
+<b>Advanced Busy Out (AVBO)</b> supports H.323, MGCP and SIP environments and can busy out voice ports or trunks based
+on ICPIF values.  The measurements are obviously IP-based.  AVBO only works with Analogue and CAS trunks.
+</div>
+
+<br>
+
+<div class="smalltext">
+<b>PSTN Fallback</b> also uses SAA and applies to individual call setups.  IP adresses are cached along with their ICPIF
+values so that SAA probes are only required on an initial call to a new IP address (therefore introducing
+a postdial delay just for the new entry).  PSTN Fallback is useful because it busies out individual calls rather
+than ports or the trunk, so it is not so brutal. You cannot use PSTN Fallback with RSVP.
+</div>
+
+<br>
+
+<h3 class="heading3">8.4 Resource-Based CAC</h3>
+
+<br>
+
+<div class="smalltext">
+Techniques such as <b>Resource Availability Indicator (RAI)</b> and <b>Gatekeeper Zone Bandwidth</b> examine the resources
+at the time of the call request and then make a single CAC decision at that time.  The resources examined will include
+available timeslots, Gateway CPU use, memory use, DSP use and bandwidth availability.
+</div>
+
+<br>
+
+<div class="smalltext">
+Techniques such as <b>Resource Reservation Protocol (RSVP)</b> just look at bandwidth availability and reserves bandwidth
+and guarantees QoS for the call duration.
+</div>
+
+<br>
+
+<div class="smalltext">
+RAI is used in H.323 networks with a Gatekeeper.  The Gateway informs the Gatekeeper when it is running low on resources.
+This is determined by configuring a low water mark and a high water mark.  The Gateway sends an RAI when the resources
+fall below the low water mark and when the resources rise above the high water mark.  The Gatekeeper then makes routing decisions
+based on these RAIs.
+</div>
+
+<br>
+
+<div class="smalltext">
+In an H.323 Gatekeeper environment, gatekeepers can be grouped into zones.  The gatekeeper in each zone can limit bandwidth
+usage within its own zone and also between its own zone and other zones.  In a single zone the gatekeeper limits the bandwidth
+allocation to the smallest link between the gateways within its zone, because the bandwidth limitation is configured per zone.
+This not very efficient as some links within the zone with larger bandwidths can carry more calls, and this also applies
+to where you have multiple zones with multiple gateways to each zone
+and the gatekeepers limit calls to the number that can be carried on the smallest links to each of the zone, even if there
+are larger links to each zone that could be used.  Using Gatekeeper CAC is the only method available in distributed H.323 zone environments. 
+</div>
+
+<br>
+
+<div class="smalltext">
+<a href="http://www.rhyshaden.com/index.htm">Home</a>
+</div>
+
+<p>
+    <a href="http://validator.w3.org/"><img src="./Quality of Service, diff serv code point, ip precedence_files/valid-html401" alt="Valid HTML 4.01 Transitional" height="31" width="88"></a>
+  </p>
+<!-- Auto Copyright Script  -->
+
+<script language="javascript" type="text/javascript">
+<!--
+today=new Date();
+y0=today.getFullYear();
+document.write('<span style="font: 8pt arial sans-serif">Copyright © 1996 - '+y0+', Rhys Haden.<\/span>');
+
+//--> 
+</script><span style="font: 8pt arial sans-serif">Copyright © 1996 - 2014, Rhys Haden.</span>
+
+
+<div class="footnote1">
+<a href="http://www.rhyshaden.com/disclaim.htm">Disclaimer</a>
+</div>
+		
+<!-- End of Content -->
+		
+		</td>
+		</tr>
+
+
+		</tbody></table>
+	</td>
+
+	<td>
+
+	<!-- Advert here -->
+	
+	<!-- Another set of links in a table as above -->
+	
+	<br>
+
+	<!-- Adverts -->
+
+
+	<!-- Another set of links in a table as above -->
+
+	</td>
+
+	</tr>
+	</tbody></table>
+
+
+	<!-- Footer starts here -->
+    <br>
+</td>
+
+<!-- Column 3 Starts -->
+
+<td valign="top" align="center" width="160" bgcolor="#EEEEEE">
+<img src="./Quality of Service, diff serv code point, ip precedence_files/line.gif" height="1" width="160" alt=""><br>
+
+	<table>
+	<tbody><tr>
+	<td>
+	<script type="text/javascript"><!--
+	google_ad_client = "pub-9819493931932596";
+	google_ad_width = 160;
+	google_ad_height = 600;
+	google_ad_format = "160x600_as";
+	google_ad_channel ="2843943775";
+	google_color_border = "EEEEEE";
+	google_color_bg = "EEEEEE";
+	google_color_link = "0000CC";
+	google_color_url = "008000";
+	google_color_text = "000000";
+	//--></script>
+	<script type="text/javascript" src="./Quality of Service, diff serv code point, ip precedence_files/show_ads.js">
+	</script><ins id="aswift_2_expand" style="display:inline-table;border:none;height:600px;margin:0;padding:0;position:relative;visibility:visible;width:160px;background-color:transparent"><ins id="aswift_2_anchor" style="display:block;border:none;height:600px;margin:0;padding:0;position:relative;visibility:visible;width:160px;background-color:transparent"><iframe width="160" height="600" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_2" name="aswift_2" style="left:0;position:absolute;top:0;"></iframe></ins></ins>
+	</td>
+	</tr>
+
+	<tr>
+	<td height="50">
+	</td>
+	</tr>
+	
+
+	</tbody></table>
+
+</td></tr></tbody></table>
+
+<!-- Content Table Ends -->
+
+<!-- Footer Table Start -->
+
+<table border="0" cellpadding="1" cellspacing="0" width="100%" bgcolor="#EEEEEE" align="left">
+<tbody><tr>
+<td align="center" valign="middle">
+
+<!-- 1st Row Start -->
+
+<a href="http://www.introdelta.com/" class="sidenav" title="IntroDelta" target="_blank">IntroDelta</a> 
+&nbsp;
+&nbsp;
+<a href="http://www.earnontheweb.com/" class="sidenav" title="Earn on the Web" target="_blank">Earn on the Web</a>
+&nbsp;
+&nbsp;
+
+
+<!-- 1st Row end -->
+
+<!-- 2nd Row Start -->
+
+<br>
+
+<!-- 2nd Row end -->
+
+<!-- 3rd Row Start -->
+                   
+<br>
+<br>
+
+</td>
+</tr>
+
+<tr>
+<td align="center">
+</td>
+</tr>
+
+<tr>
+<td align="center">
+<p>
+<small>All rights reserved. All trademarks, logos, and copyrights are
+property of their respective owners.
+</small>
+</p>
+</td>
+</tr>
+
+
+</tbody></table>
+
+<!-- Footer Table end -->
+
+<!-- menu script itself. you should not modify this file -->
+<script language="JavaScript" type="text/javascript" src="./Quality of Service, diff serv code point, ip precedence_files/menu.js"></script>
+<!-- items structure. menu hierarchy and links are stored there -->
+<script language="JavaScript" type="text/javascript" src="./Quality of Service, diff serv code point, ip precedence_files/menu_items.js"></script>
+<!-- files with geometry and styles structures -->
+<script language="JavaScript" type="text/javascript" src="./Quality of Service, diff serv code point, ip precedence_files/menu_tpl.js"></script>
+<script language="JavaScript" type="text/javascript">
+	<!--//
+
+	new menu (MENU_ITEMS, MENU_POS);
+	-->
+</script><a id="e0_0o" class="m0l0oout" href="http://www.rhyshaden.com/null" style="position: absolute; top: 147px; left: 150px; width: 120px; height: 29px; visibility: visible; z-index: 0;" onclick="return A_MENUS[0].onclick(0);" onmouseout="A_MENUS[0].onmouseout(0);" onmouseover="A_MENUS[0].onmouseover(0);" onmousedown="A_MENUS[0].onmousedown(0);"><div id="e0_0i" class="m0l0iout">Physical Layer</div></a>
+<a id="e0_1o" class="m0l1oout" href="http://www.rhyshaden.com/scs.htm" style="position: absolute; top: 177px; left: 150px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(1);" onmouseout="A_MENUS[0].onmouseout(1);" onmouseover="A_MENUS[0].onmouseover(1);" onmousedown="A_MENUS[0].onmousedown(1);"><div id="e0_1i" class="m0l1iout">Structured Cabling</div></a>
+<a id="e0_2o" class="m0l1oout" href="http://www.rhyshaden.com/cab_ibs.htm" style="position: absolute; top: 198px; left: 150px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(2);" onmouseout="A_MENUS[0].onmouseout(2);" onmouseover="A_MENUS[0].onmouseover(2);" onmousedown="A_MENUS[0].onmousedown(2);"><div id="e0_2i" class="m0l1iout">Intelligent Bldg Cabling</div></a>
+<a id="e0_3o" class="m0l1oout" href="http://www.rhyshaden.com/cabstand.htm" style="position: absolute; top: 219px; left: 150px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(3);" onmouseout="A_MENUS[0].onmouseout(3);" onmouseover="A_MENUS[0].onmouseover(3);" onmousedown="A_MENUS[0].onmousedown(3);"><div id="e0_3i" class="m0l1iout">Cabling Terminology</div></a>
+<a id="e0_4o" class="m0l1oout" href="http://www.rhyshaden.com/optical.htm" style="position: absolute; top: 240px; left: 150px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(4);" onmouseout="A_MENUS[0].onmouseout(4);" onmouseover="A_MENUS[0].onmouseover(4);" onmousedown="A_MENUS[0].onmousedown(4);"><div id="e0_4i" class="m0l1iout">Optical Budgets</div></a>
+<a id="e0_5o" class="m0l1oout" href="http://www.rhyshaden.com/pwrsep.htm" style="position: absolute; top: 261px; left: 150px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(5);" onmouseout="A_MENUS[0].onmouseout(5);" onmouseover="A_MENUS[0].onmouseover(5);" onmousedown="A_MENUS[0].onmousedown(5);"><div id="e0_5i" class="m0l1iout">Power Separation</div></a>
+<a id="e0_6o" class="m0l1oout" href="http://www.rhyshaden.com/encoding.htm" style="position: absolute; top: 282px; left: 150px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(6);" onmouseout="A_MENUS[0].onmouseout(6);" onmouseover="A_MENUS[0].onmouseover(6);" onmousedown="A_MENUS[0].onmousedown(6);"><div id="e0_6i" class="m0l1iout">Data Encoding</div></a>
+<a id="e0_7o" class="m0l1oout" href="http://www.rhyshaden.com/transm.htm" style="position: absolute; top: 303px; left: 150px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(7);" onmouseout="A_MENUS[0].onmouseout(7);" onmouseover="A_MENUS[0].onmouseover(7);" onmousedown="A_MENUS[0].onmousedown(7);"><div id="e0_7i" class="m0l1iout">Transmission</div></a>
+<a id="e0_8o" class="m0l1oout" href="http://www.rhyshaden.com/voice.htm" style="position: absolute; top: 324px; left: 150px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(8);" onmouseout="A_MENUS[0].onmouseout(8);" onmouseover="A_MENUS[0].onmouseover(8);" onmousedown="A_MENUS[0].onmousedown(8);"><div id="e0_8i" class="m0l1iout">Voice &amp; Telephony</div></a>
+<a id="e0_9o" class="m0l1oout" href="http://www.rhyshaden.com/modem.htm" style="position: absolute; top: 345px; left: 150px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(9);" onmouseout="A_MENUS[0].onmouseout(9);" onmouseover="A_MENUS[0].onmouseover(9);" onmousedown="A_MENUS[0].onmousedown(9);"><div id="e0_9i" class="m0l1iout">Modem Setup</div></a>
+<a id="e0_10o" class="m0l1oout" href="http://www.rhyshaden.com/pinouts.htm" style="position: absolute; top: 366px; left: 150px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(10);" onmouseout="A_MENUS[0].onmouseout(10);" onmouseover="A_MENUS[0].onmouseover(10);" onmousedown="A_MENUS[0].onmousedown(10);"><div id="e0_10i" class="m0l1iout">Console Pinouts</div></a>
+<a id="e0_11o" class="m0l0oout" href="http://www.rhyshaden.com/null" style="position: absolute; top: 147px; left: 269px; width: 120px; height: 29px; visibility: visible; z-index: 0;" onclick="return A_MENUS[0].onclick(11);" onmouseout="A_MENUS[0].onmouseout(11);" onmouseover="A_MENUS[0].onmouseover(11);" onmousedown="A_MENUS[0].onmousedown(11);"><div id="e0_11i" class="m0l0iout">Data Link Layer</div></a>
+<a id="e0_12o" class="m0l1oout" href="http://www.rhyshaden.com/null" style="position: absolute; top: 177px; left: 269px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(12);" onmouseout="A_MENUS[0].onmouseout(12);" onmouseover="A_MENUS[0].onmouseover(12);" onmousedown="A_MENUS[0].onmousedown(12);"><div id="e0_12i" class="m0l1iout">Ethernet</div></a>
+<a id="e0_13o" class="m0l2oout" href="http://www.rhyshaden.com/ethernet.htm" style="position: absolute; top: 182px; left: 299px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(13);" onmouseout="A_MENUS[0].onmouseout(13);" onmouseover="A_MENUS[0].onmouseover(13);" onmousedown="A_MENUS[0].onmousedown(13);"><div id="e0_13i" class="m0l1iout">Ethernet</div></a>
+<a id="e0_14o" class="m0l2oout" href="http://www.rhyshaden.com/eth_intr.htm" style="position: absolute; top: 203px; left: 299px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(14);" onmouseout="A_MENUS[0].onmouseout(14);" onmouseover="A_MENUS[0].onmouseover(14);" onmousedown="A_MENUS[0].onmousedown(14);"><div id="e0_14i" class="m0l1iout">Intro to Ethernet</div></a>
+<a id="e0_15o" class="m0l2oout" href="http://www.rhyshaden.com/eth_err.htm" style="position: absolute; top: 224px; left: 299px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(15);" onmouseout="A_MENUS[0].onmouseout(15);" onmouseover="A_MENUS[0].onmouseover(15);" onmousedown="A_MENUS[0].onmousedown(15);"><div id="e0_15i" class="m0l1iout">Ethernet Terminology</div></a>
+<a id="e0_16o" class="m0l2oout" href="http://www.rhyshaden.com/eth_brid.htm" style="position: absolute; top: 245px; left: 299px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(16);" onmouseout="A_MENUS[0].onmouseout(16);" onmouseover="A_MENUS[0].onmouseover(16);" onmousedown="A_MENUS[0].onmousedown(16);"><div id="e0_16i" class="m0l1iout">Ethernet Bridging</div></a>
+<a id="e0_17o" class="m0l2oout" href="http://www.rhyshaden.com/eth_swit.htm" style="position: absolute; top: 266px; left: 299px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(17);" onmouseout="A_MENUS[0].onmouseout(17);" onmouseover="A_MENUS[0].onmouseover(17);" onmousedown="A_MENUS[0].onmousedown(17);"><div id="e0_17i" class="m0l1iout">Ethernet Switching</div></a>
+<a id="e0_18o" class="m0l2oout" href="http://www.rhyshaden.com/eth_vlan.htm" style="position: absolute; top: 287px; left: 299px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(18);" onmouseout="A_MENUS[0].onmouseout(18);" onmouseover="A_MENUS[0].onmouseover(18);" onmousedown="A_MENUS[0].onmousedown(18);"><div id="e0_18i" class="m0l1iout">VLANs</div></a>
+<a id="e0_19o" class="m0l2oout" href="http://www.rhyshaden.com/eth_poe.htm" style="position: absolute; top: 308px; left: 299px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(19);" onmouseout="A_MENUS[0].onmouseout(19);" onmouseover="A_MENUS[0].onmouseover(19);" onmousedown="A_MENUS[0].onmousedown(19);"><div id="e0_19i" class="m0l1iout">Power over Ethernet</div></a>
+<a id="e0_20o" class="m0l1oout" href="http://www.rhyshaden.com/null" style="position: absolute; top: 198px; left: 269px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(20);" onmouseout="A_MENUS[0].onmouseout(20);" onmouseover="A_MENUS[0].onmouseover(20);" onmousedown="A_MENUS[0].onmousedown(20);"><div id="e0_20i" class="m0l1iout">Wireless</div></a>
+<a id="e0_21o" class="m0l2oout" href="http://www.rhyshaden.com/wireless.htm" style="position: absolute; top: 203px; left: 299px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(21);" onmouseout="A_MENUS[0].onmouseout(21);" onmouseover="A_MENUS[0].onmouseover(21);" onmousedown="A_MENUS[0].onmousedown(21);"><div id="e0_21i" class="m0l1iout">Wi-Fi</div></a>
+<a id="e0_22o" class="m0l2oout" href="http://www.rhyshaden.com/lwapp.htm" style="position: absolute; top: 224px; left: 299px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(22);" onmouseout="A_MENUS[0].onmouseout(22);" onmouseover="A_MENUS[0].onmouseover(22);" onmousedown="A_MENUS[0].onmousedown(22);"><div id="e0_22i" class="m0l1iout">LWAPP</div></a>
+<a id="e0_23o" class="m0l2oout" href="http://www.rhyshaden.com/wifisec.htm" style="position: absolute; top: 245px; left: 299px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(23);" onmouseout="A_MENUS[0].onmouseout(23);" onmouseover="A_MENUS[0].onmouseover(23);" onmousedown="A_MENUS[0].onmousedown(23);"><div id="e0_23i" class="m0l1iout">Wi-Fi Security</div></a>
+<a id="e0_24o" class="m0l2oout" href="http://www.rhyshaden.com/survey.htm" style="position: absolute; top: 266px; left: 299px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(24);" onmouseout="A_MENUS[0].onmouseout(24);" onmouseover="A_MENUS[0].onmouseover(24);" onmousedown="A_MENUS[0].onmousedown(24);"><div id="e0_24i" class="m0l1iout">Wi-Fi Survey</div></a>
+<a id="e0_25o" class="m0l1oout" href="http://www.rhyshaden.com/tokenr.htm" style="position: absolute; top: 219px; left: 269px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(25);" onmouseout="A_MENUS[0].onmouseout(25);" onmouseover="A_MENUS[0].onmouseover(25);" onmousedown="A_MENUS[0].onmousedown(25);"><div id="e0_25i" class="m0l1iout">Token Ring</div></a>
+<a id="e0_26o" class="m0l1oout" href="http://www.rhyshaden.com/fddi.htm" style="position: absolute; top: 240px; left: 269px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(26);" onmouseout="A_MENUS[0].onmouseout(26);" onmouseover="A_MENUS[0].onmouseover(26);" onmousedown="A_MENUS[0].onmousedown(26);"><div id="e0_26i" class="m0l1iout">FDDI</div></a>
+<a id="e0_27o" class="m0l1oout" href="http://www.rhyshaden.com/serial.htm" style="position: absolute; top: 261px; left: 269px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(27);" onmouseout="A_MENUS[0].onmouseout(27);" onmouseover="A_MENUS[0].onmouseover(27);" onmousedown="A_MENUS[0].onmousedown(27);"><div id="e0_27i" class="m0l1iout">Serial Comms</div></a>
+<a id="e0_28o" class="m0l1oout" href="http://www.rhyshaden.com/controls.htm" style="position: absolute; top: 282px; left: 269px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(28);" onmouseout="A_MENUS[0].onmouseout(28);" onmouseover="A_MENUS[0].onmouseover(28);" onmousedown="A_MENUS[0].onmousedown(28);"><div id="e0_28i" class="m0l1iout">Building Controls</div></a>
+<a id="e0_29o" class="m0l1oout" href="http://www.rhyshaden.com/x25.htm" style="position: absolute; top: 303px; left: 269px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(29);" onmouseout="A_MENUS[0].onmouseout(29);" onmouseover="A_MENUS[0].onmouseover(29);" onmousedown="A_MENUS[0].onmousedown(29);"><div id="e0_29i" class="m0l1iout">X.25</div></a>
+<a id="e0_30o" class="m0l1oout" href="http://www.rhyshaden.com/dsl.htm" style="position: absolute; top: 324px; left: 269px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(30);" onmouseout="A_MENUS[0].onmouseout(30);" onmouseover="A_MENUS[0].onmouseover(30);" onmousedown="A_MENUS[0].onmousedown(30);"><div id="e0_30i" class="m0l1iout">DSL</div></a>
+<a id="e0_31o" class="m0l1oout" href="http://www.rhyshaden.com/isdn.htm" style="position: absolute; top: 345px; left: 269px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(31);" onmouseout="A_MENUS[0].onmouseout(31);" onmouseover="A_MENUS[0].onmouseover(31);" onmousedown="A_MENUS[0].onmousedown(31);"><div id="e0_31i" class="m0l1iout">ISDN</div></a>
+<a id="e0_32o" class="m0l1oout" href="http://www.rhyshaden.com/ppp.htm" style="position: absolute; top: 366px; left: 269px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(32);" onmouseout="A_MENUS[0].onmouseout(32);" onmouseover="A_MENUS[0].onmouseover(32);" onmousedown="A_MENUS[0].onmousedown(32);"><div id="e0_32i" class="m0l1iout">PPP</div></a>
+<a id="e0_33o" class="m0l1oout" href="http://www.rhyshaden.com/frame.htm" style="position: absolute; top: 387px; left: 269px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(33);" onmouseout="A_MENUS[0].onmouseout(33);" onmouseover="A_MENUS[0].onmouseover(33);" onmousedown="A_MENUS[0].onmousedown(33);"><div id="e0_33i" class="m0l1iout">Frame Relay</div></a>
+<a id="e0_34o" class="m0l1oout" href="http://www.rhyshaden.com/atm.htm" style="position: absolute; top: 408px; left: 269px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(34);" onmouseout="A_MENUS[0].onmouseout(34);" onmouseover="A_MENUS[0].onmouseover(34);" onmousedown="A_MENUS[0].onmousedown(34);"><div id="e0_34i" class="m0l1iout">ATM</div></a>
+<a id="e0_35o" class="m0l1oout" href="http://www.rhyshaden.com/sdh.htm" style="position: absolute; top: 429px; left: 269px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(35);" onmouseout="A_MENUS[0].onmouseout(35);" onmouseover="A_MENUS[0].onmouseover(35);" onmousedown="A_MENUS[0].onmousedown(35);"><div id="e0_35i" class="m0l1iout">SDH</div></a>
+<a id="e0_36o" class="m0l1oout" href="http://www.rhyshaden.com/hdlc.htm" style="position: absolute; top: 450px; left: 269px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(36);" onmouseout="A_MENUS[0].onmouseout(36);" onmouseover="A_MENUS[0].onmouseover(36);" onmousedown="A_MENUS[0].onmousedown(36);"><div id="e0_36i" class="m0l1iout">LLC, HDLC, SDLC</div></a>
+<a id="e0_37o" class="m0l1oout" href="http://www.rhyshaden.com/smds.htm" style="position: absolute; top: 471px; left: 269px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(37);" onmouseout="A_MENUS[0].onmouseout(37);" onmouseover="A_MENUS[0].onmouseover(37);" onmousedown="A_MENUS[0].onmousedown(37);"><div id="e0_37i" class="m0l1iout">SMDS</div></a>
+<a id="e0_38o" class="m0l1oout" href="http://www.rhyshaden.com/ss7.htm" style="position: absolute; top: 492px; left: 269px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(38);" onmouseout="A_MENUS[0].onmouseout(38);" onmouseover="A_MENUS[0].onmouseover(38);" onmousedown="A_MENUS[0].onmousedown(38);"><div id="e0_38i" class="m0l1iout">SS7</div></a>
+<a id="e0_39o" class="m0l1oout" href="http://www.rhyshaden.com/cdp.htm" style="position: absolute; top: 513px; left: 269px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(39);" onmouseout="A_MENUS[0].onmouseout(39);" onmouseover="A_MENUS[0].onmouseover(39);" onmousedown="A_MENUS[0].onmousedown(39);"><div id="e0_39i" class="m0l1iout">CDP</div></a>
+<a id="e0_40o" class="m0l0oout" href="http://www.rhyshaden.com/null" style="position: absolute; top: 147px; left: 388px; width: 120px; height: 29px; visibility: visible; z-index: 0;" onclick="return A_MENUS[0].onclick(40);" onmouseout="A_MENUS[0].onmouseout(40);" onmouseover="A_MENUS[0].onmouseover(40);" onmousedown="A_MENUS[0].onmousedown(40);"><div id="e0_40i" class="m0l0iout">Network Layer</div></a>
+<a id="e0_41o" class="m0l1oout" href="http://www.rhyshaden.com/null" style="position: absolute; top: 177px; left: 388px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(41);" onmouseout="A_MENUS[0].onmouseout(41);" onmouseover="A_MENUS[0].onmouseover(41);" onmousedown="A_MENUS[0].onmousedown(41);"><div id="e0_41i" class="m0l1iout">IPv4</div></a>
+<a id="e0_42o" class="m0l2oout" href="http://www.rhyshaden.com/ipintro.htm" style="position: absolute; top: 182px; left: 418px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(42);" onmouseout="A_MENUS[0].onmouseout(42);" onmouseover="A_MENUS[0].onmouseover(42);" onmousedown="A_MENUS[0].onmousedown(42);"><div id="e0_42i" class="m0l1iout">IP Introduction</div></a>
+<a id="e0_43o" class="m0l2oout" href="http://www.rhyshaden.com/ipdgram.htm" style="position: absolute; top: 203px; left: 418px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(43);" onmouseout="A_MENUS[0].onmouseout(43);" onmouseover="A_MENUS[0].onmouseover(43);" onmousedown="A_MENUS[0].onmousedown(43);"><div id="e0_43i" class="m0l1iout">IP Datagram</div></a>
+<a id="e0_44o" class="m0l2oout" href="http://www.rhyshaden.com/ipadd.htm" style="position: absolute; top: 224px; left: 418px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(44);" onmouseout="A_MENUS[0].onmouseout(44);" onmouseover="A_MENUS[0].onmouseover(44);" onmousedown="A_MENUS[0].onmousedown(44);"><div id="e0_44i" class="m0l1iout">IP Addressing</div></a>
+<a id="e0_45o" class="m0l2oout" href="http://www.rhyshaden.com/cidr.htm" style="position: absolute; top: 245px; left: 418px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(45);" onmouseout="A_MENUS[0].onmouseout(45);" onmouseover="A_MENUS[0].onmouseover(45);" onmousedown="A_MENUS[0].onmousedown(45);"><div id="e0_45i" class="m0l1iout">CIDR</div></a>
+<a id="e0_46o" class="m0l2oout" href="http://www.rhyshaden.com/tcp.htm" style="position: absolute; top: 266px; left: 418px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(46);" onmouseout="A_MENUS[0].onmouseout(46);" onmouseover="A_MENUS[0].onmouseover(46);" onmousedown="A_MENUS[0].onmousedown(46);"><div id="e0_46i" class="m0l1iout">TCP</div></a>
+<a id="e0_47o" class="m0l2oout" href="http://www.rhyshaden.com/udp.htm" style="position: absolute; top: 287px; left: 418px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(47);" onmouseout="A_MENUS[0].onmouseout(47);" onmouseover="A_MENUS[0].onmouseover(47);" onmousedown="A_MENUS[0].onmousedown(47);"><div id="e0_47i" class="m0l1iout">UDP</div></a>
+<a id="e0_48o" class="m0l2oout" href="http://www.rhyshaden.com/arp.htm" style="position: absolute; top: 308px; left: 418px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(48);" onmouseout="A_MENUS[0].onmouseout(48);" onmouseover="A_MENUS[0].onmouseover(48);" onmousedown="A_MENUS[0].onmousedown(48);"><div id="e0_48i" class="m0l1iout">ARP/RARP</div></a>
+<a id="e0_49o" class="m0l2oout" href="http://www.rhyshaden.com/icmp.htm" style="position: absolute; top: 329px; left: 418px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(49);" onmouseout="A_MENUS[0].onmouseout(49);" onmouseover="A_MENUS[0].onmouseover(49);" onmousedown="A_MENUS[0].onmousedown(49);"><div id="e0_49i" class="m0l1iout">ICMP</div></a>
+<a id="e0_50o" class="m0l2oout" href="http://www.rhyshaden.com/dhcp.htm" style="position: absolute; top: 350px; left: 418px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(50);" onmouseout="A_MENUS[0].onmouseout(50);" onmouseover="A_MENUS[0].onmouseover(50);" onmousedown="A_MENUS[0].onmousedown(50);"><div id="e0_50i" class="m0l1iout">Bootp and DHCP</div></a>
+<a id="e0_51o" class="m0l2oout" href="http://www.rhyshaden.com/dns.htm" style="position: absolute; top: 371px; left: 418px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(51);" onmouseout="A_MENUS[0].onmouseout(51);" onmouseover="A_MENUS[0].onmouseover(51);" onmousedown="A_MENUS[0].onmousedown(51);"><div id="e0_51i" class="m0l1iout">DNS</div></a>
+<a id="e0_52o" class="m0l2oout" href="http://www.rhyshaden.com/wins.htm" style="position: absolute; top: 392px; left: 418px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(52);" onmouseout="A_MENUS[0].onmouseout(52);" onmouseover="A_MENUS[0].onmouseover(52);" onmousedown="A_MENUS[0].onmousedown(52);"><div id="e0_52i" class="m0l1iout">WINS</div></a>
+<a id="e0_53o" class="m0l2oout" href="http://www.rhyshaden.com/multicas.htm" style="position: absolute; top: 413px; left: 418px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(53);" onmouseout="A_MENUS[0].onmouseout(53);" onmouseover="A_MENUS[0].onmouseover(53);" onmousedown="A_MENUS[0].onmousedown(53);"><div id="e0_53i" class="m0l1iout">Multicast</div></a>
+<a id="e0_54o" class="m0l2oout" href="http://www.rhyshaden.com/iprip.htm" style="position: absolute; top: 434px; left: 418px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(54);" onmouseout="A_MENUS[0].onmouseout(54);" onmouseover="A_MENUS[0].onmouseover(54);" onmousedown="A_MENUS[0].onmousedown(54);"><div id="e0_54i" class="m0l1iout">RIP</div></a>
+<a id="e0_55o" class="m0l2oout" href="http://www.rhyshaden.com/igrp.htm" style="position: absolute; top: 455px; left: 418px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(55);" onmouseout="A_MENUS[0].onmouseout(55);" onmouseover="A_MENUS[0].onmouseover(55);" onmousedown="A_MENUS[0].onmousedown(55);"><div id="e0_55i" class="m0l1iout">IGRP</div></a>
+<a id="e0_56o" class="m0l2oout" href="http://www.rhyshaden.com/eigrp.htm" style="position: absolute; top: 476px; left: 418px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(56);" onmouseout="A_MENUS[0].onmouseout(56);" onmouseover="A_MENUS[0].onmouseover(56);" onmousedown="A_MENUS[0].onmousedown(56);"><div id="e0_56i" class="m0l1iout">EIGRP</div></a>
+<a id="e0_57o" class="m0l2oout" href="http://www.rhyshaden.com/ospf.htm" style="position: absolute; top: 497px; left: 418px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(57);" onmouseout="A_MENUS[0].onmouseout(57);" onmouseover="A_MENUS[0].onmouseover(57);" onmousedown="A_MENUS[0].onmousedown(57);"><div id="e0_57i" class="m0l1iout">OSPF</div></a>
+<a id="e0_58o" class="m0l2oout" href="http://www.rhyshaden.com/bgp.htm" style="position: absolute; top: 518px; left: 418px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(58);" onmouseout="A_MENUS[0].onmouseout(58);" onmouseover="A_MENUS[0].onmouseover(58);" onmousedown="A_MENUS[0].onmousedown(58);"><div id="e0_58i" class="m0l1iout">BGP</div></a>
+<a id="e0_59o" class="m0l2oout" href="http://www.rhyshaden.com/isis.htm" style="position: absolute; top: 539px; left: 418px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(59);" onmouseout="A_MENUS[0].onmouseout(59);" onmouseover="A_MENUS[0].onmouseover(59);" onmousedown="A_MENUS[0].onmousedown(59);"><div id="e0_59i" class="m0l1iout">ISIS</div></a>
+<a id="e0_60o" class="m0l2oout" href="http://www.rhyshaden.com/dlsw.htm" style="position: absolute; top: 560px; left: 418px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(60);" onmouseout="A_MENUS[0].onmouseout(60);" onmouseover="A_MENUS[0].onmouseover(60);" onmousedown="A_MENUS[0].onmousedown(60);"><div id="e0_60i" class="m0l1iout">DLSw</div></a>
+<a id="e0_61o" class="m0l2oout" href="http://www.rhyshaden.com/telnet.htm" style="position: absolute; top: 581px; left: 418px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(61);" onmouseout="A_MENUS[0].onmouseout(61);" onmouseover="A_MENUS[0].onmouseover(61);" onmousedown="A_MENUS[0].onmousedown(61);"><div id="e0_61i" class="m0l1iout">Telnet</div></a>
+<a id="e0_62o" class="m0l2oout" href="http://www.rhyshaden.com/ftp.htm" style="position: absolute; top: 602px; left: 418px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(62);" onmouseout="A_MENUS[0].onmouseout(62);" onmouseover="A_MENUS[0].onmouseover(62);" onmousedown="A_MENUS[0].onmousedown(62);"><div id="e0_62i" class="m0l1iout">FTP</div></a>
+<a id="e0_63o" class="m0l2oout" href="http://www.rhyshaden.com/finger.htm" style="position: absolute; top: 623px; left: 418px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(63);" onmouseout="A_MENUS[0].onmouseout(63);" onmouseover="A_MENUS[0].onmouseover(63);" onmousedown="A_MENUS[0].onmousedown(63);"><div id="e0_63i" class="m0l1iout">Finger</div></a>
+<a id="e0_64o" class="m0l2oout" href="http://www.rhyshaden.com/rwhois.htm" style="position: absolute; top: 644px; left: 418px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(64);" onmouseout="A_MENUS[0].onmouseout(64);" onmouseover="A_MENUS[0].onmouseover(64);" onmousedown="A_MENUS[0].onmousedown(64);"><div id="e0_64i" class="m0l1iout">RWhois</div></a>
+<a id="e0_65o" class="m0l2oout" href="http://www.rhyshaden.com/ip_small.htm" style="position: absolute; top: 665px; left: 418px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(65);" onmouseout="A_MENUS[0].onmouseout(65);" onmouseover="A_MENUS[0].onmouseover(65);" onmousedown="A_MENUS[0].onmousedown(65);"><div id="e0_65i" class="m0l1iout">IP Small Services</div></a>
+<a id="e0_66o" class="m0l2oout" href="http://www.rhyshaden.com/http.htm" style="position: absolute; top: 686px; left: 418px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(66);" onmouseout="A_MENUS[0].onmouseout(66);" onmouseover="A_MENUS[0].onmouseover(66);" onmousedown="A_MENUS[0].onmousedown(66);"><div id="e0_66i" class="m0l1iout">HTTP</div></a>
+<a id="e0_67o" class="m0l2oout" href="http://www.rhyshaden.com/nat.htm" style="position: absolute; top: 707px; left: 418px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(67);" onmouseout="A_MENUS[0].onmouseout(67);" onmouseover="A_MENUS[0].onmouseover(67);" onmousedown="A_MENUS[0].onmousedown(67);"><div id="e0_67i" class="m0l1iout">NAT</div></a>
+<a id="e0_68o" class="m0l2oout" href="http://www.rhyshaden.com/vpn.htm" style="position: absolute; top: 728px; left: 418px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(68);" onmouseout="A_MENUS[0].onmouseout(68);" onmouseover="A_MENUS[0].onmouseover(68);" onmousedown="A_MENUS[0].onmousedown(68);"><div id="e0_68i" class="m0l1iout">VPN</div></a>
+<a id="e0_69o" class="m0l2oout" href="http://www.rhyshaden.com/ssl.htm" style="position: absolute; top: 749px; left: 418px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(69);" onmouseout="A_MENUS[0].onmouseout(69);" onmouseover="A_MENUS[0].onmouseover(69);" onmousedown="A_MENUS[0].onmousedown(69);"><div id="e0_69i" class="m0l1iout">SSL</div></a>
+<a id="e0_70o" class="m0l1oout" href="http://www.rhyshaden.com/ipv6.htm" style="position: absolute; top: 198px; left: 388px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(70);" onmouseout="A_MENUS[0].onmouseout(70);" onmouseover="A_MENUS[0].onmouseover(70);" onmousedown="A_MENUS[0].onmousedown(70);"><div id="e0_70i" class="m0l1iout">IPv6</div></a>
+<a id="e0_71o" class="m0l1oout" href="http://www.rhyshaden.com/ipx.htm" style="position: absolute; top: 219px; left: 388px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(71);" onmouseout="A_MENUS[0].onmouseout(71);" onmouseover="A_MENUS[0].onmouseover(71);" onmousedown="A_MENUS[0].onmousedown(71);"><div id="e0_71i" class="m0l1iout">IPX</div></a>
+<a id="e0_72o" class="m0l1oout" href="http://www.rhyshaden.com/netbios.htm" style="position: absolute; top: 240px; left: 388px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(72);" onmouseout="A_MENUS[0].onmouseout(72);" onmouseover="A_MENUS[0].onmouseover(72);" onmousedown="A_MENUS[0].onmousedown(72);"><div id="e0_72i" class="m0l1iout">NetBIOS</div></a>
+<a id="e0_73o" class="m0l1oout" href="http://www.rhyshaden.com/decnet.htm" style="position: absolute; top: 261px; left: 388px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(73);" onmouseout="A_MENUS[0].onmouseout(73);" onmouseover="A_MENUS[0].onmouseover(73);" onmousedown="A_MENUS[0].onmousedown(73);"><div id="e0_73i" class="m0l1iout">DECnet</div></a>
+<a id="e0_74o" class="m0l1oout" href="http://www.rhyshaden.com/apple.htm" style="position: absolute; top: 282px; left: 388px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(74);" onmouseout="A_MENUS[0].onmouseout(74);" onmouseover="A_MENUS[0].onmouseover(74);" onmousedown="A_MENUS[0].onmousedown(74);"><div id="e0_74i" class="m0l1iout">AppleTalk</div></a>
+<a id="e0_75o" class="m0l1oout" href="http://www.rhyshaden.com/banyan.htm" style="position: absolute; top: 303px; left: 388px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(75);" onmouseout="A_MENUS[0].onmouseout(75);" onmouseover="A_MENUS[0].onmouseover(75);" onmousedown="A_MENUS[0].onmousedown(75);"><div id="e0_75i" class="m0l1iout">Banyan Vines</div></a>
+<a id="e0_76o" class="m0l1oout" href="http://www.rhyshaden.com/sna.htm" style="position: absolute; top: 324px; left: 388px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(76);" onmouseout="A_MENUS[0].onmouseout(76);" onmouseover="A_MENUS[0].onmouseover(76);" onmousedown="A_MENUS[0].onmousedown(76);"><div id="e0_76i" class="m0l1iout">SNA</div></a>
+<a id="e0_77o" class="m0l0oout" href="http://www.rhyshaden.com/null" style="position: absolute; top: 147px; left: 507px; width: 120px; height: 29px; visibility: visible; z-index: 0;" onclick="return A_MENUS[0].onclick(77);" onmouseout="A_MENUS[0].onmouseout(77);" onmouseover="A_MENUS[0].onmouseover(77);" onmousedown="A_MENUS[0].onmousedown(77);"><div id="e0_77i" class="m0l0iout">Upper Layers</div></a>
+<a id="e0_78o" class="m0l1oout" href="http://www.rhyshaden.com/null" style="position: absolute; top: 177px; left: 507px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(78);" onmouseout="A_MENUS[0].onmouseout(78);" onmouseover="A_MENUS[0].onmouseover(78);" onmousedown="A_MENUS[0].onmousedown(78);"><div id="e0_78i" class="m0l1iout">Security</div></a>
+<a id="e0_79o" class="m0l2oout" href="http://www.rhyshaden.com/encrypt.htm" style="position: absolute; top: 182px; left: 537px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(79);" onmouseout="A_MENUS[0].onmouseout(79);" onmouseover="A_MENUS[0].onmouseover(79);" onmousedown="A_MENUS[0].onmousedown(79);"><div id="e0_79i" class="m0l1iout">Encryption</div></a>
+<a id="e0_80o" class="m0l2oout" href="http://www.rhyshaden.com/ipsec.htm" style="position: absolute; top: 203px; left: 537px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(80);" onmouseout="A_MENUS[0].onmouseout(80);" onmouseover="A_MENUS[0].onmouseover(80);" onmousedown="A_MENUS[0].onmousedown(80);"><div id="e0_80i" class="m0l1iout">IPsec</div></a>
+<a id="e0_81o" class="m0l2oout" href="http://www.rhyshaden.com/8021x.htm" style="position: absolute; top: 224px; left: 537px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(81);" onmouseout="A_MENUS[0].onmouseout(81);" onmouseover="A_MENUS[0].onmouseover(81);" onmousedown="A_MENUS[0].onmousedown(81);"><div id="e0_81i" class="m0l1iout">802.1X</div></a>
+<a id="e0_82o" class="m0l2oout" href="http://www.rhyshaden.com/secureid.htm" style="position: absolute; top: 245px; left: 537px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(82);" onmouseout="A_MENUS[0].onmouseout(82);" onmouseover="A_MENUS[0].onmouseover(82);" onmousedown="A_MENUS[0].onmousedown(82);"><div id="e0_82i" class="m0l1iout">SecureID</div></a>
+<a id="e0_83o" class="m0l2oout" href="http://www.rhyshaden.com/ssh.htm" style="position: absolute; top: 266px; left: 537px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(83);" onmouseout="A_MENUS[0].onmouseout(83);" onmouseover="A_MENUS[0].onmouseover(83);" onmousedown="A_MENUS[0].onmousedown(83);"><div id="e0_83i" class="m0l1iout">SSH</div></a>
+<a id="e0_84o" class="m0l1oout" href="http://www.rhyshaden.com/unix.htm" style="position: absolute; top: 198px; left: 507px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(84);" onmouseout="A_MENUS[0].onmouseout(84);" onmouseover="A_MENUS[0].onmouseover(84);" onmousedown="A_MENUS[0].onmousedown(84);"><div id="e0_84i" class="m0l1iout">Unix Overview</div></a>
+<a id="e0_85o" class="m0l1oout" href="http://www.rhyshaden.com/rpc.htm" style="position: absolute; top: 219px; left: 507px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(85);" onmouseout="A_MENUS[0].onmouseout(85);" onmouseover="A_MENUS[0].onmouseover(85);" onmousedown="A_MENUS[0].onmousedown(85);"><div id="e0_85i" class="m0l1iout">RPC</div></a>
+<a id="e0_86o" class="m0l1oout" href="http://www.rhyshaden.com/nfs.htm" style="position: absolute; top: 240px; left: 507px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(86);" onmouseout="A_MENUS[0].onmouseout(86);" onmouseover="A_MENUS[0].onmouseover(86);" onmousedown="A_MENUS[0].onmousedown(86);"><div id="e0_86i" class="m0l1iout">NFS</div></a>
+<a id="e0_87o" class="m0l1oout" href="http://www.rhyshaden.com/nis.htm" style="position: absolute; top: 261px; left: 507px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(87);" onmouseout="A_MENUS[0].onmouseout(87);" onmouseover="A_MENUS[0].onmouseover(87);" onmousedown="A_MENUS[0].onmousedown(87);"><div id="e0_87i" class="m0l1iout">NIS</div></a>
+<a id="e0_88o" class="m0l1oout" href="http://www.rhyshaden.com/content.htm" style="position: absolute; top: 282px; left: 507px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(88);" onmouseout="A_MENUS[0].onmouseout(88);" onmouseover="A_MENUS[0].onmouseover(88);" onmousedown="A_MENUS[0].onmousedown(88);"><div id="e0_88i" class="m0l1iout">Content Networking</div></a>
+<a id="e0_89o" class="m0l1oout" href="./Quality of Service, diff serv code point, ip precedence_files/Quality of Service, diff serv code point, ip precedence.html" style="position: absolute; top: 303px; left: 507px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(89);" onmouseout="A_MENUS[0].onmouseout(89);" onmouseover="A_MENUS[0].onmouseover(89);" onmousedown="A_MENUS[0].onmousedown(89);"><div id="e0_89i" class="m0l1iout">Quality of Service</div></a>
+<a id="e0_90o" class="m0l0oout" href="http://www.rhyshaden.com/null" style="position: absolute; top: 147px; left: 626px; width: 120px; height: 29px; visibility: visible; z-index: 0;" onclick="return A_MENUS[0].onclick(90);" onmouseout="A_MENUS[0].onmouseout(90);" onmouseover="A_MENUS[0].onmouseover(90);" onmousedown="A_MENUS[0].onmousedown(90);"><div id="e0_90i" class="m0l0iout">Miscellaneous</div></a>
+<a id="e0_91o" class="m0l1oout" href="http://www.rhyshaden.com/osi.htm" style="position: absolute; top: 177px; left: 626px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(91);" onmouseout="A_MENUS[0].onmouseout(91);" onmouseover="A_MENUS[0].onmouseover(91);" onmousedown="A_MENUS[0].onmousedown(91);"><div id="e0_91i" class="m0l1iout">OSI</div></a>
+<a id="e0_92o" class="m0l1oout" href="http://www.rhyshaden.com/writeweb.htm" style="position: absolute; top: 198px; left: 626px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(92);" onmouseout="A_MENUS[0].onmouseout(92);" onmouseover="A_MENUS[0].onmouseover(92);" onmousedown="A_MENUS[0].onmousedown(92);"><div id="e0_92i" class="m0l1iout">HTML</div></a>
+<a id="e0_93o" class="m0l1oout" href="http://www.rhyshaden.com/null" style="position: absolute; top: 219px; left: 626px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(93);" onmouseout="A_MENUS[0].onmouseout(93);" onmouseover="A_MENUS[0].onmouseover(93);" onmousedown="A_MENUS[0].onmousedown(93);"><div id="e0_93i" class="m0l1iout">Windows NT 4</div></a>
+<a id="e0_94o" class="m0l2oout" href="http://www.rhyshaden.com/nt4.htm" style="position: absolute; top: 224px; left: 656px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(94);" onmouseout="A_MENUS[0].onmouseout(94);" onmouseover="A_MENUS[0].onmouseover(94);" onmousedown="A_MENUS[0].onmousedown(94);"><div id="e0_94i" class="m0l1iout">Contents</div></a>
+<a id="e0_95o" class="m0l2oout" href="http://www.rhyshaden.com/nt_int.htm" style="position: absolute; top: 245px; left: 656px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(95);" onmouseout="A_MENUS[0].onmouseout(95);" onmouseover="A_MENUS[0].onmouseover(95);" onmousedown="A_MENUS[0].onmousedown(95);"><div id="e0_95i" class="m0l1iout">Introduction</div></a>
+<a id="e0_96o" class="m0l2oout" href="http://www.rhyshaden.com/nt_arch.htm" style="position: absolute; top: 266px; left: 656px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(96);" onmouseout="A_MENUS[0].onmouseout(96);" onmouseover="A_MENUS[0].onmouseover(96);" onmousedown="A_MENUS[0].onmousedown(96);"><div id="e0_96i" class="m0l1iout">Architecture</div></a>
+<a id="e0_97o" class="m0l2oout" href="http://www.rhyshaden.com/nt_inst.htm" style="position: absolute; top: 287px; left: 656px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(97);" onmouseout="A_MENUS[0].onmouseout(97);" onmouseover="A_MENUS[0].onmouseover(97);" onmousedown="A_MENUS[0].onmousedown(97);"><div id="e0_97i" class="m0l1iout">Installation</div></a>
+<a id="e0_98o" class="m0l2oout" href="http://www.rhyshaden.com/nt_env.htm" style="position: absolute; top: 308px; left: 656px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(98);" onmouseout="A_MENUS[0].onmouseout(98);" onmouseover="A_MENUS[0].onmouseover(98);" onmousedown="A_MENUS[0].onmousedown(98);"><div id="e0_98i" class="m0l1iout">Environment</div></a>
+<a id="e0_99o" class="m0l2oout" href="http://www.rhyshaden.com/nt_pol.htm" style="position: absolute; top: 329px; left: 656px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(99);" onmouseout="A_MENUS[0].onmouseout(99);" onmouseover="A_MENUS[0].onmouseover(99);" onmousedown="A_MENUS[0].onmousedown(99);"><div id="e0_99i" class="m0l1iout">System Policies</div></a>
+<a id="e0_100o" class="m0l2oout" href="http://www.rhyshaden.com/nt_file.htm" style="position: absolute; top: 350px; left: 656px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(100);" onmouseout="A_MENUS[0].onmouseout(100);" onmouseover="A_MENUS[0].onmouseover(100);" onmousedown="A_MENUS[0].onmousedown(100);"><div id="e0_100i" class="m0l1iout">File Systems</div></a>
+<a id="e0_101o" class="m0l2oout" href="http://www.rhyshaden.com/nt_part.htm" style="position: absolute; top: 371px; left: 656px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(101);" onmouseout="A_MENUS[0].onmouseout(101);" onmouseover="A_MENUS[0].onmouseover(101);" onmousedown="A_MENUS[0].onmousedown(101);"><div id="e0_101i" class="m0l1iout">Partitions</div></a>
+<a id="e0_102o" class="m0l2oout" href="http://www.rhyshaden.com/nt_app.htm" style="position: absolute; top: 392px; left: 656px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(102);" onmouseout="A_MENUS[0].onmouseout(102);" onmouseover="A_MENUS[0].onmouseover(102);" onmousedown="A_MENUS[0].onmousedown(102);"><div id="e0_102i" class="m0l1iout">Applications</div></a>
+<a id="e0_103o" class="m0l2oout" href="http://www.rhyshaden.com/nt_prot.htm" style="position: absolute; top: 413px; left: 656px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(103);" onmouseout="A_MENUS[0].onmouseout(103);" onmouseover="A_MENUS[0].onmouseover(103);" onmousedown="A_MENUS[0].onmousedown(103);"><div id="e0_103i" class="m0l1iout">Protocols</div></a>
+<a id="e0_104o" class="m0l2oout" href="http://www.rhyshaden.com/nt_ras.htm" style="position: absolute; top: 434px; left: 656px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(104);" onmouseout="A_MENUS[0].onmouseout(104);" onmouseover="A_MENUS[0].onmouseover(104);" onmousedown="A_MENUS[0].onmousedown(104);"><div id="e0_104i" class="m0l1iout">RAS</div></a>
+<a id="e0_105o" class="m0l2oout" href="http://www.rhyshaden.com/nt_iis.htm" style="position: absolute; top: 455px; left: 656px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(105);" onmouseout="A_MENUS[0].onmouseout(105);" onmouseover="A_MENUS[0].onmouseover(105);" onmousedown="A_MENUS[0].onmousedown(105);"><div id="e0_105i" class="m0l1iout">IIS and PWS</div></a>
+<a id="e0_106o" class="m0l2oout" href="http://www.rhyshaden.com/nt_nov.htm" style="position: absolute; top: 476px; left: 656px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(106);" onmouseout="A_MENUS[0].onmouseout(106);" onmouseover="A_MENUS[0].onmouseover(106);" onmousedown="A_MENUS[0].onmousedown(106);"><div id="e0_106i" class="m0l1iout">Novell Netware</div></a>
+<a id="e0_107o" class="m0l2oout" href="http://www.rhyshaden.com/nt_log.htm" style="position: absolute; top: 497px; left: 656px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(107);" onmouseout="A_MENUS[0].onmouseout(107);" onmouseover="A_MENUS[0].onmouseover(107);" onmousedown="A_MENUS[0].onmousedown(107);"><div id="e0_107i" class="m0l1iout">Logging on</div></a>
+<a id="e0_108o" class="m0l2oout" href="http://www.rhyshaden.com/nt_user.htm" style="position: absolute; top: 518px; left: 656px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(108);" onmouseout="A_MENUS[0].onmouseout(108);" onmouseover="A_MENUS[0].onmouseover(108);" onmousedown="A_MENUS[0].onmousedown(108);"><div id="e0_108i" class="m0l1iout">User Accounts</div></a>
+<a id="e0_109o" class="m0l2oout" href="http://www.rhyshaden.com/nt_grp.htm" style="position: absolute; top: 539px; left: 656px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(109);" onmouseout="A_MENUS[0].onmouseout(109);" onmouseover="A_MENUS[0].onmouseover(109);" onmousedown="A_MENUS[0].onmousedown(109);"><div id="e0_109i" class="m0l1iout">Group Accounts</div></a>
+<a id="e0_110o" class="m0l2oout" href="http://www.rhyshaden.com/nt_admin.htm" style="position: absolute; top: 560px; left: 656px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(110);" onmouseout="A_MENUS[0].onmouseout(110);" onmouseover="A_MENUS[0].onmouseover(110);" onmousedown="A_MENUS[0].onmousedown(110);"><div id="e0_110i" class="m0l1iout">Administration</div></a>
+<a id="e0_111o" class="m0l2oout" href="http://www.rhyshaden.com/nt_flder.htm" style="position: absolute; top: 581px; left: 656px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(111);" onmouseout="A_MENUS[0].onmouseout(111);" onmouseover="A_MENUS[0].onmouseover(111);" onmousedown="A_MENUS[0].onmousedown(111);"><div id="e0_111i" class="m0l1iout">Shared Folders</div></a>
+<a id="e0_112o" class="m0l2oout" href="http://www.rhyshaden.com/nt_ntfs.htm" style="position: absolute; top: 602px; left: 656px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(112);" onmouseout="A_MENUS[0].onmouseout(112);" onmouseover="A_MENUS[0].onmouseover(112);" onmousedown="A_MENUS[0].onmousedown(112);"><div id="e0_112i" class="m0l1iout">NTFS Permissions</div></a>
+<a id="e0_113o" class="m0l2oout" href="http://www.rhyshaden.com/nt_print.htm" style="position: absolute; top: 623px; left: 656px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(113);" onmouseout="A_MENUS[0].onmouseout(113);" onmouseover="A_MENUS[0].onmouseover(113);" onmousedown="A_MENUS[0].onmousedown(113);"><div id="e0_113i" class="m0l1iout">Printers</div></a>
+<a id="e0_114o" class="m0l2oout" href="http://www.rhyshaden.com/nt_audit.htm" style="position: absolute; top: 644px; left: 656px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(114);" onmouseout="A_MENUS[0].onmouseout(114);" onmouseover="A_MENUS[0].onmouseover(114);" onmousedown="A_MENUS[0].onmousedown(114);"><div id="e0_114i" class="m0l1iout">Auditing</div></a>
+<a id="e0_115o" class="m0l2oout" href="http://www.rhyshaden.com/nt_rsnet.htm" style="position: absolute; top: 665px; left: 656px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(115);" onmouseout="A_MENUS[0].onmouseout(115);" onmouseover="A_MENUS[0].onmouseover(115);" onmousedown="A_MENUS[0].onmousedown(115);"><div id="e0_115i" class="m0l1iout">Monitoring</div></a>
+<a id="e0_116o" class="m0l2oout" href="http://www.rhyshaden.com/nt_bkup.htm" style="position: absolute; top: 686px; left: 656px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(116);" onmouseout="A_MENUS[0].onmouseout(116);" onmouseover="A_MENUS[0].onmouseover(116);" onmousedown="A_MENUS[0].onmousedown(116);"><div id="e0_116i" class="m0l1iout">Backup</div></a>
+<a id="e0_117o" class="m0l2oout" href="http://www.rhyshaden.com/nt_dir.htm" style="position: absolute; top: 707px; left: 656px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(117);" onmouseout="A_MENUS[0].onmouseout(117);" onmouseover="A_MENUS[0].onmouseover(117);" onmousedown="A_MENUS[0].onmousedown(117);"><div id="e0_117i" class="m0l1iout">Directory Services</div></a>
+<a id="e0_118o" class="m0l2oout" href="http://www.rhyshaden.com/nt_opt.htm" style="position: absolute; top: 728px; left: 656px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(118);" onmouseout="A_MENUS[0].onmouseout(118);" onmouseover="A_MENUS[0].onmouseover(118);" onmousedown="A_MENUS[0].onmousedown(118);"><div id="e0_118i" class="m0l1iout">Optimisation</div></a>
+<a id="e0_119o" class="m0l2oout" href="http://www.rhyshaden.com/nt_ntopt.htm" style="position: absolute; top: 749px; left: 656px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(119);" onmouseout="A_MENUS[0].onmouseout(119);" onmouseover="A_MENUS[0].onmouseover(119);" onmousedown="A_MENUS[0].onmousedown(119);"><div id="e0_119i" class="m0l1iout">Analysis</div></a>
+<a id="e0_120o" class="m0l2oout" href="http://www.rhyshaden.com/nt_troub.htm" style="position: absolute; top: 770px; left: 656px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(120);" onmouseout="A_MENUS[0].onmouseout(120);" onmouseover="A_MENUS[0].onmouseover(120);" onmousedown="A_MENUS[0].onmousedown(120);"><div id="e0_120i" class="m0l1iout">Troubleshooting</div></a>
+<a id="e0_121o" class="m0l1oout" href="http://www.rhyshaden.com/win98ics.htm" style="position: absolute; top: 240px; left: 626px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(121);" onmouseout="A_MENUS[0].onmouseout(121);" onmouseover="A_MENUS[0].onmouseover(121);" onmousedown="A_MENUS[0].onmousedown(121);"><div id="e0_121i" class="m0l1iout">Win98 ICS</div></a>
+<a id="e0_122o" class="m0l1oout" href="http://www.rhyshaden.com/snif_dos.htm" style="position: absolute; top: 261px; left: 626px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(122);" onmouseout="A_MENUS[0].onmouseout(122);" onmouseover="A_MENUS[0].onmouseover(122);" onmousedown="A_MENUS[0].onmousedown(122);"><div id="e0_122i" class="m0l1iout">DOS Sniffer</div></a>
+<a id="e0_123o" class="m0l1oout" href="http://www.rhyshaden.com/snif_win.htm" style="position: absolute; top: 282px; left: 626px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(123);" onmouseout="A_MENUS[0].onmouseout(123);" onmouseover="A_MENUS[0].onmouseover(123);" onmousedown="A_MENUS[0].onmousedown(123);"><div id="e0_123i" class="m0l1iout">Windows Sniffer</div></a>
+<a id="e0_124o" class="m0l1oout" href="http://www.rhyshaden.com/pcbuild.htm" style="position: absolute; top: 303px; left: 626px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(124);" onmouseout="A_MENUS[0].onmouseout(124);" onmouseover="A_MENUS[0].onmouseover(124);" onmousedown="A_MENUS[0].onmousedown(124);"><div id="e0_124i" class="m0l1iout">Building a PC</div></a>
+<a id="e0_125o" class="m0l1oout" href="http://www.rhyshaden.com/null" style="position: absolute; top: 324px; left: 626px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(125);" onmouseout="A_MENUS[0].onmouseout(125);" onmouseover="A_MENUS[0].onmouseover(125);" onmousedown="A_MENUS[0].onmousedown(125);"><div id="e0_125i" class="m0l1iout">Intelligent Bldgs</div></a>
+<a id="e0_126o" class="m0l2oout" href="http://www.rhyshaden.com/ibs.htm" style="position: absolute; top: 329px; left: 656px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(126);" onmouseout="A_MENUS[0].onmouseout(126);" onmouseover="A_MENUS[0].onmouseover(126);" onmousedown="A_MENUS[0].onmousedown(126);"><div id="e0_126i" class="m0l1iout">IB Contents</div></a>
+<a id="e0_127o" class="m0l2oout" href="http://www.rhyshaden.com/assign1.htm" style="position: absolute; top: 350px; left: 656px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(127);" onmouseout="A_MENUS[0].onmouseout(127);" onmouseover="A_MENUS[0].onmouseover(127);" onmousedown="A_MENUS[0].onmousedown(127);"><div id="e0_127i" class="m0l1iout">Concepts</div></a>
+<a id="e0_128o" class="m0l2oout" href="http://www.rhyshaden.com/assign2.htm" style="position: absolute; top: 371px; left: 656px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(128);" onmouseout="A_MENUS[0].onmouseout(128);" onmouseover="A_MENUS[0].onmouseover(128);" onmousedown="A_MENUS[0].onmousedown(128);"><div id="e0_128i" class="m0l1iout">Building Systems</div></a>
+<a id="e0_129o" class="m0l2oout" href="http://www.rhyshaden.com/assign4.htm" style="position: absolute; top: 392px; left: 656px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(129);" onmouseout="A_MENUS[0].onmouseout(129);" onmouseover="A_MENUS[0].onmouseover(129);" onmousedown="A_MENUS[0].onmousedown(129);"><div id="e0_129i" class="m0l1iout">Integrated Building</div></a>
+<a id="e0_130o" class="m0l2oout" href="http://www.rhyshaden.com/assign5.htm" style="position: absolute; top: 413px; left: 656px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(130);" onmouseout="A_MENUS[0].onmouseout(130);" onmouseover="A_MENUS[0].onmouseover(130);" onmousedown="A_MENUS[0].onmousedown(130);"><div id="e0_130i" class="m0l1iout">Financial Analysis</div></a>
+<a id="e0_131o" class="m0l2oout" href="http://www.rhyshaden.com/assign3.htm" style="position: absolute; top: 434px; left: 656px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(131);" onmouseout="A_MENUS[0].onmouseout(131);" onmouseover="A_MENUS[0].onmouseover(131);" onmousedown="A_MENUS[0].onmousedown(131);"><div id="e0_131i" class="m0l1iout">Information Technology</div></a>
+<a id="e0_132o" class="m0l2oout" href="http://www.rhyshaden.com/assign6.htm" style="position: absolute; top: 455px; left: 656px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(132);" onmouseout="A_MENUS[0].onmouseout(132);" onmouseover="A_MENUS[0].onmouseover(132);" onmousedown="A_MENUS[0].onmousedown(132);"><div id="e0_132i" class="m0l1iout">Facilities Management</div></a>
+<a id="e0_133o" class="m0l2oout" href="http://www.rhyshaden.com/assign7.htm" style="position: absolute; top: 476px; left: 656px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(133);" onmouseout="A_MENUS[0].onmouseout(133);" onmouseover="A_MENUS[0].onmouseover(133);" onmousedown="A_MENUS[0].onmousedown(133);"><div id="e0_133i" class="m0l1iout">Sustainable Design</div></a>
+<a id="e0_134o" class="m0l2oout" href="http://www.rhyshaden.com/assign8.htm" style="position: absolute; top: 497px; left: 656px; width: 150px; height: 20px; visibility: hidden; z-index: 2;" onclick="return A_MENUS[0].onclick(134);" onmouseout="A_MENUS[0].onmouseout(134);" onmouseover="A_MENUS[0].onmouseover(134);" onmousedown="A_MENUS[0].onmousedown(134);"><div id="e0_134i" class="m0l1iout">Design Management</div></a>
+<a id="e0_135o" class="m0l1oout" href="http://www.rhyshaden.com/ibslinks.htm" style="position: absolute; top: 345px; left: 626px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(135);" onmouseout="A_MENUS[0].onmouseout(135);" onmouseover="A_MENUS[0].onmouseover(135);" onmousedown="A_MENUS[0].onmousedown(135);"><div id="e0_135i" class="m0l1iout">Intelligent Bldgs Links</div></a>
+<a id="e0_136o" class="m0l1oout" href="http://www.rhyshaden.com/ispell.htm" style="position: absolute; top: 366px; left: 626px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(136);" onmouseout="A_MENUS[0].onmouseout(136);" onmouseover="A_MENUS[0].onmouseover(136);" onmousedown="A_MENUS[0].onmousedown(136);"><div id="e0_136i" class="m0l1iout">Spelling Codes</div></a>
+<a id="e0_137o" class="m0l1oout" href="http://www.rhyshaden.com/links.htm" style="position: absolute; top: 387px; left: 626px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(137);" onmouseout="A_MENUS[0].onmouseout(137);" onmouseover="A_MENUS[0].onmouseover(137);" onmousedown="A_MENUS[0].onmousedown(137);"><div id="e0_137i" class="m0l1iout">Data Links</div></a>
+<a id="e0_138o" class="m0l1oout" href="http://www.rhyshaden.com/cv.htm" style="position: absolute; top: 408px; left: 626px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(138);" onmouseout="A_MENUS[0].onmouseout(138);" onmouseover="A_MENUS[0].onmouseover(138);" onmousedown="A_MENUS[0].onmousedown(138);"><div id="e0_138i" class="m0l1iout">CV</div></a>
+<a id="e0_139o" class="m0l1oout" href="http://www.rhyshaden.com/future.htm" style="position: absolute; top: 429px; left: 626px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(139);" onmouseout="A_MENUS[0].onmouseout(139);" onmouseover="A_MENUS[0].onmouseover(139);" onmousedown="A_MENUS[0].onmousedown(139);"><div id="e0_139i" class="m0l1iout">Future Topics</div></a>
+<a id="e0_140o" class="m0l1oout" href="http://www.rhyshaden.com/disclaim.htm" style="position: absolute; top: 450px; left: 626px; width: 150px; height: 20px; visibility: hidden; z-index: 1;" onclick="return A_MENUS[0].onclick(140);" onmouseout="A_MENUS[0].onmouseout(140);" onmouseover="A_MENUS[0].onmouseover(140);" onmousedown="A_MENUS[0].onmousedown(140);"><div id="e0_140i" class="m0l1iout">Disclaimer</div></a>
+
+
+
+</body></html>

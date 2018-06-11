@@ -1,0 +1,244 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>Citrix NetScaler XML API User&#39;s Guide - Structure Definition</title>
+<link rel="stylesheet" type="text/css" href="help_ns.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body onload="initial()" class="ns_body">
+<div class="ns_content"><table cellpadding="0" cellspacing="0"><script type="text/javascript">
+function changeContext(id,lang,flag){
+	parent.banner.document.language.select.value = lang;
+	if( lang == "C" ){
+		if(flag == "1"){
+			showContent(cfirstcontent,id,lang);
+		}
+		else{
+			showContent(csecondcontent,id,lang);
+		}
+	}
+	if( lang == "Perl" ){
+		if(flag == "1"){
+			showContent(perlfirstcontent,id,lang);
+		}
+		else{
+			showContent(perlsecondcontent,id,lang);
+		}
+	}
+	if( lang == "Java" ){
+		if(flag == "1"){
+			showContent(javafirstcontent,id,lang);	
+		}
+		else{
+			showContent(javasecondcontent,id,lang);
+		}
+	}
+	if( lang == "C#" ){
+		if(flag == "1"){
+			showContent(csharpfirstcontent,id,lang);
+		}
+		else{
+			showContent(csharpsecondcontent,id,lang);
+		}
+	}
+	if( lang == "VB" ){
+		if(flag == "1"){
+			showContent(vbfirstcontent,id,lang);
+		}
+		else{
+			showContent(vbsecondcontent,id,lang);
+		}
+	}
+	if(flag == "1"){
+		showInside(lang,"0");
+	}
+	else{
+		showOutside(lang);
+	}
+}
+function showContent(content,id,lang){
+	if(ie4){
+	   showContentObj=document.all.id;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById(id);
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+  showLangSelect(lang);
+}
+function showInside(str,cond){
+	if(str == "C"){
+ 		var inside_content = csecondcontent;
+ 	}
+ 	if(str == "Perl"){
+ 		var inside_content = perlsecondcontent;
+ 	}
+ 	if(str == "Java"){
+ 		var inside_content = javasecondcontent;
+ 	}
+ 	if(str == "C#"){
+		var inside_content = csharpsecondcontent;
+ 	}
+ 	if(str == "VB"){
+		var inside_content = vbsecondcontent;
+ 	}
+	showContent(inside_content,'qiksearch_div1',str);
+ 	if ( cond == "1" ){
+ 		var page = 'apidoc/docs/getsslcertkeyResult.html#certkeyList';
+ 		document.location.href = page;
+ 	}
+}
+function showOutside(str){
+	if(str == "C" ){
+ 		var inside_content = cfirstcontent;
+ 	}
+ 	if(str == "Perl" ){
+ 		var inside_content = perlfirstcontent;
+ 	}
+ 	if(str == "Java" ){
+ 		var inside_content = javafirstcontent;
+ 	}
+ 	if(str == "C#" ){
+ 		var inside_content = csharpfirstcontent;
+ 	}
+ 	if(str == "VB" ){
+ 		var inside_content = vbfirstcontent;
+ 	}
+ 	showContent(inside_content,'qiksearch_div',str);
+}
+function initial(){
+	ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+	ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+	ns4=document.layers;
+	langSelected = parent.banner.document.language.select.value
+	var plink = parent.banner.document.language.plink.value
+	var my_array=plink.split("&");
+	var temp = my_array[0];
+ 	var grp = temp.split("@");
+	var cmd = my_array[1];
+	var regex = /^stat/i;
+	if( cmd.match(regex) != null ){
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex_stat.html\">Statistics</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getsslcertkeyResult");
+	}
+	else{
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex.htm\">Configuration</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getsslcertkeyResult");
+	}
+	if( langSelected == "C" ){
+ 		var content = cfirstcontent;
+	}
+	else if( langSelected == "Perl" ){
+		var content = perlfirstcontent;
+	}
+	else if( langSelected == "Java" ){
+		var content = javafirstcontent;
+	}
+	else if( langSelected == "C#" ){
+		var content = csharpfirstcontent;
+	}
+	else if( langSelected == "VB" ){
+		var content = vbfirstcontent;
+	}
+	else{
+		var content = cfirstcontent;
+		langSelected="C";
+	}
+	showContent(content,'qiksearch_div',langSelected);
+	showInside(langSelected,"0");
+}
+function showPLink(content){
+	if(ie4){
+	   showContentObj=document.all.progressive_link;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById("progressive_link");
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+}
+function showLangSelect(id){
+	   if(ie4)
+       {
+       	showObj=document.all.first_url;
+       	showObj1=document.all.second_url;
+       }
+       if(ns6)
+       {
+       	showObj=document.getElementById("first_url");
+       	showObj1=document.getElementById("second_url");
+       }
+       if( id == "C" ){
+       	newlink = "<b>C</b>";
+       	newlink1 = "<b>C</b>";
+       }
+       else{
+       	newlink = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C','1');\"><b>C</b></a>";
+       	newlink1 = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C','0');\"><b>C</b></a>";
+       }
+       if( id == "Perl" ){
+       	newlink = newlink + " | <b>Perl</b>";
+       	newlink1 = newlink1 + " | <b>Perl</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Perl','1');\"><b>Perl</b></a>";
+      	       newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Perl','0');\"><b>Perl</b></a>";
+       }
+       if( id == "Java" ){
+       	newlink = newlink + " | <b>Java</b>";
+       	newlink1 = newlink1 + " | <b>Java</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Java','1');\"><b>Java</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Java','0');\"><b>Java</b></a>";
+       }
+       if( id == "C#" ){
+       	newlink = newlink + " | <b>C#</b>";
+       	newlink1 = newlink1 + " | <b>C#</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C#','1');\"><b>C#</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C#','0');\"><b>C#</b></a>";
+       }
+       showObj.innerHTML = newlink;
+       showObj1.innerHTML = newlink1;
+}
+</script>
+<tr><td><div><div id="progressive_link"></div></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>getsslcertkeyResult Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>getsslcertkeyResult</b> structure defines the return type for getsslcertkey API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="first_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+cfirstcontent = "<pre>struct getsslcertkeyResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; struct <a href=\'getsslcertkeyResult.html\#sslcertkey\'>sslcertkey</a> list[];<br> };<br></pre></td></tr></table></div>"
+perlfirstcontent = "<pre>$getsslcertkeyResult = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rc => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; message => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; List => \'@<a href=\'getsslcertkeyResult.html\#sslcertkey\'>sslcertkey</a>\',<br> };<br></pre></td></tr></table></div>"
+javafirstcontent = "<pre>class getsslcertkeyResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getsslcertkeyResult.html\#sslcertkey\'>sslcertkey</a>[] list;<br> };<br></pre></td></tr></table></div>"
+csharpfirstcontent = "<pre>class getsslcertkeyResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getsslcertkeyResult.html\#sslcertkey\'>sslcertkey</a>[] list;<br> };<br></pre></td></tr></table></div>"
+vbfirstcontent = "<pre>Public <b>Structure</b> getsslcertkeyResult <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rc As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public message As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public  sslcertkeyList() As  <a href=\'getsslcertkeyResult.html\#sslcertkey\'>sslcertkey</a><br> <b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rc</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, rc is 0 else rc > 0. Values above 0x8000 indicate Warnings.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>message</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, message is NULL else message contains <a href="errorlisting.html">Error/Warning</a> message.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sslcertkeyList</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">List of sslcertkeys</div></td></tr><tr><td><br></td></tr><tr><td><div><a name="sslcertkey"></a></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>sslcertkey  Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>sslcertkey</b> structure defines the actual return type values for getsslcertkey API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="second_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div1" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+csecondcontent = "<pre>struct sslcertkey {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * certkeyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * cert;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * key;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * inform;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * signaturealg;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * serial;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * issuer;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * clientcertnotbefore;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * clientcertnotafter;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int daystoexpiration;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * subject;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * publickey;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int publickeysize;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int version;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int priority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * status;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * fipskey;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * passcrypt;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int data;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * servername [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * servicename;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * ocspresponder [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * expirymonitor;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int notificationperiod;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * linkcertkeyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int sslvserverpriority []   ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int sslvserverversion []   ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * service []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int servicepriority []   ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int serviceversion []   ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * crldistributionpoint []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ocsppriority []   ;<br> };<br></pre></td></tr></table></div>"
+perlsecondcontent = "<pre>$sslcertkey = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; certkeyname => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; cert => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; key => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; inform => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; signaturealg => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; serial => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; issuer => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; clientcertnotbefore => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; clientcertnotafter => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; daystoexpiration => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; subject => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; publickey => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; publickeysize => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; version => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; priority => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; status => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; fipskey => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; passcrypt => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; data => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; servername => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; servicename => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ocspresponder => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; expirymonitor => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; notificationperiod => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; linkcertkeyname => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; sslvserverpriority => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; sslvserverversion => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; service => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; servicepriority => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; serviceversion => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; crldistributionpoint => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ocsppriority => \'@\',<br> };<br></pre></td></tr></table></div>"
+javasecondcontent = "<pre>class sslcertkey {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String certkeyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String cert;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String key;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String inform;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String signaturealg;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String serial;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String issuer;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String clientcertnotbefore;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String clientcertnotafter;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int daystoexpiration;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String subject;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String publickey;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int publickeysize;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int version;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt priority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String status;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String fipskey;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String passcrypt;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt data;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String servername [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String servicename;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String ocspresponder [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String expirymonitor;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt notificationperiod;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String linkcertkeyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt [] sslvserverpriority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int [] sslvserverversion;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] service;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt [] servicepriority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int [] serviceversion;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] crldistributionpoint;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt [] ocsppriority;<br> };<br></pre></td></tr></table></div>"
+csharpsecondcontent = "<pre>class sslcertkey {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string certkeyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string cert;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string key;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string inform;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string signaturealg;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string serial;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string issuer;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string clientcertnotbefore;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string clientcertnotafter;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 daystoexpiration;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string subject;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string publickey;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 publickeysize;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 version;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 priority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string status;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string fipskey;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string passcrypt;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 data;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string servername [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string servicename;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string ocspresponder [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string expirymonitor;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 notificationperiod;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string linkcertkeyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 [] sslvserverpriority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 [] sslvserverversion;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] service;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 [] servicepriority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 [] serviceversion;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] crldistributionpoint;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 [] ocsppriority;<br> };<br></pre></td></tr></table></div>"
+vbsecondcontent = "<pre>Public <b>Structure</b> sslcertkey <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public certkeyname As String  <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public cert As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public key As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public inform As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public signaturealg As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public serial As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public issuer As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public clientcertnotbefore As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public clientcertnotafter As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public daystoexpiration As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public subject As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public publickey As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public publickeysize As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public version As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public priority As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public status As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public fipskey As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public passcrypt As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public data As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public servername As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public servicename As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ocspresponder As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public expirymonitor As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public notificationperiod As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public linkcertkeyname As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public sslvserverpriority As UInteger()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public sslvserverversion As Integer()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public service As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public servicepriority As UInteger()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public serviceversion As Integer()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public crldistributionpoint As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ocsppriority As UInteger()<br><b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>certkeyname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the certificate-key pair for which to show detailed information.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>cert</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The name and location of the file containing the certificate.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>key</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The name and location of the file containing the key.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>inform</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The encoding format of the certificate and key (PEM or DER).</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>signaturealg</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Signature algorithm.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>serial</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Serial number.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>issuer</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Issuer name.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>clientcertnotbefore</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Not-Before date.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>clientcertnotafter</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Not-After date.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>daystoexpiration</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Days remaining for the certificate to expire.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>subject</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Subject name.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>publickey</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Public key algorithm.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>publickeysize</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Size of the public key.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>version</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Version.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>priority</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">ocsp priority</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>status</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Status of the certificate.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>fipskey</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">FIPS key ID.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>passcrypt</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Passcrypt.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>data</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Vserver Id</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>servername</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Vserver name to which the certificate key pair is bound.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>servicename</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Service name to which the certificate key pair is bound.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ocspresponder</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">OCSP responders bound to this certkey</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>expirymonitor</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Certificate expiry monitor</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>notificationperiod</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Certificate expiry notification period</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>linkcertkeyname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The name of the Certificate-Authority.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sslvserverpriority</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sslvserverversion</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>service</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>servicepriority</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>serviceversion</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>crldistributionpoint</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ocsppriority</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div><b>See Also</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="getsslcertkey.html">getsslcertkey</a></div></td></tr><tr><td><br></td></tr></table></div>
+</body>
+</html>

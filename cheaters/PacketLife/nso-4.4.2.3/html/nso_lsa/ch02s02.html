@@ -1,0 +1,712 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      
+      <title>Rearchitecting an existing monolithic application into LSA -  - NSO Layered Service Architecture</title>
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+      <link rel="home" href="index.html" title="NSO Layered Service Architecture" />
+      <link rel="up" href="ncs_lsa.lsa.html" title="LSA examples" />
+      <link rel="prev" href="ch02s01.html" title="Greenfield LSA application" />
+      <link rel="next" href="ncs_lsa.lsa_cluster_comp.html" title="LSA compared to NSO clustering" />
+      <meta xmlns="" name="Section-title" content="Rearchitecting an existing monolithic application into LSA" /><script xmlns="" type="text/javascript">
+      //The id for tree cookie
+      var treeCookieId = "treeview-557";
+      var language = "en";
+      var w = new Object();
+      //Localization
+      txt_filesfound = 'Results';
+      txt_enter_at_least_1_char = "You must enter at least one character.";
+      txt_browser_not_supported = "JavaScript is disabled on your browser. Please enable JavaScript to enjoy all the features of this site.";
+      txt_please_wait = "Please wait. Search in progress...";
+      txt_results_for = "Results for: ";
+    </script><link xmlns="" rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/css/positioning.css" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/jquery/theme-redmond/jquery-ui-1.8.2.custom.css" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/jquery/treeview/jquery.treeview.css" /><style xmlns="" type="text/css">
+      
+      #noscript{
+      font-weight:bold;
+      background-color: #55AA55;
+      font-weight: bold;
+      height: 25spx;
+      z-index: 3000;
+      top:0px;
+      width:100%;
+      position: relative;
+      border-bottom: solid 5px black;
+      text-align:center;
+      color: white;
+      }
+      
+      input {
+      margin-bottom: 5px;
+      margin-top: 2px;
+      }
+      .folder {
+      display: block;
+      height: 22px;
+      padding-left: 20px;
+      background: transparent url(common/jquery/treeview/images/folder.gif) 0 0px no-repeat;
+      }
+      span.contentsTab {
+      padding-left: 20px;
+      background: url(common/images/toc-icon.png) no-repeat 0 center;
+      }
+      span.searchTab {
+      padding-left: 20px;
+      background: url(common/images/search-icon.png) no-repeat 0 center;
+      }
+      
+      /* Overide jquery treeview's defaults for ul. */
+      .treeview ul {
+      background-color: transparent;
+      margin-top: 4px;
+      }		
+      #webhelp-currentid {
+      /* background-color: #D8D8D8 !important; */
+      background-color: #D8D8D8;
+      }
+      .treeview .hover { color: black; }
+      .filetree li span a { text-decoration: none; font-size: 12px; color: #517291; }
+      
+      /* Override jquery-ui's default css customizations. These are supposed to take precedence over those.*/
+      .ui-widget-content {
+      border: 0px; 
+      background: none; 
+      color: none;     
+      }
+      .ui-widget-header {
+      color: #e9e8e9;
+      border-left: 1px solid #e5e5e5;
+      border-right: 1px solid #e5e5e5;
+      border-bottom: 1px solid #bbc4c5;
+      border-top: 4px solid #e5e5e5;
+      border: medium none;
+      background: #F4F4F4; /* old browsers */
+      background: -moz-linear-gradient(top, #F4F4F4 0%, #E6E4E5 100%); /* firefox */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F4F4F4), color-stop(100%,#E6E4E5)); /* webkit */    
+      font-weight: none;
+      }
+      .ui-widget-header a { color: none; }
+      .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { 
+      border: none; background: none; font-weight: none; color: none; }
+      .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited { color: black; text-decoration: none; }
+      .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus { border: none; background: none; font-weight: none; color: none; }
+      
+      .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { border: none; background: none; font-weight: none; color: none; }
+      .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited { 
+      color: black; text-decoration: none; 	
+      background: #C6C6C6; /* old browsers */
+      background: -moz-linear-gradient(top, #C6C6C6 0%, #D8D8D8 100%); /* firefox */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#C6C6C6), color-stop(100%,#D8D8D8)); /* webkit */
+      -webkit-border-radius:15px; -moz-border-radius:10px;
+      border: 1px solid #f1f1f1;
+      }    
+      .ui-corner-all { border-radius: 0 0 0 0; }
+      
+      .ui-tabs { padding: .2em;}
+      .ui-tabs .ui-tabs-nav li { top: 0px; margin: -2px 0 1px; text-transform: uppercase; font-size: 10.5px;}
+      .ui-tabs .ui-tabs-nav li a { padding: .25em 2em .25em 1em; margin: .5em; text-shadow: 0 1px 0 rgba(255,255,255,.5); }
+      /**
+      *	Basic Layout Theme
+      * 
+      *	This theme uses the default layout class-names for all classes
+      *	Add any 'custom class-names', from options: paneClass, resizerClass, togglerClass
+      */
+      
+      .ui-layout-pane { /* all 'panes' */ 
+      background: #FFF; 
+      border: 1px solid #BBB; 
+      padding: 05x; 
+      overflow: auto;
+      } 
+      
+      .ui-layout-resizer { /* all 'resizer-bars' */ 
+      background: #DDD; 
+      top:100px
+      } 
+      
+      .ui-layout-toggler { /* all 'toggler-buttons' */ 
+      background: #AAA; 
+      } 
+      
+    </style>
+      <!--[if IE]>
+	<link rel="stylesheet" type="text/css" href="../common/css/ie.css"/>
+	<![endif]--><script xmlns="" type="text/javascript" src="common/browserDetect.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery-1.7.2.min.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery.ui.all.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery.cookie.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/treeview/jquery.treeview.min.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/layout/jquery.layout.js">
+         <!----></script><style type="text/css">
+      
+      #header {
+      /* background: url("../images/header-bg.png") scroll top left repeat-x #4d8c83; */
+      background: transparent;
+      }
+      #leftnavigation {
+      /* background-color: #ededed!important; */
+      background-color: transparent;
+      }
+      #navheader {
+      visibility: hidden;
+      }
+      #webhelp-currentid {
+      /* background-color: #D8D8D8 !important; */
+      background-color: #FFFFFF; /*but must be changed in main.js as well*/
+      }
+      .filetree span.file {
+      /* background: url(images/file.gif) 0 0 no-repeat; */
+      background: initial;
+      }
+      .filetree span.folder, .filetree span.file {
+      padding: 1px 0 1px 7px;
+      display: block;
+      }
+
+      /* borrowed from cisco: clientlib.css */
+      .footer {
+      margin: 28px 30px 0 15px;
+      font-size: 80%;
+      line-height: 120%;
+      border-top: 1px solid #ccc;
+      padding-top: 7px;
+      color: #999;
+      }
+      .footer #footer-legal{display:inline;padding-bottom:18px}
+      #framework-footer{margin:0;padding:0 0 15px 0;min-width:900px;width:100%}
+      .footer a,.footer a:visited{color:#999}
+
+      /* from ccimr.css */
+      a:active  { color: #3366CC}
+      a:hover   { color: #3366CC}
+      a:link    { color: #3366CC}
+      a:visited { color: #3366CC}
+
+      #header img {
+      float: left;
+      margin-left: 20px;
+      margin-top: 0px;
+      }
+
+      #header h1 {
+      color: #336666;
+      margin-top: 4px;
+      }
+      #content h1, #content h2 {
+      color: #336666;
+      }
+      .title {
+      color: #336666;
+      }
+      p, pre {
+      margin-left: 0.1in;
+      }
+      p, ul, ol, li {
+        font-size: 95%;
+        font-family: Arial, Helvetica, sans-serif;
+        margin-top: 1px;
+      }
+      body {
+        font: 80.5% Arial, Helvetica, sans-serif;
+      }
+      ol {
+      display: block;
+      list-style-type: decimal;
+      -webkit-margin-before: 1em;
+      -webkit-margin-after: 1em;
+      -webkit-margin-start: 0px;
+      -webkit-margin-end: 0px;
+      -webkit-padding-start: 40px;
+      border: 1;
+      }
+    </style></head>
+   <body>
+      <noscript>
+         <div id="noscript">JavaScript is disabled on your browser. Please enable JavaScript to enjoy all the features of this site.</div>
+      </noscript>
+      <div id="header"><a href="index.html"><img style="margin-right: 2px; width: 110; height: 73; padding-right: 25px; padding-top: 8px" align="right" src="common/images/logo.gif" alt="Cisco Systems, Inc." /></a><h1>NSO Layered Service Architecture<br />LSA examples
+         </h1>
+         <div id="navheader">
+            <!---->
+            <table class="navLinks">
+               <tr>
+                  <td><a id="showHideButton" href="#" onclick="myLayout.toggle('west')" class="pointLeft" tabindex="5" title="Hide TOC tree">Sidebar
+                                                    </a></td>
+                  <td><a accesskey="p" class="navLinkPrevious" tabindex="5" href="ch02s01.html">Prev</a>
+                                                             |
+                                                             <a accesskey="u" class="navLinkUp" tabindex="5" href="ncs_lsa.lsa.html">Up</a>
+                                                         |
+                                                         <a accesskey="n" class="navLinkNext" tabindex="5" href="ncs_lsa.lsa_cluster_comp.html">Next</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div id="content">
+         <div class="sect1">
+            <div xmlns="" class="titlepage">
+               <div>
+                  <div>
+                     <h2 xmlns="http://www.w3.org/1999/xhtml" class="title" style="clear: both"><a id="d0e332"></a>Rearchitecting an existing monolithic application into LSA
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>
+                     If we do not have the luxury of designing our NSO service application
+                     from scratch, but rather we are faced with extending/changing an existing,
+                     already deployed application into the LSA architecture we can use the
+                     techniques described in this section.
+                   
+            </p>
+            <p>
+                     Usually, the reasons for rearchitecting an existing application are
+                     performance related.
+                   
+            </p>
+            <p>
+                     In the NSO example collection, one of the most popular real examples
+                     is the <code class="filename">examples.ncs/service-provider/mpls-vpn</code> code.
+                     That example contains an almost "real" VPN provisioning example whereby
+                     VPNS are provisioned in a network of CPEs, PEs and P routers according to
+                     this picture:
+                     
+            </p>
+            <div class="figure"><a id="d0e344"></a><p class="title"><strong>Figure 4. VPN network</strong></p>
+               <div class="figure-contents">
+                  <div class="mediaobject" align="center">
+                     <table border="0" summary="manufactured viewport for HTML img" style="cellpadding: 0; cellspacing: 0;" width="496">
+                        <tr>
+                           <td align="center"><img src="pics/network.jpg" align="middle" width="496" alt="VPN network" /></td>
+                        </tr>
+                     </table>
+                  </div>
+               </div>
+            </div>
+            <p><br class="figure-break" />
+               
+                     The service model in this example, roughly looks like:
+                   
+            </p>
+            <div class="informalexample"><pre class="screen">   list l3vpn {
+      description "Layer3 VPN";
+
+      key name;
+      leaf name {
+        type string;
+      }
+
+      leaf route-distinguisher {
+        description "Route distinguisher/target identifier unique for the VPN";
+        mandatory true;
+        type uint32;
+      }
+
+      list endpoint {
+        key "id";
+        leaf id {
+          type string;
+        }
+        leaf ce-device {
+          mandatory true;
+          type leafref {
+            path "/ncs:devices/ncs:device/ncs:name";
+          }
+        }
+
+        leaf ce-interface {
+          mandatory true;
+          type string;
+        }
+
+        ....
+
+        leaf as-number {
+          tailf:info "CE Router as-number";
+          type uint32;
+        }
+      }
+      container qos {
+        leaf qos-policy {
+           ......</pre></div>
+            
+                There are several interesting observations on this model code
+                related to the Layered Service Architecture.
+                
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>
+                                  Each instantiated service has a list of end points, CPE routers. These
+                                  are modeled as a leafref into the /devices tree. This has to be
+                                  changed if we wish to change this application into an LSA
+                                  application since the /devices tree at the upper layer doesn't
+                                  contain the actual managed routers, instead the /devices tree
+                                  contains the lower layer RFS nodes.
+                                
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                                  There is no connectivity/topology information in the service model,
+                                  instead the <code class="filename">mpls-vpn</code> example has topology
+                                  information on the side, and that data is used by the provisioning
+                                  code. That topology information for example contains data on which
+                                  CE routers are directly connected to which PE router.
+                                
+                     </p>
+                     <p>
+                                  Remember from the previous section, one of the additional
+                                  complications of an LSA application is the dispatching part.
+                                  The dispatch problem fits well into the pattern where we have
+                                  topology information stored on the side and let the provisioning
+                                  FASTMAP code use that data to guide the provisioning.
+                                  One straightforward way would be to augment the topology
+                                  information with additional data, indicating which RFS node is used to
+                                  manage a specific managed device.
+                                
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>
+                     By far the easiest way to change an existing monolithic NSO application
+                     into the LSA architecture, is to keep the service model at upper layer
+                     and lower layer almost identical, only changing things like leafrefs
+                     direct into the /devices tree which obviously breaks.
+                   
+            </p>
+            <p>
+                     In this example the topology information is stored in a separate
+                     container <code class="filename">share-data</code> and propagated to the
+                     LSA nodes by means of service code.
+                   
+            </p>
+            <p>
+                     The example,
+                     <code class="filename">examples.ncs/service-provider/mpls-vpn-layered-service-architecture</code>
+                     does exactly this, the upper layer data model in
+                     <code class="filename">upper-nso/packages/l3vpn/src/yang/l3vpn.yang</code>
+                     now looks as:
+                     
+            </p>
+            <div class="informalexample"><pre class="screen">   list l3vpn {
+      description "Layer3 VPN";
+
+      key name;
+      leaf name {
+        type string;
+      }
+
+      leaf route-distinguisher {
+        description "Route distinguisher/target identifier unique for the VPN";
+        mandatory true;
+        type uint32;
+      }
+
+      list endpoint {
+        key "id";
+        leaf id {
+          type string;
+        }
+        leaf ce-device {
+          mandatory true;
+          type string;
+        }
+        .......</pre></div>
+            <p>
+                     The <code class="filename">ce-device</code> leaf is now just a regular string, not
+                     a leafref.
+                   
+            </p>
+            <p>
+                     So, instead of an NSO  topology that looks like
+               
+               
+               
+                      
+            </p>
+            <div class="figure"><a id="d0e393"></a><p class="title"><strong>Figure 5. NSO topology</strong></p>
+               <div class="figure-contents">
+                  <div class="mediaobject" align="center">
+                     <table border="0" summary="manufactured viewport for HTML img" style="cellpadding: 0; cellspacing: 0;" width="496">
+                        <tr>
+                           <td align="center"><img src="pics/mpls-vpn.png" align="middle" width="496" alt="NSO topology" /></td>
+                        </tr>
+                     </table>
+                  </div>
+               </div>
+            </div>
+            <p><br class="figure-break" />
+               
+                     we want an NSO architecture that looks like:
+               
+                      
+            </p>
+            <div class="figure"><a id="d0e402"></a><p class="title"><strong>Figure 6. NSO LSA topology</strong></p>
+               <div class="figure-contents">
+                  <div class="mediaobject" align="center">
+                     <table border="0" summary="manufactured viewport for HTML img" style="cellpadding: 0; cellspacing: 0;" width="496">
+                        <tr>
+                           <td align="center"><img src="pics/mpls-vpn-lsa.png" align="middle" width="496" alt="NSO LSA topology" /></td>
+                        </tr>
+                     </table>
+                  </div>
+               </div>
+            </div>
+            <p><br class="figure-break" />
+               
+                   
+            </p>
+            <p>
+                     The task for the upper layer FastMap code is then to instantiate a
+                     copy of itself on the right lower layer NSO nodes. The upper layer
+                     FastMap code must:
+                   
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>
+                                  Determine which routers, (CE, PE or P) will be touched by it's
+                                  execution.
+                                
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                                  Look in it's dispatch table - which lower layer NSO nodes are
+                                  used to host these routers
+                                
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                                  Instantiate a copy of itself on those lower layer NSO nodes.
+                                  One extremely efficient way to do that, is to use the
+                                  <code class="filename">Maapi.copy_tree()</code> method. The code in the
+                                  example contains code that looks like:
+                                  
+                     </p>
+                     <div class="informalexample"><pre class="screen">        public Properties create(
+            ....
+            NavuContainer lowerLevelNSO = ....
+
+            Maapi maapi = service.context().getMaapi();
+            int tHandle = service.context().getMaapiHandle();
+            NavuNode dstVpn = lowerLevelNSO.container("config").
+                    container("l3vpn", "vpn").
+                    list("l3vpn").
+                    sharedCreate(serviceName);
+            ConfPath dst = dstVpn.getConfPath();
+            ConfPath src = service.getConfPath();
+
+            maapi.copy_tree(tHandle, true, src, dst);</pre></div>
+                     <p>
+                        
+                                
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>
+                     Finally, we must make a minor modification to the lower layer (RFS)
+                     provisioning code too. Originally, the FastMap code wrote all
+                     config for all routers participating in the VPN, now with the LSA
+                     partitioning, each lower layer NSO node is only responsible for the
+                     portion of the VPN which involves devices that reside in its /devices
+                     tree, thus the provisioning code must be changed to ignore devices
+                     that do not reside  in the /devices tree.
+                   
+            </p>
+            <p>
+                     As an example of the different YANG files and namespaces, we'll walk
+                     through the actual process of splitting up a monolithic service, let's
+                     assume that our original service resides in a file,
+                     <code class="filename">myserv.yang</code> and looks like:
+                     
+            </p>
+            <div class="informalexample"><pre class="screen">module myserv {
+
+  namespace "http://example.com/myserv";
+  prefix ms;
+
+  .....
+
+  list srv {
+    key name;
+    leaf name {
+      type string;
+    }
+
+    uses ncs:service-data;
+    ncs:servicepoint vlanspnt;
+
+    leaf router {
+       type leafref {
+         path "/ncs:devices/ncs:device/ncs:name";
+    .....
+    }
+}</pre></div>
+            <p>
+               
+                   
+            </p>
+            <p>
+                     In an LSA setting, we want to keep this module as close to the original as
+                     possible. We clearly want to keep the namespace, the prefix
+                     and the structure of the YANG identical to the original. This is to not
+                     disturb any provisioning systems north of the original NSO. Thus with only
+                     minor modifications, we want to run this module at the CFS node, but with
+                     non applicable leafrefs removed, thus at the CFS node we would get:
+                   
+            </p>
+            <div class="informalexample"><pre class="screen">module myserv {
+
+  namespace "http://example.com/myserv";
+  prefix ms;
+
+  .....
+
+  list srv {
+    key name;
+    leaf name {
+      type string;
+    }
+
+    uses ncs:service-data;
+    ncs:servicepoint vlanspnt;
+
+    leaf router {
+       type string;
+    .....
+    }
+}</pre></div>
+            <p>
+                       Now, we want to run almost the same YANG module at the RFS node, however
+                       the namespace must be changed. For the sake of the CFS node, we're
+                       going to NED compile the RFS and NSO doesn't like the same namespace
+                       to occur twice, thus for the RFS node, we would get a YANG module
+                       <code class="filename">myserv-rfs.yang</code> that looks like:
+                     
+            </p>
+            <div class="informalexample"><pre class="screen">module myserv-rfs {
+
+  namespace "http://example.com/myserv-rfs";
+  prefix ms-rfs;
+
+  .....
+
+  list srv {
+    key name;
+    leaf name {
+      type string;
+    }
+
+    uses ncs:service-data;
+    ncs:servicepoint vlanspnt;
+
+    leaf router {
+       type leafref {
+         path "/ncs:devices/ncs:device/ncs:name";
+    .....
+    }
+}</pre></div>
+            <p>
+                     This file can - and should - keep the leafref as is.
+                     
+            </p>
+            <p>
+                       The final and last file we get is the compiled NED, that should
+                       be loaded in the CFS node. The NED is directly compiled from the
+                       RFS model.
+                     
+            </p>
+            <div class="informalexample"><pre class="screen">$ ncs-make-package --netconf-ned /path/to-rfs-yang  myserv-rfs-ned</pre></div>
+            
+                  Thus we end up with 3 distinct packages from the original one.
+                  
+            <div class="orderedlist">
+               <ol class="orderedlist" type="1">
+                  <li class="listitem">
+                     <p>
+                                    The original, slated for the CFS node, with leafrefs removed.
+                                  
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                                    The modified original, slated for the RFS node, with the namespace
+                                    and the prefix changed.
+                                  
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                                    The NED, compiled from the RFS node code, slated for the CFS node.
+                                  
+                     </p>
+                  </li>
+               </ol>
+            </div>
+         </div><script type="text/javascript" src="common/main.js">
+            <!----></script><script type="text/javascript" src="common/splitterInit.js">
+            <!----></script><div class="footer" id="footer-legal">
+            <div class="footer-legal framework-footer-cq">
+               <div id="framework-footer">
+                  <div id="footer-legal"><a href="http://www.cisco.com/web/siteassets/legal/terms_condition.html">Terms &amp; Conditions</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/privacy.html">Privacy Statement</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/privacy.html#cookies">Cookie Policy</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/trademark.html">Trademarks</a></div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div id="sidebar">
+         <div id="leftnavigation" style="padding-top:3px;">
+            <div id="tabs">
+               <ul style="visibility: hidden;"></ul>
+               <div id="treeDiv"><img src="common/images/loading.gif" alt="loading table of contents..." id="tocLoading" style="display:block;" /><div id="ulTreeDiv" style="display:none">
+                     <ul id="tree" class="filetree">
+                        <li><span class="file"><a href="ncs_lsa.intro.html" tabindex="1">Going big - Layered service architecture</a></span><ul>
+                              <li><span class="file"><a href="ch01s01.html" tabindex="1">Introduction to the layered service architecture</a></span></li>
+                              <li><span class="file"><a href="ch01s02.html" tabindex="1">Separating the service into CFS and RFS</a></span><ul>
+                                    <li><span class="file"><a href="ch01s02s01.html" tabindex="1">New design - green field</a></span></li>
+                                    <li><span class="file"><a href="ch01s02s02.html" tabindex="1">Existing monolithic application</a></span></li>
+                                    <li><span class="file"><a href="ch01s02s03.html" tabindex="1">Existing monolithic application with stacked services</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch01s03.html" tabindex="1">Dispatching</a></span></li>
+                              <li><span class="file"><a href="ch01s04.html" tabindex="1">Scalability and performance aspects</a></span></li>
+                              <li><span class="file"><a href="ch01s05.html" tabindex="1">Multiple CFS nodes</a></span></li>
+                              <li><span class="file"><a href="ch01s06.html" tabindex="1">Pros and cons of layered service architecture</a></span><ul>
+                                    <li><span class="file"><a href="ch01s06s01.html" tabindex="1">Pros</a></span></li>
+                                    <li><span class="file"><a href="ch01s06s02.html" tabindex="1">Cons</a></span></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ncs_lsa.lsa.html" tabindex="1">LSA examples</a></span><ul>
+                              <li><span class="file"><a href="ch02s01.html" tabindex="1">Greenfield LSA application</a></span></li>
+                              <li id="webhelp-currentid"><span class="file"><a href="ch02s02.html" tabindex="1">Rearchitecting an existing monolithic application into LSA</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ncs_lsa.lsa_cluster_comp.html" tabindex="1">LSA compared to NSO clustering</a></span><ul>
+                              <li><span class="file"><a href="ch03s01.html" tabindex="1">LSA compared to NSO clustering</a></span></li>
+                           </ul>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

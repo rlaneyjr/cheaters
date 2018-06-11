@@ -1,0 +1,65 @@
+#cloud-config
+  
+# 1. Create a new group  
+groups:
+ - admin
+
+# 2. Change default user add to new group and add sudo access
+system_info:
+ default_user:
+  name: ubuntu
+  lock_passwd: true
+  groups: admin
+  sudo: ["ALL=(ALL) NOPASSWD:ALL"]
+
+# 3. Change password of default user  
+password: ralrox22
+chpasswd: { expire: False }
+ssh_pwauth: True
+
+# 4. Create new user and also create the default user  
+
+# 5. Add ssh-key  
+
+# 6. Add password ("groovy")  
+
+# 7. Add to group  
+
+# 8. Add sudo access  
+users:
+ - default
+ - name: rlaney
+   ssh-authorized-keys:
+     - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDeVHRNg9ey4eFRzZIECFio/LWooVGc+p7439+Lf+4E1IQNQ/lIPo0QFcNcWbDAXSiuS6ViNOx/9uvfvFtmRpMQLe8EClern0/uRLdq17iL0wCtm1HzLMXOAtNwiXgFJJ0BktZ71pGtjr/u1uoivG1ZjK8qh7ydVpA0GiL39d4ZcXyYvF2EE8Kp6KrwrqAyaBS8pp7OTwNT8U0UOAzSIZbCm5BS0GssyF/Skx6Q98ovlUZNs++2cxZB9rPozZwKEvcT8QiFH519QcNYlYpaeLiLOgntmWAqQ+c7P+UWWaDB9npEZsVGc4PPrprVfDM6cvMQPnJxJDPnL78uvD+oxfnNdJ9z70DS2Fvop8ipOKL4aQW128YNp91KrSBsVULUVHlQKluq58tPdwovu1a97J2kCTS8uhFxGzU+VIwm72r9v9orq9gKNGVkcMM5hyzD7AB8Dq+PGmv/47urllut2HgVe+DylB/dVlfQtv6DAsTa24ag8Z9hlThJoR3eHlBzPrH4A+2Yk9kjGsw2yAnyYm3e4I/zSr5Guvb1YTCNfEZEfGSz3t4Yh1bEvyCsjKPk7PF9d2MKC1GRAm6qBqOsNAYJ9Ra7nV5bmnDOSaB+iDkbU7k+TTOBO0sTeAjAr7J1hux1/cGn7QLL+jbX4oIcWf3qSYSUgcLSLE5D2I6uNS9+cw== rlaney@MonsterMacBook.local
+   lock_passwd: false
+   groups: admin
+   passwd: ralrox22
+   sudo: ["ALL=(ALL) NOPASSWD:ALL"]
+
+# 9. File creation
+write_files:
+ - content: |
+       # This will go inside the file
+       OK Platform9, it's working
+   path: /tmp/pf9_write_file.txt
+   permissions: '0777'
+
+# 10. Run arbitrary commands  
+runcmd:
+ - [ 'sh', '-c', 'echo "Hello World from PF9" > /tmp/pf9_hello.txt']
+ - [ 'sh', '-c', 'date > /tmp/pf9_date.txt']
+
+# 11. Set hostname  
+hostname: Utopic-US01
+
+# 12. Set timezone  
+timezone: US/Eastern
+
+# 13. Install packages
+packages:
+ - git
+ - zsh
+
+# 14. Restart network service for Redhat guests (this will fail gracefully on Debian guests)  
+bootcmd:
+ - [ 'sh', '-c', 'service network restart' ]

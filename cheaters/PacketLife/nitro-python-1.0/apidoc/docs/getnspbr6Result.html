@@ -1,0 +1,250 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>Citrix NetScaler XML API User&#39;s Guide - Structure Definition</title>
+<link rel="stylesheet" type="text/css" href="help_ns.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body onload="initial()" class="ns_body">
+<div class="ns_content"><table cellpadding="0" cellspacing="0"><script type="text/javascript">
+function changeContext(id,lang,flag){
+	parent.banner.document.language.select.value = lang;
+	if( lang == "C" ){
+		if(flag == "1"){
+			showContent(cfirstcontent,id,lang);
+		}
+		else{
+			showContent(csecondcontent,id,lang);
+		}
+	}
+	if( lang == "Perl" ){
+		if(flag == "1"){
+			showContent(perlfirstcontent,id,lang);
+		}
+		else{
+			showContent(perlsecondcontent,id,lang);
+		}
+	}
+	if( lang == "Java" ){
+		if(flag == "1"){
+			showContent(javafirstcontent,id,lang);	
+		}
+		else{
+			showContent(javasecondcontent,id,lang);
+		}
+	}
+	if( lang == "C#" ){
+		if(flag == "1"){
+			showContent(csharpfirstcontent,id,lang);
+		}
+		else{
+			showContent(csharpsecondcontent,id,lang);
+		}
+	}
+	if( lang == "VB" ){
+		if(flag == "1"){
+			showContent(vbfirstcontent,id,lang);
+		}
+		else{
+			showContent(vbsecondcontent,id,lang);
+		}
+	}
+	if(flag == "1"){
+		showInside(lang,"0");
+	}
+	else{
+		showOutside(lang);
+	}
+}
+function showContent(content,id,lang){
+	if(ie4){
+	   showContentObj=document.all.id;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById(id);
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+  showLangSelect(lang);
+}
+function showInside(str,cond){
+	if(str == "C"){
+ 		var inside_content = csecondcontent;
+ 	}
+ 	if(str == "Perl"){
+ 		var inside_content = perlsecondcontent;
+ 	}
+ 	if(str == "Java"){
+ 		var inside_content = javasecondcontent;
+ 	}
+ 	if(str == "C#"){
+		var inside_content = csharpsecondcontent;
+ 	}
+ 	if(str == "VB"){
+		var inside_content = vbsecondcontent;
+ 	}
+	showContent(inside_content,'qiksearch_div1',str);
+ 	if ( cond == "1" ){
+ 		var page = 'apidoc/docs/getnspbr6Result.html#pbr6List';
+ 		document.location.href = page;
+ 	}
+}
+function showOutside(str){
+	if(str == "C" ){
+ 		var inside_content = cfirstcontent;
+ 	}
+ 	if(str == "Perl" ){
+ 		var inside_content = perlfirstcontent;
+ 	}
+ 	if(str == "Java" ){
+ 		var inside_content = javafirstcontent;
+ 	}
+ 	if(str == "C#" ){
+ 		var inside_content = csharpfirstcontent;
+ 	}
+ 	if(str == "VB" ){
+ 		var inside_content = vbfirstcontent;
+ 	}
+ 	showContent(inside_content,'qiksearch_div',str);
+}
+function initial(){
+	ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+	ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+	ns4=document.layers;
+	langSelected = parent.banner.document.language.select.value
+	var plink = parent.banner.document.language.plink.value
+	var my_array=plink.split("&");
+	var temp = my_array[0];
+ 	var grp = temp.split("@");
+	var cmd = my_array[1];
+	var regex = /^stat/i;
+	if( cmd.match(regex) != null ){
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex_stat.html\">Statistics</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getnspbr6Result");
+	}
+	else{
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex.htm\">Configuration</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getnspbr6Result");
+	}
+	if( langSelected == "C" ){
+ 		var content = cfirstcontent;
+	}
+	else if( langSelected == "Perl" ){
+		var content = perlfirstcontent;
+	}
+	else if( langSelected == "Java" ){
+		var content = javafirstcontent;
+	}
+	else if( langSelected == "C#" ){
+		var content = csharpfirstcontent;
+	}
+	else if( langSelected == "VB" ){
+		var content = vbfirstcontent;
+	}
+	else{
+		var content = cfirstcontent;
+		langSelected="C";
+	}
+	showContent(content,'qiksearch_div',langSelected);
+	showInside(langSelected,"0");
+}
+function showPLink(content){
+	if(ie4){
+	   showContentObj=document.all.progressive_link;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById("progressive_link");
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+}
+function showLangSelect(id){
+	   if(ie4)
+       {
+       	showObj=document.all.first_url;
+       	showObj1=document.all.second_url;
+       }
+       if(ns6)
+       {
+       	showObj=document.getElementById("first_url");
+       	showObj1=document.getElementById("second_url");
+       }
+       if( id == "C" ){
+       	newlink = "<b>C</b>";
+       	newlink1 = "<b>C</b>";
+       }
+       else{
+       	newlink = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C','1');\"><b>C</b></a>";
+       	newlink1 = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C','0');\"><b>C</b></a>";
+       }
+       if( id == "Perl" ){
+       	newlink = newlink + " | <b>Perl</b>";
+       	newlink1 = newlink1 + " | <b>Perl</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Perl','1');\"><b>Perl</b></a>";
+      	       newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Perl','0');\"><b>Perl</b></a>";
+       }
+       if( id == "Java" ){
+       	newlink = newlink + " | <b>Java</b>";
+       	newlink1 = newlink1 + " | <b>Java</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Java','1');\"><b>Java</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Java','0');\"><b>Java</b></a>";
+       }
+       if( id == "C#" ){
+       	newlink = newlink + " | <b>C#</b>";
+       	newlink1 = newlink1 + " | <b>C#</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C#','1');\"><b>C#</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C#','0');\"><b>C#</b></a>";
+       }
+       showObj.innerHTML = newlink;
+       showObj1.innerHTML = newlink1;
+}
+</script>
+<tr><td><div><div id="progressive_link"></div></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>getnspbr6Result Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>getnspbr6Result</b> structure defines the return type for getnspbr6 API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="first_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+cfirstcontent = "<pre>struct getnspbr6Result {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; struct <a href=\'getnspbr6Result.html\#nspbr6\'>nspbr6</a> list[];<br> };<br></pre></td></tr></table></div>"
+perlfirstcontent = "<pre>$getnspbr6Result = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rc => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; message => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; List => \'@<a href=\'getnspbr6Result.html\#nspbr6\'>nspbr6</a>\',<br> };<br></pre></td></tr></table></div>"
+javafirstcontent = "<pre>class getnspbr6Result {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getnspbr6Result.html\#nspbr6\'>nspbr6</a>[] list;<br> };<br></pre></td></tr></table></div>"
+csharpfirstcontent = "<pre>class getnspbr6Result {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getnspbr6Result.html\#nspbr6\'>nspbr6</a>[] list;<br> };<br></pre></td></tr></table></div>"
+vbfirstcontent = "<pre>Public <b>Structure</b> getnspbr6Result <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rc As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public message As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public  nspbr6List() As  <a href=\'getnspbr6Result.html\#nspbr6\'>nspbr6</a><br> <b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rc</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, rc is 0 else rc > 0. Values above 0x8000 indicate Warnings.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>message</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, message is NULL else message contains <a href="errorlisting.html">Error/Warning</a> message.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>nspbr6List</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">List of nspbr6s</div></td></tr><tr><td><br></td></tr><tr><td><div><a name="nspbr6"></a></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>nspbr6  Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>nspbr6</b> structure defines the actual return type values for getnspbr6 API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="second_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div1" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+csecondcontent = "<pre>struct nspbr6 {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * name;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * detail;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * actioN;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * srcmac;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * protocol;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int protocolnumber;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * srcportval;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * destportval;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * srcipv6val;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * destipv6val;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int vlan;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int vxlan;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * state;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * kernelstate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * interfacE;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int hits;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int priority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * operatoR;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * operatoR2;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * operatoR3;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * operatoR4;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * msr;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * monitor;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int state2;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int totalprobes;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int totalfailedprobes;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int failedprobes;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int monstatcode;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int monstatparam1;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int monstatparam2;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int monstatparam3;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * nexthopval;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int nexthopvlan;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * data;<br> };<br></pre></td></tr></table></div>"
+perlsecondcontent = "<pre>$nspbr6 = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; name => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; detail => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; actioN => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; srcmac => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; protocol => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; protocolnumber => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; srcportval => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; destportval => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; srcipv6val => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; destipv6val => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; vlan => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; vxlan => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; state => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; kernelstate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; interfacE => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; hits => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; priority => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; operatoR => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; operatoR2 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; operatoR3 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; operatoR4 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; msr => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; monitor => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; state2 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; totalprobes => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; totalfailedprobes => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; failedprobes => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; monstatcode => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; monstatparam1 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; monstatparam2 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; monstatparam3 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; nexthopval => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; nexthopvlan => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; data => \'$\',<br> };<br></pre></td></tr></table></div>"
+javasecondcontent = "<pre>class nspbr6 {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String name;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String detail;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String actioN;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String srcmac;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String protocol;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt protocolnumber;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String srcportval;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String destportval;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String srcipv6val;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String destipv6val;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt vlan;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt vxlan;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String state;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String kernelstate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String interfacE;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt hits;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt priority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String operatoR;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String operatoR2;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String operatoR3;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String operatoR4;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String msr;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String monitor;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt state2;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt totalprobes;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt totalfailedprobes;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt failedprobes;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int monstatcode;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int monstatparam1;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int monstatparam2;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int monstatparam3;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String nexthopval;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt nexthopvlan;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String data;<br> };<br></pre></td></tr></table></div>"
+csharpsecondcontent = "<pre>class nspbr6 {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string name;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string detail;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string actioN;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string srcmac;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string protocol;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 protocolnumber;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string srcportval;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string destportval;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string srcipv6val;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string destipv6val;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 vlan;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 vxlan;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string state;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string kernelstate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string interfacE;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 hits;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 priority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string operatoR;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string operatoR2;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string operatoR3;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string operatoR4;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string msr;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string monitor;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 state2;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 totalprobes;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 totalfailedprobes;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 failedprobes;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 monstatcode;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 monstatparam1;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 monstatparam2;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 monstatparam3;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string nexthopval;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 nexthopvlan;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string data;<br> };<br></pre></td></tr></table></div>"
+vbsecondcontent = "<pre>Public <b>Structure</b> nspbr6 <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public name As String  <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public detail As String  <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public actioN As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public srcmac As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public protocol As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public protocolnumber As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public srcportval As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public destportval As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public srcipv6val As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public destipv6val As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public vlan As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public vxlan As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public state As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public kernelstate As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public interfacE As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public hits As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public priority As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public operatoR As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public operatoR2 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public operatoR3 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public operatoR4 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public msr As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public monitor As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public state2 As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public totalprobes As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public totalfailedprobes As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public failedprobes As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public monstatcode As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public monstatparam1 As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public monstatparam2 As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public monstatparam3 As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public nexthopval As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public nexthopvlan As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public data As String<br><b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>name</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the PBR6 whose settings you want the NetScaler appliance to display.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>detail</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">To get a detailed view.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>actioN</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Action to perform on the outgoing IPv6 packets that match the PBR6.
+
+Available settings function as follows:
+* ALLOW - The NetScaler appliance sends the packet to the designated next-hop router.
+* DENY - The NetScaler appliance applies the routing table for normal destination-based routing.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>srcmac</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">MAC address to match against the source MAC address of an outgoing IPv6 packet.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>protocol</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Protocol number in IPv6 header or name.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>protocolnumber</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Protocol number in IPv6 header or name.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>srcportval</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Port number or range of port numbers to match against the source port number of an outgoing IPv6 packet. In the method line interface, separate the range with a hyphen and enclose within brackets. For example: [40-90].</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>destportval</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Port number or range of port numbers to match against the destination port number of an outgoing IPv6 packet. In the method line interface, separate the range with a hyphen and enclose within brackets. For example: [40-90].
+
+Note: The destination port can be specified only for TCP and UDP protocols.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>srcipv6val</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">IP address or range of IP addresses to match against the source IP address of an outgoing IPv6 packet. In the method line interface, separate the range with a hyphen and enclose within brackets.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>destipv6val</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">IP address or range of IP addresses to match against the destination IP address of an outgoing IPv6 packet.  In the method line interface, separate the range with a hyphen and enclose within brackets.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>vlan</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">ID of the VLAN. The NetScaler appliance compares the PBR6 only to the outgoing packets on the specified VLAN. If you do not specify an interface ID, the appliance compares the PBR6 to the outgoing packets on all VLANs.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>vxlan</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">ID of the VXLAN. The NetScaler appliance compares the PBR6 only to the outgoing packets on the specified VXLAN. If you do not specify an interface ID, the appliance compares the PBR6 to the outgoing packets on all VXLANs.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>state</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Enable or disable the PBR6. After you apply the PBR6s, the NetScaler appliance compares outgoing packets to the enabled PBR6s.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>kernelstate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Commit status of the PBR6.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>interfacE</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">ID of an interface. The NetScaler appliance compares the PBR6 only to the outgoing packets on the specified interface. If you do not specify a value, the appliance compares the PBR6 to the outgoing packets on all interfaces.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>hits</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of hits of this PBR6.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>priority</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Priority of the PBR6, which determines the order in which it is evaluated relative to the other PBR6s. If you do not specify priorities while creating PBR6s, the PBR6s are evaluated in the order in which they are created.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>operatoR</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Either the equals (=) or does not equal (!=) logical operator.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>operatoR2</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Logical operator.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>operatoR3</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Logical operator.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>operatoR4</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Logical operator.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>msr</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Whether Monitored Static Route(MSR) is enabled or disabled.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>monitor</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the monitor, of type PING6 or ARP, configured on the NetScaler appliance to monitor the route specified by the Next Hop parameter. You must enable the MSR parameter before setting the Monitor parameter.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>state2</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If this route is UP/DOWN.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>totalprobes</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The total number of probes sent.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>totalfailedprobes</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The total number of failed probes.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>failedprobes</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of the current failed monitoring probes.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>monstatcode</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The code indicating the monitor response.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>monstatparam1</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">First parameter for use with message code.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>monstatparam2</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Second parameter for use with message code.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>monstatparam3</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Third parameter for use with message code.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>nexthopval</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">ID of the VLAN, if you have specified a link local address for the Next Hop parameter.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>nexthopvlan</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">VLAN number to be used for link local nexthop .</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>data</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Internal data of this route.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>See Also</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="getnspbr6.html">getnspbr6</a></div></td></tr><tr><td><br></td></tr></table></div>
+</body>
+</html>

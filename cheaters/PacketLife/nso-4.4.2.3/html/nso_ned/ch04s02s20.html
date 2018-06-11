@@ -1,0 +1,520 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      
+      <title>tailf:cli-flatten-container -  - NSO 4.4.2.3 NED Development</title>
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+      <link rel="home" href="index.html" title="NSO 4.4.2.3 NED Development" />
+      <link rel="up" href="ug.cli-annot.annotations.html" title="Annotations" />
+      <link rel="prev" href="ch04s02s19.html" title="tailf:cli-flat-list-syntax" />
+      <link rel="next" href="ch04s02s21.html" title="tailf:cli-full-command" />
+      <meta xmlns="" name="Section-title" content="tailf:cli-flatten-container" /><script xmlns="" type="text/javascript">
+      //The id for tree cookie
+      var treeCookieId = "treeview-3312";
+      var language = "en";
+      var w = new Object();
+      //Localization
+      txt_filesfound = 'Results';
+      txt_enter_at_least_1_char = "You must enter at least one character.";
+      txt_browser_not_supported = "JavaScript is disabled on your browser. Please enable JavaScript to enjoy all the features of this site.";
+      txt_please_wait = "Please wait. Search in progress...";
+      txt_results_for = "Results for: ";
+    </script><link xmlns="" rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/css/positioning.css" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/jquery/theme-redmond/jquery-ui-1.8.2.custom.css" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/jquery/treeview/jquery.treeview.css" /><style xmlns="" type="text/css">
+      
+      #noscript{
+      font-weight:bold;
+      background-color: #55AA55;
+      font-weight: bold;
+      height: 25spx;
+      z-index: 3000;
+      top:0px;
+      width:100%;
+      position: relative;
+      border-bottom: solid 5px black;
+      text-align:center;
+      color: white;
+      }
+      
+      input {
+      margin-bottom: 5px;
+      margin-top: 2px;
+      }
+      .folder {
+      display: block;
+      height: 22px;
+      padding-left: 20px;
+      background: transparent url(common/jquery/treeview/images/folder.gif) 0 0px no-repeat;
+      }
+      span.contentsTab {
+      padding-left: 20px;
+      background: url(common/images/toc-icon.png) no-repeat 0 center;
+      }
+      span.searchTab {
+      padding-left: 20px;
+      background: url(common/images/search-icon.png) no-repeat 0 center;
+      }
+      
+      /* Overide jquery treeview's defaults for ul. */
+      .treeview ul {
+      background-color: transparent;
+      margin-top: 4px;
+      }		
+      #webhelp-currentid {
+      /* background-color: #D8D8D8 !important; */
+      background-color: #D8D8D8;
+      }
+      .treeview .hover { color: black; }
+      .filetree li span a { text-decoration: none; font-size: 12px; color: #517291; }
+      
+      /* Override jquery-ui's default css customizations. These are supposed to take precedence over those.*/
+      .ui-widget-content {
+      border: 0px; 
+      background: none; 
+      color: none;     
+      }
+      .ui-widget-header {
+      color: #e9e8e9;
+      border-left: 1px solid #e5e5e5;
+      border-right: 1px solid #e5e5e5;
+      border-bottom: 1px solid #bbc4c5;
+      border-top: 4px solid #e5e5e5;
+      border: medium none;
+      background: #F4F4F4; /* old browsers */
+      background: -moz-linear-gradient(top, #F4F4F4 0%, #E6E4E5 100%); /* firefox */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F4F4F4), color-stop(100%,#E6E4E5)); /* webkit */    
+      font-weight: none;
+      }
+      .ui-widget-header a { color: none; }
+      .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { 
+      border: none; background: none; font-weight: none; color: none; }
+      .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited { color: black; text-decoration: none; }
+      .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus { border: none; background: none; font-weight: none; color: none; }
+      
+      .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { border: none; background: none; font-weight: none; color: none; }
+      .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited { 
+      color: black; text-decoration: none; 	
+      background: #C6C6C6; /* old browsers */
+      background: -moz-linear-gradient(top, #C6C6C6 0%, #D8D8D8 100%); /* firefox */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#C6C6C6), color-stop(100%,#D8D8D8)); /* webkit */
+      -webkit-border-radius:15px; -moz-border-radius:10px;
+      border: 1px solid #f1f1f1;
+      }    
+      .ui-corner-all { border-radius: 0 0 0 0; }
+      
+      .ui-tabs { padding: .2em;}
+      .ui-tabs .ui-tabs-nav li { top: 0px; margin: -2px 0 1px; text-transform: uppercase; font-size: 10.5px;}
+      .ui-tabs .ui-tabs-nav li a { padding: .25em 2em .25em 1em; margin: .5em; text-shadow: 0 1px 0 rgba(255,255,255,.5); }
+      /**
+      *	Basic Layout Theme
+      * 
+      *	This theme uses the default layout class-names for all classes
+      *	Add any 'custom class-names', from options: paneClass, resizerClass, togglerClass
+      */
+      
+      .ui-layout-pane { /* all 'panes' */ 
+      background: #FFF; 
+      border: 1px solid #BBB; 
+      padding: 05x; 
+      overflow: auto;
+      } 
+      
+      .ui-layout-resizer { /* all 'resizer-bars' */ 
+      background: #DDD; 
+      top:100px
+      } 
+      
+      .ui-layout-toggler { /* all 'toggler-buttons' */ 
+      background: #AAA; 
+      } 
+      
+    </style>
+      <!--[if IE]>
+	<link rel="stylesheet" type="text/css" href="../common/css/ie.css"/>
+	<![endif]--><script xmlns="" type="text/javascript" src="common/browserDetect.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery-1.7.2.min.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery.ui.all.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery.cookie.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/treeview/jquery.treeview.min.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/layout/jquery.layout.js">
+         <!----></script><style type="text/css">
+      
+      #header {
+      /* background: url("../images/header-bg.png") scroll top left repeat-x #4d8c83; */
+      background: transparent;
+      }
+      #leftnavigation {
+      /* background-color: #ededed!important; */
+      background-color: transparent;
+      }
+      #navheader {
+      visibility: hidden;
+      }
+      #webhelp-currentid {
+      /* background-color: #D8D8D8 !important; */
+      background-color: #FFFFFF; /*but must be changed in main.js as well*/
+      }
+      .filetree span.file {
+      /* background: url(images/file.gif) 0 0 no-repeat; */
+      background: initial;
+      }
+      .filetree span.folder, .filetree span.file {
+      padding: 1px 0 1px 7px;
+      display: block;
+      }
+
+      /* borrowed from cisco: clientlib.css */
+      .footer {
+      margin: 28px 30px 0 15px;
+      font-size: 80%;
+      line-height: 120%;
+      border-top: 1px solid #ccc;
+      padding-top: 7px;
+      color: #999;
+      }
+      .footer #footer-legal{display:inline;padding-bottom:18px}
+      #framework-footer{margin:0;padding:0 0 15px 0;min-width:900px;width:100%}
+      .footer a,.footer a:visited{color:#999}
+
+      /* from ccimr.css */
+      a:active  { color: #3366CC}
+      a:hover   { color: #3366CC}
+      a:link    { color: #3366CC}
+      a:visited { color: #3366CC}
+
+      #header img {
+      float: left;
+      margin-left: 20px;
+      margin-top: 0px;
+      }
+
+      #header h1 {
+      color: #336666;
+      margin-top: 4px;
+      }
+      #content h1, #content h2 {
+      color: #336666;
+      }
+      .title {
+      color: #336666;
+      }
+      p, pre {
+      margin-left: 0.1in;
+      }
+      p, ul, ol, li {
+        font-size: 95%;
+        font-family: Arial, Helvetica, sans-serif;
+        margin-top: 1px;
+      }
+      body {
+        font: 80.5% Arial, Helvetica, sans-serif;
+      }
+      ol {
+      display: block;
+      list-style-type: decimal;
+      -webkit-margin-before: 1em;
+      -webkit-margin-after: 1em;
+      -webkit-margin-start: 0px;
+      -webkit-margin-end: 0px;
+      -webkit-padding-start: 40px;
+      border: 1;
+      }
+    </style></head>
+   <body>
+      <noscript>
+         <div id="noscript">JavaScript is disabled on your browser. Please enable JavaScript to enjoy all the features of this site.</div>
+      </noscript>
+      <div id="header"><a href="index.html"><img style="margin-right: 2px; width: 110; height: 73; padding-right: 25px; padding-top: 8px" align="right" src="common/images/logo.gif" alt="Cisco Systems, Inc." /></a><h1>NSO 4.4.2.3 NED Development<br />Annotations
+         </h1>
+         <div id="navheader">
+            <!---->
+            <table class="navLinks">
+               <tr>
+                  <td><a id="showHideButton" href="#" onclick="myLayout.toggle('west')" class="pointLeft" tabindex="5" title="Hide TOC tree">Sidebar
+                                                    </a></td>
+                  <td><a accesskey="p" class="navLinkPrevious" tabindex="5" href="ch04s02s19.html">Prev</a>
+                                                             |
+                                                             <a accesskey="u" class="navLinkUp" tabindex="5" href="ug.cli-annot.annotations.html">Up</a>
+                                                         |
+                                                         <a accesskey="n" class="navLinkNext" tabindex="5" href="ch04s02s21.html">Next</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div id="content">
+         <div class="sect2">
+            <div xmlns="" class="titlepage">
+               <div>
+                  <div>
+                     <h3 xmlns="http://www.w3.org/1999/xhtml" class="title"><a id="d0e2521"></a>tailf:cli-flatten-container
+                     </h3>
+                  </div>
+               </div>
+            </div>
+            <p>
+                       This annotation is a bit tricky. It tells the CLI engine that
+                       the container should be allowed to co-exist with leaves on the
+                       same command line, i.e. flattened. Normally, once the parser
+                       has entered a container it will not exit. However, if the
+                       container is flattened, the container will be exited once all
+                       leaves in the container have been entered. Also, a flattened
+                       container will be displayed together with sibling leaves on
+                       the same command line (provided the surrounding container has
+                       <span class="command"><strong>tailf:cli-compact-syntax</strong></span>).
+                     
+            </p>
+            <p>
+                       Suppose you want to model the command <span class="command"><strong>limit [inbound
+                             &lt;int16&gt; &lt;int16&gt;] [outbound &lt;int16&gt;
+                             &lt;int16&gt;] mtu &lt;uint16&gt;</strong></span>. In other word the
+                       inbound and outbound settings are optional, but if you give
+                       inbound you have to specify two 16-bit integers, and you can
+                       always specify mtu.
+                     
+            </p>
+            <div class="informalexample"><pre class="programlisting">container foo {
+  tailf:cli-compact-syntax;
+  container inbound {
+    tailf:cli-compact-syntax;
+    tailf:cli-sequence-commands;
+    tailf:cli-flatten-container;
+    leaf a {
+      tailf:cli-drop-node-name;
+      type uint16;
+    }
+    leaf b {
+      tailf:cli-drop-node-name;
+      type uint16;
+    }
+  }
+  container outbound {
+    tailf:cli-compact-syntax;
+    tailf:cli-sequence-commands;
+    tailf:cli-flatten-container;
+    leaf a {
+      tailf:cli-drop-node-name;
+      type uint16;
+    }
+    leaf b {
+      tailf:cli-drop-node-name;
+      type uint16;
+    }
+  }
+  leaf mtu {
+    type uint16;
+  }
+}</pre></div>
+            <p>
+                       In the above example the
+                       <span class="command"><strong>tailf:cli-flatten-container</strong></span> tells the
+                       parser that it should exit the outbound/inbound container once
+                       both values have been entered. Without the annotation it would
+                       not be possible to exit the container once it has been
+                       entered. It would be possible to have the command <span class="command"><strong>foo
+                             inbound 1 3</strong></span> or <span class="command"><strong>foo outbound 1 2</strong></span>
+                       but not both at the same time, and not the final mtu leaf. The
+                       <span class="command"><strong>tailf:cli-compact-syntax</strong></span> annotation tells
+                       the renderer to display all leaves on the same line. If it
+                       wasn't used the line setting <span class="command"><strong>foo inbound 1 2 outbound
+                             3 4 mtu 1500</strong></span> would be displayed as:
+                     
+            </p>
+            <div class="informalexample"><pre class="programlisting">foo inbound 1
+foo inbound 2
+foo outbound 3
+foo outbound 4
+foo mtu 1500</pre></div>
+            <p>
+                       The annotation <span class="command"><strong>tailf:cli-sequence-commands</strong></span>
+                       tells the CLI that the user has to enter the leaves inside the
+                       container in the specified order. Without this annotation it
+                       would not be possible to drop the names of the leaves and
+                       still have a deterministic parser. With the annotation, the
+                       parser knows that for the command <span class="command"><strong>foo inbound 1
+                             2</strong></span>, leaf a should be assigned the value 1 and leaf b
+                       the value 2.
+                     
+            </p>
+            <p>
+                       Another example:
+                     
+            </p>
+            <div class="informalexample"><pre class="programlisting">container htest {
+  tailf:cli-add-mode;
+  container param {
+    tailf:cli-hide-in-submode;
+    tailf:cli-flatten-container;
+    tailf:cli-compact-syntax;
+    leaf a {
+      type uint16;
+    }
+    leaf b {
+      type uint16;
+    }
+  }
+  leaf mtu {
+    type uint16;
+  }
+}</pre></div>
+            <p>
+                       The above model results in the command <span class="command"><strong>htest param a
+                             &lt;uint16&gt; b &lt;uint16&gt;</strong></span> for entering the
+                       submode. Once the submode has been entered, the command
+                       <span class="command"><strong>mtu &lt;uint16&gt;</strong></span> is available. Without
+                       the <span class="command"><strong>tailf:cli-flatten-container</strong></span> annotation
+                       it wouldn't be possible to use the
+                       <span class="command"><strong>tailf:cli-hide-in-submode</strong></span> annotation to
+                       attach the leaves to the command for entering the submode.
+                     
+            </p>
+         </div><script type="text/javascript" src="common/main.js">
+            <!----></script><script type="text/javascript" src="common/splitterInit.js">
+            <!----></script><div class="footer" id="footer-legal">
+            <div class="footer-legal framework-footer-cq">
+               <div id="framework-footer">
+                  <div id="footer-legal"><a href="http://www.cisco.com/web/siteassets/legal/terms_condition.html">Terms &amp; Conditions</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/privacy.html">Privacy Statement</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/privacy.html#cookies">Cookie Policy</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/trademark.html">Trademarks</a></div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div id="sidebar">
+         <div id="leftnavigation" style="padding-top:3px;">
+            <div id="tabs">
+               <ul style="visibility: hidden;"></ul>
+               <div id="treeDiv"><img src="common/images/loading.gif" alt="loading table of contents..." id="tocLoading" style="display:block;" /><div id="ulTreeDiv" style="display:none">
+                     <ul id="tree" class="filetree">
+                        <li><span class="file"><a href="ch01.html" tabindex="1">Introduction</a></span></li>
+                        <li><span class="file"><a href="ug.ned.html" tabindex="1">Network Element Drivers (NEDs)</a></span><ul>
+                              <li><span class="file"><a href="ug.ned.introduction.html" tabindex="1">Introduction</a></span></li>
+                              <li><span class="file"><a href="ug.ned.snmpned.html" tabindex="1">The SNMP NED</a></span><ul>
+                                    <li><span class="file"><a href="ch02s02s01.html" tabindex="1">Introduction</a></span></li>
+                                    <li><span class="file"><a href="ch02s02s02.html" tabindex="1">Overview</a></span></li>
+                                    <li><span class="file"><a href="ch02s02s03.html" tabindex="1">Compiling and loading MIBs</a></span></li>
+                                    <li><span class="file"><a href="ch02s02s04.html" tabindex="1">Configuring NSO to speak SNMP southbound</a></span><ul>
+                                          <li><span class="file"><a href="ch02s02s04.html#d0e240" tabindex="1">Configure MIB groups</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ch02s02s05.html" tabindex="1">Annotations for MIB objects</a></span></li>
+                                    <li><span class="file"><a href="ch02s02s06.html" tabindex="1"> Using the SNMP NED</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.ned.identification.html" tabindex="1">NED identification</a></span></li>
+                              <li><span class="file"><a href="ug.ned.devs.html" tabindex="1">Dumb versus capable devices</a></span></li>
+                              <li><span class="file"><a href="ug.ned.clined.html" tabindex="1">The CLI NED</a></span></li>
+                              <li><span class="file"><a href="ug.ned.generic.html" tabindex="1">Generic NED</a></span></li>
+                              <li><span class="file"><a href="ug.ned.starting.generic.html" tabindex="1">Getting started with a CLI NED</a></span></li>
+                              <li><span class="file"><a href="ug.ned.generic.gettingstarted.html" tabindex="1">Getting started with a generic NED</a></span></li>
+                              <li><span class="file"><a href="ug.ned.commands.html" tabindex="1">NED commands</a></span></li>
+                              <li><span class="file"><a href="ug.ned.stats.html" tabindex="1">Statistics</a></span></li>
+                              <li><span class="file"><a href="ug.ned.stats2.html" tabindex="1">Multi NEDs for Statistics</a></span></li>
+                              <li><span class="file"><a href="ug.ned.defaultvalues.html" tabindex="1">Making the NED handle default values properly</a></span></li>
+                              <li><span class="file"><a href="ch02s13.html" tabindex="1">Using set hooks in the NED</a></span></li>
+                              <li><span class="file"><a href="ch02s14.html" tabindex="1">Dry-run considerations</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ug.cli_ned.html" tabindex="1">Writing a data model for a CLI NED</a></span><ul>
+                              <li><span class="file"><a href="ch03s01.html" tabindex="1">Overview</a></span></li>
+                              <li><span class="file"><a href="ch03s02.html" tabindex="1">Tweaking the basic rendering scheme</a></span><ul>
+                                    <li><span class="file"><a href="ch03s02s01.html" tabindex="1">Suppressing submodes</a></span></li>
+                                    <li><span class="file"><a href="ch03s02s02.html" tabindex="1">Adding  a submode</a></span></li>
+                                    <li><span class="file"><a href="ch03s02s03.html" tabindex="1">Commands with multiple parameters</a></span></li>
+                                    <li><span class="file"><a href="ch03s02s04.html" tabindex="1">Leaf values not really part of the key</a></span></li>
+                                    <li><span class="file"><a href="ch03s02s05.html" tabindex="1">Change controlling annotations</a></span></li>
+                                    <li><span class="file"><a href="ch03s02s06.html" tabindex="1">Ordered-by user lists</a></span></li>
+                                    <li><span class="file"><a href="ch03s02s07.html" tabindex="1">Default values</a></span></li>
+                                    <li><span class="file"><a href="ch03s02s08.html" tabindex="1">Understanding how the diffs are generated</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch03s03.html" tabindex="1">Modifying the Java part of the CLI NED</a></span><ul>
+                                    <li><span class="file"><a href="ch03s03s01.html" tabindex="1">Connecting to a device</a></span></li>
+                                    <li><span class="file"><a href="ch03s03s02.html" tabindex="1">Displaying the configuration of a device</a></span><ul>
+                                          <li><span class="file"><a href="ch03s03s02.html#d0e1845" tabindex="1">Stripping sections, headers and footers</a></span></li>
+                                          <li><span class="file"><a href="ch03s03s02.html#d0e1868" tabindex="1">Removing keywords</a></span></li>
+                                          <li><span class="file"><a href="ch03s03s02.html#d0e1885" tabindex="1">Replacing keywords</a></span></li>
+                                          <li><span class="file"><a href="ch03s03s02.html#d0e1928" tabindex="1">Different quoting practices</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ch03s03s03.html" tabindex="1">Applying a config</a></span></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ug.cli-annot.html" tabindex="1">Tail-f CLI NED Annotations</a></span><ul>
+                              <li><span class="file"><a href="ug.cli-annot.introduction.html" tabindex="1">Introduction</a></span></li>
+                              <li><span class="file"><a href="ug.cli-annot.annotations.html" tabindex="1">Annotations</a></span><ul>
+                                    <li><span class="file"><a href="ch04s02s01.html" tabindex="1">tailf:cli-add-mode</a></span></li>
+                                    <li><span class="file"><a href="ch04s02s02.html" tabindex="1">tailf:cli-allow-join-with-key</a></span></li>
+                                    <li><span class="file"><a href="ch04s02s03.html" tabindex="1">tailf:cli-allow-join-with-value</a></span></li>
+                                    <li><span class="file"><a href="ch04s02s04.html" tabindex="1">tailf:cli-prefix-key and tailf:cli-before-key</a></span></li>
+                                    <li><span class="file"><a href="ch04s02s05.html" tabindex="1">tailf:cli-boolean-no</a></span></li>
+                                    <li><span class="file"><a href="ch04s02s06.html" tabindex="1">tailf:cli-sequence-commands and tailf:cli-break-sequence-commands</a></span></li>
+                                    <li><span class="file"><a href="ch04s02s07.html" tabindex="1">tailf:cli-case-insensitive</a></span></li>
+                                    <li><span class="file"><a href="ch04s02s08.html" tabindex="1">tailf:cli-compact-syntax</a></span></li>
+                                    <li><span class="file"><a href="ch04s02s09.html" tabindex="1">tailf:cli-delete-container-on-delete</a></span></li>
+                                    <li><span class="file"><a href="ch04s02s10.html" tabindex="1">tailf:cli-delete-when-empty</a></span></li>
+                                    <li><span class="file"><a href="ch04s02s11.html" tabindex="1">tailf:cli-diff-dependency</a></span></li>
+                                    <li><span class="file"><a href="ch04s02s12.html" tabindex="1">tailf:cli-disallow-value</a></span></li>
+                                    <li><span class="file"><a href="ch04s02s13.html" tabindex="1">tailf:cli-display-joined</a></span></li>
+                                    <li><span class="file"><a href="ch04s02s14.html" tabindex="1">tailf:cli-display-separated</a></span></li>
+                                    <li><span class="file"><a href="ch04s02s15.html" tabindex="1">tailf:cli-drop-node-name</a></span></li>
+                                    <li><span class="file"><a href="ch04s02s16.html" tabindex="1">tailf:cli-exit-command</a></span></li>
+                                    <li><span class="file"><a href="ch04s02s17.html" tabindex="1">tailf:cli-explicit-exit</a></span></li>
+                                    <li><span class="file"><a href="ch04s02s18.html" tabindex="1">tailf:cli-expose-key-name</a></span></li>
+                                    <li><span class="file"><a href="ch04s02s19.html" tabindex="1">tailf:cli-flat-list-syntax</a></span></li>
+                                    <li id="webhelp-currentid"><span class="file"><a href="ch04s02s20.html" tabindex="1">tailf:cli-flatten-container</a></span></li>
+                                    <li><span class="file"><a href="ch04s02s21.html" tabindex="1">tailf:cli-full-command</a></span></li>
+                                    <li><span class="file"><a href="ch04s02s22.html" tabindex="1">tailf:cli-full-no</a></span></li>
+                                    <li><span class="file"><a href="ch04s02s23.html" tabindex="1">tailf:cli-hide-in-submode</a></span></li>
+                                    <li><span class="file"><a href="ch04s02s24.html" tabindex="1">tailf:cli-incomplete-command</a></span></li>
+                                    <li><span class="file"><a href="ch04s02s25.html" tabindex="1">tailf:cli-incomplete-no</a></span></li>
+                                    <li><span class="file"><a href="ch04s02s26.html" tabindex="1">tailf:cli-list-syntax</a></span></li>
+                                    <li><span class="file"><a href="ch04s02s27.html" tabindex="1">tailf:cli-mode-name</a></span></li>
+                                    <li><span class="file"><a href="ch04s02s28.html" tabindex="1">tailf:cli-multi-value</a></span></li>
+                                    <li><span class="file"><a href="ch04s02s29.html" tabindex="1">tailf:cli-multi-word-key and tailf:cli-max-words</a></span></li>
+                                    <li><span class="file"><a href="ch04s02s30.html" tabindex="1">tailf:cli-no-name-on-delete and tailf:cli-no-value-on-delete</a></span></li>
+                                    <li><span class="file"><a href="ch04s02s31.html" tabindex="1">tailf:cli-optional-in-sequence</a></span></li>
+                                    <li><span class="file"><a href="ch04s02s32.html" tabindex="1">tailf:cli-prefix-key</a></span></li>
+                                    <li><span class="file"><a href="ch04s02s33.html" tabindex="1">tailf:cli-range-list-syntax</a></span></li>
+                                    <li><span class="file"><a href="ch04s02s34.html" tabindex="1">tailf:cli-remove-before-change</a></span></li>
+                                    <li><span class="file"><a href="ch04s02s35.html" tabindex="1">tailf:cli-replace-all</a></span></li>
+                                    <li><span class="file"><a href="ch04s02s36.html" tabindex="1">tailf:cli-reset-siblings and tailf:cli-reset-all-siblings</a></span></li>
+                                    <li><span class="file"><a href="ch04s02s37.html" tabindex="1">tailf:cli-reset-container</a></span></li>
+                                    <li><span class="file"><a href="ch04s02s38.html" tabindex="1">tailf:cli-show-long-obu-diffs</a></span></li>
+                                    <li><span class="file"><a href="ch04s02s39.html" tabindex="1">tailf:cli-show-no</a></span></li>
+                                    <li><span class="file"><a href="ch04s02s40.html" tabindex="1">tailf:cli-show-with-default</a></span></li>
+                                    <li><span class="file"><a href="ch04s02s41.html" tabindex="1">tailf:cli-suppress-list-no</a></span></li>
+                                    <li><span class="file"><a href="ch04s02s42.html" tabindex="1">tailf:cli-suppress-mode</a></span></li>
+                                    <li><span class="file"><a href="ch04s02s43.html" tabindex="1">tailf:cli-key-format</a></span></li>
+                                    <li><span class="file"><a href="ch04s02s44.html" tabindex="1">tailf:cli-recursive-delete</a></span></li>
+                                    <li><span class="file"><a href="ch04s02s45.html" tabindex="1">tailf:cli-suppress-no</a></span></li>
+                                    <li><span class="file"><a href="ch04s02s46.html" tabindex="1">tailf:cli-trim-default</a></span></li>
+                                    <li><span class="file"><a href="ch04s02s47.html" tabindex="1">tailf:cli-embed-no-on-delete</a></span></li>
+                                    <li><span class="file"><a href="ch04s02s48.html" tabindex="1">tailf:cli-allow-range</a></span></li>
+                                    <li><span class="file"><a href="ch04s02s49.html" tabindex="1">tailf:cli-case-sensitive</a></span></li>
+                                    <li><span class="file"><a href="ch04s02s50.html" tabindex="1">tailf:cli-expose-ns-prefix</a></span></li>
+                                    <li><span class="file"><a href="ch04s02s51.html" tabindex="1">tailf:cli-show-obu-comments</a></span></li>
+                                    <li><span class="file"><a href="ch04s02s52.html" tabindex="1">tailf:cli-multi-line-prompt</a></span></li>
+                                    <li><span class="file"><a href="ch04s02s53.html" tabindex="1">tailf:link target</a></span></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

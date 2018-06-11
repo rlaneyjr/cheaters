@@ -1,0 +1,708 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      
+      <title>confdncs_cli -  - NSO 4.4.2.3 Manual Pages</title>
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+      <link rel="home" href="index.html" title="NSO 4.4.2.3 Manual Pages" />
+      <link rel="up" href="ncs.man.volume.1.html" title="NCS man-pages, Volume 1" />
+      <link rel="prev" href="man.1.ncs.html" title="ncs" />
+      <link rel="next" href="man.1.confd_cmd.html" title="confdncs_cmd" />
+      <meta xmlns="" name="Section-title" content="confdncs_cli" /><script xmlns="" type="text/javascript">
+      //The id for tree cookie
+      var treeCookieId = "treeview-73142";
+      var language = "en";
+      var w = new Object();
+      //Localization
+      txt_filesfound = 'Results';
+      txt_enter_at_least_1_char = "You must enter at least one character.";
+      txt_browser_not_supported = "JavaScript is disabled on your browser. Please enable JavaScript to enjoy all the features of this site.";
+      txt_please_wait = "Please wait. Search in progress...";
+      txt_results_for = "Results for: ";
+    </script><link xmlns="" rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/css/positioning.css" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/jquery/theme-redmond/jquery-ui-1.8.2.custom.css" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/jquery/treeview/jquery.treeview.css" /><style xmlns="" type="text/css">
+      
+      #noscript{
+      font-weight:bold;
+      background-color: #55AA55;
+      font-weight: bold;
+      height: 25spx;
+      z-index: 3000;
+      top:0px;
+      width:100%;
+      position: relative;
+      border-bottom: solid 5px black;
+      text-align:center;
+      color: white;
+      }
+      
+      input {
+      margin-bottom: 5px;
+      margin-top: 2px;
+      }
+      .folder {
+      display: block;
+      height: 22px;
+      padding-left: 20px;
+      background: transparent url(common/jquery/treeview/images/folder.gif) 0 0px no-repeat;
+      }
+      span.contentsTab {
+      padding-left: 20px;
+      background: url(common/images/toc-icon.png) no-repeat 0 center;
+      }
+      span.searchTab {
+      padding-left: 20px;
+      background: url(common/images/search-icon.png) no-repeat 0 center;
+      }
+      
+      /* Overide jquery treeview's defaults for ul. */
+      .treeview ul {
+      background-color: transparent;
+      margin-top: 4px;
+      }		
+      #webhelp-currentid {
+      /* background-color: #D8D8D8 !important; */
+      background-color: #D8D8D8;
+      }
+      .treeview .hover { color: black; }
+      .filetree li span a { text-decoration: none; font-size: 12px; color: #517291; }
+      
+      /* Override jquery-ui's default css customizations. These are supposed to take precedence over those.*/
+      .ui-widget-content {
+      border: 0px; 
+      background: none; 
+      color: none;     
+      }
+      .ui-widget-header {
+      color: #e9e8e9;
+      border-left: 1px solid #e5e5e5;
+      border-right: 1px solid #e5e5e5;
+      border-bottom: 1px solid #bbc4c5;
+      border-top: 4px solid #e5e5e5;
+      border: medium none;
+      background: #F4F4F4; /* old browsers */
+      background: -moz-linear-gradient(top, #F4F4F4 0%, #E6E4E5 100%); /* firefox */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F4F4F4), color-stop(100%,#E6E4E5)); /* webkit */    
+      font-weight: none;
+      }
+      .ui-widget-header a { color: none; }
+      .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { 
+      border: none; background: none; font-weight: none; color: none; }
+      .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited { color: black; text-decoration: none; }
+      .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus { border: none; background: none; font-weight: none; color: none; }
+      
+      .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { border: none; background: none; font-weight: none; color: none; }
+      .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited { 
+      color: black; text-decoration: none; 	
+      background: #C6C6C6; /* old browsers */
+      background: -moz-linear-gradient(top, #C6C6C6 0%, #D8D8D8 100%); /* firefox */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#C6C6C6), color-stop(100%,#D8D8D8)); /* webkit */
+      -webkit-border-radius:15px; -moz-border-radius:10px;
+      border: 1px solid #f1f1f1;
+      }    
+      .ui-corner-all { border-radius: 0 0 0 0; }
+      
+      .ui-tabs { padding: .2em;}
+      .ui-tabs .ui-tabs-nav li { top: 0px; margin: -2px 0 1px; text-transform: uppercase; font-size: 10.5px;}
+      .ui-tabs .ui-tabs-nav li a { padding: .25em 2em .25em 1em; margin: .5em; text-shadow: 0 1px 0 rgba(255,255,255,.5); }
+      /**
+      *	Basic Layout Theme
+      * 
+      *	This theme uses the default layout class-names for all classes
+      *	Add any 'custom class-names', from options: paneClass, resizerClass, togglerClass
+      */
+      
+      .ui-layout-pane { /* all 'panes' */ 
+      background: #FFF; 
+      border: 1px solid #BBB; 
+      padding: 05x; 
+      overflow: auto;
+      } 
+      
+      .ui-layout-resizer { /* all 'resizer-bars' */ 
+      background: #DDD; 
+      top:100px
+      } 
+      
+      .ui-layout-toggler { /* all 'toggler-buttons' */ 
+      background: #AAA; 
+      } 
+      
+    </style>
+      <!--[if IE]>
+	<link rel="stylesheet" type="text/css" href="../common/css/ie.css"/>
+	<![endif]--><script xmlns="" type="text/javascript" src="common/browserDetect.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery-1.7.2.min.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery.ui.all.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery.cookie.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/treeview/jquery.treeview.min.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/layout/jquery.layout.js">
+         <!----></script><style type="text/css">
+      
+      #header {
+      /* background: url("../images/header-bg.png") scroll top left repeat-x #4d8c83; */
+      background: transparent;
+      }
+      #leftnavigation {
+      /* background-color: #ededed!important; */
+      background-color: transparent;
+      }
+      #navheader {
+      visibility: hidden;
+      }
+      #webhelp-currentid {
+      /* background-color: #D8D8D8 !important; */
+      background-color: #FFFFFF; /*but must be changed in main.js as well*/
+      }
+      .filetree span.file {
+      /* background: url(images/file.gif) 0 0 no-repeat; */
+      background: initial;
+      }
+      .filetree span.folder, .filetree span.file {
+      padding: 1px 0 1px 7px;
+      display: block;
+      }
+
+      /* borrowed from cisco: clientlib.css */
+      .footer {
+      margin: 28px 30px 0 15px;
+      font-size: 80%;
+      line-height: 120%;
+      border-top: 1px solid #ccc;
+      padding-top: 7px;
+      color: #999;
+      }
+      .footer #footer-legal{display:inline;padding-bottom:18px}
+      #framework-footer{margin:0;padding:0 0 15px 0;min-width:900px;width:100%}
+      .footer a,.footer a:visited{color:#999}
+
+      /* from ccimr.css */
+      a:active  { color: #3366CC}
+      a:hover   { color: #3366CC}
+      a:link    { color: #3366CC}
+      a:visited { color: #3366CC}
+
+      #header img {
+      float: left;
+      margin-left: 20px;
+      margin-top: 0px;
+      }
+
+      #header h1 {
+      color: #336666;
+      margin-top: 4px;
+      }
+      #content h1, #content h2 {
+      color: #336666;
+      }
+      .title {
+      color: #336666;
+      }
+      p, pre {
+      margin-left: 0.1in;
+      }
+      p, ul, ol, li {
+        font-size: 95%;
+        font-family: Arial, Helvetica, sans-serif;
+        margin-top: 1px;
+      }
+      body {
+        font: 80.5% Arial, Helvetica, sans-serif;
+      }
+      ol {
+      display: block;
+      list-style-type: decimal;
+      -webkit-margin-before: 1em;
+      -webkit-margin-after: 1em;
+      -webkit-margin-start: 0px;
+      -webkit-margin-end: 0px;
+      -webkit-padding-start: 40px;
+      border: 1;
+      }
+    </style></head>
+   <body>
+      <noscript>
+         <div id="noscript">JavaScript is disabled on your browser. Please enable JavaScript to enjoy all the features of this site.</div>
+      </noscript>
+      <div id="header"><a href="index.html"><img style="margin-right: 2px; width: 110; height: 73; padding-right: 25px; padding-top: 8px" align="right" src="common/images/logo.gif" alt="Cisco Systems, Inc." /></a><h1>NSO 4.4.2.3 Manual Pages
+                <br />NCS man-pages, Volume 1
+         </h1>
+         <div id="navheader">
+            <!---->
+            <table class="navLinks">
+               <tr>
+                  <td><a id="showHideButton" href="#" onclick="myLayout.toggle('west')" class="pointLeft" tabindex="5" title="Hide TOC tree">Sidebar
+                                                    </a></td>
+                  <td><a accesskey="p" class="navLinkPrevious" tabindex="5" href="man.1.ncs.html">Prev</a>
+                                                             |
+                                                             <a accesskey="u" class="navLinkUp" tabindex="5" href="ncs.man.volume.1.html">Up</a>
+                                                         |
+                                                         <a accesskey="n" class="navLinkNext" tabindex="5" href="man.1.confd_cmd.html">Next</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div id="content">
+         <div class="refentry"><a id="man.1.confd_cli"></a><div xmlns="" class="titlepage"></div>
+            <div class="refnamediv"><a id="man.1.ncs_cli.name"></a><h2>Name</h2>
+               <p><span class="phrase">confd</span><span class="phrase">ncs</span>_cli — Frontend to the NSO CLI engine
+               </p>
+            </div>
+            <div class="refsynopsisdiv"><a id="man.1.confd_cli.synopsis"></a><h2>Synopsis</h2>
+               <div class="cmdsynopsis">
+                  <p><code class="command"><span class="phrase">confd</span><span class="phrase">ncs</span>_cli</code>  [<em class="replaceable"><code>options</code></em>] [<em class="replaceable"><code>File</code></em>]
+                  </p>
+               </div>
+               <div class="cmdsynopsis">
+                  <p><code class="command"><span class="phrase">confd</span><span class="phrase">ncs</span>_cli</code>  [
+                              --help 
+                           ] [
+                              --host 
+                               <em class="replaceable"><code>Host</code></em> 
+                           ] [
+                              --ip 
+                               
+                                 <em class="replaceable"><code>IpAddress</code></em>  |   <em class="replaceable"><code>IpAddress/Port</code></em>  
+                              
+                           ] [
+                              --address 
+                               <em class="replaceable"><code>Address</code></em> 
+                           ] [
+                              --port 
+                               <em class="replaceable"><code>PortNumber</code></em> 
+                           ] [
+                              --cwd 
+                               <em class="replaceable"><code>Directory</code></em> 
+                           ] [
+                              --proto 
+                               
+                                 tcp&gt;  |   ssh  |   console  
+                              
+                           ] [
+                              --interactive 
+                           ] [
+                              --noninteractive 
+                           ] [ -J  |   -C  |   -I ] [
+                              --user 
+                               <em class="replaceable"><code>Username</code></em> 
+                           ] [
+                              --uid 
+                               <em class="replaceable"><code>UidInt</code></em> 
+                           ] [
+                              --groups 
+                               <em class="replaceable"><code>Groups</code></em> 
+                           ] [
+                              --gids 
+                               <em class="replaceable"><code>GidList</code></em> 
+                           ] [
+                              --gid 
+                               <em class="replaceable"><code>Gid</code></em> 
+                           ] [
+                              --opaque 
+                               <em class="replaceable"><code>Opaque</code></em> 
+                           ] [
+                              --noaaa 
+                           ]
+                  </p>
+               </div>
+            </div>
+            <div class="refsect1"><a id="man.1.confd_cli.description"></a><h2>DESCRIPTION</h2>
+               <p>The <span class="phrase">confd</span><span class="phrase">ncs</span>_cli program is a C frontend to the NSO CLI
+                      engine. The <span class="command"><strong><span class="phrase">confd</span><span class="phrase">ncs</span>_cli</strong></span> program connects to NSO
+                      and basically passes data back and forth from the user to
+                      NSO.
+               </p>
+               <p><span class="phrase">confd</span><span class="phrase">ncs</span>_cli can be invoked from the command line. If so, no
+                      authentication is done. The archetypical usage of <span class="phrase">confd</span><span class="phrase">ncs</span>_cli is to
+                      use it as a login shell in /etc/passwd, in which case
+                      authentication is done by the login program.
+               </p>
+               <p>The source code for <span class="command"><strong>confd_cli</strong></span>
+                      resides in
+                      <code class="filename">$CONFD_DIR/src/confd/cli</code> and can be modified
+                      if required.
+               </p>
+            </div>
+            <div class="refsect1"><a id="man.1.confd_cli.options"></a><h2>OPTIONS</h2>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt><span class="term"><code class="option">-h</code>, </span><span class="term"><code class="option">--help</code></span></dt>
+                     <dd>
+                        <p>Display help text.</p>
+                     </dd>
+                     <dt><span class="term"><code class="option">-H</code>, </span><span class="term"><code class="option">--host</code> <em class="replaceable"><code>HostName</code></em></span></dt>
+                     <dd>
+                        <p>Gives the name of the current host.  The
+                                     <span class="command"><strong><span class="phrase">confd</span><span class="phrase">ncs</span>_cli</strong></span> program will use the value of
+                                     the system call <code class="function">gethostbyname()</code> by
+                                     default. The host name is used in the CLI prompt.
+                        </p>
+                     </dd>
+                     <dt><span class="term"><code class="option">-i</code>, </span><span class="term"><code class="option">--ip</code>
+                                   <em class="replaceable"><code>IpAddress</code></em> |
+                                   <em class="replaceable"><code>IpAddress/Port</code></em></span></dt>
+                     <dd>
+                        <p>Set the IP (or IP address and port) which NSO reports that the user is coming
+                                     from.  The <span class="command"><strong><span class="phrase">confd</span><span class="phrase">ncs</span>_cli</strong></span> program by default
+                                     tries to determine this automatically by reading the
+                                     <code class="envar">SSH_CONNECTION</code> environment variable.
+                        </p>
+                     </dd>
+                     <dt><span class="term"><code class="option">-A</code>, </span><span class="term"><code class="option">--address</code> <em class="replaceable"><code>Address</code></em></span></dt>
+                     <dd>
+                        <p>CLI address to connect to. The default is
+                                     127.0.0.1. This can be controlled by either this flag, or
+                                     the UNIX environment variable
+                                     <code class="envar"><span class="phrase">CONFD</span><span class="phrase">NCS</span>_IPC_ADDR</code>. The <code class="option">-A</code> flag
+                                     takes precedence.
+                        </p>
+                     </dd>
+                     <dt><span class="term"><code class="option">-P</code>, </span><span class="term"><code class="option">--port</code> <em class="replaceable"><code>PortNumber</code></em></span></dt>
+                     <dd>
+                        <p>CLI port to connect to. The default is the NSO IPC
+                                     port, which is
+                                     <span class="phrase">4565</span>
+                                     <span class="phrase">4569</span>
+                                     This can be controlled by either this
+                                     flag, or the UNIX environment variable
+                                     <code class="envar"><span class="phrase">CONFD</span><span class="phrase">NCS</span>_IPC_PORT</code>. The <code class="option">-P</code> flag
+                                     takes precedence.
+                        </p>
+                     </dd>
+                     <dt><span class="term"><code class="option">-c</code>, </span><span class="term"><code class="option">--cwd</code> <em class="replaceable"><code>Directory</code></em></span></dt>
+                     <dd>
+                        <p>The current working directory for the user once in the
+                                     CLI.  All file references from the CLI will be relative to
+                                     the cwd. By default the value will be the actual cwd where
+                                     <span class="phrase">confd</span><span class="phrase">ncs</span>_cli is invoked.
+                        </p>
+                     </dd>
+                     <dt><span class="term"><code class="option">-p</code>, </span><span class="term">
+                                     <code class="option">--proto</code>
+                                     <code class="literal">ssh</code> |
+                                     <code class="literal">tcp</code> |
+                                     <code class="literal">console</code>
+                                   </span></dt>
+                     <dd>
+                        <p>The protocol the user is using. If
+                                     <code class="envar">SSH_CONNECTION</code> is set, this defaults to
+                                     "ssh", otherwise "console".
+                        </p>
+                     </dd>
+                     <dt><span class="term"><code class="option">-n</code>, </span><span class="term"><code class="option">--interactive</code></span></dt>
+                     <dd>
+                        <p>This forces the CLI to run in interactive mode. In non
+                                     interactive mode, the CLI never prompts the user for any
+                                     input. This flag can sometimes be useful in certain CLI
+                                     scripting scenarios.
+                        </p>
+                     </dd>
+                     <dt><span class="term"><code class="option">-N</code>, </span><span class="term"><code class="option">--noninteractive</code></span></dt>
+                     <dd>
+                        <p>This forces the CLI to run in non interactive mode.
+                                     See ??? for further info.
+                                     
+                        </p>
+                     </dd>
+                     <dt><span class="term"><code class="option">-J</code>, </span><span class="term"><code class="option">-C</code>, </span><span class="term"><code class="option">-I</code></span></dt>
+                     <dd>
+                        <p>This flag sets the mode of the
+                                     CLI. <code class="option">-J</code> is Juniper style CLI,
+                                     <code class="option">-C</code> is Cisco XR style CLI and
+                                     <code class="option">-I</code> is Cisco IOS style CLI.
+                                     
+                        </p>
+                     </dd>
+                     <dt><span class="term"><code class="option">-u</code>, </span><span class="term"><code class="option">--user</code> <em class="replaceable"><code>User</code></em></span></dt>
+                     <dd>
+                        <p>Indicates to NSO which username the user has. This
+                                     defaults to the username of the invoker.
+                        </p>
+                     </dd>
+                     <dt><span class="term"><code class="option">-U</code>, </span><span class="term"><code class="option">--uid</code> <em class="replaceable"><code>Uid</code></em></span></dt>
+                     <dd>
+                        <p>Indicates to NSO which uid the user has.</p>
+                     </dd>
+                     <dt><span class="term"><code class="option">-g</code>, </span><span class="term"><code class="option">--groups</code> <em class="replaceable"><code>GroupList</code></em></span></dt>
+                     <dd>
+                        <p>Indicates to NSO which groups the user are a member
+                                     of.  The parameter is a comma separated string. This
+                                     defaults to the actual UNIX groups the user is a member
+                                     of. The group names are used by the AAA system in NSO to
+                                     authorize data and command access.
+                        </p>
+                     </dd>
+                     <dt><span class="term"><code class="option">-D</code>, </span><span class="term"><code class="option">--gids</code> <em class="replaceable"><code>GidList</code></em></span></dt>
+                     <dd>
+                        <p>Indicates to NSO which secondary group ids the user
+                                     shall have.  The parameter is a comma separated string of
+                                     integers.  This defaults to the actual secondary UNIX group
+                                     ids the user has. The gids are used by NSO when NSO
+                                     executes commands on behalf of the user.
+                        </p>
+                     </dd>
+                     <dt><span class="term"><code class="option">-G</code>, </span><span class="term"><code class="option">--gid</code> <em class="replaceable"><code>Gid</code></em></span></dt>
+                     <dd>
+                        <p>Indicates to NSO which group id the user shall have.
+                                     This defaults to the actual UNIX group id the user has. The
+                                     gid is used by NSO when NSO executes commands on behalf
+                                     of the user.
+                        </p>
+                     </dd>
+                     <dt><span class="term"><code class="option">-O</code>, </span><span class="term"><code class="option">--opaque</code> <em class="replaceable"><code>Opaque</code></em></span></dt>
+                     <dd>
+                        <p>Pass an opaque string to <span class="phrase">ConfD</span><span class="phrase">NCS</span>. The string is not interpreted by
+                                     <span class="phrase">ConfD</span><span class="phrase">NCS</span>, only made available to
+                                     application code. See "built-in variables" in <a class="link" href="man.5.clispec.html" title="clispec">clispec(5)</a> and
+                                     <code class="function">maapi_get_user_session_opaque()</code> in <a class="link" href="man.3.confd_lib_maapi.html" title="confd_lib_maapi">confd_lib_maapi(3)</a>.
+                                     The string can be given either via this flag, or via the UNIX
+                                     environment variable <code class="envar"><span class="phrase">CONFD</span><span class="phrase">NCS</span>_CLI_OPAQUE</code>. The
+                                     <code class="option">-O</code> flag takes precedence.
+                        </p>
+                     </dd>
+                     <dt><span class="term"><code class="option">--noaaa</code></span></dt>
+                     <dd>
+                        <p>Completely disables all AAA checks for this CLI. This
+                                     can be used as a disaster recovery mechanism if the AAA
+                                     rules in NSO have somehow become corrupted.
+                        </p>
+                     </dd>
+                  </dl>
+               </div>
+            </div>
+            <div class="refsect1"><a id="man.1.confd_cli.environment_variables"></a><h2>ENVIRONMENT VARIABLES</h2>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt><span class="term"><span class="phrase">CONFD</span><span class="phrase">NCS</span>_IPC_ADDR</span></dt>
+                     <dd>
+                        <p>Which IP address to connect to.</p>
+                     </dd>
+                     <dt><span class="term"><span class="phrase">CONFD</span><span class="phrase">NCS</span>_IPC_PORT</span></dt>
+                     <dd>
+                        <p>
+                                       Which TCP port to connect to.
+                                     
+                        </p>
+                     </dd>
+                     <dt><span class="term">SSH_CONNECTION</span></dt>
+                     <dd>
+                        <p>
+                                       Set by openssh and used by <span class="emphasis"><em><span class="phrase">confd</span><span class="phrase">ncs</span>_cli</em></span>
+                                       to determine client IP address etc.
+                                     
+                        </p>
+                     </dd>
+                     <dt><span class="term">TERM</span></dt>
+                     <dd>
+                        <p>
+                                       Passed on to terminal aware programs invoked by NSO.
+                                     
+                        </p>
+                     </dd>
+                  </dl>
+               </div>
+            </div>
+            <div class="refsect1"><a id="man.1.confd_cli.exit_codes"></a><h2>EXIT CODES</h2>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt><span class="term">0</span></dt>
+                     <dd>
+                        <p>
+                                       Normal exit
+                                     
+                        </p>
+                     </dd>
+                     <dt><span class="term">1</span></dt>
+                     <dd>
+                        <p>
+                                       Failed to read user data for initial handshake.
+                                     
+                        </p>
+                     </dd>
+                     <dt><span class="term">2</span></dt>
+                     <dd>
+                        <p>
+                                       Close timeout, client side closed, session inactive.
+                                     
+                        </p>
+                     </dd>
+                     <dt><span class="term">3</span></dt>
+                     <dd>
+                        <p>
+                                       Idle timeout triggered.
+                                     
+                        </p>
+                     </dd>
+                     <dt><span class="term">4</span></dt>
+                     <dd>
+                        <p>
+                                       Tcp level error detected on daemon side.
+                                     
+                        </p>
+                     </dd>
+                     <dt><span class="term">5</span></dt>
+                     <dd>
+                        <p>
+                                       Internal error occurred in daemon.
+                                     
+                        </p>
+                     </dd>
+                     <dt><span class="term">5</span></dt>
+                     <dd>
+                        <p>
+                                       User interrupted clistart using special escape char.
+                                     
+                        </p>
+                     </dd>
+                     <dt><span class="term">6</span></dt>
+                     <dd>
+                        <p>
+                                       User interrupted clistart using special escape char.
+                                     
+                        </p>
+                     </dd>
+                     <dt><span class="term">7</span></dt>
+                     <dd>
+                        <p>
+                                       Daemon abruptly closed socket.
+                                     
+                        </p>
+                     </dd>
+                  </dl>
+               </div>
+            </div>
+            <div class="refsect1"><a id="man.1.confd_cli.scripting"></a><h2>SCRIPTING</h2>
+               <p>It is very easy to use <span class="command"><strong><span class="phrase">confd</span><span class="phrase">ncs</span>_cli</strong></span> from
+                      <span class="command"><strong>/bin/sh</strong></span> scripts. <span class="command"><strong><span class="phrase">confd</span><span class="phrase">ncs</span>_cli</strong></span>
+                      reads stdin and can then also be run in non interactive mode. This
+                      is the default if stdin is not a tty (as reported by
+                      <code class="function">isatty()</code>)
+               </p>
+               <p>Here is example of invoking <span class="command"><strong><span class="phrase">confd</span><span class="phrase">ncs</span>_cli</strong></span> from
+                      a shell script.
+               </p>
+               <div class="informalexample"><pre class="programlisting">#!/bin/sh
+
+<span class="phrase">confd</span><span class="phrase">ncs</span>_cli &lt;&lt; EOF
+configure
+set foo bar 13
+set funky stuff 44
+commit
+exit no-confirm
+exit
+EOF</pre></div>
+               <p>And here is en example capturing the output of
+                      <span class="command"><strong><span class="phrase">confd</span><span class="phrase">ncs</span>_cli</strong></span>:
+               </p>
+               <div class="informalexample"><pre class="programlisting">#!/bin/sh
+{ <span class="phrase">confd</span><span class="phrase">ncs</span>_cli &lt;&lt; EOF;
+configure
+set trap-manager t2 ip-address 10.0.0.1 port 162 snmp-version 2
+commit
+exit no-confirm
+exit
+EOF
+} | grep 'Aborted:.*not unique.*'
+if [ $? != 0 ]; then
+  echo 'test2: commit did not fail'; exit 1;
+fi</pre></div>
+               <p>The above type of CLI scripting is a very efficient and easy
+                      way to test various aspects of the CLI.
+               </p>
+            </div>
+         </div><script type="text/javascript" src="common/main.js">
+            <!----></script><script type="text/javascript" src="common/splitterInit.js">
+            <!----></script><div class="footer" id="footer-legal">
+            <div class="footer-legal framework-footer-cq">
+               <div id="framework-footer">
+                  <div id="footer-legal"><a href="http://www.cisco.com/web/siteassets/legal/terms_condition.html">Terms &amp; Conditions</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/privacy.html">Privacy Statement</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/privacy.html#cookies">Cookie Policy</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/trademark.html">Trademarks</a></div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div id="sidebar">
+         <div id="leftnavigation" style="padding-top:3px;">
+            <div id="tabs">
+               <ul style="visibility: hidden;"></ul>
+               <div id="treeDiv"><img src="common/images/loading.gif" alt="loading table of contents..." id="tocLoading" style="display:block;" /><div id="ulTreeDiv" style="display:none">
+                     <ul id="tree" class="filetree">
+                        <li><span class="file"><a href="ncs.man.volume.1.html" tabindex="1">NCS man-pages, Volume 1</a></span><ul>
+                              <li><span class="file"><a href="man.1.ncs-backup.html" tabindex="1">ncs-backup</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-collect-tech-report.html" tabindex="1">ncs-collect-tech-report</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-installer.html" tabindex="1">ncs-installer</a></span></li>
+                              <li><span class="file"><a href="man.1.maapi.html" tabindex="1">ncs-maapi</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-make-package.html" tabindex="1">ncs-make-package</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-netsim.html" tabindex="1">ncs-netsim</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-project-create.html" tabindex="1">ncs-project-create</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-project-make-bundle.html" tabindex="1">ncs-project-export</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-project-git.html" tabindex="1">ncs-project-git</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-project-setup.html" tabindex="1">ncs-project-setup</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-project-update.html" tabindex="1">ncs-project-update</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-project.html" tabindex="1">ncs-project</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-setup.html" tabindex="1">ncs-setup</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-uninstall.html" tabindex="1">ncs-uninstall</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs.html" tabindex="1">ncs</a></span></li>
+                              <li id="webhelp-currentid"><span class="file"><a href="man.1.confd_cli.html" tabindex="1">confdncs_cli</a></span></li>
+                              <li><span class="file"><a href="man.1.confd_cmd.html" tabindex="1">
+                                             confdncs_cmd</a></span></li>
+                              <li><span class="file"><a href="man.1.confd_load.html" tabindex="1">confdncs_load</a></span></li>
+                              <li><span class="file"><a href="man.1.confdc.html" tabindex="1">confdc
+                                           ncsc</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-backup.html" tabindex="1">nct-backup</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-check.html" tabindex="1">nct-check</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-cli-cmd.html" tabindex="1">nct-cli-cmd</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-copy.html" tabindex="1">nct-copy</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-get-logs.html" tabindex="1">nct-get-logs</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-ha.html" tabindex="1">nct-ha</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-hostsfile.html" tabindex="1">nct-hostsfile</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-install.html" tabindex="1">nct-install</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-load-config.html" tabindex="1">nct-load-config</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-move-device.html" tabindex="1">nct-move-device</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-packages.html" tabindex="1">nct-packages</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-patch.html" tabindex="1">nct-patch</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-ssh-cmd.html" tabindex="1">nct-ssh-cmd</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-start.html" tabindex="1">nct-start</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-stop.html" tabindex="1">nct-stop</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-upgrade.html" tabindex="1">nct-upgrade</a></span></li>
+                              <li><span class="file"><a href="man.1.nct.html" tabindex="1">nct</a></span></li>
+                              <li><span class="file"><a href="man.1.pyang.html" tabindex="1">pyang</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ncs.man.volume.3.html" tabindex="1">NCS man-pages, Volume 3</a></span><ul>
+                              <li><span class="file"><a href="man.3.confd_lib.html" tabindex="1">confd_lib</a></span></li>
+                              <li><span class="file"><a href="man.3.confd_lib_cdb.html" tabindex="1">confd_lib_cdb</a></span></li>
+                              <li><span class="file"><a href="man.3.confd_lib_dp.html" tabindex="1">confd_lib_dp</a></span></li>
+                              <li><span class="file"><a href="man.3.confd_lib_events.html" tabindex="1">confd_lib_events</a></span></li>
+                              <li><span class="file"><a href="man.3.confd_lib_ha.html" tabindex="1">confd_lib_ha</a></span></li>
+                              <li><span class="file"><a href="man.3.confd_lib_lib.html" tabindex="1">confd_lib_lib</a></span></li>
+                              <li><span class="file"><a href="man.3.confd_lib_maapi.html" tabindex="1">confd_lib_maapi</a></span></li>
+                              <li><span class="file"><a href="man.3.confd_types.html" tabindex="1">confd_types</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ncs.man.volume.5.html" tabindex="1">NCS man-pages, Volume 5</a></span><ul>
+                              <li><span class="file"><a href="man.5.clispec.html" tabindex="1">clispec</a></span></li>
+                              <li><span class="file"><a href="man.5.mib_annotations.html" tabindex="1">mib_annotations</a></span></li>
+                              <li><span class="file"><a href="man.5.ncs.conf.html" tabindex="1">ncs.conf</a></span></li>
+                              <li><span class="file"><a href="man.5.tailf_yang_cli_extensions.html" tabindex="1">tailf_yang_cli_extensions</a></span></li>
+                              <li><span class="file"><a href="man.5.tailf_yang_extensions.html" tabindex="1">tailf_yang_extensions</a></span></li>
+                           </ul>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

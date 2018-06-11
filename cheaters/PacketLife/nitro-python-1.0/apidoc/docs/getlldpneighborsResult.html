@@ -1,0 +1,306 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>Citrix NetScaler XML API User&#39;s Guide - Structure Definition</title>
+<link rel="stylesheet" type="text/css" href="help_ns.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body onload="initial()" class="ns_body">
+<div class="ns_content"><table cellpadding="0" cellspacing="0"><script type="text/javascript">
+function changeContext(id,lang,flag){
+	parent.banner.document.language.select.value = lang;
+	if( lang == "C" ){
+		if(flag == "1"){
+			showContent(cfirstcontent,id,lang);
+		}
+		else{
+			showContent(csecondcontent,id,lang);
+		}
+	}
+	if( lang == "Perl" ){
+		if(flag == "1"){
+			showContent(perlfirstcontent,id,lang);
+		}
+		else{
+			showContent(perlsecondcontent,id,lang);
+		}
+	}
+	if( lang == "Java" ){
+		if(flag == "1"){
+			showContent(javafirstcontent,id,lang);	
+		}
+		else{
+			showContent(javasecondcontent,id,lang);
+		}
+	}
+	if( lang == "C#" ){
+		if(flag == "1"){
+			showContent(csharpfirstcontent,id,lang);
+		}
+		else{
+			showContent(csharpsecondcontent,id,lang);
+		}
+	}
+	if( lang == "VB" ){
+		if(flag == "1"){
+			showContent(vbfirstcontent,id,lang);
+		}
+		else{
+			showContent(vbsecondcontent,id,lang);
+		}
+	}
+	if(flag == "1"){
+		showInside(lang,"0");
+	}
+	else{
+		showOutside(lang);
+	}
+}
+function showContent(content,id,lang){
+	if(ie4){
+	   showContentObj=document.all.id;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById(id);
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+  showLangSelect(lang);
+}
+function showInside(str,cond){
+	if(str == "C"){
+ 		var inside_content = csecondcontent;
+ 	}
+ 	if(str == "Perl"){
+ 		var inside_content = perlsecondcontent;
+ 	}
+ 	if(str == "Java"){
+ 		var inside_content = javasecondcontent;
+ 	}
+ 	if(str == "C#"){
+		var inside_content = csharpsecondcontent;
+ 	}
+ 	if(str == "VB"){
+		var inside_content = vbsecondcontent;
+ 	}
+	showContent(inside_content,'qiksearch_div1',str);
+ 	if ( cond == "1" ){
+ 		var page = 'apidoc/docs/getlldpneighborsResult.html#lldpneighborsList';
+ 		document.location.href = page;
+ 	}
+}
+function showOutside(str){
+	if(str == "C" ){
+ 		var inside_content = cfirstcontent;
+ 	}
+ 	if(str == "Perl" ){
+ 		var inside_content = perlfirstcontent;
+ 	}
+ 	if(str == "Java" ){
+ 		var inside_content = javafirstcontent;
+ 	}
+ 	if(str == "C#" ){
+ 		var inside_content = csharpfirstcontent;
+ 	}
+ 	if(str == "VB" ){
+ 		var inside_content = vbfirstcontent;
+ 	}
+ 	showContent(inside_content,'qiksearch_div',str);
+}
+function initial(){
+	ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+	ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+	ns4=document.layers;
+	langSelected = parent.banner.document.language.select.value
+	var plink = parent.banner.document.language.plink.value
+	var my_array=plink.split("&");
+	var temp = my_array[0];
+ 	var grp = temp.split("@");
+	var cmd = my_array[1];
+	var regex = /^stat/i;
+	if( cmd.match(regex) != null ){
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex_stat.html\">Statistics</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getlldpneighborsResult");
+	}
+	else{
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex.htm\">Configuration</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getlldpneighborsResult");
+	}
+	if( langSelected == "C" ){
+ 		var content = cfirstcontent;
+	}
+	else if( langSelected == "Perl" ){
+		var content = perlfirstcontent;
+	}
+	else if( langSelected == "Java" ){
+		var content = javafirstcontent;
+	}
+	else if( langSelected == "C#" ){
+		var content = csharpfirstcontent;
+	}
+	else if( langSelected == "VB" ){
+		var content = vbfirstcontent;
+	}
+	else{
+		var content = cfirstcontent;
+		langSelected="C";
+	}
+	showContent(content,'qiksearch_div',langSelected);
+	showInside(langSelected,"0");
+}
+function showPLink(content){
+	if(ie4){
+	   showContentObj=document.all.progressive_link;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById("progressive_link");
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+}
+function showLangSelect(id){
+	   if(ie4)
+       {
+       	showObj=document.all.first_url;
+       	showObj1=document.all.second_url;
+       }
+       if(ns6)
+       {
+       	showObj=document.getElementById("first_url");
+       	showObj1=document.getElementById("second_url");
+       }
+       if( id == "C" ){
+       	newlink = "<b>C</b>";
+       	newlink1 = "<b>C</b>";
+       }
+       else{
+       	newlink = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C','1');\"><b>C</b></a>";
+       	newlink1 = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C','0');\"><b>C</b></a>";
+       }
+       if( id == "Perl" ){
+       	newlink = newlink + " | <b>Perl</b>";
+       	newlink1 = newlink1 + " | <b>Perl</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Perl','1');\"><b>Perl</b></a>";
+      	       newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Perl','0');\"><b>Perl</b></a>";
+       }
+       if( id == "Java" ){
+       	newlink = newlink + " | <b>Java</b>";
+       	newlink1 = newlink1 + " | <b>Java</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Java','1');\"><b>Java</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Java','0');\"><b>Java</b></a>";
+       }
+       if( id == "C#" ){
+       	newlink = newlink + " | <b>C#</b>";
+       	newlink1 = newlink1 + " | <b>C#</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C#','1');\"><b>C#</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C#','0');\"><b>C#</b></a>";
+       }
+       showObj.innerHTML = newlink;
+       showObj1.innerHTML = newlink1;
+}
+</script>
+<tr><td><div><div id="progressive_link"></div></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>getlldpneighborsResult Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>getlldpneighborsResult</b> structure defines the return type for getlldpneighbors API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="first_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+cfirstcontent = "<pre>struct getlldpneighborsResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; struct <a href=\'getlldpneighborsResult.html\#lldpneighbors\'>lldpneighbors</a> list[];<br> };<br></pre></td></tr></table></div>"
+perlfirstcontent = "<pre>$getlldpneighborsResult = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rc => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; message => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; List => \'@<a href=\'getlldpneighborsResult.html\#lldpneighbors\'>lldpneighbors</a>\',<br> };<br></pre></td></tr></table></div>"
+javafirstcontent = "<pre>class getlldpneighborsResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getlldpneighborsResult.html\#lldpneighbors\'>lldpneighbors</a>[] list;<br> };<br></pre></td></tr></table></div>"
+csharpfirstcontent = "<pre>class getlldpneighborsResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getlldpneighborsResult.html\#lldpneighbors\'>lldpneighbors</a>[] list;<br> };<br></pre></td></tr></table></div>"
+vbfirstcontent = "<pre>Public <b>Structure</b> getlldpneighborsResult <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rc As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public message As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public  lldpneighborsList() As  <a href=\'getlldpneighborsResult.html\#lldpneighbors\'>lldpneighbors</a><br> <b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rc</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, rc is 0 else rc > 0. Values above 0x8000 indicate Warnings.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>message</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, message is NULL else message contains <a href="errorlisting.html">Error/Warning</a> message.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>lldpneighborsList</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">List of lldpneighborss</div></td></tr><tr><td><br></td></tr><tr><td><div><a name="lldpneighbors"></a></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>lldpneighbors  Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>lldpneighbors</b> structure defines the actual return type values for getlldpneighbors API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="second_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div1" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+csecondcontent = "<pre>struct lldpneighbors {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * ifnum;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * chassisidsubtype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * chassisid;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * portidsubtype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * portid;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ttl;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * portdescription;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * sys;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * sysdesc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * mgmtaddresssubtype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * mgmtaddress;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * iftype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ifnumber;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * vlan;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int vlanid;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int portprotosupported;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int portprotoenabled;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int portprotoid;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int portvlanid;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * protocolid;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * linkaggrcapable;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * linkaggrenabled;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int linkaggrid;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int flag;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * syscapabilities;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * syscapenabled;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * autonegsupport;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * autonegenabled;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * autonegadvertised;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * autonegmautype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int mtu;<br> };<br></pre></td></tr></table></div>"
+perlsecondcontent = "<pre>$lldpneighbors = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ifnum => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; chassisidsubtype => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; chassisid => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; portidsubtype => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; portid => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ttl => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; portdescription => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; sys => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; sysdesc => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; mgmtaddresssubtype => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; mgmtaddress => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; iftype => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ifnumber => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; vlan => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; vlanid => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; portprotosupported => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; portprotoenabled => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; portprotoid => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; portvlanid => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; protocolid => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; linkaggrcapable => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; linkaggrenabled => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; linkaggrid => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; flag => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; syscapabilities => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; syscapenabled => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; autonegsupport => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; autonegenabled => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; autonegadvertised => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; autonegmautype => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; mtu => \'$\',<br> };<br></pre></td></tr></table></div>"
+javasecondcontent = "<pre>class lldpneighbors {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String ifnum;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String chassisidsubtype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String chassisid;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String portidsubtype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String portid;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt ttl;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String portdescription;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String sys;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String sysdesc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String mgmtaddresssubtype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String mgmtaddress;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String iftype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt ifnumber;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String vlan;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt vlanid;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt portprotosupported;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt portprotoenabled;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt portprotoid;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt portvlanid;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String protocolid;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String linkaggrcapable;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String linkaggrenabled;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt linkaggrid;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt flag;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String syscapabilities;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String syscapenabled;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String autonegsupport;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String autonegenabled;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String autonegadvertised;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String autonegmautype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt mtu;<br> };<br></pre></td></tr></table></div>"
+csharpsecondcontent = "<pre>class lldpneighbors {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string ifnum;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string chassisidsubtype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string chassisid;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string portidsubtype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string portid;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 ttl;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string portdescription;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string sys;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string sysdesc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string mgmtaddresssubtype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string mgmtaddress;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string iftype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 ifnumber;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string vlan;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 vlanid;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 portprotosupported;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 portprotoenabled;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 portprotoid;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 portvlanid;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string protocolid;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string linkaggrcapable;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string linkaggrenabled;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 linkaggrid;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 flag;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string syscapabilities;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string syscapenabled;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string autonegsupport;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string autonegenabled;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string autonegadvertised;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string autonegmautype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 mtu;<br> };<br></pre></td></tr></table></div>"
+vbsecondcontent = "<pre>Public <b>Structure</b> lldpneighbors <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ifnum As String  <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public chassisidsubtype As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public chassisid As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public portidsubtype As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public portid As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ttl As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public portdescription As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public sys As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public sysdesc As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public mgmtaddresssubtype As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public mgmtaddress As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public iftype As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ifnumber As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public vlan As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public vlanid As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public portprotosupported As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public portprotoenabled As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public portprotoid As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public portvlanid As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public protocolid As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public linkaggrcapable As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public linkaggrenabled As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public linkaggrid As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public flag As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public syscapabilities As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public syscapenabled As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public autonegsupport As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public autonegenabled As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public autonegadvertised As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public autonegmautype As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public mtu As UInteger<br><b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ifnum</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Interface Name</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>chassisidsubtype</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Chassis id sub type</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>chassisid</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Chassis Id</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>portidsubtype</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Port id subtype</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>portid</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Port Id</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ttl</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Time to Live</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>portdescription</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Port Description</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sys</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">System Name</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sysdesc</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">System Description</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>mgmtaddresssubtype</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Management Address Type</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>mgmtaddress</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Management Address</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>iftype</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Interface subtype</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ifnumber</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Interface Number</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>vlan</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">vlan name</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>vlanid</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Vlan Id</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>portprotosupported</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Flag to show Port Protocol Support</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>portprotoenabled</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Flag to show Port Protocol support enabled</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>portprotoid</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Port Protocol ID</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>portvlanid</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Port Vlan Id</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>protocolid</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">port vlan id name</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>linkaggrcapable</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Is neighbor Link Aggregation Capable</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>linkaggrenabled</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Is link aggregation Enabled</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>linkaggrid</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Link Aggregation Id</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>flag</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>syscapabilities</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Acronyms for remote system capabilities:
+OT : Other.
+RE : Repeater(IETF RFC 2108).
+BR : MAC Bridge(IEEE Std 802.1D).
+WL : WLAN Access Point(IEEE Std 802.11 MIB).
+RO : ROuter(IETF RFC 1812).
+TE : Telephone(IETF RFC 4293).
+DO : DOCSIS cable device(IETF RFC 4639 and IETF RFC 4546).
+ST : STation only(IETF RFC 4293).
+CV : C-VLAN component of a VLAN Bridge(IEEE Std 802.1Q).
+SV : S-VLAN component of a VLAN Bridge(IEEE Std 802.1Q).
+MR : Two port MAC Relay(IEEE Std 802.1Q).</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>syscapenabled</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Acronyms for remote system enabled capabilities:
+OT : Other.
+RE : Repeater(IETF RFC 2108).
+BR : MAC Bridge(IEEE Std 802.1D).
+WL : WLAN Access Point(IEEE Std 802.11 MIB).
+RO : ROuter(IETF RFC 1812).
+TE : Telephone(IETF RFC 4293).
+DO : DOCSIS cable device(IETF RFC 4639 and IETF RFC 4546).
+ST : STation only(IETF RFC 4293).
+CV : C-VLAN component of a VLAN Bridge(IEEE Std 802.1Q).
+SV : S-VLAN component of a VLAN Bridge(IEEE Std 802.1Q).
+MR : Two port MAC Relay(IEEE Std 802.1Q).</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>autonegsupport</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">MAC/PHY autonegotiation support</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>autonegenabled</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">MAC/PHY autonegotiation enabled</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>autonegadvertised</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">MAC/PHY autonegotiation advetised</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>autonegmautype</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">MAC/PHY Medium Attachment Unit (MAU) type of the port. Description listed below:
+AUI           - no internal MAU, view from AUI
+10Base5       - thick coax MAU
+Foirl         - FOIRL MAU
+10Base2       - thin coax MAU
+10BaseT       - UTP MAU
+10BaseFP      - passive fiber MAU
+10BaseFB      - sync fiber MAU
+10BaseFL      - async fiber MAU
+10Broad36     - broadband DTE MAU
+10BaseTHD     - UTP MAU, half duplex mode
+10BaseTFD     - UTP MAU, full duplex mode
+10BaseFLHD    - async fiber MAU, half duplex mode
+10BaseFLDF    - async fiber MAU, full duplex mode
+10BaseT4      - 4 pair category 3 UTP
+100BaseTXHD   - 2 pair category 5 UTP, half duplex mode
+100BaseTXFD   - 2 pair category 5 UTP, full duplex mode
+100BaseFXHD   - X fiber over PMT, half duplex mode
+100BaseFXFD   - X fiber over PMT, full duplex mode
+100BaseT2HD   - 2 pair category 3 UTP, half duplex mode
+100BaseT2DF   - 2 pair category 3 UTP, full duplex mode
+1000BaseXHD   - PCS/PMA, unknown PMD, half duplex mode
+1000BaseXFD   - PCS/PMA, unknown PMD, full duplex mode
+1000BaseLXHD  - Fiber over long-wavelength laser, half duplex mode
+1000BaseLXFD  - Fiber over long-wavelength laser, full duplex mode
+1000BaseSXHD  - Fiber over short-wavelength laser, half duplex mode
+1000BaseSXFD  - Fiber over short-wavelength laser, full duplex mode
+1000BaseCXHD  - Copper over 150-Ohm balanced cable, half duplex mode
+1000BaseCXFD  - Copper over 150-Ohm balanced cable, full duplex mode
+1000BaseTHD   - Four-pair Category 5 UTP, half duplex mode
+1000BaseTFD   - Four-pair Category 5 UTP, full duplex mode
+10GigBaseX    - X PCS/PMA, unknown PMD
+10GigBaseLX4  - X fiber over WWDM optics
+10GigBaseR    - R PCS/PMA, unknown PMD
+10GigBaseER   - R fiber over 1550 nm optics
+10GigBaseLR   - R fiber over 1310 nm optics
+10GigBaseSR   - R fiber over 850 nm optics
+10GigBaseW    - W PCS/PMA, unknown PMD
+10GigBaseEW   - W fiber over 1550 nm optics
+10GigBaseLW   - W fiber over 1310 nm optics
+10GigBaseSW   - W fiber over 850 nm optics</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>mtu</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">MTU of Remote Device</div></td></tr><tr><td><br></td></tr><tr><td><div><b>See Also</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="getlldpneighbors.html">getlldpneighbors</a></div></td></tr><tr><td><br></td></tr></table></div>
+</body>
+</html>

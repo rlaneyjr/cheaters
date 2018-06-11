@@ -1,0 +1,244 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>Citrix NetScaler XML API User&#39;s Guide - Structure Definition</title>
+<link rel="stylesheet" type="text/css" href="help_ns.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body onload="initial()" class="ns_body">
+<div class="ns_content"><table cellpadding="0" cellspacing="0"><script type="text/javascript">
+function changeContext(id,lang,flag){
+	parent.banner.document.language.select.value = lang;
+	if( lang == "C" ){
+		if(flag == "1"){
+			showContent(cfirstcontent,id,lang);
+		}
+		else{
+			showContent(csecondcontent,id,lang);
+		}
+	}
+	if( lang == "Perl" ){
+		if(flag == "1"){
+			showContent(perlfirstcontent,id,lang);
+		}
+		else{
+			showContent(perlsecondcontent,id,lang);
+		}
+	}
+	if( lang == "Java" ){
+		if(flag == "1"){
+			showContent(javafirstcontent,id,lang);	
+		}
+		else{
+			showContent(javasecondcontent,id,lang);
+		}
+	}
+	if( lang == "C#" ){
+		if(flag == "1"){
+			showContent(csharpfirstcontent,id,lang);
+		}
+		else{
+			showContent(csharpsecondcontent,id,lang);
+		}
+	}
+	if( lang == "VB" ){
+		if(flag == "1"){
+			showContent(vbfirstcontent,id,lang);
+		}
+		else{
+			showContent(vbsecondcontent,id,lang);
+		}
+	}
+	if(flag == "1"){
+		showInside(lang,"0");
+	}
+	else{
+		showOutside(lang);
+	}
+}
+function showContent(content,id,lang){
+	if(ie4){
+	   showContentObj=document.all.id;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById(id);
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+  showLangSelect(lang);
+}
+function showInside(str,cond){
+	if(str == "C"){
+ 		var inside_content = csecondcontent;
+ 	}
+ 	if(str == "Perl"){
+ 		var inside_content = perlsecondcontent;
+ 	}
+ 	if(str == "Java"){
+ 		var inside_content = javasecondcontent;
+ 	}
+ 	if(str == "C#"){
+		var inside_content = csharpsecondcontent;
+ 	}
+ 	if(str == "VB"){
+		var inside_content = vbsecondcontent;
+ 	}
+	showContent(inside_content,'qiksearch_div1',str);
+ 	if ( cond == "1" ){
+ 		var page = 'apidoc/docs/getnsconnectiontableResult.html#connectiontableList';
+ 		document.location.href = page;
+ 	}
+}
+function showOutside(str){
+	if(str == "C" ){
+ 		var inside_content = cfirstcontent;
+ 	}
+ 	if(str == "Perl" ){
+ 		var inside_content = perlfirstcontent;
+ 	}
+ 	if(str == "Java" ){
+ 		var inside_content = javafirstcontent;
+ 	}
+ 	if(str == "C#" ){
+ 		var inside_content = csharpfirstcontent;
+ 	}
+ 	if(str == "VB" ){
+ 		var inside_content = vbfirstcontent;
+ 	}
+ 	showContent(inside_content,'qiksearch_div',str);
+}
+function initial(){
+	ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+	ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+	ns4=document.layers;
+	langSelected = parent.banner.document.language.select.value
+	var plink = parent.banner.document.language.plink.value
+	var my_array=plink.split("&");
+	var temp = my_array[0];
+ 	var grp = temp.split("@");
+	var cmd = my_array[1];
+	var regex = /^stat/i;
+	if( cmd.match(regex) != null ){
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex_stat.html\">Statistics</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getnsconnectiontableResult");
+	}
+	else{
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex.htm\">Configuration</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getnsconnectiontableResult");
+	}
+	if( langSelected == "C" ){
+ 		var content = cfirstcontent;
+	}
+	else if( langSelected == "Perl" ){
+		var content = perlfirstcontent;
+	}
+	else if( langSelected == "Java" ){
+		var content = javafirstcontent;
+	}
+	else if( langSelected == "C#" ){
+		var content = csharpfirstcontent;
+	}
+	else if( langSelected == "VB" ){
+		var content = vbfirstcontent;
+	}
+	else{
+		var content = cfirstcontent;
+		langSelected="C";
+	}
+	showContent(content,'qiksearch_div',langSelected);
+	showInside(langSelected,"0");
+}
+function showPLink(content){
+	if(ie4){
+	   showContentObj=document.all.progressive_link;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById("progressive_link");
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+}
+function showLangSelect(id){
+	   if(ie4)
+       {
+       	showObj=document.all.first_url;
+       	showObj1=document.all.second_url;
+       }
+       if(ns6)
+       {
+       	showObj=document.getElementById("first_url");
+       	showObj1=document.getElementById("second_url");
+       }
+       if( id == "C" ){
+       	newlink = "<b>C</b>";
+       	newlink1 = "<b>C</b>";
+       }
+       else{
+       	newlink = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C','1');\"><b>C</b></a>";
+       	newlink1 = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C','0');\"><b>C</b></a>";
+       }
+       if( id == "Perl" ){
+       	newlink = newlink + " | <b>Perl</b>";
+       	newlink1 = newlink1 + " | <b>Perl</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Perl','1');\"><b>Perl</b></a>";
+      	       newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Perl','0');\"><b>Perl</b></a>";
+       }
+       if( id == "Java" ){
+       	newlink = newlink + " | <b>Java</b>";
+       	newlink1 = newlink1 + " | <b>Java</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Java','1');\"><b>Java</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Java','0');\"><b>Java</b></a>";
+       }
+       if( id == "C#" ){
+       	newlink = newlink + " | <b>C#</b>";
+       	newlink1 = newlink1 + " | <b>C#</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C#','1');\"><b>C#</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C#','0');\"><b>C#</b></a>";
+       }
+       showObj.innerHTML = newlink;
+       showObj1.innerHTML = newlink1;
+}
+</script>
+<tr><td><div><div id="progressive_link"></div></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>getnsconnectiontableResult Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>getnsconnectiontableResult</b> structure defines the return type for getnsconnectiontable API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="first_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+cfirstcontent = "<pre>struct getnsconnectiontableResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; struct <a href=\'getnsconnectiontableResult.html\#nsconnectiontable\'>nsconnectiontable</a> list[];<br> };<br></pre></td></tr></table></div>"
+perlfirstcontent = "<pre>$getnsconnectiontableResult = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rc => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; message => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; List => \'@<a href=\'getnsconnectiontableResult.html\#nsconnectiontable\'>nsconnectiontable</a>\',<br> };<br></pre></td></tr></table></div>"
+javafirstcontent = "<pre>class getnsconnectiontableResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getnsconnectiontableResult.html\#nsconnectiontable\'>nsconnectiontable</a>[] list;<br> };<br></pre></td></tr></table></div>"
+csharpfirstcontent = "<pre>class getnsconnectiontableResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getnsconnectiontableResult.html\#nsconnectiontable\'>nsconnectiontable</a>[] list;<br> };<br></pre></td></tr></table></div>"
+vbfirstcontent = "<pre>Public <b>Structure</b> getnsconnectiontableResult <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rc As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public message As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public  nsconnectiontableList() As  <a href=\'getnsconnectiontableResult.html\#nsconnectiontable\'>nsconnectiontable</a><br> <b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rc</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, rc is 0 else rc > 0. Values above 0x8000 indicate Warnings.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>message</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, message is NULL else message contains <a href="errorlisting.html">Error/Warning</a> message.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>nsconnectiontableList</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">List of nsconnectiontables</div></td></tr><tr><td><br></td></tr><tr><td><div><a name="nsconnectiontable"></a></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>nsconnectiontable  Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>nsconnectiontable</b> structure defines the actual return type values for getnsconnectiontable API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="second_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div1" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+csecondcontent = "<pre>struct nsconnectiontable {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * filterexpression;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * detail;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * sourceip;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int sourceport;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * destip;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int destport;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * svctype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int idletime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * state;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * linksourceip;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int linksourceport;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * linkdestip;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int linkdestport;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * linkservicetype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int linkidletime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * linkstate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * entityname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * linkentityname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int connectionnumber;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int linkconnectionnumber;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int connid;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int linkconnid;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * optionflags[];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int nswsvalue;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int peerwsvalue;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int mss;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int retxretrycnt;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rcvwnd;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int advwnd;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int sndcwnd;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int iss;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int irs;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rcvnxt;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int maxack;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int sndnxt;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int sndunack;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int httpendseq;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * httpstate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int trcount;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * priority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * httpreqver;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * httprequest;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int httprspcode;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rttsmoothed;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rttvariance;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int outoforderpkts;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * linkoptionflag[];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int linknswsvalue;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int linkpeerwsvalue;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int targetnodeidnnm;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int sourcenodeidnnm;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int channelidnnm;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int msgversionnnm;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int td;<br> };<br></pre></td></tr></table></div>"
+perlsecondcontent = "<pre>$nsconnectiontable = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; filterexpression => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; detail => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; sourceip => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; sourceport => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; destip => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; destport => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; svctype => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; idletime => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; state => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; linksourceip => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; linksourceport => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; linkdestip => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; linkdestport => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; linkservicetype => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; linkidletime => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; linkstate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; entityname => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; linkentityname => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; connectionnumber => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; linkconnectionnumber => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; connid => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; linkconnid => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; optionflags => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; nswsvalue => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; peerwsvalue => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; mss => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; retxretrycnt => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rcvwnd => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; advwnd => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; sndcwnd => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; iss => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; irs => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rcvnxt => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; maxack => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; sndnxt => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; sndunack => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpendseq => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpstate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; trcount => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; priority => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpreqver => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httprequest => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httprspcode => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rttsmoothed => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rttvariance => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; outoforderpkts => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; linkoptionflag => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; linknswsvalue => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; linkpeerwsvalue => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; targetnodeidnnm => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; sourcenodeidnnm => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; channelidnnm => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; msgversionnnm => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; td => \'$\',<br> };<br></pre></td></tr></table></div>"
+javasecondcontent = "<pre>class nsconnectiontable {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String filterexpression;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String detail;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String sourceip;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt sourceport;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String destip;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt destport;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String svctype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int idletime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String state;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String linksourceip;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt linksourceport;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String linkdestip;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt linkdestport;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String linkservicetype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int linkidletime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String linkstate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String entityname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String linkentityname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int connectionnumber;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int linkconnectionnumber;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt connid;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt linkconnid;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String optionflags[];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt nswsvalue;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt peerwsvalue;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int mss;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int retxretrycnt;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rcvwnd;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int advwnd;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int sndcwnd;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int iss;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int irs;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rcvnxt;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int maxack;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int sndnxt;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int sndunack;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int httpendseq;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String httpstate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int trcount;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String priority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String httpreqver;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String httprequest;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int httprspcode;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rttsmoothed;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rttvariance;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int outoforderpkts;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String linkoptionflag[];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt linknswsvalue;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt linkpeerwsvalue;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int targetnodeidnnm;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int sourcenodeidnnm;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt channelidnnm;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt msgversionnnm;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt td;<br> };<br></pre></td></tr></table></div>"
+csharpsecondcontent = "<pre>class nsconnectiontable {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string filterexpression;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string detail;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string sourceip;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 sourceport;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string destip;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 destport;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string svctype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 idletime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string state;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string linksourceip;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 linksourceport;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string linkdestip;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 linkdestport;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string linkservicetype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 linkidletime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string linkstate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string entityname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string linkentityname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 connectionnumber;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 linkconnectionnumber;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 connid;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 linkconnid;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string optionflags[];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 nswsvalue;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 peerwsvalue;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 mss;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 retxretrycnt;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 rcvwnd;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 advwnd;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 sndcwnd;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 iss;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 irs;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 rcvnxt;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 maxack;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 sndnxt;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 sndunack;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 httpendseq;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string httpstate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 trcount;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string priority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string httpreqver;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string httprequest;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 httprspcode;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 rttsmoothed;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 rttvariance;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 outoforderpkts;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string linkoptionflag[];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 linknswsvalue;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 linkpeerwsvalue;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 targetnodeidnnm;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 sourcenodeidnnm;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 channelidnnm;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 msgversionnnm;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 td;<br> };<br></pre></td></tr></table></div>"
+vbsecondcontent = "<pre>Public <b>Structure</b> nsconnectiontable <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public filterexpression As String  <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public detail As String  <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public sourceip As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public sourceport As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public destip As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public destport As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public svctype As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public idletime As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public state As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public linksourceip As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public linksourceport As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public linkdestip As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public linkdestport As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public linkservicetype As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public linkidletime As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public linkstate As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public entityname As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public linkentityname As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public connectionnumber As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public linkconnectionnumber As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public connid As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public linkconnid As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public optionflags() As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public nswsvalue As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public peerwsvalue As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public mss As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public retxretrycnt As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rcvwnd As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public advwnd As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public sndcwnd As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public iss As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public irs As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rcvnxt As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public maxack As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public sndnxt As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public sndunack As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpendseq As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpstate As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public trcount As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public priority As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpreqver As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httprequest As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httprspcode As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rttsmoothed As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rttvariance As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public outoforderpkts As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public linkoptionflag() As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public linknswsvalue As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public linkpeerwsvalue As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public targetnodeidnnm As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public sourcenodeidnnm As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public channelidnnm As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public msgversionnnm As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public td As UInteger<br><b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>filterexpression</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">    <qualifier> = SOURCEIP.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>detail</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Specify display options for the connection table.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sourceip</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Source IP of the connection.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sourceport</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Source port of the connection.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>destip</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Destination IP of the connection.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>destport</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Destination port of the connection.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>svctype</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Protocol supported by the connection.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>idletime</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Time since last activity was detected on the connection.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>state</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Current TCP/IP state of the connection.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>linksourceip</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Source IP of the link connection.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>linksourceport</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Source port of the link connection.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>linkdestip</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Destination IP of the link connection.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>linkdestport</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Destination port of the link connection.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>linkservicetype</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Protocol supported by the link connection.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>linkidletime</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Time since last activity was detected on link connection.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>linkstate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">TCP/IP current state of link connection.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>entityname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">NetScaler entity name for the connection.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>linkentityname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">NetScaler entity name for link connection.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>connectionnumber</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Connection number<br> NOTE: This attribute is deprecated.<br>Deprecated in favour of NSA_CONNID.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>linkconnectionnumber</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Link connection number<br> NOTE: This attribute is deprecated.<br>Deprecated in favour of NSA_LINK_CONNID.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>connid</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Unique transaction number for the connection.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>linkconnid</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Unique transaction number for the peer connection.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>optionflags</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">flags used to store TCP options like Sack, WS</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>nswsvalue</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">netscaler window scaling value</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>peerwsvalue</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">peer window scaling value</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>mss</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Client side MSS for the connection - used in server SYN.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>retxretrycnt</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Retransmission retry count for the connection.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rcvwnd</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Received Advertised Window for the connection.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>advwnd</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Sent advertised window for the connection.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sndcwnd</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">sent congestion window for the connection.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>iss</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Initial send sequence number for the connection.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>irs</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Initial receive sequence number for the connection.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rcvnxt</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">next expecting seq number for the connection.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>maxack</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">current running max ack sent for the connection.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sndnxt</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">next bytes seq number for the connection.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sndunack</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Most recently received ACK for the connection.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpendseq</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">HTTP parsing tracking seq number for the connection.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpstate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">HTTP Protocol  state for the connection.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>trcount</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Max reuests allowed per connection.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>priority</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">priority of the connection.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpreqver</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">current HTTP request version on the connection.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httprequest</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">current HTTP request type on the connection.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httprspcode</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">current response type on the connection.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rttsmoothed</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">smoothed RTT value of the connection.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rttvariance</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">RTT variance for the connection.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>outoforderpkts</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">held packets on the connection.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>linkoptionflag</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Link connection's TCP option flag for Sack and WS</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>linknswsvalue</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Link connection-s netscaler window scaling value</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>linkpeerwsvalue</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Link connection-s peer netscaler window scaling value</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>targetnodeidnnm</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">NNM connection target node ID.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sourcenodeidnnm</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">NNM connection source node ID.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>channelidnnm</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">NNM connection channel ID.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>msgversionnnm</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">nnm message version.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>td</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Traffic Domain Id.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>See Also</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="getnsconnectiontable.html">getnsconnectiontable</a></div></td></tr><tr><td><br></td></tr></table></div>
+</body>
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>Citrix NetScaler XML API User&#39;s Guide - Structure Definition</title>
+<link rel="stylesheet" type="text/css" href="help_ns.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body onload="initial()" class="ns_body">
+<div class="ns_content"><table cellpadding="0" cellspacing="0"><script type="text/javascript">
+function changeContext(id,lang,flag){
+	parent.banner.document.language.select.value = lang;
+	if( lang == "C" ){
+		if(flag == "1"){
+			showContent(cfirstcontent,id,lang);
+		}
+		else{
+			showContent(csecondcontent,id,lang);
+		}
+	}
+	if( lang == "Perl" ){
+		if(flag == "1"){
+			showContent(perlfirstcontent,id,lang);
+		}
+		else{
+			showContent(perlsecondcontent,id,lang);
+		}
+	}
+	if( lang == "Java" ){
+		if(flag == "1"){
+			showContent(javafirstcontent,id,lang);	
+		}
+		else{
+			showContent(javasecondcontent,id,lang);
+		}
+	}
+	if( lang == "C#" ){
+		if(flag == "1"){
+			showContent(csharpfirstcontent,id,lang);
+		}
+		else{
+			showContent(csharpsecondcontent,id,lang);
+		}
+	}
+	if( lang == "VB" ){
+		if(flag == "1"){
+			showContent(vbfirstcontent,id,lang);
+		}
+		else{
+			showContent(vbsecondcontent,id,lang);
+		}
+	}
+	if(flag == "1"){
+		showInside(lang,"0");
+	}
+	else{
+		showOutside(lang);
+	}
+}
+function showContent(content,id,lang){
+	if(ie4){
+	   showContentObj=document.all.id;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById(id);
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+  showLangSelect(lang);
+}
+function showInside(str,cond){
+	if(str == "C"){
+ 		var inside_content = csecondcontent;
+ 	}
+ 	if(str == "Perl"){
+ 		var inside_content = perlsecondcontent;
+ 	}
+ 	if(str == "Java"){
+ 		var inside_content = javasecondcontent;
+ 	}
+ 	if(str == "C#"){
+		var inside_content = csharpsecondcontent;
+ 	}
+ 	if(str == "VB"){
+		var inside_content = vbsecondcontent;
+ 	}
+	showContent(inside_content,'qiksearch_div1',str);
+ 	if ( cond == "1" ){
+ 		var page = 'apidoc/docs/gethanodeResult.html#nodeList';
+ 		document.location.href = page;
+ 	}
+}
+function showOutside(str){
+	if(str == "C" ){
+ 		var inside_content = cfirstcontent;
+ 	}
+ 	if(str == "Perl" ){
+ 		var inside_content = perlfirstcontent;
+ 	}
+ 	if(str == "Java" ){
+ 		var inside_content = javafirstcontent;
+ 	}
+ 	if(str == "C#" ){
+ 		var inside_content = csharpfirstcontent;
+ 	}
+ 	if(str == "VB" ){
+ 		var inside_content = vbfirstcontent;
+ 	}
+ 	showContent(inside_content,'qiksearch_div',str);
+}
+function initial(){
+	ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+	ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+	ns4=document.layers;
+	langSelected = parent.banner.document.language.select.value
+	var plink = parent.banner.document.language.plink.value
+	var my_array=plink.split("&");
+	var temp = my_array[0];
+ 	var grp = temp.split("@");
+	var cmd = my_array[1];
+	var regex = /^stat/i;
+	if( cmd.match(regex) != null ){
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex_stat.html\">Statistics</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > gethanodeResult");
+	}
+	else{
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex.htm\">Configuration</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > gethanodeResult");
+	}
+	if( langSelected == "C" ){
+ 		var content = cfirstcontent;
+	}
+	else if( langSelected == "Perl" ){
+		var content = perlfirstcontent;
+	}
+	else if( langSelected == "Java" ){
+		var content = javafirstcontent;
+	}
+	else if( langSelected == "C#" ){
+		var content = csharpfirstcontent;
+	}
+	else if( langSelected == "VB" ){
+		var content = vbfirstcontent;
+	}
+	else{
+		var content = cfirstcontent;
+		langSelected="C";
+	}
+	showContent(content,'qiksearch_div',langSelected);
+	showInside(langSelected,"0");
+}
+function showPLink(content){
+	if(ie4){
+	   showContentObj=document.all.progressive_link;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById("progressive_link");
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+}
+function showLangSelect(id){
+	   if(ie4)
+       {
+       	showObj=document.all.first_url;
+       	showObj1=document.all.second_url;
+       }
+       if(ns6)
+       {
+       	showObj=document.getElementById("first_url");
+       	showObj1=document.getElementById("second_url");
+       }
+       if( id == "C" ){
+       	newlink = "<b>C</b>";
+       	newlink1 = "<b>C</b>";
+       }
+       else{
+       	newlink = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C','1');\"><b>C</b></a>";
+       	newlink1 = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C','0');\"><b>C</b></a>";
+       }
+       if( id == "Perl" ){
+       	newlink = newlink + " | <b>Perl</b>";
+       	newlink1 = newlink1 + " | <b>Perl</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Perl','1');\"><b>Perl</b></a>";
+      	       newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Perl','0');\"><b>Perl</b></a>";
+       }
+       if( id == "Java" ){
+       	newlink = newlink + " | <b>Java</b>";
+       	newlink1 = newlink1 + " | <b>Java</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Java','1');\"><b>Java</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Java','0');\"><b>Java</b></a>";
+       }
+       if( id == "C#" ){
+       	newlink = newlink + " | <b>C#</b>";
+       	newlink1 = newlink1 + " | <b>C#</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C#','1');\"><b>C#</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C#','0');\"><b>C#</b></a>";
+       }
+       showObj.innerHTML = newlink;
+       showObj1.innerHTML = newlink1;
+}
+</script>
+<tr><td><div><div id="progressive_link"></div></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>gethanodeResult Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>gethanodeResult</b> structure defines the return type for gethanode API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="first_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+cfirstcontent = "<pre>struct gethanodeResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; struct <a href=\'gethanodeResult.html\#hanode\'>hanode</a> list[];<br> };<br></pre></td></tr></table></div>"
+perlfirstcontent = "<pre>$gethanodeResult = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rc => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; message => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; List => \'@<a href=\'gethanodeResult.html\#hanode\'>hanode</a>\',<br> };<br></pre></td></tr></table></div>"
+javafirstcontent = "<pre>class gethanodeResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'gethanodeResult.html\#hanode\'>hanode</a>[] list;<br> };<br></pre></td></tr></table></div>"
+csharpfirstcontent = "<pre>class gethanodeResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'gethanodeResult.html\#hanode\'>hanode</a>[] list;<br> };<br></pre></td></tr></table></div>"
+vbfirstcontent = "<pre>Public <b>Structure</b> gethanodeResult <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rc As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public message As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public  hanodeList() As  <a href=\'gethanodeResult.html\#hanode\'>hanode</a><br> <b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rc</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, rc is 0 else rc > 0. Values above 0x8000 indicate Warnings.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>message</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, message is NULL else message contains <a href="errorlisting.html">Error/Warning</a> message.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>hanodeList</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">List of hanodes</div></td></tr><tr><td><br></td></tr><tr><td><div><a name="hanode"></a></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>hanode  Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>hanode</b> structure defines the actual return type values for gethanode API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="second_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div1" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+csecondcontent = "<pre>struct hanode {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int id;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * name;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * ipaddress;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int flags;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * hastatus;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * state;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * hasync;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * haprop;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * enaifaces;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * disifaces;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * hamonifaces;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * pfifaces;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * ifaces;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * network;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * netmask;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * inc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * ssl2;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int hellointerval;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int deadinterval;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int masterstatetime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * failsafe;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * routemonitor;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int maxflips;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int maxfliptime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int curflips;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int completedfliptime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int syncvlan;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * routemonitorstate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * criticalinterfaces []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * pfltifaces []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * fisname []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * fisifaces []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * routemonnetwork []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * routemonnetmask []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int routemonstate []   ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * routemonbindingstate []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * routemon6network []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * routemon6netmask []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int routemon6state []   ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * routemon6bindingstate []  ;<br> };<br></pre></td></tr></table></div>"
+perlsecondcontent = "<pre>$hanode = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; id => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; name => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipaddress => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; flags => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; hastatus => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; state => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; hasync => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; haprop => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; enaifaces => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; disifaces => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; hamonifaces => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; pfifaces => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ifaces => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; network => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; netmask => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; inc => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ssl2 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; hellointerval => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; deadinterval => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; masterstatetime => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; failsafe => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; routemonitor => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; maxflips => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; maxfliptime => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; curflips => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; completedfliptime => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; syncvlan => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; routemonitorstate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; criticalinterfaces => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; pfltifaces => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; fisname => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; fisifaces => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; routemonnetwork => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; routemonnetmask => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; routemonstate => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; routemonbindingstate => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; routemon6network => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; routemon6netmask => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; routemon6state => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; routemon6bindingstate => \'@\',<br> };<br></pre></td></tr></table></div>"
+javasecondcontent = "<pre>class hanode {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt id;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String name;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String ipaddress;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt flags;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String hastatus;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String state;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String hasync;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String haprop;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String enaifaces;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String disifaces;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String hamonifaces;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String pfifaces;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String ifaces;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String network;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String netmask;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String inc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String ssl2;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt hellointerval;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt deadinterval;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt masterstatetime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String failsafe;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String routemonitor;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt maxflips;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt maxfliptime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt curflips;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt completedfliptime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt syncvlan;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String routemonitorstate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] criticalinterfaces;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] pfltifaces;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] fisname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] fisifaces;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] routemonnetwork;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] routemonnetmask;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt [] routemonstate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] routemonbindingstate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] routemon6network;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] routemon6netmask;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt [] routemon6state;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] routemon6bindingstate;<br> };<br></pre></td></tr></table></div>"
+csharpsecondcontent = "<pre>class hanode {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 id;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string name;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string ipaddress;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 flags;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string hastatus;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string state;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string hasync;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string haprop;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string enaifaces;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string disifaces;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string hamonifaces;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string pfifaces;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string ifaces;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string network;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string netmask;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string inc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string ssl2;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 hellointerval;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 deadinterval;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 masterstatetime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string failsafe;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string routemonitor;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 maxflips;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 maxfliptime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 curflips;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 completedfliptime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 syncvlan;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string routemonitorstate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] criticalinterfaces;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] pfltifaces;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] fisname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] fisifaces;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] routemonnetwork;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] routemonnetmask;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 [] routemonstate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] routemonbindingstate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] routemon6network;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] routemon6netmask;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 [] routemon6state;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] routemon6bindingstate;<br> };<br></pre></td></tr></table></div>"
+vbsecondcontent = "<pre>Public <b>Structure</b> hanode <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public id As UInteger  <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public name As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipaddress As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public flags As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public hastatus As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public state As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public hasync As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public haprop As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public enaifaces As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public disifaces As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public hamonifaces As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public pfifaces As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ifaces As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public network As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public netmask As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public inc As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ssl2 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public hellointerval As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public deadinterval As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public masterstatetime As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public failsafe As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public routemonitor As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public maxflips As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public maxfliptime As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public curflips As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public completedfliptime As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public syncvlan As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public routemonitorstate As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public criticalinterfaces As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public pfltifaces As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public fisname As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public fisifaces As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public routemonnetwork As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public routemonnetmask As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public routemonstate As UInteger()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public routemonbindingstate As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public routemon6network As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public routemon6netmask As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public routemon6state As UInteger()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public routemon6bindingstate As String()<br><b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>id</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">ID of the node whose HA settings you want to display.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>name</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Node Name.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipaddress</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">IP Address of the node.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>flags</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The flags for this entry.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>hastatus</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">HA status.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>state</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">HA Master State.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>hasync</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">HA Sync State.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>haprop</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">HA Propagation Status.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>enaifaces</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Enabled interfaces.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>disifaces</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Disabled interfaces.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>hamonifaces</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">HAMON ON interfaces.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>pfifaces</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Interfaces causing Partial Failure.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ifaces</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Interfaces on which non-multicast is not seen.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>network</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The network.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>netmask</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The netmask.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>inc</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">INC state.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ssl2</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">SSL card status.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>hellointerval</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Hello Interval.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>deadinterval</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Dead Interval.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>masterstatetime</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Time elapsed in current master state</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>failsafe</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Keep one node primary if both nodes fail the health check, so that a partially available node can back up data and handle traffic. This mode is set independently on each node.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>routemonitor</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The IP address (IPv4 or IPv6).</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>maxflips</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Max number of flips allowed before becoming sticky primary</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>maxfliptime</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Interval after which flipping of node states can again start</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>curflips</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Keeps track of number of flips that have happened till now in current interval</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>completedfliptime</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">To inform user whether flip time is elapsed or not</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>syncvlan</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Vlan on which HA related communication is sent. This include sync, propagation , connection mirroring , LB persistency config sync, persistent session sync and session state sync. However HA heartbeats can go all interfaces.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>routemonitorstate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">State for route monitor</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>criticalinterfaces</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>pfltifaces</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>fisname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>fisifaces</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>routemonnetwork</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>routemonnetmask</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>routemonstate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>routemonbindingstate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>routemon6network</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>routemon6netmask</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>routemon6state</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>routemon6bindingstate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div><b>See Also</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="gethanode.html">gethanode</a></div></td></tr><tr><td><br></td></tr></table></div>
+</body>
+</html>

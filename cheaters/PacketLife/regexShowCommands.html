@@ -1,0 +1,38 @@
+Rocking Your “Show” Commands With Regex
+MAY 10, 2010 BY ETHAN BANKS
+
+Here’s a few show commands I put together that pipe to “include” or “exclude” and use regular expressions to give you just the output you’re looking for at the Cisco IOS CLI.
+
+show run | i ^interface|^_ip address
+! Gives you the every line in your running config that starts with (that’s what the ^ is all about) “interface” or ” ip address”, essentially giving you all of your interface IP’s in an IOS-pastable format.  The underscore represents a space.  Useful for displaying IP addresses with their associated masks and interfaces.
+
+show ip interf brief | e unassigned
+! Shows you all of the IP-capable interfaces on the box, except for the ones that have not been assigned an IP address.  I use this often, especially on big switch/routers where most of the physical interfaces do not have an IP addresses, but the SVIs do.
+
+show run | i ip route.*Serial1/1
+! Shows you all static routes in your configuration pointing out Serial1/1, no matter what they are.  Substitute your own interface name.  Useful if you’re doing clean up after decommissioning an interface where you didn’t run a dynamic routing protocol.
+
+show interf status | i Gi[2-6]/20
+! Shows you the status of all port 20s in slots 2-6 of a chassis with gig cards.  Putting the 2-6 in square brackets is a regex telling the parser that any character that’s 2 through 6 inclusive is a match.
+
+show interf status | i Gi[246]/20
+! Shows you the status of all port 20s in slots 2, 4, and 6 of a chassis with gig cards.  Here, [246] tells the parser that values 2, 4, or 6 are all matches for that position.
+
+show interf status | i Gi./2_
+! Shows you the status of all ports ending in 2.  The underscore represents a space, so this makes sure you don’t get a match for “20” or “22” when all you really want is “2”.  The dot is a wildcard, allowing for any single character in that position.  If you want to match a random number of additional wildcard characters, follow the dot with an asterisk.
+
+show interf status | i Gi7/(29|3[0-9])
+! Shows you the status of all ports in slot 7, 29 – 39 inclusive.  You get the “Gi7/”, right?  No regex magic there.  The “29|” could be translated “29 or”.  The “3[0-9]” could be translated “3 followed by any of the digits 0 through 9 inclusive”.  Put it all together, and you get a match for any line containing Gi7/, followed by 29 or 30-39.
+
+show interf status | i _101_
+! Displays all lines contain the number 101 with a leading and trailing space.  Useful if you want to show all the ports in a particular VLAN, in this case 101.
+
+show inter status | i a-100_|_100_
+! Displays all the ports that are running at 100Mbps, whether statically defined or auto-negotiated.  Will also match interfaces in Vlan100, though.  Sadly, Cisco does not allow you to pipe to “include” and then further pipe to “exclude”, such as you can do in *nix by nesting piped greps.  If you could nest your pipe commands in the IOS CLI, there could be some very interesting output filters generated.
+
+show interface | i line|escription|bits
+! Presents all interfaces, their descriptions, and the bits per second flowing through them, both input and output.  Does not distinguish between up/down status.
+
+I view this list as “a good start”, leveraging basic regex features.  I use these features all the time to more quickly parse through router and switch output.  How about you?  I’d love to see your clever commands in the comments.  What I posted was just a warm up for what could be done, I’m sure.
+
+

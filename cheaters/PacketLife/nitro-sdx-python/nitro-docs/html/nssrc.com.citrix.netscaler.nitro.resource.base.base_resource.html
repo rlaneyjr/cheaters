@@ -1,0 +1,573 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>base_resource module &mdash; Nitro  documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Nitro  documentation" href="index.html" />
+    <link rel="up" title="base package" href="nssrc.com.citrix.netscaler.nitro.resource.base.html" />
+    <link rel="next" title="base_response module" href="nssrc.com.citrix.netscaler.nitro.resource.base.base_response.html" />
+    <link rel="prev" title="Json module" href="nssrc.com.citrix.netscaler.nitro.resource.base.Json.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="nssrc.com.citrix.netscaler.nitro.resource.base.base_response.html" title="base_response module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="nssrc.com.citrix.netscaler.nitro.resource.base.Json.html" title="Json module"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Nitro  documentation</a> &raquo;</li>
+          <li><a href="nssrc.com.citrix.netscaler.nitro.resource.base.html" accesskey="U">base package</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-nssrc.com.citrix.netscaler.nitro.resource.base.base_resource">
+<span id="base-resource-module"></span><h1>base_resource module<a class="headerlink" href="#module-nssrc.com.citrix.netscaler.nitro.resource.base.base_resource" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource">
+<em class="property">class </em><tt class="descname">base_resource</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<dl class="classmethod">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.get_object_type">
+<em class="property">classmethod </em><tt class="descname">get_object_type</tt><big>(</big><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.get_object_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the resource type.</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>Resource Type. eg:lbvserver, csvserver.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.resource_to_string">
+<tt class="descname">resource_to_string</tt><big>(</big><em>service</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.resource_to_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts netscaler resource to Json string.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd>service - nitro_service object</dd>
+<dt>Returns:</dt>
+<dd>string in Json format.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.unset_string">
+<tt class="descname">unset_string</tt><big>(</big><em>service</em>, <em>args</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.unset_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>forms a String for unset operation on a resource.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><blockquote class="first">
+<div>service - nitro_service object.</div></blockquote>
+<p class="last">id - session id.
+args - Array of args that are to be unset.</p>
+</dd>
+<dt>Returns:</dt>
+<dd>string in Json format.</dd>
+<dt>Throws:</dt>
+<dd>Exception if invalid input is given.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.post_requestEx">
+<tt class="descname">post_requestEx</tt><big>(</big><em>service</em>, <em>opt</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.post_requestEx" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this method to perform a POST operation on netscaler resource.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><blockquote class="first">
+<div>service - nitro_service object.</div></blockquote>
+<p class="last">opt - Options class object.</p>
+</dd>
+<dt>Returns:</dt>
+<dd>requested resource.</dd>
+<dt>Throws:</dt>
+<dd>Exception if invalid input is given.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.post_request">
+<tt class="descname">post_request</tt><big>(</big><em>service</em>, <em>opt</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.post_request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this method to perform a Add operation on netscaler resource.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><blockquote class="first">
+<div>service - nitro_service object.</div></blockquote>
+<p class="last">opt - Options class object.</p>
+</dd>
+<dt>Returns:</dt>
+<dd>status of the operation performed.</dd>
+<dt>Throws:</dt>
+<dd>Exception if invalid input is given.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.unset_request">
+<tt class="descname">unset_request</tt><big>(</big><em>service</em>, <em>opt</em>, <em>args</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.unset_request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this method to perform an Unset operation on netscaler resource.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><blockquote class="first">
+<div>service - nitro_service object.</div></blockquote>
+<p class="last">opt - options class object.
+args - string.</p>
+</dd>
+<dt>Returns:</dt>
+<dd>status of the operation performed.</dd>
+<dt>Throws:</dt>
+<dd>Exception</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.add_resource">
+<tt class="descname">add_resource</tt><big>(</big><em>service</em>, <em>opt=''</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.add_resource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this method to perform a add operation on netscaler resource.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><blockquote class="first">
+<div>service - nitro_service object.</div></blockquote>
+<p class="last">opt - options class object.</p>
+</dd>
+<dt>Returns:</dt>
+<dd>status of the operation performed.</dd>
+<dt>Throws:</dt>
+<dd>Exception</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.update_resource">
+<tt class="descname">update_resource</tt><big>(</big><em>service</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.update_resource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this method to perform a modify operation on netscaler resource.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><blockquote class="first">
+<div>service - nitro_service object.</div></blockquote>
+<p class="last">opt - options class object.</p>
+</dd>
+<dt>Returns:</dt>
+<dd>status of the operation performed.</dd>
+<dt>Throws:</dt>
+<dd>Exception</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.delete_resource">
+<tt class="descname">delete_resource</tt><big>(</big><em>service</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.delete_resource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this method to perform a delete operation on netscaler resource.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd>service - nitro_service object</dd>
+<dt>Returns:</dt>
+<dd>status of the operation performed.</dd>
+<dt>Throws:</dt>
+<dd>Exception of the type nitro_exception is thrown.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.getfiltered">
+<tt class="descname">getfiltered</tt><big>(</big><em>service</em>, <em>opt</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.getfiltered" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this method to perform a filtered get operation on netscaler resource.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><blockquote class="first">
+<div>service - nitro_service object.</div></blockquote>
+<p class="last">opt - options class object.</p>
+</dd>
+<dt>Returns:</dt>
+<dd>Array of nitro resources of given resource type.</dd>
+<dt>Throws:</dt>
+<dd>Exception of the type nitro_exception is thrown.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.get_resources">
+<tt class="descname">get_resources</tt><big>(</big><em>service</em>, <em>opt=''</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.get_resources" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this method to perform a get operation on netscaler resource.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><blockquote class="first">
+<div>service - nitro_service object.</div></blockquote>
+<p class="last">opt - options class object.</p>
+</dd>
+<dt>Returns:</dt>
+<dd>Array of nitro resources of specified type.</dd>
+<dt>Throws:</dt>
+<dd>Exception of the type nitro_exception is thrown.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.get_resource">
+<tt class="descname">get_resource</tt><big>(</big><em>service</em>, <em>opt=''</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.get_resource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this method to perform a get operation on netscaler resource.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><blockquote class="first">
+<div>service - nitro_service object.</div></blockquote>
+<p class="last">opt - options class object.</p>
+</dd>
+<dt>Returns:</dt>
+<dd>Array of nitro resources of specified type.</dd>
+<dt>Throws:</dt>
+<dd>Exception of the type nitro_exception is thrown.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.stat_resources">
+<tt class="descname">stat_resources</tt><big>(</big><em>service</em>, <em>opt=''</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.stat_resources" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this method to perform a stat operation on netscaler resources.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><blockquote class="first">
+<div>service - nitro_service object.</div></blockquote>
+<p class="last">opt - options class object.</p>
+</dd>
+<dt>Returns:</dt>
+<dd>Array of nitro stat resources of specified type.</dd>
+<dt>Throws:</dt>
+<dd>Exception of the type nitro_exception is thrown.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.stat_resource">
+<tt class="descname">stat_resource</tt><big>(</big><em>service</em>, <em>opt=''</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.stat_resource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this method to perform a stat operation on a netscaler resource.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><blockquote class="first">
+<div>service - nitro_service object.</div></blockquote>
+<p class="last">opt - options class object.</p>
+</dd>
+<dt>Returns:</dt>
+<dd>Requested Nitro stat resource.</dd>
+<dt>Throws:</dt>
+<dd>Exception of the type nitro_exception is thrown.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.perform_operation">
+<tt class="descname">perform_operation</tt><big>(</big><em>service</em>, <em>action=''</em>, <em>opt=''</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.perform_operation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this method to perform a clear/sync/link/unlink/save ...etc 
+operation on netscaler resource.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><blockquote class="first">
+<div>service - nitro_service object.</div></blockquote>
+<p class="last">action - action needs to be taken on resource. 
+opt - options object with action that is to be performed set.</p>
+</dd>
+<dt>Returns:</dt>
+<dd>status of the operation performed.</dd>
+<dt>Throws:</dt>
+<dd>Exception of the type nitro_exception is thrown.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.perform_operationEx">
+<tt class="descname">perform_operationEx</tt><big>(</big><em>service</em>, <em>action</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.perform_operationEx" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this method to perform a POST operation that returns a resource ...etc 
+operation on netscaler resource.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><blockquote class="first">
+<div>service - nitro_service object.</div></blockquote>
+<p class="last">action - action needs to be taken on resource.</p>
+</dd>
+<dt>Returns:</dt>
+<dd>requested resource</dd>
+<dt>Throws:</dt>
+<dd>Exception of the type nitro_exception is thrown.</dd>
+</dl>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.perform_operation_bulk_request">
+<em class="property">classmethod </em><tt class="descname">perform_operation_bulk_request</tt><big>(</big><em>service</em>, <em>resources</em>, <em>action</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.perform_operation_bulk_request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this method to perform a clear/sync/link/unlink/save ...etc 
+operation on netscaler resources.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><blockquote class="first">
+<div>service - nitro_service object.</div></blockquote>
+<p class="last">resources - Array of Nitro resources on which the specified action to be performed.
+opt - options object with action that is to be performed set.</p>
+</dd>
+<dt>Returns:</dt>
+<dd>status of the operation performed.</dd>
+<dt>Throws:</dt>
+<dd>Exception of the type nitro_exception is thrown.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.rename_resource">
+<tt class="descname">rename_resource</tt><big>(</big><em>service</em>, <em>newname</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.rename_resource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this method to perform a rename operation on netscaler resource.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><blockquote class="first">
+<div>service - nitro_service object.</div></blockquote>
+<p class="last">newname - new name to be set to the specified resource.</p>
+</dd>
+<dt>Returns:</dt>
+<dd>status of the operation performed.</dd>
+<dt>Throws:</dt>
+<dd>Exception of the type nitro_exception is thrown.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.unset_resource">
+<tt class="descname">unset_resource</tt><big>(</big><em>service</em>, <em>args</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.unset_resource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this method to perform an Unset operation on netscaler resource.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><blockquote class="first">
+<div>service - nitro_service object.</div></blockquote>
+<p class="last">args - Array of args that are to be unset.</p>
+</dd>
+<dt>Returns:</dt>
+<dd>status of the operation performed.</dd>
+<dt>Throws:</dt>
+<dd>Exception of the type nitro_exception is thrown.</dd>
+</dl>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.update_bulk_request">
+<em class="property">classmethod </em><tt class="descname">update_bulk_request</tt><big>(</big><em>service</em>, <em>resources</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.update_bulk_request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this method to perform an update operation on netscaler resources.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><blockquote class="first">
+<div>service - nitro_service object.</div></blockquote>
+<p class="last">resources - Array of nitro resources to be updated.</p>
+</dd>
+<dt>Returns:</dt>
+<dd>status of the operation performed.</dd>
+<dt>Throws:</dt>
+<dd>Exception of the type nitro_exception is thrown.</dd>
+</dl>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.unset_bulk_request">
+<em class="property">classmethod </em><tt class="descname">unset_bulk_request</tt><big>(</big><em>service</em>, <em>resources</em>, <em>args</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.unset_bulk_request" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.add_bulk_request">
+<em class="property">classmethod </em><tt class="descname">add_bulk_request</tt><big>(</big><em>service</em>, <em>resources</em>, <em>opt=''</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.add_bulk_request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this method to perform a add operation on netscaler resources.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><blockquote class="first">
+<div>service - nitro_service object.</div></blockquote>
+<p class="last">resources - Nitro resources to be added on netscaler.
+opt - options class object.</p>
+</dd>
+<dt>Returns:</dt>
+<dd>status of the performed operation.</dd>
+<dt>Throws:</dt>
+<dd>Exception  Nitro exception is thrown.</dd>
+</dl>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.delete_bulk_request">
+<em class="property">classmethod </em><tt class="descname">delete_bulk_request</tt><big>(</big><em>service</em>, <em>resources</em>, <em>opt=''</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.delete_bulk_request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this method to perform a delete operation on netscaler resources.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><blockquote class="first">
+<div>service - nitro_service object.</div></blockquote>
+<p class="last">resources - Nitro resources to be deleted on netscaler.
+opt - options class object.</p>
+</dd>
+<dt>Returns:</dt>
+<dd>status of the performed operation.</dd>
+<dt>Throws:</dt>
+<dd>Exception  Nitro exception is thrown.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.put_data">
+<tt class="descname">put_data</tt><big>(</big><em>service</em>, <em>request</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.put_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.put_bulk_data">
+<em class="property">classmethod </em><tt class="descname">put_bulk_data</tt><big>(</big><em>service</em>, <em>request</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.put_bulk_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.post_dataEx">
+<tt class="descname">post_dataEx</tt><big>(</big><em>service</em>, <em>request</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.post_dataEx" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.post_data">
+<tt class="descname">post_data</tt><big>(</big><em>service</em>, <em>request</em>, <em>opt</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.post_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.post_bulk_data">
+<em class="property">classmethod </em><tt class="descname">post_bulk_data</tt><big>(</big><em>service</em>, <em>request</em>, <em>opt=''</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.post_bulk_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.get_request">
+<tt class="descname">get_request</tt><big>(</big><em>service</em>, <em>opt</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.get_request" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method, forms the http GET request, applies on the netscaler.
+Reads the response from the netscaler and converts it to corresponding 
+resource type.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><blockquote class="first">
+<div>service - nitro_service object.</div></blockquote>
+<p class="last">opt - Options class object</p>
+</dd>
+<dt>Returns:</dt>
+<dd>Array of requested resources.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.stat_request">
+<tt class="descname">stat_request</tt><big>(</big><em>service</em>, <em>opt</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.stat_request" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method, forms the http GET request, applies on the netscaler.
+Reads the response from the netscaler and converts it to corresponding stat resource type.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><blockquote class="first">
+<div>service</div></blockquote>
+<p class="last">opt - Options class object</p>
+</dd>
+<dt>Returns:</dt>
+<dd>Array of requested resources.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.delete_request">
+<tt class="descname">delete_request</tt><big>(</big><em>service</em>, <em>req_args</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource.delete_request" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method, forms the http DELETE request, applies on the netscaler.
+Reads the response from the netscaler and converts it to base response.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><blockquote class="first">
+<div>service - nitro_service object.</div></blockquote>
+<p class="last">req_args</p>
+</dd>
+<dt>Returns:</dt>
+<dd>Array of requested resources.</dd>
+<dt>Throws:</dt>
+<dd>Exception</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper"><ul class="globaltoc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.exception.html">Nitro exception Package</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.base.html">Base Package</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.base.Json.html">Json</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">base_resource</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.base.base_response.html">base_response</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.base.base_responses.html">base_responses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.base.configobjects.html">configobjects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.base.ipayload_formatter.html">ipayload_formatter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.base.login.html">login</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.base.loginchallengeresponse.html">loginchallengeresponse</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.base.logout.html">logout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.base.statobjects.html">statobjects</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.service.html">Service Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.util.html">Util Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.html">Config Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.stat.html">Stat Package</a></li>
+</ul>
+</ul>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="nssrc.com.citrix.netscaler.nitro.resource.base.Json.html"
+                        title="previous chapter">Json module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="nssrc.com.citrix.netscaler.nitro.resource.base.base_response.html"
+                        title="next chapter">base_response module</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div> 
+
+    <div class="footer">
+        &copy; Copyright © 1999-2014 Citrix Systems, Inc. All Rights Reserved.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.
+    </div>
+  </body>
+</html>

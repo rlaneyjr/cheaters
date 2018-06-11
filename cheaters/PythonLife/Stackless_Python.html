@@ -1,0 +1,4132 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+
+
+<script type="text/javascript" src="/static/js/analytics.js"></script>
+<script type="text/javascript">archive_analytics.values.server_name="wwwb-app13.us.archive.org";archive_analytics.values.server_ms=437;</script>
+<link type="text/css" rel="stylesheet" href="/static/css/banner-styles.css"/>
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.5: http://docutils.sourceforge.net/" />
+<title>Introduction to Concurrent Programming with Stackless Python</title>
+<meta name="author" content="Grant Olson" />
+<meta name="date" content="July 7, 2006" />
+<style type="text/css">
+
+body{
+    font-family:sans-serif;
+    margin-left:5%;
+    margin-right:5%;
+    }
+
+.literal-block {
+    margin-left:5%;
+    margin-right:5%;
+    padding-top:1em;
+    padding-bottom:1em;
+    padding-left:1em;
+    font-weight:medium;
+    background:#dddddd;
+    border:1pt solid black;
+}
+
+.note {
+    border:1pt solid black;
+    background:#dddddd;
+    margin-left:10%;
+    margin-right:10%;
+    padding-left:1em;
+    padding-right:1em;
+}
+.admonition-title {
+    font-weight:bold;
+}
+
+</style>
+</head>
+<body>
+
+
+<!-- BEGIN WAYBACK TOOLBAR INSERT -->
+<script type="text/javascript" src="/static/js/disclaim-element.js" ></script>
+<script type="text/javascript" src="/static/js/graph-calc.js" ></script>
+<script type="text/javascript">//<![CDATA[
+var __wm = (function(imgWidth,imgHeight,yearImgWidth,monthImgWidth){
+var wbPrefix = "/web/";
+var wbCurrentUrl = "http://members.verizon.net/olsongt/stackless/why_stackless.html";
+
+var firstYear = 1996;
+var displayDay = "1";
+var displayMonth = "Oct";
+var displayYear = "2007";
+var prettyMonths = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+var $D=document,$=function(n){return document.getElementById(n)};
+var trackerVal,curYear = -1,curMonth = -1;
+var yearTracker,monthTracker;
+function showTrackers(val) {
+  if (val===trackerVal) return;
+  var $ipp=$("wm-ipp");
+  var $y=$("displayYearEl"),$m=$("displayMonthEl"),$d=$("displayDayEl");
+  if (val) {
+    $ipp.className="hi";
+  } else {
+    $ipp.className="";
+    $y.innerHTML=displayYear;$m.innerHTML=displayMonth;$d.innerHTML=displayDay;
+  }
+  yearTracker.style.display=val?"inline":"none";
+  monthTracker.style.display=val?"inline":"none";
+  trackerVal = val;
+}
+function trackMouseMove(event,element) {
+  var eventX = getEventX(event);
+  var elementX = getElementX(element);
+  var xOff = Math.min(Math.max(0, eventX - elementX),imgWidth);
+  var monthOff = xOff % yearImgWidth;
+
+  var year = Math.floor(xOff / yearImgWidth);
+  var monthOfYear = Math.min(11,Math.floor(monthOff / monthImgWidth));
+  // 1 extra border pixel at the left edge of the year:
+  var month = (year * 12) + monthOfYear;
+  var day = monthOff % 2==1?15:1;
+  var dateString = zeroPad(year + firstYear) + zeroPad(monthOfYear+1,2) +
+    zeroPad(day,2) + "000000";
+
+  $("displayYearEl").innerHTML=year+firstYear;
+  $("displayMonthEl").innerHTML=prettyMonths[monthOfYear];
+  // looks too jarring when it changes..
+  //$("displayDayEl").innerHTML=zeroPad(day,2);
+  var url = wbPrefix + dateString + '/' +  wbCurrentUrl;
+  $("wm-graph-anchor").href=url;
+
+  if(curYear != year) {
+    var yrOff = year * yearImgWidth;
+    yearTracker.style.left = yrOff + "px";
+    curYear = year;
+  }
+  if(curMonth != month) {
+    var mtOff = year + (month * monthImgWidth) + 1;
+    monthTracker.style.left = mtOff + "px";
+    curMonth = month;
+  }
+}
+function hideToolbar() {
+  $("wm-ipp").style.display="none";
+}
+function bootstrap() {
+  var $spk=$("wm-ipp-sparkline");
+  yearTracker=$D.createElement('div');
+  yearTracker.className='yt';
+  with(yearTracker.style){
+    display='none';width=yearImgWidth+"px";height=imgHeight+"px";
+  }
+  monthTracker=$D.createElement('div');
+  monthTracker.className='mt';
+  with(monthTracker.style){
+    display='none';width=monthImgWidth+"px";height=imgHeight+"px";
+  }
+  $spk.appendChild(yearTracker);
+  $spk.appendChild(monthTracker);
+
+  var $ipp=$("wm-ipp");
+  $ipp&&disclaimElement($ipp);
+}
+return{st:showTrackers,mv:trackMouseMove,h:hideToolbar,bt:bootstrap};
+})(550, 27, 25, 2);//]]>
+</script>
+<style type="text/css">
+body {
+  margin-top:0 !important;
+  padding-top:0 !important;
+  min-width:800px !important;
+}
+</style>
+<div id="wm-ipp" lang="en" style="display:none;">
+
+<div style="position:fixed;left:0;top:0;width:100%!important">
+<div id="wm-ipp-inside">
+   <table style="width:100%;"><tbody><tr>
+   <td id="wm-logo">
+       <a href="/web/" title="Wayback Machine home page"><img src="/static/images/toolbar/wayback-toolbar-logo.png" alt="Wayback Machine" width="110" height="39" border="0" /></a>
+   </td>
+   <td class="c">
+       <table style="margin:0 auto;"><tbody><tr>
+       <td class="u" colspan="2">
+       <form target="_top" method="get" action="/web/form-submit.jsp" name="wmtb" id="wmtb"><input type="text" name="url" id="wmtbURL" value="http://members.verizon.net/olsongt/stackless/why_stackless.html" style="width:400px;" onfocus="this.focus();this.select();" /><input type="hidden" name="type" value="replay" /><input type="hidden" name="date" value="20071001004937" /><input type="submit" value="Go" /><span id="wm_tb_options" style="display:block;"></span></form>
+       </td>
+       <td class="n" rowspan="2">
+           <table><tbody>
+           <!-- NEXT/PREV MONTH NAV AND MONTH INDICATOR -->
+           <tr class="m">
+           	<td class="b" nowrap="nowrap">
+		
+		    <a href="/web/20070608003135/http://members.verizon.net/olsongt/stackless/why_stackless.html#tasklets" title="8 Jun 2007">JUN</a>
+		
+		</td>
+		<td class="c" id="displayMonthEl" title="You are here: 0:49:37 Oct 1, 2007">OCT</td>
+		<td class="f" nowrap="nowrap">
+		
+		    <a href="/web/20080509062737/http://members.verizon.net/olsongt/stackless/why_stackless.html" title="9 May 2008"><strong>MAY</strong></a>
+		
+                </td>
+	    </tr>
+           <!-- NEXT/PREV CAPTURE NAV AND DAY OF MONTH INDICATOR -->
+           <tr class="d">
+               <td class="b" nowrap="nowrap">
+               
+                   <a href="/web/20070608003135/http://members.verizon.net/olsongt/stackless/why_stackless.html#tasklets" title="0:31:35 Jun 8, 2007"><img src="/static/images/toolbar/wm_tb_prv_on.png" alt="Previous capture" width="14" height="16" border="0" /></a>
+               
+               </td>
+               <td class="c" id="displayDayEl" style="width:34px;font-size:24px;" title="You are here: 0:49:37 Oct 1, 2007">1</td>
+	       <td class="f" nowrap="nowrap">
+               
+		   <a href="/web/20080509062737/http://members.verizon.net/olsongt/stackless/why_stackless.html" title="6:27:37 May 9, 2008"><img src="/static/images/toolbar/wm_tb_nxt_on.png" alt="Next capture" width="14" height="16" border="0" /></a>
+	       
+	       </td>
+           </tr>
+           <!-- NEXT/PREV YEAR NAV AND YEAR INDICATOR -->
+           <tr class="y">
+	       <td class="b" nowrap="nowrap">
+               
+                   <a href="/web/20060720211225/http://members.verizon.net/olsongt/stackless/why_stackless.html" title="20 Jul 2006"><strong>2006</strong></a>
+               
+               </td>
+               <td class="c" id="displayYearEl" title="You are here: 0:49:37 Oct 1, 2007">2007</td>
+	       <td class="f" nowrap="nowrap">
+               
+	           <a href="/web/20100528151832/http://members.verizon.net/olsongt/stackless/why_stackless.html" title="28 May 2010"><strong>2010</strong></a>
+	       
+	       </td>
+           </tr>
+           </tbody></table>
+       </td>
+       </tr>
+       <tr>
+       <td class="s">
+           <a class="t" href="/web/20071001004937*/http://members.verizon.net/olsongt/stackless/why_stackless.html" title="See a list of every capture for this URL">96 captures</a>
+           <div class="r" title="Timespan for captures of this URL">8 Jul 06 - 22 Dec 16</div>
+       </td>
+       <td class="k">
+       <a href="" id="wm-graph-anchor">
+       <div id="wm-ipp-sparkline" title="Explore captures for this URL">
+	 <img id="sparklineImgId" alt="sparklines"
+		 onmouseover="__wm.st(1)" onmouseout="__wm.st(0)"
+		 onmousemove="__wm.mv(event,this)"
+		 width="550"
+		 height="27"
+		 border="0"
+		 src="/web/jsp/graph.jsp?graphdata=550_27_1996:-1:000000000000_1997:-1:000000000000_1998:-1:000000000000_1999:-1:000000000000_2000:-1:000000000000_2001:-1:000000000000_2002:-1:000000000000_2003:-1:000000000000_2004:-1:000000000000_2005:-1:000000000000_2006:-1:000000200013_2007:9:846694000100_2008:-1:000010000000_2009:-1:000000000000_2010:-1:000010000000_2011:-1:000000000000_2012:-1:000000000020_2013:-1:00af01000110_2014:-1:000100010001_2015:-1:001000000000_2016:-1:001100030001_2017:-1:000000000000" />
+       </div>
+       </a>
+       </td>
+       </tr></tbody></table>
+   </td>
+   <td class="r">
+       <a href="#close" onclick="__wm.h();return false;" style="background-image:url(/static/images/toolbar/wm_tb_close.png);top:5px;" title="Close the toolbar">Close</a>
+       <a href="http://faq.web.archive.org/" style="background-image:url(/static/images/toolbar/wm_tb_help.png);bottom:5px;" title="Get some help using the Wayback Machine">Help</a>
+   </td>
+   </tr></tbody></table>
+</div>
+</div>
+</div>
+<script type="text/javascript">__wm.bt();</script>
+<!-- END WAYBACK TOOLBAR INSERT -->
+
+<div class="document" id="introduction-to-concurrent-programming-with-stackless-python">
+<h1 class="title">Introduction to Concurrent Programming with Stackless Python</h1>
+<table class="docinfo" frame="void" rules="none">
+<col class="docinfo-name" />
+<col class="docinfo-content" />
+<tbody valign="top">
+<tr><th class="docinfo-name">Author:</th>
+<td>Grant Olson</td></tr>
+<tr class="field"><th class="docinfo-name">Email:</th><td class="field-body"><a class="reference" href="mailto:olsongt@verizon.net">olsongt&#64;verizon.net</a></td>
+</tr>
+<tr><th class="docinfo-name">Date:</th>
+<td>July 7, 2006</td></tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="table-of-contents" name="table-of-contents">Table of Contents</a></p>
+<ul class="auto-toc simple">
+<li><a class="reference" href="#introduction" id="id5" name="id5">1&nbsp;&nbsp;&nbsp;Introduction</a><ul class="auto-toc">
+<li><a class="reference" href="#why-stackless" id="id6" name="id6">1.1&nbsp;&nbsp;&nbsp;Why Stackless</a><ul class="auto-toc">
+<li><a class="reference" href="#the-real-world-is-concurrent" id="id7" name="id7">1.1.1&nbsp;&nbsp;&nbsp;The Real World is Concurrent</a></li>
+<li><a class="reference" href="#concurrency-might-just-might-be-the-next-big-programming-paradigm" id="id8" name="id8">1.1.2&nbsp;&nbsp;&nbsp;Concurrency might, just might, be the next big programming paradigm</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#installing-stackless" id="id9" name="id9">1.2&nbsp;&nbsp;&nbsp;Installing Stackless</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#getting-started-with-stackless" id="id10" name="id10">2&nbsp;&nbsp;&nbsp;Getting Started With Stackless</a><ul class="auto-toc">
+<li><a class="reference" href="#tasklets" id="id11" name="id11">2.1&nbsp;&nbsp;&nbsp;Tasklets</a></li>
+<li><a class="reference" href="#the-scheduler" id="id12" name="id12">2.2&nbsp;&nbsp;&nbsp;The Scheduler</a></li>
+<li><a class="reference" href="#channels" id="id13" name="id13">2.3&nbsp;&nbsp;&nbsp;Channels</a></li>
+<li><a class="reference" href="#summary" id="id14" name="id14">2.4&nbsp;&nbsp;&nbsp;Summary</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#coroutines" id="id15" name="id15">3&nbsp;&nbsp;&nbsp;Coroutines</a><ul class="auto-toc">
+<li><a class="reference" href="#the-problem-with-to-subroutines" id="id16" name="id16">3.1&nbsp;&nbsp;&nbsp;The Problem with to Subroutines</a><ul class="auto-toc">
+<li><a class="reference" href="#the-stack" id="id17" name="id17">3.1.1&nbsp;&nbsp;&nbsp;The Stack</a></li>
+<li><a class="reference" href="#so-why-do-we-use-stacks" id="id18" name="id18">3.1.2&nbsp;&nbsp;&nbsp;So why do we use stacks?</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#enter-coroutines" id="id19" name="id19">3.2&nbsp;&nbsp;&nbsp;Enter Coroutines</a></li>
+<li><a class="reference" href="#id1" id="id20" name="id20">3.3&nbsp;&nbsp;&nbsp;Summary</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#lightweight-threads" id="id21" name="id21">4&nbsp;&nbsp;&nbsp;Lightweight Threads</a><ul class="auto-toc">
+<li><a class="reference" href="#the-hackysack-simulation" id="id22" name="id22">4.1&nbsp;&nbsp;&nbsp;The hackysack simulation</a></li>
+<li><a class="reference" href="#tradional-threaded-version-of-the-game" id="id23" name="id23">4.2&nbsp;&nbsp;&nbsp;Tradional threaded version of the game</a></li>
+<li><a class="reference" href="#stackless" id="id24" name="id24">4.3&nbsp;&nbsp;&nbsp;Stackless</a></li>
+<li><a class="reference" href="#id2" id="id25" name="id25">4.4&nbsp;&nbsp;&nbsp;Summary</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#dataflow" id="id26" name="id26">5&nbsp;&nbsp;&nbsp;Dataflow</a><ul class="auto-toc">
+<li><a class="reference" href="#the-factory" id="id27" name="id27">5.1&nbsp;&nbsp;&nbsp;The Factory</a></li>
+<li><a class="reference" href="#the-normal-version" id="id28" name="id28">5.2&nbsp;&nbsp;&nbsp;The 'normal' version</a><ul class="auto-toc">
+<li><a class="reference" href="#analysis" id="id29" name="id29">5.2.1&nbsp;&nbsp;&nbsp;Analysis</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#enter-dataflow" id="id30" name="id30">5.3&nbsp;&nbsp;&nbsp;Enter Dataflow</a></li>
+<li><a class="reference" href="#the-stackless-version-of-the-code" id="id31" name="id31">5.4&nbsp;&nbsp;&nbsp;The Stackless Version of the Code</a><ul class="auto-toc">
+<li><a class="reference" href="#id3" id="id32" name="id32">5.4.1&nbsp;&nbsp;&nbsp;Analysis</a><ul class="auto-toc">
+<li><a class="reference" href="#sleeper-utilities" id="id33" name="id33">5.4.1.1&nbsp;&nbsp;&nbsp;Sleeper utilities</a></li>
+<li><a class="reference" href="#the-classes" id="id34" name="id34">5.4.1.2&nbsp;&nbsp;&nbsp;The classes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference" href="#so-what-have-we-gained" id="id35" name="id35">5.5&nbsp;&nbsp;&nbsp;So what have we gained?</a></li>
+<li><a class="reference" href="#pushing-data" id="id36" name="id36">5.6&nbsp;&nbsp;&nbsp;Pushing Data</a><ul class="auto-toc">
+<li><a class="reference" href="#half-adder" id="id37" name="id37">5.6.1&nbsp;&nbsp;&nbsp;Half Adder</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference" href="#actors" id="id38" name="id38">6&nbsp;&nbsp;&nbsp;Actors</a><ul class="auto-toc">
+<li><a class="reference" href="#killer-robots" id="id39" name="id39">6.1&nbsp;&nbsp;&nbsp;Killer Robots!</a><ul class="auto-toc">
+<li><a class="reference" href="#actor-base-class" id="id40" name="id40">6.1.1&nbsp;&nbsp;&nbsp;Actor Base Class</a></li>
+<li><a class="reference" href="#message-format" id="id41" name="id41">6.1.2&nbsp;&nbsp;&nbsp;Message Format</a></li>
+<li><a class="reference" href="#world-class" id="id42" name="id42">6.1.3&nbsp;&nbsp;&nbsp;World class</a></li>
+<li><a class="reference" href="#a-simple-robot" id="id43" name="id43">6.1.4&nbsp;&nbsp;&nbsp;A Simple Robot</a></li>
+<li><a class="reference" href="#detour-pygame" id="id44" name="id44">6.1.5&nbsp;&nbsp;&nbsp;Detour: pyGame</a></li>
+<li><a class="reference" href="#round-1-of-the-code" id="id45" name="id45">6.1.6&nbsp;&nbsp;&nbsp;Round 1 of the code</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#more-detours-simulation-mechanics" id="id46" name="id46">6.2&nbsp;&nbsp;&nbsp;More Detours: Simulation Mechanics</a><ul class="auto-toc">
+<li><a class="reference" href="#actor-properties" id="id47" name="id47">6.2.1&nbsp;&nbsp;&nbsp;Actor Properties</a></li>
+<li><a class="reference" href="#collision-detection" id="id48" name="id48">6.2.2&nbsp;&nbsp;&nbsp;Collision Detection</a></li>
+<li><a class="reference" href="#constant-time" id="id49" name="id49">6.2.3&nbsp;&nbsp;&nbsp;Constant Time</a></li>
+<li><a class="reference" href="#damage-hitpoints-and-dying" id="id50" name="id50">6.2.4&nbsp;&nbsp;&nbsp;Damage, Hitpoints, and Dying</a></li>
+<li><a class="reference" href="#round-2-of-the-code" id="id51" name="id51">6.2.5&nbsp;&nbsp;&nbsp;Round 2 of the code</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#back-to-the-actors-let-s-get-crazy" id="id52" name="id52">6.3&nbsp;&nbsp;&nbsp;Back to the actors: Let's get crazy</a><ul class="auto-toc">
+<li><a class="reference" href="#explosions" id="id53" name="id53">6.3.1&nbsp;&nbsp;&nbsp;Explosions</a></li>
+<li><a class="reference" href="#mine-dropping-robot" id="id54" name="id54">6.3.2&nbsp;&nbsp;&nbsp;Mine Dropping Robot</a></li>
+<li><a class="reference" href="#spawner-pads" id="id55" name="id55">6.3.3&nbsp;&nbsp;&nbsp;Spawner Pads</a></li>
+<li><a class="reference" href="#the-final-simulation" id="id56" name="id56">6.3.4&nbsp;&nbsp;&nbsp;The Final Simulation</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#id4" id="id57" name="id57">6.4&nbsp;&nbsp;&nbsp;Summary</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#complete-code-listings" id="id58" name="id58">7&nbsp;&nbsp;&nbsp;Complete Code Listings</a><ul class="auto-toc">
+<li><a class="reference" href="#pingpong-py-recursive-ping-pong-example" id="id59" name="id59">7.1&nbsp;&nbsp;&nbsp;pingpong.py - recursive ping pong example</a></li>
+<li><a class="reference" href="#pingpong-stackless-py-stackless-ping-pong-example" id="id60" name="id60">7.2&nbsp;&nbsp;&nbsp;pingpong_stackless.py - stackless ping pong example</a></li>
+<li><a class="reference" href="#hackysackthreaded-py-os-thread-based-hackysack-example" id="id61" name="id61">7.3&nbsp;&nbsp;&nbsp;hackysackthreaded.py - OS-Thread based hackysack example</a></li>
+<li><a class="reference" href="#hackysackstackless-py-stackless-hackysack-example" id="id62" name="id62">7.4&nbsp;&nbsp;&nbsp;hackysackstackless.py - stackless hackysack example</a></li>
+<li><a class="reference" href="#assemblyline-py-normal-assemblyline-example" id="id63" name="id63">7.5&nbsp;&nbsp;&nbsp;assemblyline.py - 'normal' assemblyline example</a></li>
+<li><a class="reference" href="#assemblyline-stackless-py-stackless-assembly-line-example" id="id64" name="id64">7.6&nbsp;&nbsp;&nbsp;assemblyline-stackless.py - stackless assembly line example</a></li>
+<li><a class="reference" href="#digitalcircuit-py-stackless-digital-circuit" id="id65" name="id65">7.7&nbsp;&nbsp;&nbsp;digitalCircuit.py - stackless digital circuit</a></li>
+<li><a class="reference" href="#actors-py-first-actor-example" id="id66" name="id66">7.8&nbsp;&nbsp;&nbsp;actors.py - first actor example</a></li>
+<li><a class="reference" href="#actors2-py-second-actor-example" id="id67" name="id67">7.9&nbsp;&nbsp;&nbsp;actors2.py - second actor example</a></li>
+<li><a class="reference" href="#actors3-py-third-actor-example" id="id68" name="id68">7.10&nbsp;&nbsp;&nbsp;actors3.py - third actor example</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id5" id="introduction" name="introduction">1&nbsp;&nbsp;&nbsp;Introduction</a></h1>
+<div class="section">
+<h2><a class="toc-backref" href="#id6" id="why-stackless" name="why-stackless">1.1&nbsp;&nbsp;&nbsp;Why Stackless</a></h2>
+<p>According the stackless website at <a class="reference" href="/web/20071001004937/http://www.stackless.com/">http://www.stackless.com/</a>:</p>
+<pre class="literal-block">
+Stackless Python is an enhanced version of the Python programming language.
+It allows programmers to reap the benefits of thread-based programming
+without the performance and complexity problems associated with
+conventional threads. The microthreads that Stackless adds to Python are a
+cheap and lightweight convenience which can if used properly, give the
+following benefits:
+
+  + Improved program structure.
+
+  + More readable code.
+
+  + Increased programmer productivity.
+</pre>
+<p>Which acts as a very concise definition of stackless python, but what does that
+mean to us? It means that stackless provides the tools to model concurrency
+more easily than you can currently do in most conventional languages.  We're
+not just talking about Python itself, but Java, C/C++ and other languages as
+well.  Although there are some languages out there that provide concurrency
+features, they are either languages languages being primarily used in academia
+(such as Mozart/Oz) or lesser used/special purpose professional languages (such
+as erlang).  With stackless, you get concurrency in addition to all of the
+advantages of python itself, in an environment that you are (hopefully) already
+familiar with.</p>
+<p>This of course begs the question: Why concurrency?</p>
+<div class="section">
+<h3><a class="toc-backref" href="#id7" id="the-real-world-is-concurrent" name="the-real-world-is-concurrent">1.1.1&nbsp;&nbsp;&nbsp;The Real World is Concurrent</a></h3>
+<p>The real world is 'concurrent'.  It is made up of a bunch of things (or
+<strong>actors</strong>) that interact with each other in a loosely coupled way with limited
+knowledge of each other.  One of the purported benefits of object-oriented
+programming is that objects model things in the real world.  To a certain
+extent, this is true.  Object-oriented programming does a good job modelling
+individual objects, but it doesn't do a very good job representing interactions
+between these individual objects in a realistic way.  For example, what is
+wrong with the following code example?</p>
+<pre class="literal-block">
+def familyTacoNight():
+    husband.eat(dinner)
+    wife.eat(dinner)
+    son.eat(dinner)
+    daughter.eat(dinner)
+</pre>
+<p>At first glance, nothing.  But there is a subtle programs with the above
+example; the events occur serially.  That is, the wife does not eat until after
+the husband is completed with his meal, the son doesn't eat until the wife is
+done, and the daughter is last in line.  In the real world, the wife, son,
+and daughter will eat even if the husband gets caught in a traffic jam.  In the
+above example they'll starve to death.  Even worse no one will ever know
+because they'll never get the opportunity to throw an exception and notify the
+world!</p>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id8" id="concurrency-might-just-might-be-the-next-big-programming-paradigm" name="concurrency-might-just-might-be-the-next-big-programming-paradigm">1.1.2&nbsp;&nbsp;&nbsp;Concurrency might, just might, be the next big programming paradigm</a></h3>
+<p>I personally believe that concurrency is the next big paradigm in the software
+world.  As programs become more complex and resource intensive, we can no
+longer count on Moore's Law providing us with faster processors every year.
+Current performance increases in commodity PC's are coming from multi-core and
+multi-cpu machines.  Once an individual CPU is maxed out for performance,
+software developers will have to move to distributed models where multiple
+computers interact with each other to create a high powered application (think
+think GooglePlex).  To take advantage of both multi-core machines and
+distributed programming, concurrency quickly becomes the de-facto standard way
+of doing things.</p>
+</div>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id9" id="installing-stackless" name="installing-stackless">1.2&nbsp;&nbsp;&nbsp;Installing Stackless</a></h2>
+<p>Details for installing stackless can be found on the stackless website.
+Currently, linux users can get the source from subversion and perform a build.
+For windows users, there is an available .zip file that has to be extracted
+into an existing installation of python.  The rest of this tutorial assumes
+that you have a working installation of stackless python, along with a basic
+understanding of the python language itself.</p>
+</div>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id10" id="getting-started-with-stackless" name="getting-started-with-stackless">2&nbsp;&nbsp;&nbsp;Getting Started With Stackless</a></h1>
+<p>This chapter provides a brief introduction to stackless' primitives.  Later
+chapters will build on these primitives to show more practical functionality.</p>
+<div class="section">
+<h2><a class="toc-backref" href="#id11" id="tasklets" name="tasklets">2.1&nbsp;&nbsp;&nbsp;Tasklets</a></h2>
+<p>Tasklets are the primary building block for stackless.  You create a tasklet by
+feeding it any python callable (usually a function or class method).  This
+creates a tasklet and adds it to the scheduler.  Here is a quick
+demonstration:</p>
+<pre class="literal-block">
+Python 2.4.3 Stackless 3.1b3 060504 (#69, May  3 2006, 19:20:41) [MSC v.1310 32
+bit (Intel)] on win32
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+&gt;&gt;&gt; import stackless
+&gt;&gt;&gt;
+&gt;&gt;&gt; def print_x(x):
+...     print x
+...
+&gt;&gt;&gt; stackless.tasklet(print_x)('one')
+&lt;stackless.tasklet object at 0x00A45870&gt;
+&gt;&gt;&gt; stackless.tasklet(print_x)('two')
+&lt;stackless.tasklet object at 0x00A45A30&gt;
+&gt;&gt;&gt; stackless.tasklet(print_x)('three')
+&lt;stackless.tasklet object at 0x00A45AB0&gt;
+&gt;&gt;&gt;
+&gt;&gt;&gt; stackless.run()
+one
+two
+three
+&gt;&gt;&gt;
+</pre>
+<p>Note that the tasklets queue up and don't run until you call <em>stackless.run()</em>.</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id12" id="the-scheduler" name="the-scheduler">2.2&nbsp;&nbsp;&nbsp;The Scheduler</a></h2>
+<p>The scheduler controls the order in which the tasklets are run.  If you just
+create a bunch of tasklets, they will run in the order they are created.  In
+practice, you will generally create tasklets that reschedule themselves so that
+each one can have it's turn.  A quick demonstration:</p>
+<pre class="literal-block">
+Python 2.4.3 Stackless 3.1b3 060504 (#69, May  3 2006, 19:20:41) [MSC v.1310 32
+bit (Intel)] on win32
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+&gt;&gt;&gt; import stackless
+&gt;&gt;&gt;
+&gt;&gt;&gt; def print_three_times(x):
+...     print &quot;1:&quot;, x
+...     stackless.schedule()
+...     print &quot;2:&quot;, x
+...     stackless.schedule()
+...     print &quot;3:&quot;, x
+...     stackless.schedule()
+...
+&gt;&gt;&gt;
+&gt;&gt;&gt; stackless.tasklet(print_three_times)('first')
+&lt;stackless.tasklet object at 0x00A45870&gt;
+&gt;&gt;&gt; stackless.tasklet(print_three_times)('second')
+&lt;stackless.tasklet object at 0x00A45A30&gt;
+&gt;&gt;&gt; stackless.tasklet(print_three_times)('third')
+&lt;stackless.tasklet object at 0x00A45AB0&gt;
+&gt;&gt;&gt;
+&gt;&gt;&gt; stackless.run()
+1: first
+1: second
+1: third
+2: first
+2: second
+2: third
+3: first
+3: second
+3: third
+&gt;&gt;&gt;
+</pre>
+<p>Note that when we call <em>stackless.schedule()</em>, the active tasklet pauses
+itself and reinserts itself into the end of the scheduler's queue, allowing the
+next tasklet to run.  Once all of the tasklets ahead of this run, it picks up
+where it left off.  This continues until all active tasklets have finished
+running.  This is how we achieve cooperative multitasking with stackless.</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id13" id="channels" name="channels">2.3&nbsp;&nbsp;&nbsp;Channels</a></h2>
+<p>Channels allow you to send information between tasklets.  This accomplished two
+things:</p>
+<blockquote>
+<ol class="arabic simple">
+<li>It allows you to exchange information between tasklets.</li>
+<li>It allows you to control the flow of execution.</li>
+</ol>
+</blockquote>
+<p>Another quick demonstration:</p>
+<pre class="literal-block">
+C:\&gt;c:\python24\python
+Python 2.4.3 Stackless 3.1b3 060504 (#69, May  3 2006, 19:20:41) [MSC v.1310 32
+bit (Intel)] on win32
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+&gt;&gt;&gt; import stackless
+&gt;&gt;&gt;
+&gt;&gt;&gt; channel = stackless.channel()
+&gt;&gt;&gt;
+&gt;&gt;&gt; def receiving_tasklet():
+...     print &quot;Recieving tasklet started&quot;
+...     print channel.receive()
+...     print &quot;Receiving tasklet finished&quot;
+...
+&gt;&gt;&gt; def sending_tasklet():
+...     print &quot;Sending tasklet started&quot;
+...     channel.send(&quot;send from sending_tasklet&quot;)
+...     print &quot;sending tasklet finished&quot;
+...
+&gt;&gt;&gt; def another_tasklet():
+...     print &quot;Just another tasklet in the scheduler&quot;
+...
+&gt;&gt;&gt; stackless.tasklet(receiving_tasklet)()
+&lt;stackless.tasklet object at 0x00A45B30&gt;
+&gt;&gt;&gt; stackless.tasklet(sending_tasklet)()
+&lt;stackless.tasklet object at 0x00A45B70&gt;
+&gt;&gt;&gt; stackless.tasklet(another_tasklet)()
+&lt;stackless.tasklet object at 0x00A45BF0&gt;
+&gt;&gt;&gt;
+&gt;&gt;&gt; stackless.run()
+Recieving tasklet started
+Sending tasklet started
+send from sending_tasklet
+Receiving tasklet finished
+Just another tasklet in the scheduler
+sending tasklet finished
+&gt;&gt;&gt;
+&gt;&gt;&gt;
+</pre>
+<p>When the receiving tasklet calls <em>channel.receive()</em>, it blocks.  This means
+the tasklet pauses until something is sent over the channel.  Nothing other
+than sending something over the channel will re-activate the tasklet.</p>
+<p>When something is sent over the channel by the sending tasklet, the receiving
+tasklet resumes immediately, bypassing the existing schedule.  The sending
+tasklet is send to the back of the schedule, as if <em>stackless.schedule()</em> had
+been called.</p>
+<p>Also note that a send will block if there is nothing to immediately receive the
+message:</p>
+<pre class="literal-block">
+&gt;&gt;&gt;
+&gt;&gt;&gt; stackless.tasklet(sending_tasklet)()
+&lt;stackless.tasklet object at 0x00A45B70&gt;
+&gt;&gt;&gt; stackless.tasklet(another_tasklet)()
+&lt;stackless.tasklet object at 0x00A45BF0&gt;
+&gt;&gt;&gt;
+&gt;&gt;&gt; stackless.run()
+Sending tasklet started
+Just another tasklet in the scheduler
+&gt;&gt;&gt;
+&gt;&gt;&gt; stackless.tasklet(another_tasklet)()
+&lt;stackless.tasklet object at 0x00A45B30&gt;
+&gt;&gt;&gt; stackless.run()
+Just another tasklet in the scheduler
+&gt;&gt;&gt;
+&gt;&gt;&gt; #Finally adding the receiving tasklet
+...
+&gt;&gt;&gt; stackless.tasklet(receiving_tasklet)()
+&lt;stackless.tasklet object at 0x00A45BF0&gt;
+&gt;&gt;&gt;
+&gt;&gt;&gt; stackless.run()
+Recieving tasklet started
+send from sending_tasklet
+Receiving tasklet finished
+sending tasklet finished
+&gt;&gt;&gt;
+</pre>
+<p>The sending tasklet will not be re-inserted into the scheduler until it has
+successfully send data to another tasklet.</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id14" id="summary" name="summary">2.4&nbsp;&nbsp;&nbsp;Summary</a></h2>
+<p>That covers a majority of stackless' functionality.  Doesn't seem like much
+does it?  We dealt with a couple of objects and maybe 4 or 5 function calls.
+By using this small API as our building blocks, we can start to do some really
+interesting things.</p>
+</div>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id15" id="coroutines" name="coroutines">3&nbsp;&nbsp;&nbsp;Coroutines</a></h1>
+<div class="section">
+<h2><a class="toc-backref" href="#id16" id="the-problem-with-to-subroutines" name="the-problem-with-to-subroutines">3.1&nbsp;&nbsp;&nbsp;The Problem with to Subroutines</a></h2>
+<p>Most conventional programming languages expose the concept of subroutines.  A
+subroutine is called by another routine (which is probably considered a
+subroutine by another routine) and may or may not return a result.  By
+definition, a subroutine is subordinate to the caller.</p>
+<p>Take the following example:</p>
+<pre class="literal-block">
+def ping():
+    print &quot;PING&quot;
+    pong()
+
+def pong():
+    print &quot;PONG&quot;
+    ping()
+
+
+ping()
+
+</pre>
+<p>An experienced programmer will see a problem with this program.  It causes a
+stack overflow.  If you run the program, it'll display a big nasty traceback
+indicating that you ran out of stack space.</p>
+<div class="section">
+<h3><a class="toc-backref" href="#id17" id="the-stack" name="the-stack">3.1.1&nbsp;&nbsp;&nbsp;The Stack</a></h3>
+<p>I debated how much detail I should get into about the C-stack, and decided to
+bypass the description entirely.  It seemed like other attempts to describe it
+and diagrams only made sense to people who already understood it.  I'll try to
+provide a simplistic explanation of it.  Interested readers should look for
+more information on the web.</p>
+<p>Every time you call a subroutine, it creates a <strong>stack frame</strong>.  This is the
+holding area for variables and other information local to the subroutine.  In
+this case, when you call <em>ping()</em> it creates a stack frame that holds
+information for the subroutine call.  Simplistically, the frame says that says
+<em>ping pinged</em>.  When it calls <em>pong()</em>, this creates another stack frame that
+says <em>pong ponged</em>.  The stack frames are chained together, with each
+subroutine call acting as a link in the chain.  In this case, the stack
+basically says <em>ping pinged so pong ponged</em>.  Of course when <em>pong()</em> calls
+<em>ping()</em> this extends the stack.  Here is a visual representation:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="94%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Frame</th>
+<th class="head">Stack</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>1</td>
+<td>ping pinged</td>
+</tr>
+<tr><td>2</td>
+<td>ping pinged so pong ponged</td>
+</tr>
+<tr><td>3</td>
+<td>ping pinged so pong ponged so ping pinged</td>
+</tr>
+<tr><td>4</td>
+<td>ping pinged so pong ponged so ping pinged so pong ponged</td>
+</tr>
+<tr><td>5</td>
+<td>ping pinged so pong ponged so ping pinged so pong ponged so ping pinged</td>
+</tr>
+<tr><td>6</td>
+<td>ping pinged so pong ponged so ping pinged so pong ponged so ping pinged ...</td>
+</tr>
+</tbody>
+</table>
+<p>Now imagine that the page width represents the memory that your system has
+allocated to the stack.  When you hit the edge of the page, you <em>overflow</em> and
+the system runs out of memory.  Hence the term <em>stack overflow</em>.</p>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id18" id="so-why-do-we-use-stacks" name="so-why-do-we-use-stacks">3.1.2&nbsp;&nbsp;&nbsp;So why do we use stacks?</a></h3>
+<p>The above example is intentionally designed to show you the problem with the
+stack.  In most cases, each stack frame cleans itself up when a subroutine
+returns.  In those cases, the stack will clean itself up.  This is generally a
+good thing.  In C, the stack is the one area where the programmer doesn't have
+to do manual memory management.  Luckily, python programmers don't have to
+worry about memory management and the stack directly, but because the python
+interpreter itself is written in C, the implementors do have to worry about it.
+Using the stack makes things convenient.  That is until we start calling
+functions that never return, like the example above.  Then the stack actually
+starts working against the programmer, and exhausts available memory.</p>
+</div>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id19" id="enter-coroutines" name="enter-coroutines">3.2&nbsp;&nbsp;&nbsp;Enter Coroutines</a></h2>
+<p>In this case, it's a little silly that the stack overflows.  <em>ping()</em> and
+<em>pong()</em> aren't really subroutines.  One isn't subordinate to the other.  They
+are <em>coroutines</em>, on equal footing, who should be able communicate seamlessly
+with each other.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="94%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Frame</th>
+<th class="head">Stack</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>1</td>
+<td>ping pinged</td>
+</tr>
+<tr><td>2</td>
+<td>pong ponged</td>
+</tr>
+<tr><td>3</td>
+<td>ping pinged</td>
+</tr>
+<tr><td>4</td>
+<td>pong ponged</td>
+</tr>
+<tr><td>5</td>
+<td>ping pinged</td>
+</tr>
+<tr><td>6</td>
+<td>pong ponged</td>
+</tr>
+</tbody>
+</table>
+<p>With stackless, we create coroutines with channels.  If you remember, one of
+the two benefits of channels is that they allow you to control flow between
+tasklets.  By using channels, we can go back and forth between the ping and
+pong tasklets as much as we want without a stack overflow:</p>
+<pre class="literal-block">
+#
+# pingpong_stackless.py
+#
+
+import stackless
+
+ping_channel = stackless.channel()
+pong_channel = stackless.channel()
+
+def ping():
+    while ping_channel.receive(): #blocks here
+        print &quot;PING&quot;
+        pong_channel.send(&quot;from ping&quot;)
+
+def pong():
+    while pong_channel.receive():
+        print &quot;PONG&quot;
+        ping_channel.send(&quot;from pong&quot;)
+
+
+
+stackless.tasklet(ping)()
+stackless.tasklet(pong)()
+
+# we need to 'prime' the game by sending a start message
+# if not, both tasklets will block
+stackless.tasklet(ping_channel.send)('startup')
+
+stackless.run()
+
+
+
+
+
+</pre>
+<p>You can run this program as long as you want and it won't crash.  Also, if you
+examine memory usage (with the Task Manager on Windows or <strong>top</strong> on Unix),
+you'll see that memory usage is constant.  The coroutine version of the program
+uses the same memory whether it runs for 1 minute or a day.  If you examine
+memory usage of the recursive version, you'll see that it grows quickly before
+the program blows up.</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id20" id="id1" name="id1">3.3&nbsp;&nbsp;&nbsp;Summary</a></h2>
+<p>If you recall, earlier I mentioned that experience programmers would
+immediately see a problem with the recursive version of the code.  But
+honestly, there's not 'computer science' issue that would prevent this code
+from working.  It is simply a minor implementation detail that you're stuck with
+in most conventional languages, because most conventional languages use a
+stack.  In some sense, experienced programmers have simply been brainwashed to
+accept this as an acceptable problem.  Stackless removes this perceived
+problem.</p>
+</div>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id21" id="lightweight-threads" name="lightweight-threads">4&nbsp;&nbsp;&nbsp;Lightweight Threads</a></h1>
+<p>Threadlets, as the name implies, are lightweight compared to the threads built
+into today's OSes and supported by the standard python code.  They use less
+memory than a 'traditional' thread, and switching between threadlets is much
+less resource intensive than switching between 'traditional' threads.</p>
+<p>To demonstrate exactly how much more efficient threadlets are than traditional
+threads, we'll write the same program using both traditional threads and
+threadlets.</p>
+<div class="section">
+<h2><a class="toc-backref" href="#id22" id="the-hackysack-simulation" name="the-hackysack-simulation">4.1&nbsp;&nbsp;&nbsp;The hackysack simulation</a></h2>
+<p>Hackysack is a game in which a group of dirty hippies stand in a circle and
+kick a small bean filled bag around.  The object is to keep the bag from
+hitting the ground, while passing it to other players and doing tricks.
+Players can only use their feet to kick the ball around.</p>
+<p>In our simple simulation, we'll assume that the circle is a constant size once
+the game starts, and that the players are so good that the game will go on
+infinitely if allowed.</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id23" id="tradional-threaded-version-of-the-game" name="tradional-threaded-version-of-the-game">4.2&nbsp;&nbsp;&nbsp;Tradional threaded version of the game</a></h2>
+<pre class="literal-block">
+import thread
+import random
+import sys
+import Queue
+
+class hackysacker:
+    counter = 0
+    def __init__(self,name,circle):
+        self.name = name
+        self.circle = circle
+        circle.append(self)
+        self.messageQueue = Queue.Queue()
+
+        thread.start_new_thread(self.messageLoop,())
+
+    def incrementCounter(self):
+        hackysacker.counter += 1
+        if hackysacker.counter &gt;= turns:
+            while self.circle:
+                hs = self.circle.pop()
+                if hs is not self:
+                    hs.messageQueue.put('exit')
+            sys.exit()
+
+    def messageLoop(self):
+        while 1:
+            message = self.messageQueue.get()
+            if message == &quot;exit&quot;:
+                debugPrint(&quot;%s is going home&quot; % self.name)
+                sys.exit()
+            debugPrint(&quot;%s got hackeysack from %s&quot; % (self.name, message.name))
+            kickTo = self.circle[random.randint(0,len(self.circle)-1)]
+            debugPrint(&quot;%s kicking hackeysack to %s&quot; % (self.name, kickTo.name))
+            self.incrementCounter()
+            kickTo.messageQueue.put(self)
+                
+
+
+def debugPrint(x):
+    if debug:
+        print x
+
+debug=1
+hackysackers=5
+turns = 5
+
+def runit(hs=10,ts=10,dbg=1):
+    global hackysackers,turns,debug
+    hackysackers = hs
+    turns = ts
+    debug = dbg
+    
+    hackysacker.counter= 0
+    circle = []
+    one = hackysacker('1',circle)
+
+    for i in range(hackysackers):
+        hackysacker(`i`,circle)
+
+    one.messageQueue.put(one)
+
+    try:
+        while circle:
+            pass
+    except:
+        #sometimes we get a phantom error on cleanup.
+        pass
+
+
+if __name__ == &quot;__main__&quot;:
+    runit(dbg=1)
+
+
+
+
+</pre>
+<p>A hackysacker class is initialized with it's name, a reference to a global list
+<em>circle</em> that contains all of the players, and a message queue derived from the
+Queue class included in the python standard library.</p>
+<p>The Queue class acts similarly to stackless channels.  It contains <em>put()</em> and
+<em>get()</em> methods.  Calling the <em>put()</em> method on an empty Queue blocks until
+another thread <em>put()s</em> something into the Queue.  The Queue class is also
+designed to work efficiently with OS-level threads.</p>
+<p>The <em>__init__</em> method then starts the messageLoop in a new thread using the
+thread module from the python standard library.  The message loop starts an
+infinite loop that processes messages in the queue.  If it receives the special
+message 'exit', it terminates the thread.</p>
+<p>If it receives another message, that indicates that it is receiving the
+hackysack.  It grabs another random player from the loop and 'kicks' the
+hackysack to it by sending it a message.</p>
+<p>Once there have been enough kicks, as counted by the class variable
+<em>hackysacker.counter</em>, each player in the circle is sent the special 'exit'
+message.</p>
+<p>Note that there is also a debugPrint function that prints output if the global
+variable debug is non-zero.  We can print the game to stdout, but this will
+make the timing inaccurate when we measure it.</p>
+<p>Let's run the program to verify that it works:</p>
+<pre class="literal-block">
+C:\Documents and Settings\grant\Desktop\why_stackless\code&gt;c:\python24\python.exe
+hackysackthreaded.py
+
+1 got hackeysack from 1
+1 kicking hackeysack to 4
+4 got hackeysack from 1
+4 kicking hackeysack to 0
+0 got hackeysack from 4
+0 kicking hackeysack to 1
+1 got hackeysack from 0
+1 kicking hackeysack to 3
+3 got hackeysack from 1
+3 kicking hackeysack to 3
+4 is going home
+2 is going home
+1 is going home
+0 is going home
+1 is going home
+
+C:\Documents and Settings\grant\Desktop\why_stackless\code&gt;
+</pre>
+<p>And we see that all the hackysackers get together and play a quick game.  Now
+let's time some trial runs.  The python standard library include a program
+timeit.py that does this.  In this case, we'll disable debug printing as well:</p>
+<pre class="literal-block">
+C:\Documents and Settings\grant\Desktop\why_stackless\code&gt;c:\python24\python.ex
+e c:\Python24\lib\timeit.py -s &quot;import hackysackthreaded&quot; hackysackthreaded.ru
+nit(10,1000,0)
+10 loops, best of 3: 183 msec per loop
+</pre>
+<p>Ten hackysackers going 1000 rounds takes 183 msecs on my computer.  Let's
+increase the number of players:</p>
+<pre class="literal-block">
+C:\Documents and Settings\grant\Desktop\why_stackless\code&gt;c:\python24\python.ex
+e c:\Python24\lib\timeit.py -s &quot;import hackeysackthreaded&quot; hackeysackthreaded.ru
+nit(100,1000,0)
+10 loops, best of 3: 231 msec per loop
+
+C:\Documents and Settings\grant\Desktop\why_stackless\code&gt;c:\python24\python.ex
+e c:\Python24\lib\timeit.py -s &quot;import hackysackthreaded&quot; hackysackthreaded.ru
+nit(1000,1000,0)
+10 loops, best of 3: 681 msec per loop
+
+C:\Documents and Settings\grant\Desktop\why_stackless\code&gt;c:\python24\python.ex
+e c:\Python24\lib\timeit.py -s &quot;import hackysackthreaded&quot; hackysackthreaded.ru
+nit(10000,1000,0)
+Traceback (most recent call last):
+  File &quot;c:\Python24\lib\timeit.py&quot;, line 255, in main
+    x = t.timeit(number)
+  File &quot;c:\Python24\lib\timeit.py&quot;, line 161, in timeit
+    timing = self.inner(it, self.timer)
+  File &quot;&lt;timeit-src&gt;&quot;, line 6, in inner
+  File &quot;.\hackeysackthreaded.py&quot;, line 58, in runit
+    hackysacker(`i`,circle)
+  File &quot;.\hackeysackthreaded.py&quot;, line 14, in __init__
+    thread.start_new_thread(self.messageLoop,())
+error: can't start new thread
+</pre>
+<p>And we get an error when trying to start 10,000 threads on my 3 Ghz machine
+with 1 Gig of ram.  I don't want to bore you with the details of the output,
+but with some trial and error, the program starts failing at about 1100 threads
+on my machine.  Also note that 1000 threads takes about three times as long as
+10.</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id24" id="stackless" name="stackless">4.3&nbsp;&nbsp;&nbsp;Stackless</a></h2>
+<pre class="literal-block">
+import stackless
+import random
+import sys
+
+class hackysacker:
+    counter = 0
+    def __init__(self,name,circle):
+        self.name = name
+        self.circle = circle
+        circle.append(self)
+        self.channel = stackless.channel()
+
+        stackless.tasklet(self.messageLoop)()
+
+    def incrementCounter(self):
+        hackysacker.counter += 1
+        if hackysacker.counter &gt;= turns:
+            while self.circle:
+                self.circle.pop().channel.send('exit')
+
+    def messageLoop(self):
+        while 1:
+            message = self.channel.receive()
+            if message == 'exit':
+                return
+            debugPrint(&quot;%s got hackeysack from %s&quot; % (self.name, message.name))
+            kickTo = self.circle[random.randint(0,len(self.circle)-1)]
+            while kickTo is self:
+                kickTo = self.circle[random.randint(0,len(self.circle)-1)]
+            debugPrint(&quot;%s kicking hackeysack to %s&quot; % (self.name, kickTo.name))
+            self.incrementCounter()
+            kickTo.channel.send(self)
+                
+
+
+def debugPrint(x):
+    if debug:print x
+
+debug = 5
+hackysackers = 5
+turns = 1
+
+def runit(hs=5,ts=5,dbg=1):
+    global hackysackers,turns,debug
+    hackysackers = hs
+    turns = ts
+    debug = dbg
+    
+    hackysacker.counter = 0
+    circle = []
+    one = hackysacker('1',circle)
+
+    for i in range(hackysackers):
+        hackysacker(`i`,circle)
+
+    one.channel.send(one)
+
+    try:
+        stackless.run()
+    except TaskletExit:
+        pass
+    
+
+if __name__ == &quot;__main__&quot;:
+    runit()
+
+
+
+
+
+</pre>
+<p>This code is virtually identical to the threaded version.  The primary
+differences are that we start tasklets instead of threads, and we switch
+between threads via channels instead of a Queue object.  Let's run it and
+verify the output:</p>
+<pre class="literal-block">
+C:\Documents and Settings\grant\Desktop\why_stackless\code&gt;c:\Python24\python.ex
+e hackysackstackless.py
+1 got hackeysack from 1
+1 kicking hackeysack to 1
+1 got hackeysack from 1
+1 kicking hackeysack to 4
+4 got hackeysack from 1
+4 kicking hackeysack to 1
+1 got hackeysack from 4
+1 kicking hackeysack to 4
+4 got hackeysack from 1
+4 kicking hackeysack to 0
+</pre>
+<p>And it works as expected.  Now for the timing:</p>
+<pre class="literal-block">
+C:\Documents and Settings\grant\Desktop\why_stackless\code&gt;c:\Python24\python.ex
+e c:\Python24\lib\timeit.py -s&quot;import hackysackstackless&quot; hackysackstackless.r
+unit(10,1000,0)
+100 loops, best of 3: 19.7 msec per loop
+</pre>
+<p>It only takes 19.7 msec.  This is almost 10 times faster than the threaded
+version.  Now lets start increasing the number of threadlets:</p>
+<pre class="literal-block">
+C:\Documents and Settings\grant\Desktop\why_stackless\code&gt;c:\Python24\python.ex
+e c:\Python24\lib\timeit.py -s&quot;import hackysackstackless&quot; hackysackstackless.r
+unit(100,1000,0)
+100 loops, best of 3: 19.7 msec per loop
+
+C:\Documents and Settings\grant\Desktop\why_stackless\code&gt;c:\Python24\python.ex
+e c:\Python24\lib\timeit.py -s&quot;import hackysackstackless&quot; hackysackstackless.r
+unit(1000,1000,0)
+10 loops, best of 3: 26.9 msec per loop
+
+C:\Documents and Settings\grant\Desktop\why_stackless\code&gt;c:\Python24\python.ex
+e c:\Python24\lib\timeit.py -s&quot;import hackysackstackless&quot; hackysackstackless.r
+unit(10000,1000,0)
+10 loops, best of 3: 109 msec per loop
+
+C:\Documents and Settings\grant\Desktop\why_stackless\code&gt;c:\Python24\python.ex
+e c:\Python24\lib\timeit.py -s&quot;import hackysackstackless&quot; hackysackstackless.r
+unit(100000,1000,0)
+10 loops, best of 3: 1.07 sec per loop
+</pre>
+<p>Even by the time we get to 10,000 threads, which the threaded version wasn't
+even capable of running, we're still running faster than the threaded version
+did with only 10 threads.</p>
+<p>Now I'm trying to keep the code simple, so you'll have to take my word for it,
+but the increase in timings here is due to the time it takes to setup the
+hackysack circle.  The amount of time to run the game is constant whether you
+have 10 threadlets or 100000 threadlets.  This is because of the way channels
+work: they block and instantly resume when they get a message.  On the other
+hand, OS threads each take turns checking to see if their message Queue has any
+elements.  This means that the more threads you run, the worse performance
+gets.</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id25" id="id2" name="id2">4.4&nbsp;&nbsp;&nbsp;Summary</a></h2>
+<p>Hopefully, I've successfully demonstrated that threadlets run at least an order
+of magnitude faster than OS threads, and scale much better.  The general wisdom
+with OS threads is (1) don't use them, and (2) if you have to use as little as
+possible.  Stackless' threadlets free us from these constraints.</p>
+</div>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id26" id="dataflow" name="dataflow">5&nbsp;&nbsp;&nbsp;Dataflow</a></h1>
+<div class="section">
+<h2><a class="toc-backref" href="#id27" id="the-factory" name="the-factory">5.1&nbsp;&nbsp;&nbsp;The Factory</a></h2>
+<p>Let's pretend we want to write a simulation of a doll factory that has the
+following requirements:</p>
+<blockquote>
+<ul class="simple">
+<li>One storeroom that contains plastic pellets that will be molded.</li>
+<li>One storeroom that contains rivets used to attach parts.</li>
+<li>An injection molder that takes 0.2 pounds of plastic pellets and creates
+a pair of arms in 6 seconds.</li>
+<li>An injection molder that takes 0.2 pounds of plastic pellets and creates
+a pair of legs in 5 seconds.</li>
+<li>An injection molder that takes 0.1 pounds of plastic pellets and creates
+a head in 4 seconds.</li>
+<li>An injection molder that takes 0.5 pounds of plastic pellets and creates
+a torso in 10 seconds.</li>
+<li>An assembly station that takes a completed torso, a completed pair of
+legs, a rivet, and puts them together in 2 seconds.</li>
+<li>An assembly station that takes the combined part from above, a pair of
+arms, and a rivet and puts them together in 2 seconds.</li>
+<li>An assembly station that takes the completed part from above, a head,
+and a rivet and puts them together in 3 seconds.</li>
+<li>Each station keeps on doing this forever.</li>
+</ul>
+</blockquote>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id28" id="the-normal-version" name="the-normal-version">5.2&nbsp;&nbsp;&nbsp;The 'normal' version</a></h2>
+<p>I'll take a stab at writing this 'normally' without using stackless.  After we
+go through the 'normal' example, we'll build one with stackless and compare the
+resulting code.  If you think the example is contrived, and you have the time,
+you may want to take a break, write a factory with the above requirements
+yourself, and compare your resulting code to the stackless version.</p>
+<p>Here is the code:</p>
+<pre class="literal-block">
+
+class storeroom:
+    def __init__(self,name,product,unit,count):
+        self.product = product
+        self.unit = unit
+        self.count = count
+        self.name = name
+
+    def get(self,count):
+        if count &gt; self.count:
+            raise RuntimeError(&quot;Not enough %s&quot; % self.product)
+        else:
+            self.count -= count
+
+        return count            
+
+    def put(self,count):
+        self.count += count
+
+    def run(self):
+        pass
+
+rivetStoreroom = storeroom(&quot;rivetStoreroom&quot;,&quot;rivets&quot;,&quot;#&quot;,1000)
+plasticStoreroom = storeroom(&quot;plastic Storeroom&quot;,&quot;plastic pellets&quot;,&quot;lb&quot;,100)
+
+class injectionMolder:
+    def __init__(self,name,partName,plasticSource,plasticPerPart,timeToMold):
+        self.partName = partName
+        self.plasticSource = plasticSource
+        self.plasticPerPart = plasticPerPart
+        self.timeToMold = timeToMold
+        self.items = 0
+        self.plastic = 0
+        self.time = -1
+        self.name = name
+
+    def get(self,items):
+        if items &gt; self.items:
+            return 0
+        else:
+            self.items -= items
+            return items
+
+    def run(self):
+        if self.time == 0:
+            self.items += 1
+            print &quot;%s finished making part&quot; % self.name
+            self.time -= 1
+        elif self.time &lt; 0:
+            print &quot;%s starts making new part %s&quot; % (self.name,self.partName)
+            if self.plastic &lt; self.plasticPerPart:
+                print &quot;%s getting more plastic&quot;
+                self.plastic += self.plasticSource.get(self.plasticPerPart * 10)
+            self.time = self.timeToMold
+        else:
+            print &quot;%s molding for %s more seconds&quot; % (self.partName, self.time)
+            self.time -= 1
+                
+
+armMolder = injectionMolder(&quot;arm Molder&quot;, &quot;arms&quot;,plasticStoreroom,0.2,6)
+legMolder = injectionMolder(&quot;leg Molder&quot;, &quot;leg&quot;,plasticStoreroom,0.2,5)
+headMolder = injectionMolder(&quot;head Molder&quot;,&quot;head&quot;,plasticStoreroom,0.1,4)
+torsoMolder = injectionMolder(&quot;torso Molder&quot;,&quot;torso&quot;,plasticStoreroom,0.5,10)
+
+
+class assembler:
+    def __init__(self,name,partAsource,partBsource,rivetSource,timeToAssemble):
+        self.partAsource = partAsource
+        self.partBsource = partBsource
+        self.rivetSource = rivetSource
+        self.timeToAssemble = timeToAssemble
+        self.itemA = 0
+        self.itemB = 0
+        self.items = 0
+        self.rivets = 0
+        self.time = -1
+        self.name = name
+
+    def get(self,items):
+        if items &gt; self.items:
+            return 0
+        else:
+            self.items -= items
+            return items
+
+    def run(self):
+        if self.time == 0:
+            self.items += 1
+            print &quot;%s finished assembling part&quot; % self.name
+            self.time -= 1
+        elif self.time &lt; 0:
+            print &quot;%s starts assembling new part&quot; % self.name
+            if self.itemA &lt; 1:
+                print &quot;%s Getting item A&quot; % self.name
+                self.itemA += self.partAsource.get(1)
+                if self.itemA &lt; 1:
+                    print &quot;%s waiting for item A&quot; % self.name
+            elif self.itemB &lt; 1:
+                print &quot;%s Getting item B&quot; % self.name
+                self.itemB += self.partBsource.get(1)
+                if self.itemB &lt; 1:
+                    print &quot;%s waiting for item B&quot; % self.name
+            print &quot;%s starting to assemble&quot; % self.name
+            self.time = self.timeToAssemble
+        else:
+            print &quot;%s assembling for %s more seconds&quot; % (self.name, self.time)
+            self.time -= 1
+            
+legAssembler = assembler(&quot;leg Assembler&quot;,torsoMolder,legMolder,rivetStoreroom,2)
+armAssembler = assembler(&quot;arm Assembler&quot;, armMolder,legAssembler,rivetStoreroom,2)
+torsoAssembler = assembler(&quot;torso Assembler&quot;, headMolder,armAssembler,
+                            rivetStoreroom,3)
+
+components = [rivetStoreroom, plasticStoreroom, armMolder,
+                legMolder, headMolder, torsoMolder,
+              legAssembler, armAssembler, torsoAssembler]
+
+def run():
+    while 1:
+        for component in components:
+            component.run()
+        raw_input(&quot;Press &lt;ENTER&gt; to continue...&quot;)
+        print &quot;\n\n\n&quot;
+        
+
+if __name__ == &quot;__main__&quot;:
+    run()
+
+
+
+</pre>
+<div class="section">
+<h3><a class="toc-backref" href="#id29" id="analysis" name="analysis">5.2.1&nbsp;&nbsp;&nbsp;Analysis</a></h3>
+<p>We start off with a class that represents the storerooms.  It is initialized
+with a product name, a unit measurement (such as pounds or number of parts),
+and an initial quantity.  There is also a run method that does nothing; its
+usage will become clear a little later.  We create two storeroom instances
+based on this class.</p>
+<p>Next up is an injectionMolder class.  It is initialized with the name of a
+finished part, a storeroom that acts a plastic source, the quantity required to
+build one part, and the time required to create the part.  There is a get()
+method that can be used to get retrieve a finished part and adjust inventory if
+one exists.  For this class the run() method actually does something:</p>
+<blockquote>
+<ul class="simple">
+<li>While the timer is above 0, it continues molding and decrements the counter.</li>
+<li>When the time-to-mold reaches 0, a finished part is created and the time
+counter is set to -1.</li>
+<li>When the time counter is -1, the molder checks to see if it has enough
+plastic to mold another part, retrieves it if necessary, and begins
+molding.</li>
+</ul>
+</blockquote>
+<p>We create four injection molder instances with this class.</p>
+<p>Next up is an assembler class.  It is initialized with the name of the finished
+part, the source for part 1, the source for part 2, a storeroom that contains
+rivets, and the time required to assemble the parts in question.  There is a get()
+method that can be used to get retrieve a finished part and adjust inventory if
+one exists.  For this class the run() method:</p>
+<blockquote>
+<ul class="simple">
+<li>If the timer is greater than one, the assembler has the required parts and
+continues to assemble.</li>
+<li>If the timer equals 0, a part is completed and inventory is adjusted.</li>
+<li>If the timer is less than one, the assembler tries to grab one of each part
+required to start building again.  It may have to wait here if a part hasn't
+finished molding yet.</li>
+</ul>
+</blockquote>
+<p>Assembler instances are created to attach the leg, arm, and head.</p>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">You'll notice a lot of similarities between the storeroom, injectionMolder,
+and assember classes.  If I was writing a production system, I would
+probably create a base class and use inheritance.  In this case, I thought
+setting up a class heirarchy would confuse the code, so I kept it
+intentionally simple.</p>
+</div>
+<p>All instances from all three classes are loaded into an array called
+compenents.  We then create an event loop that repeatedly calls the run()
+method for each component.</p>
+</div>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id30" id="enter-dataflow" name="enter-dataflow">5.3&nbsp;&nbsp;&nbsp;Enter Dataflow</a></h2>
+<p>If you're familiar with unix systems, you've probably used dataflow techniques
+whether you knew it or not.  Take the following shell command:</p>
+<pre class="literal-block">
+cat README | more
+</pre>
+<p>In fairness, the Windows equivilent is:</p>
+<pre class="literal-block">
+type readme.txt | more
+</pre>
+<p>Although dataflow techniques aren't as pervasive in the Windows world as they
+are in the Unix world.</p>
+<p>For those who are unfamilar with the <em>more</em> program, it recieves input from an
+external source, displays a page's worth of output, pauses until the user hits
+a key, and shows another page.  The '|' operator takes the output from one
+program, and pipes it into the input of another command.  In this case, either
+<em>cat</em> or <em>type</em> sends the text of a document to standard output, and <em>more</em>
+recieves it.</p>
+<p>The <em>more</em> program just sits there until data flows into it from another
+program.  Once enough data flows in, it displays a page on the screen and
+pauses.  The user hits a key, and more lets more data flow in.  Once again,
+more waits until enough data flows in, displays it, and pauses.  Hence the term
+<em>dataflow</em>.</p>
+<p>Using the stackless round-robin scheduler in addition to channels, we can use
+dataflow techniques to write the factory simulation.</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id31" id="the-stackless-version-of-the-code" name="the-stackless-version-of-the-code">5.4&nbsp;&nbsp;&nbsp;The Stackless Version of the Code</a></h2>
+<pre class="literal-block">
+import stackless
+
+
+#
+# 'Sleep helper functions
+# 
+
+sleepingTasklets = []
+sleepingTicks = 0
+
+def Sleep(secondsToWait):
+    channel = stackless.channel()
+    endTime = sleepingTicks + secondsToWait
+    sleepingTasklets.append((endTime, channel))
+    sleepingTasklets.sort()
+    # Block until we get sent an awakening notification.
+    channel.receive()
+
+def ManageSleepingTasklets():
+    global sleepingTicks
+    while 1:
+        if len(sleepingTasklets):
+            endTime = sleepingTasklets[0][0]
+            while endTime &lt;= sleepingTicks:
+                channel = sleepingTasklets[0][1]
+                del sleepingTasklets[0]
+                # We have to send something, but it doesn't matter 
+                # what as it is not used.
+                channel.send(None)
+                endTime = sleepingTasklets[0][0] # check next
+        sleepingTicks += 1
+        print &quot;1 second passed&quot;
+        stackless.schedule()
+
+stackless.tasklet(ManageSleepingTasklets)()
+
+#
+# Factory implementation
+#
+
+class storeroom:
+    def __init__(self,name,product,unit,count):
+        self.product = product
+        self.unit = unit
+        self.count = count
+        self.name = name
+
+    def get(self,count):
+        while count &gt; self.count: #reschedule until we have enough
+            print &quot;%s doesn't have enough %s to deliver yet&quot; % (self.name, 
+                                                                self.product)
+            stackless.schedule()
+        self.count -= count
+        return count
+
+        return count            
+
+    def put(self,count):
+        self.count += count
+
+    def run(self):
+        pass
+
+rivetStoreroom = storeroom(&quot;rivetStoreroom&quot;,&quot;rivets&quot;,&quot;#&quot;,1000)
+plasticStoreroom = storeroom(&quot;plastic Storeroom&quot;,&quot;plastic pellets&quot;,&quot;lb&quot;,100)
+
+class injectionMolder:
+    def __init__(self,name,partName,plasticSource,plasticPerPart,timeToMold):
+        self.partName = partName
+        self.plasticSource = plasticSource
+        self.plasticPerPart = plasticPerPart
+        self.timeToMold = timeToMold
+        self.plastic = 0
+        self.items = 0
+        self.name = name
+        stackless.tasklet(self.run)()
+
+    def get(self,items):
+        while items &gt; self.items: #reschedule until we have enough
+            print &quot;%s doesn't have enough %s to deliver yet&quot; % (self.name,
+                                                                self.partName)
+            stackless.schedule()
+        self.items -= items
+        return items
+
+    def run(self):
+        while 1:
+            print &quot;%s starts making new part %s&quot; % (self.name,self.partName)
+            if self.plastic &lt; self.plasticPerPart:
+                print &quot;%s getting more plastic&quot;
+                self.plastic += self.plasticSource.get(self.plasticPerPart * 10)
+            self.plastic -= self.plasticPerPart
+            Sleep(self.timeToMold)
+            print &quot;%s done molding after %s seconds&quot; % (self.partName,
+                                                        self.timeToMold)
+            self.items += 1
+            print &quot;%s finished making part&quot; % self.name
+            stackless.schedule()
+                
+
+armMolder = injectionMolder(&quot;arm Molder&quot;, &quot;arms&quot;,plasticStoreroom,0.2,5)
+legMolder = injectionMolder(&quot;leg Molder&quot;, &quot;leg&quot;,plasticStoreroom,0.2,5)
+headMolder = injectionMolder(&quot;head Molder&quot;,&quot;head&quot;,plasticStoreroom,0.1,5)
+torsoMolder = injectionMolder(&quot;torso Molder&quot;,&quot;torso&quot;,plasticStoreroom,0.5,10)
+
+
+class assembler:
+    def __init__(self,name,partAsource,partBsource,rivetSource,timeToAssemble):
+        self.partAsource = partAsource
+        self.partBsource = partBsource
+        self.rivetSource = rivetSource
+        self.timeToAssemble = timeToAssemble
+        self.itemA = 0
+        self.itemB = 0
+        self.items = 0
+        self.rivets = 0
+        self.name = name
+        stackless.tasklet(self.run)()
+
+    def get(self,items):
+        while items &gt; self.items: #reschedule until we have enough
+            print &quot;Don't have a %s to deliver yet&quot; % (self.name)
+            stackless.schedule()
+        self.items -= items
+        return items
+    
+    def run(self):        
+        while 1:
+            print &quot;%s starts assembling new part&quot; % self.name
+            self.itemA += self.partAsource.get(1)
+            self.itemB += self.partBsource.get(1)
+            print &quot;%s starting to assemble&quot; % self.name
+            Sleep(self.timeToAssemble)
+            print &quot;%s done assembling after %s&quot; % (self.name, self.timeToAssemble)
+            self.items += 1
+            print &quot;%s finished assembling part&quot; % self.name
+            stackless.schedule()
+            
+legAssembler = assembler(&quot;leg Assembler&quot;,torsoMolder,legMolder,rivetStoreroom,2)
+armAssembler = assembler(&quot;arm Assembler&quot;, armMolder,legAssembler,rivetStoreroom,2)
+torsoAssembler = assembler(&quot;torso Assembler&quot;, headMolder,armAssembler,
+                            rivetStoreroom,3)
+
+def pause():
+    while 1:
+        raw_input(&quot;Press &lt;ENTER&gt; to continue...&quot;)
+        print &quot;\n\n\n&quot;
+        stackless.schedule()
+
+stackless.tasklet(pause)()
+
+def run():
+    stackless.run()
+    
+if __name__ == &quot;__main__&quot;:
+    run()
+
+</pre>
+<div class="section">
+<h3><a class="toc-backref" href="#id32" id="id3" name="id3">5.4.1&nbsp;&nbsp;&nbsp;Analysis</a></h3>
+<div class="section">
+<h4><a class="toc-backref" href="#id33" id="sleeper-utilities" name="sleeper-utilities">5.4.1.1&nbsp;&nbsp;&nbsp;Sleeper utilities</a></h4>
+<p>First, we create some helper functions that allow our classes to 'sleep'.  When
+a tasklet calls Sleep(), it creates a channel, calculates a time to wake up,
+and attaches this information to the global sleepingTasklets array.  After
+that, channel.receive() is called.  This causes the calling tasklet to pause
+until reawakened.</p>
+<p>Then we create a function to manage the sleeping tasklets.  It checks the
+global sleepingTasklets array, finds any items that are ready to wake up, and
+reactivates them via the channel.  This function is added to the tasklet
+scheduler.</p>
+</div>
+<div class="section">
+<h4><a class="toc-backref" href="#id34" id="the-classes" name="the-classes">5.4.1.2&nbsp;&nbsp;&nbsp;The classes</a></h4>
+<p>These classes are similar to the original classes with a few notable
+exceptions.  The first is that they spawn their <em>run()</em> methods at
+instantiation.  We no longer need to manually create a components array and an
+external <em>run()</em> function to process the event loop; stackless handles this
+implicitly.  The second difference is that tasklets will sleep while waiting
+for a part to be built instead of explictly maintaining a counter to track
+time.  The third difference is that calls to <em>get()</em> are more natural.  If a
+material or part is not available, the tasklet will simply reschedule itself
+until it is available.</p>
+</div>
+</div>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id35" id="so-what-have-we-gained" name="so-what-have-we-gained">5.5&nbsp;&nbsp;&nbsp;So what have we gained?</a></h2>
+<p>Okay, so what's the big deal? Both programs run and basically generate the same
+results.  Lets examine the run method from the original version of the
+factory:</p>
+<pre class="literal-block">
+def run(self):
+    if self.time == 0:
+        self.items += 1
+        print &quot;%s finished assembling part&quot; % self.name
+        self.time -= 1
+    elif self.time &lt; 0:
+        print &quot;%s starts assembling new part&quot; % self.name
+        if self.itemA &lt; 1:
+            print &quot;%s Getting item A&quot; % self.name
+            self.itemA += self.partAsource.get(1)
+            if self.itemA &lt; 1:
+                print &quot;%s waiting for item A&quot; % self.name
+        elif self.itemB &lt; 1:
+            print &quot;%s Getting item B&quot; % self.name
+            self.itemB += self.partBsource.get(1)
+            if self.itemB &lt; 1:
+                print &quot;%s waiting for item B&quot; % self.name
+        print &quot;%s starting to assemble&quot; % self.name
+        self.time = self.timeToAssemble
+    else:
+        print &quot;%s assembling for %s more seconds&quot; % (self.name, self.time)
+        self.time -= 1
+</pre>
+<p>And then the stackless version:</p>
+<pre class="literal-block">
+def run(self):
+    while 1:
+        print &quot;%s starts assembling new part&quot; % self.name
+        self.itemA += self.partAsource.get(1)
+        self.itemB += self.partBsource.get(1)
+        print &quot;%s starting to assemble&quot; % self.name
+        Sleep(self.timeToAssemble)
+        print &quot;%s done assembling after %s&quot; % (self.name, self.timeToAssemble)
+        self.items += 1
+        print &quot;%s finished assembling part&quot; % self.name
+        stackless.schedule()
+</pre>
+<p>The stackless version is much simpler, clearer, and intuitive than the original
+version.  It doesn't wrap the event loop infrastructure into the run method.
+This has been decoupled from the run() method.  The run() method only expresses
+what it is doing, and doesn't worry about the details of how it gets done.  It
+lets the software developer concentrate on how the factory works, and not how
+the event loop and program works.</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id36" id="pushing-data" name="pushing-data">5.6&nbsp;&nbsp;&nbsp;Pushing Data</a></h2>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">The completed program from this section is listed as digitalCircuit.py in
+both the code .zip archive and at the end of this document.</p>
+</div>
+<p>In the case of the factory, we were 'pulling' data.  Each component asked for
+the parts it needed and waited until they arrived.  We could also 'push'
+information so that one component in a system propigates its changes forward to
+another component.  The 'pull' approach is called <strong>lazy data flow</strong> and the 'push' approach is called <strong>eager data flow</strong>.</p>
+<p>To demonstrate the push approach, we'll build a digital circuit simulator.  The simulator will consist of various parts that that have a state of 0 or 1, and can be interconnected in various ways.  In this case, we will take an object oriented approach and define an EventHandler base class that implements most of the functionality:</p>
+<pre class="literal-block">
+class EventHandler:
+    def __init__(self,*outputs):
+        if outputs==None:
+            self.outputs=[]
+        else:
+            self.outputs=list(outputs)
+
+        self.channel = stackless.channel()
+        stackless.tasklet(self.listen)()
+
+    def listen(self):
+        while 1:
+            val = self.channel.receive()
+            self.processMessage(val)
+            for output in self.outputs:
+                self.notify(output)
+                
+    def processMessage(self,val):
+        pass
+
+    def notify(self,output):
+        pass
+
+    def registerOutput(self,output):
+        self.outputs.append(output)
+    
+    def __call__(self,val):
+        self.channel.send(val)
+
+</pre>
+<p>The EventHandler class core functionality performs three things:</p>
+<blockquote>
+<ul class="simple">
+<li>It continously listens for messages on a channel on the listen method.</li>
+<li>Then it processes any message it recieves via the processMessage method.</li>
+<li>Then it notifies any registered outputs of the results via the nofify method.</li>
+</ul>
+</blockquote>
+<p>In addition there are two helper methods:</p>
+<blockquote>
+<ul>
+<li><p class="first">registerOutput allows you to register additional outputs after instantiation.</p>
+</li>
+<li><p class="first">__call__ is overridden as a convienence so that we can send messages in
+the form of:</p>
+<pre class="literal-block">
+event(1)
+</pre>
+<p>instead of:</p>
+<pre class="literal-block">
+event.channel.send(1)
+</pre>
+</li>
+</ul>
+</blockquote>
+<p>Using the EventHandler class as a building block, we can start to implement our
+digital circuit simulator, starting with a Switch.  This is a representation of
+a user-togglible switch that can be send to either a 0 or 1 value:</p>
+<pre class="literal-block">
+class Switch(EventHandler):
+    def __init__(self,initialState=0,*outputs):
+        EventHandler.__init__(self,*outputs)
+        self.state = initialState
+
+    def processMessage(self,val):
+        debugPrint(&quot;Setting input to %s&quot; % val)
+        self.state = val
+
+    def notify(self,output):
+        output((self,self.state))
+
+</pre>
+<p>When initialized, the switch stores its original state.  processMessage is
+overridden to store the received message as the current state.  The notify
+method is overridden to send a tuple containing a reference to the instance
+itself and the state.  As we will see a little further on, we need to send the
+instance so that components with multiple inputs can tell what the message
+source was.</p>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you're typing in the code as you go along, please note that we're using the
+debugPrint() function originally defined in the <strong>Lightweight Threads</strong> section
+to provide diagnostics.</p>
+</div>
+<p>The next class we'll create is the Reporter() class.  Instances of this class simply display their current state.  I suppose we could imagine that these were LED's in a real digital circuit:</p>
+<pre class="literal-block">
+class Reporter(EventHandler):
+    def __init__(self,msg=&quot;%(sender)s send message %(value)s&quot;):
+        EventHandler.__init__(self)
+        self.msg = msg
+        
+    def processMessage(self,msg):
+        sender,value=msg
+        print self.msg % {'sender':sender,'value':value}
+
+</pre>
+<p>The initializer accepts an optional format string for subsequent output.
+Everything else should be self explanitory.</p>
+<p>Now we have a good enough framework to test the initial functionality:</p>
+<pre class="literal-block">
+C:\Documents and Settings\grant\Desktop\why_stackless\code&gt;c:\Python24\python.ex
+e
+Python 2.4.3 Stackless 3.1b3 060516 (#69, May  3 2006, 11:46:11) [MSC v.1310 32
+bit (Intel)] on win32
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+&gt;&gt;&gt; import stackless
+&gt;&gt;&gt; from digitalCircuit import *
+&gt;&gt;&gt;
+&gt;&gt;&gt; reporter = Reporter()
+&gt;&gt;&gt; switch = Switch(0,reporter) #create switch and attach reporter as output.
+&gt;&gt;&gt;
+&gt;&gt;&gt; switch(1)
+&lt;digitalCircuit.Switch instance at 0x00A46828&gt; send message 1
+&gt;&gt;&gt;
+&gt;&gt;&gt; switch(0)
+&lt;digitalCircuit.Switch instance at 0x00A46828&gt; send message 0
+&gt;&gt;&gt;
+&gt;&gt;&gt; switch(1)
+&lt;digitalCircuit.Switch instance at 0x00A46828&gt; send message 1
+&gt;&gt;&gt;
+</pre>
+<p>Unlike the factory we created earlier, toggling a switch instantly pushes the
+results to it's output and the results are displayed.</p>
+<p>Now lets create some digital logic components.  The first is an inverter.  It
+takes an input and pushes the logical inverse.  Inputs of 0 or 1 will push 1 or
+0 respectively:</p>
+<pre class="literal-block">
+class Inverter(EventHandler):
+    def __init__(self,input,*outputs):
+        EventHandler.__init__(self,*outputs)
+        self.input = input
+        input.registerOutput(self)
+        self.state = 0
+
+    def processMessage(self,msg):
+        sender,value = msg
+        debugPrint(&quot;Inverter received %s from %s&quot; % (value,msg))
+        if value:
+            self.state = 0
+        else:
+            self.state = 1
+
+</pre>
+<p>The initializer for the inverter accepts an input, which is some sort of
+EventHandler, stores it, and registers itself as an output.  processMessage()
+sets the state to the logical opposite of the message recieved.  Like the
+Switch class, the notify event sends a tuple containing itself and its state.</p>
+<p>We could chain this between the Switch and Reporter from the example above.
+Feel free to try it if you like, but I don't think it's necessary to show the
+interactive session here.</p>
+<p>Next up is an AndGate.  This is the first class we have that accepts multiple
+inputs.  It has two inputs.  If both are set to 1, it sends the message 1,
+otherwise it sends the message 0:</p>
+<pre class="literal-block">
+class AndGate(EventHandler):
+    def __init__(self,inputA,inputB,*outputs):
+        EventHandler.__init__(self,*outputs)
+
+        self.inputA = inputA
+        self.inputAstate = inputA.state
+        inputA.registerOutput(self)
+        
+        self.inputB = inputB
+        self.inputBstate = inputB.state
+        inputB.registerOutput(self)
+        
+        self.state = 0
+
+    def processMessage(self,msg):
+        sender, value = msg
+        debugPrint(&quot;AndGate received %s from %s&quot; % (value,sender))
+        
+        if sender is self.inputA:
+            self.inputAstate = value
+        elif sender is self.inputB:
+            self.inputBstate = value
+        else:
+            raise RuntimeError(&quot;Didn't expect message from %s&quot; % sender)
+
+        if self.inputAstate and self.inputBstate:
+            self.state = 1
+        else:
+            self.state = 0
+        debugPrint(&quot;AndGate's new state =&gt; %s&quot; % self.state)
+        
+    def notify(self,output):
+        output((self,self.state))
+
+</pre>
+<p>In the AndGate's process message, we need to determine what input sent the
+message and assign the state accordingly.  This is why we needed to send the
+self object from the other components.</p>
+<p>Lastly, we have the OrGate.  It is identical to the AndGate, with the execption
+that it sends the message 1 if ether input is 1, and 0 only if both inputs are
+0:</p>
+<pre class="literal-block">
+class OrGate(EventHandler):
+    def __init__(self,inputA,inputB,*outputs):
+        EventHandler.__init__(self,*outputs)
+
+        self.inputA = inputA
+        self.inputAstate = inputA.state
+        inputA.registerOutput(self)
+        
+        self.inputB = inputB
+        self.inputBstate = inputB.state
+        inputB.registerOutput(self)
+        
+        self.state = 0
+
+    def processMessage(self,msg):
+        sender, value = msg
+        debugPrint(&quot;OrGate received %s from %s&quot; % (value,sender))
+        
+        if sender is self.inputA:
+            self.inputAstate = value
+        elif sender is self.inputB:
+            self.inputBstate = value
+        else:
+            raise RuntimeError(&quot;Didn't expect message from %s&quot; % sender)
+
+        if self.inputAstate or self.inputBstate:
+            self.state = 1
+        else:
+            self.state = 0
+        debugPrint(&quot;OrGate's new state =&gt; %s&quot; % self.state)
+
+    def notify(self,output):
+        output((self,self.state))
+
+
+</pre>
+<div class="section">
+<h3><a class="toc-backref" href="#id37" id="half-adder" name="half-adder">5.6.1&nbsp;&nbsp;&nbsp;Half Adder</a></h3>
+<p>To finish things up, we'll use the components we have created to build a half-adder.  A half-adder performs addition on two bits.  [TODO: Make half adder diagram]  We chain together several of our components and flip the switches.  Flipping the switches changes their state, and propigates these changes through the system via dataflow:</p>
+<pre class="literal-block">
+if __name__ == &quot;__main__&quot;:
+    # half adder
+    inputA = Switch()
+    inputB = Switch()
+    result = Reporter(&quot;Result = %(value)s&quot;)
+    carry = Reporter(&quot;Carry = %(value)s&quot;)
+    andGateA = AndGate(inputA,inputB,carry)
+    orGate = OrGate(inputA,inputB)
+    inverter = Inverter(andGateA)
+    andGateB = AndGate(orGate,inverter,result)
+    inputA(1)
+    inputB(1)
+    inputB(0)
+    inputA(0)
+    
+
+</pre>
+</div>
+</div>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id38" id="actors" name="actors">6&nbsp;&nbsp;&nbsp;Actors</a></h1>
+<p>In the actor model, everything is an actor (duh!).  Actors are objects (in the
+generic sense, not necessarily the OO sense) that can:</p>
+<blockquote>
+<ul class="simple">
+<li>Receive messages from other actors.</li>
+<li>Process the received messages as they see fit.</li>
+<li>Send messages to other actors.</li>
+<li>Create new Actors.</li>
+</ul>
+</blockquote>
+<p>Actors do not have any direct access to other actors.  All communication is
+accomplished via message passing.  This provides a rich model to simulate
+real-world objects that are loosely-coupled and have limited knowledge of each
+others internals.</p>
+<p>If we're going to create a simulation, we might as well simulate...</p>
+<div class="section">
+<h2><a class="toc-backref" href="#id39" id="killer-robots" name="killer-robots">6.1&nbsp;&nbsp;&nbsp;Killer Robots!</a></h2>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">The completed program from this section is listed as actors.py in
+both the code .zip archive and at the end of this document.</p>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id40" id="actor-base-class" name="actor-base-class">6.1.1&nbsp;&nbsp;&nbsp;Actor Base Class</a></h3>
+<p>In this example, we'll configure a small world where robots can move around and
+fight utilizing the actor model.  To begin with, let's define a base class for
+all of our actors:</p>
+<pre class="literal-block">
+class actor:
+    def __init__(self):
+        self.channel = stackless.channel()
+        self.processMessageMethod = self.defaultMessageAction
+        stackless.tasklet(self.processMessage)()
+
+    def processMessage(self):
+        while 1:
+            self.processMessageMethod(self.channel.receive())
+        
+    def defaultMessageAction(self,args):
+        print args
+
+</pre>
+<p>By default, an actor creates a channel to accept messages, assigns a method to
+process the messages, and kicks off a loop to dispatch accepted messages to the
+processing method.  The default processor simply prints the message that it
+received.  That's really all we need to implement the actor model.</p>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id41" id="message-format" name="message-format">6.1.2&nbsp;&nbsp;&nbsp;Message Format</a></h3>
+<p>All messages will be sent in in the format of sender's channel, followed by a
+string containing the message name, followed by optional parameters.  Examples
+are:</p>
+<pre class="literal-block">
+(self.channel, &quot;JOIN&quot;, (1,1) )
+(self.channel, &quot;COLLISION&quot;)
+etc...
+</pre>
+<p>Note that we're sending the sender's channel only instead of the entire self
+object.  In the actor model, all communication between actors needs to occur
+through message passing.  If we send <em>self</em>, then it would be too easy to cheat
+and access unknown information about the actor that sent a message.</p>
+<p>In fact, you'll note that when we instantiate most of the actors in this
+chapter, we don't even assign them to a variable that is accessible to other
+actors.  We just create them and let them float around on their own with
+limited knowledge of the environment.</p>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id42" id="world-class" name="world-class">6.1.3&nbsp;&nbsp;&nbsp;World class</a></h3>
+<p>The world actor acts as the central hub through which all of the actors
+interact.  Other actors send a JOIN message to the world actor, and it tracks
+them.  Periodically, it sends out a WORLD_STATE message which contains
+information about all visible actors for their own internal processing:</p>
+<pre class="literal-block">
+class world(actor):
+    def __init__(self):
+        actor.__init__(self)
+        self.registeredActors = {}
+        stackless.tasklet(self.sendStateToActors)()
+
+    def testForCollision(self,x,y):
+        if x &lt; 0 or x &gt; 496:
+            return 1
+        elif y &lt; 0 or y &gt; 496:
+            return 1
+        else:
+            return 0
+    
+    def sendStateToActors(self):
+        while 1:
+            for actor in self.registeredActors.keys():
+                actorInfo = self.registeredActors[actor]
+                if self.registeredActors[actor][1] != (-1,-1):
+                    VectorX,VectorY = (math.sin(math.radians(actorInfo[2])) * actorInfo[3],
+                                       math.cos(math.radians(actorInfo[2])) * actorInfo[3])
+                    x,y = actorInfo[1]
+                    x += VectorX
+                    y -= VectorY
+                    if self.testForCollision(x,y):
+                        actor.send((self.channel,&quot;COLLISION&quot;))
+                    else:                        
+                        self.registeredActors[actor] = tuple([actorInfo[0],
+                                                          (x,y),
+                                                              actorInfo[2],
+                                                              actorInfo[3]])
+            worldState = [self.channel, &quot;WORLD_STATE&quot;]
+            for actor in self.registeredActors.keys():
+                if self.registeredActors[actor][1] != (-1,-1):
+                    worldState.append( (actor, self.registeredActors[actor]))
+            message = tuple(worldState)
+            for actor in self.registeredActors.keys():
+                actor.send(message)
+            stackless.schedule()
+
+    def defaultMessageAction(self,args):
+        sentFrom, msg, msgArgs = args[0],args[1],args[2:]
+        if msg == &quot;JOIN&quot;:
+            print 'ADDING ' , msgArgs
+            self.registeredActors[sentFrom] = msgArgs
+        elif msg == &quot;UPDATE_VECTOR&quot;:
+            self.registeredActors[sentFrom] = tuple([self.registeredActors[sentFrom][0],
+                                                     self.registeredActors[sentFrom][1],
+                                                     msgArgs[0],msgArgs[1]])
+        else:
+            print '!!!! WORLD GOT UNKNOWN MESSAGE ' , args
+            
+World = world().channel
+
+</pre>
+<p>In addition to the message processing tasklet, the world actor spawns a
+separate tasklet that runs the sendStateToActors() method.  This method has a
+loop which builds the information about the state of the world, and sends it to
+all actors.  This is the only message that the actors can rely on receiving.
+If necessary, they will respond to this message by sending some sort of UPDATE
+message back to the world.</p>
+<p>As part of the sendStateToActors() method, the world actor needs to update its
+internal record of the location of moving actors.  It creates a vector based on
+the angle and velocity of a moving actor, makes sure that the updated position
+doesn't collide with one of the walls of the world, and saves the new location.</p>
+<p>The defaultMessageAction() method processes the following known messages and
+ignores the rest:</p>
+<dl class="docutils">
+<dt>JOIN</dt>
+<dd>Add an actor to the list of known actors in the world.  Parameters include
+location, angle, and velocity of the actor.  A location of -1,-1 indicates
+that the actor is not visible to other actors, such as the display actor
+detailed below.</dd>
+<dt>UPDATE_VECTOR</dt>
+<dd>Set a new angle and velocity for the actor that send the message.</dd>
+</dl>
+<p>Lastly, a world actor is instantiated and its channel is saved in the global
+variable World so that other actors can send their initial JOIN messages.</p>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id43" id="a-simple-robot" name="a-simple-robot">6.1.4&nbsp;&nbsp;&nbsp;A Simple Robot</a></h3>
+<p>We'll start off with a simple robot that moves at a constant velocity, rotating
+clockwise one degree as a response to each WORLD_STATE message.  In the event of
+a COLLISION with the world's walls, it will turn 73 degrees and attempt to
+continue moving forward.  Any other message is ignored.</p>
+<pre class="literal-block">
+class basicRobot(actor):
+    def __init__(self,location=(0,0),angle=135,velocity=1,world=World):
+        actor.__init__(self)
+        self.location = location
+        self.angle = angle
+        self.velocity = velocity
+        self.world = world
+
+        joinMsg =(self.channel,&quot;JOIN&quot;,self.__class__.__name__,
+                  self.location,self.angle,self.velocity)
+        self.world.send(joinMsg)
+
+    def defaultMessageAction(self,args):
+        sentFrom, msg, msgArgs = args[0],args[1],args[2:]
+        if msg == &quot;WORLD_STATE&quot;:
+            self.location = (self.location[0] + 1, self.location[1] + 1)
+            self.angle += 1
+            if self.angle &gt;= 360:
+                self.angle -= 360
+
+            updateMsg = (self.channel, &quot;UPDATE_VECTOR&quot;,
+                         self.angle,self.velocity)
+            self.world.send(updateMsg)
+        elif msg == &quot;COLLISION&quot;:
+            self.angle += 73
+            if self.angle &gt;= 360:
+                self.angle -= 360
+        else:
+            print &quot;UNKNOWN MESSAGE&quot;, args
+
+basicRobot(angle=135,velocity=5)
+basicRobot((464,0),angle=225,velocity=10)
+
+    
+stackless.run()
+
+</pre>
+<p>Note that the constructor for the robot issues a join message to the world
+object to register it.  Other than that, hopefully the code is straightforward.</p>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id44" id="detour-pygame" name="detour-pygame">6.1.5&nbsp;&nbsp;&nbsp;Detour: pyGame</a></h3>
+<p>So far we've been using debug print statements to illustrate the way things are
+working in our sample programs.  I tried to do this to keep the code simple and
+understandable, but at some point print statements become more confusing than
+illustrative.  We were already pushing it in the section on Dataflow, but the
+code in this section is getting too complex to even try to represent it with
+printed output.</p>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">You will need to install a current copy of pyGame for the code samples in
+this section to work.  It is available at <a class="reference" href="/web/20071001004937/http://www.pygame.org/">http://www.pygame.org/</a></p>
+</div>
+<p>I decided to use pyGame to create a simple visualization engine.  Although
+descriptions of pyGame internals are outside the scope of this tutorial,
+operation is relatively straight-forward.  When the display actor receives a
+WORLD_STATE message, it places the appropriate actors and updates the display.
+Luckily, we are able to isolate all of the pygame code into a single actor, so
+the rest of the code should remain 'unpolluted'  and understandable without
+knowing or caring how pygame renders the display:</p>
+<pre class="literal-block">
+class display(actor):
+    def __init__(self,world=World):
+        actor.__init__(self)
+
+        self.world = World
+
+        self.icons = {}
+        pygame.init()
+
+        window = pygame.display.set_mode((496,496))
+        pygame.display.set_caption(&quot;Actor Demo&quot;)
+
+        joinMsg = (self.channel,&quot;JOIN&quot;,self.__class__.__name__, (-1,-1))
+        self.world.send(joinMsg)
+
+    def defaultMessageAction(self,args):
+        sentFrom, msg, msgArgs = args[0],args[1],args[2:]
+        if msg == &quot;WORLD_STATE&quot;:
+            self.updateDisplay(msgArgs)
+        else:
+            print &quot;UNKNOWN MESSAGE&quot;, args
+
+    def getIcon(self, iconName):
+        if self.icons.has_key(iconName):
+            return self.icons[iconName]
+        else:
+            iconFile = os.path.join(&quot;data&quot;,&quot;%s.bmp&quot; % iconName)
+            surface = pygame.image.load(iconFile)
+            surface.set_colorkey((0xf3,0x0a,0x0a))
+            self.icons[iconName] = surface
+            return surface
+
+    def updateDisplay(self,actors):
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT: sys.exit()
+            
+        screen = pygame.display.get_surface()
+
+        background = pygame.Surface(screen.get_size())
+        background = background.convert()
+        background.fill((200, 200, 200))
+
+        screen.blit(background, (0,0))
+        for item in actors:
+            screen.blit(pygame.transform.rotate(self.getIcon(item[1][0]),-item[1][2]), item[1][1])
+        pygame.display.flip()
+
+display()
+
+</pre>
+<p>This takes the WORLD_STATE and creates a display based on that.</p>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">You will need to install pyGame in your python installation for the examples
+in this section to work.  You will also want to download the optional icons
+that I've created and unzip the directory under your source directory.</p>
+</div>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id45" id="round-1-of-the-code" name="round-1-of-the-code">6.1.6&nbsp;&nbsp;&nbsp;Round 1 of the code</a></h3>
+<p>Now we have enough to run the first version of the program.  Upon execution,
+two of the basicRobots will zoom around and bounce off of the walls.</p>
+</div>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id46" id="more-detours-simulation-mechanics" name="more-detours-simulation-mechanics">6.2&nbsp;&nbsp;&nbsp;More Detours: Simulation Mechanics</a></h2>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">The completed program from this section is listed as actors2.py in
+both the code .zip archive and at the end of this document.</p>
+</div>
+<p>As another detour, we need to implement some game (er... I mean simulation)
+mechanics.  Strictly speaking, these mechanics don't have anything to do with
+the actor model.  However, to create a rich and realistic simulation we need
+to get these mechanics out of the way.  This section will detail what we are
+trying to accomplish and how we will accomplish it.  After that, our
+environment to toy around with actors will be much more usable.</p>
+<div class="section">
+<h3><a class="toc-backref" href="#id47" id="actor-properties" name="actor-properties">6.2.1&nbsp;&nbsp;&nbsp;Actor Properties</a></h3>
+<p>As the information that the world actor needs to track becomes more complex,
+sending a bunch of individual arguments in the initial JOIN message becomes
+cumbersome.  To make this easier, we'll create a properties object to track the
+info.  This will be sent with the JOIN message instead of individual
+parameters.</p>
+<pre class="literal-block">
+class properties:
+    def __init__(self,name,location=(-1,-1),angle=0,
+                 velocity=0,height=-1,width=-1,hitpoints=1,physical=True,
+                 public=True):
+        self.name = name
+        self.location = location
+        self.angle = angle
+        self.velocity = velocity
+        self.height = height
+        self.width = width
+        self.public = public
+        self.hitpoints = hitpoints
+
+</pre>
+<p>Note that the properties object is created to transfer information between
+actors.  We will not store a local copy with the actor that creates it.  If we
+did, the world actor would be able to modify the internal workings of actors
+instead of properly modifying them by sending messages.</p>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id48" id="collision-detection" name="collision-detection">6.2.2&nbsp;&nbsp;&nbsp;Collision Detection</a></h3>
+<p>There are a few problems with the collision detection routine in the last
+version of the program.  The most obvious is that actors do not collide with
+each other.  The two robots bouncing around will just drive through each other
+instead of colliding.  The second problem is that we don't account for the size
+of the actor.  This is most obvious when the robots hit the right or bottom
+walls.  They appear to go halfway into the edge of the world before a COLLISION
+is registered.  I'm sure there are whole books on collision detection out
+there, but we'll try to stick with a reasonably simple version that works well
+enough for our purposes.</p>
+<p>First, we'll add height and width properties to each actor.  This allows us to
+create a 'bounding-box' around the actor.  The location property contains the
+top-left corner of the box, and adding the height and width to this value will
+create the bottom-right corner of the box.  This gives a reasonable
+approximation of the actor's physical dimensions.</p>
+<p>To test for world collisions, we now check to see if any of the corners of the
+bounding box have collided with the edges of the world.  To test for collisions
+with other objects, we'll maintain a list of items that have already been
+tested for collision.  We'll walk through the list and see if any of the
+corner-points from either of the actors resides inside another actor's bounding
+box.  If so they collide.</p>
+<p>That's really all there is to our basic collision detection system.  Here is the function to test for an individual collision:</p>
+<pre class="literal-block">
+    def testForCollision(self,x,y,item,otherItems=[]):
+        if x &lt; 0 or x + item.width &gt; 496:
+            return self.channel
+        elif y &lt; 0 or y+ item.height &gt; 496:
+            return self.channel
+        else:
+            ax1,ax2,ay1,ay2 = x, x+item.width, y,y+item.height
+            for item,bx1,bx2,by1,by2 in otherItems:
+                if self.registeredActors[item].physical == False: continue
+                for x,y in [(ax1,ay1),(ax1,ay2),(ax2,ay1),(ax2,ay2)]:
+                    if x &gt;= bx1 and x &lt;= bx2 and y &gt;= by1 and y &lt;= by2:
+                        return item
+                for x,y in [(bx1,by1),(bx1,by2),(bx2,by1),(bx2,by2)]:
+                    if x &gt;= ax1 and x &lt;= ax2 and y &gt;= ay1 and y &lt;= ay2:
+                        return item
+            return None
+
+</pre>
+<p>There is another method that iterates through all actors and tests.  It is called during the sendStateToActors() tasklet:</p>
+<pre class="literal-block">
+    def updateActorPositions(self):
+        actorPositions = []
+        for actor in self.registeredActors.keys():
+            actorInfo = self.registeredActors[actor]
+            if actorInfo.public and actorInfo.physical:
+                x,y = actorInfo.location
+                angle = actorInfo.angle
+                velocity = actorInfo.velocity
+                VectorX,VectorY = (math.sin(math.radians(angle)) * velocity,
+                                   math.cos(math.radians(angle)) * velocity)
+                x += VectorX/self.updateRate
+                y -= VectorY/self.updateRate
+                collision = self.testForCollision(x,y,actorInfo,actorPositions)
+                if collision:
+                    #don't move
+                    actor.send((self.channel,&quot;COLLISION&quot;,actor,collision))
+                    if collision and collision is not self.channel:
+                        collision.send((self.channel,&quot;COLLISION&quot;,actor,collision))
+                else:                        
+                    actorInfo.location = (x,y)
+                actorPositions.append( (actor,
+                                        actorInfo.location[0],
+                                        actorInfo.location[0] + actorInfo.height,
+                                        actorInfo.location[1],
+                                        actorInfo.location[1] + actorInfo.width))
+
+</pre>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id49" id="constant-time" name="constant-time">6.2.3&nbsp;&nbsp;&nbsp;Constant Time</a></h3>
+<p>Another problem with our simulation is that it runs on different speeds on
+different computers.  If your computer is faster than mine, I imagine you can
+barely even see the robots.  If it is slower, they may come to a crawl.</p>
+<p>To correct this, we'll issue the WORLD_STATE messages at a constant rate.  By
+default we'll go with one every thirtieth of a second.  If we could just
+standardize on that, things would be easy, but we need to be able to correct if
+the computer cannot handle the load and maintain this update rate.  If it takes
+longer than 1/30 of a second to run an individual frame (either due to the
+complexity of the program, or an external program hogging resources) we need to
+adjust the update rate.</p>
+<p>For our example, if we accomplish everything we are using more time than we
+have based on our update rate, we'll decrease the rate by one part per second.
+If we have 40% or more free time based on our current update rate, we'll
+increase the rate by one part per second with a maximum cap of 30 updates per
+second.</p>
+<p>This allows us to run at the same speed on different computers, but it
+introduces an interesting problem.  For example, we're currently updating our
+basicRobot's angle for one degree for each update, and have velocity set per
+update.  If we run the program for ten seconds on two different computers, one
+running at 20 updates per second and another running 30 updates per second, the
+robots will be in different locations.  This is clearly undesirable.  We need
+to adjust the updates that actors made based on a time-delta.</p>
+<p>In the case of the basicRobots, instead of updating the angle 1 degree per turn
+and (for example) the velocity 5 points per turn, we should calculate this
+based on the time that has passed.  In this case, we'll want to update the
+angle 30.0 degrees times the time-delta, and the velocity 150.0 points times
+the time-delta.  This way we'll get consistent behaviour regardless of the
+update rate.</p>
+<p>To facilitate this, we'll need to modify the WORLD_STATE message to include
+both the current time and the update rate, so that actors receiving the message
+will be able to calculate appropriate update information.</p>
+<p>Code implementing the update rate:</p>
+<pre class="literal-block">
+    def runFrame(self):
+        initialStartTime = time.clock()
+        startTime = time.clock()
+        while 1:
+            self.killDeadActors()
+            self.updateActorPositions()
+            self.sendStateToActors(startTime)
+            #wait
+            calculatedEndTime = startTime + 1.0/self.updateRate
+
+            doneProcessingTime = time.clock()
+            percentUtilized =  (doneProcessingTime - startTime) / (1.0/self.updateRate)
+            if percentUtilized &gt;= 1:
+                self.updateRate -= 1
+                print &quot;TOO MUCH LOWERING FRAME RATE: &quot; , self.updateRate
+            elif percentUtilized &lt;= 0.6 and self.updateRate &lt; self.maxupdateRate:
+                self.updateRate += 1
+                print &quot;TOO MUCH FREETIME, RAISING FRAME RATE: &quot; , self.updateRate
+
+            while time.clock() &lt; calculatedEndTime:
+                stackless.schedule()
+            startTime = calculatedEndTime
+            
+            stackless.schedule()
+
+
+</pre>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id50" id="damage-hitpoints-and-dying" name="damage-hitpoints-and-dying">6.2.4&nbsp;&nbsp;&nbsp;Damage, Hitpoints, and Dying</a></h3>
+<p>Right now our robots are immortal.  They will go on forever.  That isn't very
+fun.  They should only be able to take so much damage before they die.  To
+facilitate this, we'll add a couple of new messages.  The DAMAGE message
+includes a parameter that indicates the amount of damage received.  This is
+subtracted from the new property <em>hitpoints</em> in the basicRobot class.  If
+damage is less than or equal to 0, the actor receiving the message sends a
+KILLME message to world actor.  Here is the applicable code snipped from the
+defaultMessageAction() method of the basic robot:</p>
+<pre class="literal-block">
+        elif msg == &quot;DAMAGE&quot;:
+            self.hitpoints -= msgArgs[0]
+            if self.hitpoints &lt;= 0:
+                self.world.send( (self.channel,&quot;KILLME&quot;) )
+        else:
+            print &quot;UNKNOWN MESSAGE&quot;, args
+
+</pre>
+<p>In addition, we've arbitrarily decided that COLLISION messages will deduct one
+hitpoint and send a KILLME message to the world if necessary.</p>
+<p>When the WORLD actor receives a KILLME message, it will set it's internal
+record of the sending actor's hitpoints to zero.  Later, as part of the normal
+update, it will delete actors with hitpoints less than or equal to zero:</p>
+<pre class="literal-block">
+    def killDeadActors(self):
+        for actor in self.registeredActors.keys():
+            if self.registeredActors[actor].hitpoints &lt;= 0:
+                print &quot;ACTOR DIED&quot;, self.registeredActors[actor].hitpoints
+                actor.send_exception(TaskletExit)
+                del self.registeredActors[actor]
+
+</pre>
+<p>Note that we've introduced the channels <em>send_exception()</em> method here.
+Instead of a normal send, this causes <em>channel.receive()</em> to raise an exception
+in the receiving tasklet.  In this case we're raising stackless' TaskletExit
+exception, which will cause the tasklet to end silently.  You could raise any
+other exception, but if an arbitrary exception is unhanded, it will be
+re-raised in the main tasklet.</p>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id51" id="round-2-of-the-code" name="round-2-of-the-code">6.2.5&nbsp;&nbsp;&nbsp;Round 2 of the code</a></h3>
+<p>The completed version of this program still isn't too thrilling, but if you run
+it you'll see that all of the features we have added above are working.  The
+robots will eventually die and disappear after enough collisions.</p>
+</div>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id52" id="back-to-the-actors-let-s-get-crazy" name="back-to-the-actors-let-s-get-crazy">6.3&nbsp;&nbsp;&nbsp;Back to the actors: Let's get crazy</a></h2>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">The completed program from this section is listed as actors3.py in
+both the code .zip archive and at the end of this document.</p>
+</div>
+<p>Now that the simulation mechanics are out of the way, we can start to have some
+fun with the program.  First off...</p>
+<div class="section">
+<h3><a class="toc-backref" href="#id53" id="explosions" name="explosions">6.3.1&nbsp;&nbsp;&nbsp;Explosions</a></h3>
+<p>It's not very exciting to have the robots simply disappear when they die.  They
+should at least blow up.  Robots will create an explosion actor when they die.
+This is not physical, so it simply displays the explosion image.  It will kill
+itself after three seconds so that the explosion image will disappear:</p>
+<pre class="literal-block">
+class explosion(actor):
+    def __init__(self,location=(0,0),angle=0,world=World):
+        actor.__init__(self)
+        self.time = 0.0
+        self.world = world
+        self.world.send((self.channel,&quot;JOIN&quot;,
+                            properties(self.__class__.__name__,
+                                       location = location,
+                                       angle = angle,
+                                       velocity=0,
+                                       height=32.0,width=32.0,hitpoints=1,
+                                       physical=False)))
+                           
+    def defaultMessageAction(self,args):
+        sentFrom, msg, msgArgs = args[0],args[1],args[2:]
+        if msg == &quot;WORLD_STATE&quot;:
+            WorldState = msgArgs[0]
+            if self.time == 0.0:
+                self.time = WorldState.time
+            elif WorldState.time &gt;= self.time + 3.0:
+                self.world.send( (self.channel, &quot;KILLME&quot;) )
+
+
+</pre>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id54" id="mine-dropping-robot" name="mine-dropping-robot">6.3.2&nbsp;&nbsp;&nbsp;Mine Dropping Robot</a></h3>
+<p>Now we'll create a robot that drops mines.  Before the robot class, we'll need
+the mine class:</p>
+<pre class="literal-block">
+class mine(actor):
+    def __init__(self,location=(0,0),world=World):
+        actor.__init__(self)
+        self.world = world
+        self.world.send((self.channel,&quot;JOIN&quot;,
+                            properties(self.__class__.__name__,
+                                       location=location,
+                                       angle=0,
+                                       velocity=0,
+                                       height=2.0,width=2.0,hitpoints=1)))
+
+    def defaultMessageAction(self,args):
+        sentFrom, msg, msgArgs = args[0],args[1],args[2:]
+        if msg == &quot;WORLD_STATE&quot;:
+            pass                
+        elif msg == &quot;COLLISION&quot;:
+            if msgArgs[0] is self.channel:
+                other = msgArgs[1]
+            else:
+                other = msgArgs[0]
+            other.send( (self.channel,&quot;DAMAGE&quot;,25) )
+            self.world.send( (self.channel,&quot;KILLME&quot;))
+            print &quot;MINE COLLISION&quot;
+        else:
+            print &quot;UNKNOWN MESSAGE&quot;, args
+
+
+</pre>
+<p>This is a simple actor.  It simply sits there until something hits it, then
+sends 25 points damage to whatever it collided with and kills itself.</p>
+<p>The mindropperRobot is similar to the basic robot, with a few differences.
+First, to mix things up, I've configured the minedropperRobot to move in a
+serpentine fashion instead of slowly turning in the same direction.  Secondly,
+it will create a mine every second and place it directly behind itself:</p>
+<pre class="literal-block">
+class minedropperRobot(actor):
+    def __init__(self,location=(0,0),angle=135,velocity=1,
+                 hitpoints=20,world=World):
+        actor.__init__(self)
+        self.location = location
+        self.angle = angle
+        self.delta = 0.0
+        self.height=32.0
+        self.width=32.0
+        self.deltaDirection = &quot;up&quot;
+        self.nextMine = 0.0
+        self.velocity = velocity
+        self.hitpoints = hitpoints
+        self.world = world
+        self.world.send((self.channel,&quot;JOIN&quot;,
+                            properties(self.__class__.__name__,
+                                       location=self.location,
+                                       angle=self.angle,
+                                       velocity=self.velocity,
+                                       height=self.height,width=self.width,
+                                       hitpoints=self.hitpoints)))
+
+    def defaultMessageAction(self,args):
+        sentFrom, msg, msgArgs = args[0],args[1],args[2:]
+        if msg == &quot;WORLD_STATE&quot;:
+            for actor in msgArgs[0].actors:
+                if actor[0] is self.channel:
+                    break
+            self.location = actor[1].location
+            if self.deltaDirection == &quot;up&quot;:
+                self.delta += 60.0 * (1.0 / msgArgs[0].updateRate)
+                if self.delta &gt; 15.0:
+                    self.delta = 15.0
+                    self.deltaDirection = &quot;down&quot;
+            else:
+                self.delta -= 60.0 * (1.0 / msgArgs[0].updateRate)
+                if self.delta &lt; -15.0:
+                    self.delta = -15.0
+                    self.deltaDirection = &quot;up&quot;
+            if self.nextMine &lt;= msgArgs[0].time:
+                self.nextMine = msgArgs[0].time + 1.0
+                mineX,mineY = (self.location[0] + (self.width / 2.0) ,
+                               self.location[1] + (self.width / 2.0))
+
+                mineDistance = (self.width / 2.0 ) ** 2
+                mineDistance += (self.height / 2.0) ** 2
+                mineDistance = math.sqrt(mineDistance)
+
+                VectorX,VectorY = (math.sin(math.radians(self.angle + self.delta)),
+                                   math.cos(math.radians(self.angle + self.delta)))
+                VectorX,VectorY = VectorX * mineDistance,VectorY * mineDistance
+                x,y = self.location
+                x += self.width / 2.0
+                y += self.height / 2.0
+                x -= VectorX
+                y += VectorY
+                mine( (x,y))
+                
+            updateMsg = (self.channel, &quot;UPDATE_VECTOR&quot;,
+                         self.angle + self.delta ,self.velocity)
+            self.world.send(updateMsg)
+        elif msg == &quot;COLLISION&quot;:
+            self.angle += 73.0
+            if self.angle &gt;= 360:
+                self.angle -= 360
+            self.hitpoints -= 1
+            if self.hitpoints &lt;= 0:
+                explosion(self.location,self.angle)
+                self.world.send((self.channel,&quot;KILLME&quot;))
+        elif msg == &quot;DAMAGE&quot;:
+            self.hitpoints -= msgArgs[0]
+            if self.hitpoints &lt;= 0:
+                explosion(self.location,self.angle)
+                self.world.send((self.channel, &quot;KILLME&quot;))
+        else:
+            print &quot;UNKNOWN MESSAGE&quot;, args
+
+
+</pre>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id55" id="spawner-pads" name="spawner-pads">6.3.3&nbsp;&nbsp;&nbsp;Spawner Pads</a></h3>
+<p>Spawner pads simply create new robots with random attributes at their location
+every five seconds.  There is a little black magic in the constructor.  Instead
+of creating an array of valid robot objects, we use introspection to find all
+classes that end with then name &quot;Robot&quot; and add them to the list.  That way, if
+you create your own robot classes, you won't need to go through any sort of
+registration mechanism with the spawner class.  Other than that, the class
+should be reasonably straightforward:</p>
+<pre class="literal-block">
+class spawner(actor):
+    def __init__(self,location=(0,0),world=World):
+        actor.__init__(self)
+        self.location = location
+        self.time = 0.0
+        self.world = world
+        
+        self.robots = []
+        for name,klass in globals().iteritems():
+            if name.endswith(&quot;Robot&quot;):
+                self.robots.append(klass)
+
+        self.world.send((self.channel,&quot;JOIN&quot;,
+                            properties(self.__class__.__name__,
+                                       location = location,
+                                       angle=0,
+                                       velocity=0,
+                                       height=32.0,width=32.0,hitpoints=1,
+                                       physical=False)))
+
+    def defaultMessageAction(self,args):    
+        sentFrom, msg, msgArgs = args[0],args[1],args[2:]
+        if msg == &quot;WORLD_STATE&quot;:
+            WorldState = msgArgs[0]
+            if self.time == 0.0:
+                self.time = WorldState.time + 0.5 # wait 1/2 second on start
+            elif WorldState.time &gt;= self.time: # every five seconds
+                self.time = WorldState.time + 5.0
+                angle = random.random() * 360.0
+                velocity = random.random() * 1000.0
+                newRobot = random.choice(self.robots)
+                newRobot(self.location,angle,velocity)
+
+
+</pre>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id56" id="the-final-simulation" name="the-final-simulation">6.3.4&nbsp;&nbsp;&nbsp;The Final Simulation</a></h3>
+<p>We'll finish up by creating spawners in each of the four corners and the center
+of the world.  We now have a simulation that will keep on going and creating
+new robots as necessary.  Feel free to add new robots and play around with the
+simulation.</p>
+</div>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id57" id="id4" name="id4">6.4&nbsp;&nbsp;&nbsp;Summary</a></h2>
+<p>We've managed to create a reasonably complex simulation with a small amount of
+code.  Even more importantly, each actor runs on it's own.  If you consider the
+messages we've been passing our API, it doesn't really have much to it:</p>
+<blockquote>
+<ul class="simple">
+<li>WORLD_STATE</li>
+<li>JOIN</li>
+<li>UPDATE_VECTOR</li>
+<li>COLLISION</li>
+<li>KILLME</li>
+<li>DAMAGE</li>
+</ul>
+</blockquote>
+<p>Other than that, everything else an actor needs to know about is encapsulated
+within itself.  With only these six messages that it has to deal with to
+understand the outside world, it simplifies both the program and our ability to
+understand it.</p>
+</div>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id58" id="complete-code-listings" name="complete-code-listings">7&nbsp;&nbsp;&nbsp;Complete Code Listings</a></h1>
+<div class="section">
+<h2><a class="toc-backref" href="#id59" id="pingpong-py-recursive-ping-pong-example" name="pingpong-py-recursive-ping-pong-example">7.1&nbsp;&nbsp;&nbsp;pingpong.py - recursive ping pong example</a></h2>
+<pre class="literal-block">
+def ping():
+    print &quot;PING&quot;
+    pong()
+
+def pong():
+    print &quot;PONG&quot;
+    ping()
+
+
+ping()
+
+</pre>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id60" id="pingpong-stackless-py-stackless-ping-pong-example" name="pingpong-stackless-py-stackless-ping-pong-example">7.2&nbsp;&nbsp;&nbsp;pingpong_stackless.py - stackless ping pong example</a></h2>
+<pre class="literal-block">
+#
+# pingpong_stackless.py
+#
+
+import stackless
+
+ping_channel = stackless.channel()
+pong_channel = stackless.channel()
+
+def ping():
+    while ping_channel.receive(): #blocks here
+        print &quot;PING&quot;
+        pong_channel.send(&quot;from ping&quot;)
+
+def pong():
+    while pong_channel.receive():
+        print &quot;PONG&quot;
+        ping_channel.send(&quot;from pong&quot;)
+
+
+
+stackless.tasklet(ping)()
+stackless.tasklet(pong)()
+
+# we need to 'prime' the game by sending a start message
+# if not, both tasklets will block
+stackless.tasklet(ping_channel.send)('startup')
+
+stackless.run()
+
+
+
+
+
+</pre>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id61" id="hackysackthreaded-py-os-thread-based-hackysack-example" name="hackysackthreaded-py-os-thread-based-hackysack-example">7.3&nbsp;&nbsp;&nbsp;hackysackthreaded.py - OS-Thread based hackysack example</a></h2>
+<pre class="literal-block">
+import thread
+import random
+import sys
+import Queue
+
+class hackysacker:
+    counter = 0
+    def __init__(self,name,circle):
+        self.name = name
+        self.circle = circle
+        circle.append(self)
+        self.messageQueue = Queue.Queue()
+
+        thread.start_new_thread(self.messageLoop,())
+
+    def incrementCounter(self):
+        hackysacker.counter += 1
+        if hackysacker.counter &gt;= turns:
+            while self.circle:
+                hs = self.circle.pop()
+                if hs is not self:
+                    hs.messageQueue.put('exit')
+            sys.exit()
+
+    def messageLoop(self):
+        while 1:
+            message = self.messageQueue.get()
+            if message == &quot;exit&quot;:
+                debugPrint(&quot;%s is going home&quot; % self.name)
+                sys.exit()
+            debugPrint(&quot;%s got hackeysack from %s&quot; % (self.name, message.name))
+            kickTo = self.circle[random.randint(0,len(self.circle)-1)]
+            debugPrint(&quot;%s kicking hackeysack to %s&quot; % (self.name, kickTo.name))
+            self.incrementCounter()
+            kickTo.messageQueue.put(self)
+                
+
+
+def debugPrint(x):
+    if debug:
+        print x
+
+debug=1
+hackysackers=5
+turns = 5
+
+def runit(hs=10,ts=10,dbg=1):
+    global hackysackers,turns,debug
+    hackysackers = hs
+    turns = ts
+    debug = dbg
+    
+    hackysacker.counter= 0
+    circle = []
+    one = hackysacker('1',circle)
+
+    for i in range(hackysackers):
+        hackysacker(`i`,circle)
+
+    one.messageQueue.put(one)
+
+    try:
+        while circle:
+            pass
+    except:
+        #sometimes we get a phantom error on cleanup.
+        pass
+
+
+if __name__ == &quot;__main__&quot;:
+    runit(dbg=1)
+
+
+
+
+</pre>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id62" id="hackysackstackless-py-stackless-hackysack-example" name="hackysackstackless-py-stackless-hackysack-example">7.4&nbsp;&nbsp;&nbsp;hackysackstackless.py - stackless hackysack example</a></h2>
+<pre class="literal-block">
+import stackless
+import random
+import sys
+
+class hackysacker:
+    counter = 0
+    def __init__(self,name,circle):
+        self.name = name
+        self.circle = circle
+        circle.append(self)
+        self.channel = stackless.channel()
+
+        stackless.tasklet(self.messageLoop)()
+
+    def incrementCounter(self):
+        hackysacker.counter += 1
+        if hackysacker.counter &gt;= turns:
+            while self.circle:
+                self.circle.pop().channel.send('exit')
+
+    def messageLoop(self):
+        while 1:
+            message = self.channel.receive()
+            if message == 'exit':
+                return
+            debugPrint(&quot;%s got hackeysack from %s&quot; % (self.name, message.name))
+            kickTo = self.circle[random.randint(0,len(self.circle)-1)]
+            while kickTo is self:
+                kickTo = self.circle[random.randint(0,len(self.circle)-1)]
+            debugPrint(&quot;%s kicking hackeysack to %s&quot; % (self.name, kickTo.name))
+            self.incrementCounter()
+            kickTo.channel.send(self)
+                
+
+
+def debugPrint(x):
+    if debug:print x
+
+debug = 5
+hackysackers = 5
+turns = 1
+
+def runit(hs=5,ts=5,dbg=1):
+    global hackysackers,turns,debug
+    hackysackers = hs
+    turns = ts
+    debug = dbg
+    
+    hackysacker.counter = 0
+    circle = []
+    one = hackysacker('1',circle)
+
+    for i in range(hackysackers):
+        hackysacker(`i`,circle)
+
+    one.channel.send(one)
+
+    try:
+        stackless.run()
+    except TaskletExit:
+        pass
+    
+
+if __name__ == &quot;__main__&quot;:
+    runit()
+
+
+
+
+
+</pre>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id63" id="assemblyline-py-normal-assemblyline-example" name="assemblyline-py-normal-assemblyline-example">7.5&nbsp;&nbsp;&nbsp;assemblyline.py - 'normal' assemblyline example</a></h2>
+<pre class="literal-block">
+
+class storeroom:
+    def __init__(self,name,product,unit,count):
+        self.product = product
+        self.unit = unit
+        self.count = count
+        self.name = name
+
+    def get(self,count):
+        if count &gt; self.count:
+            raise RuntimeError(&quot;Not enough %s&quot; % self.product)
+        else:
+            self.count -= count
+
+        return count            
+
+    def put(self,count):
+        self.count += count
+
+    def run(self):
+        pass
+
+rivetStoreroom = storeroom(&quot;rivetStoreroom&quot;,&quot;rivets&quot;,&quot;#&quot;,1000)
+plasticStoreroom = storeroom(&quot;plastic Storeroom&quot;,&quot;plastic pellets&quot;,&quot;lb&quot;,100)
+
+class injectionMolder:
+    def __init__(self,name,partName,plasticSource,plasticPerPart,timeToMold):
+        self.partName = partName
+        self.plasticSource = plasticSource
+        self.plasticPerPart = plasticPerPart
+        self.timeToMold = timeToMold
+        self.items = 0
+        self.plastic = 0
+        self.time = -1
+        self.name = name
+
+    def get(self,items):
+        if items &gt; self.items:
+            return 0
+        else:
+            self.items -= items
+            return items
+
+    def run(self):
+        if self.time == 0:
+            self.items += 1
+            print &quot;%s finished making part&quot; % self.name
+            self.time -= 1
+        elif self.time &lt; 0:
+            print &quot;%s starts making new part %s&quot; % (self.name,self.partName)
+            if self.plastic &lt; self.plasticPerPart:
+                print &quot;%s getting more plastic&quot;
+                self.plastic += self.plasticSource.get(self.plasticPerPart * 10)
+            self.time = self.timeToMold
+        else:
+            print &quot;%s molding for %s more seconds&quot; % (self.partName, self.time)
+            self.time -= 1
+                
+
+armMolder = injectionMolder(&quot;arm Molder&quot;, &quot;arms&quot;,plasticStoreroom,0.2,6)
+legMolder = injectionMolder(&quot;leg Molder&quot;, &quot;leg&quot;,plasticStoreroom,0.2,5)
+headMolder = injectionMolder(&quot;head Molder&quot;,&quot;head&quot;,plasticStoreroom,0.1,4)
+torsoMolder = injectionMolder(&quot;torso Molder&quot;,&quot;torso&quot;,plasticStoreroom,0.5,10)
+
+
+class assembler:
+    def __init__(self,name,partAsource,partBsource,rivetSource,timeToAssemble):
+        self.partAsource = partAsource
+        self.partBsource = partBsource
+        self.rivetSource = rivetSource
+        self.timeToAssemble = timeToAssemble
+        self.itemA = 0
+        self.itemB = 0
+        self.items = 0
+        self.rivets = 0
+        self.time = -1
+        self.name = name
+
+    def get(self,items):
+        if items &gt; self.items:
+            return 0
+        else:
+            self.items -= items
+            return items
+
+    def run(self):
+        if self.time == 0:
+            self.items += 1
+            print &quot;%s finished assembling part&quot; % self.name
+            self.time -= 1
+        elif self.time &lt; 0:
+            print &quot;%s starts assembling new part&quot; % self.name
+            if self.itemA &lt; 1:
+                print &quot;%s Getting item A&quot; % self.name
+                self.itemA += self.partAsource.get(1)
+                if self.itemA &lt; 1:
+                    print &quot;%s waiting for item A&quot; % self.name
+            elif self.itemB &lt; 1:
+                print &quot;%s Getting item B&quot; % self.name
+                self.itemB += self.partBsource.get(1)
+                if self.itemB &lt; 1:
+                    print &quot;%s waiting for item B&quot; % self.name
+            print &quot;%s starting to assemble&quot; % self.name
+            self.time = self.timeToAssemble
+        else:
+            print &quot;%s assembling for %s more seconds&quot; % (self.name, self.time)
+            self.time -= 1
+            
+legAssembler = assembler(&quot;leg Assembler&quot;,torsoMolder,legMolder,rivetStoreroom,2)
+armAssembler = assembler(&quot;arm Assembler&quot;, armMolder,legAssembler,rivetStoreroom,2)
+torsoAssembler = assembler(&quot;torso Assembler&quot;, headMolder,armAssembler,
+                            rivetStoreroom,3)
+
+components = [rivetStoreroom, plasticStoreroom, armMolder,
+                legMolder, headMolder, torsoMolder,
+              legAssembler, armAssembler, torsoAssembler]
+
+def run():
+    while 1:
+        for component in components:
+            component.run()
+        raw_input(&quot;Press &lt;ENTER&gt; to continue...&quot;)
+        print &quot;\n\n\n&quot;
+        
+
+if __name__ == &quot;__main__&quot;:
+    run()
+
+
+
+</pre>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id64" id="assemblyline-stackless-py-stackless-assembly-line-example" name="assemblyline-stackless-py-stackless-assembly-line-example">7.6&nbsp;&nbsp;&nbsp;assemblyline-stackless.py - stackless assembly line example</a></h2>
+<pre class="literal-block">
+
+class storeroom:
+    def __init__(self,name,product,unit,count):
+        self.product = product
+        self.unit = unit
+        self.count = count
+        self.name = name
+
+    def get(self,count):
+        if count &gt; self.count:
+            raise RuntimeError(&quot;Not enough %s&quot; % self.product)
+        else:
+            self.count -= count
+
+        return count            
+
+    def put(self,count):
+        self.count += count
+
+    def run(self):
+        pass
+
+rivetStoreroom = storeroom(&quot;rivetStoreroom&quot;,&quot;rivets&quot;,&quot;#&quot;,1000)
+plasticStoreroom = storeroom(&quot;plastic Storeroom&quot;,&quot;plastic pellets&quot;,&quot;lb&quot;,100)
+
+class injectionMolder:
+    def __init__(self,name,partName,plasticSource,plasticPerPart,timeToMold):
+        self.partName = partName
+        self.plasticSource = plasticSource
+        self.plasticPerPart = plasticPerPart
+        self.timeToMold = timeToMold
+        self.items = 0
+        self.plastic = 0
+        self.time = -1
+        self.name = name
+
+    def get(self,items):
+        if items &gt; self.items:
+            return 0
+        else:
+            self.items -= items
+            return items
+
+    def run(self):
+        if self.time == 0:
+            self.items += 1
+            print &quot;%s finished making part&quot; % self.name
+            self.time -= 1
+        elif self.time &lt; 0:
+            print &quot;%s starts making new part %s&quot; % (self.name,self.partName)
+            if self.plastic &lt; self.plasticPerPart:
+                print &quot;%s getting more plastic&quot;
+                self.plastic += self.plasticSource.get(self.plasticPerPart * 10)
+            self.time = self.timeToMold
+        else:
+            print &quot;%s molding for %s more seconds&quot; % (self.partName, self.time)
+            self.time -= 1
+                
+
+armMolder = injectionMolder(&quot;arm Molder&quot;, &quot;arms&quot;,plasticStoreroom,0.2,6)
+legMolder = injectionMolder(&quot;leg Molder&quot;, &quot;leg&quot;,plasticStoreroom,0.2,5)
+headMolder = injectionMolder(&quot;head Molder&quot;,&quot;head&quot;,plasticStoreroom,0.1,4)
+torsoMolder = injectionMolder(&quot;torso Molder&quot;,&quot;torso&quot;,plasticStoreroom,0.5,10)
+
+
+class assembler:
+    def __init__(self,name,partAsource,partBsource,rivetSource,timeToAssemble):
+        self.partAsource = partAsource
+        self.partBsource = partBsource
+        self.rivetSource = rivetSource
+        self.timeToAssemble = timeToAssemble
+        self.itemA = 0
+        self.itemB = 0
+        self.items = 0
+        self.rivets = 0
+        self.time = -1
+        self.name = name
+
+    def get(self,items):
+        if items &gt; self.items:
+            return 0
+        else:
+            self.items -= items
+            return items
+
+    def run(self):
+        if self.time == 0:
+            self.items += 1
+            print &quot;%s finished assembling part&quot; % self.name
+            self.time -= 1
+        elif self.time &lt; 0:
+            print &quot;%s starts assembling new part&quot; % self.name
+            if self.itemA &lt; 1:
+                print &quot;%s Getting item A&quot; % self.name
+                self.itemA += self.partAsource.get(1)
+                if self.itemA &lt; 1:
+                    print &quot;%s waiting for item A&quot; % self.name
+            elif self.itemB &lt; 1:
+                print &quot;%s Getting item B&quot; % self.name
+                self.itemB += self.partBsource.get(1)
+                if self.itemB &lt; 1:
+                    print &quot;%s waiting for item B&quot; % self.name
+            print &quot;%s starting to assemble&quot; % self.name
+            self.time = self.timeToAssemble
+        else:
+            print &quot;%s assembling for %s more seconds&quot; % (self.name, self.time)
+            self.time -= 1
+            
+legAssembler = assembler(&quot;leg Assembler&quot;,torsoMolder,legMolder,rivetStoreroom,2)
+armAssembler = assembler(&quot;arm Assembler&quot;, armMolder,legAssembler,rivetStoreroom,2)
+torsoAssembler = assembler(&quot;torso Assembler&quot;, headMolder,armAssembler,
+                            rivetStoreroom,3)
+
+components = [rivetStoreroom, plasticStoreroom, armMolder,
+                legMolder, headMolder, torsoMolder,
+              legAssembler, armAssembler, torsoAssembler]
+
+def run():
+    while 1:
+        for component in components:
+            component.run()
+        raw_input(&quot;Press &lt;ENTER&gt; to continue...&quot;)
+        print &quot;\n\n\n&quot;
+        
+
+if __name__ == &quot;__main__&quot;:
+    run()
+
+
+
+</pre>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id65" id="digitalcircuit-py-stackless-digital-circuit" name="digitalcircuit-py-stackless-digital-circuit">7.7&nbsp;&nbsp;&nbsp;digitalCircuit.py - stackless digital circuit</a></h2>
+<pre class="literal-block">
+import stackless
+
+debug=0
+def debugPrint(x):
+    if debug:print x
+
+class EventHandler:
+    def __init__(self,*outputs):
+        if outputs==None:
+            self.outputs=[]
+        else:
+            self.outputs=list(outputs)
+
+        self.channel = stackless.channel()
+        stackless.tasklet(self.listen)()
+
+    def listen(self):
+        while 1:
+            val = self.channel.receive()
+            self.processMessage(val)
+            for output in self.outputs:
+                self.notify(output)
+                
+    def processMessage(self,val):
+        pass
+
+    def notify(self,output):
+        pass
+
+    def registerOutput(self,output):
+        self.outputs.append(output)
+    
+    def __call__(self,val):
+        self.channel.send(val)
+
+class Switch(EventHandler):
+    def __init__(self,initialState=0,*outputs):
+        EventHandler.__init__(self,*outputs)
+        self.state = initialState
+
+    def processMessage(self,val):
+        debugPrint(&quot;Setting input to %s&quot; % val)
+        self.state = val
+
+    def notify(self,output):
+        output((self,self.state))
+
+class Reporter(EventHandler):
+    def __init__(self,msg=&quot;%(sender)s send message %(value)s&quot;):
+        EventHandler.__init__(self)
+        self.msg = msg
+        
+    def processMessage(self,msg):
+        sender,value=msg
+        print self.msg % {'sender':sender,'value':value}
+
+class Inverter(EventHandler):
+    def __init__(self,input,*outputs):
+        EventHandler.__init__(self,*outputs)
+        self.input = input
+        input.registerOutput(self)
+        self.state = 0
+
+    def processMessage(self,msg):
+        sender,value = msg
+        debugPrint(&quot;Inverter received %s from %s&quot; % (value,msg))
+        if value:
+            self.state = 0
+        else:
+            self.state = 1
+
+    def notify(self,output):
+        output((self,self.state))
+
+class AndGate(EventHandler):
+    def __init__(self,inputA,inputB,*outputs):
+        EventHandler.__init__(self,*outputs)
+
+        self.inputA = inputA
+        self.inputAstate = inputA.state
+        inputA.registerOutput(self)
+        
+        self.inputB = inputB
+        self.inputBstate = inputB.state
+        inputB.registerOutput(self)
+        
+        self.state = 0
+
+    def processMessage(self,msg):
+        sender, value = msg
+        debugPrint(&quot;AndGate received %s from %s&quot; % (value,sender))
+        
+        if sender is self.inputA:
+            self.inputAstate = value
+        elif sender is self.inputB:
+            self.inputBstate = value
+        else:
+            raise RuntimeError(&quot;Didn't expect message from %s&quot; % sender)
+
+        if self.inputAstate and self.inputBstate:
+            self.state = 1
+        else:
+            self.state = 0
+        debugPrint(&quot;AndGate's new state =&gt; %s&quot; % self.state)
+        
+    def notify(self,output):
+        output((self,self.state))
+
+class OrGate(EventHandler):
+    def __init__(self,inputA,inputB,*outputs):
+        EventHandler.__init__(self,*outputs)
+
+        self.inputA = inputA
+        self.inputAstate = inputA.state
+        inputA.registerOutput(self)
+        
+        self.inputB = inputB
+        self.inputBstate = inputB.state
+        inputB.registerOutput(self)
+        
+        self.state = 0
+
+    def processMessage(self,msg):
+        sender, value = msg
+        debugPrint(&quot;OrGate received %s from %s&quot; % (value,sender))
+        
+        if sender is self.inputA:
+            self.inputAstate = value
+        elif sender is self.inputB:
+            self.inputBstate = value
+        else:
+            raise RuntimeError(&quot;Didn't expect message from %s&quot; % sender)
+
+        if self.inputAstate or self.inputBstate:
+            self.state = 1
+        else:
+            self.state = 0
+        debugPrint(&quot;OrGate's new state =&gt; %s&quot; % self.state)
+
+    def notify(self,output):
+        output((self,self.state))
+
+
+if __name__ == &quot;__main__&quot;:
+    # half adder
+    inputA = Switch()
+    inputB = Switch()
+    result = Reporter(&quot;Result = %(value)s&quot;)
+    carry = Reporter(&quot;Carry = %(value)s&quot;)
+    andGateA = AndGate(inputA,inputB,carry)
+    orGate = OrGate(inputA,inputB)
+    inverter = Inverter(andGateA)
+    andGateB = AndGate(orGate,inverter,result)
+    inputA(1)
+    inputB(1)
+    inputB(0)
+    inputA(0)
+    
+
+</pre>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id66" id="actors-py-first-actor-example" name="actors-py-first-actor-example">7.8&nbsp;&nbsp;&nbsp;actors.py - first actor example</a></h2>
+<pre class="literal-block">
+import pygame
+import pygame.locals
+import os, sys
+import stackless
+import math
+
+class actor:
+    def __init__(self):
+        self.channel = stackless.channel()
+        self.processMessageMethod = self.defaultMessageAction
+        stackless.tasklet(self.processMessage)()
+
+    def processMessage(self):
+        while 1:
+            self.processMessageMethod(self.channel.receive())
+        
+    def defaultMessageAction(self,args):
+        print args
+
+class world(actor):
+    def __init__(self):
+        actor.__init__(self)
+        self.registeredActors = {}
+        stackless.tasklet(self.sendStateToActors)()
+
+    def testForCollision(self,x,y):
+        if x &lt; 0 or x &gt; 496:
+            return 1
+        elif y &lt; 0 or y &gt; 496:
+            return 1
+        else:
+            return 0
+    
+    def sendStateToActors(self):
+        while 1:
+            for actor in self.registeredActors.keys():
+                actorInfo = self.registeredActors[actor]
+                if self.registeredActors[actor][1] != (-1,-1):
+                    VectorX,VectorY = (math.sin(math.radians(actorInfo[2])) * actorInfo[3],
+                                       math.cos(math.radians(actorInfo[2])) * actorInfo[3])
+                    x,y = actorInfo[1]
+                    x += VectorX
+                    y -= VectorY
+                    if self.testForCollision(x,y):
+                        actor.send((self.channel,&quot;COLLISION&quot;))
+                    else:                        
+                        self.registeredActors[actor] = tuple([actorInfo[0],
+                                                          (x,y),
+                                                              actorInfo[2],
+                                                              actorInfo[3]])
+            worldState = [self.channel, &quot;WORLD_STATE&quot;]
+            for actor in self.registeredActors.keys():
+                if self.registeredActors[actor][1] != (-1,-1):
+                    worldState.append( (actor, self.registeredActors[actor]))
+            message = tuple(worldState)
+            for actor in self.registeredActors.keys():
+                actor.send(message)
+            stackless.schedule()
+
+    def defaultMessageAction(self,args):
+        sentFrom, msg, msgArgs = args[0],args[1],args[2:]
+        if msg == &quot;JOIN&quot;:
+            print 'ADDING ' , msgArgs
+            self.registeredActors[sentFrom] = msgArgs
+        elif msg == &quot;UPDATE_VECTOR&quot;:
+            self.registeredActors[sentFrom] = tuple([self.registeredActors[sentFrom][0],
+                                                     self.registeredActors[sentFrom][1],
+                                                     msgArgs[0],msgArgs[1]])
+        else:
+            print '!!!! WORLD GOT UNKNOWN MESSAGE ' , args
+            
+World = world().channel
+
+class display(actor):
+    def __init__(self,world=World):
+        actor.__init__(self)
+
+        self.world = World
+
+        self.icons = {}
+        pygame.init()
+
+        window = pygame.display.set_mode((496,496))
+        pygame.display.set_caption(&quot;Actor Demo&quot;)
+
+        joinMsg = (self.channel,&quot;JOIN&quot;,self.__class__.__name__, (-1,-1))
+        self.world.send(joinMsg)
+
+    def defaultMessageAction(self,args):
+        sentFrom, msg, msgArgs = args[0],args[1],args[2:]
+        if msg == &quot;WORLD_STATE&quot;:
+            self.updateDisplay(msgArgs)
+        else:
+            print &quot;UNKNOWN MESSAGE&quot;, args
+
+    def getIcon(self, iconName):
+        if self.icons.has_key(iconName):
+            return self.icons[iconName]
+        else:
+            iconFile = os.path.join(&quot;data&quot;,&quot;%s.bmp&quot; % iconName)
+            surface = pygame.image.load(iconFile)
+            surface.set_colorkey((0xf3,0x0a,0x0a))
+            self.icons[iconName] = surface
+            return surface
+
+    def updateDisplay(self,actors):
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT: sys.exit()
+            
+        screen = pygame.display.get_surface()
+
+        background = pygame.Surface(screen.get_size())
+        background = background.convert()
+        background.fill((200, 200, 200))
+
+        screen.blit(background, (0,0))
+        for item in actors:
+            screen.blit(pygame.transform.rotate(self.getIcon(item[1][0]),-item[1][2]), item[1][1])
+        pygame.display.flip()
+
+display()
+
+class basicRobot(actor):
+    def __init__(self,location=(0,0),angle=135,velocity=1,world=World):
+        actor.__init__(self)
+        self.location = location
+        self.angle = angle
+        self.velocity = velocity
+        self.world = world
+
+        joinMsg =(self.channel,&quot;JOIN&quot;,self.__class__.__name__,
+                  self.location,self.angle,self.velocity)
+        self.world.send(joinMsg)
+
+    def defaultMessageAction(self,args):
+        sentFrom, msg, msgArgs = args[0],args[1],args[2:]
+        if msg == &quot;WORLD_STATE&quot;:
+            self.location = (self.location[0] + 1, self.location[1] + 1)
+            self.angle += 1
+            if self.angle &gt;= 360:
+                self.angle -= 360
+
+            updateMsg = (self.channel, &quot;UPDATE_VECTOR&quot;,
+                         self.angle,self.velocity)
+            self.world.send(updateMsg)
+        elif msg == &quot;COLLISION&quot;:
+            self.angle += 73
+            if self.angle &gt;= 360:
+                self.angle -= 360
+        else:
+            print &quot;UNKNOWN MESSAGE&quot;, args
+
+basicRobot(angle=135,velocity=5)
+basicRobot((464,0),angle=225,velocity=10)
+
+    
+stackless.run()
+
+
+</pre>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id67" id="actors2-py-second-actor-example" name="actors2-py-second-actor-example">7.9&nbsp;&nbsp;&nbsp;actors2.py - second actor example</a></h2>
+<pre class="literal-block">
+import pygame
+import pygame.locals
+import os, sys
+import stackless
+import math
+import time
+
+class actor:
+    def __init__(self):
+        self.channel = stackless.channel()
+        self.processMessageMethod = self.defaultMessageAction
+        stackless.tasklet(self.processMessage)()
+
+    def processMessage(self):
+        while 1:
+            self.processMessageMethod(self.channel.receive())
+        
+    def defaultMessageAction(self,args):
+        print args
+
+class properties:
+    def __init__(self,name,location=(-1,-1),angle=0,
+                 velocity=0,height=-1,width=-1,hitpoints=1,physical=True,
+                 public=True):
+        self.name = name
+        self.location = location
+        self.angle = angle
+        self.velocity = velocity
+        self.height = height
+        self.width = width
+        self.public = public
+        self.hitpoints = hitpoints
+        self.physical = physical
+
+class worldState:
+    def __init__(self,updateRate,time):
+        self.updateRate = updateRate
+        self.time = time
+        self.actors = []
+
+class world(actor):
+    def __init__(self):
+        actor.__init__(self)
+        self.registeredActors = {}
+        self.updateRate = 30
+        self.maxupdateRate = 30
+        stackless.tasklet(self.runFrame)()
+
+    def testForCollision(self,x,y,item,otherItems=[]):
+        if x &lt; 0 or x + item.width &gt; 496:
+            return self.channel
+        elif y &lt; 0 or y+ item.height &gt; 496:
+            return self.channel
+        else:
+            ax1,ax2,ay1,ay2 = x, x+item.width, y,y+item.height
+            for item,bx1,bx2,by1,by2 in otherItems:
+                if self.registeredActors[item].physical == False: continue
+                for x,y in [(ax1,ay1),(ax1,ay2),(ax2,ay1),(ax2,ay2)]:
+                    if x &gt;= bx1 and x &lt;= bx2 and y &gt;= by1 and y &lt;= by2:
+                        return item
+                for x,y in [(bx1,by1),(bx1,by2),(bx2,by1),(bx2,by2)]:
+                    if x &gt;= ax1 and x &lt;= ax2 and y &gt;= ay1 and y &lt;= ay2:
+                        return item
+            return None
+
+    def killDeadActors(self):
+        for actor in self.registeredActors.keys():
+            if self.registeredActors[actor].hitpoints &lt;= 0:
+                print &quot;ACTOR DIED&quot;, self.registeredActors[actor].hitpoints
+                actor.send_exception(TaskletExit)
+                del self.registeredActors[actor]
+
+    def updateActorPositions(self):
+        actorPositions = []
+        for actor in self.registeredActors.keys():
+            actorInfo = self.registeredActors[actor]
+            if actorInfo.public and actorInfo.physical:
+                x,y = actorInfo.location
+                angle = actorInfo.angle
+                velocity = actorInfo.velocity
+                VectorX,VectorY = (math.sin(math.radians(angle)) * velocity,
+                                   math.cos(math.radians(angle)) * velocity)
+                x += VectorX/self.updateRate
+                y -= VectorY/self.updateRate
+                collision = self.testForCollision(x,y,actorInfo,actorPositions)
+                if collision:
+                    #don't move
+                    actor.send((self.channel,&quot;COLLISION&quot;,actor,collision))
+                    if collision and collision is not self.channel:
+                        collision.send((self.channel,&quot;COLLISION&quot;,actor,collision))
+                else:                        
+                    actorInfo.location = (x,y)
+                actorPositions.append( (actor,
+                                        actorInfo.location[0],
+                                        actorInfo.location[0] + actorInfo.height,
+                                        actorInfo.location[1],
+                                        actorInfo.location[1] + actorInfo.width))
+
+    def sendStateToActors(self,starttime):
+        WorldState = worldState(self.updateRate,starttime)
+        for actor in self.registeredActors.keys():
+            if self.registeredActors[actor].public:
+                WorldState.actors.append( (actor, self.registeredActors[actor]) )
+        for actor in self.registeredActors.keys():
+            actor.send( (self.channel,&quot;WORLD_STATE&quot;,WorldState) )
+
+    def runFrame(self):
+        initialStartTime = time.clock()
+        startTime = time.clock()
+        while 1:
+            self.killDeadActors()
+            self.updateActorPositions()
+            self.sendStateToActors(startTime)
+            #wait
+            calculatedEndTime = startTime + 1.0/self.updateRate
+
+            doneProcessingTime = time.clock()
+            percentUtilized =  (doneProcessingTime - startTime) / (1.0/self.updateRate)
+            if percentUtilized &gt;= 1:
+                self.updateRate -= 1
+                print &quot;TOO MUCH LOWERING FRAME RATE: &quot; , self.updateRate
+            elif percentUtilized &lt;= 0.6 and self.updateRate &lt; self.maxupdateRate:
+                self.updateRate += 1
+                print &quot;TOO MUCH FREETIME, RAISING FRAME RATE: &quot; , self.updateRate
+
+            while time.clock() &lt; calculatedEndTime:
+                stackless.schedule()
+            startTime = calculatedEndTime
+            
+            stackless.schedule()
+
+    def defaultMessageAction(self,args):
+        sentFrom, msg, msgArgs = args[0],args[1],args[2:]
+        if msg == &quot;JOIN&quot;:
+            print 'ADDING ' , msgArgs
+            self.registeredActors[sentFrom] = msgArgs[0]
+        elif msg == &quot;UPDATE_VECTOR&quot;:
+            self.registeredActors[sentFrom].angle = msgArgs[0]
+            self.registeredActors[sentFrom].velocity = msgArgs[1]
+        elif msg == &quot;COLLISION&quot;:
+            pass # known, but we don't do anything
+        elif msg == &quot;KILLME&quot;:
+            self.registeredActors[sentFrom].hitpoints = 0
+        else:
+            print '!!!! WORLD GOT UNKNOWN MESSAGE ' , args
+            
+World = world().channel
+
+class display(actor):
+    def __init__(self,world=World):
+        actor.__init__(self)
+
+        self.world = World
+        self.icons = {}
+        pygame.init()
+
+        window = pygame.display.set_mode((496,496))
+        pygame.display.set_caption(&quot;Actor Demo&quot;)
+        
+        self.world.send((self.channel,&quot;JOIN&quot;,
+                            properties(self.__class__.__name__,
+                                       public=False)))
+
+    def defaultMessageAction(self,args):
+        sentFrom, msg, msgArgs = args[0],args[1],args[2:]
+        if msg == &quot;WORLD_STATE&quot;:
+            self.updateDisplay(msgArgs)
+        else:
+            print &quot;UNKNOWN MESSAGE&quot;, args
+
+    def getIcon(self, iconName):
+        if self.icons.has_key(iconName):
+            return self.icons[iconName]
+        else:
+            iconFile = os.path.join(&quot;data&quot;,&quot;%s.bmp&quot; % iconName)
+            surface = pygame.image.load(iconFile)
+            surface.set_colorkey((0xf3,0x0a,0x0a))
+            self.icons[iconName] = surface
+            return surface
+
+    def updateDisplay(self,msgArgs):
+        
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT: sys.exit()
+            
+        screen = pygame.display.get_surface()
+
+        background = pygame.Surface(screen.get_size())
+        background = background.convert()
+        background.fill((200, 200, 200))
+
+        screen.blit(background, (0,0))
+
+        WorldState = msgArgs[0]
+
+        for channel,item in WorldState.actors:
+            screen.blit(pygame.transform.rotate(self.getIcon(item.name),-item.angle), item.location)
+        pygame.display.flip()
+
+display()
+
+class basicRobot(actor):
+    def __init__(self,location=(0,0),angle=135,velocity=1,
+                 hitpoints=20,world=World):
+        actor.__init__(self)
+        self.location = location
+        self.angle = angle
+        self.velocity = velocity
+        self.hitpoints = hitpoints
+        self.world = world
+        self.world.send((self.channel,&quot;JOIN&quot;,
+                            properties(self.__class__.__name__,
+                                       location=self.location,
+                                       angle=self.angle,
+                                       velocity=self.velocity,
+                                       height=32,width=32,
+                                       hitpoints=self.hitpoints)))
+
+    def defaultMessageAction(self,args):
+        sentFrom, msg, msgArgs = args[0],args[1],args[2:]
+        if msg == &quot;WORLD_STATE&quot;:
+            for actor in msgArgs[0].actors:
+                if actor[0] is self: break
+            self.location = actor[1].location
+            self.angle += 30.0 * (1.0 / msgArgs[0].updateRate)
+            if self.angle &gt;= 360:
+                self.angle -= 360
+
+            updateMsg = (self.channel, &quot;UPDATE_VECTOR&quot;, self.angle,
+                         self.velocity)
+            self.world.send(updateMsg)
+        elif msg == &quot;COLLISION&quot;:
+            self.angle += 73.0
+            if self.angle &gt;= 360:
+                self.angle -= 360
+            self.hitpoints -= 1
+            if self.hitpoints &lt;= 0:
+                self.world.send((self.channel, &quot;KILLME&quot;))
+        elif msg == &quot;DAMAGE&quot;:
+            self.hitpoints -= msgArgs[0]
+            if self.hitpoints &lt;= 0:
+                self.world.send( (self.channel,&quot;KILLME&quot;) )
+        else:
+            print &quot;UNKNOWN MESSAGE&quot;, args
+
+basicRobot(angle=135,velocity=150)
+basicRobot((464,0),angle=225,velocity=300)
+basicRobot((100,200),angle=78,velocity=500)
+basicRobot((400,300),angle=298,velocity=5)
+basicRobot((55,55),angle=135,velocity=150)
+basicRobot((464,123),angle=225,velocity=300)
+basicRobot((180,200),angle=78,velocity=500)
+basicRobot((400,380),angle=298,velocity=5)
+    
+stackless.run()
+
+
+</pre>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id68" id="actors3-py-third-actor-example" name="actors3-py-third-actor-example">7.10&nbsp;&nbsp;&nbsp;actors3.py - third actor example</a></h2>
+<pre class="literal-block">
+import pygame
+import pygame.locals
+import os, sys
+import stackless
+import math
+import time
+import random
+
+class actor:
+    def __init__(self):
+        self.channel = stackless.channel()
+        self.processMessageMethod = self.defaultMessageAction
+        stackless.tasklet(self.processMessage)()
+
+    def processMessage(self):
+        while 1:
+            self.processMessageMethod(self.channel.receive())
+        
+    def defaultMessageAction(self,args):
+        print args
+
+class properties:
+    def __init__(self,name,location=(-1,-1),angle=0,
+                 velocity=0,height=-1,width=-1,hitpoints=1,physical=True,
+                 public=True):
+        self.name = name
+        self.location = location
+        self.angle = angle
+        self.velocity = velocity
+        self.height = height
+        self.width = width
+        self.public = public
+        self.hitpoints = hitpoints
+        self.physical = physical
+
+class worldState:
+    def __init__(self,updateRate,time):
+        self.updateRate = updateRate
+        self.time = time
+        self.actors = []
+
+class world(actor):
+    def __init__(self):
+        actor.__init__(self)
+        self.registeredActors = {}
+        self.updateRate = 30
+        self.maxupdateRate = 30
+        stackless.tasklet(self.runFrame)()
+
+    def testForCollision(self,x,y,item,otherItems=[]):
+        if x &lt; 0 or x + item.width &gt; 496:
+            return self.channel
+        elif y &lt; 0 or y+ item.height &gt; 496:
+            return self.channel
+        else:
+            ax1,ax2,ay1,ay2 = x, x+item.width, y,y+item.height
+            for item,bx1,bx2,by1,by2 in otherItems:
+                if self.registeredActors[item].physical == False: continue
+                for x,y in [(ax1,ay1),(ax1,ay2),(ax2,ay1),(ax2,ay2)]:
+                    if x &gt;= bx1 and x &lt;= bx2 and y &gt;= by1 and y &lt;= by2:
+                        return item
+                for x,y in [(bx1,by1),(bx1,by2),(bx2,by1),(bx2,by2)]:
+                    if x &gt;= ax1 and x &lt;= ax2 and y &gt;= ay1 and y &lt;= ay2:
+                        return item
+            return None
+
+    def killDeadActors(self):
+        for actor in self.registeredActors.keys():
+            if self.registeredActors[actor].hitpoints &lt;= 0:
+                print &quot;ACTOR DIED&quot;, self.registeredActors[actor].hitpoints
+                actor.send_exception(TaskletExit)
+                del self.registeredActors[actor]
+
+    def updateActorPositions(self):
+        actorPositions = []
+        for actor in self.registeredActors.keys():
+            actorInfo = self.registeredActors[actor]
+            if actorInfo.public and actorInfo.physical:
+                x,y = actorInfo.location
+                angle = actorInfo.angle
+                velocity = actorInfo.velocity
+                VectorX,VectorY = (math.sin(math.radians(angle)) * velocity,
+                                   math.cos(math.radians(angle)) * velocity)
+                x += VectorX/self.updateRate
+                y -= VectorY/self.updateRate
+                collision = self.testForCollision(x,y,actorInfo,actorPositions)
+                if collision:
+                    #don't move
+                    actor.send((self.channel,&quot;COLLISION&quot;,actor,collision))
+                    if collision and collision is not self.channel:
+                        collision.send((self.channel,&quot;COLLISION&quot;,actor,collision))
+                else:                        
+                    actorInfo.location = (x,y)
+                actorPositions.append( (actor,
+                                        actorInfo.location[0],
+                                        actorInfo.location[0] + actorInfo.height,
+                                        actorInfo.location[1],
+                                        actorInfo.location[1] + actorInfo.width))
+
+    def sendStateToActors(self,starttime):
+        WorldState = worldState(self.updateRate,starttime)
+        for actor in self.registeredActors.keys():
+            if self.registeredActors[actor].public:
+                WorldState.actors.append( (actor, self.registeredActors[actor]) )
+        for actor in self.registeredActors.keys():
+            actor.send( (self.channel,&quot;WORLD_STATE&quot;,WorldState) )
+
+    def runFrame(self):
+        initialStartTime = time.clock()
+        startTime = time.clock()
+        while 1:
+            self.killDeadActors()
+            self.updateActorPositions()
+            self.sendStateToActors(startTime)
+            #wait
+            calculatedEndTime = startTime + 1.0/self.updateRate
+
+            doneProcessingTime = time.clock()
+            percentUtilized =  (doneProcessingTime - startTime) / (1.0/self.updateRate)
+            if percentUtilized &gt;= 1:
+                self.updateRate -= 1
+                print &quot;TOO MUCH LOWERING FRAME RATE: &quot; , self.updateRate
+            elif percentUtilized &lt;= 0.6 and self.updateRate &lt; self.maxupdateRate:
+                self.updateRate += 1
+                print &quot;TOO MUCH FREETIME, RAISING FRAME RATE: &quot; , self.updateRate
+
+            while time.clock() &lt; calculatedEndTime:
+                stackless.schedule()
+            startTime = calculatedEndTime
+            
+            stackless.schedule()
+
+    def defaultMessageAction(self,args):
+        sentFrom, msg, msgArgs = args[0],args[1],args[2:]
+        if msg == &quot;JOIN&quot;:
+            self.registeredActors[sentFrom] = msgArgs[0]
+        elif msg == &quot;UPDATE_VECTOR&quot;:
+            self.registeredActors[sentFrom].angle = msgArgs[0]
+            self.registeredActors[sentFrom].velocity = msgArgs[1]
+        elif msg == &quot;COLLISION&quot;:
+            pass # known, but we don't do anything
+        elif msg == &quot;KILLME&quot;:
+            self.registeredActors[sentFrom].hitpoints = 0
+        else:
+            print '!!!! WORLD GOT UNKNOWN MESSAGE ' , msg, msgArgs
+            
+World = world().channel
+
+class display(actor):
+    def __init__(self,world=World):
+        actor.__init__(self)
+
+        self.world = World
+        self.icons = {}
+        pygame.init()
+
+        window = pygame.display.set_mode((496,496))
+        pygame.display.set_caption(&quot;Actor Demo&quot;)
+        
+        self.world.send((self.channel,&quot;JOIN&quot;,
+                            properties(self.__class__.__name__,
+                                       public=False)))
+
+    def defaultMessageAction(self,args):
+        sentFrom, msg, msgArgs = args[0],args[1],args[2:]
+        if msg == &quot;WORLD_STATE&quot;:
+            self.updateDisplay(msgArgs)
+        else:
+            print &quot;DISPLAY UNKNOWN MESSAGE&quot;, args
+
+    def getIcon(self, iconName):
+        if self.icons.has_key(iconName):
+            return self.icons[iconName]
+        else:
+            iconFile = os.path.join(&quot;data&quot;,&quot;%s.bmp&quot; % iconName)
+            surface = pygame.image.load(iconFile)
+            surface.set_colorkey((0xf3,0x0a,0x0a))
+            self.icons[iconName] = surface
+            return surface
+
+    def updateDisplay(self,msgArgs):
+        
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT: sys.exit()
+            
+        screen = pygame.display.get_surface()
+
+        background = pygame.Surface(screen.get_size())
+        background = background.convert()
+        background.fill((200, 200, 200))
+
+        screen.blit(background, (0,0))
+
+        WorldState = msgArgs[0]
+
+        for channel,item in WorldState.actors:
+            itemImage = self.getIcon(item.name)
+            itemImage = pygame.transform.rotate(itemImage,-item.angle)
+            screen.blit(itemImage, item.location)
+        pygame.display.flip()
+
+display()
+
+class basicRobot(actor):
+    def __init__(self,location=(0,0),angle=135,velocity=1,
+                 hitpoints=20,world=World):
+        actor.__init__(self)
+        self.location = location
+        self.angle = angle
+        self.velocity = velocity
+        self.hitpoints = hitpoints
+        self.world = world
+        self.world.send((self.channel,&quot;JOIN&quot;,
+                            properties(self.__class__.__name__,
+                                       location=self.location,
+                                       angle=self.angle,
+                                       velocity=self.velocity,
+                                       height=32,width=32,hitpoints=self.hitpoints)))
+
+    def defaultMessageAction(self,args):
+        sentFrom, msg, msgArgs = args[0],args[1],args[2:]
+        if msg == &quot;WORLD_STATE&quot;:
+            for actor in msgArgs[0].actors:
+                if actor[0] is self: break
+            self.location = actor[1].location
+            self.angle += 30.0 * (1.0 / msgArgs[0].updateRate)
+            if self.angle &gt;= 360:
+                self.angle -= 360
+                
+            updateMsg = (self.channel, &quot;UPDATE_VECTOR&quot;,
+                         self.angle,self.velocity)
+            self.world.send(updateMsg)
+        elif msg == &quot;COLLISION&quot;:
+            self.angle += 73.0
+            if self.angle &gt;= 360:
+                self.angle -= 360
+            self.hitpoints -= 1
+            if self.hitpoints &lt;= 0:
+                explosion(self.location,self.angle)
+                self.world.send((self.channel, &quot;KILLME&quot;))
+        elif msg == &quot;DAMAGE&quot;:
+            self.hitpoints -= msgArgs[0]
+            if self.hitpoints &lt;= 0:
+                explosion(self.location,self.angle)
+                self.world.send( (self.channel,&quot;KILLME&quot;) )
+                
+        else:
+            print &quot;BASIC ROBOT UNKNOWN MESSAGE&quot;, args
+
+class explosion(actor):
+    def __init__(self,location=(0,0),angle=0,world=World):
+        actor.__init__(self)
+        self.time = 0.0
+        self.world = world
+        self.world.send((self.channel,&quot;JOIN&quot;,
+                            properties(self.__class__.__name__,
+                                       location = location,
+                                       angle = angle,
+                                       velocity=0,
+                                       height=32.0,width=32.0,hitpoints=1,
+                                       physical=False)))
+                           
+    def defaultMessageAction(self,args):
+        sentFrom, msg, msgArgs = args[0],args[1],args[2:]
+        if msg == &quot;WORLD_STATE&quot;:
+            WorldState = msgArgs[0]
+            if self.time == 0.0:
+                self.time = WorldState.time
+            elif WorldState.time &gt;= self.time + 3.0:
+                self.world.send( (self.channel, &quot;KILLME&quot;) )
+
+class mine(actor):
+    def __init__(self,location=(0,0),world=World):
+        actor.__init__(self)
+        self.world = world
+        self.world.send((self.channel,&quot;JOIN&quot;,
+                            properties(self.__class__.__name__,
+                                       location=location,
+                                       angle=0,
+                                       velocity=0,
+                                       height=2.0,width=2.0,hitpoints=1)))
+
+    def defaultMessageAction(self,args):
+        sentFrom, msg, msgArgs = args[0],args[1],args[2:]
+        if msg == &quot;WORLD_STATE&quot;:
+            pass                
+        elif msg == &quot;COLLISION&quot;:
+            if msgArgs[0] is self.channel:
+                other = msgArgs[1]
+            else:
+                other = msgArgs[0]
+            other.send( (self.channel,&quot;DAMAGE&quot;,25) )
+            self.world.send( (self.channel,&quot;KILLME&quot;))
+            print &quot;MINE COLLISION&quot;
+        else:
+            print &quot;UNKNOWN MESSAGE&quot;, args
+
+class minedropperRobot(actor):
+    def __init__(self,location=(0,0),angle=135,velocity=1,
+                 hitpoints=20,world=World):
+        actor.__init__(self)
+        self.location = location
+        self.angle = angle
+        self.delta = 0.0
+        self.height=32.0
+        self.width=32.0
+        self.deltaDirection = &quot;up&quot;
+        self.nextMine = 0.0
+        self.velocity = velocity
+        self.hitpoints = hitpoints
+        self.world = world
+        self.world.send((self.channel,&quot;JOIN&quot;,
+                            properties(self.__class__.__name__,
+                                       location=self.location,
+                                       angle=self.angle,
+                                       velocity=self.velocity,
+                                       height=self.height,width=self.width,
+                                       hitpoints=self.hitpoints)))
+
+    def defaultMessageAction(self,args):
+        sentFrom, msg, msgArgs = args[0],args[1],args[2:]
+        if msg == &quot;WORLD_STATE&quot;:
+            for actor in msgArgs[0].actors:
+                if actor[0] is self.channel:
+                    break
+            self.location = actor[1].location
+            if self.deltaDirection == &quot;up&quot;:
+                self.delta += 60.0 * (1.0 / msgArgs[0].updateRate)
+                if self.delta &gt; 15.0:
+                    self.delta = 15.0
+                    self.deltaDirection = &quot;down&quot;
+            else:
+                self.delta -= 60.0 * (1.0 / msgArgs[0].updateRate)
+                if self.delta &lt; -15.0:
+                    self.delta = -15.0
+                    self.deltaDirection = &quot;up&quot;
+            if self.nextMine &lt;= msgArgs[0].time:
+                self.nextMine = msgArgs[0].time + 1.0
+                mineX,mineY = (self.location[0] + (self.width / 2.0) ,
+                               self.location[1] + (self.width / 2.0))
+
+                mineDistance = (self.width / 2.0 ) ** 2
+                mineDistance += (self.height / 2.0) ** 2
+                mineDistance = math.sqrt(mineDistance)
+
+                VectorX,VectorY = (math.sin(math.radians(self.angle + self.delta)),
+                                   math.cos(math.radians(self.angle + self.delta)))
+                VectorX,VectorY = VectorX * mineDistance,VectorY * mineDistance
+                x,y = self.location
+                x += self.width / 2.0
+                y += self.height / 2.0
+                x -= VectorX
+                y += VectorY
+                mine( (x,y))
+                
+            updateMsg = (self.channel, &quot;UPDATE_VECTOR&quot;,
+                         self.angle + self.delta ,self.velocity)
+            self.world.send(updateMsg)
+        elif msg == &quot;COLLISION&quot;:
+            self.angle += 73.0
+            if self.angle &gt;= 360:
+                self.angle -= 360
+            self.hitpoints -= 1
+            if self.hitpoints &lt;= 0:
+                explosion(self.location,self.angle)
+                self.world.send((self.channel,&quot;KILLME&quot;))
+        elif msg == &quot;DAMAGE&quot;:
+            self.hitpoints -= msgArgs[0]
+            if self.hitpoints &lt;= 0:
+                explosion(self.location,self.angle)
+                self.world.send((self.channel, &quot;KILLME&quot;))
+        else:
+            print &quot;UNKNOWN MESSAGE&quot;, args
+
+class spawner(actor):
+    def __init__(self,location=(0,0),world=World):
+        actor.__init__(self)
+        self.location = location
+        self.time = 0.0
+        self.world = world
+        
+        self.robots = []
+        for name,klass in globals().iteritems():
+            if name.endswith(&quot;Robot&quot;):
+                self.robots.append(klass)
+
+        self.world.send((self.channel,&quot;JOIN&quot;,
+                            properties(self.__class__.__name__,
+                                       location = location,
+                                       angle=0,
+                                       velocity=0,
+                                       height=32.0,width=32.0,hitpoints=1,
+                                       physical=False)))
+
+    def defaultMessageAction(self,args):    
+        sentFrom, msg, msgArgs = args[0],args[1],args[2:]
+        if msg == &quot;WORLD_STATE&quot;:
+            WorldState = msgArgs[0]
+            if self.time == 0.0:
+                self.time = WorldState.time + 0.5 # wait 1/2 second on start
+            elif WorldState.time &gt;= self.time: # every five seconds
+                self.time = WorldState.time + 5.0
+                angle = random.random() * 360.0
+                velocity = random.random() * 1000.0
+                newRobot = random.choice(self.robots)
+                newRobot(self.location,angle,velocity)
+
+spawner( (32,32) )
+spawner( (432,32) )
+spawner( (32,432) )
+spawner( (432,432) )
+spawner( (232,232) )
+    
+stackless.run()
+
+
+</pre>
+</div>
+</div>
+</div>
+</body>
+</html>
+
+
+
+
+
+<!--
+     FILE ARCHIVED ON 0:49:37 Oct 1, 2007 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 19:52:35 Mar 1, 2017.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+-->

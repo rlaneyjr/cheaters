@@ -1,0 +1,328 @@
+<title>OpenStack Commands Cheat Sheet</title>
+
+<h3>Monitor OpenStack Service Logs</h3>
+
+<p>Ubuntu</p>
+
+<p>Controller logs:</p>
+
+<pre><code>tail -f /var/log/{ceilometer,cinder,glance,keystone,mysql,neutron,nova,openvswitch,rabbitmq}/*.log /var/log/syslog</code></pre>
+
+<p>Compute logs:</p>
+
+<pre><code>tail -f /var/log/{ceilometer,neutron,nova,openvswitch}/*.log /var/log/syslog</code></pre>
+
+<p>CentOS/RHEL</p>
+
+<p>Controller logs:</p>
+
+<pre><code>tail -f /var/log/{ceilometer,cinder,glance,keystone,mysql,neutron,nova,openvswitch,rabbitmq}/*.log /var/log/messages</code></pre>
+
+<p>Compute logs:</p>
+
+<pre><code>tail -f /var/log/{ceilometer,neutron,nova,openvswitch}/*.log /var/log/messages</code></pre>
+
+<h3>Keystone</h3>
+
+<p>See Status of Keystone Services</p>
+
+<pre><code>keystone service-list</code></pre>
+
+<p>List All Keystone Endpoints</p>
+
+<pre><code>keystone endpoint-list</code></pre>
+
+<h3>Glance</h3>
+
+<p>List Current Glance Images</p>
+
+<pre><code>glance image-list</code></pre>
+
+<p>Upload Images to Glance</p>
+
+<pre><code>glance image-create --name &lt;IMAGE-NAME&gt; --is-public &lt;true OR false&gt; --container-format &lt;CONTAINER-FORMAT&gt; --disk-format &lt;DISK-FORMAT&gt; --copy-from &lt;URI&gt;</code></pre>
+
+<p>Example 1: Upload the <strong>cirros-0.3.2-x86_64</strong> OpenStack cloud image:</p>
+
+<pre><code>glance image-create --name cirros-0.3.2-x86_64 --is-public true --container-format bare --disk-format qcow2 --copy-from http://download.cirros-cloud.net/0.3.2/cirros-0.3.2-x86_64-disk.img</code></pre>
+
+<p>Example 2: Upload the <strong>ubuntu-server-12.04</strong> OpenStack cloud image:</p>
+
+<pre><code>glance image-create --name ubuntu-server-12.04 --is-public true --container-format bare --disk-format qcow2 --copy-from http://cloud-images.ubuntu.com/precise/current/precise-server-cloudimg-amd64-disk1.img</code></pre>
+
+<p>Example 3: Upload the <strong>centos-6.5</strong> OpenStack cloud image:</p>
+
+<pre><code>glance image-create --name centos-6.5-x86_64 --is-public true --container-format bare --disk-format qcow2 --copy-from http://public.thornelabs.net/centos-6.5-20140117.0.x86_64.qcow2</code></pre>
+
+<h3>Nova</h3>
+
+<p>See Status of Nova Services</p>
+
+<pre><code>nova service-list</code></pre>
+
+<p>List Current Nova Instances</p>
+
+<pre><code>nova list</code></pre>
+
+<p>Boot an Instance</p>
+
+<p>Boot an instance assigned to a particular Neutron Network:</p>
+
+<pre><code>nova boot &lt;INSTANCE-NAME&gt; --image &lt;GLANCE-IMAGE-ID&gt; --flavor &lt;FLAVOR-ID&gt; --security-groups &lt;SEC-GROUP-1,SEC-GROUP-2&gt; --key-name &lt;SSH-KEY-NAME&gt; --nic net-id=&lt;NET-ID&gt; --availability-zone &lt;AVAILABILITY-ZONE-NAME&gt;</code></pre>
+
+<p>Boot an instance assigned to a particular Neutron Port:</p>
+
+<pre><code>nova boot &lt;INSTANCE-NAME&gt; --image &lt;GLANCE-IMAGE-ID&gt; --flavor &lt;FLAVOR-ID&gt; --security-groups &lt;SEC-GROUP-1,SEC-GROUP-2&gt; --key-name &lt;SSH-KEY-NAME&gt; --nic port-id=&lt;PORT-ID&gt; --availability-zone &lt;AVAILABILITY-ZONE-NAME&gt;</code></pre>
+
+<p>Create a Flavor</p>
+
+<pre><code>nova flavor-create &lt;FLAVOR-NAME&gt; &lt;FLAVOR-ID&gt; &lt;RAM-IN-MB&gt; &lt;ROOT-DISK-IN-GB&gt; &lt;VCPU&gt;</code></pre>
+
+<p>For example, create a new flavor called <strong>m1.custom</strong> with an ID of <strong>6</strong>, <strong>512 MB</strong> of RAM, <strong>5 GB</strong> of root disk space, and <strong>1</strong> vCPU:</p>
+
+<pre><code>nova flavor-create m1.custom 6 512 5 1</code></pre>
+
+<p>Create Nova Security Group</p>
+
+<p>This command is only used if you are using <strong>nova-network</strong>.</p>
+
+<pre><code>nova secgroup-create &lt;NAME&gt; &lt;DESCRIPTION&gt;</code></pre>
+
+<p>Add Rules to Nova Security Group</p>
+
+<p>These command is only used if you are using <strong>nova-network</strong>.</p>
+
+<pre><code>nova secgroup-add-rule &lt;NAME&gt; &lt;PROTOCOL&gt; &lt;BEGINNING-PORT&gt; &lt;ENDING-PORT&gt; &lt;SOURCE-SUBNET&gt;</code></pre>
+
+<p>Example 1: Add a rule to the <strong>default</strong> Nova Security Group to allow SSH access to instances:</p>
+
+<pre><code>nova secgroup-add-rule default tcp 22 22 0.0.0.0/0</code></pre>
+
+<p>Example 2: Add a rule to the <strong>default</strong> Nova Security Group Rule to allow ICMP communication to instances:</p>
+
+<pre><code>nova secgroup-add-rule default icmp -1 -1 0.0.0.0/0</code></pre>
+
+<p>Apply Nova Security Group to Instance</p>
+
+<p>This command is only used if you are using <strong>nova-network</strong>.</p>
+
+<pre><code>nova add-secgroup &lt;NOVA-ID&gt; &lt;SECURITY-GROUP-ID&gt;</code></pre>
+
+<p>Create Nova Key SSH Pair</p>
+
+<pre><code>nova keypair-add --pub_key &lt;SSH-PUBLIC-KEY-FILE-NAME&gt; &lt;NAME-OF-KEY&gt;</code></pre>
+
+<p>Create Nova Floating IP Pool</p>
+
+<pre><code>nova-manage floating create &lt;SUBNET-NAME&gt; &lt;NAME-OF-POOL&gt;</code></pre>
+
+<p>Create Host Aggregate With Availability Zone</p>
+
+<pre><code>nova aggregate-create &lt;HOST-AGG-NAME&gt; &lt;AVAIL-ZONE-NAME&gt;</code></pre>
+
+<p>Add Compute Host to Host Aggregate</p>
+
+<pre><code>nova aggregate-add-host &lt;HOST-AGG-ID&gt; &lt;COMPUTE-HOST-NAME&gt;</code></pre>
+
+<p>Live Migrate an Instance</p>
+
+<p>If your compute hosts use shared storage:</p>
+
+<pre><code>nova live-migration &lt;INSTANCE-ID&gt; &lt;COMPUTE-HOST-ID&gt;</code></pre>
+
+<p>If your compute hosts do <em>not</em> use shared storage:</p>
+
+<pre><code>nova live-migration --block-migrate &lt;INSTANCE-ID&gt; &lt;COMPUTE-HOST-ID&gt;</code></pre>
+
+<p>Attach Cinder Volume to Instance</p>
+
+<p>Before running this command, you will need to have already created a Cinder Volume.</p>
+
+<pre><code>nova volume-attach &lt;INSTANCE-ID&gt; &lt;CINDER-VOLUME-ID&gt; &lt;DEVICE (use auto)&gt;</code></pre>
+
+<p>Create and Boot an Instance from a Cinder Volume</p>
+
+<p>Before running this command, you will need to have already created a Cinder Volume from a Glance Image.</p>
+
+<pre><code>nova boot --flavor &lt;FLAVOR-ID&gt; --block_device_mapping vda=&lt;CINDER-VOLUME-ID&gt;:::0 &lt;INSTANCE-NAME&gt;</code></pre>
+
+<p>Create and Boot an Instance from a Cinder Volume Snapshot</p>
+
+<p>Before running this command, you will have to have already created a Cinder Volume Snapshot:</p>
+
+<pre><code>nova boot --flavor &lt;FLAVOR-ID&gt; --block_device_mapping vda=&lt;CINDER-SNAPSHOT-ID&gt;:snap::0 &lt;INSTANCE-NAME&gt;</code></pre>
+
+<p>Reset the State of an Instance</p>
+
+<p>If an instance gets stuck in a <strong>delete</strong> state, the instance state can be reset then deleted:</p>
+
+<pre><code>nova reset-state &lt;INSTANCE-ID&gt;</code></pre>
+
+<pre><code>nova delete &lt;INSTANCE-ID&gt;</code></pre>
+
+<p>You can also use the <strong>active</strong> command line switch to force an instance back into an active state:</p>
+
+<pre><code>nova reset-state --active &lt;INSTANCE-ID&gt;</code></pre>
+
+<p>Get Direct URL to Instance Console Using novnc</p>
+
+<pre><code>nova get-vnc-console &lt;INSTANCE-ID&gt; novnc</code></pre>
+
+<p>Get Direct URL to Instance Console Using xvpvnc</p>
+
+<pre><code>nova get-vnc-console &lt;INSTANCE-ID&gt; xvpvnc</code></pre>
+
+<h3>Cinder</h3>
+
+<p>See Status of Cinder Services</p>
+
+<pre><code>cinder service-list</code></pre>
+
+<p>List Current Cinder Volumes</p>
+
+<pre><code>cinder list</code></pre>
+
+<p>Create Cinder Volume</p>
+
+<pre><code>cinder create --display-name &lt;CINDER-IMAGE-DISPLAY-NAME&gt; &lt;SIZE-IN-GB&gt;</code></pre>
+
+<p>Create Cinder Volume from Glance Image</p>
+
+<pre><code>cinder create --image-id &lt;GLANCE-IMAGE-ID&gt; --display-name &lt;CINDER-IMAGE-DISPLAY-NAME&gt; &lt;SIZE-IN-GB&gt;</code></pre>
+
+<p>Create Snapshot of Cinder Volume</p>
+
+<pre><code>cinder snapshot-create --display-name &lt;SNAPSHOT-DISPLAY-NAME&gt; &lt;CINDER-VOLUME-ID&gt;</code></pre>
+
+<p>If the Cinder Volume is not available, i.e. it is currently attached to an instance, you must pass the force flag:</p>
+
+<pre><code>cinder snapshot-create --display-name &lt;SNAPSHOT-DISPLAY-NAME&gt; &lt;CINDER-VOLUME-ID&gt; --force True</code></pre>
+
+<h3>Neutron</h3>
+
+<p>See Status of Neutron Services</p>
+
+<pre><code>neutron agent-list</code></pre>
+
+<p>List Current Neutron Networks</p>
+
+<pre><code>neutron net-list</code></pre>
+
+<p>List Current Neutron Subnets</p>
+
+<pre><code>neutron subnet-list</code></pre>
+
+<p>Rename Neutron Network</p>
+
+<pre><code>neutron net-update &lt;CURRENT-NET-NAME&gt; --name &lt;NEW-NET-NAME&gt;</code></pre>
+
+<p>Rename Neutron Subnet</p>
+
+<pre><code>neutron subnet-update &lt;CURRENT-SUBNET-NAME&gt; --name &lt;NEW-SUBNET-NAME&gt;</code></pre>
+
+<p>Create Neutron Security Group</p>
+
+<pre><code>neutron security-group-create &lt;SEC-GROUP-NAME&gt;</code></pre>
+
+<p>Add Rules to Neutron Security Group</p>
+
+<pre><code>neutron security-group-rule-create --direction &lt;ingress OR egress&gt; --ethertype &lt;IPv4 or IPv6&gt; --protocol &lt;PROTOCOL&gt; --port-range-min &lt;PORT-NUMBER&gt; --port-range-max &lt;PORT-NUMBER&gt; &lt;SEC-GROUP-NAME&gt;</code></pre>
+
+<p>Example 1: Add a rule to the <strong>default</strong> Neutron Security Group to allow SSH access to instances:</p>
+
+<pre><code>neutron security-group-rule-create --direction ingress --ethertype IPv4 --protocol tcp --port-range-min 22 --port-range-max 22 default</code></pre>
+
+<p>Example 2: Add a rule to the <strong>default</strong> Neutron Security Group to allow ICMP communication to instances:</p>
+
+<pre><code>neutron security-group-rule-create --direction ingress --ethertype IPv4 --protocol icmp default</code></pre>
+
+<p>Create a Neutron Tenant Network</p>
+
+<pre><code>neutron net-create &lt;NET-NAME&gt;</code></pre>
+
+<pre><code>neutron subnet-create --name &lt;SUBNET-NAME&gt; &lt;NET-NAME&gt; &lt;SUBNET-CIDR&gt;</code></pre>
+
+<p>Create a Neutron Provider Network</p>
+
+<pre><code>neutron net-create &lt;NET-NAME&gt; --provider:physical_network=&lt;LABEL-PHYSICAL-INTERFACE&gt; --provider:network_type=&lt;flat or vlan&gt; --shared --router:external=True
+
+neutron subnet-create --name &lt;SUBNET-NAME&gt; &lt;NET-NAME&gt; &lt;SUBNET-CIDR&gt;  --gateway &lt;GATEWAY-IP&gt; --allocation-pool start=&lt;STARTING-IP&gt;,end=&lt;ENDING-IP&gt; --dns-nameservers list=true &lt;DNS-IP-1 DNS-IP-2&gt;
+</code></pre>
+
+<p>Create a Neutron Router</p>
+
+<pre><code>neutron router-create &lt;ROUTER-NAME&gt;
+</code></pre>
+
+<p>Set Default Gateway on a Neutron Router</p>
+
+<pre><code>neutron router-gateway-set &lt;ROUTER-NAME&gt; &lt;NET-NAME&gt;
+</code></pre>
+
+<p>Attach a Tenant Network to a Neutron Router</p>
+
+<pre><code>neutron router-interface-add &lt;ROUTER-NAME&gt; &lt;SUBNET-NAME&gt;
+</code></pre>
+
+<p>Create a Neutron Floating IP Pool</p>
+
+<p>If you need N number of floating IP addresses, run this command N number of times:</p>
+
+<pre><code>neutron floatingip-create &lt;NET-NAME&gt;
+</code></pre>
+
+<p>Assign a Neutron Floating IP Address to an Instances</p>
+
+<pre><code>neutron floatingip-associate &lt;FLOATING-IP-ID&gt; &lt;NEUTRON-PORT-ID&gt;
+</code></pre>
+
+<p>Create a Neutron Port with a Fixed IP Address</p>
+
+<pre><code>neutron port-create &lt;NET-NAME&gt; --fixed-ip ip_address=&lt;IP-ADDRESS&gt;
+</code></pre>
+
+<h3>References</h3>
+
+<p><a href="http://docs.openstack.org/user-guide/content/app_cheat_sheet.html">Appendix A. OpenStack command-line interface cheat sheet</a></p>
+
+
+<pre>
+    <code>
+        #!/bin/bash
+
+        # To use an OpenStack cloud you need to authenticate against the Identity
+        # service named keystone, which returns a **Token** and **Service Catalog**.
+        # The catalog contains the endpoints for all services the user/tenant has
+        # access to - such as Compute, Image Service, Identity, Object Storage, Block
+        # Storage, and Networking (code-named nova, glance, keystone, swift,
+        # cinder, and neutron).
+        #
+        # *NOTE*: Using the 2.0 *Identity API* does not necessarily mean any other
+        # OpenStack API is version 2.0. For example, your cloud provider may implement
+        # Image API v1.1, Block Storage API v2, and Compute API v2.0. OS_AUTH_URL is
+        # only for the Identity API served through keystone.
+        export OS_AUTH_URL=http://controller01:5000/v2.0
+
+        # With the addition of Keystone we have standardized on the term **tenant**
+        # as the entity that owns the resources.
+        export OS_TENANT_ID=c4116ef1ab1c4d4b82eb0387cb37995f
+        export OS_TENANT_NAME="admin"
+        export OS_PROJECT_NAME="admin"
+
+        # In addition to the owning entity (tenant), OpenStack stores the entity
+        # performing the action as the **user**.
+        export OS_USERNAME="admin"
+
+        # With Keystone you pass the keystone password.
+        echo "Please enter your OpenStack Password: "
+        read -sr OS_PASSWORD_INPUT
+        export OS_PASSWORD=$OS_PASSWORD_INPUT
+
+        # If your configuration has multiple regions, we set that information here.
+        # OS_REGION_NAME is optional and only valid in certain environments.
+        export OS_REGION_NAME="RegionOne"
+        # Don't leave a blank variable, unset it if it was empty
+        if [ -z "$OS_REGION_NAME" ]; then unset OS_REGION_NAME; fi
+    </code>
+
+</pre>

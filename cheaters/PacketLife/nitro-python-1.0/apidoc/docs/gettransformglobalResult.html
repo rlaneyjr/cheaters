@@ -1,0 +1,247 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>Citrix NetScaler XML API User&#39;s Guide - Structure Definition</title>
+<link rel="stylesheet" type="text/css" href="help_ns.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body onload="initial()" class="ns_body">
+<div class="ns_content"><table cellpadding="0" cellspacing="0"><script type="text/javascript">
+function changeContext(id,lang,flag){
+	parent.banner.document.language.select.value = lang;
+	if( lang == "C" ){
+		if(flag == "1"){
+			showContent(cfirstcontent,id,lang);
+		}
+		else{
+			showContent(csecondcontent,id,lang);
+		}
+	}
+	if( lang == "Perl" ){
+		if(flag == "1"){
+			showContent(perlfirstcontent,id,lang);
+		}
+		else{
+			showContent(perlsecondcontent,id,lang);
+		}
+	}
+	if( lang == "Java" ){
+		if(flag == "1"){
+			showContent(javafirstcontent,id,lang);	
+		}
+		else{
+			showContent(javasecondcontent,id,lang);
+		}
+	}
+	if( lang == "C#" ){
+		if(flag == "1"){
+			showContent(csharpfirstcontent,id,lang);
+		}
+		else{
+			showContent(csharpsecondcontent,id,lang);
+		}
+	}
+	if( lang == "VB" ){
+		if(flag == "1"){
+			showContent(vbfirstcontent,id,lang);
+		}
+		else{
+			showContent(vbsecondcontent,id,lang);
+		}
+	}
+	if(flag == "1"){
+		showInside(lang,"0");
+	}
+	else{
+		showOutside(lang);
+	}
+}
+function showContent(content,id,lang){
+	if(ie4){
+	   showContentObj=document.all.id;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById(id);
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+  showLangSelect(lang);
+}
+function showInside(str,cond){
+	if(str == "C"){
+ 		var inside_content = csecondcontent;
+ 	}
+ 	if(str == "Perl"){
+ 		var inside_content = perlsecondcontent;
+ 	}
+ 	if(str == "Java"){
+ 		var inside_content = javasecondcontent;
+ 	}
+ 	if(str == "C#"){
+		var inside_content = csharpsecondcontent;
+ 	}
+ 	if(str == "VB"){
+		var inside_content = vbsecondcontent;
+ 	}
+	showContent(inside_content,'qiksearch_div1',str);
+ 	if ( cond == "1" ){
+ 		var page = 'apidoc/docs/gettransformglobalResult.html#transform_bind_globalList';
+ 		document.location.href = page;
+ 	}
+}
+function showOutside(str){
+	if(str == "C" ){
+ 		var inside_content = cfirstcontent;
+ 	}
+ 	if(str == "Perl" ){
+ 		var inside_content = perlfirstcontent;
+ 	}
+ 	if(str == "Java" ){
+ 		var inside_content = javafirstcontent;
+ 	}
+ 	if(str == "C#" ){
+ 		var inside_content = csharpfirstcontent;
+ 	}
+ 	if(str == "VB" ){
+ 		var inside_content = vbfirstcontent;
+ 	}
+ 	showContent(inside_content,'qiksearch_div',str);
+}
+function initial(){
+	ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+	ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+	ns4=document.layers;
+	langSelected = parent.banner.document.language.select.value
+	var plink = parent.banner.document.language.plink.value
+	var my_array=plink.split("&");
+	var temp = my_array[0];
+ 	var grp = temp.split("@");
+	var cmd = my_array[1];
+	var regex = /^stat/i;
+	if( cmd.match(regex) != null ){
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex_stat.html\">Statistics</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > gettransformglobalResult");
+	}
+	else{
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex.htm\">Configuration</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > gettransformglobalResult");
+	}
+	if( langSelected == "C" ){
+ 		var content = cfirstcontent;
+	}
+	else if( langSelected == "Perl" ){
+		var content = perlfirstcontent;
+	}
+	else if( langSelected == "Java" ){
+		var content = javafirstcontent;
+	}
+	else if( langSelected == "C#" ){
+		var content = csharpfirstcontent;
+	}
+	else if( langSelected == "VB" ){
+		var content = vbfirstcontent;
+	}
+	else{
+		var content = cfirstcontent;
+		langSelected="C";
+	}
+	showContent(content,'qiksearch_div',langSelected);
+	showInside(langSelected,"0");
+}
+function showPLink(content){
+	if(ie4){
+	   showContentObj=document.all.progressive_link;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById("progressive_link");
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+}
+function showLangSelect(id){
+	   if(ie4)
+       {
+       	showObj=document.all.first_url;
+       	showObj1=document.all.second_url;
+       }
+       if(ns6)
+       {
+       	showObj=document.getElementById("first_url");
+       	showObj1=document.getElementById("second_url");
+       }
+       if( id == "C" ){
+       	newlink = "<b>C</b>";
+       	newlink1 = "<b>C</b>";
+       }
+       else{
+       	newlink = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C','1');\"><b>C</b></a>";
+       	newlink1 = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C','0');\"><b>C</b></a>";
+       }
+       if( id == "Perl" ){
+       	newlink = newlink + " | <b>Perl</b>";
+       	newlink1 = newlink1 + " | <b>Perl</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Perl','1');\"><b>Perl</b></a>";
+      	       newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Perl','0');\"><b>Perl</b></a>";
+       }
+       if( id == "Java" ){
+       	newlink = newlink + " | <b>Java</b>";
+       	newlink1 = newlink1 + " | <b>Java</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Java','1');\"><b>Java</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Java','0');\"><b>Java</b></a>";
+       }
+       if( id == "C#" ){
+       	newlink = newlink + " | <b>C#</b>";
+       	newlink1 = newlink1 + " | <b>C#</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C#','1');\"><b>C#</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C#','0');\"><b>C#</b></a>";
+       }
+       showObj.innerHTML = newlink;
+       showObj1.innerHTML = newlink1;
+}
+</script>
+<tr><td><div><div id="progressive_link"></div></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>gettransformglobalResult Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>gettransformglobalResult</b> structure defines the return type for gettransformglobal API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="first_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+cfirstcontent = "<pre>struct gettransformglobalResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; struct <a href=\'gettransformglobalResult.html\#transformglobal\'>transformglobal</a> list[];<br> };<br></pre></td></tr></table></div>"
+perlfirstcontent = "<pre>$gettransformglobalResult = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rc => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; message => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; List => \'@<a href=\'gettransformglobalResult.html\#transformglobal\'>transformglobal</a>\',<br> };<br></pre></td></tr></table></div>"
+javafirstcontent = "<pre>class gettransformglobalResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'gettransformglobalResult.html\#transformglobal\'>transformglobal</a>[] list;<br> };<br></pre></td></tr></table></div>"
+csharpfirstcontent = "<pre>class gettransformglobalResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'gettransformglobalResult.html\#transformglobal\'>transformglobal</a>[] list;<br> };<br></pre></td></tr></table></div>"
+vbfirstcontent = "<pre>Public <b>Structure</b> gettransformglobalResult <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rc As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public message As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public  transformglobalList() As  <a href=\'gettransformglobalResult.html\#transformglobal\'>transformglobal</a><br> <b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rc</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, rc is 0 else rc > 0. Values above 0x8000 indicate Warnings.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>message</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, message is NULL else message contains <a href="errorlisting.html">Error/Warning</a> message.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>transformglobalList</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">List of transformglobals</div></td></tr><tr><td><br></td></tr><tr><td><div><a name="transformglobal"></a></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>transformglobal  Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>transformglobal</b> structure defines the actual return type values for gettransformglobal API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="second_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div1" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+csecondcontent = "<pre>struct transformglobal {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * type;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * policyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int priority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * gotopriorityexpression;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * invoke;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * labeltype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * labelname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int flowtype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int numpol;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * transformpolicyname []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int transformpolicypriority []   ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * transformpolicygotoprioexpression []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * transforminvoke []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * transformpolicyinvokelabeltype []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * transformpolicyinvokelabelname []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int transformpolicynumpol []   ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int transformpolicyflowtype []   ;<br> };<br></pre></td></tr></table></div>"
+perlsecondcontent = "<pre>$transformglobal = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; type => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; policyname => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; priority => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; gotopriorityexpression => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; invoke => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; labeltype => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; labelname => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; flowtype => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; numpol => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; transformpolicyname => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; transformpolicypriority => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; transformpolicygotoprioexpression => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; transforminvoke => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; transformpolicyinvokelabeltype => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; transformpolicyinvokelabelname => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; transformpolicynumpol => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; transformpolicyflowtype => \'@\',<br> };<br></pre></td></tr></table></div>"
+javasecondcontent = "<pre>class transformglobal {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String type;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String policyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt priority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String gotopriorityexpression;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String invoke;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String labeltype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String labelname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt flowtype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt numpol;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] transformpolicyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt [] transformpolicypriority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] transformpolicygotoprioexpression;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] transforminvoke;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] transformpolicyinvokelabeltype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] transformpolicyinvokelabelname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt [] transformpolicynumpol;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt [] transformpolicyflowtype;<br> };<br></pre></td></tr></table></div>"
+csharpsecondcontent = "<pre>class transformglobal {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string type;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string policyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 priority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string gotopriorityexpression;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string invoke;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string labeltype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string labelname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 flowtype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 numpol;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] transformpolicyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 [] transformpolicypriority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] transformpolicygotoprioexpression;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] transforminvoke;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] transformpolicyinvokelabeltype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] transformpolicyinvokelabelname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 [] transformpolicynumpol;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 [] transformpolicyflowtype;<br> };<br></pre></td></tr></table></div>"
+vbsecondcontent = "<pre>Public <b>Structure</b> transformglobal <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public type As String  <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public policyname As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public priority As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public gotopriorityexpression As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public invoke As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public labeltype As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public labelname As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public flowtype As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public numpol As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public transformpolicyname As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public transformpolicypriority As UInteger()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public transformpolicygotoprioexpression As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public transforminvoke As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public transformpolicyinvokelabeltype As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public transformpolicyinvokelabelname As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public transformpolicynumpol As UInteger()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public transformpolicyflowtype As UInteger()<br><b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>type</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Specifies the bind point to which to bind the policy.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>policyname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the transform policy.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>priority</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Specifies the priority of the policy.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>gotopriorityexpression</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Expression specifying the priority of the next policy which will get evaluated if the current policy rule evaluates to TRUE.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>invoke</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the current policy evaluates to TRUE, terminate evaluation of policies bound to the current policy label, and then forwards the request or response to the specified virtual server or evaluates the specified policy label.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>labeltype</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Type of invocation. Available settings function as follows:
+* reqvserver - Send the request to the specified request virtual server.
+* resvserver - Send the response to the specified response virtual server.
+* policylabel - Invoke the specified policy label.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>labelname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the policy label to invoke if the current policy evaluates to TRUE, the invoke parameter is set, and the label type is Policy Label.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>flowtype</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">flowtype of the bound transform policy.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>numpol</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The number of policies bound to the bindpoint.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>transformpolicyname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>transformpolicypriority</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>transformpolicygotoprioexpression</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>transforminvoke</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>transformpolicyinvokelabeltype</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>transformpolicyinvokelabelname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>transformpolicynumpol</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>transformpolicyflowtype</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div><b>See Also</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="gettransformglobal.html">gettransformglobal</a></div></td></tr><tr><td><br></td></tr></table></div>
+</body>
+</html>

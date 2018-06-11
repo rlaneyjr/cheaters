@@ -1,0 +1,543 @@
+<div id="html5">
+<h2>OVS Open vSwitch Commands</h2>
+<hr />
+<div>
+    <article id="ovs-vsctl">
+        <h3>ovs-vsctl</h3>
+        <h4>ovs-vswitchd management utility</h4>
+        <h4>usage: ovs-vsctl [OPTIONS] COMMAND [ARG...]</h4>
+        <section>
+            <h4>Open vSwitch commands:</h4>
+            <dl>
+                <dt><code>init</code></dt>
+                <dd>initialize database, if not yet initialized</dd>
+                <dt><code>show</code></dt>
+                <dd>print overview of database contents</dd>
+                <dt><code>emer-reset</code></dt>
+                <dd>reset configuration to clean state</dd>
+            </dl>
+        </section>
+        <section>
+            <h4>Bridge commands:</h4>
+            <dl>
+                <dt><code>add-br BRIDGE</code></dt>
+                <dd>create a new bridge named BRIDGE</dd>
+                <dt><code>add-br BRIDGE PARENT VLAN</code></dt>
+                <dd>create new fake BRIDGE in PARENT on VLAN</dd>
+                <dt><code>del-br BRIDGE</code></dt>
+                <dd>delete BRIDGE and all of its ports</dd>
+                <dt><code>list-br</code></dt>
+                <dd>print the names of all the bridges</dd>
+                <dt><code>br-exists BRIDGE</code></dt>
+                <dd>exit 2 if BRIDGE does not exist</dd>
+                <dt><code>br-to-vlan BRIDGE</code></dt>
+                <dd>print the VLAN which BRIDGE is on</dd>
+                <dt><code>br-to-parent BRIDGE</code></dt>
+                <dd>print the parent of BRIDGE</dd>
+                <dt><code>br-set-external-id BRIDGE KEY VALUE</code></dt>
+                <dd>set KEY on BRIDGE to VALUE</dd>
+                <dt><code>br-set-external-id BRIDGE KEY</code></dt>
+                <dd>unset KEY on BRIDGE</dd>
+                <dt><code>br-get-external-id BRIDGE KEY</code></dt>
+                <dd>print value of KEY on BRIDGE</dd>
+                <dt><code>br-get-external-id BRIDGE</code></dt>
+                <dd>list key-value pairs on BRIDGE</dd>
+            </dl>
+        </section>
+        <section>
+            <h4>Port commands (a bond is considered to be a single port):</h4>
+            <dl>
+                <dt><code>list-ports BRIDGE</code></dt>
+                <dd>print the names of all the ports on BRIDGE</dd>
+                <dt><code>add-port BRIDGE PORT</code></dt>
+                <dd>add network device PORT to BRIDGE</dd>
+                <dt><code>add-bond BRIDGE PORT IFACE...</code></dt>
+                <dd>add bonded port PORT in BRIDGE from IFACES</dd>
+                <dt><code>del-port [BRIDGE] PORT</code></dt>
+                <dd>delete PORT (which may be bonded) from BRIDGE</dd>
+                <dt><code>port-to-br PORT</code></dt>
+                <dd>print name of bridge that contains PORT</dd>
+            </dl>
+        </section>
+        <section>
+            <h4>Interface commands (a bond consists of multiple interfaces):</h4>
+            <dl>
+                <dt><code>list-ifaces BRIDGE</code></dt>
+                <dd>print the names of all interfaces on BRIDGE</dd>
+                <dt><code>iface-to-br IFACE</code></dt>
+                <dd>print name of bridge that contains IFACE</dd>
+            </dl>
+        </section>
+        <section>
+            <h4>Controller commands:</h4>
+            <dl>
+                <dt><code>get-controller BRIDGE</code></dt>
+                <dd>print the controllers for BRIDGE</dd>
+                <dt><code>del-controller BRIDGE</code></dt>
+                <dd>delete the controllers for BRIDGE</dd>
+                <dt><code>set-controller BRIDGE TARGET...</code></dt>
+                <dd>set the controllers for BRIDGE</dd>
+                <dt><code>get-fail-mode BRIDGE</code></dt>
+                <dd>print the fail-mode for BRIDGE</dd>
+                <dt><code>del-fail-mode BRIDGE</code></dt>
+                <dd>delete the fail-mode for BRIDGE</dd>
+                <dt><code>set-fail-mode BRIDGE MODE</code></dt>
+                <dd>set the fail-mode for BRIDGE to MODE</dd>
+            </dl>
+        </section>
+        <section>
+            <h4>Manager commands:</h4>
+            <dl>
+                <dt><code>get-manager</code></dt>
+                <dd>print the managers</dd>
+                <dt><code>del-manager</code></dt>
+                <dd>delete the managers</dd>
+                <dt><code>set-manager TARGET...</code></dt>
+                <dd>set the list of managers to TARGET...</dd>
+            </dl>
+        </section>
+        <section>
+            <h4>SSL commands:</h4>
+            <dl>
+                <dt><code>get-ssl</code></dt>
+                <dd>print the SSL configuration</dd>
+                <dt><code>del-ssl</code></dt>
+                <dd>delete the SSL configuration</dd>
+                <dt><code>set-ssl PRIV-KEY CERT CA-CERT</code></dt>
+                <dd>set the SSL configuration</dd>
+            </dl>
+        </section>
+        <section>
+            <h4>Switch commands:</h4>
+            <dl>
+                <dt><code>emer-reset</code></dt>
+                <dd>reset switch to known good state</dd>
+            </dl>
+        </section>
+        <section>
+            <h4>Database commands:</h4>
+            <dl>
+                <dt><code>list TBL [REC]</code></dt>
+                <dd>list RECord (or all records) in TBL</dd>
+                <dt><code>find TBL CONDITION...</code></dt>
+                <dd>list records satisfying CONDITION in TBL</dd>
+                <dt><code>get TBL REC COL[:KEY]</code></dt>
+                <dd>print values of COLumns in RECord in TBL</dd>
+                <dt><code>set TBL REC COL[:KEY]=VALUE</code></dt>
+                <dd>set COLumn values in RECord in TBL</dd>
+                <dt><code>add TBL REC COL [KEY=]VALUE</code></dt>
+                <dd>add (KEY=)VALUE to COLumn in RECord in TBL</dd>
+                <dt><code>remove TBL REC COL [KEY=]VALUE</code></dt>
+                <dd>remove (KEY=)VALUE from COLumn</dd>
+                <dt><code>clear TBL REC COL</code></dt>
+                <dd>clear values from COLumn in RECord in TBL</dd>
+                <dt><code>create TBL COL[:KEY]=VALUE</code></dt>
+                <dd>create and initialize new record</dd>
+                <dt><code>destroy TBL REC</code></dt>
+                <dd>delete RECord from TBL</dd>
+                <dt><code>wait-until TBL REC [COL[:KEY]=VALUE]</code></dt>
+                <dd>wait until condition is true</dd>
+                <p><em>Potentially unsafe database commands require --force option.</em></p>
+            </dl>
+        </section>
+        <section>
+            <h4>Options:</h4>
+            <dl>
+                <dt><code>--db=DATABASE</code></dt>
+                <dd>connect to DATABASE</dd>
+                <p><em>(default: unix:/var/run/openvswitch/db.sock)</em></p>
+                <dt><code>--no-wait</code></dt>
+                <dd>do not wait for ovs-vswitchd to reconfigure</dd>
+                <dt><code>--retry</code></dt>
+                <dd>keep trying to connect to server forever</dd>
+                <dt><code>-t, --timeout=SECS</code></dt>
+                <dd>wait at most SECS seconds for ovs-vswitchd</dd>
+                <dt><code>--dry-run</code></dt>
+                <dd>do not commit changes to database</dd>
+                <dt><code>--oneline</code></dt>
+                <dd>print exactly one line of output per command</dd>
+            </dl>
+        </section>
+        <section>
+            <h4>Logging options:</h4>
+            <dl>
+                <dt><code>-vSPEC, --verbose=SPEC</code></dt>
+                <dd>set logging levels</dd>
+                <dt><code>-v, --verbose</code></dt>
+                <dd>set maximum verbosity level</dd>
+                <dt><code>--log-file[=FILE]</code></dt>
+                <dd>enable logging to specified FILE</dd>
+                <p><em>(default: /var/log/openvswitch/ovs-vsctl.log)</em></p>
+                <dt><code>--syslog-target=HOST:PORT</code></dt>
+                <dd>also send syslog msgs to HOST:PORT via UDP</dd>
+                <dt><code>--no-syslog</code></dt>
+                <dd>equivalent to --verbose=vsctl:syslog:warn</dd>
+            </dl>
+        </section>
+        <section>
+            <h4>Active database connection methods:</h4>
+            <dl>
+                <dt><code>tcp:IP:PORT</code></dt>
+                <dd>PORT at remote IP</dd>
+                <dt><code>ssl:IP:PORT</code></dt>
+                <dd>SSL PORT at remote IP</dd>
+                <dt><code>unix:FILE</code></dt>
+                <dd>Unix domain socket named FILE</dd>
+            </dl>
+        </section>
+        <section>
+            <h4>Passive database connection methods:</h4>
+            <dl>
+                <dt><code>ptcp:PORT[:IP]</code></dt>
+                <dd>listen to TCP PORT on IP</dd>
+                <dt><code>pssl:PORT[:IP]</code></dt>
+                <dd>listen for SSL on PORT on IP</dd>
+                <dt><code>punix:FILE</code></dt>
+                <dd>listen on Unix domain socket FILE</dd>
+            </dl>
+        </section>
+        <section>
+            <h4>PKI configuration (required to use SSL):</h4>
+            <dl>
+                <dt><code>-p, --private-key=FILE</code></dt>
+                <dd>file with private key</dd>
+                <dt><code>-c, --certificate=FILE</code></dt>
+                <dd>file with certificate for private key</dd>
+                <dt><code>-C, --ca-cert=FILE</code></dt>
+                <dd>file with peer CA certificate</dd>
+            </dl>
+        </section>
+        <section>
+            <h4>Other options:</h4>
+            <dl>
+                <dt><code>-h, --help</code></dt>
+                <dd>display this help message</dd>
+                <dt><code>-V, --version</code></dt>
+                <dd>display version information</dd>
+            </dl>
+        </section>
+    </article>
+</div>
+<hr />
+<div>
+    <article id="ovs-ofctl">
+        ovs-ofctl: OpenFlow switch management utility
+        usage: ovs-ofctl [OPTIONS] COMMAND [ARG...]
+
+        <section>
+            For OpenFlow switches:
+            show SWITCH                 show OpenFlow information
+            dump-desc SWITCH            print switch description
+            dump-tables SWITCH          print table stats
+            dump-table-features SWITCH  print table features
+            mod-port SWITCH IFACE ACT   modify port behavior
+            mod-table SWITCH MOD        modify flow table behavior
+            get-frags SWITCH            print fragment handling behavior
+            set-frags SWITCH FRAG_MODE  set fragment handling behavior
+            dump-ports SWITCH [PORT]    print port statistics
+            dump-ports-desc SWITCH [PORT]  print port descriptions
+            dump-flows SWITCH           print all flow entries
+            dump-flows SWITCH FLOW      print matching FLOWs
+            dump-aggregate SWITCH       print aggregate flow statistics
+            dump-aggregate SWITCH FLOW  print aggregate stats for FLOWs
+            queue-stats SWITCH [PORT [QUEUE]]  dump queue stats
+            add-flow SWITCH FLOW        add flow described by FLOW
+            add-flows SWITCH FILE       add flows from FILE
+            mod-flows SWITCH FLOW       modify actions of matching FLOWs
+            del-flows SWITCH [FLOW]     delete matching FLOWs
+            replace-flows SWITCH FILE   replace flows with those in FILE
+            diff-flows SOURCE1 SOURCE2  compare flows from two sources
+            packet-out SWITCH IN_PORT ACTIONS PACKET...
+            execute ACTIONS on PACKET
+            monitor SWITCH [MISSLEN] [invalid_ttl] [watch:[...]]
+            print packets received from SWITCH
+            snoop SWITCH                snoop on SWITCH and its controller
+            add-group SWITCH GROUP      add group described by GROUP
+            add-group SWITCH FILE       add group from FILE
+            mod-group SWITCH GROUP      modify specific group
+            del-groups SWITCH [GROUP]   delete matching GROUPs
+            dump-group-features SWITCH  print group features
+            dump-groups SWITCH [GROUP]  print group description
+            dump-group-stats SWITCH [GROUP]  print group statistics
+            queue-get-config SWITCH PORT  print queue information for port
+            add-meter SWITCH METER      add meter described by METER
+            mod-meter SWITCH METER      modify specific METER
+            del-meter SWITCH METER      delete METER
+            del-meters SWITCH           delete all meters
+            dump-meter SWITCH METER     print METER configuration
+            dump-meters SWITCH          print all meter configuration
+            meter-stats SWITCH [METER]  print meter statistics
+            meter-features SWITCH       print meter features
+        </section>
+
+        <section>
+            For OpenFlow switches and controllers:
+            probe TARGET                probe whether TARGET is up
+            ping TARGET [N]             latency of N-byte echos
+            benchmark TARGET N COUNT    bandwidth of COUNT N-byte echos
+            SWITCH or TARGET is an active OpenFlow connection method.
+        </section>
+
+        <section>
+            Other commands:
+            ofp-parse FILE              print messages read from FILE
+            ofp-parse-pcap PCAP         print OpenFlow read from PCAP
+        </section>
+
+        <section>
+            Active OpenFlow connection methods:
+            tcp:IP[:PORT]           PORT (default: 6633) at remote IP
+            ssl:IP[:PORT]           SSL PORT (default: 6633) at remote IP
+            unix:FILE               Unix domain socket named FILE
+            PKI configuration (required to use SSL):
+            -p, --private-key=FILE  file with private key
+            -c, --certificate=FILE  file with certificate for private key
+            -C, --ca-cert=FILE      file with peer CA certificate
+        </section>
+
+        <section>
+            Daemon options:
+            --detach                run in background as daemon
+            --no-chdir              do not chdir to '/'
+            --pidfile[=FILE]        create pidfile (default: /var/run/openvswitch/ovs-ofctl.pid)
+            --overwrite-pidfile     with --pidfile, start even if already running
+        </section>
+
+        <section>
+            OpenFlow version options:
+            -V, --version           display version information
+            -O, --protocols         set allowed OpenFlow versions
+            (default: OpenFlow10, OpenFlow11, OpenFlow12, OpenFlow13)
+        </section>
+
+        <section>
+            Logging options:
+            -vSPEC, --verbose=SPEC   set logging levels
+            -v, --verbose            set maximum verbosity level
+            --log-file[=FILE]        enable logging to specified FILE
+            (default: /var/log/openvswitch/ovs-ofctl.log)
+            --syslog-target=HOST:PORT  also send syslog msgs to HOST:PORT via UDP
+        </section>
+
+        <section>
+            Other options:
+            --strict                    use strict match for flow commands
+            --readd                     replace flows that haven't changed
+            -F, --flow-format=FORMAT    force particular flow format
+            -P, --packet-in-format=FRMT force particular packet in format
+            -m, --more                  be more verbose printing OpenFlow
+            --timestamp                 (monitor, snoop) print timestamps
+            -t, --timeout=SECS          give up after SECS seconds
+            --sort[=field]              sort in ascending order
+            --rsort[=field]             sort in descending order
+            --unixctl=SOCKET            set control socket name
+            -h, --help                  display this help message
+            -V, --version               display version information
+        </section>
+    </article>
+</div>
+<hr />
+<div>
+    <code>
+        ovs-appctl, for querying and controlling Open vSwitch daemon
+        usage: ovs-appctl [TARGET] COMMAND [ARG...]
+        Targets:
+          -t, --target=TARGET  pidfile or socket to contact
+        Common commands:
+          help               List commands supported by the target
+          version            Print version of the target
+          vlog/list          List current logging levels
+          vlog/set [SPEC]
+              Set log levels as detailed in SPEC, which may include:
+              A valid module name (all modules, by default)
+              'syslog', 'console', 'file' (all facilities, by default))
+              'off', 'emer', 'err', 'warn', 'info', or 'dbg' ('dbg', bydefault)
+          vlog/reopen        Make the program reopen its log file
+        Other options:
+          --timeout=SECS     wait at most SECS seconds for a response
+          -h, --help         Print this helpful information
+          -V, --version      Display ovs-appctl version information
+    </code>
+</div>
+<hr />
+<div>
+    <code>
+        ovs-dpctl: Open vSwitch datapath management utility
+        usage: ovs-dpctl [OPTIONS] COMMAND [ARG...]
+          add-dp DP [IFACE...]     add new datapath DP (with IFACEs)
+          del-dp DP                delete local datapath DP
+          add-if DP IFACE...       add each IFACE as a port on DP
+          set-if DP IFACE...       reconfigure each IFACE within DP
+          del-if DP IFACE...       delete each IFACE from DP
+          dump-dps                 display names of all datapaths
+          show                     show basic info on all datapaths
+          show DP...               show basic info on each DP
+          dump-flows [DP]          display flows in DP
+          add-flow [DP] FLOW ACTIONS add FLOW with ACTIONS to DP
+          mod-flow [DP] FLOW ACTIONS change FLOW actions to ACTIONS in DP
+          del-flow [DP] FLOW         delete FLOW from DP
+          del-flows [DP]             delete all flows from DP
+        Each IFACE on add-dp, add-if, and set-if may be followed by
+        comma-separated options.  See ovs-dpctl(8) for syntax, or the
+        Interface table in ovs-vswitchd.conf.db(5) for an options list.
+        For COMMAND dump-flows, add-flow, mod-flow, del-flow and
+        del-flows, DP is optional if there is only one datapath.
+
+        Logging options:
+          -vSPEC, --verbose=SPEC   set logging levels
+          -v, --verbose            set maximum verbosity level
+          --log-file[=FILE]        enable logging to specified FILE
+                                   (default: /var/log/openvswitch/ovs-dpctl.log)
+          --syslog-target=HOST:PORT  also send syslog msgs to HOST:PORT via UDP
+
+        Options for show and mod-flow:
+          -s,  --statistics           print statistics for port or flow
+
+        Options for dump-flows:
+          -m, --more                  increase verbosity of output
+
+        Options for mod-flow:
+          --may-create                create flow if it doesn't exist
+          --clear                     reset existing stats to zero
+
+        Other options:
+          -t, --timeout=SECS          give up after SECS seconds
+          -h, --help                  display this help message
+          -V, --version               display version information
+    </code>
+</div>
+<hr />
+<h6>Bring up the bridges:</h6>
+<div><code>
+        ip link set br-ex up
+        ip link set br-ex1 up
+        ip link set br-ex2 up
+</code></div>
+
+<div><code>
+        sudo ovs-ofctl show br-int && sudo ovs-ofctl dump-flows br-int
+        sudo ovs-ofctl show br-tun && sudo ovs-ofctl dump-flows br-tun
+</code></div>
+
+<div><code>sudo su -s /bin/sh -c "neutron-db-manage --config-file /etc/neutron/neutron.conf --config-file /etc/neutron/plugins/ml2/ml2_conf.ini upgrade head" neutron</code></div>
+
+<div><code>
+        sudo service openvswitch-switch restart
+        sudo service neutron-plugin-openvswitch-agent restart
+        sudo service neutron-l3-agent restart
+        sudo service neutron-dhcp-agent restart
+        sudo service neutron-metadata-agent restart
+</code></div>
+</div>
+
+
+This post was written using Ubuntu 12.04.1 LTS and Open vSwitch 1.4.0 (installed using apt-get directly from the Precise Pangolin repositories). The use of a different Linux distribution and/or a different version of OVS might make this process slightly different.
+
+The first step is to add a bridge (substitute your desired bridge name for ovsbr1 in the following command):
+
+ovs-vsctl add-br ovsbr1
+
+Once the bridge is established, then you’ll need to create a bond. This is the actual link aggregate on OVS. The syntax for adding a bond looks something like this:
+
+ovs-vsctl add-bond <bridge name> <bond name> <list of interfaces>
+
+So, if you wanted to add a bond to ovsbr1 using physical interfaces eth1 and eth3, your command would look something like this:
+
+ovs-vsctl add-bond ovsbr1 bond0 eth1 eth3
+
+However, there’s a problem with this configuration: by default, LACP isn’t enabled on a bond. To fix this, you have two options.
+
+1. Change the command use to create the bond, so that LACP is enabled when the bond is created.
+
+2. Enable LACP after the bond is created.
+
+For option #1, you’ll simply append lacp=active to the command to create the bond, like so:
+
+ovs-vsctl add-bond ovsbr1 bond0 eth1 eth3 lacp=active
+
+For option #2, you’d use ovs-vsctl set to modify the properties of the bond. Here’s an example:
+
+ovs-vsctl set port bond0 lacp=active
+
+Once the bond is created and LACP is enabled, you can check the configuration and/or status of the bond. Assuming that you’ve already configured your physical switch correctly, your bond should be working and passing traffic. You can use this command to see the status of the bond:
+
+ovs-appctl bond/show <bond name>
+
+The output from that command will look something like this:
+
+bond_mode: balance-slb
+bond-hash-algorithm: balance-slb
+bond-hash-basis: 0
+updelay: 0 ms
+downdelay: 0 ms
+next rebalance: 6415 ms
+lacp_negotiated: true
+
+slave eth4: enabled
+    active slave
+    may_enable: true
+
+slave eth3: enabled
+    may_enable: true
+
+slave eth1: enabled
+    may_enable: true
+
+slave eth2: enabled
+    may_enable: true
+
+This command will show more detailed LACP-specific information:
+
+ovs-appctl lacp/show <bond name>
+
+This command returns a great deal of information; here’s a quick snippet:
+
+---- bond0 ----
+    status: active negotiated
+    sys_id: 00:22:19:bd:db:dd
+    sys_priority: 65534
+    aggregation key: 4
+    lacp_time: fast
+
+slave: eth1: current attached
+    port_id: 4
+    port_priority: 65535
+    actor sys_id: 00:22:19:bd:db:dd
+    actor sys_priority: 65534
+    actor port_id: 4
+    actor port_priority: 65535
+    actor key: 4
+    actor state: activity timeout aggregation synchronized collecting distributing
+    partner sys_id: 00:12:f2:cc:6d:40
+    partner sys_priority: 1
+    partner port_id: 12
+    partner port_priority: 1
+    partner key: 10000
+    partner state: activity aggregation synchronized collecting distributing
+
+You can also use this command to view the configuration details of the bond:
+
+ovs-vsctl list port bond0
+
+The output from this command will look something like this:
+
+_uuid               : ae7eb7ca-e3e0-4166-bcfb-4348071799e0
+bond_downdelay      : 0
+bond_fake_iface     : false
+bond_mode           : []
+bond_updelay        : 0
+external_ids        : {}
+fake_bridge         : false
+interfaces          : [9963381b-6a7d-4a8f-acf8-86150361530e, bee2df86-ed14-456b-8f3a-25fb00fa6040, daf5ac51-4135-4e3c-a937-c62dfc4b5e9f, 
+fcd2d6ef-9a18-452a-9a79-1c97e5a95ef2]
+lacp                : active
+mac                 : []
+name                : "bond0"
+other_config        : {lacp-time=fast}
+qos                 : []
+statistics          : {}
+status              : {}
+tag                 : []
+trunks              : []
+vlan_mode           : []
+

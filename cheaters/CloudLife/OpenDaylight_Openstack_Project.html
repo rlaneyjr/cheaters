@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<title>OpenStack and OpenDaylight - OpenDaylight Project</title>
+<h1 >OpenStack and OpenDaylight</h1>
+<p><a href="http://www.openstack.org">OpenStack</a> is a popular open source Infrastructure as a service project, covering compute, storage and network management. OpenStack can use OpenDaylight as its network management provider through the Modular Layer 2 (ML2) north-bound plug-in. OpenDaylight manages the network flows for the OpenStack compute nodes via the OVSDB south-bound plug-in. This page describes how to set that up, and how to tell when everything is working.
+</p>
+<div id="toc" class="toc"><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Installing_OpenStack"><span class="tocnumber">1</span> <span class="toctext">Installing OpenStack</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Installing_OpenDaylight"><span class="tocnumber">2</span> <span class="toctext">Installing OpenDaylight</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#Ensuring_OpenStack_network_state_is_clean"><span class="tocnumber">3</span> <span class="toctext">Ensuring OpenStack network state is clean</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="#Ensure_Neutron_is_stopped"><span class="tocnumber">4</span> <span class="toctext">Ensure Neutron is stopped</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="#Configuring_Open_vSwitch_to_be_managed_by_OpenDaylight"><span class="tocnumber">5</span> <span class="toctext">Configuring Open vSwitch to be managed by OpenDaylight</span></a></li>
+<li class="toclevel-1 tocsection-6"><a href="#Configuring_Neutron_to_use_OpenDaylight"><span class="tocnumber">6</span> <span class="toctext">Configuring Neutron to use OpenDaylight</span></a></li>
+<li class="toclevel-1 tocsection-7"><a href="#Verifying_it_works"><span class="tocnumber">7</span> <span class="toctext">Verifying it works</span></a></li>
+</ul>
+</div>
+
+<h2><span class="mw-headline" id="Installing_OpenStack">Installing OpenStack</span></h2>
+<p>Installing OpenStack is out of scope for this document, but to get started, it is useful to have a minimal multi-node OpenStack deployment.
+</p><p>The reference deployment we will use for this document is a 3 node cluster:
+</p>
+<ul>
+<li> One control node containing all of the management services for OpenStack (Nova, Neutron, Glance, Swift, Cinder, Keystone)
+</li>
+<li> Two compute nodes running nova-compute
+</li>
+<li> Neutron using the OVS back-end and vxlan for tunnels 
+</li>
+</ul>
+<p>Once you have installed OpenStack, verify that it is working by connecting to Horizon and performing a few operations. To check the Neutron configuration, create two instances on a private subnet bridging to your public network, and verify that you can connect to them, and that they can see each other.
+</p>
+<h2><span class="mw-headline" id="Installing_OpenDaylight">Installing OpenDaylight</span></h2>
+<p><b>Prerequisites:</b> OpenDaylight requires Java 1.7.0.
+</p>
+<ul>
+<li> On the control host, <a rel="nofollow" class="external text" href="http://www.opendaylight.org/software/downloads">Download the latest OpenDaylight release</a> (at the time of writing, this is 0.2.1-Helium-SR1.1)
+</li>
+<li> Uncompress it as root, and start OpenDaylight (you can start OpenDaylight by running karaf directly, but exiting from the shell will shut it down): 
+</li>
+</ul>
+<pre>   $ tar xvfz distribution-karaf-0.2.1-Helium-SR1.1.tar.gz
+   $ cd distribution-karaf-0.2.0-Helium
+   $ ./bin/start # Start OpenDaylight as a server process
+</pre>
+<ul>
+<li> Connect to the Karaf shell, and install the odl-ovsdb-openstack bundle, dlux and their dependencies:
+</li>
+</ul>
+<pre>   $ ./bin/client # Connect to OpenDaylight with the client
+   opendaylight-user@root&gt; feature:install odl-base-all odl-aaa-authn odl-restconf odl-nsf-all odl-adsal-northbound odl-mdsal-apidocs \
+   odl-ovsdb-openstack odl-ovsdb-northbound odl-dlux-core
+</pre>
+<ul>
+<li> If everything is installed correctly, you should now be able to log in to the dlux interface on <a rel="nofollow" class="external free" href="http://$CONTROL_HOST:8181/dlux/index.html">http://$CONTROL_HOST:8181/dlux/index.html</a> - the default username and password is "admin/admin" (see screenshot below)
+</li>
+</ul>
+<p><br />
+For Lithium (only!) the URL for DLUX changed - use:
+</p>
+<pre>http://&lt;controller-ip&gt;:8181/index.html</pre>
+<h2><span class="mw-headline" id="Ensuring_OpenStack_network_state_is_clean">Ensuring OpenStack network state is clean</span></h2>
+<p>When using OpenDaylight as the Neutron back-end, ODL expects to be the only source of truth for Open vSwitch configuration. Because of this, it is necessary to remove existing OpenStack and Open vSwitch configurations to give OpenDaylight a clean slate.
+</p>
+<ul>
+<li> Delete instances
+</li>
+</ul>
+<pre>   $ nova list
+   $ nova delete &lt;instance names&gt;
+</pre>
+<ul>
+<li> Remove link from subnets to routers
+</li>
+</ul>
+<pre>   $ neutron subnet-list
+   $ neutron router-list
+   $ neutron router-port-list &lt;router name&gt;
+   $ neutron router-interface-delete &lt;router name&gt; &lt;subnet ID or name&gt;
+</pre>
+<ul>
+<li> Delete subnets, nets, routers
+</li>
+</ul>
+<pre>   $ neutron subnet-delete &lt;subnet name&gt;
+   $ neutron net-list
+   $ neutron net-delete &lt;net name&gt;
+   $ neutron router-delete &lt;router name&gt;
+</pre>
+<ul>
+<li> Check that all ports have been cleared - at this point, this should be an empty list
+</li>
+</ul>
+<pre>   $ neutron port-list
+</pre>
+<h2><span class="mw-headline" id="Ensure_Neutron_is_stopped">Ensure Neutron is stopped</span></h2>
+<p>While Neutron is managing the OVS instances on compute and control nodes, OpenDaylight and Neutron can be in conflict. To prevent issues, we turn off Neutron server on the network controller, and Neutron's Open vswitch agents on all hosts.
+</p>
+<ul>
+<li> Turn off neutron-server on control node
+</li>
+</ul>
+<pre>   # systemctl stop neutron-server
+</pre>
+<ul>
+<li> On each node in the cluster, shut down and disable Neutron's agent services to ensure that they do not restart after a reboot:
+</li>
+</ul>
+<pre>   # systemctl stop neutron-openvswitch-agent
+   # systemctl disable neutron-openvswitch-agent
+</pre>
+<h2><span class="mw-headline" id="Configuring_Open_vSwitch_to_be_managed_by_OpenDaylight">Configuring Open vSwitch to be managed by OpenDaylight</span></h2>
+<p>On each host (both compute and network node) we will clear the pre-existing Open vSwitch config and set OpenDaylight to manage the switch:
+</p>
+<ul>
+<li> Stop the Open vSwitch service, and clear existing OVSDB (ODL expects to manage vSwitches completely)
+</li>
+</ul>
+<pre>   # systemctl stop openvswitch
+   # rm -rf /var/log/openvswitch/*
+   # rm -rf /etc/openvswitch/conf.db
+   # systemctl start openvswitch
+</pre>
+<ul>
+<li> At this stage, your Open vSwitch configuration should be empty:
+</li>
+</ul>
+<pre>
+[root@dneary-odl-compute2 ~]# ovs-vsctl show
+9f3b38cb-eefc-4bc7-828b-084b1f66fbfd
+    ovs_version: &quot;2.1.3&quot;
+</pre>
+<ul>
+<li> Set OpenDaylight as the manager on all nodes
+</li>
+</ul>
+<pre>   # ovs-vsctl set-manager tcp:${CONTROL_HOST}:6640
+</pre>
+<ul>
+<li> You should now see a new section in your Open vSwitch configuration showing that you are connected to the OpenDaylight server, and OpenDaylight will automatically create a br-int bridge:
+</li>
+</ul>
+<pre>
+[root@dneary-odl-compute2 ~]# ovs-vsctl show
+9f3b38cb-eefc-4bc7-828b-084b1f66fbfd
+    Manager &quot;tcp:172.16.21.56:6640&quot;
+        is_connected: true
+    Bridge br-int
+        Controller &quot;tcp:172.16.21.56:6633&quot;
+        fail_mode: secure
+        Port br-int
+            Interface br-int
+    ovs_version: &quot;2.1.3&quot;
+</pre>
+<ul>
+<li> (BUG WORKAROUND) If SELinux is enabled, you may not have a security context in place which allows Open vSwitch remote administration. If you do not see the result above (specifically, if you do not see "is_connected: true" in the Manager section), set SELinux to Permissive mode on all nodes and ensure it stays that way after boot:
+</li>
+</ul>
+<pre>   # setenforce 0
+   # sed -i -e 's/SELINUX=enforcing/SELINUX=permissive/g' /etc/selinux/config
+</pre>
+<ul>
+<li> Make sure all nodes, including the control node, are connected to OpenDaylight
+</li>
+<li> If you reload DLUX, you should now see that all of your Open vSwitch nodes are now connected to OpenDaylight
+</li>
+</ul>
+<ul>
+<li> If something has gone wrong, check <code>data/log/karaf.log</code> under the OpenDaylight distribution directory. If you do not see any interesting log entries, set logging for OVSDB to TRACE level inside Karaf and try again:
+</li>
+</ul>
+<pre>   log:set TRACE ovsdb
+</pre>
+<h2><span class="mw-headline" id="Configuring_Neutron_to_use_OpenDaylight">Configuring Neutron to use OpenDaylight</span></h2>
+<p>Once you have configured the vSwitches to connect to OpenDaylight, you can now ensure that OpenStack Neutron is using OpenDaylight.
+</p><p>First, ensure that port 8080 (which will be used by OpenDaylight to listen for REST calls) is available. By default, swift-proxy-service listens on the same port, and you may need to move it (to another port or another host), or disable that service. I moved it to port 8081 by editing <code>/etc/swift/proxy-server.conf</code> and <code>/etc/cinder/cinder.conf</code>, modifying iptables appropriately, and restarting swift-proxy-service and OpenDaylight.
+</p>
+<ul>
+<li> Configure Neutron to use OpenDaylight's ML2 driver:
+</li>
+</ul>
+<pre>
+crudini --set /etc/neutron/plugins/ml2/ml2_conf.ini ml2 mechanism_drivers opendaylight 
+crudini --set /etc/neutron/plugins/ml2/ml2_conf.ini ml2 tenant_network_types vxlan
+
+cat &lt;&lt;EOT&gt;&gt; /etc/neutron/plugins/ml2/ml2_conf.ini 
+[ml2_odl]
+password = admin
+username = admin
+url = http://${CONTROL_HOST}:8080/controller/nb/v2/neutron
+EOT
+</pre>
+<ul>
+<li> Reset Neutron's ML2 database
+</li>
+</ul>
+<pre>
+mysql -e &quot;drop database if exists neutron_ml2;&quot;
+mysql -e &quot;create database neutron_ml2 character set utf8;&quot;
+mysql -e &quot;grant all on neutron_ml2.* to 'neutron'@'%';&quot;
+neutron-db-manage --config-file /usr/share/neutron/neutron-dist.conf --config-file /etc/neutron/neutron.conf \
+--config-file /etc/neutron/plugin.ini upgrade head
+</pre>
+<ul>
+<li> Restart neutron-server:
+</li>
+</ul>
+<pre>   systemctl start neutron-server
+</pre>
+<h2><span class="mw-headline" id="Verifying_it_works">Verifying it works</span></h2>
+<ul>
+<li> Verify that OpenDaylight's ML2 interface is working:
+</li>
+</ul>
+<pre>
+curl -u admin:admin http://${CONTROL_HOST}:8080/controller/nb/v2/neutron/networks
+
+{
+   &quot;networks&quot;&#160;: [ ]
+}
+</pre>
+<p>If this does not work or gives an error, check Neutron's log file in <code>/var/log/neutron/server.log</code>. Error messages here should give some clue as to what the problem is in the connection with OpenDaylight
+</p>
+<ul>
+<li> Create a net, subnet, router, connect ports, and start an instance using the Neutron CLI:
+</li>
+</ul>
+<pre>
+neutron router-create router1
+neutron net-create private
+neutron subnet-create private --name=private_subnet 10.10.5.0/24
+neutron router-interface-add router1 private_subnet
+nova boot --flavor &lt;flavor&gt; --image &lt;image id&gt; --nic net-id=&lt;network id&gt; test1
+nova boot --flavor &lt;flavor&gt; --image &lt;image id&gt; --nic net-id=&lt;network id&gt; test2
+</pre>
+<p>At this point, you have confirmed that OpenDaylight is creating network end-points for instances on your network and managing traffic to them.
+</p><p>Congratulations! You're done!
+</p>
+</div>								<div class="printfooter">
+				Retrieved from "<a href="https://wiki.opendaylight.org/index.php?title=OpenStack_and_OpenDaylight&amp;oldid=37478">https://wiki.opendaylight.org/index.php?title=OpenStack_and_OpenDaylight&amp;oldid=37478</a>"				</div>
+</html>

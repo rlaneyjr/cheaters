@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Awk Quick Reference - Bruce Barnett</title>
+</head>
+<body class="light sans-serif loaded">
+  <div id="container" class="container font-size5 content-width3">
+    <div id="reader-header" class="header" style="display: block;">
+      <a id="reader-domain" class="domain" href="http://www.grymoire.com/Unix/AwkRef.html">grymoire.com</a>
+      <div class="domain-border"></div>
+      <h1 id="reader-title">Awk Quick Reference - Bruce Barnett</h1>
+      <div id="reader-credits" class="credits"></div>
+    </div>
+
+    <div class="content">
+      <div id="moz-reader-content" class="line-height4" style="display: block;"><div id="readability-page-1" class="page" xml:base="http://www.grymoire.com/Unix/AwkRef.html"><div id="centerDoc"><ins id="aswift_0_expand"><ins id="aswift_0_anchor"></ins></ins><p><b>Awk Quick Reference - by Bruce Barnett <a href="https://twitter.com/#%21grymoire">@grymoire</a></b>
+</p><p>AWK can be thought of as a program that can read rows and columns
+of information, and generate data - like a spreadsheet. It can also be
+thought of as a simple C interpretor, as AWK and C have similar
+features.
+</p><h2><a name="MAWK_Usage" href="http://www.grymoire.com/Unix/AwkRef.html#TOC"> MAWK Usage</a></h2><p>From mawk(1)
+       mawk  [-W  option]  [-F value] [-v var=value] [--] 'program text' [file
+       ...]
+       mawk [-W option] [-F value] [-v var=value] [-f program-file] [--] [file
+       ...]
+
+</p><h2><a name="GAWK_Usage" href="http://www.grymoire.com/Unix/AwkRef.html#TOC">GAWK Usage</a></h2><p>From gawk --help:
+</p><pre>Usage: gawk [POSIX or GNU style options] -f progfile [--] file ...
+Usage: gawk [POSIX or GNU style options] [--] 'program' file ...
+POSIX options:		GNU long options:
+	-f progfile		--file=progfile
+	-F fs			--field-separator=fs
+	-v var=val		--assign=var=val
+	-m[fr] val
+	-O			--optimize
+	-W compat		--compat
+	-W copyleft		--copyleft
+	-W copyright		--copyright
+	-W dump-variables[=file]	--dump-variables[=file]
+	-W exec=file		--exec=file
+	-W gen-po		--gen-po
+	-W help			--help
+	-W lint[=fatal]		--lint[=fatal]
+	-W lint-old		--lint-old
+	-W non-decimal-data	--non-decimal-data
+	-W profile[=file]	--profile[=file]
+	-W posix		--posix
+	-W re-interval		--re-interval
+	-W source=program-text	--source=program-text
+	-W traditional		--traditional
+	-W usage		--usage
+	-W use-lc-numeric	--use-lc-numeric
+	-W version		--version
+</pre><h2><a name="Program" href="http://www.grymoire.com/Unix/AwkRef.html#TOC">Program</a></h2><p>There are only a few commands in AWK.
+The Tables below are from my <a href="http://www.grymoire.com/Unix/Awk.html">awk tutorial</a>. Check this out if you need a beter explanation.
+The basic operation of AWK is that a line from the input file is read, and for each line, the AWK script is executed.
+</p><h2><a name="Basic_Structure" href="http://www.grymoire.com/Unix/AwkRef.html#TOC">Basic Structure</a></h2><p style="display: inline;" class="readability-styled">
+The basic structure of an AWK script consists of one or more of the following types of lines:
+</p><pre>pattern { statements }
+function name(parameter_list) { statements }
+</pre><h2><a name="Patterns" href="http://www.grymoire.com/Unix/AwkRef.html#TOC">Patterns</a></h2><p style="display: inline;" class="readability-styled">
+If a pattern is not specified, it defaults to be "true", and every line read will cause the starement to be executed,
+</p><p>
+A pattern can have the following form.
+</p><pre>    BEGIN
+    END
+    /regular expression/
+    relational expression
+    pattern &amp;&amp; pattern
+    pattern || pattern
+    pattern ? pattern : pattern
+    (pattern)
+    ! pattern
+    pattern1, pattern2 <i>- Range pattern</i>
+</pre><h2><a name="Statements" href="http://www.grymoire.com/Unix/AwkRef.html#TOC">Statements</a></h2><p>Statements have the following syntax, separated by a new line or a semicolon.
+</p><dl><dd>if ( <i>conditional</i> ) <i>statement</i> [ else <i>statement</i> ]<br>
+while ( <i>conditional</i> ) <i>statement</i><br>
+for ( <i>expression</i> ; <i>conditional</i> ; <i>expression</i> ) <i>statement</i><br>
+for ( <i>variable</i> in <i>array</i> ) <i>statement</i><br>
+break<br>
+continue<br>
+{ [ <i>statement</i> ] ...}<br>
+<i>variable</i>=<i>expression</i><br>
+print [ <i>expression-list</i> ] [ &gt; <i>expression</i> ]<br>
+printf <i>format</i> [ , <i>expression-list</i> ] [ &gt; <i>expression</i> ]<br>
+next <br>
+exit<br>
+</dd></dl><h2><a name="Special_Variables" href="http://www.grymoire.com/Unix/AwkRef.html#TOC">Special Variables</a></h2><table border="1">
+<tbody><tr><th colspan="5"> AWK Table 14<br>Special Variables</th></tr>
+<tr><th>Variable</th><th>Purpose</th><th>AWK</th><th>NAWK</th><th>GAWK</th></tr>
+<tr><td><a href="http://www.grymoire.com/Unix/Awk.html#uh-15" name="toc-uh-15">FS</a></td><td>Field separator</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+<tr><td><a href="http://www.grymoire.com/Unix/Awk.html#uh-17" name="toc-uh-17">NF</a></td><td>Number of Fields</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+<tr><td><a href="http://www.grymoire.com/Unix/Awk.html#uh-19" name="toc-uh-19">RS</a></td><td>Record separator</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+<tr><td><a href="http://www.grymoire.com/Unix/Awk.html#uh-18" name="toc-uh-18">NR</a></td><td>Number of input records</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+<tr><td><a href="http://www.grymoire.com/Unix/Awk.html#uh-21" name="toc-uh-21">FILENAME</a></td><td>Current filename</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+<tr><td><a href="http://www.grymoire.com/Unix/Awk.html#uh-16" name="toc-uh-16">OFS</a></td><td>Output field separator</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+<tr><td><a href="http://www.grymoire.com/Unix/Awk.html#uh-20" name="toc-uh-20">ORS</a></td><td>Output record separator</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+<tr><td><a href="http://www.grymoire.com/Unix/Awk.html#uh-56" name="toc-uh-56">ARGC</a></td><td># of arguments</td><td></td><td>Yes</td><td>Yes</td></tr>
+<tr><td><a href="http://www.grymoire.com/Unix/Awk.html#uh-57" name="toc-uh-57">ARGV</a></td><td>Array of arguments</td><td></td><td>Yes</td><td>Yes</td></tr>
+<tr><td><a href="http://www.grymoire.com/Unix/Awk.html#uh-58" name="toc-uh-58">ARGIND</a></td><td>Index of ARGV of current file</td><td></td><td></td><td>Yes</td></tr>
+<tr><td><a href="http://www.grymoire.com/Unix/Awk.html#uh-59" name="toc-uh-59">FNR</a></td><td>Input record number</td><td></td><td>Yes</td><td>Yes</td></tr>
+<tr><td><a href="http://www.grymoire.com/Unix/Awk.html#uh-60" name="toc-uh-60">OFMT</a></td><td>Ouput format (default "%.6g")</td><td></td><td>Yes</td><td>Yes</td></tr>
+<tr><td><a href="http://www.grymoire.com/Unix/Awk.html#uh-61" name="toc-uh-61">RSTART</a></td><td>Index of first character after match()</td><td></td><td>Yes</td><td>Yes</td></tr>
+<tr><td><a href="http://www.grymoire.com/Unix/Awk.html#uh-61" name="toc-uh-61">RLENGTH</a></td><td>Length of string after match()</td><td></td><td>Yes</td><td>Yes</td></tr>
+<tr><td><a href="http://www.grymoire.com/Unix/Awk.html#uh-62" name="toc-uh-62">SUBSEP</a></td><td>Default separator with multiple subscripts in array (default "\034")</td><td></td><td>Yes</td><td>Yes</td></tr>
+<tr><td><a href="http://www.grymoire.com/Unix/Awk.html#uh-63" name="toc-uh-63">ENVIRON</a></td><td>Array of environment variables</td><td></td><td></td><td>Yes</td></tr>
+<tr><td><a href="http://www.grymoire.com/Unix/Awk.html#uh-64" name="toc-uh-64">IGNORECASE</a></td><td>Ignore case of regular expression</td><td></td><td></td><td>Yes</td></tr>
+<tr><td><a href="http://www.grymoire.com/Unix/Awk.html#uh-65" name="toc-uh-65">CONVFMT</a></td><td>conversion format (default: "%.6g")</td><td></td><td></td><td>Yes</td></tr>
+<tr><td><a href="http://www.grymoire.com/Unix/Awk.html#uh-66" name="toc-uh-66">ERRNO</a></td><td>Current error after getline failure</td><td></td><td></td><td>Yes</td></tr>
+<tr><td><a href="http://www.grymoire.com/Unix/Awk.html#uh-67" name="toc-uh-67">FIELDWIDTHS</a></td><td>list of field widths (instead of using FS)</td><td></td><td></td><td>Yes</td></tr>
+<tr><td>BINMODE</td><td>Binary Mode (Windows)</td><td></td><td></td><td>Yes</td></tr>
+<tr><td>LINT</td><td>Turns --lint mode on/off</td><td></td><td></td><td>Yes</td></tr>
+<tr><td>PROCINFO</td><td>Array of informaiton about current AWK program</td><td></td><td></td><td>Yes</td></tr>
+<tr><td>RT</td><td>Record terminator</td><td></td><td></td><td>Yes</td></tr>
+<tr><td>TEXTDOMAIN</td><td>Text domain (i.e. localization) of current AWK program</td><td></td><td></td><td>Yes</td></tr>
+</tbody></table><h2><a name="Variables_.241.2C_.242.2C_etc.">Variables $1, $2, etc.</a></h2><p style="display: inline;" class="readability-styled">
+The variables $1, $2, etc created by spliting up each line into fields. 
+$1 is the first field (i.e. the first column), $2 is the second, etc.
+</p><p>Relational expressions are created using unary, binary, relational, the following operators:
+
+</p><p>Unary variables change the value of a variable.
+</p><table border="1">
+<tbody><tr><th colspan="2">Unary Operators<br><i>variable operator<br>operator variable</i></th></tr>
+<tr><th>Operator</th><th>Meaning</th></tr>
+<tr><td>++</td><td>Increment by 1</td></tr>
+<tr><td>--</td><td>Decrement by 1</td></tr>
+</tbody></table><p>
+Binary operators combine values.
+</p><table border="1">
+<tbody><tr><th colspan="3">AWK Table 1<br>Binary Operators<br><i>expression operator expression</i></th></tr>
+<tr><th>Operator</th><th>Type</th><th>Meaning</th></tr>
+<tr><td>+</td><td>Arithmetic</td><td>Addition</td></tr>
+<tr><td>-</td><td>Arithmetic</td><td>Subtraction</td></tr>
+<tr><td>*</td><td>Arithmetic</td><td>Multiplication</td></tr>
+<tr><td>/</td><td>Arithmetic</td><td>Division</td></tr>
+<tr><td>%</td><td>Arithmetic</td><td>Modulo</td></tr>
+<tr><td>&lt;space&gt;</td><td>String</td><td>Concatenation</td></tr>
+</tbody></table><p>
+Assignment variables change the values of variables.
+</p><table border="1">
+<tbody><tr><th colspan="2">AWK Table 2<br>Assignment Operators<br><i>variable operator expression</i></th></tr>
+<tr><th>Operator</th><th>Meaning</th></tr>
+<tr><td>+=</td><td>Add result to variable</td></tr>
+<tr><td>-=</td><td>Subtract result from variable</td></tr>
+<tr><td>*=</td><td>Multiply variable by result</td></tr>
+<tr><td>/=</td><td>Divide variable by result</td></tr>
+<tr><td>%=</td><td>Apply modulo to variable</td></tr>
+</tbody></table><p>
+Relational operators compare values.
+</p><table border="1">
+<tbody><tr><th colspan="2">AWK Table 3<br>Relational Operators<br><i>expression operator expression</i></th></tr>
+<tr><th>Operator</th><th>Meaning</th></tr>
+<tr><td>==</td><td>Is equal</td></tr>
+<tr><td>!=</td><td>Is not equal to</td></tr>
+<tr><td>&gt;</td><td>Is greater than</td></tr>
+<tr><td>&gt;=</td><td>Is greater than or equal to</td></tr>
+<tr><td>&lt;</td><td>Is less than</td></tr>
+<tr><td>&lt;=</td><td>Is less than or equal to</td></tr>
+</tbody></table><p>
+Certain characters that follow a '\' have a special meaning.
+</p><table border="1">
+<tbody><tr><th colspan="2">AWK Table 5<br>Escape Sequences</th></tr>
+<tr><th>Sequence</th><th>Description</th></tr>
+<tr><td>\a</td><td>ASCII bell (NAWK/GAWK only)</td></tr>
+<tr><td>\b</td><td>Backspace</td></tr>
+<tr><td>\f</td><td>Formfeed</td></tr>
+<tr><td>\n</td><td>Newline</td></tr>
+<tr><td>\r</td><td>Carriage Return</td></tr>
+<tr><td>\t</td><td>Horizontal tab</td></tr>
+<tr><td>\v</td><td>Vertical tab (NAWK only)</td></tr>
+<tr><td>\ddd</td><td>Character (1 to 3 octal digits) (NAWK only)</td></tr>
+<tr><td>\xdd</td><td>Character (hexadecimal) (NAWK only)</td></tr>
+<tr><td>\&lt;Any other character&gt;</td><td>That character</td></tr>
+</tbody></table><p>
+The printf or sprintf statement generates a string using a format field and variables.
+</p><pre>printf(<i>Format</i>,variable, variable,...) statement, 
+</pre><p>Inside the format field, you can define  how the variables should be output.
+</p><table border="1">
+<tbody><tr><th colspan="2"> AWK Table 6<br>Format Specifiers</th></tr>
+<tr><th>Specifier</th><th>Meaning</th></tr>
+<tr><td>%c</td><td>ASCII Character</td></tr>
+<tr><td>%d</td><td>Decimal integer</td></tr>
+<tr><td>%e</td><td>Floating Point number<br>(engineering format)</td></tr>
+<tr><td>%f</td><td>Floating Point number<br>(fixed point format)</td></tr>
+<tr><td>%g</td><td>The shorter of e or f,<br>with trailing zeros removed</td></tr>
+<tr><td>%o</td><td>Octal</td></tr>
+<tr><td>%s</td><td>String</td></tr>
+<tr><td>%x</td><td>Hexadecimal</td></tr>
+<tr><td>%%</td><td>Literal %</td></tr>
+</tbody></table><p>Here are some examples of format conversions.
+</p><table border="1">
+<tbody><tr><th colspan="3"> AWK Table 7<br>Example of format conversions</th></tr>
+<tr><th>Format</th><th>Value</th><th>Results</th></tr>
+<tr><td>%c</td><td>100.0</td><td>d</td></tr>
+<tr><td>%c</td><td>"100.0"</td><td>1 (NAWK?)</td></tr>
+<tr><td>%c</td><td>42</td><td>"</td></tr>
+<tr><td>%d</td><td>100.0</td><td>100</td></tr>
+<tr><td>%e</td><td>100.0</td><td>1.000000e+02</td></tr>
+<tr><td>%f</td><td>100.0</td><td>100.000000</td></tr>
+<tr><td>%g</td><td>100.0</td><td>100</td></tr>
+<tr><td>%o</td><td>100.0</td><td>144</td></tr>
+<tr><td>%s</td><td>100.0</td><td>100.0</td></tr>
+<tr><td>%s</td><td>"13f"</td><td>13f</td></tr>
+<tr><td>%d</td><td>"13f"</td><td>0 (AWK)</td></tr>
+<tr><td>%d</td><td>"13f"</td><td>13 (NAWK)</td></tr>
+<tr><td>%x</td><td>100.0</td><td>64</td></tr>
+</tbody></table><p>
+Here are more complex format conversion examples
+</p><p>
+The AWK variants have build-in functions. There are numeric, string, and miscellaneous functions.
+</p><table border="1">
+<tbody><tr><th colspan="3"> AWK Table 9<br>Numeric Functions</th></tr>
+<tr><th>Name</th><th>Function</th><th>Variant</th></tr>
+<tr><td>cos</td><td>cosine</td><td>GAWK,AWK,NAWK</td></tr>
+<tr><td>exp</td><td>Exponent</td><td>GAWK,AWK,NAWK</td></tr>
+<tr><td>int</td><td>Integer</td><td>GAWK,AWK,NAWK</td></tr>
+<tr><td>log</td><td>Logarithm</td><td>GAWK,AWK,NAWK</td></tr>
+<tr><td>sin</td><td>Sine</td><td>GAWK,AWK,NAWK</td></tr>
+<tr><td>sqrt</td><td>Square Root</td><td>GAWK,AWK,NAWK</td></tr>
+<tr><td>atan2</td><td>Arctangent</td><td>GAWK,NAWK</td></tr>
+<tr><td>rand</td><td>Random</td><td>GAWK,NAWK</td></tr>
+<tr><td>srand</td><td>Seed Random</td><td>GAWK,NAWK</td></tr>
+</tbody></table><table border="1">
+<tbody><tr><th colspan="2"> AWK Table 10<br>String Functions</th></tr>
+<tr><th>Name</th><th>Variant</th></tr>
+<tr><td>index(string,search)</td><td>AWK, NAWK, GAWK</td></tr>
+<tr><td>length(string)</td><td>AWK, NAWK, GAWK</td></tr>
+<tr><td>split(string,array,separator)</td><td>AWK, NAWK, GAWK</td></tr>
+<tr><td>substr(string,position)</td><td>AWK, NAWK, GAWK</td></tr>
+<tr><td>substr(string,position,max)</td><td>AWK, NAWK, GAWK</td></tr>
+<tr><td>sub(regex,replacement)</td><td>NAWK, GAWK</td></tr>
+<tr><td>sub(regex,replacement,string)</td><td>NAWK, GAWK</td></tr>
+<tr><td>gsub(regex,replacement)</td><td>NAWK, GAWK</td></tr>
+<tr><td>gsub(regex,replacement,string)</td><td>NAWK, GAWK</td></tr>
+<tr><td>match(string,regex)</td><td>NAWK, GAWK</td></tr>
+<tr><td>tolower(string)</td><td>GAWK</td></tr>
+<tr><td>toupper(string)</td><td>GAWK</td></tr>
+<tr><td>asort(string,[d])</td><td>GAWK</td></tr>
+<tr><td>asorti(string,[d])</td><td>GAWK</td></tr>
+<tr><td>gensub(r,s,h [,t])</td><td>GAWK</td></tr>
+<tr><td>strtonum(string)</td><td>GAWK</td></tr>
+</tbody></table><table border="1">
+<tbody><tr><th colspan="2"> AWK Table 11<br>Miscellaneous Functions</th></tr>
+<tr><th>Name</th><th>Variant</th></tr>
+<tr><td>getline</td><td>AWK, NAWK, GAWK</td></tr>
+<tr><td>getline &lt;file</td><td>NAWK, GAWK</td></tr>
+<tr><td>getline variable</td><td>NAWK, GAWK</td></tr>
+<tr><td>getline variable &lt;file</td><td>NAWK, GAWK</td></tr>
+<tr><td>"command" | getline</td><td>NAWK, GAWK</td></tr>
+<tr><td>"command" | getline variable</td><td>NAWK, GAWK</td></tr>
+<tr><td>system(command)</td><td>NAWK, GAWK</td></tr>
+<tr><td>close(command)</td><td>NAWK, GAWK</td></tr>
+<tr><td>systime()</td><td>GAWK</td></tr>
+<tr><td>strftime(string)</td><td>GAWK</td></tr>
+<tr><td>strftime(string, timestamp)</td><td>GAWK</td></tr>
+</tbody></table><p>
+The <i>strftime</i>function has special formats.
+</p><table border="1">
+<tbody><tr><th colspan="2"> AWK Table 12<br>GAWK's strftime formats</th></tr>
+<tr><td>%a</td><td>The locale's abbreviated weekday name</td></tr>
+<tr><td>%A</td><td>The locale's full weekday name</td></tr>
+<tr><td>%b</td><td>The locale's abbreviated month name</td></tr>
+<tr><td>%B</td><td>The locale's full month name</td></tr>
+<tr><td>%c</td><td>The locale's "appropriate" date and time representation</td></tr>
+<tr><td>%d</td><td>The day of the month as a decimal number (01--31)</td></tr>
+<tr><td>%H</td><td>The hour (24-hour clock) as a decimal number (00--23)</td></tr>
+<tr><td>%I</td><td>The hour (12-hour clock) as a decimal number (01--12)</td></tr>
+<tr><td>%j</td><td>The day of the year as a decimal number (001--366)</td></tr>
+<tr><td>%m</td><td>The month as a decimal number (01--12)</td></tr>
+<tr><td>%M</td><td>The minute as a decimal number (00--59)</td></tr>
+<tr><td>%p</td><td>The locale's equivalent of the AM/PM</td></tr>
+<tr><td>%S</td><td>The second as a decimal number (00--61).</td></tr>
+<tr><td>%U</td><td>The week number of the year (Sunday is first day of week)</td></tr>
+<tr><td>%w</td><td>The weekday as a decimal number (0--6).  Sunday is day 0</td></tr>
+<tr><td>%W</td><td>The week number of the year (Monday is first day of week)</td></tr>
+<tr><td>%x</td><td>The locale's "appropriate" date representation</td></tr>
+<tr><td>%X</td><td>The locale's "appropriate" time representation</td></tr>
+<tr><td>%y</td><td>The year without century as a decimal number (00--99)</td></tr>
+<tr><td>%Y</td><td>The year with century as a decimal number</td></tr>
+<tr><td>%Z</td><td>The time zone name or abbreviation</td></tr>
+<tr><td>%%</td><td>A literal %.</td></tr>
+</tbody></table><p>
+Modern versions of GAWK (Gnu AWK) have additional functions.
+</p><table border="1">
+<tbody><tr><th colspan="2"> AWK Table 13<br>Optional GAWK strftime formats</th></tr>
+<tr><td>%D</td><td>Equivalent to specifying %m/%d/%y</td></tr>
+<tr><td>%e</td><td>The day of the month, padded with a blank if it is only one digit</td></tr>
+<tr><td>%h</td><td>Equivalent to %b, above</td></tr>
+<tr><td>%n</td><td>A newline character (ASCII LF)</td></tr>
+<tr><td>%r</td><td>Equivalent to specifying %I:%M:%S %p</td></tr>
+<tr><td>%R</td><td>Equivalent to specifying %H:%M</td></tr>
+<tr><td>%T</td><td>Equivalent to specifying %H:%M:%S</td></tr>
+<tr><td>%t</td><td>A TAB character</td></tr>
+<tr><td>%k</td><td>The hour as a decimal number (0-23)</td></tr>
+<tr><td>%l</td><td>The hour (12-hour clock) as a decimal number (1-12)</td></tr>
+<tr><td>%C</td><td>The century, as a number between 00 and 99</td></tr>
+<tr><td>%u</td><td>is replaced by the weekday as a decimal number [Monday == 1]</td></tr>
+<tr><td>%V</td><td>is replaced by the week number of the year (using ISO 8601)</td></tr>
+<tr><td>%v</td><td>The date in VMS format (e.g. 20-JUN-1991)</td></tr>
+</tbody></table></div></div></div>
+    </div>
+
+</body></html>

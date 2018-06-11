@@ -1,0 +1,1846 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      
+      <title>confdc ncsc -  - NSO 4.4.2.3 Manual Pages</title>
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+      <link rel="home" href="index.html" title="NSO 4.4.2.3 Manual Pages" />
+      <link rel="up" href="ncs.man.volume.1.html" title="NCS man-pages, Volume 1" />
+      <link rel="prev" href="man.1.confd_load.html" title="confdncs_load" />
+      <link rel="next" href="man.1.nct-backup.html" title="nct-backup" />
+      <meta xmlns="" name="Section-title" content="confdc ncsc" /><script xmlns="" type="text/javascript">
+      //The id for tree cookie
+      var treeCookieId = "treeview-73142";
+      var language = "en";
+      var w = new Object();
+      //Localization
+      txt_filesfound = 'Results';
+      txt_enter_at_least_1_char = "You must enter at least one character.";
+      txt_browser_not_supported = "JavaScript is disabled on your browser. Please enable JavaScript to enjoy all the features of this site.";
+      txt_please_wait = "Please wait. Search in progress...";
+      txt_results_for = "Results for: ";
+    </script><link xmlns="" rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/css/positioning.css" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/jquery/theme-redmond/jquery-ui-1.8.2.custom.css" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/jquery/treeview/jquery.treeview.css" /><style xmlns="" type="text/css">
+      
+      #noscript{
+      font-weight:bold;
+      background-color: #55AA55;
+      font-weight: bold;
+      height: 25spx;
+      z-index: 3000;
+      top:0px;
+      width:100%;
+      position: relative;
+      border-bottom: solid 5px black;
+      text-align:center;
+      color: white;
+      }
+      
+      input {
+      margin-bottom: 5px;
+      margin-top: 2px;
+      }
+      .folder {
+      display: block;
+      height: 22px;
+      padding-left: 20px;
+      background: transparent url(common/jquery/treeview/images/folder.gif) 0 0px no-repeat;
+      }
+      span.contentsTab {
+      padding-left: 20px;
+      background: url(common/images/toc-icon.png) no-repeat 0 center;
+      }
+      span.searchTab {
+      padding-left: 20px;
+      background: url(common/images/search-icon.png) no-repeat 0 center;
+      }
+      
+      /* Overide jquery treeview's defaults for ul. */
+      .treeview ul {
+      background-color: transparent;
+      margin-top: 4px;
+      }		
+      #webhelp-currentid {
+      /* background-color: #D8D8D8 !important; */
+      background-color: #D8D8D8;
+      }
+      .treeview .hover { color: black; }
+      .filetree li span a { text-decoration: none; font-size: 12px; color: #517291; }
+      
+      /* Override jquery-ui's default css customizations. These are supposed to take precedence over those.*/
+      .ui-widget-content {
+      border: 0px; 
+      background: none; 
+      color: none;     
+      }
+      .ui-widget-header {
+      color: #e9e8e9;
+      border-left: 1px solid #e5e5e5;
+      border-right: 1px solid #e5e5e5;
+      border-bottom: 1px solid #bbc4c5;
+      border-top: 4px solid #e5e5e5;
+      border: medium none;
+      background: #F4F4F4; /* old browsers */
+      background: -moz-linear-gradient(top, #F4F4F4 0%, #E6E4E5 100%); /* firefox */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F4F4F4), color-stop(100%,#E6E4E5)); /* webkit */    
+      font-weight: none;
+      }
+      .ui-widget-header a { color: none; }
+      .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { 
+      border: none; background: none; font-weight: none; color: none; }
+      .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited { color: black; text-decoration: none; }
+      .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus { border: none; background: none; font-weight: none; color: none; }
+      
+      .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { border: none; background: none; font-weight: none; color: none; }
+      .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited { 
+      color: black; text-decoration: none; 	
+      background: #C6C6C6; /* old browsers */
+      background: -moz-linear-gradient(top, #C6C6C6 0%, #D8D8D8 100%); /* firefox */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#C6C6C6), color-stop(100%,#D8D8D8)); /* webkit */
+      -webkit-border-radius:15px; -moz-border-radius:10px;
+      border: 1px solid #f1f1f1;
+      }    
+      .ui-corner-all { border-radius: 0 0 0 0; }
+      
+      .ui-tabs { padding: .2em;}
+      .ui-tabs .ui-tabs-nav li { top: 0px; margin: -2px 0 1px; text-transform: uppercase; font-size: 10.5px;}
+      .ui-tabs .ui-tabs-nav li a { padding: .25em 2em .25em 1em; margin: .5em; text-shadow: 0 1px 0 rgba(255,255,255,.5); }
+      /**
+      *	Basic Layout Theme
+      * 
+      *	This theme uses the default layout class-names for all classes
+      *	Add any 'custom class-names', from options: paneClass, resizerClass, togglerClass
+      */
+      
+      .ui-layout-pane { /* all 'panes' */ 
+      background: #FFF; 
+      border: 1px solid #BBB; 
+      padding: 05x; 
+      overflow: auto;
+      } 
+      
+      .ui-layout-resizer { /* all 'resizer-bars' */ 
+      background: #DDD; 
+      top:100px
+      } 
+      
+      .ui-layout-toggler { /* all 'toggler-buttons' */ 
+      background: #AAA; 
+      } 
+      
+    </style>
+      <!--[if IE]>
+	<link rel="stylesheet" type="text/css" href="../common/css/ie.css"/>
+	<![endif]--><script xmlns="" type="text/javascript" src="common/browserDetect.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery-1.7.2.min.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery.ui.all.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery.cookie.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/treeview/jquery.treeview.min.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/layout/jquery.layout.js">
+         <!----></script><style type="text/css">
+      
+      #header {
+      /* background: url("../images/header-bg.png") scroll top left repeat-x #4d8c83; */
+      background: transparent;
+      }
+      #leftnavigation {
+      /* background-color: #ededed!important; */
+      background-color: transparent;
+      }
+      #navheader {
+      visibility: hidden;
+      }
+      #webhelp-currentid {
+      /* background-color: #D8D8D8 !important; */
+      background-color: #FFFFFF; /*but must be changed in main.js as well*/
+      }
+      .filetree span.file {
+      /* background: url(images/file.gif) 0 0 no-repeat; */
+      background: initial;
+      }
+      .filetree span.folder, .filetree span.file {
+      padding: 1px 0 1px 7px;
+      display: block;
+      }
+
+      /* borrowed from cisco: clientlib.css */
+      .footer {
+      margin: 28px 30px 0 15px;
+      font-size: 80%;
+      line-height: 120%;
+      border-top: 1px solid #ccc;
+      padding-top: 7px;
+      color: #999;
+      }
+      .footer #footer-legal{display:inline;padding-bottom:18px}
+      #framework-footer{margin:0;padding:0 0 15px 0;min-width:900px;width:100%}
+      .footer a,.footer a:visited{color:#999}
+
+      /* from ccimr.css */
+      a:active  { color: #3366CC}
+      a:hover   { color: #3366CC}
+      a:link    { color: #3366CC}
+      a:visited { color: #3366CC}
+
+      #header img {
+      float: left;
+      margin-left: 20px;
+      margin-top: 0px;
+      }
+
+      #header h1 {
+      color: #336666;
+      margin-top: 4px;
+      }
+      #content h1, #content h2 {
+      color: #336666;
+      }
+      .title {
+      color: #336666;
+      }
+      p, pre {
+      margin-left: 0.1in;
+      }
+      p, ul, ol, li {
+        font-size: 95%;
+        font-family: Arial, Helvetica, sans-serif;
+        margin-top: 1px;
+      }
+      body {
+        font: 80.5% Arial, Helvetica, sans-serif;
+      }
+      ol {
+      display: block;
+      list-style-type: decimal;
+      -webkit-margin-before: 1em;
+      -webkit-margin-after: 1em;
+      -webkit-margin-start: 0px;
+      -webkit-margin-end: 0px;
+      -webkit-padding-start: 40px;
+      border: 1;
+      }
+    </style></head>
+   <body>
+      <noscript>
+         <div id="noscript">JavaScript is disabled on your browser. Please enable JavaScript to enjoy all the features of this site.</div>
+      </noscript>
+      <div id="header"><a href="index.html"><img style="margin-right: 2px; width: 110; height: 73; padding-right: 25px; padding-top: 8px" align="right" src="common/images/logo.gif" alt="Cisco Systems, Inc." /></a><h1>NSO 4.4.2.3 Manual Pages
+                <br />NCS man-pages, Volume 1
+         </h1>
+         <div id="navheader">
+            <!---->
+            <table class="navLinks">
+               <tr>
+                  <td><a id="showHideButton" href="#" onclick="myLayout.toggle('west')" class="pointLeft" tabindex="5" title="Hide TOC tree">Sidebar
+                                                    </a></td>
+                  <td><a accesskey="p" class="navLinkPrevious" tabindex="5" href="man.1.confd_load.html">Prev</a>
+                                                             |
+                                                             <a accesskey="u" class="navLinkUp" tabindex="5" href="ncs.man.volume.1.html">Up</a>
+                                                         |
+                                                         <a accesskey="n" class="navLinkNext" tabindex="5" href="man.1.nct-backup.html">Next</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div id="content">
+         <div class="refentry"><a id="man.1.confdc"></a><div xmlns="" class="titlepage"></div>
+            <div class="refnamediv"><a id="man.1.confdc.name"></a><h2>Name</h2>
+               <p>confdc — Confdc compiler</p>
+            </div>
+            <div class="refnamediv"><a id="man.1.confdc.name2"></a><p>ncsc — NCS Yang compiler</p>
+            </div>
+            <div class="refsynopsisdiv"><a id="man.1.confdc.synopsis"></a><h2>Synopsis</h2>
+               <div class="cmdsynopsis">
+                  <p><code class="command"><span class="phrase">confdc</span><span class="phrase">ncsc</span></code>   -c   [-a | --annotate
+                           <em class="replaceable"><code>YangAnnotationFile</code></em>] [--deviation <em class="replaceable"><code>DeviationFile</code></em>
+                           ] [-o <em class="replaceable"><code>FxsFile</code></em>] [--verbose] [--fail-on-warnings] [-E | --error <em class="replaceable"><code>ErrorCode</code></em>...] [-W | --warning
+                           <em class="replaceable"><code>ErrorCode</code></em>...] [-w | --no-warning
+                           <em class="replaceable"><code>ErrorCode</code></em>...] [--strict-yang] [--no-yang-source] [--use-description [always] ] [[--no-features] |  [-F | --features <em class="replaceable"><code>Features</code></em>
+                             ...]] [--ignore-unknown-features] [-p | --prefix
+                           <em class="replaceable"><code>Prefix</code></em>] [--subagent
+                           <em class="replaceable"><code>MountPath</code></em>] [--yangpath <em class="replaceable"><code>YangDir</code></em>] [--export <em class="replaceable"><code>Agent</code></em>
+                            [-f <em class="replaceable"><code>FxsFileOrDir</code></em>...]
+                           ...]  -- <em class="replaceable"><code>YangFile</code></em> 
+                  </p>
+               </div>
+               <div class="cmdsynopsis">
+                  <p><code class="command"><span class="phrase">confdc</span><span class="phrase">ncsc</span></code>   --strip-yang-source    <em class="replaceable"><code>FxsFile</code></em> 
+                  </p>
+               </div>
+               <div class="cmdsynopsis">
+                  <p><code class="command"><span class="phrase">confdc</span><span class="phrase">ncsc</span></code>   --list-errors 
+                  </p>
+               </div>
+               <div class="cmdsynopsis">
+                  <p><code class="command"><span class="phrase">confdc</span><span class="phrase">ncsc</span></code>   -c   [-o <em class="replaceable"><code>CclFile</code></em>]  <em class="replaceable"><code>ClispecFile</code></em> 
+                  </p>
+               </div>
+               <div class="cmdsynopsis">
+                  <p><code class="command"><span class="phrase">confdc</span><span class="phrase">ncsc</span></code>   -c   [-o <em class="replaceable"><code>BinFile</code></em>] [-I <em class="replaceable"><code>Dir</code></em>]  <em class="replaceable"><code>MibFile</code></em> 
+                  </p>
+               </div>
+               <div class="cmdsynopsis">
+                  <p><code class="command"><span class="phrase">confdc</span><span class="phrase">ncsc</span></code>   -c   [-o <em class="replaceable"><code>BinFile</code></em>] [--read-only] [--verbose] [-I <em class="replaceable"><code>Dir</code></em>] [--include-file <em class="replaceable"><code>BinFile</code></em>] [--fail-on-warnings] [--warn-on-type-errors ] [--warn-on-access-mismatch ] [--mib-annotation <em class="replaceable"><code>MibA</code></em>] [-f <em class="replaceable"><code>FxsFileOrDir</code></em>...]  -- <em class="replaceable"><code>MibFile</code></em>   <em class="replaceable"><code>FxsFile</code></em>... 
+                  </p>
+               </div>
+               <div class="cmdsynopsis">
+                  <p><code class="command"><span class="phrase">confdc</span><span class="phrase">ncsc</span></code>   --ncs-compile-bundle <em class="replaceable"><code>Directory</code></em>  [--yangpath <em class="replaceable"><code>YangDir</code></em>] [--ncs-skip-template] [--ncs-skip-statistics] [--ncs-skip-config] [--lax-revsion-merge] [--ncs-depend-package <em class="replaceable"><code>PackDir</code></em>] [--ncs-apply-deviations]  --ncs-device-type <em class="replaceable"><code>netconf | snmp-ned | generic-ned | cli-ned</code></em>   --ncs-device-dir <em class="replaceable"><code>Directory</code></em> 
+                  </p>
+               </div>
+               <div class="cmdsynopsis">
+                  <p><code class="command"><span class="phrase">ncsc</span></code>   --ncs-compile-mib-bundle <em class="replaceable"><code>Directory</code></em>  [--ncs-skip-template] [--ncs-skip-statistics] [--ncs-skip-config]  --ncs-device-type <em class="replaceable"><code>netconf | snmp-ned | generic-ned | cli-ned</code></em>   --ncs-device-dir <em class="replaceable"><code>Directory</code></em> 
+                  </p>
+               </div>
+               <div class="cmdsynopsis">
+                  <p><code class="command"><span class="phrase">confdc</span><span class="phrase">ncsc</span></code>   --ncs-compile-module <em class="replaceable"><code>YangFile</code></em>  [--yangpath <em class="replaceable"><code>YangDir</code></em>] [--ncs-skip-template] [--ncs-skip-statistics] [--ncs-skip-config] [--ncs-keep-callpoints] [--lax-revision-merge] [--ncs-depend-package
+                     <em class="replaceable"><code>PackDir</code></em>]  --ncs-device-type <em class="replaceable"><code>netconf | snmp-ned | generic-ned | cli-ned</code></em>   --ncs-device-dir <em class="replaceable"><code>Directory</code></em> 
+                  </p>
+               </div>
+               <div class="cmdsynopsis">
+                  <p><code class="command"><span class="phrase">confdc</span><span class="phrase">ncsc</span></code>   --emit-h <em class="replaceable"><code>HFile</code></em>  [--macro-prefix <em class="replaceable"><code>Prefix</code></em>] [--include-type ] [--exclude-enums ] [--fail-on-warnings ]  <em class="replaceable"><code>FxsFile</code></em> 
+                  </p>
+               </div>
+               <div class="cmdsynopsis">
+                  <p><code class="command"><span class="phrase">confdc</span><span class="phrase">ncsc</span></code>   --emit-h <em class="replaceable"><code>HFile</code></em>  [-a | --annotate
+                           <em class="replaceable"><code>YangAnnotationFile</code></em>] [--deviation <em class="replaceable"><code>DeviationFile</code></em>
+                           ] [--strict-yang] [[--no-features] |  [-F | --features <em class="replaceable"><code>Features</code></em>
+                             ...]] [--ignore-unknown-features] [--yangpath <em class="replaceable"><code>YangDir</code></em>] [--macro-prefix <em class="replaceable"><code>Prefix</code></em>] [--include-type ] [--exclude-enums ] [--fail-on-warnings ]  <em class="replaceable"><code>YangFile</code></em> 
+                  </p>
+               </div>
+               <div class="cmdsynopsis">
+                  <p><code class="command"><span class="phrase">confdc</span><span class="phrase">ncsc</span></code>   --emit-java <em class="replaceable"><code>JFile</code></em>  [--print-java-filename ] [--java-disable-prefix ] [--java-package <em class="replaceable"><code>Package</code></em>] [--exclude-enums ] [--fail-on-warnings ] [-f <em class="replaceable"><code>FxsFileOrDir</code></em>
+                           ...]  <em class="replaceable"><code>FxsFile</code></em> 
+                  </p>
+               </div>
+               <div class="cmdsynopsis">
+                  <p><code class="command"><span class="phrase">confdc</span><span class="phrase">ncsc</span></code>   --emit-python <em class="replaceable"><code>PyFile</code></em>  [--print-python-filename ] [--no-init-py ] [--python-disable-prefix ] [--exclude-enums ] [--fail-on-warnings ] [-f <em class="replaceable"><code>FxsFileOrDir</code></em>
+                           ...]  <em class="replaceable"><code>FxsFile</code></em> 
+                  </p>
+               </div>
+               <div class="cmdsynopsis">
+                  <p><code class="command"><span class="phrase">confdc</span><span class="phrase">ncsc</span></code>   --emit-hrl <em class="replaceable"><code>HrlFile</code></em>  [--macro-prefix <em class="replaceable"><code>Prefix</code></em>] [--include-type ] [--exclude-enums ] [--fail-on-warnings ]  <em class="replaceable"><code>FxsFile</code></em> 
+                  </p>
+               </div>
+               <div class="cmdsynopsis">
+                  <p><code class="command"><span class="phrase">confdc</span><span class="phrase">ncsc</span></code>   --emit-hrl <em class="replaceable"><code>HrlFile</code></em>  [-a | --annotate
+                           <em class="replaceable"><code>YangAnnotationFile</code></em>] [--deviation <em class="replaceable"><code>DeviationFile</code></em>
+                           ] [--strict-yang] [[--no-features] |  [-F | --features <em class="replaceable"><code>Features</code></em>
+                             ...]] [--ignore-unknown-features] [--yangpath <em class="replaceable"><code>YangDir</code></em>] [--macro-prefix <em class="replaceable"><code>Prefix</code></em>] [--include-type ] [--exclude-enums ] [--fail-on-warnings ]  <em class="replaceable"><code>YangFile</code></em> 
+                  </p>
+               </div>
+               <div class="cmdsynopsis">
+                  <p><code class="command"><span class="phrase">confdc</span><span class="phrase">ncsc</span></code>   --emit-mib <em class="replaceable"><code>MibFile</code></em>  [ --join-names <em class="replaceable"><code>capitalize</code></em>  |   <em class="replaceable"><code>hyphen</code></em> ] [--oid <em class="replaceable"><code>OID</code></em>] [--top <em class="replaceable"><code>Name</code></em>] [--tagpath <em class="replaceable"><code>Path</code></em>] [--import <em class="replaceable"><code>Module</code></em> <em class="replaceable"><code>Name</code></em>] [--module <em class="replaceable"><code>Module</code></em>] [--generate-oids ] [--generate-yang-annotation] [--skip-symlinks] [--top <em class="replaceable"><code>Top</code></em>] [--fail-on-warnings ] [--no-comments ] [--read-only ]  -- <em class="replaceable"><code>FxsFile</code></em>... 
+                  </p>
+               </div>
+               <div class="cmdsynopsis">
+                  <p><code class="command"><span class="phrase">confdc</span><span class="phrase">ncsc</span></code>   --mib2yang-std  [-p <em class="replaceable"><code>Prefix</code></em>] [-o <em class="replaceable"><code>YangFile</code></em>]  -- <em class="replaceable"><code>MibFile</code></em> 
+                  </p>
+               </div>
+               <div class="cmdsynopsis">
+                  <p><code class="command"><span class="phrase">confdc</span><span class="phrase">ncsc</span></code>   --mib2yang-mods  [--mib-annotation <em class="replaceable"><code>MibA</code></em>] [--keep-readonly] [--namespace <em class="replaceable"><code>Uri</code></em>] [--revision <em class="replaceable"><code>Date</code></em>] [-o <em class="replaceable"><code>YangDeviationFile</code></em>]  -- <em class="replaceable"><code>MibFile</code></em> 
+                  </p>
+               </div>
+               <div class="cmdsynopsis">
+                  <p><code class="command"><span class="phrase">confdc</span><span class="phrase">ncsc</span></code>   --mib2yang  [--mib-annotation <em class="replaceable"><code>MibA</code></em>] [--emit-doc] [--snmp-name] [--read-only] [-u <em class="replaceable"><code>Uri</code></em>] [-p <em class="replaceable"><code>Prefix</code></em>] [-o <em class="replaceable"><code>YangFile</code></em>]  -- <em class="replaceable"><code>MibFile</code></em> 
+                  </p>
+               </div>
+               <div class="cmdsynopsis">
+                  <p><code class="command"><span class="phrase">confdc</span><span class="phrase">ncsc</span></code>   --snmpuser <em class="replaceable"><code>EngineID</code></em>   <em class="replaceable"><code>User</code></em>   <em class="replaceable"><code>AuthType</code></em>   <em class="replaceable"><code>PrivType</code></em>   <em class="replaceable"><code>PassPhrase</code></em> 
+                  </p>
+               </div>
+               <div class="cmdsynopsis">
+                  <p><code class="command"><span class="phrase">confdc</span><span class="phrase">ncsc</span></code>   --revision-merge   [-o <em class="replaceable"><code>ResultFxs</code></em>] [-v ] [-f <em class="replaceable"><code>FxsFileOrDir</code></em>...]  -- <em class="replaceable"><code>ListOfFxsFiles</code></em>... 
+                  </p>
+               </div>
+               <div class="cmdsynopsis">
+                  <p><code class="command"><span class="phrase">confdc</span><span class="phrase">ncsc</span></code>   --lax-revision-merge   [-o <em class="replaceable"><code>ResultFxs</code></em>] [-v ] [-f <em class="replaceable"><code>FxsFileOrDir</code></em>...]  -- <em class="replaceable"><code>ListOfFxsFiles</code></em>... 
+                  </p>
+               </div>
+               <div class="cmdsynopsis">
+                  <p><code class="command"><span class="phrase">confdc</span><span class="phrase">ncsc</span></code>   --get-info    <em class="replaceable"><code>FxsFile</code></em> 
+                  </p>
+               </div>
+               <div class="cmdsynopsis">
+                  <p><code class="command"><span class="phrase">confdc</span><span class="phrase">ncsc</span></code>   --get-uri    <em class="replaceable"><code>FxsFile</code></em> 
+                  </p>
+               </div>
+               <div class="cmdsynopsis">
+                  <p><code class="command"><span class="phrase">confdc</span><span class="phrase">ncsc</span></code>   --version  
+                  </p>
+               </div>
+            </div>
+            <div class="refsect1"><a id="man.1.confdc.description"></a><h2>DESCRIPTION</h2>
+               <p>During startup the NSO daemon loads .fxs files describing 
+                      our configuration data models. A .fxs file is the result of a
+                      compiled YANG data model file.
+                      The daemon also loads clispec files describing customizations to
+                      the auto-generated CLI.
+                      The clispec files are described in
+                      <a class="link" href="man.5.clispec.html" title="clispec">clispec(5)</a>.
+                      
+               </p>
+               <p>A yang file by convention uses .yang (or .yin) filename suffix. YANG
+                      files are directly transformed into .fxs files by <span class="phrase">confdc</span><span class="phrase">ncsc</span>.
+               </p>
+               <p>We can use any number of .fxs files when working with the
+                      NSO daemon.
+               </p>
+               <p>The <code class="option">--emit-h</code> option is used to generate a
+                      .h file from a .fxs or YANG (.yang/.yin) file. How to use the generated
+                      .h files is described in the ConfD User Guide.
+               </p>
+               <p>The <code class="option">--emit-java</code> option is used to generate
+                      a .java file from a .fxs file. The java file is used in
+                      combination with the Java library for Java based applications.
+                      
+               </p>
+               <p>The <code class="option">--emit-python</code> option is used to generate
+                      a .py file from a .fxs file. The python file is used in
+                      combination with the Python library for Python based applications.
+                      
+               </p>
+               <p>The <code class="option">--emit-hrl</code> option is used to generate a
+                      .hrl file from a .fxs or YANG (.yang/.yin) file. The .hrl file can
+                      be used for Erlang based applications.
+               </p>
+               <p>The <code class="option">--print-java-filename</code> option is used to print
+                      the resulting name of the would be generated .java file.
+                      
+               </p>
+               <p>The <code class="option">--print-python-filename</code> option is used to print
+                      the resulting name of the would be generated .py file.
+                      
+               </p>
+               <p>The <code class="option">--python-disable-prefix</code> option is used to prevent
+                      prepending the Yang module prefix to each symbol in the generated .py file.
+                      
+               </p>
+               <p>The <code class="option">--emit-mib</code> option is used to generate
+                      an SNMP MIB from .fxs files.
+               </p>
+               <p>The <code class="option">--snmpuser</code> option is used to generate
+                      localized keys for SNMP v3.
+               </p>
+               <p>A clispec file by convention uses a .cli filename suffix. We
+                      use the <span class="phrase">confdc</span><span class="phrase">ncsc</span> command to compile a clispec into a loadable format
+                      (with a .ccl suffix).
+               </p>
+               <p> A mib file by convention uses a .mib filename suffix. The
+                      <span class="phrase">confdc</span><span class="phrase">ncsc</span> command is used for compiling the mib with one or more fxs
+                      files (containing OID to YANG mappings) into a loadable format (with a .bin suffix). See
+                      the NSO
+                      User Guide for more information about compiling the
+                      mib.
+               </p>
+               <p>Take a look at the EXAMPLE section for a crash course.</p>
+            </div>
+            <div class="refsect1"><a id="man.1.confdc.options"></a><h2>OPTIONS</h2>
+               <div class="refsect2"><a id="man.1.confdc.options.common"></a><h3>Common options</h3>
+                  <div class="variablelist">
+                     <dl class="variablelist">
+                        <dt><span class="term"><code class="option">-f</code>, </span><span class="term"><code class="option">--fxsdep</code> <em class="replaceable"><code>FxsFileOrDir</code></em>...</span></dt>
+                        <dd>
+                           <p>.fxs files (or directories containing .fxs files) to
+                                          be used to resolve cross namespace dependencies.
+                           </p>
+                        </dd>
+                        <dt><span class="term">
+                                          <code class="option">--yangpath</code> <em class="replaceable"><code>YangModuleDir</code></em>
+                                        </span></dt>
+                        <dd>
+                           <p> YangModuleDir is a directory containing other YANG
+                                          modules and submodules.  This flag must be used when we
+                                          import or include other YANG modules or submodules that
+                                          reside in another directory.
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">-o</code>, </span><span class="term"><code class="option">--output</code> <em class="replaceable"><code>File</code></em></span></dt>
+                        <dd>
+                           <p>Put the resulting file in the location given by File.</p>
+                        </dd>
+                     </dl>
+                  </div>
+               </div>
+               <div class="refsect2"><a id="man.1.confdc.options.compile"></a><h3>Compile options</h3>
+                  <div class="variablelist">
+                     <dl class="variablelist">
+                        <dt><span class="term"><code class="option">-c</code>, </span><span class="term"><code class="option">--compile</code> <em class="replaceable"><code>File</code></em></span></dt>
+                        <dd>
+                           <p>Compile a YANG file (.yang/.yin) to a .fxs file
+                                          or a clispec (.cli
+                                          file) to a .ccl file,
+                                          or a MIB (.mib file) to a .bin file
+                                        
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">-a</code>, </span><span class="term"><code class="option">--annotate</code> <em class="replaceable"><code>AnnotationFile</code></em></span></dt>
+                        <dd>
+                           <p>YANG users that are utilizing the tailf:annotate
+                                          extension must use this flag to indicate the YANG
+                                          annotation file(s).
+                           </p>
+                           <p>This parameter can be given multiple times.</p>
+                        </dd>
+                        <dt><span class="term"><code class="option">--deviation </code><em class="replaceable"><code>DeviationFile</code></em></span></dt>
+                        <dd>
+                           <p>Indicates that deviations from the module in
+                                          <span class="emphasis"><em>DeviationFile</em></span> should be present in
+                                          the fxs file.
+                           </p>
+                           <p>This parameter can be given multiple times.</p>
+                        </dd>
+                        <dt><span class="term"><code class="option">-F</code><em class="replaceable"><code>features</code></em>, </span><span class="term"><code class="option">--feature </code><em class="replaceable"><code>features</code></em></span></dt>
+                        <dd>
+                           <p>
+                                            Indicates that support for the YANG
+                                            <span class="emphasis"><em>features</em></span> should be present in the
+                                            fxs file.  <em class="replaceable"><code>features</code></em> is a
+                                            string on the form
+                                            <em class="replaceable"><code>modulename</code></em>:[<em class="replaceable"><code>feature</code></em>(,<em class="replaceable"><code>feature</code></em>)*]
+                                          
+                           </p>
+                           <p>
+                                            This option is used to prune the data model by removing
+                                            all nodes that are defined with a "if-feature" that is
+                                            not listed as <em class="replaceable"><code>feature</code></em>.
+                                          
+                           </p>
+                           <p>
+                                            This option can be given multiple times.
+                                          
+                           </p>
+                           <p>
+                                            If this option is not given, nothing is pruned, i.e., it works
+                                            as if all features were explicitly listed.
+                                          
+                           </p>
+                           <p>
+                                            If the module uses a feature defined in an imported YANG
+                                            module, it must be given as
+                                            <em class="replaceable"><code>modulename:feature</code></em>.
+                                          
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">--no-yang-source</code></span></dt>
+                        <dd>
+                           <p>By default, the YANG module and submodules source is
+                                          included in the fxs file, so that a NETCONF or RESTCONF
+                                          client can download the module from the server.
+                           </p>
+                           <p>
+                                            If this option is given, the YANG source is not included.
+                                          
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">--no-features</code></span></dt>
+                        <dd>
+                           <p>Indicates that no YANG features from the given module
+                                          are supported.
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">--ignore-unknown-features</code></span></dt>
+                        <dd>
+                           <p>
+                                            Instructs the compiler to not give an error if an unknown
+                                            feature is specified with <code class="option">--feature</code>.
+                                          
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">-p</code>, </span><span class="term"><code class="option">--prefix</code> <em class="replaceable"><code>Prefix</code></em></span></dt>
+                        <dd>
+                           <p>
+                                            <span class="phrase">ConfD</span><span class="phrase">NCS</span> needs to have a unique prefix
+                                            for each loaded YANG module, which is used e.g. in the CLI
+                                            and in the APIs. By default the prefix defined in the YANG
+                                            module is used, but this prefix is not required to be
+                                            unique across modules. This option can be used to specify
+                                            an alternate prefix in case of conflicts. The special
+                                            value 'module-name' means that the module name will be
+                                            used for this prefix.
+                                          
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">--use-description [always]</code></span></dt>
+                        <dd>
+                           <p>
+                                            Normally, 'description' statements are ignored by
+                                            <span class="phrase">confdc</span><span class="phrase">ncsc</span>.  Instead the 'tailf:info'
+                                            statement is used as help and information text in the
+                                            CLI and Web UI.  When this option is specified, text in
+                                            'description' statements is used if no 'tailf:info'
+                                            statement is present.  If the option
+                                            <span class="emphasis"><em>always</em></span> is given, 'description' is
+                                            used even if 'tailf:info' is present.
+                                          
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">--export</code> <em class="replaceable"><code>Agent</code></em> ...</span></dt>
+                        <dd>
+                           <p>Makes the namespace visible to Agent. Agent is
+                                          either "none", "all", "netconf", "snmp", "cli", "webui",
+                                          "rest" or a free-text string.  This option overrides any
+                                          <code class="code">tailf:export</code> statements in the module.  The option
+                                          "all" makes it visible to all agents. Use
+                                          "none" to make it invisible to all agents.
+                           </p>
+                        </dd>
+                        <dt><span class="term">
+                                          <code class="option">--subagent</code> <em class="replaceable"><code>MountPath</code></em>
+                                        </span></dt>
+                        <dd>
+                           <p>This option is used to compile a subagent's
+                                          YANG modules for the master agent. It tells the
+                                          master agent that this namespace is handled by a
+                                          subagent. MountPath is an XPath expression (without instance
+                                          selectors) where the namespace is mounted in the master
+                                          agent's data hierarchy.
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">--fail-on-warnings</code></span></dt>
+                        <dd>
+                           <p>Make compilation fail on warnings.</p>
+                        </dd>
+                        <dt><span class="term">
+                                          <code class="option">-W</code>
+                                          <em class="replaceable"><code>ErrorCode</code></em>
+                                        </span></dt>
+                        <dd>
+                           <p>
+                                            Treat <em class="replaceable"><code>ErrorCode</code></em> as a warning,
+                                            even if <code class="option">--fail-on-warnings</code> is given.
+                                            <em class="replaceable"><code>ErrorCode</code></em> must be a warning
+                                            or a minor error.
+                                          
+                           </p>
+                           <p>
+                                          Use <code class="option">--list-errors</code> to get a listing of all
+                                          errors and warnings.
+                                          
+                           </p>
+                           <p>
+                                            The following example treats all warnings except the
+                                            warning for dependency mismatch as errors:
+                                          
+                           </p>
+                           <div class="informalexample"><pre class="screen">$ <span class="phrase">confdc</span><span class="phrase">ncsc</span> -c --fail-on-warnings -W TAILF_DEPENDENCY_MISMATCH</pre></div>
+                        </dd>
+                        <dt><span class="term">
+                                          <code class="option">-w</code>
+                                          <em class="replaceable"><code>ErrorCode</code></em>
+                                        </span></dt>
+                        <dd>
+                           <p>
+                                            Do not report the warning <em class="replaceable"><code>ErrorCode</code></em>,
+                                            even if <code class="option">--fail-on-warnings</code> is given.
+                                            <em class="replaceable"><code>ErrorCode</code></em> must be a warning.
+                                          
+                           </p>
+                           <p>
+                                          Use <code class="option">--list-errors</code> to get a listing of all
+                                          errors and warnings.
+                                          
+                           </p>
+                           <p>
+                                            The following example ignores the warning
+                                            TAILF_DEPENDENCY_MISMATCH:
+                                          
+                           </p>
+                           <div class="informalexample"><pre class="screen">$ <span class="phrase">confdc</span><span class="phrase">ncsc</span> -c -w TAILF_DEPENDENCY_MISMATCH</pre></div>
+                        </dd>
+                        <dt><span class="term">
+                                          <code class="option">-E</code>
+                                          <em class="replaceable"><code>ErrorCode</code></em>
+                                        </span></dt>
+                        <dd>
+                           <p>
+                                            Treat the warning <em class="replaceable"><code>ErrorCode</code></em> as
+                                            an error.
+                                          
+                           </p>
+                           <p>
+                                            Use <code class="option">--list-errors</code> to get a listing of all
+                                            errors and warnings.
+                                          
+                           </p>
+                           <p>
+                                            The following example treats only the warning for unused
+                                            import as an error:
+                                          
+                           </p>
+                           <div class="informalexample"><pre class="screen">$ <span class="phrase">confdc</span><span class="phrase">ncsc</span> -c -E UNUSED_IMPORT</pre></div>
+                        </dd>
+                        <dt><span class="term"><code class="option">--strict-yang</code></span></dt>
+                        <dd>
+                           <p>Force strict YANG compliance.  Currently this checks
+                                          that the deref() function is not used in XPath expressions
+                                          and leafrefs.
+                           </p>
+                        </dd>
+                     </dl>
+                  </div>
+               </div>
+               <div class="refsect2"><a id="man.1.confdc.options.mib2yang-std"></a><h3>Standard MIB to YANG options</h3>
+                  <div class="variablelist">
+                     <dl class="variablelist">
+                        <dt><span class="term"><code class="option">--mib2yang-std <em class="replaceable"><code>MibFile</code></em></code></span></dt>
+                        <dd>
+                           <p>Generate a YANG file from the MIB module (.mib file), in
+                                                accordance with the IETF standard, RFC-6643.
+                           </p>
+                           <p>
+                                            If the MIB IMPORTs other MIBs, these MIBs must be
+                                            available (as .mib files) to the compiler when a YANG
+                                            module is generated.  By default, all MIBs in the
+                                            current directory and all builtin MIBs are available.
+                                            Since the compiler uses the tool
+                                            <span class="command"><strong>smidump</strong></span> to perform the conversion to
+                                            YANG, the environment variable
+                                            <code class="varname">SMIPATH</code> can be set to a
+                                            colon-separated list of directories to search for MIB
+                                            files.
+                                          
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">-p</code>, </span><span class="term"><code class="option">--prefix</code> <em class="replaceable"><code>Prefix</code></em></span></dt>
+                        <dd>
+                           <p>
+                                            Specify a prefix to use in the generated YANG module.
+                                          
+                           </p>
+                           <p>
+                                            An appendix to the RFC describes how the prefix is automatically
+                                            generated, but such an automatically generated prefix is not always
+                                            unique, and
+                                            NSO
+                                            requires unique prefixes in all loaded modules.
+                                          
+                           </p>
+                        </dd>
+                     </dl>
+                  </div>
+               </div>
+               <div class="refsect2"><a id="man.1.confdc.options.mib2yang-mods"></a><h3>Standard MIB to YANG modification options</h3>
+                  <div class="variablelist">
+                     <dl class="variablelist">
+                        <dt><span class="term"><code class="option">--mib2yang-mods <em class="replaceable"><code>MibFile</code></em></code></span></dt>
+                        <dd>
+                           <p>Generate a combined YANG deviation/annotation file from the MIB
+                                                module (.mib file), which can be used to compile the yang
+                                                file generated by --mib2yang-std, to achieve a similar result
+                                                as with the non-standard --mib2yang translation.
+                                            
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">-p</code>, </span><span class="term"><code class="option">--prefix</code> <em class="replaceable"><code>Prefix</code></em></span></dt>
+                        <dd>
+                           <p>
+                                            Specify a prefix to use in the generated YANG module.
+                                          
+                           </p>
+                           <p>
+                                            An appendix to the RFC describes how the prefix is automatically
+                                            generated, but such an automatically generated prefix is not
+                                            always unique, and
+                                            NSO
+                                            requires unique prefixes in all loaded modules.
+                                          
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">--mib-annotation</code> <em class="replaceable"><code>MibA</code></em></span></dt>
+                        <dd>
+                           <p>
+                                            Provide a MIB annotation file to control how to override the
+                                            standard translation of specific MIB objects to YANG. See
+                                            <a class="link" href="man.5.mib_annotations.html" title="mib_annotations">mib_annotations(5)</a>.
+                                          
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">--revision <em class="replaceable"><code>Date</code></em></code></span></dt>
+                        <dd>
+                           <p>
+                                            Generate a revision statement with the provided Date as value in
+                                            the deviation/annotation file.
+                                          
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">--namespace</code> <em class="replaceable"><code>Uri</code></em></span></dt>
+                        <dd>
+                           <p>
+                                            Specify a uri to use as namespace in the generated
+                                            deviation/annotation module.
+                                          
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">--keep-readonly</code></span></dt>
+                        <dd>
+                           <p>
+                                            Do not generate any deviations of the standard config (false)
+                                            statements. Without this flag, config statements will be
+                                            deviated to true on yang nodes corresponding to writable MIB
+                                            objects.
+                                          
+                           </p>
+                        </dd>
+                     </dl>
+                  </div>
+               </div>
+               <div class="refsect2"><a id="man.1.confdc.options.mib2yang"></a><h3>MIB to YANG options</h3>
+                  <div class="variablelist">
+                     <dl class="variablelist">
+                        <dt><span class="term"><code class="option">--mib2yang <em class="replaceable"><code>MibFile</code></em></code></span></dt>
+                        <dd>
+                           <p>Generate a YANG file from the MIB module (.mib file).</p>
+                           <p>
+                                            If the MIB IMPORTs other MIBs, these MIBs must be
+                                            available (as .mib files) to the compiler when a YANG
+                                            module is generated.  By default, all MIBs in the
+                                            current directory and all builtin MIBs are available.
+                                            Since the compiler uses the tool
+                                            <span class="command"><strong>smidump</strong></span> to perform the conversion to
+                                            YANG, the environment variable
+                                            <code class="varname">SMIPATH</code> can be set to a
+                                            colon-separated list of directories to search for MIB
+                                            files.
+                                          
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">-u</code>, </span><span class="term"><code class="option">--uri</code> <em class="replaceable"><code>Uri</code></em></span></dt>
+                        <dd>
+                           <p>
+                                            Specify a uri to use as namespace in the generated YANG module.
+                                          
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">-p</code>, </span><span class="term"><code class="option">--prefix</code> <em class="replaceable"><code>Prefix</code></em></span></dt>
+                        <dd>
+                           <p>
+                                            Specify a prefix to use in the generated YANG module.
+                                          
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">--mib-annotation</code> <em class="replaceable"><code>MibA</code></em></span></dt>
+                        <dd>
+                           <p>
+                                            Provide a MIB annotation file to control how to translate
+                                            specific MIB objects to YANG.  See <a class="link" href="man.5.mib_annotations.html" title="mib_annotations">mib_annotations(5)</a>.
+                                          
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">--snmp-name</code></span></dt>
+                        <dd>
+                           <p>
+                                            Generate the YANG statement "tailf:snmp-name" instead of
+                                            "tailf:snmp-oid".
+                                          
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">--read-only</code></span></dt>
+                        <dd>
+                           <p>
+                                            Generate a YANG module where all nodes are "config false".
+                                          
+                           </p>
+                        </dd>
+                     </dl>
+                  </div>
+               </div>
+               <div class="refsect2"><a id="man.1.confdc.options.mibcompiler"></a><h3>MIB compiler options</h3>
+                  <div class="variablelist">
+                     <dl class="variablelist">
+                        <dt><span class="term"><code class="option">-c</code>, </span><span class="term"><code class="option">--compile</code> <em class="replaceable"><code>MibFile</code></em></span></dt>
+                        <dd>
+                           <p>Compile a MIB module (.mib file) to a .bin file.
+                                          
+                           </p>
+                           <p>
+                                            If the MIB IMPORTs other MIBs, these MIBs must be
+                                            available (as compiled .bin files) to the compiler.  By
+                                            default, all compiled MIBs in the current directory and
+                                            all builtin MIBs are available.  Use the parameters
+                                            <span class="emphasis"><em>--include-dir</em></span> or
+                                            <span class="emphasis"><em>--include-file</em></span> to specify where the
+                                            compiler can find the compiled MIBs.
+                                          
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">--verbose</code></span></dt>
+                        <dd>
+                           <p>Print extra debug info during compilation.</p>
+                        </dd>
+                        <dt><span class="term"><code class="option">--read-only</code></span></dt>
+                        <dd>
+                           <p>Compile the MIB as read-only.  All SET attempts over
+                                          SNMP will be rejected.
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">-I</code>, </span><span class="term"><code class="option">--include-dir</code> <em class="replaceable"><code>Dir</code></em></span></dt>
+                        <dd>
+                           <p>
+                                            Add the directory Dir to the list of directories to be
+                                            searched for IMPORTed MIBs (.bin files).
+                                          
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">--include-file</code> <em class="replaceable"><code>File</code></em></span></dt>
+                        <dd>
+                           <p>Add File to the list of files of IMPORTed
+                                          (compiled) MIB files.  File must be a .bin file.
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">--fail-on-warnings</code></span></dt>
+                        <dd>
+                           <p>Make compilation fail on warnings.</p>
+                        </dd>
+                        <dt><span class="term"><code class="option">--warn-on-type-errors</code></span></dt>
+                        <dd>
+                           <p>Warn rather than give error on type checks performed
+                                          by the MIB compiler.
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">--warn-on-access-mismatch</code></span></dt>
+                        <dd>
+                           <p>Give a warning if an SNMP object has read only
+                                          access to a config object.
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">--mib-annotation</code> <em class="replaceable"><code>MibA</code></em></span></dt>
+                        <dd>
+                           <p>Provide a MIB annotation file to fine-tune how
+                                          specific MIB objects should behave in the SNMP agent.  See <a class="link" href="man.5.mib_annotations.html" title="mib_annotations">mib_annotations(5)</a>.
+                           </p>
+                        </dd>
+                     </dl>
+                  </div>
+               </div>
+               <div class="refsect2"><a id="man.1.confdc.options.emit-h"></a><h3>Emit C header file options</h3>
+                  <div class="variablelist">
+                     <dl class="variablelist">
+                        <dt><span class="term"><code class="option">--emit-h</code> <em class="replaceable"><code>HFile</code></em></span></dt>
+                        <dd>
+                           <p>Generate a .h utility header file to be used when
+                                          working with the NSO C APIs.
+                           </p>
+                           <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+                              <h3 class="title">Note</h3>
+                              <p>When the header file is generated from a YANG
+                                             (.yang/.yin) file, the YANG file is currently compiled to a
+                                             temporary .fxs file as an intermediary step.
+                              </p>
+                           </div>
+                        </dd>
+                        <dt><span class="term">
+                                          <code class="option">--macro-prefix</code> <em class="replaceable"><code>Prefix</code></em>
+                                        </span></dt>
+                        <dd>
+                           <p>Without this option, all macro definitions in the
+                                          generated .h file are prepended with the argument of the
+                                          <code class="code">prefix</code> statement in the YANG module. If this
+                                          option is used, the macro definitions are prepended with
+                                          Prefix instead.
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">--include-type</code></span></dt>
+                        <dd>
+                           <p>If this option is used all macro definitions for
+                                          enums in the generated .h file have the type name as part
+                                          of their name.
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">--exclude-enums</code></span></dt>
+                        <dd>
+                           <p>If this option is used, macro definitions for enums
+                                          are omitted from the generated .h file. This can in some
+                                          cases be useful to avoid conflicts between enum symbols, or
+                                          between enums and other symbols.
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">--fail-on-warnings</code></span></dt>
+                        <dd>
+                           <p>If this option is used all warnings are treated as
+                                          errors and <span class="phrase">confdc</span><span class="phrase">ncsc</span> will fail its execution.
+                           </p>
+                        </dd>
+                     </dl>
+                  </div>
+               </div>
+               <div class="refsect2"><a id="man.1.confdc.options.emit-hrl"></a><h3>Emit Erlang header file options</h3>
+                  <div class="variablelist">
+                     <dl class="variablelist">
+                        <dt><span class="term"><code class="option">--emit-hrl</code> <em class="replaceable"><code>HrlFile</code></em></span></dt>
+                        <dd>
+                           <p>Generate a .hrl utility header file to be used when
+                                          working with the NSO Erlang APIs.
+                           </p>
+                           <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+                              <h3 class="title">Note</h3>
+                              <p>When the header file is generated from a YANG
+                                             (.yang/.yin) file, the YANG file is currently compiled to a
+                                             temporary .fxs file as an intermediary step.
+                              </p>
+                           </div>
+                        </dd>
+                        <dt><span class="term">
+                                          <code class="option">--macro-prefix</code> <em class="replaceable"><code>Prefix</code></em>
+                                        </span></dt>
+                        <dd>
+                           <p>Without this option, all macro definitions in the
+                                          generated .hrl file are prepended with the argument of the
+                                          <code class="code">prefix</code> statement in the YANG module. If this
+                                          option is used, the macro definitions are prepended with
+                                          Prefix instead.
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">--include-type</code></span></dt>
+                        <dd>
+                           <p>If this option is used all macro definitions for
+                                          enums in the generated .hrl file have the type name as part
+                                          of their name.
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">--exclude-enums</code></span></dt>
+                        <dd>
+                           <p>If this option is used, macro definitions for enums
+                                          are omitted from the generated .hrl file. This can in some
+                                          cases be useful to avoid conflicts between enum symbols, or
+                                          between enums and other symbols.
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">--fail-on-warnings</code></span></dt>
+                        <dd>
+                           <p>If this option is used all warnings are treated as
+                                          errors and <span class="phrase">confdc</span><span class="phrase">ncsc</span> will fail its execution.
+                           </p>
+                        </dd>
+                     </dl>
+                  </div>
+               </div>
+               <div class="refsect2"><a id="man.1.confdc.options.emit-mib"></a><h3>Emit SMIv2 MIB options</h3>
+                  <div class="variablelist">
+                     <dl class="variablelist">
+                        <dt><span class="term">
+                                          <code class="option">--emit-mib</code> <em class="replaceable"><code>MibFile</code></em>
+                                        </span></dt>
+                        <dd>
+                           <p>Generates a MIB file for use with SNMP
+                                          agents/managers.  See the appropriate section in the SNMP
+                                          agent chapter in the NSO User Guide for more
+                                          information.
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">--join-names capitalize</code></span></dt>
+                        <dd>
+                           <p>
+                                            Join element names without separator, but
+                                            capitalizing, to get the MIB name. This is the default.
+                                          
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">--join-names hyphen</code></span></dt>
+                        <dd>
+                           <p>
+                                            Join element names with hyphens to get the MIB name.
+                                          
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">--join-names force-capitalize</code></span></dt>
+                        <dd>
+                           <p>
+                                            The characters '.' and '_' can occur in YANG identifiers
+                                            but not in SNMP identifiers; they are converted to
+                                            hyphens, unless this option is given.  In this case,
+                                            such identifiers are capitalized (to lowerCamelCase).
+                                          
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">--oid</code> <em class="replaceable"><code>OID</code></em></span></dt>
+                        <dd>
+                           <p>
+                                            Let <span class="emphasis"><em>OID</em></span> be the top object's OID. If
+                                            the first component of the OID is a name not defined in
+                                            SNMPv2-SMI, the <code class="option">--import</code> option is also
+                                            needed in order to produce a valid MIB module, to import
+                                            the name from the proper module. If this option is not
+                                            given, a <code class="code">tailf:snmp-oid</code> statement must be
+                                            specified in the YANG header.
+                                          
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">--tagpath Path</code></span></dt>
+                        <dd>
+                           <p>
+                                            Generate the MIB only for a subtree of the module.  The
+                                            <span class="emphasis"><em>Path</em></span> argument is an absolute schema
+                                            node identifier, and it must refer to container nodes
+                                            only.
+                                          
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">--import</code> <em class="replaceable"><code>Module</code></em> <em class="replaceable"><code>Name</code></em> </span></dt>
+                        <dd>
+                           <p>
+                                            Add an IMPORT statement which imports
+                                            <span class="emphasis"><em>Name</em></span> from
+                                            the MIB <span class="emphasis"><em>Module</em></span>.
+                                          
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">--top</code> <em class="replaceable"><code>Name</code></em></span></dt>
+                        <dd>
+                           <p>
+                                            Let <span class="emphasis"><em>Name</em></span> be the name of the top object.
+                                          
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">--module</code> <em class="replaceable"><code>Name</code></em></span></dt>
+                        <dd>
+                           <p>
+                                            Let <span class="emphasis"><em>Name</em></span> be the module name. If
+                                            a <code class="code">tailf:snmp-mib-module-name</code> statement is in
+                                            the YANG header, the two names must be equal.
+                                          
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">--generate-oids</code></span></dt>
+                        <dd>
+                           <p>
+                                            Translate all data nodes into MIB objects, and generate OIDs
+                                            for data nodes without <code class="code">tailf:snmp-oid</code> statements.
+                                          
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">--generate-yang-annotation</code></span></dt>
+                        <dd>
+                           <p>
+                                            Generate a YANG annotation file containing the
+                                            <code class="code">tailf:snmp-oid</code>,
+                                            <code class="code">tailf:snmp-mib-module-name</code> and
+                                            <code class="code">tailf:snmp-row-status-column</code> statements for the
+                                            nodes. Implies <code class="code">--skip-symlinks</code>.
+                                          
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">--skip-symlinks</code></span></dt>
+                        <dd>
+                           <p>
+                                            Do not generate MIB objects for data nodes modeled through
+                                            symlinks.
+                                          
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">--fail-on-warnings</code></span></dt>
+                        <dd>
+                           <p>If this option is used all warnings are treated as
+                                          errors and <span class="phrase">confdc</span><span class="phrase">ncsc</span> will fail its execution.
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">--no-comments</code></span></dt>
+                        <dd>
+                           <p>
+                                            If this option is used no additional comments will be
+                                            generated in the MIB.
+                                          
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">--read-only</code></span></dt>
+                        <dd>
+                           <p>
+                                            If this option is used all objects in the MIB will be
+                                            read only.
+                                          
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">--prefix</code> <em class="replaceable"><code>String</code></em></span></dt>
+                        <dd>
+                           <p>
+                                            Prefix all MIB object names with
+                                            <span class="emphasis"><em>String</em></span>.
+                                          
+                           </p>
+                        </dd>
+                     </dl>
+                  </div>
+               </div>
+               <div class="refsect2"><a id="man.1.confdc.options.emit-snmpuser"></a><h3>Emit SNMP user options</h3>
+                  <div class="variablelist">
+                     <dl class="variablelist">
+                        <dt><span class="term">
+                                          <code class="option">--snmpuser</code>
+                                          <em class="replaceable"><code>EngineID</code></em>
+                                          <em class="replaceable"><code>User</code></em>
+                                          <em class="replaceable"><code>AuthType</code></em>
+                                          <em class="replaceable"><code>PrivType</code></em>
+                                          <em class="replaceable"><code>PassPhrase</code></em>
+                                        </span></dt>
+                        <dd>
+                           <p>Generates a user entry with localized keys for the
+                                          specified engine identifier. The output is an usmUserEntry
+                                          in XML format that can be used in an initiation file for
+                                          the SNMP-USER-BASED-SM-MIB::usmUserTable.  In short this
+                                          command provides key generation for users in SNMP v3.
+                                          This option takes five arguments: The EngineID is either a
+                                          string or a colon separated hexlist, or a dot separated
+                                          octet list.  The User argument is a string specifying the
+                                          user name.  The AuthType argument is one of md5, sha, or
+                                          none.  The PrivType argument is one of des, aes, or none.
+                                          The PassPhrase argument is a string.
+                           </p>
+                        </dd>
+                     </dl>
+                  </div>
+               </div>
+               <div class="refsect2"><a id="man.1.confdc.options.emit-java"></a><h3>Emit Java options</h3>
+                  <div class="variablelist">
+                     <dl class="variablelist">
+                        <dt><span class="term">
+                                          <code class="option">--emit-java</code> <em class="replaceable"><code>JFile</code></em>
+                                        </span></dt>
+                        <dd>
+                           <p>Generate a .java ConfNamespace file from a .fxs file
+                                          to be used when working with the Java library.
+                                          The file is useful, but not necessary when working with the
+                                          NAVU library. JFile could either be a file or a directory. If
+                                          JFile is a directory the resulting .java file will be created
+                                          in that directory with a name based on the module name in the
+                                          YANG module. If JFile is not a directory that file is created.
+                                          Use <span class="emphasis"><em>--print-java-filename</em></span>
+                                          to get the resulting file name.
+                                          
+                           </p>
+                        </dd>
+                        <dt><span class="term">
+                                          <code class="option">--print-java-filename</code>
+                                        </span></dt>
+                        <dd>
+                           <p>Only print the resulting java file name. Due to
+                                          restrictions of identifiers in Java the name of the Class
+                                          and thus the name of the file might get changed if
+                                          non Java characters are used in the name of the file or in the
+                                          name of the module. If this option is used no file is emitted
+                                          the name of the file which would be created is just printed on
+                                          stdout.
+                                          
+                           </p>
+                        </dd>
+                        <dt><span class="term">
+                                          <code class="option">--java-package</code> <em class="replaceable"><code>Package</code></em>
+                                        </span></dt>
+                        <dd>
+                           <p>If this option is used the generated java file will
+                                          have the given package declaration at the top.
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">--exclude-enums</code></span></dt>
+                        <dd>
+                           <p>If this option is used, definitions for enums
+                                          are omitted from the generated java file. This can in some
+                                          cases be useful to avoid conflicts between enum symbols, or
+                                          between enums and other symbols.
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">--fail-on-warnings</code></span></dt>
+                        <dd>
+                           <p>If this option is used all warnings are treated as
+                                          errors and <span class="phrase">confdc</span><span class="phrase">ncsc</span> will fail its execution.
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">-f</code>, </span><span class="term"><code class="option">--fxsdep</code> <em class="replaceable"><code>FxsFileOrDir</code></em>...</span></dt>
+                        <dd>
+                           <p>.fxs files (or directories containing .fxs files) to
+                                          be used to resolve cross namespace dependencies.
+                           </p>
+                        </dd>
+                     </dl>
+                  </div>
+               </div>
+               <div class="refsect2"><a id="man.1.confdc.options.ncs.bundle"></a><h3>NCS device module import options</h3>
+                  <p>
+                             These options are used to import device modules into NCS.
+                             The import is done as a source code transformation of the
+                             yang modules (MIBs) that define the managed device.
+                             By default, the imported modules (MIBs) will be augmented
+                             three times. Once under <span class="command"><strong>/devices/device/config</strong></span>,
+                             once under <span class="command"><strong>/devices/template/config</strong></span> and once under
+                             <span class="command"><strong>/devices/device/live-status</strong></span>.
+                           
+                  </p>
+                  <p>
+                             The <span class="command"><strong>ncsc</strong></span> commands to import device modules
+                             can take the following options:
+                           
+                  </p>
+                  <p><code class="option">--ncs-skip-template</code>
+                     
+                           This option makes the NCS bundle compilation skip the layout of
+                           the template tree - thus making the NCS feature of
+                           provisioning devices through the template tree unusable.
+                           The main reason for using this option is to save memory if the
+                           data models are very large.
+                           
+                  </p>
+                  <p><code class="option">--ncs-skip-statistics</code>
+                     
+                           This option makes the NCS bundle compilation skip the layout of
+                           the live tree. This option make sense for e.g NED modules
+                           that are sometimes config only. It also makes sense for the
+                           Junos module which doesn't have and "config false" data.
+                           
+                  </p>
+                  <p><code class="option">--ncs-skip-config</code>
+                     
+                           This option makes the NCS bundle compilation skip the layout of
+                           the config tree. This option make sense for some NED modules
+                           that are typically status and commands only.
+                           
+                  </p>
+                  <p><code class="option">--ncs-keep-callpoints</code>
+                     
+                           This option makes the NCS bundle compilation keep callpoints when
+                           performing the ncs transformation from modules to device modules,
+                           as long as the callpoints have either <code class="code">tailf:set-hook</code> or
+                           <code class="code">tailf:transaction-hook</code> as sub statement.
+                           
+                  </p>
+                  <p><code class="option">--ncs-device-dir Directory</code>
+                           This is the target directory where the output of the
+                           <span class="emphasis"><em>--ncs-compile-xxx</em></span> command is collected.
+                           
+                  </p>
+                  <p><code class="option">--lax-revision-merge</code>
+                           When we have multiple revisions of the same module, the
+                           <code class="filename">ncsc</code> command to import the module will fail if
+                           a YANG module does not follow the YANG module upgrade rules. See RFC 6020.
+                           This option makes <code class="filename">ncsc</code> ignore those strict rules.
+                           Use with extreme care, the end result may be that NCS is incompatible
+                           with the managed devices.
+                           
+                  </p>
+                  <p><code class="option">--ncs-depend-package PackageDir</code>
+                           When a package has references to Yang code in another package, use
+                           this flag when compiling the package.
+                           
+                  </p>
+                  <p><code class="option">--ncs-apply-deviations</code> This option will
+                           make <code class="option">--ncs-compile-bundle</code> apply deviations that
+                           are defined in one module with a target in another module. By
+                           default such deviations are ignored.
+                  </p>
+                  <p><code class="option">--ncs-device-type netconf | snmp-ned |
+                              generic-ned | cli-ned</code>
+                           All imported device modules adhere to a specific device type.
+                           
+                  </p>
+                  <div class="variablelist">
+                     <dl class="variablelist">
+                        <dt><span class="term">
+                                          <code class="option">--ncs-compile-bundle</code>
+                                          <em class="replaceable"><code>YangFileDirectory</code></em>
+                                        </span></dt>
+                        <dd>
+                           <p>
+                                            To import a set of managed device YANG files into NCS, gather the
+                                            required files in a directory and import by using this flag.
+                                            Several invocations will populate the mandatory
+                                            <code class="option">--ncs-device-dir</code> directory
+                                            with the compiler output.  This command also handles revision
+                                            management for NCS imported device modules. Invoke the command
+                                            several times with different
+                                            <code class="filename">YangFileDirectory</code> directories and the same
+                                            <code class="option">--ncs-device-dir</code> directory to accumulate
+                                            the revision history of the modules in several different
+                                            <code class="filename">YangFileDirectory</code> directories.
+                                          
+                           </p>
+                           <p>
+                                            This command will ignore any NCS-internal modules found in
+                                            the <code class="filename">YangFileDirectory</code> directory, as
+                                            well as modules annotating, deviating, or augmenting
+                                            NCS-internal modules. For the remaining ones, modules
+                                            having annotations or deviations for other modules are
+                                            identified, and such annotations and deviations are
+                                            processed as follows:
+                                          
+                           </p>
+                           <div class="orderedlist">
+                              <ol class="orderedlist" type="1">
+                                 <li class="listitem">
+                                    <p>
+                                                         Annotations using <code class="code">tailf:annotate</code> are
+                                                         ignored (this annotation mechanism is incompatible
+                                                         with the source code transformation).
+                                                       
+                                    </p>
+                                 </li>
+                                 <li class="listitem">
+                                    <p>
+                                                         Annotations using <code class="code">tailf:annotate-module</code>
+                                                         are applied (but may, depending on the type of
+                                                         annotation and the device type, be ignored by the
+                                                         transformation).
+                                                       
+                                    </p>
+                                 </li>
+                                 <li class="listitem">
+                                    <p>
+                                                         Deviations are applied if the
+                                                         <code class="option">--ncs-apply-deviations</code> option is
+                                                         given, otherwise ignored. The deviations are not
+                                                         applied by default, since NCS does not support
+                                                         different devices having different deviations for a
+                                                         common YANG module.
+                                                       
+                                    </p>
+                                 </li>
+                              </ol>
+                           </div>
+                           <p>
+                                            Typically when NCS needs to manage multiple revisions of the same
+                                            module, the filenames of the YANG modules are on the form of
+                                            <code class="filename">MOD@REVISION.yang</code>. The
+                                            <code class="option">--ncs-compile-bundle</code> as well as the
+                                            <code class="option">--ncs-compile-module</code> commands will rename
+                                            the source YANG files and organize the result as per revision
+                                            in the <code class="option">--ncs-device-dir</code> output directory.
+                                          
+                           </p>
+                           <p>
+                                            The output structure could look like:
+                              
+                                          
+                           </p>
+                           <div class="informalexample"><pre class="screen">ncsc-out
+|----modules
+|----|----fxs
+|----|----|----interfaces.fxs
+|----|----|----sys.fxs
+|----|----revisions
+|----|----|----interfaces
+|----|----|----|----revision-merge
+|----|----|----|----|----interfaces.fxs
+|----|----|----|----2009-12-06
+|----|----|----|----|----interfaces.fxs
+|----|----|----|----|----interfaces.yang.orig
+|----|----|----|----|----interfaces.yang
+|----|----|----|----2006-11-05
+|----|----|----|----|----interfaces.fxs
+|----|----|----|----|----interfaces.yang.orig
+|----|----|----|----|----interfaces.yang
+|----|----|----sys
+|----|----|----|----2010-03-26
+|----|----|----|----|----sys.yang.orig
+|----|----|----|----|----sys.yang
+|----|----|----|----|----sys.fxs
+|----|----yang
+|----|----|----interfaces.yang
+|----|----|----sys.yang</pre></div>
+                           <p>
+                              
+                                          where we have the following paths:
+                                          
+                           </p>
+                           <div class="orderedlist">
+                              <ol class="orderedlist" type="1">
+                                 <li class="listitem">
+                                    <p>
+                                                         <code class="filename">modules/fxs</code> contains the FXS files
+                                                         that are revision compiled and are ready to load into NCS.
+                                                       
+                                    </p>
+                                 </li>
+                                 <li class="listitem">
+                                    <p>
+                                                         <code class="filename">modules/yang/$MODULE.yang</code> is the
+                                                         augmented YANG file of the latest revision. NCS will run
+                                                         with latest revision of all YANG files, and the
+                                                         revision compilation will annotate that tree with information
+                                                         indication at which revision each YANG element was introduced.
+                                                       
+                                    </p>
+                                 </li>
+                                 <li class="listitem">
+                                    <p>
+                                                         <code class="filename">modules/revisions/$MODULE</code> contains
+                                                         the different revisions for $MODULE and also the merged
+                                                         compilation result.
+                                                       
+                                    </p>
+                                 </li>
+                              </ol>
+                           </div>
+                        </dd>
+                     </dl>
+                  </div>
+                  <div class="variablelist">
+                     <dl class="variablelist">
+                        <dt><span class="term">
+                                          <code class="option">--ncs-compile-mib-bundle</code>
+                                          <em class="replaceable"><code>MibFileDirectory</code></em>
+                                        </span></dt>
+                        <dd>
+                           <p>
+                                            To import a set of SNMP MIB modules for a managed device
+                                            into NCS, put the required MIBs in a directory and
+                                            import by using this flag.  The MIB files MUST have the
+                                            ".mib" extension.  The compile also picks up any MIB
+                                            annotation files present in this directory, with the
+                                            extension ".miba".  See <a class="link" href="man.5.mib_annotations.html" title="mib_annotations">mib_annotations(5)</a>
+                                            .
+                                          
+                           </p>
+                           <p>
+                                            This command translates all MIB modules to YANG modules
+                                            according to the standard translation algorithm defined
+                                            in I.D-ietf-netmod-smi-yang, then it generates a YANG
+                                            deviations module in order to handle writable
+                                            configuration data.  When all MIB modules have been
+                                            translated to YANG,
+                                            <span class="emphasis"><em>--ncs-compile-bundle</em></span> is invoked.
+                                          
+                           </p>
+                           <p>
+                                            Each invocation of this command will populate the
+                                            <span class="emphasis"><em>--ncs-device-dir</em></span>
+                                            with the compiler output.  This command also handles revision
+                                            management for NCS imported device modules. Invoke the command
+                                            several times with different
+                                            <span class="emphasis"><em>MibFileDirectory</em></span> directories and the same
+                                            <span class="emphasis"><em>--ncs-device-dir</em></span> directory to accumulate
+                                            the revision history of the modules in several different
+                                            <span class="emphasis"><em>MibFileDirectory</em></span> directories.
+                                          
+                           </p>
+                        </dd>
+                     </dl>
+                  </div>
+                  <div class="variablelist">
+                     <dl class="variablelist">
+                        <dt><span class="term">
+                                          <code class="option">--ncs-compile-module</code>
+                                          <em class="replaceable"><code>YangFile</code></em>
+                                        </span></dt>
+                        <dd>
+                           <p>
+                                            This ncsc command imports a single device YANG file into
+                                            the <span class="emphasis"><em>--ncs-model-dir</em></span> structure.
+                                            It's an alternative to
+                                            <span class="emphasis"><em>--ncs-compile-bundle</em></span>, however is just
+                                            special case of a one-module bundle. From a Makefile perspective
+                                            it may sometimes be easier to use this version of
+                                            bundle compilation.
+                                          
+                           </p>
+                        </dd>
+                     </dl>
+                  </div>
+               </div>
+               <div class="refsect2"><a id="man.1.confdc.options.misc"></a><h3>Misc options</h3>
+                  <div class="variablelist">
+                     <dl class="variablelist">
+                        <dt><span class="term">
+                                          <code class="option">--strip-yang-source</code>
+                                          <em class="replaceable"><code>FxsFile</code></em>
+                                        </span></dt>
+                        <dd>
+                           <p>Removes included YANG source from the fxs file.
+                                          This makes the file smaller, but it means that the YANG
+                                          module and submodules cannot be downloaded from the
+                                          server, unless they are present in the load path.
+                           </p>
+                        </dd>
+                        <dt><span class="term">
+                                          <code class="option">--get-info</code>
+                                          <em class="replaceable"><code>FxsFile</code></em>
+                                        </span></dt>
+                        <dd>
+                           <p>Various info about the file is printed on standard
+                                          output, including the names of the source files used to
+                                          produce this file, which <span class="phrase">confdc</span>
+                                          <span class="phrase">ncsc</span> version was used, and for
+                                          fxs files, namespace URI, other namespaces the file
+                                          depends on, namespace prefix, and mount point.
+                           </p>
+                        </dd>
+                        <dt><span class="term">
+                                          <code class="option">--get-uri</code> <em class="replaceable"><code>FxsFile</code></em>
+                                        </span></dt>
+                        <dd>
+                           <p>Extract the namespace URI.</p>
+                        </dd>
+                        <dt><span class="term"><code class="option">--version</code></span></dt>
+                        <dd>
+                           <p>Reports the <span class="phrase">confdc</span>
+                                          <span class="phrase">ncsc</span> version.
+                           </p>
+                        </dd>
+                     </dl>
+                  </div>
+               </div>
+            </div>
+            <div class="refsect1"><a id="man.1.confdc.example"></a><h2>EXAMPLE</h2>
+               <p>
+                        Assume we have the file  <code class="filename">system.yang</code>:
+                      
+               </p>
+               <div class="informalexample"><pre class="programlisting">module system {
+  namespace "http://example.com/ns/gargleblaster";
+  prefix "gb";
+
+  import ietf-inet-types {
+    prefix inet;
+  }
+  container servers {
+    list server {
+      key name;
+      leaf name {
+        type string;
+      }
+      leaf ip {
+        type inet:ip-address;
+      }
+      leaf port {
+        type inet:port-number;
+      }
+    }
+  }
+}</pre></div>
+               <p>To compile this file we do:</p>
+               <div class="informalexample"><pre class="screen">$ confdc -c system.yang</pre></div>
+               <div class="informalexample"><pre class="screen">$ ncsc -c system.yang</pre></div>
+               <p>If we intend to access data from this module from
+                      our C
+                      programs, it is meaningful to generate a .h file like this:
+               </p>
+               <div class="informalexample"><pre class="screen">$ confdc -c --emit-h blaster.h system.fxs</pre></div>
+               <p>The .h file contains <code class="code">#define</code>
+                      entries for the
+                      different nodes in system.yang. C code that needs to
+                      manipulate or read data from this module will typically need to include the
+                      generated .h file.
+               </p>
+               <p>
+                        If we intend to manipulate this data from our Java programs, we
+                        must typically also invoke:
+                      
+               </p>
+               <div class="informalexample"><pre class="screen">$ confdc --emit-java blaster.java system.fxs</pre></div>
+               <div class="informalexample"><pre class="screen">$ ncsc --emit-java blaster.java system.fxs</pre></div>
+               <p>Finally we show how to compile a clispec into a loadable
+                      format:
+               </p>
+               <div class="informalexample"><pre class="screen">$ confdc -c mycli.cli
+$ ls mycli.ccl
+myccl.ccl</pre></div>
+               <div class="informalexample"><pre class="screen">$ ncsc -c mycli.cli
+$ ls mycli.ccl
+myccl.ccl</pre></div>
+            </div>
+            <div class="refsect1"><a id="man.1.confdc.diagnostics"></a><h2>DIAGNOSTICS</h2>
+               <p>On success exit status is 0. On failure 1. Any error message
+                      is printed to stderr.
+               </p>
+            </div>
+            <div class="refsect1"><a id="d0e8012"></a><h2>YANG 1.1</h2>
+               <p>
+                        <span class="phrase">ConfD</span>
+                        <span class="phrase">NCS</span> supports YANG 1.1, as
+                        defined in draft-ietf-netmod-rfc6020bis-12, with the following
+                        exceptions:
+                        
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>
+                                       Type <code class="varname">empty</code> in unions and in list keys
+                                       is not supported.
+                                     
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>
+                                       Type <code class="varname">leafref</code> in unions are not
+                                       validated, and treated as a string internally.
+                                     
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>
+                                       <span class="command"><strong>anydata</strong></span> is not supported.
+                                     
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>
+                                       The new scoping rules for submodules are not implemented.
+                                       Specifically, a submodule must still include other
+                                       submodules in order to access definitions defined there.
+                                     
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>
+                                       Inline <span class="command"><strong>notification</strong></span> statements are handled by the
+                                       compiler, but not supported in the APIs.
+                                     
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>
+                                       The new XPath functions <code class="function">derived-from()</code> and
+                                       <code class="function">derived-from-or-self()</code> can only be
+                                       using with literal strings in the second argument.
+                                     
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>
+                                       Leafref paths without prefixes in top-level typedefs are
+                                       handled as in YANG 1.
+                                     
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <p>
+                      
+               </p>
+            </div>
+            <div class="refsect1"><a id="man.1.confdc.see_also"></a><h2>SEE ALSO</h2>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt><span class="term">The <span class="phrase">ConfD</span>
+                                   <span class="phrase">NCS</span> User Guide</span></dt>
+                     <dd>
+                        <p></p>
+                     </dd>
+                     <dt><span class="term">
+                                     <span class="citerefentry"><span class="refentrytitle"><span class="phrase">confd</span>
+                                             <span class="phrase">ncs</span></span>(1)</span>
+                                   </span></dt>
+                     <dd>
+                        <p>command to start and control the
+                                     <span class="phrase">ConfD</span>
+                                     <span class="phrase">NCS</span> daemon
+                        </p>
+                     </dd>
+                     <dt><span class="term">
+                                     <span class="citerefentry"><span class="refentrytitle">
+                                             <span class="phrase">confd.conf</span>
+                                             <span class="phrase">ncs.conf</span></span>(5)</span>
+                                   </span></dt>
+                     <dd>
+                        <p><span class="phrase">ConfD</span>
+                                     <span class="phrase">NCS</span>
+                                     daemon configuration file format
+                        </p>
+                     </dd>
+                     <dt><span class="term">
+                                     <span class="citerefentry"><span class="refentrytitle">clispec</span>(5)</span>
+                                   </span></dt>
+                     <dd>
+                        <p>CLI specification file format</p>
+                     </dd>
+                     <dt><span class="term">
+                                     <span class="citerefentry"><span class="refentrytitle">mib_annotations</span>(5)</span>
+                                   </span></dt>
+                     <dd>
+                        <p>MIB annotations file format</p>
+                     </dd>
+                  </dl>
+               </div>
+            </div>
+         </div><script type="text/javascript" src="common/main.js">
+            <!----></script><script type="text/javascript" src="common/splitterInit.js">
+            <!----></script><div class="footer" id="footer-legal">
+            <div class="footer-legal framework-footer-cq">
+               <div id="framework-footer">
+                  <div id="footer-legal"><a href="http://www.cisco.com/web/siteassets/legal/terms_condition.html">Terms &amp; Conditions</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/privacy.html">Privacy Statement</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/privacy.html#cookies">Cookie Policy</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/trademark.html">Trademarks</a></div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div id="sidebar">
+         <div id="leftnavigation" style="padding-top:3px;">
+            <div id="tabs">
+               <ul style="visibility: hidden;"></ul>
+               <div id="treeDiv"><img src="common/images/loading.gif" alt="loading table of contents..." id="tocLoading" style="display:block;" /><div id="ulTreeDiv" style="display:none">
+                     <ul id="tree" class="filetree">
+                        <li><span class="file"><a href="ncs.man.volume.1.html" tabindex="1">NCS man-pages, Volume 1</a></span><ul>
+                              <li><span class="file"><a href="man.1.ncs-backup.html" tabindex="1">ncs-backup</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-collect-tech-report.html" tabindex="1">ncs-collect-tech-report</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-installer.html" tabindex="1">ncs-installer</a></span></li>
+                              <li><span class="file"><a href="man.1.maapi.html" tabindex="1">ncs-maapi</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-make-package.html" tabindex="1">ncs-make-package</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-netsim.html" tabindex="1">ncs-netsim</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-project-create.html" tabindex="1">ncs-project-create</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-project-make-bundle.html" tabindex="1">ncs-project-export</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-project-git.html" tabindex="1">ncs-project-git</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-project-setup.html" tabindex="1">ncs-project-setup</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-project-update.html" tabindex="1">ncs-project-update</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-project.html" tabindex="1">ncs-project</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-setup.html" tabindex="1">ncs-setup</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-uninstall.html" tabindex="1">ncs-uninstall</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs.html" tabindex="1">ncs</a></span></li>
+                              <li><span class="file"><a href="man.1.confd_cli.html" tabindex="1">confdncs_cli</a></span></li>
+                              <li><span class="file"><a href="man.1.confd_cmd.html" tabindex="1">
+                                             confdncs_cmd</a></span></li>
+                              <li><span class="file"><a href="man.1.confd_load.html" tabindex="1">confdncs_load</a></span></li>
+                              <li id="webhelp-currentid"><span class="file"><a href="man.1.confdc.html" tabindex="1">confdc
+                                           ncsc</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-backup.html" tabindex="1">nct-backup</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-check.html" tabindex="1">nct-check</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-cli-cmd.html" tabindex="1">nct-cli-cmd</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-copy.html" tabindex="1">nct-copy</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-get-logs.html" tabindex="1">nct-get-logs</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-ha.html" tabindex="1">nct-ha</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-hostsfile.html" tabindex="1">nct-hostsfile</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-install.html" tabindex="1">nct-install</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-load-config.html" tabindex="1">nct-load-config</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-move-device.html" tabindex="1">nct-move-device</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-packages.html" tabindex="1">nct-packages</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-patch.html" tabindex="1">nct-patch</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-ssh-cmd.html" tabindex="1">nct-ssh-cmd</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-start.html" tabindex="1">nct-start</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-stop.html" tabindex="1">nct-stop</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-upgrade.html" tabindex="1">nct-upgrade</a></span></li>
+                              <li><span class="file"><a href="man.1.nct.html" tabindex="1">nct</a></span></li>
+                              <li><span class="file"><a href="man.1.pyang.html" tabindex="1">pyang</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ncs.man.volume.3.html" tabindex="1">NCS man-pages, Volume 3</a></span><ul>
+                              <li><span class="file"><a href="man.3.confd_lib.html" tabindex="1">confd_lib</a></span></li>
+                              <li><span class="file"><a href="man.3.confd_lib_cdb.html" tabindex="1">confd_lib_cdb</a></span></li>
+                              <li><span class="file"><a href="man.3.confd_lib_dp.html" tabindex="1">confd_lib_dp</a></span></li>
+                              <li><span class="file"><a href="man.3.confd_lib_events.html" tabindex="1">confd_lib_events</a></span></li>
+                              <li><span class="file"><a href="man.3.confd_lib_ha.html" tabindex="1">confd_lib_ha</a></span></li>
+                              <li><span class="file"><a href="man.3.confd_lib_lib.html" tabindex="1">confd_lib_lib</a></span></li>
+                              <li><span class="file"><a href="man.3.confd_lib_maapi.html" tabindex="1">confd_lib_maapi</a></span></li>
+                              <li><span class="file"><a href="man.3.confd_types.html" tabindex="1">confd_types</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ncs.man.volume.5.html" tabindex="1">NCS man-pages, Volume 5</a></span><ul>
+                              <li><span class="file"><a href="man.5.clispec.html" tabindex="1">clispec</a></span></li>
+                              <li><span class="file"><a href="man.5.mib_annotations.html" tabindex="1">mib_annotations</a></span></li>
+                              <li><span class="file"><a href="man.5.ncs.conf.html" tabindex="1">ncs.conf</a></span></li>
+                              <li><span class="file"><a href="man.5.tailf_yang_cli_extensions.html" tabindex="1">tailf_yang_cli_extensions</a></span></li>
+                              <li><span class="file"><a href="man.5.tailf_yang_extensions.html" tabindex="1">tailf_yang_extensions</a></span></li>
+                           </ul>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

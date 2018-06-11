@@ -1,0 +1,1139 @@
+############################################################
+SQlite3 HELP
+############################################################
+SQLite version 3.8.5 2014-08-15 22:37:57
+Enter ".help" for usage hints.
+Connected to a transient in-memory database.
+Use ".open FILENAME" to reopen on a persistent database.
+sqlite> .help
+.backup ?DB? FILE      Backup DB (default "main") to FILE
+.bail on|off           Stop after hitting an error.  Default OFF
+.clone NEWDB           Clone data into NEWDB from the existing database
+.databases             List names and files of attached databases
+.dump ?TABLE? ...      Dump the database in an SQL text format
+                         If TABLE specified, only dump tables matching
+                         LIKE pattern TABLE.
+.echo on|off           Turn command echo on or off
+.exit                  Exit this program
+.explain ?on|off?      Turn output mode suitable for EXPLAIN on or off.
+                         With no args, it turns EXPLAIN on.
+.headers on|off        Turn display of headers on or off
+.help                  Show this message
+.import FILE TABLE     Import data from FILE into TABLE
+.indices ?TABLE?       Show names of all indices
+                         If TABLE specified, only show indices for tables
+                         matching LIKE pattern TABLE.
+.log FILE|off          Turn logging on or off.  FILE can be stderr/stdout
+.mode MODE ?TABLE?     Set output mode where MODE is one of:
+                         csv      Comma-separated values
+                         column   Left-aligned columns.  (See .width)
+                         html     HTML <table> code
+                         insert   SQL insert statements for TABLE
+                         line     One value per line
+                         list     Values delimited by .separator string
+                         tabs     Tab-separated values
+                         tcl      TCL list elements
+.nullvalue STRING      Use STRING in place of NULL values
+.once FILENAME         Output for the next SQL command only to FILENAME
+.open ?FILENAME?       Close existing database and reopen FILENAME
+.output ?FILENAME?     Send output to FILENAME or stdout
+.print STRING...       Print literal STRING
+.prompt MAIN CONTINUE  Replace the standard prompts
+.quit                  Exit this program
+.read FILENAME         Execute SQL in FILENAME
+.restore ?DB? FILE     Restore content of DB (default "main") from FILE
+.save FILE             Write in-memory database into FILE
+.schema ?TABLE?        Show the CREATE statements
+                         If TABLE specified, only show tables matching
+                         LIKE pattern TABLE.
+.separator STRING      Change separator used by output mode and .import
+.shell CMD ARGS...     Run CMD ARGS... in a system shell
+.show                  Show the current values for various settings
+.stats on|off          Turn stats on or off
+.system CMD ARGS...    Run CMD ARGS... in a system shell
+.tables ?TABLE?        List names of tables
+                         If TABLE specified, only list tables matching
+                         LIKE pattern TABLE.
+.timeout MS            Try opening locked tables for MS milliseconds
+.timer on|off          Turn SQL timer on or off
+.trace FILE|off        Output each SQL statement as it is run
+.vfsname ?AUX?         Print the name of the VFS stack
+.width NUM1 NUM2 ...   Set column widths for "column" mode
+                         Negative values right-justify
+
+############################################################
+SQlite3 Part 1
+############################################################
+sqlite3 test.db // open sqlite and provide a database name
+
+// Creates a table in the database
+// Primary Key automatically generates values that start at 1 and increase by 1
+// name is a text field that will hold employee names
+
+create table employees (id integer primary key, name text); 
+
+// Insert some employees
+
+insert into employees (id, name) values(1, 'Max Eisenhardt');
+insert into employees (name) values('Pietro Maximoff');
+insert into employees (name) values('Wanda Maximoff');
+insert into employees (name) values('Mortimer Toynbee');
+insert into employees (name) values('Jason Wyngarde');
+
+// In column mode, each record is shown on a separate line with the data aligned in columns
+
+// headers on shows the column names, if off they wouldn't show
+
+.mode column
+.headers on
+select * from employees; // Show all employees
+
+// Changes the width of the columns
+
+.width 15 20
+
+.exit // Closes the database
+
+sqlite3 test.db // Reopen database
+
+.tables // Displays the tables
+
+// Displays every value on its own line
+
+.mode line
+select * from employees;
+
+// Shows the statements used to create the database. You could also provide a table name to see how that single table was made
+
+.schema OR .schema employees
+
+// You can get a more detailed database view
+
+.mode column
+.headers on
+select type, name, tbl_name, sql from sqlite_master order by type;
+
+// Used to show the current settings
+
+.show
+
+// Set NULL to 'NULL'
+
+.nullvalue 'NULL'
+.show
+
+// Change the prompt for SQLite
+
+.prompt 'sqlite3> '
+.show
+
+// Used to export database into SQL format on the screen
+
+.dump
+
+// Used to output to a file
+
+.output ./Documents/sqlite3Files/employees.sql
+.dump
+.output stdout // Restores output to the screen
+
+// You don't delete a database with any command. You have to delete the file itself
+
+// You can delete a table however
+
+drop table employees;
+
+// You can import the table then with
+
+.read ./Documents/sqlite3Files/employees.sql
+
+// .mode is used to change the formatting of the output
+// OPTIONS FOR MODE : column, csv
+// html: html table
+// insert: insert commands used 
+// list: List without commas
+// tabs: Tab separated list
+
+// How to output a CSV list to a file
+
+.mode csv // You could define the output should be csv
+.separator ,  // OR define the separator for the columns
+.output ./Documents/sqlite3Files/employees.csv
+.separator ,
+select * from employees;
+.output stdout
+
+// Output html table
+
+.mode html 
+select * from employees;
+.output stdout
+
+// line outputs column name and value
+
+.mode line
+select * from employees;
+.output stdout
+
+// Items with double quotes
+
+.mode tcl
+select * from employees;
+.output stdout
+
+############################################################
+SQlite3 Part 2 (Java Parsing)
+############################################################
+import java.util.Arrays;
+import java.util.Comparator;
+
+
+public class SuperPowers {
+	
+	static String[][] superPowerArray = {{"Power augmentation", "Ability to enhance or weaken the powers of others"}, 
+			{"Power bestowal", "Ability to bestow powers or jump-start latent powers"}, 
+			{"Power mimicry or absorption", "Ability to copy or absorb another''s powers or skills"},
+			{"Power negation", "Ability to cancel the superpowers of others"}, 
+			{"Power sensing", "Ability to sense or recognize superhuman powers"}, 
+			{"Healing factor", "Ability to heal rapidly and with greater finality from any injury"},
+			{"Acid generation", "Ability to generate acid, can be manifested through touch or as a spray"}, 
+			{"Animal mimicry", "Ability to take on the abilities of certain animals"}, 
+			{"Biological manipulation", "Ability to control all aspects of a living creature''s biological make-up"},
+			{"Body part substitution", "Ability to replace one''s limbs or other body parts with those of another"}, 
+			{"Bone manipulation", "Ability to manipulate the bones in one''s own body"}, 
+			{"Duplication (physical)", "Ability to create physical duplicates of oneself"},
+			{"Duplication (temporal)", "Ability to bring past and future versions of oneself back to the present"},
+			{"Echolocation", "Ability to determine location of objects in the environment by use of reflected sound waves"},
+			{"Firebreathing", "Ability generate gases from the body and exhale fire from the mouth"},
+			{"Invisibility", "Ability to render the user unseen to the naked eye"},
+			{"Invulnerability", "Ability to be immune to one or more forms of physical, mental, and spiritual damage and influence"},
+			{"Kinetic absorption", "Ability to absorb forms of kinetic energy into oneself and utilize it in some way, such as by converting it into physical strength or using it to power energy blasts"},
+			{"Superhuman longevity", "Ability to live longer than a normal human"},
+			{"Matter Ingestion", "Ability to consume any sort of matter without any ill effects on the user"},
+			{"Merging", "Ability to temporarily merge two or more beings into a single being, which results in a completely new and stronger being"},
+			{"Pheromone manipulation", "Ability to generate and control pheromones which may have various effects"},
+			{"Poison generation", "Ability to assault others with one or more varieties of toxins, with widely disparate effects"},
+			{"Prehensile / animated hair", "Ability to animate and lengthen one''s hair"},
+			{"Reactive adaptation / evolution", "Ability to develop a resistance or immunity to whatever they were injured by or exposed to"},
+			{"Self-detonation / reformation", "Ability to explode one''s body mass and reform"},
+			{"Sonic scream", "Ability to generate vocal sounds of a higher amplitude than a normal human"},
+			{"Vortex breath", "Ability to inhale/exhale with superhumanly powerful strength"},
+			{"Superhuman endurance", "Ability to have a higher resistance to one or more forms of damage before being injured as well as the ability to exert ones self in an activity indefinitely without becoming tired"},
+			{"Superhuman agility", "Ability to react faster than a normal human and to possess greater flexibility and with higher/farther jumping capacity"},
+			{"Superhuman senses", "Ability to see, smell, taste, feel and/or hear more than a normal Human"},
+			{"Superhuman strength", "Ability to have a level of strength much higher than normally possible given their proportions"},
+			{"Night vision", "The ability to see clearly in total darkness"},
+			{"X-ray vision", "Ability to see through solid matter"},
+			{"Heat vision", "Ability to burn objects and other individuals with one''s gaze"},
+			{"Telescopic vision", "Ability to magnify and extend one''s vision to various levels"},
+			{"Freeze vision", "Ability to freeze objects and other individuals with one''s gaze"},
+			{"Wallcrawling", "Ability to adhere to solid surfaces, including walls and ceilings"},
+			{"Waterbreathing", "Ability to respirate through water in lieu of a gaseous medium"},
+			{"Ecological empathy", "The ability to sense the overall well-being and conditions of one''s immediate environment and natural setting stemming from a psychic sensitivity to nature"},
+			{"Innate capability", "Ability to naturally have skills and/or knowledge typically earned through learning"},
+			{"Omni-linguism", "Ability to understand any form of language"},
+			{"Omniscience", "Ability to know anything and everything"},
+			{"Superhuman mentality", "Ability to have intelligence quotient far above that of a genius level"},
+			{"Superhuman tracking", "Ability to track an individual or object through supernatural means"},
+			{"Astral projection", "This is the ability to separate and control one''s astral body"},
+			{"Cross-dimensional awareness", "Ability to detect actions and events in other dimensions"},
+			{"Empathy", "Ability to read or sense the emotions and/or control the emotions or feelings of others"},
+			{"Mediumship", "Ability to see and communicate with the dead"},
+			{"Precognition", "Ability to perceive the future"},
+			{"Psychometry", "Ability to relate details about the past or future condition of an object or location"},
+			{"Telepathy", "Ability to read the thoughts of, or to mentally communicate with others"},
+			{"Technopathy", "Electrical/telekinetic manipulation that allows for a mental interface to manipulate technology"},
+			{"Astral trapping", "Ability to cause an astral projection to stay on the astral plane"},
+			{"Memory manipulation", "Ability to erase or enhance the memories of another"},
+			{"Mind control", "The ability to alter the perceptions of others, and general ability to control the actions of others with the mind"},
+			{"Possession", "Ability to take control and inhabit the body of an individual"},
+			{"Psionic blast", "Ability to overload another''s mind causing pain, memory loss, lack of consciousness, vegetative state or death"},
+			{"Psychic weapons", "Ability to create a weapon of psychic energy that can harm mentally and not physically"},
+			{"Animation", "Ability to bring inanimate objects to life or to free an individual from petrification"},
+			{"Darkness or shadow manipulation", "Ability to create or manipulate darkness"},
+			{"Density control", "Ability to increase or decrease the natural density of an object and/or one''s self"},
+			{"Disintegration", "Ability to disintegrate matter through touch or through beams"},
+			{"Elemental transmutation", "The ability to alter chemical elements, changing them from one substance to another by rearranging the atomic structure"},
+			{"Gravity manipulation", "Ability to manipulate or generate gravitons"},
+			{"Immortality", "Ability to live forever. This may be complete immortality encompassing invulnerability, partial invulnerability to all but specific events "},
+			{"Intangibility or phasing", "Ability to quantum tunnel through solid matter without harm"},
+			{"Light manipulation", "Ability to control, generate or absorb light particles"},
+			{"Magnetism manipulation", "Ability to control and/or generate magnetic fields"},
+			{"Mass manipulation", "Ability to increase or decrease mass in an object"},
+			{"Microwave manipulation", "The ability to convert ambient electromagnetic energy into microwaves and manipulate it into various effects such as heat, light, and radiation"},
+			{"Molecular manipulation", "Ability to mentally manipulate the molecules of objects and/or one''s self on a molecular level"},
+			{"Probability manipulation", "Ability to alter probability, causing unlikely things to happen, or likely things not to happen"},
+			{"Radiation manipulation", "Ability to generate, manipulate or have immunity to toxic radiation"},
+			{"Reality warping", "Ability to change or manipulate reality itself"},
+			{"Resurrection", "Ability to come back to life after being killed as well as to bring others back to life"},
+			{"Sound manipulation", "Ability to manipulate sound"},
+			{"Time manipulation", "Ability to affect the flow of time by slowing, accelerating, reversing, or stopping it"},
+			{"Air and wind manipulation", "Ability to control, generate, or absorb air or wind"},
+			{"Animal control", "Ability to communicate with animals, birds and even aquatic creatures and get them to perform tasks on command"},
+			{"Cold and ice manipulation", "Ability to reduce the kinetic energy of atoms and thus reduce temperature, can be used to control, generate, or absorb ice"},
+			{"Earth manipulation", "Ability to control earth; sand, stone, rock, lava, dirt, or other minerals"},
+			{"Electric manipulation", "Ability to control, generate or absorb electric fields"},
+			{"Fire and heat manipulation", "Ability to control the kinetic energy of atoms to generate, control or absorb fire"},
+			{"Plant manipulation", "Ability to create, control, manipulate or animate plant life"},
+			{"Water and moisture manipulation", "Ability to control, generate or absorb water"},
+			{"Weather manipulation", "Ability to control or mentally affect the weather"},
+			{"Concussion beams", "Ability to generate or transform various forms of energy into a solid or concussive beam of energy"},
+			{"Energy blasts", "Ability to expel various forms of energy from the body"},
+			{"Energy constructs", "Ability to create complex shapes such as giant boxing gloves or cages or even functional machinery such as fire extinguishers or laser rifles out of solid energy"},
+			{"Energy conversion", "Ability to absorb one form of energy and convert it into another form of energy"},
+			{"Force field generation", "Ability to project powerful fields of manipulated energy"},
+			{"Electrical transportation", "Ability to travel through electrical conduits such as power lines or telephone lines"},
+			{"Omnipresence", "Ability to be present anywhere and everywhere simultaneously"},
+			{"Dimensional travel", "Ability to travel between two or more dimensions, realities, realms"},
+			{"Portal creation", "Ability to create wormholes, portation discs or other spatial portals for transport"},
+			{"Summoning", "Ability to summon beings or objects for assistance"},
+			{"Superhuman speed", "The ability to move, run, fly, react, think, and sense at speeds much faster than a normal human"},
+			{"Teleportation", "Ability to move from one place to another without occupying the space in between"},
+			{"Time travel", "Ability to travel back or forth through time"},
+			{"Flight", "Ability to fly"},
+			{"Animal morphing", "Ability to take on animal forms"},
+			{"Elasticity", "Ability to stretch, deform, expand or contract one''s body into any form imaginable"},
+			{"Inorganic", "Ability to transform completely into an inorganic substance while retaining organic properties"},
+			{"Liquification", "Ability to turn partially or completely into a liquid"},
+			{"Size shifting", "Ability to increase or decrease one''s size"},
+			{"Sublimation", "Ability to transform into a gaseous, mist, or fog-like form"},
+			{"Substance mimicry", "Ability to transform into any substance touched"}};
+	
+	static String[][] superhumanArray = {{"Tony Stark", "Iron Man"}, 
+		{"Steve Rodgers", "Captain America"}, 
+		{"Henry Pym", "Ant-Man"},
+		{"Janet van Dyne", "Wasp"},
+		{"Thor", "Thor"},
+		{"Bruce Banner", "Hulk"}};
+	
+	static String[][] specificPowerArray = {{"13", "Can emit pulse bolts from the hands and chest. Can generate a defensive energy shield, a freeze-beam and sonic blasts"},
+		{"34", "2280 mph"},
+		{"95", "90 tons"},
+		{"95", "1200 lbs"},
+		{"109", "Uses a nigh-indestructible disc-shaped shield as a throwing weapon and shield"},
+		{"83", "Microscopic to 100 feet gigantic"},
+		{"34", "40 mph"},
+		{"29", "Electrical force bursts"},
+		{"95", "Over 100 Tons"},
+		{"107", "Can summon the elements of the storm being lightning, rain, wind, and snow"},
+		{"40", "Near invulnerability"},
+		{"34", "1500 mph"},
+		{"95", "Over 100 Tons"}};
+	
+	static String[][] identityPowerArray = {{"1", "1", "2", "3"},
+											{"2", "4", "5", "14"},
+											{"3", "6", "14", "14"},
+											{"4", "6", "7", "8"},
+											{"5", "9", "10", "11"},
+											{"6", "11", "12", "13"}};
+	
+	public static void main(String[] args){
+		
+		// sort sorts the Array based on the order specified by 
+		// the comparator. We are sorting the array in this situation
+		// based on the powers name. To sort by the description we
+		// would replace power1[0] with power1[1] for example
+		
+		Arrays.sort(superPowerArray, new Comparator<String[]>() {
+            
+			// compare returns a negative number if the first
+			// argument is less then the other. Zero if they
+			// are equal and positive number if greater than.
+			
+            public int compare(final String[] power1, final String[] power2) {
+            	
+            	// Compares power1 to power2
+            	// If power1 >= power2 then power1 is compared to 
+            	// the next power that follows
+            	// If power1 < power2 then power2 is compared to 
+            	// the next power that follows
+            	
+            	// If the following comparison was switched then
+            	// reverse alphabetical order would be used
+            	
+                return power1[0].compareTo(power2[0]);
+            }
+        });
+		
+		SuperPowers superPowerTools = new SuperPowers();
+		
+		// Generate insert statements for general_power table
+		
+		superPowerTools.generateInsertStatements(superPowerArray, "general_power", "power_type", "general_power_desc");
+		
+		// Generate insert statements for identity table
+		
+		superPowerTools.generateInsertStatements(superhumanArray, "identity", "secret_identity", "character");
+		
+		// Generate insert statements for power table
+		
+		superPowerTools.generateInsertStatements(specificPowerArray, "power", "power_type_id", true, "power_desc", false);
+		
+		// Generate insert statements for superhuman table
+		
+		superPowerTools.generateInsertStatements(identityPowerArray, "superhuman", "identity_id", true, 
+				"power_id_1", true, "power_id_2", true, "power_id_3", true);
+		
+		
+	}
+	
+	public void generateInsertStatements(String[][] theArray, String tableName, String cellName1, String cellName2){
+		
+		// Generate all insert statements for a table
+		
+		for(String[] item : theArray){
+					
+			System.out.println("insert into " + tableName + " (" +
+					cellName1 + ", " + cellName2 + ") values ('" + 
+					item[0] + "', '" + item[1] + "');");
+					
+		}
+		
+	}
+	
+	// Used to create insert statements when values may be ints
+	
+	public void generateInsertStatements(String[][] theArray, String tableName, String cellName1, boolean isInt, String cellName2, boolean isInt2){
+		
+		// Generate all insert statements for a table
+		
+		for(String[] item : theArray){
+					
+			String insertStatement = "insert into " + tableName + " (" +
+					cellName1 + ", " + cellName2 + ") values ("; 
+			
+			if(isInt){
+				
+				insertStatement += item[0] + ", ";
+				
+			} else {
+				
+				insertStatement += "'" + item[0] + ", ";
+				
+			}
+			
+			if(isInt2){
+				
+				insertStatement += item[1] + ");";
+				
+			} else {
+				
+				insertStatement += "'" + item[1] + "');";
+				
+			}
+			
+			System.out.println(insertStatement);
+					
+		}
+		
+	}
+	
+	public void generateInsertStatements(String[][] theArray, String tableName, String cellName1, boolean isInt, String cellName2, boolean isInt2, 
+			String cellName3, boolean isInt3, String cellName4, boolean isInt4){
+		
+		// Generate all insert statements for a table
+		
+		for(String[] item : theArray){
+					
+			String insertStatement = "insert into " + tableName + " (" +
+					cellName1 + ", " + cellName2 + ", " + cellName3 + ", " + cellName4 + ") values ("; 
+			
+			if(isInt){
+				
+				insertStatement += item[0] + ", ";
+				
+			} else {
+				
+				insertStatement += "'" + item[0] + ", ";
+				
+			}
+			
+			if(isInt2){
+				
+				insertStatement += item[1] + ", ";
+				
+			} else {
+				
+				insertStatement += "'" + item[1] + ", ";
+				
+			}
+			
+			if(isInt3){
+				
+				insertStatement += item[2] + ", ";
+				
+			} else {
+				
+				insertStatement += "'" + item[2] + ", ";
+				
+			}
+			
+			if(isInt4){
+				
+				insertStatement += item[3] + ");";
+				
+			} else {
+				
+				insertStatement += "'" + item[3] + "');";
+				
+			}
+			
+			System.out.println(insertStatement);
+					
+		}
+		
+	}
+
+}
+
+############################################################
+SQlite3 Part 3
+############################################################
+1. Each command ends with a semi-colon
+2. There are 3 types of values
+	a. String literals, which are characters surrounded almost always with single quotes
+	b. Numeric literals, which are numbers of any type without quotes
+	c. Binary literals are numbers represented as hexidecimals
+	
+3. There are 5 types in SQLite
+	a. integer
+	b. real
+	c. text
+	d. blob
+	e. null
+	
+4. To use single quotes in a string add 2 in a row rather then one ''
+5. Single line comments start with 2 lines --
+6. Multiline comments start with /* and end with */
+7. SQL is case insensitive
+8. Each table can have only one primary key
+
+select * // The action / verb
+from general_power // The subject of your query
+where power_type='Invulnerability'; // The predicate which describes the subject
+
+CREATE TABLE origin_issue (id INTEGER PRIMARY KEY, 
+comic_name TEXT NOT NULL COLLATE NOCASE,
+issue_number INTEGER NOT NULL DEFAULT '0',
+comic_issn INTEGER UNIQUE CHECK(comic_issn>0),
+character_id integer,
+FOREIGN KEY(character_id) REFERENCES identity(id));
+
+// primary key means this will auto increment by 1 and remain unique
+// NOT NULL means it can't contain a null value
+// COLLATE NOCASE converts upper case characters to lowercase characters when comparing
+// COLLATE BINARY if 2 strings are compared, they are compared using the exact characters
+// COLLATE RTRIM compares just like BINARY except trailing white space is ignored
+// DEFAULT defines a default value to use
+// UNIQUE makes sure that the same number isn't used in this column
+// CHECK sets a rule that all data in the column must obey
+// A FOREIGN KEY in one table references a PRIMARY KEY in another table
+
+// To add a column 
+// It Can't be UNIQUE, PRIMARY KEY
+// It can't have a default value CURRENT_TIME, CURRENT_DATE, CURRENT_TIMESTAMP, // or an expression in parentheses
+// If NOT NULL it can't have a NULL value
+
+ALTER TABLE origin_issue
+ADD COLUMN writer TEXT;
+
+// You can rename a table
+
+ALTER TABLE origin_issue RENAME TO first_issue;
+
+// You can't delete columns in any way
+
+// SELECT is used to query your database
+
+// When using SELECT you define many clauses that narrow down to a specific type // of data
+
+SELECT id, character 
+FROM identity;
+
+select * from superhuman;
+
+.schema superhuman
+
+select identity_id
+from superhuman
+where power_id_1 = 6; 
+
+select identity_id
+from superhuman
+where power_id_2 = 14 and power_id_3 = 14; 
+
+select identity_id
+from superhuman
+where power_id_2 = 14 or power_id_3 = 14; 
+
+// LIKE can be used with % to match a series of characters and zero or more 
+// characters there after
+
+select power_type
+from general_power
+where power_type LIKE 'Superhuman%';
+
+// Return all matches for Superhuman followed by an s word
+
+select power_type
+from general_power
+where power_type LIKE 'Superhuman%s%';
+
+// Return all matches for Superhuman followed by an s word
+
+select power_type
+from general_power
+where power_type LIKE 'Superhuman%s%'
+AND power_type NOT LIKE '%strength%';
+
+// _ can be used to represent any 1 character or space
+
+select power_type
+from general_power
+where power_type LIKE 'Power_________';
+
+// ORDER BY allows you to define sorting either DESC or ASC
+// LIMIT allows you to limit your results
+// OFFSET will skip the first number or results 
+
+select power_type, general_power_desc
+from general_power
+where general_power_desc LIKE '%control%'
+ORDER BY power_type ASC, power_type LIMIT 10 OFFSET 2;
+
+// You can also use a comma after LIMIT offset_number, limit_number
+
+select power_type, general_power_desc
+from general_power
+where general_power_desc LIKE '%control%'
+ORDER BY power_type ASC, power_type LIMIT 2, 10;
+
+// You can change the title of columns with AS like this
+
+SELECT power_type AS 'Common Power'
+FROM general_power WHERE power_type LIKE 'Superhuman%';
+
+// Fix Captain Americas Last Name
+
+select * from identity;
+
+UPDATE identity SET secret_identity='Steve Rogers'
+WHERE id=2;
+
+// Use DISTINCT to output the first result and then ignore duplicates
+
+INSERT INTO identity (secret_identity, character)
+VALUES ('Scott Lang', 'Ant-Man');
+
+select * from identity;
+
+SELECT DISTINCT character
+FROM identity;
+
+// DELETE a row in a table
+
+DELETE FROM identity
+WHERE id=7;
+
+select * from identity;
+
+// SQLites SELECT can also be used to perform numerous Arithmetic, Boolean, 
+// Bitwise, Relational and other Operations
+
+SELECT (1+2) / (6-3) * 10;
+
+SELECT 15 % 10;
+
+// You can perform boolean operations in which 0 is false and any other number 
+// is true
+
+SELECT 1 AND 0, 1 OR 0, NOT 1;
+
+// Relational Operators all work as well
+// <, <=, >, >=, =, ==, !=, <>
+
+SELECT 1 < 2, 3 >= 2, 1 = 1, 1 <> 2;
+
+// Other Operators
+
+SELECT 'Super' || 'hero'; // String concatenation
+
+SELECT 'Paul' IN ('Mike', 'Phil', 'Paul');
+
+SELECT * FROM identity WHERE character IN ('Iron Man', 'Hulk');
+
+// GLOB is like LIKE, but it is case sensitive and it uses the UNIX file 
+// globbing syntax
+
+// Find results that contain super, but not Super
+
+SELECT * FROM general_power
+WHERE general_power_desc
+GLOB '*super*';
+
+// Find any match that has 9 characters
+
+SELECT * FROM general_power
+WHERE power_type
+GLOB '?????????';
+
+// BETWEEN can be used to make comparisons as well
+
+SELECT * FROM power;
+
+SELECT * FROM power
+WHERE power_type_id
+BETWEEN 1 AND 40; 
+
+Random SQLite Functions
+
+SELECT random(); // Generate random number
+
+SELECT ABS(RANDOM() % 100); // Random number between 0 and 100
+
+// Generate minimum and maximum values from a result
+
+SELECT min(id), max(id)
+FROM identity;
+
+SELECT LOWER(secret_identity), 
+UPPER(character)
+FROM identity;
+
+SELECT total_changes(); // Returns the total number of changes made to the 
+// database since it was last opened
+
+SELECT LENGTH('Iron Man'); // Returns the number of characters in a string
+
+SELECT COUNT(*) FROM identity; // Number of rows in the table
+
+SELECT date(); // Return the current date
+
+SELECT time(); // Return the current time
+
+SELECT datetime(); // Return the current date and time
+
+SELECT date('now', '-30 days'); // Get the date 30 days ago
+
+SELECT date('now', '-20 months'); // Get the date 30 days ago
+
+SELECT date('now', 'weekday 0'); // Get the date of the next Sunday
+
+SELECT time('now', '-1000 minutes');
+
+SELECT time('now', '-1000 seconds');
+
+SELECT strftime('%m-%d-%Y'); // You can modify the date format
+
+// Find Thanksgiving day
+
+SELECT date('now', 'start of year', '10 months', '21 days', 'weekday 4');
+
+
+-- CREATE DATABASE
+
+sqlite3 studentdb.db
+
+-- There are no ENUMs in SQLite, so we need a separate table for sex
+
+CREATE TABLE sex_type(
+sex_id TEXT PRIMARY KEY NOT NULL,
+sex_type INTEGER);
+
+-- Fill the sex_type table
+
+INSERT INTO sex_type(sex_id, sex_type) VALUES ('M',1);
+INSERT INTO sex_type(sex_id, sex_type) VALUES ('F',2);
+
+--------
+
+CREATE TABLE student(
+name VARCHAR(23) NOT NULL, -- VARCHAR is treated as TEXT and 23 is ignored
+sex CHARACTER(1) NOT NULL, -- CHARACTER and the length restriction is ignored
+id_number INTEGER PRIMARY KEY AUTOINCREMENT, 
+foreign key(sex) references sex_type(sex_id));
+
+--------
+
+-- Creating an ENUM that represents the type of test (Quiz or Test)
+
+CREATE TABLE test_type(
+test_id TEXT PRIMARY KEY NOT NULL,
+test_type INTEGER);
+
+-- Fill the test_type table
+
+INSERT INTO test_type(test_id, test_type) VALUES ('Q',1);
+INSERT INTO test_type(test_id, test_type) VALUES ('T',2);
+
+--------
+
+CREATE TABLE test(
+  date     DATE NOT NULL, -- DATE is seen as a NUMERIC type
+  type_test TEXT NOT NULL,
+  test_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  FOREIGN KEY (type_test) REFERENCES test_type (test_id));
+
+
+CREATE TABLE test_score(
+student_id INTEGER NOT NULL,
+test_id INTEGER NOT NULL,
+score INTEGER NOT NULL,
+FOREIGN KEY (test_id) REFERENCES test (test_id),
+FOREIGN KEY (student_id) REFERENCES student (id_number),
+PRIMARY KEY (test_id, student_id)); -- A Composite Primary Key
+
+--------
+
+CREATE TABLE absence(
+  student_id INTEGER NOT NULL,
+  date       DATE NOT NULL,
+  PRIMARY KEY (student_id, date),
+  FOREIGN KEY (student_id) REFERENCES student (id_number));
+  
+-------
+
+INSERT VALUES
+
+INSERT INTO student (name, sex) VALUES ('Sally','F');
+INSERT INTO student (name, sex) VALUES ('Mark','M');
+INSERT INTO student (name, sex) VALUES ('Paul','M');
+INSERT INTO student (name, sex) VALUES ('Peter','M');
+INSERT INTO student (name, sex) VALUES ('Michael','M');
+INSERT INTO student (name, sex) VALUES ('Thomas','M');
+INSERT INTO student (name, sex) VALUES ('Rebecca','F');
+INSERT INTO student (name, sex) VALUES ('Willow','F');
+INSERT INTO student (name, sex) VALUES ('Sarah','F');
+INSERT INTO student (name, sex) VALUES ('Emily','F');
+
+
+-- date, type_test, test_id
+
+INSERT INTO test VALUES (date('now'),'Q',1); -- New Test: NULL for Autoincrement
+
+-- student_id, test_id, score
+
+INSERT INTO test_score VALUES (1,1,24);
+INSERT INTO test_score VALUES (2,1,22);
+INSERT INTO test_score VALUES (3,1,-1);
+INSERT INTO test_score VALUES (4,1,19);
+INSERT INTO test_score VALUES (5,1,25);
+INSERT INTO test_score VALUES (6,1,22);
+INSERT INTO test_score VALUES (7,1,18);
+INSERT INTO test_score VALUES (8,1,16);
+INSERT INTO test_score VALUES (9,1,20);
+INSERT INTO test_score VALUES (10,1,19);
+
+-- student_id, date
+
+INSERT INTO absence VALUES (3,date('now')); -- One student was absent
+
+------- NEW TEST
+
+-- date, type_test, test_id
+
+INSERT INTO test VALUES ('2013-06-10','T',2); -- Put quotes around date
+
+-- student_id, test_id, score
+
+INSERT INTO test_score VALUES (1,2,48);
+INSERT INTO test_score VALUES (2,2,44);
+INSERT INTO test_score VALUES (3,2,42);
+INSERT INTO test_score VALUES (4,2,-1);
+INSERT INTO test_score VALUES (5,2,40);
+INSERT INTO test_score VALUES (6,2,45);
+INSERT INTO test_score VALUES (7,2,50);
+INSERT INTO test_score VALUES (8,2,39);
+INSERT INTO test_score VALUES (9,2,-1);
+INSERT INTO test_score VALUES (10,2,-1);
+
+-- student_id, date
+
+INSERT INTO absence VALUES (4,'2013-06-10'); 
+INSERT INTO absence VALUES (9,'2013-06-10'); 
+INSERT INTO absence VALUES (10,'2013-06-10'); 
+
+-- SELECT QUERIES
+
+-- Show test results for all students for the quiz given on 2013-06-08
+-- We need to pull this information from 2 tables this time
+
+SELECT student_id, score, type_test, date
+FROM test, test_score
+WHERE date = '2013-06-08'
+AND test.test_id = test_score.test_id;
+
+-- Print out the students name with the scores
+-- You have to match the student ids for tables test_score and student
+-- That way they will only show the test score that corresponds with each
+-- individual student
+
+SELECT name, score, type_test, date
+FROM test, test_score, student
+WHERE date = '2013-06-08'
+AND test.test_id = test_score.test_id
+AND test_score.student_id = student.id_number;
+
+-- List all students along with their number of absences
+-- Since we are using an aggregate query here to group data we have to define 
+-- how we want the information to be grouped when it is displayed on the screen. 
+-- That is why we define id_number as the way to group information. It is saying 
+-- that we should calculate the number of absences for each id_number.
+
+SELECT name AS NAME, 
+COUNT(absence.date) AS ABSENCES
+FROM student, absence
+WHERE absence.student_id = student.id_number
+GROUP BY id_number;
+
+-- SQLite JOINS
+
+-- Above we defined INNER JOINs by separating tables with a comma. You can also
+-- define them with the word INNER JOIN
+
+-- An INNER JOIN is the most common join. An INNER JOIN returns only those 
+-- records from tables that match. The JOIN CONDITION defines the results.
+
+SELECT name, score, test_id
+FROM test_score JOIN student
+ON student_id = id_number;
+
+
+
+-- To show all students with the number of ansences even if they have none we
+-- have to use a LEFT JOIN. 
+
+-- The LEFT JOIN says that we need a row for each piece of data listed on the 
+-- left of the join. Don't forget to change WHERE into ON
+
+SELECT name AS NAME, 
+COUNT(absence.date) AS ABSENCES
+FROM student LEFT JOIN absence
+ON absence.student_id = student.id_number
+GROUP BY id_number;
+
+
+
+-- A NATURAL INNER JOIN is similar to a LEFT JOIN in that it returns all columns
+-- that match in both tables.
+
+SELECT score, test_id 
+FROM student NATURAL JOIN test_score
+WHERE student_id = id_number;
+
+
+
+-- A CROSS INNER JOIN (Cartesian Join) combines all the records from 2 tables. 
+-- This can sometimes make a mess and should normally be avoided
+
+SELECT score, test_id  
+FROM student CROSS JOIN test_score;
+
+
+
+############################################################
+SQlite3 Part 4
+############################################################
+-- Applying Functions in SQLite
+
+-- Find the Best and Worst Scores on all quizes and tests
+
+-- test_score : student_id, test_id, score
+-- test : date, type_test, test_id
+-- student : name, sex, id_number
+
+SELECT test.date AS DATE,
+MIN(test_score.score) AS WORST,
+MAX(test_score.score) AS BEST
+FROM test_score, test
+WHERE test_score.test_id = test.test_id
+GROUP BY test.date;
+
+-- Print the average score on each test
+
+SELECT test.date AS DATE,
+AVG(test_score.score) 'AVG SCORE'
+FROM test_score, test
+WHERE test_score.test_id = test.test_id
+GROUP BY test.date;
+
+-- List all students that had a test score over 40
+
+SELECT name, test_score.score 
+FROM test_score, student
+WHERE test_score.score > 40 AND test_score.student_id = student.id_number
+GROUP BY name;
+
+SELECT COUNT(name) AS 'SCORED OVER 40'
+FROM student
+WHERE student.name in
+(SELECT name 
+FROM test_score, student
+WHERE test_score.score > 40 AND test_score.student_id = student.id_number
+GROUP BY name);
+
+-- VIEWS IN SQLite --
+
+-- A view is used to store a queries result. It is not part of the schema
+
+CREATE VIEW ScoreOver40 AS 
+SELECT name, test_score.score
+FROM test_score, student
+WHERE test_score.score > 40 
+AND test_score.student_id = student.id_number
+GROUP BY name;
+
+drop view ScoreOver40; -- Delete the view
+
+-- TRIGGERS in SQLite --
+
+-- Triggers are operations that are automatically performed when a specific 
+-- event occurs
+
+-- test : date, type_test, test_id
+-- test_score : student_id, test_id, score
+-- student : name, sex, id_number
+
+-- Will Hold Data When a Student Has a Makeup Test
+
+CREATE TABLE Log(
+id INTEGER PRIMARY KEY,
+test_id INTEGER NOT NULL, 
+date     DATE NOT NULL,
+student_id INTEGER NOT NULL,
+FOREIGN KEY (test_id) REFERENCES test_score (test_id),
+FOREIGN KEY (student_id) REFERENCES test_score (student_id));
+
+-- The Trigger that updates the Log when test_score is updated
+
+CREATE TRIGGER test_score_update
+AFTER UPDATE OF score ON test_score
+BEGIN
+INSERT INTO Log(test_id, date, student_id)
+VALUES(new.test_id, date('now'), new.student_id); 
+-- Don't reference table instead use new
+END;
+
+select * from absence; -- Show all absences
+
+UPDATE test_score 
+SET score=20
+WHERE test_id=2 AND student_id=9;
+
+############################################################
+Python for SQlite3
+############################################################
+#! /usr/bin/python
+import sqlite3
+
+# Create a version of the database in RAM, this could also be a filename ending with .db
+createDb = sqlite3.connect(‘:memory:’)
+
+# Creates the SQLite cursor that is used to query the database
+queryCurs = createDb.cursor()
+
+def createTable():
+# Calls the execute method that will submit a create table SQL Query
+# id will auto increment and doesn’t require values to be entered
+queryCurs.execute(”’create table customers
+(id integer primary key, name text, street text, city text, state text, balance real)”’)
+
+def addCust(name, street, city, state, balance):
+
+# Calls the execute method that will submit a insert SQL Query
+queryCurs.execute(”’insert into customers (name, street, city, state, balance)
+values (?, ?, ?, ?, ?)”’,(name, street, city, state, balance))
+
+def main():
+# Call the method createTable, that will create the table in the database
+createTable()
+
+# Add customers to the database
+addCust(‘Derek Banas’, ’5708 Highway St’, ‘Verona’, ‘PA’, 150.76)
+addCust(‘Monty Davis’, ’5709 Highway St’, ‘Verona’, ‘PA’, 350.60)
+addCust(‘Paul Smith’, ’5710 Highway St’, ‘Verona’, ‘PA’, 0.00)
+addCust(‘Sue Smith’, ’5712 Highway St’, ‘Verona’, ‘PA’, 50.90)
+
+# Force the database to make changes with the commit command
+createDb.commit()
+
+queryCurs.execute(‘select * from customers’)
+
+# Cycles through the tuple and prints the entries to screen
+for i in queryCurs:
+print “\n”
+for j in i:
+print j
+
+# Print customers ordered by lowest balance and with titles
+queryCurs.execute(‘select * from customers order by balance’)
+
+# Creates a list that contains the titles for my database data
+listTitle = ['Id Num ','Name ','Street ','City ','State ','Balance ']
+k = 0
+
+# Cycles through the tuple and prints the entries to screen
+for i in queryCurs:
+print “\n”
+for j in i:
+print listTitle[k],
+print j
+if k < 5: k += 1
+else: k = 0
+
+# Closes the database
+queryCurs.close()
+
+if __name__ == ‘__main__’: main()
+
+- See more at: http://www.newthinktank.com/2010/11/python-2-7-tutorial-pt-12/#sthash.ARn3BQc2.dpuf
+
+############################################################
+Python for SQL
+############################################################
+#! /usr/bin/python
+import shelve
+
+def addCust(database):
+customer = {}
+
+print “Add a new customer to the database\n”
+
+custNum = raw_input(‘Enter a customer number: ‘)
+customer['firstName'] = raw_input(‘Customer First Name: ‘)
+customer['lastName'] = raw_input(‘Customer Last Name: ‘)
+customer['streetAdd'] = raw_input(‘Customer Street Address: ‘)
+customer['city'] = raw_input(‘Customer City: ‘)
+customer['state'] = raw_input(‘Customer State: ‘)
+customer['zip'] = raw_input(‘Customer Zip Code: ‘)
+
+database[custNum] = customer
+return
+
+def main():
+database = shelve.open(‘customers.dat’, writeback=True)
+
+addCust(database)
+
+lookForCust = 1
+
+while (lookForCust != ’0′):
+lookForCust = raw_input(“Enter Customer Number(0 to Exit)”)
+
+if lookForCust ==’0′:
+break
+else:
+try:
+for i in database[lookForCust]:
+print i, ” “, database[lookForCust][i]
+except KeyError:
+print “Customer not in database”
+break
+else:
+print “\n”
+
+database.close()
+
+if __name__ == ‘__main__’: main()
+
+- See more at: http://www.newthinktank.com/2010/11/python-2-7-tutorial-pt-11/#sthash.MPCvuVTH.dpuf

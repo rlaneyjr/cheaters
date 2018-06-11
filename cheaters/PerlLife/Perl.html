@@ -1,0 +1,1760 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><link type="text/css" id="dark-mode" rel="stylesheet" href=""><style type="text/css" id="dark-mode-custom-style"></style><head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<link rel="shortcut icon" href="https://qntm.org/page/favicon.ico">
+		<title>Perl</title>
+
+		<style type="text/css">
+			@font-face {
+				font-family: 'Ubuntu Mono';
+				font-style: normal;
+				font-weight: 700;
+				src: local('Ubuntu Mono Bold'), local('UbuntuMono-Bold'), url('https://themes.googleusercontent.com/static/fonts/ubuntumono/v3/ceqTZGKHipo8pJj4molytjqR_3kx9_hJXbbyU8S6IN0.woff') format('woff');
+			}
+			body {
+				padding: 2em;
+				font-family: Tahoma;
+			}
+			pre {
+				margin-left: 2em;
+			}
+			pre, code {
+				color: #348275;
+				font-family: "Ubuntu Mono", monospace;
+			}
+		</style>
+	<style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+.en-markup-crop-options {
+    top: 18px !important;
+    left: 50% !important;
+    margin-left: -100px !important;
+    width: 200px !important;
+    border: 2px rgba(255,255,255,.38) solid !important;
+    border-radius: 4px !important;
+}
+
+.en-markup-crop-options div div:first-of-type {
+    margin-left: 0px !important;
+}
+</style></head>
+
+	<!-- https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700|Roboto+Slab:400,700 -->
+	<body>
+<h1>Learn Perl in about 2 hours 30 minutes</h1>
+<h2><a href="https://qntm.org/perl">By Sam Hughes</a></h2>
+
+<p>Perl is a dynamic, dynamically-typed, high-level, scripting 
+(interpreted) language most comparable with PHP and Python. Perl's 
+syntax owes a lot to ancient shell scripting tools, and it is famed for 
+its overuse of confusing symbols, the majority of which are impossible 
+to Google for. Perl's shell scripting heritage makes it great for 
+writing <i>glue code</i>: scripts which link together other scripts and 
+programs. Perl is ideally suited for processing text data and producing 
+more text data. Perl is widespread, popular, highly portable and 
+well-supported. Perl was designed with the philosophy "There's More Than
+ One Way To Do It" (TMTOWTDI) (contrast with Python, where "there should
+ be one - and preferably only one - obvious way to do it").</p>
+<p>Perl has horrors, but it also has some great redeeming features. In 
+this respect it is like every other programming language ever created.</p>
+<p>This document is intended to be informative, not evangelical. It is aimed at people who, like me:</p>
+<ul>
+	<li>dislike the official Perl documentation at <a href="http://perl.org/">http://perl.org/</a> for being intensely technical and giving far too much space to very unusual edge cases</li>
+	<li>learn new programming languages most quickly by "axiom and example"</li>
+	<li>wish Larry Wall would get to the point</li>
+	<li>already know how to program in general terms</li>
+	<li>don't care about Perl beyond what's necessary to get the job done.</li>
+</ul>
+<p>This document is intended to be as short as possible, but no shorter.</p>
+
+<h2>Preliminary notes</h2>
+<ul>
+	<li><p>The following can be said of almost every declarative statement 
+in this document: "that's not, strictly speaking, true; the situation is
+ actually a lot more complicated". If you see a serious lie, point it 
+out, but I reserve the right to preserve certain critical 
+lies-to-children.</p></li>
+	<li><p>Throughout this document I'm using example <code>print</code> 
+statements to output data but not explicitly appending line breaks. This
+ is done to prevent me from going crazy and to give greater attention to
+ the actual string being printed in each case, which is invariably more 
+important. In many examples, this results in 
+alotofwordsallsmusheduptogetherononeline if the code is run in reality. 
+Try to ignore this.</p></li>
+</ul>
+
+<h2>Hello world</h2>
+<p>A Perl <i>script</i> is a text file with the extension <code>.pl</code>.</p>
+<p>Here's the full text of <code>helloworld.pl</code>:</p>
+<pre class="perl">use strict;
+use warnings;
+
+<a href="http://perldoc.perl.org/functions/print.html">print</a> "Hello world";
+</pre>
+<p>Perl scripts are interpreted by the Perl interpreter, <code>perl</code> or <code>perl.exe</code>:</p>
+<pre class="bash">perl helloworld.pl [arg0 [arg1 [arg2 ...]]]
+</pre>
+<p>A few immediate notes. Perl's syntax is highly permissive and it will
+ allow you to do things which result in ambiguous-looking statements 
+with unpredictable behaviour. There's no point in me explaining what 
+these behaviours are, because you want to avoid them. The way to avoid 
+them is to put <code>use strict; use warnings;</code> at the very top of every Perl script or module that you create. Statements of the form <code>use foo;</code> are <i>pragmas</i>. A pragma is a signal to <code>perl.exe</code>,
+ which takes effect when initial syntactic validation is being 
+performed, before the program starts running. These lines have no effect
+ when the interpreter encounters them at run time.</p>
+<p>The semicolon, <code>;</code>, is the statement terminator. The symbol <code>#</code> begins a comment. A comment lasts until the end of the line. Perl has no block comment syntax.</p>
+
+<h2>Variables</h2>
+<p>Perl variables come in three types: <i>scalars</i>, <i>arrays</i> and <i>hashes</i>. Each type has its own <i>sigil</i>: <code>$</code>, <code>@</code> and <code>%</code> respectively. Variables are declared using <code>my</code>, and remain in scope until the end of the enclosing block or file.</p>
+<h3>Scalar variables</h3>
+<p>A scalar variable can contain:</p>
+<ul>
+	<li><code>undef</code> (corresponds to <code>None</code> in Python, <code>null</code> in PHP)</li>
+	<li>a number (Perl does not distinguish between an integer and a float)</li>
+	<li>a string</li>
+	<li>a reference to any other variable.</li>
+</ul>
+
+<pre class="perl">my $undef = undef;
+print $undef; # prints the empty string "" and raises a warning
+
+# implicit undef:
+my $undef2;
+print $undef2; # prints "" and raises exactly the same warning
+</pre>
+
+<pre class="perl">my $num = 4040.5;
+print $num; # "4040.5"
+</pre>
+
+<pre class="perl">my $string = "world";
+print $string; # "world"
+</pre>
+
+<p>(References are coming up shortly.)</p>
+<p>String concatenation using the <code>.</code> operator (same as PHP):</p>
+<pre class="perl">print "Hello ".$string; # "Hello world"
+</pre>
+
+<h3>"Booleans"</h3>
+<p><strong>Perl has no boolean data type.</strong> A scalar in an <code>if</code> statement evaluates to boolean "false" if and only if it is one of the following:</p>
+<ul>
+	<li><code>undef</code></li>
+	<li>number <code>0</code></li>
+	<li>string <code>""</code></li>
+	<li>string <code>"0"</code>.</li>
+</ul>
+
+<p>The Perl documentation <em>repeatedly</em> claims that functions 
+return "true" or "false" values in certain situations. In practice, when
+ a function is claimed to return "true" it usually returns <code>1</code>, and when it is claimed to return false it usually returns the empty string, <code>""</code>.</p>
+
+<h3>Weak typing</h3>
+<p><strong>It is impossible to determine whether a scalar contains a "number" or a "string".</strong>
+ More precisely, it should never be necessary to do this. Whether a 
+scalar behaves like a number or a string depends on the operator with 
+which it is used. When used as a string, a scalar will behave like a 
+string. When used as a number, a scalar will behave like a number 
+(raising a warning if this isn't possible):</p>
+
+<pre class="perl">my $str1 = "4G";
+my $str2 = "4H";
+
+print $str1 .  $str2; # "4G4H"
+print $str1 +  $str2; # "8" with two warnings
+print $str1 eq $str2; # "" (empty string, i.e. false)
+print $str1 == $str2; # "1" with two warnings
+
+# The classic error
+print "yes" == "no"; # "1" with two warnings; both values evaluate to 0 when used as numbers
+</pre>
+
+<p>The lesson is to always using the correct operator in the correct 
+situation. There are separate operators for comparing scalars as numbers
+ and comparing scalars as strings:</p>
+
+<pre class="perl"># Numerical operators:  &lt;,  &gt;, &lt;=, &gt;=, ==, !=, &lt;=&gt;, +, *
+# String operators:    <a href="http://perldoc.perl.org/perlop.html#Equality-Operators">lt, gt, le, ge, eq, ne, cmp</a>, <a href="http://perldoc.perl.org/perlop.html#Additive-Operators">.</a>, <a href="http://perldoc.perl.org/perlop.html#Multiplicative-Operators">x</a>
+</pre>
+
+<h3>Array variables</h3>
+
+<p>An array variable is a list of scalars indexed by integers beginning at 0. In Python this is known as a <i>list</i>, and in PHP this is known as an <i>array</i>. An array is declared using a parenthesised list of scalars:</p>
+
+<pre class="perl">my @array = (
+	"print",
+	"these",
+	"strings",
+	"out",
+	"for",
+	"me", # trailing comma is okay
+);
+</pre>
+
+<p>You have to use a dollar sign to access a value from an array, because the value being <em>retrieved</em> is not an array but a scalar:</p>
+
+<pre class="perl">print $array[0]; # "print"
+print $array[1]; # "these"
+print $array[2]; # "strings"
+print $array[3]; # "out"
+print $array[4]; # "for"
+print $array[5]; # "me"
+print $array[6]; # returns undef, prints "" and raises a warning
+</pre>
+
+<p>You can use negative indices to retrieve entries starting from the end and working backwards:</p>
+
+<pre class="perl">print $array[-1]; # "me"
+print $array[-2]; # "for"
+print $array[-3]; # "out"
+print $array[-4]; # "strings"
+print $array[-5]; # "these"
+print $array[-6]; # "print"
+print $array[-7]; # returns undef, prints "" and raises a warning
+</pre>
+
+<p>There is no collision between a scalar <code>$var</code> and an array <code>@var</code> containing a scalar entry <code>$var[0]</code>. There may, however, be reader confusion, so avoid this.</p>
+
+<p>To get an array's length:</p>
+<pre class="perl">print "This array has ".(scalar @array)."elements"; # "This array has 6 elements"
+print "The last populated index is ".$#array;       # "The last populated index is 5"
+</pre>
+
+<p>The arguments with which the original Perl script was invoked are stored in the <a href="http://perldoc.perl.org/perlvar.html">built-in array variable</a> <code>@ARGV</code>.</p>
+
+<p>Variables can be interpolated into strings:</p>
+<pre class="perl">print "Hello $string"; # "Hello world"
+print "@array";        # "print these strings out for me"
+</pre>
+
+<p><strong>Caution.</strong> One day you will put somebody's email address inside a string, <code>"jeff@gmail.com"</code>. This will cause Perl to look for an array variable called <code>@gmail</code>
+ to interpolate into the string, and not find it, resulting in a runtime
+ error. Interpolation can be prevented in two ways: by 
+backslash-escaping the sigil, or by using single quotes instead of 
+double quotes.</p>
+
+<pre class="perl">print "Hello \$string"; # "Hello $string"
+print 'Hello $string';  # "Hello $string"
+print "\@array";        # "@array"
+print '@array';         # "@array"
+</pre>
+
+<h3>Hash variables</h3>
+
+<p>A hash variable is a list of scalars indexed by strings. In Python this is known as a <i>dictionary</i>, and in PHP it is known as an <i>array</i>.</p>
+
+<pre class="perl">my %scientists = (
+	"Newton"   =&gt; "Isaac",
+	"Einstein" =&gt; "Albert",
+	"Darwin"   =&gt; "Charles",
+);
+</pre>
+
+<p>Notice how similar this declaration is to an array declaration. In fact, the double arrow symbol <code>=&gt;</code>
+ is called a "fat comma", because it is just a synonym for the comma 
+separator. A hash is declared using a list with an even number of 
+elements, where the even-numbered elements (0, 2, ...) are all taken as 
+strings.</p>
+
+<p>Once again, you have to use a dollar sign to access a value from a hash, because the value being <em>retrieved</em> is not a hash but a scalar:</p>
+
+<pre class="perl">print $scientists{"Newton"};   # "Isaac"
+print $scientists{"Einstein"}; # "Albert"
+print $scientists{"Darwin"};   # "Charles"
+print $scientists{"Dyson"};    # returns undef, prints "" and raises a warning
+</pre>
+
+<p>Note the braces used here. Again, there is no collision between a scalar <code>$var</code> and a hash <code>%var</code> containing a scalar entry <code>$var{"foo"}</code>.</p>
+
+<p>You can convert a hash straight to an array with twice as many 
+entries, alternating between key and value (and the reverse is equally 
+easy):</p>
+<pre class="perl">my @scientists = %scientists;
+</pre>
+
+<p>However, unlike an array, the keys of a hash have <em>no underlying order</em>. They will be returned in whatever order is more efficient. So, notice the rearranged <em>order</em> but preserved <em>pairs</em> in the resulting array:</p>
+<pre class="perl">print "@scientists"; # something like "Einstein Albert Darwin Charles Newton Isaac"
+</pre>
+
+<p>To recap, you have to use <strong>square brackets</strong> to retrieve a value from an array, but you have to use <strong>braces</strong>
+ to retrieve a value from a hash. The square brackets are effectively a 
+numerical operator and the braces are effectively a string operator. The
+ fact that the <em>index</em> supplied is a number or a string is of absolutely no significance:</p>
+
+<pre class="perl">my $data = "orange";
+my @data = ("purple");
+my %data = ( "0" =&gt; "blue");
+
+print $data;      # "orange"
+print $data[0];   # "purple"
+print $data["0"]; # "purple"
+print $data{0};   # "blue"
+print $data{"0"}; # "blue"
+</pre>
+
+<h3>Lists</h3>
+
+<p>A <i>list</i> in Perl is a different thing again from either an array or a hash. You've just seen several lists:</p>
+
+<pre class="perl">(
+	"print",
+	"these",
+	"strings",
+	"out",
+	"for",
+	"me",
+)
+
+(
+	"Newton"   =&gt; "Isaac",
+	"Einstein" =&gt; "Albert",
+	"Darwin"   =&gt; "Charles",
+)
+</pre>
+
+<p><strong>A list is not a variable.</strong> A list is an ephemeral <em>value</em> which can be <em>assigned</em>
+ to an array or a hash variable. This is why the syntax for declaring 
+array and hash variables is identical. There are many situations where 
+the terms "list" and "array" can be used interchangeably, but there are 
+equally many where lists and arrays display subtly different and 
+extremely confusing behaviour.</p>
+
+<p>Okay. Remember that <code>=&gt;</code> is just <code>,</code> in disguise and then look at this example:</p>
+
+<pre class="perl">("one", 1, "three", 3, "five", 5)
+("one" =&gt; 1, "three" =&gt; 3, "five" =&gt; 5)
+</pre>
+
+<p>The use of <code>=&gt;</code> hints that one of these lists is an 
+array declaration and the other is a hash declaration. But on their own,
+ neither of them are declarations of anything. They are just lists. <em>Identical</em> lists. Also:</p>
+
+<pre class="perl">()
+</pre>
+
+<p>There aren't even hints here. This list could be used to declare an empty array or an empty hash and the <code>perl</code>
+ interpreter clearly has no way of telling either way. Once you 
+understand this odd aspect of Perl, you will also understand why the 
+following fact must be true: <strong>List values cannot be nested.</strong> Try it:</p>
+
+<pre class="perl">my @array = (
+	"apples",
+	"bananas",
+	(
+		"inner",
+		"list",
+		"several",
+		"entries",
+	),
+	"cherries",
+);
+</pre>
+
+<p>Perl has no way of knowing whether <code>("inner", "list", "several", "entries")</code> is supposed to be an inner array or an inner hash. Therefore, Perl assumes that it is neither and <strong>flattens the list out into a single long list</strong>:</p>
+
+<pre>print $array[0]; # "apples"
+print $array[1]; # "bananas"
+print $array[2]; # "inner"
+print $array[3]; # "list"
+print $array[4]; # "several"
+print $array[5]; # "entries"
+print $array[6]; # "cherries"
+</pre>
+
+<p>The same is true whether the fat comma is used or not:</p>
+
+<pre class="perl">my %hash = (
+	"beer" =&gt; "good",
+	"bananas" =&gt; (
+		"green"  =&gt; "wait",
+		"yellow" =&gt; "eat",
+	),
+);
+
+# The above raises a warning because the hash was declared using a 7-element list
+
+print $hash{"beer"};    # "good"
+print $hash{"bananas"}; # "green"
+print $hash{"wait"};    # "yellow";
+print $hash{"eat"};     # undef, so prints "" and raises a warning
+</pre>
+
+<p>Of course, this does make it easy to concatenate multiple arrays together:</p>
+
+<pre class="perl">my @bones   = ("humerus", ("jaw", "skull"), "tibia");
+my @fingers = ("thumb", "index", "middle", "ring", "little");
+my @parts   = (@bones, @fingers, ("foot", "toes"), "eyeball", "knuckle");
+print @parts;
+</pre>
+
+<p>More on this shortly.</p>
+
+<h2>Context</h2>
+
+<p>Perl's most distinctive feature is that its code is <i>context-sensitive</i>. <strong>Every expression in Perl is evaluated either in scalar context or list context</strong>,
+ depending on whether it is expected to produce a scalar or a list. 
+Without knowing the context in which an expression is evaluated, it is 
+impossible to determine what it will evaluate to.</p>
+<p>A scalar assignment such as <code>my $scalar =</code> evaluates its expression in scalar context. Here, the expression is <code>"Mendeleev"</code>:</p>
+<pre class="perl">my $scalar = "Mendeleev";
+</pre>
+<p>An array or hash assignment such as <code>my @array =</code> or <code>my %hash =</code> evaluates its expression in list context. Here, the expression is <code>("Alpha", "Beta", "Gamma", "Pie")</code> (or <code>("Alpha" =&gt; "Beta", "Gamma" =&gt; "Pie")</code>, the two are equivalent):</p>
+<pre class="perl">my @array = ("Alpha", "Beta", "Gamma", "Pie");
+my %hash = ("Alpha" =&gt; "Beta", "Gamma" =&gt; "Pie");
+</pre>
+<p>A scalar expression evaluated in list context is silently converted into a single-element list:</p>
+<pre class="perl">my @array = "Mendeleev"; # same as 'my @array = ("Mendeleev");'
+</pre>
+<p>An array expression evaluated in scalar context returns the length of the array:</p>
+<pre class="perl">my @array = ("Alpha", "Beta", "Gamma", "Pie");
+my $scalar = @array;
+print $scalar; # "4"
+</pre>
+<p>A list expression (a list is different from an array, remember?) 
+evaluated in scalar context returns not the length of the list but <em>the final scalar in the list</em>:</p>
+<pre class="perl">my $scalar = ("Alpha", "Beta", "Gamma", "Pie");
+print $scalar; # "Pie"
+</pre>
+<p>The <code><a href="http://perldoc.perl.org/functions/print.html">print</a></code> built-in function evaluates all of its arguments in list context. In fact, <code>print</code>
+ accepts an unlimited list of arguments and prints each one after the 
+other, which means it can be used to print arrays directly:</p>
+<pre class="perl">my @array = ("Alpha", "Beta", "Goo");
+my $scalar = "-X-";
+print @array;              # "AlphaBetaGoo";
+print $scalar, @array, 98; # "-X-AlphaBetaGoo98";
+</pre>
+<p><strong>Caution.</strong> Many Perl expressions and <a href="http://perldoc.perl.org/perlfunc.html">built-in functions</a>
+ display radically different behaviour depending on the context in which
+ they are evaluated. The most prominent example is the function <code><a href="http://perldoc.perl.org/functions/reverse.html">reverse</a></code>. In list context, <code>reverse</code> treats its arguments as a list, and reverses the list. In scalar context, <code>reverse</code> concatenates the whole list together and then reverses it as a single word.</p>
+<pre class="perl">print reverse "hello world"; # "hello world"
+
+my $string = reverse "hello world";
+print $string; # "dlrow olleh"
+</pre>
+<p>You can force any expression to be evaluated in scalar context using the <code><a href="http://perldoc.perl.org/functions/scalar.html">scalar</a></code> built-in function:</p>
+<pre class="perl">print scalar reverse "hello world"; # "dlrow olleh"
+</pre>
+<p>Remember how we used <code>scalar</code> earlier, to get the length of an array?</p>
+
+<h2 id="refs">References and nested data structures</h2>
+
+<p>In the same way that lists cannot contain lists as elements, <strong>arrays and hashes cannot contain other arrays and hashes as elements.</strong> They can only contain scalars. Watch what happens when we try:</p>
+
+<pre class="perl">my @outer = ("Sun", "Mercury", "Venus", undef, "Mars");
+my @inner = ("Earth", "Moon");
+
+$outer[3] = @inner;
+
+print $outer[3]; # "2"
+</pre>
+
+<p><code>$outer[3]</code> is a scalar, so it demands a scalar value. When you try to assign an array value like <code>@inner</code> to it, <code>@inner</code> is evaluated in scalar context. This is the same as assigning <code>scalar @inner</code>, which is the length of array <code>@inner</code>, which is 2.</p>
+
+<p>However, a scalar variable may contain a <i>reference</i> to any 
+variable, including an array variable or a hash variable. This is how 
+more complicated data structures are created in Perl.</p>
+
+<p>A reference is created using a backslash.</p>
+<pre class="perl">my $colour    = "Indigo";
+my $scalarRef = \$colour;
+</pre>
+
+<p>Any time you would use the name of a variable, you can instead just put some braces in, and, within the braces, put a <em>reference</em> to a variable instead.</p>
+<pre class="perl">print $colour;         # "Indigo"
+print $scalarRef;      # e.g. "SCALAR(0x182c180)"
+print ${ $scalarRef }; # "Indigo"
+</pre>
+
+<p>As long as the result is not ambiguous, you can omit the braces too:</p>
+
+<pre class="perl">print $$scalarRef; # "Indigo"
+</pre>
+
+<p>If your reference is a reference to an array or hash variable, you 
+can get data out of it using braces or using the more popular arrow 
+operator, <code>-&gt;</code>:</p>
+
+<pre class="perl">my @colours = ("Red", "Orange", "Yellow", "Green", "Blue");
+my $arrayRef = \@colours;
+
+print $colours[0];       # direct array access
+print ${ $arrayRef }[0]; # use the reference to get to the array
+print $arrayRef-&gt;[0];    # exactly the same thing
+
+my %atomicWeights = ("Hydrogen" =&gt; 1.008, "Helium" =&gt; 4.003, "Manganese" =&gt; 54.94);
+my $hashRef = \%atomicWeights;
+
+print $atomicWeights{"Helium"}; # direct hash access
+print ${ $hashRef }{"Helium"};  # use a reference to get to the hash
+print $hashRef-&gt;{"Helium"};     # exactly the same thing - this is very common
+</pre>
+
+<h3>Declaring a data structure</h3>
+
+<p>Here are four examples, but in practice the last one is the most useful.</p>
+
+<pre class="perl">my %owner1 = (
+	"name" =&gt; "Santa Claus",
+	"DOB"  =&gt; "1882-12-25",
+);
+
+my $owner1Ref = \%owner1;
+
+my %owner2 = (
+	"name" =&gt; "Mickey Mouse",
+	"DOB"  =&gt; "1928-11-18",
+);
+
+my $owner2Ref = \%owner2;
+
+my @owners = ( $owner1Ref, $owner2Ref );
+
+my $ownersRef = \@owners;
+
+my %account = (
+	"number" =&gt; "12345678",
+	"opened" =&gt; "2000-01-01",
+	"owners" =&gt; $ownersRef,
+);
+</pre>
+
+<p>That's obviously unnecessarily laborious, because you can shorten it to:</p>
+
+<pre class="perl">my %owner1 = (
+	"name" =&gt; "Santa Claus",
+	"DOB"  =&gt; "1882-12-25",
+);
+
+my %owner2 = (
+	"name" =&gt; "Mickey Mouse",
+	"DOB"  =&gt; "1928-11-18",
+);
+
+my @owners = ( \%owner1, \%owner2 );
+
+my %account = (
+	"number" =&gt; "12345678",
+	"opened" =&gt; "2000-01-01",
+	"owners" =&gt; \@owners,
+);
+</pre>
+
+<p>It is also possible to declare <i>anonymous</i> arrays and hashes 
+using different symbols. Use square brackets for an anonymous array and 
+braces for an anonymous hash. The value returned in each case is a <em>reference</em> to the anonymous data structure in question. Watch carefully, this results in exactly the same <code>%account</code> as above:</p>
+
+<pre class="perl"># Braces denote an anonymous hash
+my $owner1Ref = {
+	"name" =&gt; "Santa Claus",
+	"DOB"  =&gt; "1882-12-25",
+};
+
+my $owner2Ref = {
+	"name" =&gt; "Mickey Mouse",
+	"DOB"  =&gt; "1928-11-18",
+};
+
+# Square brackets denote an anonymous array
+my $ownersRef = [ $owner1Ref, $owner2Ref ];
+
+my %account = (
+	"number" =&gt; "12345678",
+	"opened" =&gt; "2000-01-01",
+	"owners" =&gt; $ownersRef,
+);
+</pre>
+
+<p>Or, for short (and this is the form you should <em>actually</em> use when declaring complex data structures in-line):</p>
+
+<pre class="perl">my %account = (
+	"number" =&gt; "31415926",
+	"opened" =&gt; "3000-01-01",
+	"owners" =&gt; [
+		{
+			"name" =&gt; "Philip Fry",
+			"DOB"  =&gt; "1974-08-06",
+		},
+		{
+			"name" =&gt; "Hubert Farnsworth",
+			"DOB"  =&gt; "2841-04-09",
+		},
+	],
+);
+</pre>
+
+<h3>Getting information out of a data structure</h3>
+
+<p>Now, let's assume that you still have <code>%account</code> kicking 
+around but everything else (if there was anything else) has fallen out 
+of scope. You can print the information out by reversing the same 
+procedure in each case. Again, here are four examples, of which the last
+ is the most useful:</p>
+
+<pre class="perl">my $ownersRef = $account{"owners"};
+my @owners    = @{ $ownersRef };
+my $owner1Ref = $owners[0];
+my %owner1    = %{ $owner1Ref };
+my $owner2Ref = $owners[1];
+my %owner2    = %{ $owner2Ref };
+print "Account #", $account{"number"}, "\n";
+print "Opened on ", $account{"opened"}, "\n";
+print "Joint owners:\n";
+print "\t", $owner1{"name"}, " (born ", $owner1{"DOB"}, ")\n";
+print "\t", $owner2{"name"}, " (born ", $owner2{"DOB"}, ")\n";
+</pre>
+
+<p>Or, for short:</p>
+
+<pre class="perl">my @owners = @{ $account{"owners"} };
+my %owner1 = %{ $owners[0] };
+my %owner2 = %{ $owners[1] };
+print "Account #", $account{"number"}, "\n";
+print "Opened on ", $account{"opened"}, "\n";
+print "Joint owners:\n";
+print "\t", $owner1{"name"}, " (born ", $owner1{"DOB"}, ")\n";
+print "\t", $owner2{"name"}, " (born ", $owner2{"DOB"}, ")\n";
+</pre>
+
+<p>Or using references and the <code>-&gt;</code> operator:</p>
+
+<pre class="perl">my $ownersRef = $account{"owners"};
+my $owner1Ref = $ownersRef-&gt;[0];
+my $owner2Ref = $ownersRef-&gt;[1];
+print "Account #", $account{"number"}, "\n";
+print "Opened on ", $account{"opened"}, "\n";
+print "Joint owners:\n";
+print "\t", $owner1Ref-&gt;{"name"}, " (born ", $owner1Ref-&gt;{"DOB"}, ")\n";
+print "\t", $owner2Ref-&gt;{"name"}, " (born ", $owner2Ref-&gt;{"DOB"}, ")\n";
+</pre>
+
+<p>And if we completely skip all the intermediate values:</p>
+
+<pre class="perl">print "Account #", $account{"number"}, "\n";
+print "Opened on ", $account{"opened"}, "\n";
+print "Joint owners:\n";
+print "\t", $account{"owners"}-&gt;[0]-&gt;{"name"}, " (born ", $account{"owners"}-&gt;[0]-&gt;{"DOB"}, ")\n";
+print "\t", $account{"owners"}-&gt;[1]-&gt;{"name"}, " (born ", $account{"owners"}-&gt;[1]-&gt;{"DOB"}, ")\n";
+</pre>
+
+<h3>How to shoot yourself in the foot with array references</h3>
+
+<p>This array has five elements:</p>
+<pre class="perl">my @array1 = (1, 2, 3, 4, 5);
+print @array1; # "12345"
+</pre>
+
+<p>This array, however, has ONE element (which happens to be a reference to an anonymous, five-element array):</p>
+<pre class="perl">my @array2 = [1, 2, 3, 4, 5];
+print @array2; # e.g. "ARRAY(0x182c180)"
+</pre>
+
+<p>This <em>scalar</em> is a reference to an anonymous, five-element array:</p>
+<pre class="perl">my $array3Ref = [1, 2, 3, 4, 5];
+print $array3Ref;      # e.g. "ARRAY(0x22710c0)"
+print @{ $array3Ref }; # "12345"
+print @$array3Ref;     # "12345"
+</pre>
+
+<h2>Conditionals</h2>
+
+<h3><code>if</code> ... <code>elsif</code> ... <code>else</code> ...</h3>
+
+<p>No surprises here, other than the spelling of <code>elsif</code>:</p>
+<pre class="perl">my $word = "antidisestablishmentarianism";
+my $strlen = <a href="http://perldoc.perl.org/functions/length.html">length</a> $word;
+
+if($strlen &gt;= 15) {
+	print "'", $word, "' is a very long word";
+} elsif(10 &lt;= $strlen &amp;&amp; $strlen &lt; 15) {
+	print "'", $word, "' is a medium-length word";
+} else {
+	print "'", $word, "' is a short word";
+}
+</pre>
+
+<p>Perl provides a shorter "<i>statement</i> <code>if</code> <i>condition</i>" syntax which is highly recommended for <strong>short</strong> statements:</p>
+
+<pre class="perl">print "'", $word, "' is actually enormous" if $strlen &gt;= 20;
+</pre>
+
+<h3><code>unless</code> ... <code>else</code> ...</h3>
+
+<pre class="perl">my $temperature = 20;
+
+unless($temperature &gt; 30) {
+	print $temperature, " degrees Celsius is not very hot";
+} else {
+	print $temperature, " degrees Celsius is actually pretty hot";
+}
+</pre>
+
+<p><code>unless</code> blocks are generally best avoided like the plague because they are very confusing. An "<code>unless</code> [... <code>else</code>]" block can be trivially refactored into an "<code>if</code> [... <code>else</code>]" block by negating the condition [or by keeping the condition and swapping the blocks]. Mercifully, there is no <code>elsunless</code> keyword.</p>
+
+<p>This, by comparison, is highly recommended because it is so easy to read:</p>
+<pre class="perl">print "Oh no it's too cold" unless $temperature &gt; 15;
+</pre>
+
+<h3>Ternary operator</h3>
+
+<p>The ternary operator <code>?:</code> allows simple <code>if</code> statements to be embedded in a statement. The canonical use for this is singular/plural forms:</p>
+
+<pre class="perl">my $gain = 48;
+print "You gained ", $gain, " ", ($gain == 1 ? "experience point" : "experience points"), "!";
+</pre>
+
+<p>Aside: singulars and plurals are best spelled out in full in both 
+cases. Don't do something clever like the following, because anybody 
+searching the codebase to replace the words "tooth" or "teeth" will 
+never find this line:</p>
+
+<pre class="perl">my $lost = 1;
+print "You lost ", $lost, " t", ($lost == 1 ? "oo" : "ee"), "th!";
+</pre>
+
+<p>Ternary operators may be nested:</p>
+
+<pre class="perl">my $eggs = 5;
+print "You have ", $eggs == 0 ? "no eggs" :
+                   $eggs == 1 ? "an egg"  :
+                   "some eggs";
+</pre>
+
+<p><code>if</code> statements evaluate their conditions in scalar context. For example, <code>if(@array)</code> returns true if and only if <code>@array</code> has 1 or more elements. It doesn't matter what those elements are - they may contain <code>undef</code> or other false values for all we care.</p>
+
+<h2>Loops</h2>
+
+<p>There's More Than One Way To Do It.</p>
+
+<p>Perl has a conventional <code>while</code> loop:</p>
+<pre class="perl">my $i = 0;
+while($i &lt; scalar @array) {
+	print $i, ": ", $array[$i];
+	$i++;
+}
+</pre>
+
+<p>Perl also offers the <code>until</code> keyword:</p>
+<pre class="perl">my $i = 0;
+until($i &gt;= scalar @array) {
+	print $i, ": ", $array[$i];
+	$i++;
+}
+</pre>
+
+<p>These <code>do</code> loops are <em>almost</em> equivalent to the above (a warning would be raised if <code>@array</code> were empty):</p>
+
+<pre class="perl">my $i = 0;
+do {
+	print $i, ": ", $array[$i];
+	$i++;
+} while ($i &lt; scalar @array);
+</pre>
+
+<p>and</p>
+
+<pre class="perl">my $i = 0;
+do {
+	print $i, ": ", $array[$i];
+	$i++;
+} until ($i &gt;= scalar @array);
+</pre>
+
+<p>Basic C-style <code>for</code> loops are available too. Notice how we put a <code>my</code> inside the <code>for</code> statement, declaring <code>$i</code> only for the scope of the loop:</p>
+<pre class="perl">for(my $i = 0; $i &lt; scalar @array; $i++) {
+	print $i, ": ", $array[$i];
+}
+# $i has ceased to exist here, which is much tidier.
+</pre>
+<p>This kind of <code>for</code> loop is considered old-fashioned and 
+should be avoided where possible. Native iteration over a list is much 
+nicer. Note: unlike PHP, the <code>for</code> and <code>foreach</code> keywords are synonyms. Just use whatever looks most readable:</p>
+<pre class="perl">foreach my $string ( @array ) {
+	print $string;
+}
+</pre>
+
+<p>If you do need the indices, the <a href="http://perldoc.perl.org/perlop.html#Range-Operators">range operator</a> <code>..</code> creates an anonymous list of integers:</p>
+<pre class="perl">foreach my $i ( 0 .. $#array ) {
+	print $i, ": ", $array[$i];
+}
+</pre>
+
+<p>You can't iterate over a hash. However, you can iterate over its keys. Use the <code>keys</code> built-in function to retrieve an array containing all the keys of a hash. Then use the <code>foreach</code> approach that we used for arrays:</p>
+<pre class="perl">foreach my $key (keys %scientists) {
+	print $key, ": ", $scientists{$key};
+}
+</pre>
+
+<p>Since a hash has no underlying order, the keys may be returned in any order. Use the <code>sort</code> built-in function to sort the array of keys alphabetically beforehand:</p>
+<pre class="perl">foreach my $key (sort keys %scientists) {
+	print $key, ": ", $scientists{$key};
+}
+</pre>
+
+<p>If you don't provide an explicit iterator, Perl uses a default iterator, <code>$_</code>. <code>$_</code> is the first and friendliest of the <a href="http://perldoc.perl.org/perlvar.html">built-in variables</a>:</p>
+<pre class="perl">foreach ( @array ) {
+	print $_;
+}
+</pre>
+
+<p>If using the default iterator, and you only wish to put a single 
+statement inside your loop, you can use the super-short loop syntax:</p>
+<pre class="perl">print $_ foreach @array;
+</pre>
+
+<h3>Loop control</h3>
+
+<p><code>next</code> and <code>last</code> can be used to control the progress of a loop. In most programming languages these are known as <code>continue</code> and <code>break</code> respectively. We can also optionally provide a label for any loop. By convention, labels are written in <code>ALLCAPITALS</code>. Having labelled the loop, <code>next</code> and <code>last</code> may target that label. This example finds primes below 100:</p>
+
+<pre class="perl">CANDIDATE: for my $candidate ( 2 .. 100 ) {
+	for my $divisor ( 2 .. <a href="http://perldoc.perl.org/functions/sqrt.html">sqrt</a> $candidate ) {
+		next CANDIDATE if $candidate % $divisor == 0;
+	}
+	print $candidate." is prime\n";
+}
+</pre>
+
+<h2>Array functions</h2>
+
+<h3>In-place array modification</h3>
+
+<p>We'll use <code>@stack</code> to demonstrate these:</p>
+
+<pre class="perl">my @stack = ("Fred", "Eileen", "Denise", "Charlie");
+print @stack; # "FredEileenDeniseCharlie"
+</pre>
+
+<p><code><a href="http://perldoc.perl.org/functions/pop.html">pop</a></code> extracts and returns the final element of the array. This can be thought of as the top of the stack:</p>
+<pre class="perl">print pop @stack; # "Charlie"
+print @stack;     # "FredEileenDenise"
+</pre>
+
+<p><code><a href="http://perldoc.perl.org/functions/push.html">push</a></code> appends extra elements to the end of the array:</p>
+<pre class="perl">push @stack, "Bob", "Alice";
+print @stack; # "FredEileenDeniseBobAlice"
+</pre>
+
+<p><code><a href="http://perldoc.perl.org/functions/shift.html">shift</a></code> extracts and returns the first element of the array:</p>
+<pre class="perl">print shift @stack; # "Fred"
+print @stack;       # "EileenDeniseBobAlice"
+</pre>
+
+<p><code><a href="http://perldoc.perl.org/functions/unshift.html">unshift</a></code> inserts new elements at the beginning of the array:</p>
+<pre class="perl">unshift @stack, "Hank", "Grace";
+print @stack; # "HankGraceEileenDeniseBobAlice"
+</pre>
+
+<p><code>pop</code>, <code>push</code>, <code>shift</code> and <code>unshift</code> are all special cases of <code><a href="http://perldoc.perl.org/functions/splice.html">splice</a></code>. <code>splice</code> removes and returns an array slice, replacing it with a different array slice:</p>
+<pre class="perl">print splice(@stack, 1, 4, "&lt;&lt;&lt;", "&gt;&gt;&gt;"); # "GraceEileenDeniseBob"
+print @stack;                             # "Hank&lt;&lt;&lt;&gt;&gt;&gt;Alice"
+</pre>
+
+<h3>Creating new arrays from old</h3>
+
+<p>Perl provides the following functions which act on arrays to create other arrays.</p>
+
+<p>The <code><a href="http://perldoc.perl.org/functions/join.html">join</a></code> function concatenates many strings into one:</p>
+
+<pre class="perl">my @elements = ("Antimony", "Arsenic", "Aluminum", "Selenium");
+print @elements;             # "AntimonyArsenicAluminumSelenium"
+print "@elements";           # "Antimony Arsenic Aluminum Selenium"
+print join(", ", @elements); # "Antimony, Arsenic, Aluminum, Selenium"
+</pre>
+
+<p>In list context, the <code><a href="http://perldoc.perl.org/functions/reverse.html">reverse</a></code> function returns a list in reverse order. In scalar context, <code>reverse</code> concatenates the whole list together and then reverses it as a single word.</p>
+<pre class="perl">print reverse("Hello", "World");        # "WorldHello"
+print reverse("HelloWorld");            # "HelloWorld"
+print scalar reverse("HelloWorld");     # "dlroWolleH"
+print scalar reverse("Hello", "World"); # "dlroWolleH"
+</pre>
+
+<p>The <code><a href="http://perldoc.perl.org/functions/map.html">map</a></code> function takes an array as input and applies an operation to every scalar <code>$_</code>
+ in this array. It then constructs a new array out of the results. The 
+operation to perform is provided in the form of a single expression 
+inside braces:</p>
+
+<pre class="perl">my @capitals = ("Baton Rouge", "Indianapolis", "Columbus", "Montgomery", "Helena", "Denver", "Boise");
+
+print join ", ", map { uc $_ } @capitals;
+# "BATON ROUGE, INDIANAPOLIS, COLUMBUS, MONTGOMERY, HELENA, DENVER, BOISE"
+</pre>
+
+<p>The <code><a href="http://perldoc.perl.org/functions/grep.html">grep</a></code> function takes an array as input and returns a filtered array as output. The syntax is similar to <code>map</code>. This time, the second argument is evaluated for each scalar <code>$_</code> in the input array. If a boolean true value is returned, the scalar is put into the output array, otherwise not.</p>
+
+<pre class="perl">print join ", ", grep { length $_ == 6 } @capitals;
+# "Helena, Denver"
+</pre>
+
+<p>Obviously, the length of the resulting array is the <em>number of successful matches</em>, which means you can use <code>grep</code> to quickly check whether an array contains an element:</p>
+<pre class="perl">print scalar grep { $_ eq "Columbus" } @capitals; # "1"
+</pre>
+
+<p><code>grep</code> and <code>map</code> may be combined to form <i><a href="https://en.wikipedia.org/wiki/List_comprehension">list comprehensions</a></i>, an exceptionally powerful feature conspicuously absent from many other programming languages.</p>
+
+<p>By default, the <code><a href="http://perldoc.perl.org/functions/sort.html">sort</a></code> function returns the input array, sorted into lexical (alphabetical) order:</p>
+
+<pre class="perl">my @elevations = (19, 1, 2, 100, 3, 98, 100, 1056);
+
+print join ", ", sort @elevations;
+# "1, 100, 100, 1056, 19, 2, 3, 98"
+</pre>
+
+<p>However, similar to <code>grep</code> and <code>map</code>, you may 
+supply some code of your own. Sorting is always performed using a series
+ of comparisons between two elements. Your block receives <code>$a</code> and <code>$b</code> as inputs and should return -1 if <code>$a</code> is "less than" <code>$b</code>, 0 if they are "equal" or 1 if <code>$a</code> is "greater than" <code>$b</code>.</p>
+
+<p>The <code>cmp</code> operator does exactly this for strings:</p>
+
+<pre class="perl">print join ", ", sort { $a cmp $b } @elevations;
+# "1, 100, 100, 1056, 19, 2, 3, 98"
+</pre>
+
+<p>The "spaceship operator", <code>&lt;=&gt;</code>, does the same for numbers:</p>
+
+<pre class="perl">print join ", ", sort { $a &lt;=&gt; $b } @elevations;
+# "1, 2, 3, 19, 98, 100, 100, 1056"
+</pre>
+
+<p><code>$a</code> and <code>$b</code> are always scalars, but they can 
+be references to quite complex objects which are difficult to compare. 
+If you need more space for the comparison, you can create a separate 
+subroutine and provide its name instead:</p>
+
+<pre class="perl">sub comparator {
+	# lots of code...
+	# return -1, 0 or 1
+}
+
+print join ", ", sort comparator @elevations;
+</pre>
+
+<p>You can't do this for <code>grep</code> or <code>map</code> operations.</p>
+
+<p>Notice how the subroutine and block are never explicitly provided with <code>$a</code> and <code>$b</code>. Like <code>$_</code>, <code>$a</code> and <code>$b</code> are, in fact, global variables which are <em>populated</em> with a pair of values to be compared each time.</p>
+
+<h2>Built-in functions</h2>
+<p>By now you have seen at least a dozen built-in functions: <code>print</code>, <code>sort</code>, <code>map</code>, <code>grep</code>, <code>keys</code>, <code>scalar</code> and so on. Built-in functions are one of Perl's greatest strengths. They</p>
+<ul>
+	<li>are numerous</li>
+	<li>are very useful</li>
+	<li>are <a href="http://perldoc.perl.org/perlfunc.html">extensively documented</a></li>
+	<li>vary greatly in syntax, so check the documentation</li>
+	<li>sometimes accept regular expressions as arguments</li>
+	<li>sometimes accept entire blocks of code as arguments</li>
+	<li>sometimes don't require commas between arguments</li>
+	<li>sometimes will consume an arbitrary number of comma-separated arguments and sometimes will not</li>
+	<li>sometimes will fill in their own arguments if too few are supplied</li>
+	<li>generally don't require brackets around their arguments except in ambiguous circumstances</li>
+</ul>
+<p>The best advice regarding built-in functions is to <strong>know that they exist</strong>.
+ Skim the documentation for future reference. If you are carrying out a 
+task which feels like it's low-level and common enough that it's been 
+done many times before, the chances are that it has.</p>
+
+<h2>User-defined subroutines</h2>
+
+<p>Subroutines are declared using the <code><a href="http://perldoc.perl.org/functions/sub.html">sub</a></code>
+ keyword. In contrast with built-in functions, user-defined subroutines 
+always accept the same input: a list of scalars. That list may of course
+ have a single element, or be empty. A single scalar is taken as a list 
+with a single element. A hash with <var>N</var> elements is taken as a list with 2<var>N</var> elements.</p>
+<p>Although the brackets are optional, subroutines should always be 
+invoked using brackets, even when called with no arguments. This makes 
+it clear that a subroutine call is happening.</p>
+<p>Once you're inside a subroutine, the arguments are available using the <a href="http://perldoc.perl.org/perlvar.html">built-in array variable</a> <code>@_</code>. Example:</p>
+
+<pre class="perl">sub hyphenate {
+
+  # Extract the first argument from the array, ignore everything else
+  my $word = shift @_;
+
+  # An overly clever list comprehension
+  $word = join "-", map { <a href="http://perldoc.perl.org/functions/substr.html">substr</a> $word, $_, 1 } (0 .. (<a href="http://perldoc.perl.org/functions/length.html">length</a> $word) - 1);
+  return $word;
+}
+
+print hyphenate("exterminate"); # "e-x-t-e-r-m-i-n-a-t-e"
+</pre>
+
+<h3>Perl calls by reference</h3>
+
+<p>Unlike almost every other major programming language, Perl calls by 
+reference. This means that the variables or values available inside the 
+body of a subroutine are not copies of the originals. They <em>are</em> the originals.</p>
+
+<pre class="perl">my $x = 7;
+
+sub reassign {
+  $_[0] = 42;
+}
+
+reassign($x);
+print $x; # "42"
+</pre>
+
+<p>If you try something like</p>
+
+<pre class="perl">reassign(8);
+</pre>
+
+<p>then an error occurs and execution halts, because the first line of <code>reassign()</code> is equivalent to</p>
+
+<pre class="perl">8 = 42;
+</pre>
+
+<p>which is obviously nonsense.</p>
+
+<p>The lesson to learn is that in the body of a subroutine, you should always unpack your arguments before working with them.</p>
+
+<h3>Unpacking arguments</h3>
+<p>There's More Than One Way To unpack <code>@_</code>, but some are superior to others.</p>
+<p>The example subroutine <code>left_pad</code> below pads a string out to the required length using the supplied pad character. (The <code>x</code>
+ function concatenates multiple copies of the same string in a row.) 
+(Note: for brevity, these subroutines all lack some elementary error 
+checking, i.e. ensuring the pad character is only 1 character, checking 
+that the width is greater than or equal to the length of existing 
+string, checking that all needed arguments were passed at all.)</p>
+<p><code>left_pad</code> is typically invoked as follows:</p>
+<pre class="perl">print left_pad("hello", 10, "+"); # "+++++hello"
+</pre>
+
+<ol>
+	<li>
+		<p>Unpacking <code>@_</code> entry by entry is effective but not terribly pretty:</p>
+<pre class="perl">sub left_pad {
+	my $oldString = $_[0];
+	my $width     = $_[1];
+	my $padChar   = $_[2];
+	my $newString = ($padChar x ($width - length $oldString)) . $oldString;
+	return $newString;
+}
+</pre>
+	</li>
+	<li>
+		<p>Unpacking <code>@_</code> by removing data from it using <code>shift</code> is recommended for up to 4 arguments:</p>
+<pre class="perl">sub left_pad {
+	my $oldString = shift @_;
+	my $width     = shift @_;
+	my $padChar   = shift @_;
+	my $newString = ($padChar x ($width - length $oldString)) . $oldString;
+	return $newString;
+}
+</pre>
+		<p>If no array is provided to the <code>shift</code> function, then it operates on <code>@_</code> implicitly. This approach is seen very commonly:</p>
+<pre class="perl">sub left_pad {
+	my $oldString = shift;
+	my $width     = shift;
+	my $padChar   = shift;
+	my $newString = ($padChar x ($width - length $oldString)) . $oldString;
+	return $newString;
+}
+</pre>
+		<p>Beyond 4 arguments it becomes hard to keep track of what is being assigned where.</p>
+	</li>
+	<li>
+		<p>You can unpack <code>@_</code> all in one go using multiple simultaneous scalar assignment. Again, this is okay for up to 4 arguments:</p>
+<pre class="perl">sub left_pad {
+	my ($oldString, $width, $padChar) = @_;
+	my $newString = ($padChar x ($width - length $oldString)) . $oldString;
+	return $newString;
+}
+</pre>
+	</li>
+	<li>
+		<p>For subroutines with large numbers of arguments or where some 
+arguments are optional or cannot be used in combination with others, 
+best practice is to require the user to provide a hash of arguments when
+ calling the subroutine, and then unpack <code>@_</code> back into that hash of arguments. For this approach, our subroutine call would look a little different:</p>
+<pre class="perl">print left_pad("oldString" =&gt; "pod", "width" =&gt; 10, "padChar" =&gt; "+");
+</pre>
+		<p>And the subroutine itself looks like this:</p>
+<pre class="perl">sub left_pad {
+	my %args = @_;
+	my $newString = ($args{"padChar"} x ($args{"width"} - length $args{"oldString"})) . $args{"oldString"};
+	return $newString;
+}
+</pre>
+	</li>
+</ol>
+<h3>Returning values</h3>
+<p>Like other Perl expressions, subroutine calls may display contextual behaviour. You can use the <code><a href="http://perldoc.perl.org/functions/wantarray.html">wantarray</a></code> function (which should be called <code>wantlist</code> but never mind) to detect what context the subroutine is being evaluated in, and return a result appropriate to that context:</p>
+<pre class="perl">sub contextualSubroutine {
+	# Caller wants a list. Return a list
+	return ("Everest", "K2", "Etna") if wantarray;
+
+	# Caller wants a scalar. Return a scalar
+	return 3;
+}
+
+my @array = contextualSubroutine();
+print @array; # "EverestK2Etna"
+
+my $scalar = contextualSubroutine();
+print $scalar; # "3"
+</pre>
+
+<h2>System calls</h2>
+<p>Apologies if you already know the following non-Perl-related facts. 
+Every time a process finishes on a Windows or Linux system (and, I 
+assume, on most other systems), it concludes with a 16-bit <i>status word</i>. The highest 8 bits constitute a <i>return code</i>
+ between 0 and 255 inclusive, with 0 conventionally representing 
+unqualified success, and other values representing various degrees of 
+failure. The other 8 bits are less frequently examined - they "reflect 
+mode of failure, like signal death and core dump information".</p>
+<p>You can exit from a Perl script with the return code of your choice (from 0 to 255) using <code><a href="http://perldoc.perl.org/functions/exit.html">exit</a></code>.</p>
+<p>Perl provides More Than One Way To - in a single call - spawn a child
+ process, pause the current script until the child process has finished,
+ and then resume interpretation of the current script. Whichever method 
+is used, you will find that immediately afterwards, the <a href="http://perldoc.perl.org/perlvar.html">built-in scalar variable</a> <code>$?</code>
+ has been populated with the status word that was returned from that 
+child process's termination. You can get the return code by taking just 
+the highest 8 of those 16 bits: <code>$? &gt;&gt; 8</code>.</p>
+<p>The <code><a href="http://perldoc.perl.org/functions/system.html">system</a></code> function can be used to invoke another program with the arguments listed. The value returned by <code>system</code> is the same value with which <code>$?</code> is populated:</p>
+<pre class="perl">my $rc = system "perl", "anotherscript.pl", "foo", "bar", "baz";
+$rc &gt;&gt;= 8;
+print $rc; # "37"
+</pre>
+<p>Alternatively, you can use backticks <code>``</code> to run an actual
+ command at the command line and capture the standard output from that 
+command. In scalar context the entire output is returned as a single 
+string. In list context, the entire output is returned as an array of 
+strings, each one representing a line of output.</p>
+<pre class="perl">my $text = `perl anotherscript.pl foo bar baz`;
+print $text; # "foobarbaz"
+</pre>
+<p>This is the behaviour which would be seen if <code>anotherscript.pl</code> contained, for example:</p>
+<pre class="perl">use strict;
+use warnings;
+
+print @ARGV;
+exit 37;
+</pre>
+
+<h2>Files and file handles</h2>
+
+<p>A scalar variable may contain a <i>file handle</i> instead of a number/string/reference or <code>undef</code>. A file handle is essentially a reference to a specific location inside a specific file.</p>
+
+<p>Use <code><a href="http://perldoc.perl.org/functions/open.html">open</a></code> to turn a scalar variable into a file handle. <code>open</code> must be supplied with a <i>mode</i>. The mode <code>&lt;</code> indicates that we wish to open the file to read from it:</p>
+
+<pre class="perl">my $f = "text.txt";
+my $result = open my $fh, "&lt;", $f;
+
+if(!$result) {
+	<a href="http://perldoc.perl.org/functions/die.html">die</a> "Couldn't open '".$f."' for reading because: ".$!;
+}
+</pre>
+
+<p>If successful, <code>open</code> returns a true value. Otherwise, it returns false and an error message is stuffed into the built-in variable <code>$!</code>. As seen above, you should always check that the <code>open</code> operation completed successfully. This checking being rather tedious, a common idiom is:</p>
+<pre class="perl">open(my $fh, "&lt;", $f) || die "Couldn't open '".$f."' for reading because: ".$!;
+</pre>
+<p>Note the need for parentheses around the <code>open</code> call's arguments.</p>
+<p>To read a line of text from a filehandle, use the <code><a href="http://perldoc.perl.org/functions/readline.html">readline</a></code> built-in function. <code>readline</code> returns a full line of text, with a line break intact at the end of it (except possibly for the final line of the file), or <code>undef</code> if you've reached the end of the file.</p>
+<pre class="perl">while(1) {
+	my $line = readline $fh;
+	last unless defined $line;
+	# process the line...
+}
+</pre>
+<p>To truncate that possible trailing line break, use <code><a href="http://perldoc.perl.org/functions/chomp.html">chomp</a></code>:</p>
+<pre class="perl">chomp $line;
+</pre>
+<p>Note that <code>chomp</code> acts on <code>$line</code> in place. <code>$line = chomp $line</code> is probably not what you want.</p>
+<p>You can also use <code><a href="http://perldoc.perl.org/functions/eof.html">eof</a></code> to detect that the end of the file has been reached:</p>
+<pre class="perl">while(!eof $fh) {
+	my $line = readline $fh;
+	# process $line...
+}
+</pre>
+<p>But beware of just using <code>while(my $line = readline $fh)</code>, because if <code>$line</code> turns out to be <code>"0"</code>, the loop will terminate early. If you want to write something like that, Perl provides the <code>&lt;&gt;</code> operator which wraps up <code>readline</code> in a fractionally safer way. This is very commonly-seen and perfectly safe:</p>
+<pre class="perl">while(my $line = &lt;$fh&gt;) {
+	# process $line...
+}
+</pre>
+<p>And even:</p>
+<pre class="perl">while(&lt;$fh&gt;) {
+	# process $_...
+}
+</pre>
+<p>Writing to a file involves first opening it in a different mode. The mode <code>&gt;</code> indicates that we wish to open the file to write to it. (<code>&gt;</code>
+ will clobber the content of the target file if it already exists and 
+has content. To merely append to an existing file, use mode <code>&gt;&gt;</code>.) Then, simply provide the filehandle as a zeroth argument for the <code>print</code> function.</p>
+<pre class="perl">open(my $fh2, "&gt;", $f) || die "Couldn't open '".$f."' for writing because: ".$!;
+print $fh2 "The eagles have left the nest";
+</pre>
+<p>Notice the absence of a comma between <code>$fh2</code> and the next argument.</p>
+
+<p>File handles are actually closed automatically when they drop out of scope, but otherwise:</p>
+<pre class="perl"><a href="http://perldoc.perl.org/functions/close.html">close</a> $fh2;
+close $fh;
+</pre>
+
+<p>Three filehandles exist as global constants: <code>STDIN</code>, <code>STDOUT</code> and <code>STDERR</code>. These are open automatically when the script starts. To read a single line of user input:</p>
+<pre class="perl">my $line = &lt;STDIN&gt;;
+</pre>
+<p>To just wait for the user to hit Enter:</p>
+<pre class="perl">&lt;STDIN&gt;;
+</pre>
+<p>Calling <code>&lt;&gt;</code> with no filehandle reads data from <code>STDIN</code>, or from any files named in arguments when the Perl script was called.</p>
+<p>As you may have gathered, <code>print</code> prints to <code>STDOUT</code> by default if no filehandle is named.</p>
+
+<h3>File tests</h3>
+
+<p>The function <code>-e</code> is a built-in function which tests whether the named file exists.</p>
+<pre class="perl">print "what" unless -e "/usr/bin/perl";
+</pre>
+<p>The function <code>-d</code> is a built-in function which tests whether the named file is a directory.</p>
+<p>The function <code>-f</code> is a built-in function which tests whether the named file is a plain file.</p>
+<p>These are just three of <a href="http://perldoc.perl.org/functions/-X.html">a large class of functions</a> of the form <code>-X</code> where <code>X</code> is some lower- or upper-case letter. These functions are called <i>file tests</i>.
+ Note the leading minus sign. In a Google query, the minus sign 
+indicates to exclude results containing this search term. This makes 
+file tests hard to Google for! Just search for "perl file test" instead.</p>
+
+<h2>Regular expressions</h2>
+<p>Regular expressions appear in many languages and tools other than 
+Perl. Perl's core regular expression syntax is basically the same as 
+everywhere else, but Perl's <em>full</em> regular expression 
+capabilities are terrifyingly complex and difficult to understand. The 
+best advice I can give you is to avoid this complexity wherever 
+possible.</p>
+<p>Match operations are performed using <code>=~ m//</code>. In scalar context, <code>=~ m//</code> returns true on success, false on failure.</p>
+
+<pre class="perl">my $string = "Hello world";
+if($string =~ m/(\w+)\s+(\w+)/) {
+	print "success";
+}
+</pre>
+<p>Parentheses perform sub-matches. After a successful match operation 
+is performed, the sub-matches get stuffed into the built-in variables <code>$1</code>, <code>$2</code>, <code>$3</code>, ...:</p>
+<pre class="perl">print $1; # "Hello"
+print $2; # "world"
+</pre>
+<p>In list context, <code>=~ m//</code> returns <code>$1</code>, <code>$2</code>, ... as a list.</p>
+<pre class="perl">my $string = "colourless green ideas sleep furiously";
+my @matches = $string =~ m/(\w+)\s+((\w+)\s+(\w+))\s+(\w+)\s+(\w+)/;
+
+print join ", ", map { "'".$_."'" } @matches;
+# prints "'colourless', 'green ideas', 'green', 'ideas', 'sleep', 'furiously'"
+</pre>
+
+<p>Substitution operations are performed using <code>=~ s///</code>.</p>
+<pre class="perl">my $string = "Good morning world";
+$string =~ s/world/Vietnam/;
+print $string; # "Good morning Vietnam"
+</pre>
+<p>Notice how the contents of <code>$string</code> have changed. You have to pass a scalar variable on the left-hand side of an <code>=~ s///</code> operation. If you pass a literal string, you'll get an error.</p>
+
+<p>The <code>/g</code> flag indicates "group match".</p>
+
+<p>In scalar context, each <code>=~ m//g</code> call finds another match after the previous one, returning true on success, false on failure. You can access <code>$1</code> and so on afterwards in the usual way. For example:</p>
+<pre class="perl">my $string = "a tonne of feathers or a tonne of bricks";
+while($string =~ m/(\w+)/g) {
+  print "'".$1."'\n";
+}
+</pre>
+
+<p>In list context, an <code>=~ m//g</code> call returns all of the matches at once.</p>
+<pre class="perl">my @matches = $string =~ m/(\w+)/g;
+print join ", ", map { "'".$_."'" } @matches;
+</pre>
+
+<p>An <code>=~ s///g</code> call performs a global search/replace and returns the number of matches. Here, we replace all vowels with the letter "r".</p>
+
+<pre class="perl"># Try once without /g.
+$string =~ s/[aeiou]/r/;
+print $string; # "r tonne of feathers or a tonne of bricks"
+
+# Once more.
+$string =~ s/[aeiou]/r/;
+print $string; # "r trnne of feathers or a tonne of bricks"
+
+# And do all the rest using /g
+$string =~ s/[aeiou]/r/g;
+print $string, "\n"; # "r trnnr rf frrthrrs rr r trnnr rf brrcks"
+</pre>
+
+<p>The <code>/i</code> flag makes matches and substitutions case-insensitive.</p>
+<p>The <code>/x</code> flag allows your regular expression to contain whitespace (e.g., line breaks) and comments.</p>
+<pre class="perl">"Hello world" =~ m/
+  (\w+) # one or more word characters
+  [ ]   # single literal space, stored inside a character class
+  world # literal "world"
+/x;
+
+# returns true
+</pre>
+
+<h2>Modules and packages</h2>
+
+<p>In Perl, modules and packages are different things.</p>
+
+<h3>Modules</h3>
+
+<p>A <i>module</i> is a <code>.pm</code> file that you can <i>include</i> in another Perl file (script or module). A module is a text file with exactly the same syntax as a <code>.pl</code> Perl script. An example module might be located at <code>C:\foo\bar\baz\Demo\StringUtils.pm</code> or <code>/foo/bar/baz/Demo/StringUtils.pm</code>, and read as follows:</p>
+
+<pre class="perl">use strict;
+use warnings;
+
+sub zombify {
+	my $word = shift @_;
+	$word =~ s/[aeiou]/r/g;
+	return $word;
+}
+
+return 1;
+</pre>
+
+<p>Because a module is executed from top to bottom when it is loaded, 
+you need to return a true value at the end to show that it was loaded 
+successfully.</p>
+
+<p>So that the Perl interpreter can find them, directories containing Perl modules should be listed in your environment variable <code>PERL5LIB</code> before calling <code>perl</code>. List the root directory containing the modules, don't list the module directories or the modules themselves:</p>
+<pre class="bash">set PERL5LIB="C:\foo\bar\baz;%PERL5LIB%"
+</pre>
+<p>or</p>
+<pre class="bash">export PERL5LIB="/foo/bar/baz:$PERL5LIB"
+</pre>
+
+<p>Once the Perl module is created and <code>perl</code> knows where to look for it, you can use the <code><a href="http://perldoc.perl.org/functions/require.html">require</a></code> built-in function to search for and execute it during a Perl script. For example, calling <code>require Demo::StringUtils</code> causes the Perl interpreter to search each directory listed in <code>PERL5LIB</code> in turn, looking for a file called <code>Demo/StringUtils.pm</code>.
+ After the module has been executed, the subroutines that were defined 
+there suddenly become available to the main script. Our example script 
+might be called <code>main.pl</code> and read as follows:</p>
+
+<pre class="perl">use strict;
+use warnings;
+
+require Demo::StringUtils;
+
+print zombify("i want brains"); # "r wrnt brrrns"
+</pre>
+
+<p><i>Note the use of the double colon <code>::</code> as a directory separator.</i></p>
+
+<p>Now a problem surfaces: if <code>main.pl</code> contains many <code>require</code> calls, and each of the modules so loaded contains more <code>require</code> calls, then it can become difficult to track down the original declaration of the <code>zombify()</code> subroutine. The solution to this problem is to use packages.</p>
+
+<h3>Packages</h3>
+
+<p>A <i>package</i> is a namespace in which subroutines can be declared.
+ Any subroutine you declare is implicitly declared within the current 
+package. At the beginning of execution, you are in the <code>main</code> package, but you can switch package using the <code><a href="http://perldoc.perl.org/functions/package.html">package</a></code> built-in function:</p>
+
+<pre class="perl">use strict;
+use warnings;
+
+sub subroutine {
+	print "universe";
+}
+
+package Food::Potatoes;
+
+# no collision:
+sub subroutine {
+	print "kingedward";
+}
+</pre>
+
+<p><i>Note the use of the double colon <code>::</code> as a namespace separator.</i></p>
+
+<p>Any time you call a subroutine, you implicitly call a subroutine 
+which is inside the current package. Alternatively, you can explicitly 
+provide a package. See what happens if we continue the above script:</p>
+
+<pre class="perl">subroutine();                 # "kingedward"
+main::subroutine();           # "universe"
+Food::Potatoes::subroutine(); # "kingedward"
+</pre>
+
+<p>So the logical solution to the problem described above is to modify <code>C:\foo\bar\baz\Demo\StringUtils.pm</code> or <code>/foo/bar/baz/Demo/StringUtils.pm</code> to read:</p>
+
+<pre class="perl">use strict;
+use warnings;
+
+<ins>package Demo::StringUtils;</ins>
+
+sub zombify {
+	my $word = shift @_;
+	$word =~ s/[aeiou]/r/g;
+	return $word;
+}
+
+return 1;
+</pre>
+
+<p>And modify <code>main.pl</code> to read:</p>
+
+<pre class="perl">use strict;
+use warnings;
+
+require Demo::StringUtils;
+
+print <ins>Demo::StringUtils::</ins>zombify("i want brains"); # "r wrnt brrrns"
+</pre>
+
+<p>Now read this next bit carefully.</p>
+<p>Packages and modules are two completely separate and distinct 
+features of the Perl programming language. The fact that they both use 
+the same double colon delimiter is a huge red herring. It is possible to
+ switch packages multiple times over the course of a script or module, 
+and it is possible to use the same package declaration in multiple 
+locations in multiple files. Calling <code>require Foo::Bar</code> <em>does not</em> look for and load a file with a <code>package Foo::Bar</code> declaration somewhere inside it, nor does it necessarily load subroutines in the <code>Foo::Bar</code> namespace. Calling <code>require Foo::Bar</code> merely loads a file called <code>Foo/Bar.pm</code>, which need not have <em>any</em> kind of package declaration inside it at all, and in fact might declare <code>package Baz::Qux</code> and other nonsense inside it for all you know.</p>
+<p>Likewise, a subroutine call <code>Baz::Qux::processThis()</code> need not necessarily have been declared inside a file named <code>Baz/Qux.pm</code>. It could have been declared <em>literally anywhere</em>.</p>
+<p>Separating these two concepts is one of the stupidest features of 
+Perl, and treating them as separate concepts invariably results in 
+chaotic, maddening code. Fortunately for us, the majority of Perl 
+programmers obey the following two laws:</p>
+<ol>
+	<li><strong>A Perl script (<code>.pl</code> file) must always contain exactly zero <code>package</code> declarations.</strong></li>
+	<li><strong>A Perl module (<code>.pm</code> file) must always contain exactly one <code>package</code> declaration, corresponding exactly to its name and location.</strong> E.g. module <code>Demo/StringUtils.pm</code> must begin with <code>package Demo::StringUtils</code>.</li>
+</ol>
+<p>Because of this, in practice you will find that most "packages" and "modules" produced by reliable third parties <em>can</em>
+ be regarded and referred to interchangeably. However, it is important 
+that you do not take this for granted, because one day you <em>will</em> meet code produced by a madman.</p>
+
+<h2>Object-oriented Perl</h2>
+
+<p>Perl is not a great language for OO programming. Perl's OO capabilities were grafted on after the fact, and this shows.</p>
+
+<ul>
+	<li><p>An <i>object</i> is simply a reference (i.e. a scalar variable) 
+which happens to know which class its referent belongs to. To tell a 
+reference that its referent belongs to a class, use <code><a href="http://perldoc.perl.org/functions/bless.html">bless</a></code>. To find out what class a reference's referent belongs to (if any), use <code><a href="http://perldoc.perl.org/functions/ref.html">ref</a></code>.</p></li>
+	<li><p>A <i>method</i> is simply a subroutine that expects an object 
+(or, in the case of class methods, a package name) as its first 
+argument. Object methods are invoked using <code>$obj-&gt;method()</code>; class methods are invoked using <code>Package::Name-&gt;method()</code>.</p></li>
+	<li><p>A <i>class</i> is simply a package that happens to contain methods.</p></li>
+</ul>
+
+<p>A quick example makes this clearer. An example module <code>Animal.pm</code> containing a class <code>Animal</code> reads like this:</p>
+
+<pre class="perl">use strict;
+use warnings;
+
+package Animal;
+
+sub eat {
+	# First argument is always the object to act upon.
+	my $self = shift @_;
+
+	foreach my $food ( @_ ) {
+		if($self-&gt;can_eat($food)) {
+			print "Eating ", $food;
+		} else {
+			print "Can't eat ", $food;
+		}
+	}
+}
+
+# For the sake of argument, assume an Animal can eat anything.
+sub can_eat {
+	return 1;
+}
+
+return 1;
+</pre>
+
+<p>And we might make use of this class like so:</p>
+
+<pre class="perl">require Animal;
+
+my $animal = {
+	"legs"   =&gt; 4,
+	"colour" =&gt; "brown",
+};                       # $animal is an ordinary hash reference
+print ref $animal;       # "HASH"
+bless $animal, "Animal"; # now it is an object of class "Animal"
+print ref $animal;       # "Animal"
+</pre>
+
+<p>Note: literally any reference can be blessed into any class. It's up 
+to you to ensure that (1) the referent can actually be used as an 
+instance of this class and (2) that the class in question exists and has
+ been loaded.</p>
+
+<p>You can still work with the original hash in the usual way:</p>
+<pre class="perl">print "Animal has ", $animal-&gt;{"legs"}, " leg(s)";
+</pre>
+
+<p>But you can now also call methods on the object using the same <code>-&gt;</code> operator, like so:</p>
+<pre class="perl">$animal-&gt;eat("insects", "curry", "eucalyptus");
+</pre>
+
+<p>This final call is equivalent to <code>Animal::eat($animal, "insects", "curry", "eucalyptus")</code>.</p>
+
+<h3>Constructors</h3>
+
+<p>A constructor is a class method which returns a new object. If you 
+want one, just declare one. You can use any name you like. For class 
+methods, the first argument passed is not an object but a class name. In
+ this case, <code>"Animal"</code>:</p>
+<pre class="perl">use strict;
+use warnings;
+
+package Animal;
+
+sub new {
+	my $class = shift @_;
+	return bless { "legs" =&gt; 4, "colour" =&gt; "brown" }, $class;
+}
+
+# ...etc.
+</pre>
+
+<p>And then use it like so:</p>
+<pre class="perl">my $animal = Animal-&gt;new();
+</pre>
+
+<h3>Inheritance</h3>
+
+<p>To create a class inheriting from a parent class, use <code>use parent</code>. Let's suppose we subclassed <code>Animal</code> with <code>Koala</code>, located at <code>Koala.pm</code>:</p>
+
+<pre class="perl">use strict;
+use warnings;
+
+package Koala;
+
+# Inherit from Animal
+use parent ("Animal");
+
+# Override one method
+sub can_eat {
+	my $self = shift @_; # Not used. You could just put "shift @_;" here
+	my $food = shift @_;
+	return $food eq "eucalyptus";
+}
+
+return 1;
+</pre>
+
+<p>And some sample code:</p>
+
+<pre class="perl">use strict;
+use warnings;
+
+require Koala;
+
+my $koala = Koala-&gt;new();
+
+$koala-&gt;eat("insects", "curry", "eucalyptus"); # eat only the eucalyptus
+</pre>
+
+<p>This final method call tries to invoke <code>Koala::eat($koala, "insects", "curry", "eucalyptus")</code>, but a subroutine <code>eat()</code> isn't defined in the <code>Koala</code> package. However, because <code>Koala</code> has a parent class <code>Animal</code>, the Perl interpreter tries calling <code>Animal::eat($koala, "insects", "curry", "eucalyptus")</code> instead, which works. Note how the class <code>Animal</code> was loaded automatically by <code>Koala.pm</code>.</p>
+<p>Since <code>use parent</code> accepts a list of parent class names, Perl supports multiple inheritance, with all the benefits and horrors this entails.</p>
+
+<h2><code>BEGIN</code> blocks</h2>
+
+<p>A <code><a href="http://perldoc.perl.org/functions/BEGIN.html">BEGIN</a></code> block is executed as soon as <code>perl</code> has finished parsing that block, even before it parses the rest of the file. It is ignored at execution time:</p>
+
+<pre class="perl">use strict;
+use warnings;
+
+print "This gets printed second";
+
+BEGIN {
+	print "This gets printed first";
+}
+
+print "This gets printed third";
+</pre>
+<p>A <code>BEGIN</code> block is always executed first. If you create multiple <code>BEGIN</code> blocks (don't), they are executed in order from top to bottom as the compiler encounters them. A <code>BEGIN</code> block always executes first even if it is placed halfway through a script (don't do this) or at the end (or this). <strong>Do not mess with the natural order of code. Put <code>BEGIN</code> blocks at the beginning!</strong></p>
+<p>A <code>BEGIN</code> block is executed as soon as the block has been parsed. Once this is done, <em>parsing</em> resumes at the end of the <code>BEGIN</code> block. Only once the whole script or module has been parsed is any of the code outside of <code>BEGIN</code> blocks executed.</p>
+<pre class="perl">use strict;
+use warnings;
+
+print "This 'print' statement gets parsed successfully but never executed";
+
+BEGIN {
+	print "This gets printed first";
+}
+
+print "This, also, is parsed successfully but never executed";
+
+...because e4h8v3oitv8h4o8gch3o84c3 there is a huge parsing error down here.
+</pre>
+<p>Because they are executed at compilation time, a <code>BEGIN</code> block placed inside a conditional block will <em>still</em> be executed first, even if the conditional evaluates to false and despite the fact that the conditional <em>has not been evaluated at all yet</em> and in fact <em>may never be evaluated</em>.</p>
+<pre class="perl">if(0) {
+	BEGIN {
+		print "This will definitely get printed";
+	}
+	print "Even though this won't";
+}
+</pre>
+<strong>Do not put <code>BEGIN</code> blocks in conditionals!</strong> If you want to do something conditionally at compile time, you need to put the conditional <em>inside</em> the <code>BEGIN</code> block:<p></p>
+<pre class="perl">BEGIN {
+	if($condition) {
+		# etc.
+	}
+}
+</pre>
+
+<h2><code>use</code></h2>
+<p>Okay. Now that you understand the obtuse behaviour and semantics of packages, modules, class methods and <code>BEGIN</code> blocks, I can explain the exceedingly commonly-seen <code><a href="http://perldoc.perl.org/functions/use.html">use</a></code> function.</p>
+<p>The following three statements:</p>
+<pre class="perl">use Caterpillar ("crawl", "pupate");
+use Caterpillar ();
+use Caterpillar;
+</pre>
+<p>are respectively equivalent to:</p>
+<pre class="perl">BEGIN {
+	require Caterpillar;
+	Caterpillar-&gt;import("crawl", "pupate");
+}
+BEGIN {
+	require Caterpillar;
+}
+BEGIN {
+	require Caterpillar;
+	Caterpillar-&gt;import();
+}
+</pre>
+<ul>
+	<li>No, the three examples are not in the wrong order. It is just that Perl is dumb.</li>
+	<li>A <code>use</code> call is a disguised <code>BEGIN</code> block. The same warnings apply. <code>use</code> statements must always be placed at the top of the file, and <strong>never inside conditionals</strong>.</li>
+	<li><code>import()</code> is not a built-in Perl function. It is a <strong>user-defined class method</strong>. The burden is on the programmer of the <code>Caterpillar</code> package to define or inherit <code>import()</code>, and the method could theoretically accept anything as arguments and do anything with those arguments. <code>use Caterpillar;</code> could do anything. Consult the documentation of <code>Caterpillar.pm</code> to find out exactly what will happen.</li>
+	<li>Notice how <code>require Caterpillar</code> loads a <strong>module</strong> named <code>Caterpillar.pm</code>, whereas <code>Caterpillar-&gt;import()</code> calls the <code>import()</code> subroutine that was defined inside the <code>Caterpillar</code> <strong>package</strong>. Let's hope the module and the package coincide!</li>
+</ul>
+
+<h2>Exporter</h2>
+
+<p>The most common way to define an <code>import()</code> method is to inherit it from the <a href="http://perldoc.perl.org/Exporter.html">Exporter</a> module. Exporter is a core module, and a <i>de facto</i> core feature of the Perl programming language. In Exporter's implementation of <code>import()</code>, the list of arguments that you pass in is interpreted as a list of subroutine names. When a subroutine is <code>import()</code>ed, it becomes available in the current package as well as in its own original package.</p>
+
+<p>This concept is easiest to grasp using an example. Here's what <code>Caterpillar.pm</code> looks like:</p>
+
+<pre class="perl">use strict;
+use warnings;
+
+package Caterpillar;
+
+# Inherit from Exporter
+use parent ("Exporter");
+
+sub crawl  { print "inch inch";   }
+sub eat    { print "chomp chomp"; }
+sub pupate { print "bloop bloop"; }
+
+our @EXPORT_OK = ("crawl", "eat");
+
+return 1;
+</pre>
+
+<p>The package variable <code>@EXPORT_OK</code> should contain a list of subroutine names.</p>
+<p>Another piece of code may then <code>import()</code> these subroutines by name, typically using a <code>use</code> statement:</p>
+
+<pre class="perl">use strict;
+use warnings;
+use Caterpillar ("crawl");
+
+crawl(); # "inch inch"
+</pre>
+
+<p>In this case, the current package is <code>main</code>, so the <code>crawl()</code> call is actually a call to <code>main::crawl()</code>, which (because it was imported) maps to <code>Caterpillar::crawl()</code>.</p>
+
+<p>Note: regardless of the content of <code>@EXPORT_OK</code>, every method can always be called "longhand":</p>
+
+<pre class="perl">use strict;
+use warnings;
+use Caterpillar (); # no subroutines named, no import() call made
+
+# and yet...
+Caterpillar::crawl();  # "inch inch"
+Caterpillar::eat();    # "chomp chomp"
+Caterpillar::pupate(); # "bloop bloop"
+</pre>
+
+<p>Perl has no private methods. Customarily, a method intended for private use is named with a leading underscore or two.</p>
+
+<h3><code>@EXPORT</code></h3>
+
+<p>The Exporter module also defines a package variable called <code>@EXPORT</code>, which can also be populated with a list of subroutine names.</p>
+
+<pre class="perl">use strict;
+use warnings;
+
+package Caterpillar;
+
+# Inherit from Exporter
+use parent ("Exporter");
+
+sub crawl  { print "inch inch";   }
+sub eat    { print "chomp chomp"; }
+sub pupate { print "bloop bloop"; }
+
+our @EXPORT = ("crawl", "eat", "pupate");
+
+return 1;
+</pre>
+
+<p>The subroutines named in <code>@EXPORT</code> are exported if <code>import()</code> is called with no arguments at all, which is what happens here:</p>
+
+<pre class="perl">use strict;
+use warnings;
+use Caterpillar; # calls import() with no arguments
+
+crawl();  # "inch inch"
+eat();    # "chomp chomp"
+pupate(); # "bloop bloop"
+</pre>
+
+<p>But notice how we are back in a situation where, without other clues, it might not be easy to tell where <code>crawl()</code> was originally defined. The moral of this story is twofold:</p>
+<ol>
+<li><p>When creating a module which makes use of Exporter, never use <code>@EXPORT</code> to export subroutines by default. Always make the user call subroutines "longhand" or <code>import()</code> them explicitly (using e.g. <code>use Caterpillar ("crawl")</code>, which is a strong clue to look in <code>Caterpillar.pm</code> for the definition of <code>crawl()</code>).</p></li>
+<li><p>When <code>use</code>ing a module which makes use of Exporter, always explicitly name the subroutines you want to <code>import()</code>. If you don't want to <code>import()</code> any subroutines and wish to refer to them longhand, you must supply an explicit empty list: <code>use Caterpillar ()</code>.</p></li>
+</ol>
+
+<h2>Miscellaneous notes</h2>
+<ul>
+	<li>
+		<p>The core module <a href="http://perldoc.perl.org/Data/Dumper.html">Data::Dumper</a> can be used to output an arbitrary scalar to the screen. This is an essential debug tool.</p>
+	</li>
+	<li>
+		<p>There's an alternate syntax, <code>qw{ }</code>, for declaring arrays. This is often seen in <code>use</code> statements:</p>
+<pre class="perl">use Account qw{create open close suspend delete};
+</pre>
+		<p>There are <a href="http://perldoc.perl.org/perlop.html#Quote-and-Quote-like-Operators">many other quote-like operators</a>.</p>
+	</li>
+	<li>
+		<p>In <code>=~ m//</code> and <code>=~ s///</code> operations, you can
+ use braces instead of slashes as the regex delimiters. This is quite 
+useful if your regex contains a lot of slashes, which would otherwise 
+need escaping with backslashes. For example, <code>=~ m{///}</code> matches three literal forward slashes, and <code>=~ s{^https?://}{}</code> removes the protocol part of a URL.</p>
+	</li>
+	<li>
+		<p>Perl does have <code>CONSTANTS</code>. These are discouraged now, but weren't always. Constants are actually just subroutine calls with omitted brackets.</p>
+	</li>
+	<li>
+		<p>Sometimes people omit quotes around hash keys, writing <code>$hash{key}</code> instead of <code>$hash{"key"}</code>. They can get away with it because in this situation the bareword <code>key</code> occurs as the string <code>"key"</code>, as opposed to a subroutine call <code>key()</code>.</p>
+	</li>
+	<li>
+		<p>If you see a block of unformatted code wrapped in a delimiter with double chevrons, like <code><a href="http://perldoc.perl.org/perlop.html#Quote-and-Quote-like-Operators">&lt;&lt;EOF</a></code>, the magic word to Google for is "here-doc".</p>
+	</li>
+	<li>
+		<p>Warning! Many built-in functions can be called with no arguments, <strong>causing them to operate on <code>$_</code> instead</strong>. Hopefully this will help you understand formations like:</p>
+<pre class="perl">print foreach @array;
+</pre>
+<p>and</p>
+<pre class="perl">foreach ( @array ) {
+	next unless defined;
+}
+</pre>
+		<p>I dislike this formation because it can lead to problems when refactoring.</p>
+	</li>
+</ul>
+
+<p>And that's two and a half hours.</p>
+<h4><a href="https://qntm.org/perl">Back to Things Of Interest</a></h4>
+
+<script type="text/javascript"><!--
+	var sc_project=667681; 
+	var sc_invisible=1; 
+	var sc_partition=5; 
+	var sc_security="f56850e2"; 
+	var sc_remove_link=1; 
+// --></script>
+<script type="text/javascript" src="Perl_files/counter_xhtml.js"></script>
+
+<noscript>
+	<p><img
+		class="statcounter"
+		src="https://c6.statcounter.com/counter.php?sc_project=667681&amp;java=0&amp;security=f56850e2&amp;invisible=1"
+		alt="website statistics"
+	/></p>
+</noscript>
+
+</body></html>

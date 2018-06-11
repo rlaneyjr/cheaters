@@ -1,0 +1,244 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>Citrix NetScaler XML API User&#39;s Guide - Structure Definition</title>
+<link rel="stylesheet" type="text/css" href="help_ns.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body onload="initial()" class="ns_body">
+<div class="ns_content"><table cellpadding="0" cellspacing="0"><script type="text/javascript">
+function changeContext(id,lang,flag){
+	parent.banner.document.language.select.value = lang;
+	if( lang == "C" ){
+		if(flag == "1"){
+			showContent(cfirstcontent,id,lang);
+		}
+		else{
+			showContent(csecondcontent,id,lang);
+		}
+	}
+	if( lang == "Perl" ){
+		if(flag == "1"){
+			showContent(perlfirstcontent,id,lang);
+		}
+		else{
+			showContent(perlsecondcontent,id,lang);
+		}
+	}
+	if( lang == "Java" ){
+		if(flag == "1"){
+			showContent(javafirstcontent,id,lang);	
+		}
+		else{
+			showContent(javasecondcontent,id,lang);
+		}
+	}
+	if( lang == "C#" ){
+		if(flag == "1"){
+			showContent(csharpfirstcontent,id,lang);
+		}
+		else{
+			showContent(csharpsecondcontent,id,lang);
+		}
+	}
+	if( lang == "VB" ){
+		if(flag == "1"){
+			showContent(vbfirstcontent,id,lang);
+		}
+		else{
+			showContent(vbsecondcontent,id,lang);
+		}
+	}
+	if(flag == "1"){
+		showInside(lang,"0");
+	}
+	else{
+		showOutside(lang);
+	}
+}
+function showContent(content,id,lang){
+	if(ie4){
+	   showContentObj=document.all.id;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById(id);
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+  showLangSelect(lang);
+}
+function showInside(str,cond){
+	if(str == "C"){
+ 		var inside_content = csecondcontent;
+ 	}
+ 	if(str == "Perl"){
+ 		var inside_content = perlsecondcontent;
+ 	}
+ 	if(str == "Java"){
+ 		var inside_content = javasecondcontent;
+ 	}
+ 	if(str == "C#"){
+		var inside_content = csharpsecondcontent;
+ 	}
+ 	if(str == "VB"){
+		var inside_content = vbsecondcontent;
+ 	}
+	showContent(inside_content,'qiksearch_div1',str);
+ 	if ( cond == "1" ){
+ 		var page = 'apidoc/docs/getsystemglobalResult.html#systemglobalList';
+ 		document.location.href = page;
+ 	}
+}
+function showOutside(str){
+	if(str == "C" ){
+ 		var inside_content = cfirstcontent;
+ 	}
+ 	if(str == "Perl" ){
+ 		var inside_content = perlfirstcontent;
+ 	}
+ 	if(str == "Java" ){
+ 		var inside_content = javafirstcontent;
+ 	}
+ 	if(str == "C#" ){
+ 		var inside_content = csharpfirstcontent;
+ 	}
+ 	if(str == "VB" ){
+ 		var inside_content = vbfirstcontent;
+ 	}
+ 	showContent(inside_content,'qiksearch_div',str);
+}
+function initial(){
+	ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+	ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+	ns4=document.layers;
+	langSelected = parent.banner.document.language.select.value
+	var plink = parent.banner.document.language.plink.value
+	var my_array=plink.split("&");
+	var temp = my_array[0];
+ 	var grp = temp.split("@");
+	var cmd = my_array[1];
+	var regex = /^stat/i;
+	if( cmd.match(regex) != null ){
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex_stat.html\">Statistics</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getsystemglobalResult");
+	}
+	else{
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex.htm\">Configuration</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getsystemglobalResult");
+	}
+	if( langSelected == "C" ){
+ 		var content = cfirstcontent;
+	}
+	else if( langSelected == "Perl" ){
+		var content = perlfirstcontent;
+	}
+	else if( langSelected == "Java" ){
+		var content = javafirstcontent;
+	}
+	else if( langSelected == "C#" ){
+		var content = csharpfirstcontent;
+	}
+	else if( langSelected == "VB" ){
+		var content = vbfirstcontent;
+	}
+	else{
+		var content = cfirstcontent;
+		langSelected="C";
+	}
+	showContent(content,'qiksearch_div',langSelected);
+	showInside(langSelected,"0");
+}
+function showPLink(content){
+	if(ie4){
+	   showContentObj=document.all.progressive_link;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById("progressive_link");
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+}
+function showLangSelect(id){
+	   if(ie4)
+       {
+       	showObj=document.all.first_url;
+       	showObj1=document.all.second_url;
+       }
+       if(ns6)
+       {
+       	showObj=document.getElementById("first_url");
+       	showObj1=document.getElementById("second_url");
+       }
+       if( id == "C" ){
+       	newlink = "<b>C</b>";
+       	newlink1 = "<b>C</b>";
+       }
+       else{
+       	newlink = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C','1');\"><b>C</b></a>";
+       	newlink1 = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C','0');\"><b>C</b></a>";
+       }
+       if( id == "Perl" ){
+       	newlink = newlink + " | <b>Perl</b>";
+       	newlink1 = newlink1 + " | <b>Perl</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Perl','1');\"><b>Perl</b></a>";
+      	       newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Perl','0');\"><b>Perl</b></a>";
+       }
+       if( id == "Java" ){
+       	newlink = newlink + " | <b>Java</b>";
+       	newlink1 = newlink1 + " | <b>Java</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Java','1');\"><b>Java</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Java','0');\"><b>Java</b></a>";
+       }
+       if( id == "C#" ){
+       	newlink = newlink + " | <b>C#</b>";
+       	newlink1 = newlink1 + " | <b>C#</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C#','1');\"><b>C#</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C#','0');\"><b>C#</b></a>";
+       }
+       showObj.innerHTML = newlink;
+       showObj1.innerHTML = newlink1;
+}
+</script>
+<tr><td><div><div id="progressive_link"></div></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>getsystemglobalResult Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>getsystemglobalResult</b> structure defines the return type for getsystemglobal API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="first_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+cfirstcontent = "<pre>struct getsystemglobalResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; struct <a href=\'getsystemglobalResult.html\#systemglobal\'>systemglobal</a> list[];<br> };<br></pre></td></tr></table></div>"
+perlfirstcontent = "<pre>$getsystemglobalResult = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rc => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; message => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; List => \'@<a href=\'getsystemglobalResult.html\#systemglobal\'>systemglobal</a>\',<br> };<br></pre></td></tr></table></div>"
+javafirstcontent = "<pre>class getsystemglobalResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getsystemglobalResult.html\#systemglobal\'>systemglobal</a>[] list;<br> };<br></pre></td></tr></table></div>"
+csharpfirstcontent = "<pre>class getsystemglobalResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getsystemglobalResult.html\#systemglobal\'>systemglobal</a>[] list;<br> };<br></pre></td></tr></table></div>"
+vbfirstcontent = "<pre>Public <b>Structure</b> getsystemglobalResult <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rc As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public message As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public  systemglobalList() As  <a href=\'getsystemglobalResult.html\#systemglobal\'>systemglobal</a><br> <b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rc</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, rc is 0 else rc > 0. Values above 0x8000 indicate Warnings.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>message</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, message is NULL else message contains <a href="errorlisting.html">Error/Warning</a> message.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>systemglobalList</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">List of systemglobals</div></td></tr><tr><td><br></td></tr><tr><td><div><a name="systemglobal"></a></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>systemglobal  Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>systemglobal</b> structure defines the actual return type values for getsystemglobal API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="second_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div1" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+csecondcontent = "<pre>struct systemglobal {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * policyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int priority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int bindpolicytype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * builtin[];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * radiuspolicyname []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int radiuspolicypriority []   ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * radiuspolicybuiltin []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * ldappolicyname []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ldappolicypriority []   ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * ldappolicybuiltin []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * tacacspolicyname []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int tacacspolicypriority []   ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * tacacspolicybuiltin []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * localpolicyname []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int localpolicypriority []   ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * localpolicybuiltin []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * nslogpolicyname []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int nslogpriority []   ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * nslogbuiltin []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * syslogpolicyname []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int syslogpriority []   ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * syslogbuiltin []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * authnpolicyname []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int authnpolicypriority []   ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * authnpolicybuiltin []  ;<br> };<br></pre></td></tr></table></div>"
+perlsecondcontent = "<pre>$systemglobal = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; policyname => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; priority => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; bindpolicytype => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; builtin => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; radiuspolicyname => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; radiuspolicypriority => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; radiuspolicybuiltin => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ldappolicyname => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ldappolicypriority => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ldappolicybuiltin => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; tacacspolicyname => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; tacacspolicypriority => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; tacacspolicybuiltin => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; localpolicyname => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; localpolicypriority => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; localpolicybuiltin => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; nslogpolicyname => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; nslogpriority => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; nslogbuiltin => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; syslogpolicyname => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; syslogpriority => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; syslogbuiltin => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; authnpolicyname => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; authnpolicypriority => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; authnpolicybuiltin => \'@\',<br> };<br></pre></td></tr></table></div>"
+javasecondcontent = "<pre>class systemglobal {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String policyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt priority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt bindpolicytype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String builtin[];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] radiuspolicyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt [] radiuspolicypriority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] radiuspolicybuiltin;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] ldappolicyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt [] ldappolicypriority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] ldappolicybuiltin;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] tacacspolicyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt [] tacacspolicypriority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] tacacspolicybuiltin;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] localpolicyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt [] localpolicypriority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] localpolicybuiltin;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] nslogpolicyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt [] nslogpriority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] nslogbuiltin;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] syslogpolicyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt [] syslogpriority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] syslogbuiltin;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] authnpolicyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt [] authnpolicypriority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] authnpolicybuiltin;<br> };<br></pre></td></tr></table></div>"
+csharpsecondcontent = "<pre>class systemglobal {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string policyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 priority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 bindpolicytype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string builtin[];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] radiuspolicyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 [] radiuspolicypriority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] radiuspolicybuiltin;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] ldappolicyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 [] ldappolicypriority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] ldappolicybuiltin;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] tacacspolicyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 [] tacacspolicypriority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] tacacspolicybuiltin;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] localpolicyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 [] localpolicypriority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] localpolicybuiltin;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] nslogpolicyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 [] nslogpriority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] nslogbuiltin;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] syslogpolicyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 [] syslogpriority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] syslogbuiltin;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] authnpolicyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 [] authnpolicypriority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] authnpolicybuiltin;<br> };<br></pre></td></tr></table></div>"
+vbsecondcontent = "<pre>Public <b>Structure</b> systemglobal <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public policyname As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public priority As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public bindpolicytype As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public builtin() As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public radiuspolicyname As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public radiuspolicypriority As UInteger()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public radiuspolicybuiltin As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ldappolicyname As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ldappolicypriority As UInteger()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ldappolicybuiltin As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public tacacspolicyname As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public tacacspolicypriority As UInteger()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public tacacspolicybuiltin As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public localpolicyname As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public localpolicypriority As UInteger()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public localpolicybuiltin As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public nslogpolicyname As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public nslogpriority As UInteger()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public nslogbuiltin As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public syslogpolicyname As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public syslogpriority As UInteger()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public syslogbuiltin As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public authnpolicyname As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public authnpolicypriority As UInteger()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public authnpolicybuiltin As String()<br><b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>policyname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The name of the  method policy.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>priority</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The priority of the method policy.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>bindpolicytype</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Bound policy type</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>builtin</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Indicates that a variable is a built-in (SYSTEM INTERNAL) type.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>radiuspolicyname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>radiuspolicypriority</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>radiuspolicybuiltin</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ldappolicyname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ldappolicypriority</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ldappolicybuiltin</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>tacacspolicyname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>tacacspolicypriority</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>tacacspolicybuiltin</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>localpolicyname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>localpolicypriority</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>localpolicybuiltin</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>nslogpolicyname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>nslogpriority</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>nslogbuiltin</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>syslogpolicyname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>syslogpriority</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>syslogbuiltin</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>authnpolicyname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>authnpolicypriority</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>authnpolicybuiltin</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div><b>See Also</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="getsystemglobal.html">getsystemglobal</a></div></td></tr><tr><td><br></td></tr></table></div>
+</body>
+</html>

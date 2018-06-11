@@ -1,0 +1,244 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>Citrix NetScaler XML API User&#39;s Guide - Structure Definition</title>
+<link rel="stylesheet" type="text/css" href="help_ns.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body onload="initial()" class="ns_body">
+<div class="ns_content"><table cellpadding="0" cellspacing="0"><script type="text/javascript">
+function changeContext(id,lang,flag){
+	parent.banner.document.language.select.value = lang;
+	if( lang == "C" ){
+		if(flag == "1"){
+			showContent(cfirstcontent,id,lang);
+		}
+		else{
+			showContent(csecondcontent,id,lang);
+		}
+	}
+	if( lang == "Perl" ){
+		if(flag == "1"){
+			showContent(perlfirstcontent,id,lang);
+		}
+		else{
+			showContent(perlsecondcontent,id,lang);
+		}
+	}
+	if( lang == "Java" ){
+		if(flag == "1"){
+			showContent(javafirstcontent,id,lang);	
+		}
+		else{
+			showContent(javasecondcontent,id,lang);
+		}
+	}
+	if( lang == "C#" ){
+		if(flag == "1"){
+			showContent(csharpfirstcontent,id,lang);
+		}
+		else{
+			showContent(csharpsecondcontent,id,lang);
+		}
+	}
+	if( lang == "VB" ){
+		if(flag == "1"){
+			showContent(vbfirstcontent,id,lang);
+		}
+		else{
+			showContent(vbsecondcontent,id,lang);
+		}
+	}
+	if(flag == "1"){
+		showInside(lang,"0");
+	}
+	else{
+		showOutside(lang);
+	}
+}
+function showContent(content,id,lang){
+	if(ie4){
+	   showContentObj=document.all.id;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById(id);
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+  showLangSelect(lang);
+}
+function showInside(str,cond){
+	if(str == "C"){
+ 		var inside_content = csecondcontent;
+ 	}
+ 	if(str == "Perl"){
+ 		var inside_content = perlsecondcontent;
+ 	}
+ 	if(str == "Java"){
+ 		var inside_content = javasecondcontent;
+ 	}
+ 	if(str == "C#"){
+		var inside_content = csharpsecondcontent;
+ 	}
+ 	if(str == "VB"){
+		var inside_content = vbsecondcontent;
+ 	}
+	showContent(inside_content,'qiksearch_div1',str);
+ 	if ( cond == "1" ){
+ 		var page = 'apidoc/docs/getvpnglobalResult.html#vpnglobalList';
+ 		document.location.href = page;
+ 	}
+}
+function showOutside(str){
+	if(str == "C" ){
+ 		var inside_content = cfirstcontent;
+ 	}
+ 	if(str == "Perl" ){
+ 		var inside_content = perlfirstcontent;
+ 	}
+ 	if(str == "Java" ){
+ 		var inside_content = javafirstcontent;
+ 	}
+ 	if(str == "C#" ){
+ 		var inside_content = csharpfirstcontent;
+ 	}
+ 	if(str == "VB" ){
+ 		var inside_content = vbfirstcontent;
+ 	}
+ 	showContent(inside_content,'qiksearch_div',str);
+}
+function initial(){
+	ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+	ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+	ns4=document.layers;
+	langSelected = parent.banner.document.language.select.value
+	var plink = parent.banner.document.language.plink.value
+	var my_array=plink.split("&");
+	var temp = my_array[0];
+ 	var grp = temp.split("@");
+	var cmd = my_array[1];
+	var regex = /^stat/i;
+	if( cmd.match(regex) != null ){
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex_stat.html\">Statistics</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getvpnglobalResult");
+	}
+	else{
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex.htm\">Configuration</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getvpnglobalResult");
+	}
+	if( langSelected == "C" ){
+ 		var content = cfirstcontent;
+	}
+	else if( langSelected == "Perl" ){
+		var content = perlfirstcontent;
+	}
+	else if( langSelected == "Java" ){
+		var content = javafirstcontent;
+	}
+	else if( langSelected == "C#" ){
+		var content = csharpfirstcontent;
+	}
+	else if( langSelected == "VB" ){
+		var content = vbfirstcontent;
+	}
+	else{
+		var content = cfirstcontent;
+		langSelected="C";
+	}
+	showContent(content,'qiksearch_div',langSelected);
+	showInside(langSelected,"0");
+}
+function showPLink(content){
+	if(ie4){
+	   showContentObj=document.all.progressive_link;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById("progressive_link");
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+}
+function showLangSelect(id){
+	   if(ie4)
+       {
+       	showObj=document.all.first_url;
+       	showObj1=document.all.second_url;
+       }
+       if(ns6)
+       {
+       	showObj=document.getElementById("first_url");
+       	showObj1=document.getElementById("second_url");
+       }
+       if( id == "C" ){
+       	newlink = "<b>C</b>";
+       	newlink1 = "<b>C</b>";
+       }
+       else{
+       	newlink = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C','1');\"><b>C</b></a>";
+       	newlink1 = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C','0');\"><b>C</b></a>";
+       }
+       if( id == "Perl" ){
+       	newlink = newlink + " | <b>Perl</b>";
+       	newlink1 = newlink1 + " | <b>Perl</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Perl','1');\"><b>Perl</b></a>";
+      	       newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Perl','0');\"><b>Perl</b></a>";
+       }
+       if( id == "Java" ){
+       	newlink = newlink + " | <b>Java</b>";
+       	newlink1 = newlink1 + " | <b>Java</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Java','1');\"><b>Java</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Java','0');\"><b>Java</b></a>";
+       }
+       if( id == "C#" ){
+       	newlink = newlink + " | <b>C#</b>";
+       	newlink1 = newlink1 + " | <b>C#</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C#','1');\"><b>C#</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C#','0');\"><b>C#</b></a>";
+       }
+       showObj.innerHTML = newlink;
+       showObj1.innerHTML = newlink1;
+}
+</script>
+<tr><td><div><div id="progressive_link"></div></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>getvpnglobalResult Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>getvpnglobalResult</b> structure defines the return type for getvpnglobal API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="first_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+cfirstcontent = "<pre>struct getvpnglobalResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; struct <a href=\'getvpnglobalResult.html\#vpnglobal\'>vpnglobal</a> list[];<br> };<br></pre></td></tr></table></div>"
+perlfirstcontent = "<pre>$getvpnglobalResult = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rc => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; message => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; List => \'@<a href=\'getvpnglobalResult.html\#vpnglobal\'>vpnglobal</a>\',<br> };<br></pre></td></tr></table></div>"
+javafirstcontent = "<pre>class getvpnglobalResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getvpnglobalResult.html\#vpnglobal\'>vpnglobal</a>[] list;<br> };<br></pre></td></tr></table></div>"
+csharpfirstcontent = "<pre>class getvpnglobalResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getvpnglobalResult.html\#vpnglobal\'>vpnglobal</a>[] list;<br> };<br></pre></td></tr></table></div>"
+vbfirstcontent = "<pre>Public <b>Structure</b> getvpnglobalResult <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rc As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public message As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public  vpnglobalList() As  <a href=\'getvpnglobalResult.html\#vpnglobal\'>vpnglobal</a><br> <b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rc</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, rc is 0 else rc > 0. Values above 0x8000 indicate Warnings.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>message</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, message is NULL else message contains <a href="errorlisting.html">Error/Warning</a> message.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>vpnglobalList</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">List of vpnglobals</div></td></tr><tr><td><br></td></tr><tr><td><div><a name="vpnglobal"></a></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>vpnglobal  Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>vpnglobal</b> structure defines the actual return type values for getvpnglobal API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="second_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div1" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+csecondcontent = "<pre>struct vpnglobal {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * policyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int priority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * intranetdomain [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * intranetapplication [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * nexthopserver [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * urlname [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * intranetip [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * netmask [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * staserver [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * staaddresstype [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * staauthid [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * appcontroller [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * sharefile [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * type;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * builtin[];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * secondary;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * groupextraction;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * policytype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * auditpolicyname []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int auditpolicypriority []   ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * sessionpolicyname []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int sessionpolicypriority []   ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * sessionpolicybuiltin []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * radiusauthpolicyname []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int radiusauthpolicypriority []   ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * radiusauthpolicysecondary []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * ldapauthpolicyname []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ldapauthpolicypriority []   ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * ldapauthpolicysecondary []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * ldapauthpolicygroupextraction []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * certauthpolicyname []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int certauthpolicypriority []   ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * certauthpolicysecondary []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * tacacsauthpolicyname []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int tacacsauthpolicypriority []   ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * tacacsauthpolicysecondary []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * localauthpolicyname []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int localauthpolicypriority []   ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * localauthpolicysecondary []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * negauthpolicyname []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int negauthpolicypriority []   ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * negauthpolicysecondary []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * samlauthpolicyname []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int samlauthpolicypriority []   ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * samlauthpolicysecondary []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * authnpolicyname []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int authnpolicypriority []   ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * trafficpolicyname []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int trafficpolicypriority []   ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * cvpnpolicyname []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int cvpnpriority []   ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * cvpnbindpoint []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * clientlesspolicybuiltin []  ;<br> };<br></pre></td></tr></table></div>"
+perlsecondcontent = "<pre>$vpnglobal = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; policyname => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; priority => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; intranetdomain => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; intranetapplication => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; nexthopserver => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; urlname => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; intranetip => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; netmask => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; staserver => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; staaddresstype => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; staauthid => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; appcontroller => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; sharefile => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; type => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; builtin => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; secondary => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; groupextraction => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; policytype => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; auditpolicyname => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; auditpolicypriority => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; sessionpolicyname => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; sessionpolicypriority => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; sessionpolicybuiltin => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; radiusauthpolicyname => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; radiusauthpolicypriority => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; radiusauthpolicysecondary => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ldapauthpolicyname => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ldapauthpolicypriority => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ldapauthpolicysecondary => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ldapauthpolicygroupextraction => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; certauthpolicyname => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; certauthpolicypriority => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; certauthpolicysecondary => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; tacacsauthpolicyname => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; tacacsauthpolicypriority => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; tacacsauthpolicysecondary => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; localauthpolicyname => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; localauthpolicypriority => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; localauthpolicysecondary => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; negauthpolicyname => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; negauthpolicypriority => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; negauthpolicysecondary => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; samlauthpolicyname => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; samlauthpolicypriority => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; samlauthpolicysecondary => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; authnpolicyname => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; authnpolicypriority => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; trafficpolicyname => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; trafficpolicypriority => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; cvpnpolicyname => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; cvpnpriority => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; cvpnbindpoint => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; clientlesspolicybuiltin => \'@\',<br> };<br></pre></td></tr></table></div>"
+javasecondcontent = "<pre>class vpnglobal {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String policyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt priority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String intranetdomain [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String intranetapplication [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String nexthopserver [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String urlname [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String intranetip [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String netmask [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String staserver [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String staaddresstype [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String staauthid [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String appcontroller [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String sharefile [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String type;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String builtin[];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String secondary;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String groupextraction;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String policytype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] auditpolicyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt [] auditpolicypriority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] sessionpolicyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt [] sessionpolicypriority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] sessionpolicybuiltin;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] radiusauthpolicyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt [] radiusauthpolicypriority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] radiusauthpolicysecondary;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] ldapauthpolicyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt [] ldapauthpolicypriority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] ldapauthpolicysecondary;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] ldapauthpolicygroupextraction;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] certauthpolicyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt [] certauthpolicypriority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] certauthpolicysecondary;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] tacacsauthpolicyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt [] tacacsauthpolicypriority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] tacacsauthpolicysecondary;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] localauthpolicyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt [] localauthpolicypriority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] localauthpolicysecondary;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] negauthpolicyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt [] negauthpolicypriority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] negauthpolicysecondary;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] samlauthpolicyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt [] samlauthpolicypriority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] samlauthpolicysecondary;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] authnpolicyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt [] authnpolicypriority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] trafficpolicyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt [] trafficpolicypriority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] cvpnpolicyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt [] cvpnpriority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] cvpnbindpoint;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] clientlesspolicybuiltin;<br> };<br></pre></td></tr></table></div>"
+csharpsecondcontent = "<pre>class vpnglobal {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string policyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 priority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string intranetdomain [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string intranetapplication [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string nexthopserver [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string urlname [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string intranetip [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string netmask [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string staserver [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string staaddresstype [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string staauthid [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string appcontroller [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string sharefile [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string type;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string builtin[];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string secondary;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string groupextraction;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string policytype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] auditpolicyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 [] auditpolicypriority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] sessionpolicyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 [] sessionpolicypriority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] sessionpolicybuiltin;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] radiusauthpolicyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 [] radiusauthpolicypriority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] radiusauthpolicysecondary;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] ldapauthpolicyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 [] ldapauthpolicypriority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] ldapauthpolicysecondary;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] ldapauthpolicygroupextraction;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] certauthpolicyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 [] certauthpolicypriority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] certauthpolicysecondary;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] tacacsauthpolicyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 [] tacacsauthpolicypriority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] tacacsauthpolicysecondary;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] localauthpolicyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 [] localauthpolicypriority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] localauthpolicysecondary;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] negauthpolicyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 [] negauthpolicypriority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] negauthpolicysecondary;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] samlauthpolicyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 [] samlauthpolicypriority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] samlauthpolicysecondary;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] authnpolicyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 [] authnpolicypriority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] trafficpolicyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 [] trafficpolicypriority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] cvpnpolicyname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 [] cvpnpriority;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] cvpnbindpoint;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] clientlesspolicybuiltin;<br> };<br></pre></td></tr></table></div>"
+vbsecondcontent = "<pre>Public <b>Structure</b> vpnglobal <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public policyname As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public priority As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public intranetdomain As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public intranetapplication As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public nexthopserver As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public urlname As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public intranetip As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public netmask As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public staserver As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public staaddresstype As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public staauthid As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public appcontroller As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public sharefile As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public type As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public builtin() As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public secondary As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public groupextraction As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public policytype As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public auditpolicyname As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public auditpolicypriority As UInteger()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public sessionpolicyname As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public sessionpolicypriority As UInteger()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public sessionpolicybuiltin As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public radiusauthpolicyname As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public radiusauthpolicypriority As UInteger()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public radiusauthpolicysecondary As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ldapauthpolicyname As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ldapauthpolicypriority As UInteger()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ldapauthpolicysecondary As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ldapauthpolicygroupextraction As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public certauthpolicyname As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public certauthpolicypriority As UInteger()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public certauthpolicysecondary As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public tacacsauthpolicyname As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public tacacsauthpolicypriority As UInteger()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public tacacsauthpolicysecondary As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public localauthpolicyname As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public localauthpolicypriority As UInteger()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public localauthpolicysecondary As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public negauthpolicyname As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public negauthpolicypriority As UInteger()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public negauthpolicysecondary As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public samlauthpolicyname As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public samlauthpolicypriority As UInteger()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public samlauthpolicysecondary As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public authnpolicyname As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public authnpolicypriority As UInteger()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public trafficpolicyname As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public trafficpolicypriority As UInteger()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public cvpnpolicyname As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public cvpnpriority As UInteger()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public cvpnbindpoint As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public clientlesspolicybuiltin As String()<br><b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>policyname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The name of the policy.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>priority</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The priority of the policy.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>intranetdomain</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The conflicting intranet domain name.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>intranetapplication</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The intranet vpn application.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>nexthopserver</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The name of the next hop server bound to vpn global.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>urlname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The intranet url.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>intranetip</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The intranet ip address or range.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>netmask</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The intranet ip address or range's netmask.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>staserver</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Configured Secure Ticketing Authority (STA) server.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>staaddresstype</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Type of the STA server address(ipv4/v6).</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>staauthid</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Authority ID of the STA Server. Authority ID is used to match incoming STA Tickets in the SOCKS/CGP protocol with the right STA Server.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>appcontroller</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Configured App Controller server.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sharefile</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Configured Sharefile server, in the format IP:PORT / FQDN:PORT</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>type</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Bindpoint to which the policy is bound</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>builtin</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Indicates that a variable is a built-in (SYSTEM INTERNAL) type.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>secondary</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Bind the authentication policy as the secondary policy to use in a two-factor configuration. A user must then authenticate not only to a primary authentication server but also to a secondary authentication server. User groups are aggregated across both authentication servers. The user name must be exactly the same on both authentication servers, but the authentication servers can require different passwords.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>groupextraction</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Bind the Authentication policy to a tertiary chain which will be used only for group extraction.  The user will not authenticate against this server, and this will only be called it primary and/or secondary authentication has succeeded.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>policytype</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Policy type (Classic/Advanced) to be bound.Used for display.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>auditpolicyname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>auditpolicypriority</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sessionpolicyname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sessionpolicypriority</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sessionpolicybuiltin</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>radiusauthpolicyname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>radiusauthpolicypriority</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>radiusauthpolicysecondary</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ldapauthpolicyname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ldapauthpolicypriority</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ldapauthpolicysecondary</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ldapauthpolicygroupextraction</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>certauthpolicyname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>certauthpolicypriority</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>certauthpolicysecondary</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>tacacsauthpolicyname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>tacacsauthpolicypriority</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>tacacsauthpolicysecondary</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>localauthpolicyname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>localauthpolicypriority</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>localauthpolicysecondary</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>negauthpolicyname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>negauthpolicypriority</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>negauthpolicysecondary</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>samlauthpolicyname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>samlauthpolicypriority</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>samlauthpolicysecondary</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>authnpolicyname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>authnpolicypriority</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>trafficpolicyname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>trafficpolicypriority</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>cvpnpolicyname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>cvpnpriority</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>cvpnbindpoint</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>clientlesspolicybuiltin</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div><b>See Also</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="getvpnglobal.html">getvpnglobal</a></div></td></tr><tr><td><br></td></tr></table></div>
+</body>
+</html>

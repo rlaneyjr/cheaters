@@ -1,0 +1,103 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>Citrix NetScaler XML API User&#39;s Guide - addsslcrl</title>
+<link rel="stylesheet" type="text/css" href="help_ns.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body onload="initial()" class="ns_body">
+<div class="ns_content"><table cellpadding="0" cellspacing="0"><script type="text/javascript">
+function showContent(content,lang){
+			if(ie4){
+				showContentObj=document.all.qiksearch_div;
+			}
+			if(ns6){
+				showContentObj=document.getElementById("qiksearch_div");
+			}
+			if(ie4||ns6){
+				if(showContentObj.innerHTML!=content){
+					showContentObj.innerHTML=content;
+				}
+				else{
+					showContentObj.innerHTML="";
+				}
+			}
+			if(ns4){
+				document.nsdiv.document.write(content);
+				document.nsdiv.document.close();
+			}
+}
+function showLangSelect(id){
+		ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+		ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+		ns4=document.layers;
+		if(ie4){
+			showObj=document.all.first_url;
+		}
+		if(ns6){
+			showObj=document.getElementById("first_url");
+		}
+		if( id == "C" ){
+			newlink = "<b>C</b>";
+		}
+		else{
+			newlink = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('C');\"><b>C</b></a>";
+		}
+		if( id == "Perl" ){
+			newlink = newlink + " | <b>Perl</b>";
+		}
+		else{
+			newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('Perl');\"><b>Perl</b></a>";
+		}
+		if( id == "Java" ){
+			newlink = newlink + " | <b>Java</b>";
+		}
+		else{
+			newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('Java');\"><b>Java</b></a>";
+		}
+		if( id == "C#" ){
+			newlink = newlink + " | <b>C#</b>";
+		}
+		else{
+			newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('C#');\"><b>C#</b></a>";
+		}
+		showObj.innerHTML = newlink;
+}
+function initial(){
+		ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+		ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+		ns4=document.layers;
+		langSelected = parent.banner.document.language.select.value
+		parent.banner.document.language.plink.value = "SSL@ssl.html&addsslcrl";
+		changeContext(langSelected);
+}
+function changeContext(lang){
+parent.banner.document.language.select.value = lang;
+if( lang == "C" ){
+showContent('<table><tr><td><pre><a href=\'simpleResult_struct.html\'>simpleResult</a><b> addsslcrl</b>(<br> &nbsp;&nbsp;&nbsp;&nbsp;char * <i>crlname</i>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char * <i>crlpath</i>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href=\'informatsEnum.html\'>informatsEnum</a> <i>inform</i> <br>);</pre></td></tr></table>','C');
+}
+if( lang == "Perl" ){
+showContent('<table><tr><td><pre><a href=\'simpleResult_struct.html\'>simpleResult</a><b> addsslcrl</b>(<br>&nbsp;&nbsp;&nbsp;&nbsp;name(\'crlname\' => value),<br>&nbsp;&nbsp;&nbsp;&nbsp;name(\'crlpath\' => value),<br>&nbsp;&nbsp;&nbsp;&nbsp;name(\'inform\' => <a href=\'informatsEnum.html\'>Values</a>)<br>);</pre></td></tr></table>','Perl')
+}
+if( lang == "Java" ){
+showContent('<table><tr><td><pre>public <a href=\'simpleResult_struct.html\'>simpleResult</a><b> addsslcrl</b>(<br> &nbsp;&nbsp;&nbsp;&nbsp;String <i>crlname</i>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String <i>crlpath</i>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href=\'informatsEnum.html\'>informatsEnum</a> <i>inform</i> <br>);</pre></td></tr></table>','Java');
+}
+if( lang == "C#" ){
+showContent('<table><tr><td><pre>public <a href=\'simpleResult_struct.html\'>simpleResult</a><b> addsslcrl</b>(<br> &nbsp;&nbsp;&nbsp;&nbsp;string <i>crlname</i>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string <i>crlpath</i>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href=\'informatsEnum.html\'>informatsEnum</a> <i>inform</i> <br>);</pre></td></tr></table>','C#');
+}
+if( lang == "VB" ){
+showContent('<table><tr><td><pre>Public Function<b> addsslcrl</b>(<br> &nbsp;&nbsp;&nbsp;&nbsp;ByVal <i>crlname</i> As String ,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ByVal <i>crlpath</i> As String ,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ByVal <i>inform</i> As <a href=\'informatsEnum.html\'>informatsEnum</a> <br>) As <a href=\'simpleResult_struct.html\'>simpleResult</a> </pre></td></tr></table>','VB');
+}
+showLangSelect(lang);
+}
+</script>
+<tr><td><div><a href='introduction.html'>Home</a> > <a href="APIIndex.htm">Configuration</a> > <a href="ssl.html">SSL</a> > addsslcrl</div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>addsslcrl</td></tr><tr><td><br></td></tr><tr><td><div>Use this method to adds a Certificate Revocation List (CRL). A CRL identifies invalid certificates by serial number and issuer. In a high availability configuration, the CRL must be in the same location on the primary and secondary nodes.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="first_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><b>Parameters</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><i>crlname</i></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name for the Certificate Revocation List (CRL). Must begin with an ASCII alphanumeric or underscore (_) character, and must contain only ASCII alphanumeric, underscore, hash (#), period (.), space, colon (:), at (@), equals (=), and hyphen (-) characters. Cannot be changed after the CRL is created.
+
+The following requirement applies only to the NetScaler CLI:
+If the name includes one or more spaces, enclose the name in double or single quotation marks (for example, "my crl" or 'my crl').<br>This is mandatory parameter.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><i>crlpath</i></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Path to the CRL file. /var/netscaler/ssl/ is the default path.<br>This is mandatory parameter.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><i>inform</i></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Input format of the CRL file. The two formats supported on the appliance are:
+PEM - Privacy Enhanced Mail.
+DER - Distinguished Encoding Rule.<br> Default value =  FORMAT_PEM.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Return Value</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left">Returns <a href="simpleResult_struct.html">simpleResult</a></div></td></tr><tr><td><br></td></tr><tr><td><div><b>See Also</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href=".html"></a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="createsslcrl.html">createsslcrl</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="getsslcrl.html">getsslcrl</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="rmsslcrl.html">rmsslcrl</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="setsslcrl_basedn.html">setsslcrl_basedn</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="setsslcrl_binary.html">setsslcrl_binary</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="setsslcrl_binddn.html">setsslcrl_binddn</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="setsslcrl_cacert.html">setsslcrl_cacert</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="setsslcrl_day.html">setsslcrl_day</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="setsslcrl_interval.html">setsslcrl_interval</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="setsslcrl_method.html">setsslcrl_method</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="setsslcrl_password.html">setsslcrl_password</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="setsslcrl_port.html">setsslcrl_port</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="setsslcrl_refresh.html">setsslcrl_refresh</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="setsslcrl_scope.html">setsslcrl_scope</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="setsslcrl_server.html">setsslcrl_server</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="setsslcrl_time.html">setsslcrl_time</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="unsetsslcrl_basedn.html">unsetsslcrl_basedn</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="unsetsslcrl_binary.html">unsetsslcrl_binary</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="unsetsslcrl_binddn.html">unsetsslcrl_binddn</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="unsetsslcrl_cacert.html">unsetsslcrl_cacert</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="unsetsslcrl_day.html">unsetsslcrl_day</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="unsetsslcrl_interval.html">unsetsslcrl_interval</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="unsetsslcrl_method.html">unsetsslcrl_method</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="unsetsslcrl_password.html">unsetsslcrl_password</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="unsetsslcrl_port.html">unsetsslcrl_port</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="unsetsslcrl_refresh.html">unsetsslcrl_refresh</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="unsetsslcrl_scope.html">unsetsslcrl_scope</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="unsetsslcrl_server.html">unsetsslcrl_server</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="unsetsslcrl_time.html">unsetsslcrl_time</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="unsetsslcrl_url.html">unsetsslcrl_url</a></div></td></tr><tr><td><br></td></tr></table></div>
+</body>
+</html>

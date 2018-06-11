@@ -1,0 +1,245 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>Citrix NetScaler XML API User&#39;s Guide - Structure Definition</title>
+<link rel="stylesheet" type="text/css" href="help_ns.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body onload="initial()" class="ns_body">
+<div class="ns_content"><table cellpadding="0" cellspacing="0"><script type="text/javascript">
+function changeContext(id,lang,flag){
+	parent.banner.document.language.select.value = lang;
+	if( lang == "C" ){
+		if(flag == "1"){
+			showContent(cfirstcontent,id,lang);
+		}
+		else{
+			showContent(csecondcontent,id,lang);
+		}
+	}
+	if( lang == "Perl" ){
+		if(flag == "1"){
+			showContent(perlfirstcontent,id,lang);
+		}
+		else{
+			showContent(perlsecondcontent,id,lang);
+		}
+	}
+	if( lang == "Java" ){
+		if(flag == "1"){
+			showContent(javafirstcontent,id,lang);	
+		}
+		else{
+			showContent(javasecondcontent,id,lang);
+		}
+	}
+	if( lang == "C#" ){
+		if(flag == "1"){
+			showContent(csharpfirstcontent,id,lang);
+		}
+		else{
+			showContent(csharpsecondcontent,id,lang);
+		}
+	}
+	if( lang == "VB" ){
+		if(flag == "1"){
+			showContent(vbfirstcontent,id,lang);
+		}
+		else{
+			showContent(vbsecondcontent,id,lang);
+		}
+	}
+	if(flag == "1"){
+		showInside(lang,"0");
+	}
+	else{
+		showOutside(lang);
+	}
+}
+function showContent(content,id,lang){
+	if(ie4){
+	   showContentObj=document.all.id;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById(id);
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+  showLangSelect(lang);
+}
+function showInside(str,cond){
+	if(str == "C"){
+ 		var inside_content = csecondcontent;
+ 	}
+ 	if(str == "Perl"){
+ 		var inside_content = perlsecondcontent;
+ 	}
+ 	if(str == "Java"){
+ 		var inside_content = javasecondcontent;
+ 	}
+ 	if(str == "C#"){
+		var inside_content = csharpsecondcontent;
+ 	}
+ 	if(str == "VB"){
+		var inside_content = vbsecondcontent;
+ 	}
+	showContent(inside_content,'qiksearch_div1',str);
+ 	if ( cond == "1" ){
+ 		var page = 'apidoc/docs/getlbparameterResult.html#lbparamList';
+ 		document.location.href = page;
+ 	}
+}
+function showOutside(str){
+	if(str == "C" ){
+ 		var inside_content = cfirstcontent;
+ 	}
+ 	if(str == "Perl" ){
+ 		var inside_content = perlfirstcontent;
+ 	}
+ 	if(str == "Java" ){
+ 		var inside_content = javafirstcontent;
+ 	}
+ 	if(str == "C#" ){
+ 		var inside_content = csharpfirstcontent;
+ 	}
+ 	if(str == "VB" ){
+ 		var inside_content = vbfirstcontent;
+ 	}
+ 	showContent(inside_content,'qiksearch_div',str);
+}
+function initial(){
+	ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+	ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+	ns4=document.layers;
+	langSelected = parent.banner.document.language.select.value
+	var plink = parent.banner.document.language.plink.value
+	var my_array=plink.split("&");
+	var temp = my_array[0];
+ 	var grp = temp.split("@");
+	var cmd = my_array[1];
+	var regex = /^stat/i;
+	if( cmd.match(regex) != null ){
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex_stat.html\">Statistics</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getlbparameterResult");
+	}
+	else{
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex.htm\">Configuration</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getlbparameterResult");
+	}
+	if( langSelected == "C" ){
+ 		var content = cfirstcontent;
+	}
+	else if( langSelected == "Perl" ){
+		var content = perlfirstcontent;
+	}
+	else if( langSelected == "Java" ){
+		var content = javafirstcontent;
+	}
+	else if( langSelected == "C#" ){
+		var content = csharpfirstcontent;
+	}
+	else if( langSelected == "VB" ){
+		var content = vbfirstcontent;
+	}
+	else{
+		var content = cfirstcontent;
+		langSelected="C";
+	}
+	showContent(content,'qiksearch_div',langSelected);
+	showInside(langSelected,"0");
+}
+function showPLink(content){
+	if(ie4){
+	   showContentObj=document.all.progressive_link;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById("progressive_link");
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+}
+function showLangSelect(id){
+	   if(ie4)
+       {
+       	showObj=document.all.first_url;
+       	showObj1=document.all.second_url;
+       }
+       if(ns6)
+       {
+       	showObj=document.getElementById("first_url");
+       	showObj1=document.getElementById("second_url");
+       }
+       if( id == "C" ){
+       	newlink = "<b>C</b>";
+       	newlink1 = "<b>C</b>";
+       }
+       else{
+       	newlink = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C','1');\"><b>C</b></a>";
+       	newlink1 = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C','0');\"><b>C</b></a>";
+       }
+       if( id == "Perl" ){
+       	newlink = newlink + " | <b>Perl</b>";
+       	newlink1 = newlink1 + " | <b>Perl</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Perl','1');\"><b>Perl</b></a>";
+      	       newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Perl','0');\"><b>Perl</b></a>";
+       }
+       if( id == "Java" ){
+       	newlink = newlink + " | <b>Java</b>";
+       	newlink1 = newlink1 + " | <b>Java</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Java','1');\"><b>Java</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Java','0');\"><b>Java</b></a>";
+       }
+       if( id == "C#" ){
+       	newlink = newlink + " | <b>C#</b>";
+       	newlink1 = newlink1 + " | <b>C#</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C#','1');\"><b>C#</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C#','0');\"><b>C#</b></a>";
+       }
+       showObj.innerHTML = newlink;
+       showObj1.innerHTML = newlink1;
+}
+</script>
+<tr><td><div><div id="progressive_link"></div></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>getlbparameterResult Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>getlbparameterResult</b> structure defines the return type for getlbparameter API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="first_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+cfirstcontent = "<pre>struct getlbparameterResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; struct <a href=\'getlbparameterResult.html\#lbparameter\'>lbparameter</a> list[];<br> };<br></pre></td></tr></table></div>"
+perlfirstcontent = "<pre>$getlbparameterResult = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rc => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; message => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; List => \'@<a href=\'getlbparameterResult.html\#lbparameter\'>lbparameter</a>\',<br> };<br></pre></td></tr></table></div>"
+javafirstcontent = "<pre>class getlbparameterResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getlbparameterResult.html\#lbparameter\'>lbparameter</a>[] list;<br> };<br></pre></td></tr></table></div>"
+csharpfirstcontent = "<pre>class getlbparameterResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getlbparameterResult.html\#lbparameter\'>lbparameter</a>[] list;<br> };<br></pre></td></tr></table></div>"
+vbfirstcontent = "<pre>Public <b>Structure</b> getlbparameterResult <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rc As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public message As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public  lbparameterList() As  <a href=\'getlbparameterResult.html\#lbparameter\'>lbparameter</a><br> <b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rc</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, rc is 0 else rc > 0. Values above 0x8000 indicate Warnings.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>message</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, message is NULL else message contains <a href="errorlisting.html">Error/Warning</a> message.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>lbparameterList</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">List of lbparameters</div></td></tr><tr><td><br></td></tr><tr><td><div><a name="lbparameter"></a></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>lbparameter  Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>lbparameter</b> structure defines the actual return type values for getlbparameter API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="second_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div1" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+csecondcontent = "<pre>struct lbparameter {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * httponlycookieflag;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * usesecuredpersistencecookie;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * cookiepassphrase;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * consolidatedlconn;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * useportforhashlb;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * preferdirectroute;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int startuprrfactor;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * monitorskipmaxclient;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * monitorconnectionclose;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * vserverspecificmac;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int sessionsthreshold;<br> };<br></pre></td></tr></table></div>"
+perlsecondcontent = "<pre>$lbparameter = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httponlycookieflag => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; usesecuredpersistencecookie => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; cookiepassphrase => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; consolidatedlconn => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; useportforhashlb => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; preferdirectroute => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; startuprrfactor => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; monitorskipmaxclient => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; monitorconnectionclose => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; vserverspecificmac => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; sessionsthreshold => \'$\',<br> };<br></pre></td></tr></table></div>"
+javasecondcontent = "<pre>class lbparameter {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String httponlycookieflag;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String usesecuredpersistencecookie;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String cookiepassphrase;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String consolidatedlconn;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String useportforhashlb;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String preferdirectroute;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt startuprrfactor;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String monitorskipmaxclient;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String monitorconnectionclose;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String vserverspecificmac;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt sessionsthreshold;<br> };<br></pre></td></tr></table></div>"
+csharpsecondcontent = "<pre>class lbparameter {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string httponlycookieflag;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string usesecuredpersistencecookie;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string cookiepassphrase;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string consolidatedlconn;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string useportforhashlb;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string preferdirectroute;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 startuprrfactor;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string monitorskipmaxclient;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string monitorconnectionclose;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string vserverspecificmac;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 sessionsthreshold;<br> };<br></pre></td></tr></table></div>"
+vbsecondcontent = "<pre>Public <b>Structure</b> lbparameter <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httponlycookieflag As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public usesecuredpersistencecookie As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public cookiepassphrase As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public consolidatedlconn As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public useportforhashlb As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public preferdirectroute As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public startuprrfactor As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public monitorskipmaxclient As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public monitorconnectionclose As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public vserverspecificmac As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public sessionsthreshold As UInteger<br><b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httponlycookieflag</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Include the HttpOnly attribute in persistence cookies. The HttpOnly attribute limits the scope of a cookie to HTTP requests and helps mitigate the risk of cross-site scripting attacks.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>usesecuredpersistencecookie</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Encode persistence cookie values using SHA2 hash.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>cookiepassphrase</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Use this parameter to specify the passphrase used to generate secured persistence cookie value. It specifies the passphrase with a maximum of 31 characters.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>consolidatedlconn</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">To find the service with the fewest connections, the virtual server uses the consolidated connection statistics from all the packet engines. The NO setting allows consideration of only the number of connections on the packet engine that received the new connection.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>useportforhashlb</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Include the port number of the service when creating a hash for hash based load balancing methods. With the NO setting, only the IP address of the service is considered when creating a hash.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>preferdirectroute</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Perform route lookup for traffic received by the NetScaler appliance, and forward the traffic according to configured routes. Do not set this parameter if you want a wildcard virtual server to direct packets received by the appliance to an intermediary device, such as a firewall, even if their destination is directly connected to the appliance. Route lookup is performed after the packets have been processed and returned by the intermediary device.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>startuprrfactor</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Used to change the factor of service hits after which vserver will come out of slowstart phase.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>monitorskipmaxclient</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">When a monitor initiates a connection to a service, do not check to determine whether the number of connections to the service has reached the limit specified by the service's Max Clients setting. Enables monitoring to continue even if the service has reached its connection limit.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>monitorconnectionclose</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Close monitoring connections by sending the service a connection termination message with the specified bit set.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>vserverspecificmac</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Allow a MAC-mode virtual server to accept traffic returned by an intermediary device, such as a firewall, to which the traffic was previously forwarded by another MAC-mode virtual server. The second virtual server can then distribute that traffic across the destination server farm. Also useful when load balancing Branch Repeater appliances.
+Note: The second virtual server can also send the traffic to another set of intermediary devices, such as another set of firewalls. If necessary, you can configure multiple MAC-mode virtual servers to pass traffic successively through multiple sets of intermediary devices.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sessionsthreshold</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">This option is used to get the upper-limit on the number of persistent sessions set by the administrator for this system</div></td></tr><tr><td><br></td></tr><tr><td><div><b>See Also</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="getlbparameter.html">getlbparameter</a></div></td></tr><tr><td><br></td></tr></table></div>
+</body>
+</html>

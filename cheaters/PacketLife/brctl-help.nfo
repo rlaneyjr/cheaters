@@ -1,0 +1,179 @@
+Usage: brctl [commands]
+commands:
+        addbr           <bridge>                add bridge
+        delbr           <bridge>                delete bridge
+        addif           <bridge> <device>       add interface to bridge
+        delif           <bridge> <device>       delete interface from bridge
+        hairpin         <bridge> <port> {on|off}        turn hairpin on/off
+        setageing       <bridge> <time>         set ageing time
+        setbridgeprio   <bridge> <prio>         set bridge priority
+        setfd           <bridge> <time>         set bridge forward delay
+        sethello        <bridge> <time>         set hello time
+        setmaxage       <bridge> <time>         set max message age
+        setpathcost     <bridge> <port> <cost>  set path cost
+        setportprio     <bridge> <port> <prio>  set port priority
+        show            [ <bridge> ]            show a list of bridges
+        showmacs        <bridge>                show a list of mac addrs
+        showstp         <bridge>                show bridge stp info
+        stp             <bridge> {on|off}       turn stp on/off
+
+brctl showstp brq133a937c-e4
+brctl showstp brq25b94f9b-cc
+brctl showstp brq35ca7ee6-14
+brctl showstp brq38b7aec5-20
+brctl showstp brq49b750d4-73
+brctl showstp brq5dad29cd-cc
+brctl showstp brq662b83ba-60
+brctl showstp brq83addbfa-0e
+brctl showstp brq85991221-da
+brctl showstp brqd1cf7223-2d
+brctl showstp brqdb1f9af6-1a
+brctl showstp brqe40b73c3-f4
+brctl showstp brqf3ffcc01-9d
+brctl showstp virbr0
+
+
+brctl showmacs brq133a937c-e4 && \
+echo '######################' && \
+brctl showmacs brq25b94f9b-cc && \
+echo '######################' && \
+brctl showmacs brq35ca7ee6-14 && \
+echo '######################' && \
+brctl showmacs brq38b7aec5-20 && \
+echo '######################' && \
+brctl showmacs brq49b750d4-73 && \
+echo '######################' && \
+brctl showmacs brq5dad29cd-cc && \
+echo '######################' && \
+brctl showmacs brq662b83ba-60 && \
+echo '######################' && \
+brctl showmacs brq83addbfa-0e && \
+echo '######################' && \
+brctl showmacs brq85991221-da && \
+echo '######################' && \
+brctl showmacs brqd1cf7223-2d && \
+echo '######################' && \
+brctl showmacs brqdb1f9af6-1a && \
+echo '######################' && \
+brctl showmacs brqe40b73c3-f4 && \
+echo '######################' && \
+brctl showmacs brqf3ffcc01-9d && \
+echo '######################' && \
+brctl showmacs virbr0
+
+
+port no mac addr                is local?       ageing timer
+  1     00:12:01:d1:90:91       no                 1.06
+  1     18:03:73:ed:c9:18       yes                0.00
+  1     18:03:73:ed:c9:18       yes                0.00
+  2     2e:54:f1:ef:87:ab       yes                0.00
+  2     2e:54:f1:ef:87:ab       yes                0.00
+  7     fa:16:3e:35:1e:04       no                 6.19
+  6     fa:16:3e:67:8f:af       no                 4.13
+  7     fe:16:3e:35:1e:04       yes                0.00
+  7     fe:16:3e:35:1e:04       yes                0.00
+  6     fe:16:3e:67:8f:af       yes                0.00
+  6     fe:16:3e:67:8f:af       yes                0.00
+  3     fe:16:3e:df:22:cc       yes                0.00
+  3     fe:16:3e:df:22:cc       yes                0.00
+  4     fe:e0:b5:a1:3d:a1       yes                0.00
+  4     fe:e0:b5:a1:3d:a1       yes                0.00
+  5     fe:e7:5e:ae:99:b3       yes                0.00
+  5     fe:e7:5e:ae:99:b3       yes                0.00
+######################
+port no mac addr                is local?       ageing timer
+  2     06:e4:a4:e4:23:b2       yes                0.00
+  2     06:e4:a4:e4:23:b2       yes                0.00
+  1     fa:16:3e:c5:c9:3e       no                 6.20
+  1     fe:16:3e:c5:c9:3e       yes                0.00
+  1     fe:16:3e:c5:c9:3e       yes                0.00
+######################
+port no mac addr                is local?       ageing timer
+  1     00:12:01:d1:90:a1       no                 0.02
+  1     00:1b:21:77:28:51       yes                0.00
+  1     00:1b:21:77:28:51       yes                0.00
+  2     3a:12:5a:74:ee:ad       yes                0.00
+  2     3a:12:5a:74:ee:ad       yes                0.00
+  3     ae:73:71:98:c2:0c       yes                0.00
+  3     ae:73:71:98:c2:0c       yes                0.00
+######################
+port no mac addr                is local?       ageing timer
+  1     00:12:01:d1:90:92       no                 1.07
+  2     0e:79:ac:45:ad:e8       yes                0.00
+  2     0e:79:ac:45:ad:e8       yes                0.00
+  1     18:03:73:ed:c9:1c       yes                0.00
+  1     18:03:73:ed:c9:1c       yes                0.00
+######################
+port no mac addr                is local?       ageing timer
+  2     3a:3e:92:c2:2a:53       yes                0.00
+  2     3a:3e:92:c2:2a:53       yes                0.00
+  1     fa:16:3e:6b:70:fe       no                 3.15
+  3     fa:16:3e:cd:6a:56       no                 2.30
+  1     fe:16:3e:6b:70:fe       yes                0.00
+  1     fe:16:3e:6b:70:fe       yes                0.00
+  3     fe:16:3e:cd:6a:56       yes                0.00
+  3     fe:16:3e:cd:6a:56       yes                0.00
+######################
+port no mac addr                is local?       ageing timer
+  1     fa:16:3e:48:14:a2       no                 1.52
+  2     fe:05:fb:3a:a4:49       yes                0.00
+  2     fe:05:fb:3a:a4:49       yes                0.00
+  1     fe:16:3e:48:14:a2       yes                0.00
+  1     fe:16:3e:48:14:a2       yes                0.00
+######################
+port no mac addr                is local?       ageing timer
+  1     f6:74:1c:30:bf:b4       yes                0.00
+  1     f6:74:1c:30:bf:b4       yes                0.00
+  2     fe:7c:8e:14:68:b0       yes                0.00
+  2     fe:7c:8e:14:68:b0       yes                0.00
+######################
+port no mac addr                is local?       ageing timer
+  1     02:fb:14:1e:22:d9       yes                0.00
+  1     02:fb:14:1e:22:d9       yes                0.00
+  3     26:d0:a5:b0:a1:f6       yes                0.00
+  3     26:d0:a5:b0:a1:f6       yes                0.00
+  2     76:cb:79:82:48:ed       yes                0.00
+  2     76:cb:79:82:48:ed       yes                0.00
+######################
+port no mac addr                is local?       ageing timer
+  1     56:5f:c4:8e:56:eb       yes                0.00
+  1     56:5f:c4:8e:56:eb       yes                0.00
+  3     7e:7f:0c:7c:b7:71       yes                0.00
+  3     7e:7f:0c:7c:b7:71       yes                0.00
+  2     b6:19:59:d8:7e:5e       yes                0.00
+  2     b6:19:59:d8:7e:5e       yes                0.00
+######################
+port no mac addr                is local?       ageing timer
+  2     6a:79:69:c1:4a:dc       yes                0.00
+  2     6a:79:69:c1:4a:dc       yes                0.00
+  1     fa:16:3e:43:9f:64       no                 6.20
+  1     fe:16:3e:43:9f:64       yes                0.00
+  1     fe:16:3e:43:9f:64       yes                0.00
+######################
+port no mac addr                is local?       ageing timer
+  2     7e:6e:25:cc:bd:1d       yes                0.00
+  2     7e:6e:25:cc:bd:1d       yes                0.00
+  1     fa:16:3e:d8:c2:de       no                 4.14
+  1     fe:16:3e:d8:c2:de       yes                0.00
+  1     fe:16:3e:d8:c2:de       yes                0.00
+######################
+port no mac addr                is local?       ageing timer
+  2     62:05:9c:6d:f9:29       yes                0.00
+  2     62:05:9c:6d:f9:29       yes                0.00
+  3     62:0e:7d:cb:ca:4f       yes                0.00
+  3     62:0e:7d:cb:ca:4f       yes                0.00
+  1     ea:95:e1:42:9b:44       yes                0.00
+  1     ea:95:e1:42:9b:44       yes                0.00
+######################
+port no mac addr                is local?       ageing timer
+  1     00:1b:21:77:28:50       yes                0.00
+  1     00:1b:21:77:28:50       yes                0.00
+  2     36:e3:16:1c:32:12       yes                0.00
+  2     36:e3:16:1c:32:12       yes                0.00
+  1     88:90:8d:1b:17:85       no                 1.84
+  3     e6:0b:26:ee:49:07       yes                0.00
+  3     e6:0b:26:ee:49:07       yes                0.00
+######################
+port no mac addr                is local?       ageing timer
+  1     52:54:00:4e:63:9f       yes                0.00
+  1     52:54:00:4e:63:9f       yes                0.00

@@ -1,0 +1,246 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>Citrix NetScaler XML API User&#39;s Guide - Structure Definition</title>
+<link rel="stylesheet" type="text/css" href="help_ns.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body onload="initial()" class="ns_body">
+<div class="ns_content"><table cellpadding="0" cellspacing="0"><script type="text/javascript">
+function changeContext(id,lang,flag){
+	parent.banner.document.language.select.value = lang;
+	if( lang == "C" ){
+		if(flag == "1"){
+			showContent(cfirstcontent,id,lang);
+		}
+		else{
+			showContent(csecondcontent,id,lang);
+		}
+	}
+	if( lang == "Perl" ){
+		if(flag == "1"){
+			showContent(perlfirstcontent,id,lang);
+		}
+		else{
+			showContent(perlsecondcontent,id,lang);
+		}
+	}
+	if( lang == "Java" ){
+		if(flag == "1"){
+			showContent(javafirstcontent,id,lang);	
+		}
+		else{
+			showContent(javasecondcontent,id,lang);
+		}
+	}
+	if( lang == "C#" ){
+		if(flag == "1"){
+			showContent(csharpfirstcontent,id,lang);
+		}
+		else{
+			showContent(csharpsecondcontent,id,lang);
+		}
+	}
+	if( lang == "VB" ){
+		if(flag == "1"){
+			showContent(vbfirstcontent,id,lang);
+		}
+		else{
+			showContent(vbsecondcontent,id,lang);
+		}
+	}
+	if(flag == "1"){
+		showInside(lang,"0");
+	}
+	else{
+		showOutside(lang);
+	}
+}
+function showContent(content,id,lang){
+	if(ie4){
+	   showContentObj=document.all.id;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById(id);
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+  showLangSelect(lang);
+}
+function showInside(str,cond){
+	if(str == "C"){
+ 		var inside_content = csecondcontent;
+ 	}
+ 	if(str == "Perl"){
+ 		var inside_content = perlsecondcontent;
+ 	}
+ 	if(str == "Java"){
+ 		var inside_content = javasecondcontent;
+ 	}
+ 	if(str == "C#"){
+		var inside_content = csharpsecondcontent;
+ 	}
+ 	if(str == "VB"){
+		var inside_content = vbsecondcontent;
+ 	}
+	showContent(inside_content,'qiksearch_div1',str);
+ 	if ( cond == "1" ){
+ 		var page = 'apidoc/docs/getsslcrlResult.html#crlList';
+ 		document.location.href = page;
+ 	}
+}
+function showOutside(str){
+	if(str == "C" ){
+ 		var inside_content = cfirstcontent;
+ 	}
+ 	if(str == "Perl" ){
+ 		var inside_content = perlfirstcontent;
+ 	}
+ 	if(str == "Java" ){
+ 		var inside_content = javafirstcontent;
+ 	}
+ 	if(str == "C#" ){
+ 		var inside_content = csharpfirstcontent;
+ 	}
+ 	if(str == "VB" ){
+ 		var inside_content = vbfirstcontent;
+ 	}
+ 	showContent(inside_content,'qiksearch_div',str);
+}
+function initial(){
+	ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+	ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+	ns4=document.layers;
+	langSelected = parent.banner.document.language.select.value
+	var plink = parent.banner.document.language.plink.value
+	var my_array=plink.split("&");
+	var temp = my_array[0];
+ 	var grp = temp.split("@");
+	var cmd = my_array[1];
+	var regex = /^stat/i;
+	if( cmd.match(regex) != null ){
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex_stat.html\">Statistics</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getsslcrlResult");
+	}
+	else{
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex.htm\">Configuration</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getsslcrlResult");
+	}
+	if( langSelected == "C" ){
+ 		var content = cfirstcontent;
+	}
+	else if( langSelected == "Perl" ){
+		var content = perlfirstcontent;
+	}
+	else if( langSelected == "Java" ){
+		var content = javafirstcontent;
+	}
+	else if( langSelected == "C#" ){
+		var content = csharpfirstcontent;
+	}
+	else if( langSelected == "VB" ){
+		var content = vbfirstcontent;
+	}
+	else{
+		var content = cfirstcontent;
+		langSelected="C";
+	}
+	showContent(content,'qiksearch_div',langSelected);
+	showInside(langSelected,"0");
+}
+function showPLink(content){
+	if(ie4){
+	   showContentObj=document.all.progressive_link;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById("progressive_link");
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+}
+function showLangSelect(id){
+	   if(ie4)
+       {
+       	showObj=document.all.first_url;
+       	showObj1=document.all.second_url;
+       }
+       if(ns6)
+       {
+       	showObj=document.getElementById("first_url");
+       	showObj1=document.getElementById("second_url");
+       }
+       if( id == "C" ){
+       	newlink = "<b>C</b>";
+       	newlink1 = "<b>C</b>";
+       }
+       else{
+       	newlink = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C','1');\"><b>C</b></a>";
+       	newlink1 = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C','0');\"><b>C</b></a>";
+       }
+       if( id == "Perl" ){
+       	newlink = newlink + " | <b>Perl</b>";
+       	newlink1 = newlink1 + " | <b>Perl</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Perl','1');\"><b>Perl</b></a>";
+      	       newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Perl','0');\"><b>Perl</b></a>";
+       }
+       if( id == "Java" ){
+       	newlink = newlink + " | <b>Java</b>";
+       	newlink1 = newlink1 + " | <b>Java</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Java','1');\"><b>Java</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Java','0');\"><b>Java</b></a>";
+       }
+       if( id == "C#" ){
+       	newlink = newlink + " | <b>C#</b>";
+       	newlink1 = newlink1 + " | <b>C#</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C#','1');\"><b>C#</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C#','0');\"><b>C#</b></a>";
+       }
+       showObj.innerHTML = newlink;
+       showObj1.innerHTML = newlink1;
+}
+</script>
+<tr><td><div><div id="progressive_link"></div></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>getsslcrlResult Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>getsslcrlResult</b> structure defines the return type for getsslcrl API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="first_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+cfirstcontent = "<pre>struct getsslcrlResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; struct <a href=\'getsslcrlResult.html\#sslcrl\'>sslcrl</a> list[];<br> };<br></pre></td></tr></table></div>"
+perlfirstcontent = "<pre>$getsslcrlResult = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rc => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; message => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; List => \'@<a href=\'getsslcrlResult.html\#sslcrl\'>sslcrl</a>\',<br> };<br></pre></td></tr></table></div>"
+javafirstcontent = "<pre>class getsslcrlResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getsslcrlResult.html\#sslcrl\'>sslcrl</a>[] list;<br> };<br></pre></td></tr></table></div>"
+csharpfirstcontent = "<pre>class getsslcrlResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getsslcrlResult.html\#sslcrl\'>sslcrl</a>[] list;<br> };<br></pre></td></tr></table></div>"
+vbfirstcontent = "<pre>Public <b>Structure</b> getsslcrlResult <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rc As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public message As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public  sslcrlList() As  <a href=\'getsslcrlResult.html\#sslcrl\'>sslcrl</a><br> <b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rc</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, rc is 0 else rc > 0. Values above 0x8000 indicate Warnings.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>message</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, message is NULL else message contains <a href="errorlisting.html">Error/Warning</a> message.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sslcrlList</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">List of sslcrls</div></td></tr><tr><td><br></td></tr><tr><td><div><a name="sslcrl"></a></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>sslcrl  Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>sslcrl</b> structure defines the actual return type values for getsslcrl API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="second_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div1" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+csecondcontent = "<pre>struct sslcrl {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * crlname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * crlpath;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * inform;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * cacert;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * refresh;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * scope;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * server;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int port;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * url;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * method;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * basedn;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * interval;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int day;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * time;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * binddn;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * password;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int flags;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int lastupdatetime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int version;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * signaturealgo;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * issuer;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * lastupdate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * nextupdate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * date [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * number [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * binary;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int daystoexpiration;<br> };<br></pre></td></tr></table></div>"
+perlsecondcontent = "<pre>$sslcrl = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; crlname => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; crlpath => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; inform => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; cacert => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; refresh => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; scope => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; server => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; port => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; url => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; method => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; basedn => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; interval => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; day => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; time => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; binddn => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; password => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; flags => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; lastupdatetime => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; version => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; signaturealgo => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; issuer => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; lastupdate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; nextupdate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; date => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; number => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; binary => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; daystoexpiration => \'$\',<br> };<br></pre></td></tr></table></div>"
+javasecondcontent = "<pre>class sslcrl {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String crlname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String crlpath;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String inform;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String cacert;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String refresh;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String scope;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String server;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt port;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String url;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String method;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String basedn;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String interval;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int day;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String time;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String binddn;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String password;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int flags;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int lastupdatetime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int version;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String signaturealgo;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String issuer;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String lastupdate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String nextupdate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String date [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String number [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String binary;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int daystoexpiration;<br> };<br></pre></td></tr></table></div>"
+csharpsecondcontent = "<pre>class sslcrl {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string crlname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string crlpath;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string inform;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string cacert;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string refresh;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string scope;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string server;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 port;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string url;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string method;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string basedn;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string interval;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 day;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string time;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string binddn;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string password;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 flags;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 lastupdatetime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 version;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string signaturealgo;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string issuer;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string lastupdate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string nextupdate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string date [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string number [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string binary;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 daystoexpiration;<br> };<br></pre></td></tr></table></div>"
+vbsecondcontent = "<pre>Public <b>Structure</b> sslcrl <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public crlname As String  <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public crlpath As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public inform As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public cacert As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public refresh As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public scope As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public server As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public port As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public url As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public method As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public basedn As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public interval As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public day As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public time As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public binddn As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public password As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public flags As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public lastupdatetime As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public version As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public signaturealgo As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public issuer As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public lastupdate As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public nextupdate As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public date As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public number As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public binary As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public daystoexpiration As Integer<br><b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>crlname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the CRL for which to show detailed information.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>crlpath</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The name and path to the file containing the CRL.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>inform</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The encoding format of the CRL (PEM or DER).</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>cacert</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The CA certificate that issued the CRL.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>refresh</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The state of the auto refresh feature for the CRL.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>scope</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Extent of the search operation on the LDAP server.
+                   Base: Exactly the same level as basedn
+                   One : One level below basedn.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>server</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The IP address of the LDAP/HTTP server from which the CRLs are to be fetched.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>port</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The port of the LDAP/HTTP server.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>url</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">URL of the CRL distribution point.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>method</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The method for CRL refresh (LDAP or HTTP).</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>basedn</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The baseDN to be used to fetch the CRL object from the LDAP server.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>interval</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The CRL refresh interval.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>day</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The day when the CRL is to be refreshed.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>time</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The time when the CRL is to be refreshed.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>binddn</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The  bindDN  to  be  used  to  access the CRL object in the LDAP repository.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>password</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The password to be is used to access the CRL object in the  LDAP repository.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>flags</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">CRL status flag.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>lastupdatetime</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Last CRL refresh time.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>version</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">CRL version.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>signaturealgo</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Signature algorithm.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>issuer</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Issuer name.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>lastupdate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Last update time.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>nextupdate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Next update time.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>date</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Certificate Revocation date</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>number</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Certificate Serial number.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>binary</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Mode of retrieval of CRL from LDAP server.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>daystoexpiration</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of days remaining for the CRL to expire.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>See Also</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="getsslcrl.html">getsslcrl</a></div></td></tr><tr><td><br></td></tr></table></div>
+</body>
+</html>

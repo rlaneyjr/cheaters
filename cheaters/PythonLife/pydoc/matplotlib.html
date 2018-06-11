@@ -1,0 +1,683 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: package matplotlib</title>
+<meta charset="utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>matplotlib</strong></big></big> (version 1.5.1)</font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/lib/python2.7/site-packages/matplotlib/__init__.py">/usr/local/lib/python2.7/site-packages/matplotlib/__init__.py</a></font></td></tr></table>
+    <p><tt>This&nbsp;is&nbsp;an&nbsp;<a href="__builtin__.html#object">object</a>-oriented&nbsp;plotting&nbsp;library.<br>
+&nbsp;<br>
+A&nbsp;procedural&nbsp;interface&nbsp;is&nbsp;provided&nbsp;by&nbsp;the&nbsp;companion&nbsp;pyplot&nbsp;module,<br>
+which&nbsp;may&nbsp;be&nbsp;imported&nbsp;directly,&nbsp;e.g.::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;import&nbsp;matplotlib.pyplot&nbsp;as&nbsp;plt<br>
+&nbsp;<br>
+or&nbsp;using&nbsp;ipython::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ipython<br>
+&nbsp;<br>
+at&nbsp;your&nbsp;terminal,&nbsp;followed&nbsp;by::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;In&nbsp;[1]:&nbsp;%matplotlib<br>
+&nbsp;&nbsp;&nbsp;&nbsp;In&nbsp;[2]:&nbsp;import&nbsp;matplotlib.pyplot&nbsp;as&nbsp;plt<br>
+&nbsp;<br>
+at&nbsp;the&nbsp;ipython&nbsp;shell&nbsp;prompt.<br>
+&nbsp;<br>
+For&nbsp;the&nbsp;most&nbsp;part,&nbsp;direct&nbsp;use&nbsp;of&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>-oriented&nbsp;library&nbsp;is<br>
+encouraged&nbsp;when&nbsp;programming;&nbsp;pyplot&nbsp;is&nbsp;primarily&nbsp;for&nbsp;working<br>
+interactively.&nbsp;&nbsp;The<br>
+exceptions&nbsp;are&nbsp;the&nbsp;pyplot&nbsp;commands&nbsp;:func:`~matplotlib.pyplot.figure`,<br>
+:func:`~matplotlib.pyplot.subplot`,<br>
+:func:`~matplotlib.pyplot.subplots`,&nbsp;and<br>
+:func:`~pyplot.savefig`,&nbsp;which&nbsp;can&nbsp;greatly&nbsp;simplify&nbsp;scripting.<br>
+&nbsp;<br>
+Modules&nbsp;include:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:mod:`matplotlib.axes`<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;defines&nbsp;the&nbsp;:class:`~matplotlib.axes.Axes`&nbsp;class.&nbsp;&nbsp;Most&nbsp;pylab<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;commands&nbsp;are&nbsp;wrappers&nbsp;for&nbsp;:class:`~matplotlib.axes.Axes`<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;methods.&nbsp;&nbsp;The&nbsp;axes&nbsp;module&nbsp;is&nbsp;the&nbsp;highest&nbsp;level&nbsp;of&nbsp;OO&nbsp;access&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;library.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:mod:`matplotlib.figure`<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;defines&nbsp;the&nbsp;:class:`~matplotlib.figure.Figure`&nbsp;class.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:mod:`matplotlib.artist`<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;defines&nbsp;the&nbsp;:class:`~matplotlib.artist.Artist`&nbsp;base&nbsp;class&nbsp;for<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;all&nbsp;classes&nbsp;that&nbsp;draw&nbsp;things.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:mod:`matplotlib.lines`<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;defines&nbsp;the&nbsp;:class:`~matplotlib.lines.Line2D`&nbsp;class&nbsp;for<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;drawing&nbsp;lines&nbsp;and&nbsp;markers<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:mod:`matplotlib.patches`<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;defines&nbsp;classes&nbsp;for&nbsp;drawing&nbsp;polygons<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:mod:`matplotlib.text`<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;defines&nbsp;the&nbsp;:class:`~matplotlib.text.Text`,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:class:`~matplotlib.text.TextWithDash`,&nbsp;and<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:class:`~matplotlib.text.Annotate`&nbsp;classes<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:mod:`matplotlib.image`<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;defines&nbsp;the&nbsp;:class:`~matplotlib.image.AxesImage`&nbsp;and<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:class:`~matplotlib.image.FigureImage`&nbsp;classes<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:mod:`matplotlib.collections`<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;classes&nbsp;for&nbsp;efficient&nbsp;drawing&nbsp;of&nbsp;groups&nbsp;of&nbsp;lines&nbsp;or&nbsp;polygons<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:mod:`matplotlib.colors`<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;classes&nbsp;for&nbsp;interpreting&nbsp;color&nbsp;specifications&nbsp;and&nbsp;for&nbsp;making<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;colormaps<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:mod:`matplotlib.cm`<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;colormaps&nbsp;and&nbsp;the&nbsp;:class:`~matplotlib.image.ScalarMappable`<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mixin&nbsp;class&nbsp;for&nbsp;providing&nbsp;color&nbsp;mapping&nbsp;functionality&nbsp;to&nbsp;other<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;classes<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:mod:`matplotlib.ticker`<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;classes&nbsp;for&nbsp;calculating&nbsp;tick&nbsp;mark&nbsp;locations&nbsp;and&nbsp;for&nbsp;formatting<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tick&nbsp;labels<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:mod:`matplotlib.backends`<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;subpackage&nbsp;with&nbsp;modules&nbsp;for&nbsp;various&nbsp;gui&nbsp;libraries&nbsp;and&nbsp;output<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;formats<br>
+&nbsp;<br>
+The&nbsp;base&nbsp;matplotlib&nbsp;namespace&nbsp;includes:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:data:`~matplotlib.rcParams`<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;global&nbsp;dictionary&nbsp;of&nbsp;default&nbsp;configuration&nbsp;settings.&nbsp;&nbsp;It&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;initialized&nbsp;by&nbsp;code&nbsp;which&nbsp;may&nbsp;be&nbsp;overridded&nbsp;by&nbsp;a&nbsp;matplotlibrc<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;file.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:func:`~matplotlib.rc`<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;function&nbsp;for&nbsp;setting&nbsp;groups&nbsp;of&nbsp;rcParams&nbsp;values<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:func:`~matplotlib.use`<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;function&nbsp;for&nbsp;setting&nbsp;the&nbsp;matplotlib&nbsp;backend.&nbsp;&nbsp;If&nbsp;used,&nbsp;this<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function&nbsp;must&nbsp;be&nbsp;called&nbsp;immediately&nbsp;after&nbsp;importing&nbsp;matplotlib<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;the&nbsp;first&nbsp;time.&nbsp;&nbsp;In&nbsp;particular,&nbsp;it&nbsp;must&nbsp;be&nbsp;called<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**before**&nbsp;importing&nbsp;pylab&nbsp;(if&nbsp;pylab&nbsp;is&nbsp;imported).<br>
+&nbsp;<br>
+matplotlib&nbsp;was&nbsp;initially&nbsp;written&nbsp;by&nbsp;John&nbsp;D.&nbsp;Hunter&nbsp;(1968-2012)&nbsp;and&nbsp;is&nbsp;now<br>
+developed&nbsp;and&nbsp;maintained&nbsp;by&nbsp;a&nbsp;host&nbsp;of&nbsp;others.<br>
+&nbsp;<br>
+Occasionally&nbsp;the&nbsp;internal&nbsp;documentation&nbsp;(python&nbsp;docstrings)&nbsp;will&nbsp;refer<br>
+to&nbsp;MATLAB&amp;reg;,&nbsp;a&nbsp;registered&nbsp;trademark&nbsp;of&nbsp;The&nbsp;MathWorks,&nbsp;Inc.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Package Contents</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="matplotlib._cm.html">_cm</a><br>
+<a href="matplotlib._cm_listed.html">_cm_listed</a><br>
+<a href="matplotlib._cntr.html">_cntr</a><br>
+<a href="matplotlib._contour.html">_contour</a><br>
+<a href="matplotlib._delaunay.html">_delaunay</a><br>
+<a href="matplotlib._image.html">_image</a><br>
+<a href="matplotlib._mathtext_data.html">_mathtext_data</a><br>
+<a href="matplotlib._path.html">_path</a><br>
+<a href="matplotlib._png.html">_png</a><br>
+<a href="matplotlib._pylab_helpers.html">_pylab_helpers</a><br>
+<a href="matplotlib._qhull.html">_qhull</a><br>
+<a href="matplotlib._tri.html">_tri</a><br>
+<a href="matplotlib._version.html">_version</a><br>
+<a href="matplotlib.afm.html">afm</a><br>
+<a href="matplotlib.animation.html">animation</a><br>
+<a href="matplotlib.artist.html">artist</a><br>
+<a href="matplotlib.axes.html"><strong>axes</strong>&nbsp;(package)</a><br>
+<a href="matplotlib.axis.html">axis</a><br>
+<a href="matplotlib.backend_bases.html">backend_bases</a><br>
+<a href="matplotlib.backend_managers.html">backend_managers</a><br>
+<a href="matplotlib.backend_tools.html">backend_tools</a><br>
+</td><td width="25%" valign=top><a href="matplotlib.backends.html"><strong>backends</strong>&nbsp;(package)</a><br>
+<a href="matplotlib.bezier.html">bezier</a><br>
+<a href="matplotlib.blocking_input.html">blocking_input</a><br>
+<a href="matplotlib.cbook.html">cbook</a><br>
+<a href="matplotlib.cm.html">cm</a><br>
+<a href="matplotlib.collections.html">collections</a><br>
+<a href="matplotlib.colorbar.html">colorbar</a><br>
+<a href="matplotlib.colors.html">colors</a><br>
+<a href="matplotlib.compat.html"><strong>compat</strong>&nbsp;(package)</a><br>
+<a href="matplotlib.container.html">container</a><br>
+<a href="matplotlib.contour.html">contour</a><br>
+<a href="matplotlib.dates.html">dates</a><br>
+<a href="matplotlib.delaunay.html"><strong>delaunay</strong>&nbsp;(package)</a><br>
+<a href="matplotlib.docstring.html">docstring</a><br>
+<a href="matplotlib.dviread.html">dviread</a><br>
+<a href="matplotlib.externals.html"><strong>externals</strong>&nbsp;(package)</a><br>
+<a href="matplotlib.figure.html">figure</a><br>
+<a href="matplotlib.finance.html">finance</a><br>
+<a href="matplotlib.font_manager.html">font_manager</a><br>
+<a href="matplotlib.fontconfig_pattern.html">fontconfig_pattern</a><br>
+<a href="matplotlib.ft2font.html">ft2font</a><br>
+</td><td width="25%" valign=top><a href="matplotlib.gridspec.html">gridspec</a><br>
+<a href="matplotlib.hatch.html">hatch</a><br>
+<a href="matplotlib.image.html">image</a><br>
+<a href="matplotlib.legend.html">legend</a><br>
+<a href="matplotlib.legend_handler.html">legend_handler</a><br>
+<a href="matplotlib.lines.html">lines</a><br>
+<a href="matplotlib.markers.html">markers</a><br>
+<a href="matplotlib.mathtext.html">mathtext</a><br>
+<a href="matplotlib.mlab.html">mlab</a><br>
+<a href="matplotlib.offsetbox.html">offsetbox</a><br>
+<a href="matplotlib.patches.html">patches</a><br>
+<a href="matplotlib.path.html">path</a><br>
+<a href="matplotlib.patheffects.html">patheffects</a><br>
+<a href="matplotlib.projections.html"><strong>projections</strong>&nbsp;(package)</a><br>
+<a href="matplotlib.pylab.html">pylab</a><br>
+<a href="matplotlib.pyplot.html">pyplot</a><br>
+<a href="matplotlib.quiver.html">quiver</a><br>
+<a href="matplotlib.rcsetup.html">rcsetup</a><br>
+<a href="matplotlib.sankey.html">sankey</a><br>
+<a href="matplotlib.scale.html">scale</a><br>
+<a href="matplotlib.sphinxext.html"><strong>sphinxext</strong>&nbsp;(package)</a><br>
+</td><td width="25%" valign=top><a href="matplotlib.spines.html">spines</a><br>
+<a href="matplotlib.stackplot.html">stackplot</a><br>
+<a href="matplotlib.streamplot.html">streamplot</a><br>
+<a href="matplotlib.style.html"><strong>style</strong>&nbsp;(package)</a><br>
+<a href="matplotlib.table.html">table</a><br>
+<a href="matplotlib.testing.html"><strong>testing</strong>&nbsp;(package)</a><br>
+<a href="matplotlib.tests.html"><strong>tests</strong>&nbsp;(package)</a><br>
+<a href="matplotlib.texmanager.html">texmanager</a><br>
+<a href="matplotlib.text.html">text</a><br>
+<a href="matplotlib.textpath.html">textpath</a><br>
+<a href="matplotlib.ticker.html">ticker</a><br>
+<a href="matplotlib.tight_bbox.html">tight_bbox</a><br>
+<a href="matplotlib.tight_layout.html">tight_layout</a><br>
+<a href="matplotlib.transforms.html">transforms</a><br>
+<a href="matplotlib.tri.html"><strong>tri</strong>&nbsp;(package)</a><br>
+<a href="matplotlib.ttconv.html">ttconv</a><br>
+<a href="matplotlib.type1font.html">type1font</a><br>
+<a href="matplotlib.units.html">units</a><br>
+<a href="matplotlib.widgets.html">widgets</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="__builtin__.html#dict">__builtin__.dict</a>(<a href="__builtin__.html#object">__builtin__.object</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="matplotlib.html#RcParams">RcParams</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="__builtin__.html#object">__builtin__.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="matplotlib.html#Verbose">Verbose</a>
+</font></dt><dt><font face="helvetica, arial"><a href="matplotlib.html#rc_context">rc_context</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="RcParams">class <strong>RcParams</strong></a>(<a href="__builtin__.html#dict">__builtin__.dict</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;dictionary&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;including&nbsp;validation<br>
+&nbsp;<br>
+validating&nbsp;functions&nbsp;are&nbsp;defined&nbsp;and&nbsp;associated&nbsp;with&nbsp;rc&nbsp;parameters&nbsp;in<br>
+:mod:`matplotlib.rcsetup`<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="matplotlib.html#RcParams">RcParams</a></dd>
+<dd><a href="__builtin__.html#dict">__builtin__.dict</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="RcParams-__getitem__"><strong>__getitem__</strong></a>(self, key)</dt></dl>
+
+<dl><dt><a name="RcParams-__init__"><strong>__init__</strong></a>(self, *args, **kwargs)</dt><dd><tt>#&nbsp;validate&nbsp;values&nbsp;on&nbsp;the&nbsp;way&nbsp;in</tt></dd></dl>
+
+<dl><dt><a name="RcParams-__repr__"><strong>__repr__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="RcParams-__setitem__"><strong>__setitem__</strong></a>(self, key, val)</dt></dl>
+
+<dl><dt><a name="RcParams-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="RcParams-find_all"><strong>find_all</strong></a>(self, pattern)</dt><dd><tt>Return&nbsp;the&nbsp;subset&nbsp;of&nbsp;this&nbsp;<a href="#RcParams">RcParams</a>&nbsp;dictionary&nbsp;whose&nbsp;keys&nbsp;match,<br>
+using&nbsp;:func:`re.search`,&nbsp;the&nbsp;given&nbsp;``pattern``.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Changes&nbsp;to&nbsp;the&nbsp;returned&nbsp;dictionary&nbsp;are&nbsp;*not*&nbsp;propagated&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;parent&nbsp;<a href="#RcParams">RcParams</a>&nbsp;dictionary.</tt></dd></dl>
+
+<dl><dt><a name="RcParams-keys"><strong>keys</strong></a>(self)</dt><dd><tt>Return&nbsp;sorted&nbsp;list&nbsp;of&nbsp;keys.</tt></dd></dl>
+
+<dl><dt><a name="RcParams-update"><strong>update</strong></a>(self, *args, **kwargs)</dt><dd><tt>#&nbsp;<a href="http://stackoverflow.com/questions/2390827">http://stackoverflow.com/questions/2390827</a><br>
+#&nbsp;(how-to-properly-subclass-<a href="__builtin__.html#dict">dict</a>-and-override-get-set)<br>
+#&nbsp;the&nbsp;default&nbsp;<a href="__builtin__.html#dict">dict</a>&nbsp;`update`&nbsp;does&nbsp;not&nbsp;use&nbsp;__setitem__<br>
+#&nbsp;so&nbsp;rcParams.<a href="#RcParams-update">update</a>(...)&nbsp;(such&nbsp;as&nbsp;in&nbsp;seaborn)&nbsp;side-steps<br>
+#&nbsp;all&nbsp;of&nbsp;the&nbsp;validation&nbsp;over-ride&nbsp;update&nbsp;to&nbsp;force<br>
+#&nbsp;through&nbsp;__setitem__</tt></dd></dl>
+
+<dl><dt><a name="RcParams-values"><strong>values</strong></a>(self)</dt><dd><tt>Return&nbsp;values&nbsp;in&nbsp;order&nbsp;of&nbsp;sorted&nbsp;keys.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>msg_depr</strong> = u'%s is deprecated and replaced with %s; please use the latter.'</dl>
+
+<dl><dt><strong>msg_depr_ignore</strong> = u'%s is deprecated and ignored. Use %s'</dl>
+
+<dl><dt><strong>validate</strong> = {u'agg.path.chunksize': &lt;function validate_int&gt;, u'animation.avconv_args': &lt;function f&gt;, u'animation.avconv_path': &lt;type 'unicode'&gt;, u'animation.bitrate': &lt;function validate_int&gt;, u'animation.codec': &lt;type 'unicode'&gt;, u'animation.convert_args': &lt;function f&gt;, u'animation.convert_path': &lt;type 'unicode'&gt;, u'animation.ffmpeg_args': &lt;function f&gt;, u'animation.ffmpeg_path': &lt;type 'unicode'&gt;, u'animation.frame_format': &lt;matplotlib.rcsetup.ValidateInStrings object&gt;, ...}</dl>
+
+<hr>
+Methods inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
+<dl><dt><a name="RcParams-__cmp__"><strong>__cmp__</strong></a>(...)</dt><dd><tt>x.<a href="#RcParams-__cmp__">__cmp__</a>(y)&nbsp;&lt;==&gt;&nbsp;cmp(x,y)</tt></dd></dl>
+
+<dl><dt><a name="RcParams-__contains__"><strong>__contains__</strong></a>(...)</dt><dd><tt>D.<a href="#RcParams-__contains__">__contains__</a>(k)&nbsp;-&gt;&nbsp;True&nbsp;if&nbsp;D&nbsp;has&nbsp;a&nbsp;key&nbsp;k,&nbsp;else&nbsp;False</tt></dd></dl>
+
+<dl><dt><a name="RcParams-__delitem__"><strong>__delitem__</strong></a>(...)</dt><dd><tt>x.<a href="#RcParams-__delitem__">__delitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;del&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="RcParams-__eq__"><strong>__eq__</strong></a>(...)</dt><dd><tt>x.<a href="#RcParams-__eq__">__eq__</a>(y)&nbsp;&lt;==&gt;&nbsp;x==y</tt></dd></dl>
+
+<dl><dt><a name="RcParams-__ge__"><strong>__ge__</strong></a>(...)</dt><dd><tt>x.<a href="#RcParams-__ge__">__ge__</a>(y)&nbsp;&lt;==&gt;&nbsp;x&gt;=y</tt></dd></dl>
+
+<dl><dt><a name="RcParams-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#RcParams-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="RcParams-__gt__"><strong>__gt__</strong></a>(...)</dt><dd><tt>x.<a href="#RcParams-__gt__">__gt__</a>(y)&nbsp;&lt;==&gt;&nbsp;x&gt;y</tt></dd></dl>
+
+<dl><dt><a name="RcParams-__iter__"><strong>__iter__</strong></a>(...)</dt><dd><tt>x.<a href="#RcParams-__iter__">__iter__</a>()&nbsp;&lt;==&gt;&nbsp;iter(x)</tt></dd></dl>
+
+<dl><dt><a name="RcParams-__le__"><strong>__le__</strong></a>(...)</dt><dd><tt>x.<a href="#RcParams-__le__">__le__</a>(y)&nbsp;&lt;==&gt;&nbsp;x&lt;=y</tt></dd></dl>
+
+<dl><dt><a name="RcParams-__len__"><strong>__len__</strong></a>(...)</dt><dd><tt>x.<a href="#RcParams-__len__">__len__</a>()&nbsp;&lt;==&gt;&nbsp;len(x)</tt></dd></dl>
+
+<dl><dt><a name="RcParams-__lt__"><strong>__lt__</strong></a>(...)</dt><dd><tt>x.<a href="#RcParams-__lt__">__lt__</a>(y)&nbsp;&lt;==&gt;&nbsp;x&lt;y</tt></dd></dl>
+
+<dl><dt><a name="RcParams-__ne__"><strong>__ne__</strong></a>(...)</dt><dd><tt>x.<a href="#RcParams-__ne__">__ne__</a>(y)&nbsp;&lt;==&gt;&nbsp;x!=y</tt></dd></dl>
+
+<dl><dt><a name="RcParams-__sizeof__"><strong>__sizeof__</strong></a>(...)</dt><dd><tt>D.<a href="#RcParams-__sizeof__">__sizeof__</a>()&nbsp;-&gt;&nbsp;size&nbsp;of&nbsp;D&nbsp;in&nbsp;memory,&nbsp;in&nbsp;bytes</tt></dd></dl>
+
+<dl><dt><a name="RcParams-clear"><strong>clear</strong></a>(...)</dt><dd><tt>D.<a href="#RcParams-clear">clear</a>()&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Remove&nbsp;all&nbsp;items&nbsp;from&nbsp;D.</tt></dd></dl>
+
+<dl><dt><a name="RcParams-copy"><strong>copy</strong></a>(...)</dt><dd><tt>D.<a href="#RcParams-copy">copy</a>()&nbsp;-&gt;&nbsp;a&nbsp;shallow&nbsp;copy&nbsp;of&nbsp;D</tt></dd></dl>
+
+<dl><dt><a name="RcParams-fromkeys"><strong>fromkeys</strong></a>(...)</dt><dd><tt><a href="__builtin__.html#dict">dict</a>.<a href="#RcParams-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;<a href="__builtin__.html#dict">dict</a>&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
+v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dd></dl>
+
+<dl><dt><a name="RcParams-get"><strong>get</strong></a>(...)</dt><dd><tt>D.<a href="#RcParams-get">get</a>(k[,d])&nbsp;-&gt;&nbsp;D[k]&nbsp;if&nbsp;k&nbsp;in&nbsp;D,&nbsp;else&nbsp;d.&nbsp;&nbsp;d&nbsp;defaults&nbsp;to&nbsp;None.</tt></dd></dl>
+
+<dl><dt><a name="RcParams-has_key"><strong>has_key</strong></a>(...)</dt><dd><tt>D.<a href="#RcParams-has_key">has_key</a>(k)&nbsp;-&gt;&nbsp;True&nbsp;if&nbsp;D&nbsp;has&nbsp;a&nbsp;key&nbsp;k,&nbsp;else&nbsp;False</tt></dd></dl>
+
+<dl><dt><a name="RcParams-items"><strong>items</strong></a>(...)</dt><dd><tt>D.<a href="#RcParams-items">items</a>()&nbsp;-&gt;&nbsp;list&nbsp;of&nbsp;D's&nbsp;(key,&nbsp;value)&nbsp;pairs,&nbsp;as&nbsp;2-tuples</tt></dd></dl>
+
+<dl><dt><a name="RcParams-iteritems"><strong>iteritems</strong></a>(...)</dt><dd><tt>D.<a href="#RcParams-iteritems">iteritems</a>()&nbsp;-&gt;&nbsp;an&nbsp;iterator&nbsp;over&nbsp;the&nbsp;(key,&nbsp;value)&nbsp;items&nbsp;of&nbsp;D</tt></dd></dl>
+
+<dl><dt><a name="RcParams-iterkeys"><strong>iterkeys</strong></a>(...)</dt><dd><tt>D.<a href="#RcParams-iterkeys">iterkeys</a>()&nbsp;-&gt;&nbsp;an&nbsp;iterator&nbsp;over&nbsp;the&nbsp;keys&nbsp;of&nbsp;D</tt></dd></dl>
+
+<dl><dt><a name="RcParams-itervalues"><strong>itervalues</strong></a>(...)</dt><dd><tt>D.<a href="#RcParams-itervalues">itervalues</a>()&nbsp;-&gt;&nbsp;an&nbsp;iterator&nbsp;over&nbsp;the&nbsp;values&nbsp;of&nbsp;D</tt></dd></dl>
+
+<dl><dt><a name="RcParams-pop"><strong>pop</strong></a>(...)</dt><dd><tt>D.<a href="#RcParams-pop">pop</a>(k[,d])&nbsp;-&gt;&nbsp;v,&nbsp;remove&nbsp;specified&nbsp;key&nbsp;and&nbsp;return&nbsp;the&nbsp;corresponding&nbsp;value.<br>
+If&nbsp;key&nbsp;is&nbsp;not&nbsp;found,&nbsp;d&nbsp;is&nbsp;returned&nbsp;if&nbsp;given,&nbsp;otherwise&nbsp;KeyError&nbsp;is&nbsp;raised</tt></dd></dl>
+
+<dl><dt><a name="RcParams-popitem"><strong>popitem</strong></a>(...)</dt><dd><tt>D.<a href="#RcParams-popitem">popitem</a>()&nbsp;-&gt;&nbsp;(k,&nbsp;v),&nbsp;remove&nbsp;and&nbsp;return&nbsp;some&nbsp;(key,&nbsp;value)&nbsp;pair&nbsp;as&nbsp;a<br>
+2-tuple;&nbsp;but&nbsp;raise&nbsp;KeyError&nbsp;if&nbsp;D&nbsp;is&nbsp;empty.</tt></dd></dl>
+
+<dl><dt><a name="RcParams-setdefault"><strong>setdefault</strong></a>(...)</dt><dd><tt>D.<a href="#RcParams-setdefault">setdefault</a>(k[,d])&nbsp;-&gt;&nbsp;D.<a href="#RcParams-get">get</a>(k,d),&nbsp;also&nbsp;set&nbsp;D[k]=d&nbsp;if&nbsp;k&nbsp;not&nbsp;in&nbsp;D</tt></dd></dl>
+
+<dl><dt><a name="RcParams-viewitems"><strong>viewitems</strong></a>(...)</dt><dd><tt>D.<a href="#RcParams-viewitems">viewitems</a>()&nbsp;-&gt;&nbsp;a&nbsp;set-like&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;providing&nbsp;a&nbsp;view&nbsp;on&nbsp;D's&nbsp;items</tt></dd></dl>
+
+<dl><dt><a name="RcParams-viewkeys"><strong>viewkeys</strong></a>(...)</dt><dd><tt>D.<a href="#RcParams-viewkeys">viewkeys</a>()&nbsp;-&gt;&nbsp;a&nbsp;set-like&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;providing&nbsp;a&nbsp;view&nbsp;on&nbsp;D's&nbsp;keys</tt></dd></dl>
+
+<dl><dt><a name="RcParams-viewvalues"><strong>viewvalues</strong></a>(...)</dt><dd><tt>D.<a href="#RcParams-viewvalues">viewvalues</a>()&nbsp;-&gt;&nbsp;an&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;providing&nbsp;a&nbsp;view&nbsp;on&nbsp;D's&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
+<dl><dt><strong>__hash__</strong> = None</dl>
+
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object&gt;<dd><tt>T.<a href="#RcParams-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Verbose">class <strong>Verbose</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;class&nbsp;to&nbsp;handle&nbsp;reporting.&nbsp;&nbsp;Set&nbsp;the&nbsp;fileo&nbsp;attribute&nbsp;to&nbsp;any&nbsp;file<br>
+instance&nbsp;to&nbsp;handle&nbsp;the&nbsp;output.&nbsp;&nbsp;Default&nbsp;is&nbsp;sys.stdout<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Verbose-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Verbose-ge"><strong>ge</strong></a>(self, level)</dt><dd><tt>return&nbsp;true&nbsp;if&nbsp;self.<strong>level</strong>&nbsp;is&nbsp;&gt;=&nbsp;level</tt></dd></dl>
+
+<dl><dt><a name="Verbose-report"><strong>report</strong></a>(self, s, level<font color="#909090">=u'helpful'</font>)</dt><dd><tt>print&nbsp;message&nbsp;s&nbsp;to&nbsp;self.<strong>fileo</strong>&nbsp;if&nbsp;self.<strong>level</strong>&gt;=level.&nbsp;&nbsp;Return<br>
+value&nbsp;indicates&nbsp;whether&nbsp;a&nbsp;message&nbsp;was&nbsp;issued</tt></dd></dl>
+
+<dl><dt><a name="Verbose-set_fileo"><strong>set_fileo</strong></a>(self, fname)</dt></dl>
+
+<dl><dt><a name="Verbose-set_level"><strong>set_level</strong></a>(self, level)</dt><dd><tt>set&nbsp;the&nbsp;verbosity&nbsp;to&nbsp;one&nbsp;of&nbsp;the&nbsp;<a href="#Verbose">Verbose</a>.levels&nbsp;strings</tt></dd></dl>
+
+<dl><dt><a name="Verbose-wrap"><strong>wrap</strong></a>(self, fmt, func, level<font color="#909090">=u'helpful'</font>, always<font color="#909090">=True</font>)</dt><dd><tt>return&nbsp;a&nbsp;callable&nbsp;function&nbsp;that&nbsp;wraps&nbsp;func&nbsp;and&nbsp;reports&nbsp;it<br>
+output&nbsp;through&nbsp;the&nbsp;verbose&nbsp;handler&nbsp;if&nbsp;current&nbsp;verbosity&nbsp;level<br>
+is&nbsp;higher&nbsp;than&nbsp;level<br>
+&nbsp;<br>
+if&nbsp;always&nbsp;is&nbsp;True,&nbsp;the&nbsp;report&nbsp;will&nbsp;occur&nbsp;on&nbsp;every&nbsp;function<br>
+call;&nbsp;otherwise&nbsp;only&nbsp;on&nbsp;the&nbsp;first&nbsp;time&nbsp;the&nbsp;function&nbsp;is&nbsp;called</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>arg</strong> = 'matplotlib'</dl>
+
+<dl><dt><strong>i</strong> = 3</dl>
+
+<dl><dt><strong>level</strong> = u'debug-annoying'</dl>
+
+<dl><dt><strong>levels</strong> = (u'silent', u'helpful', u'debug', u'debug-annoying')</dl>
+
+<dl><dt><strong>vald</strong> = {u'debug': 2, u'debug-annoying': 3, u'helpful': 1, u'silent': 0}</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="rc_context">class <strong>rc_context</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Return&nbsp;a&nbsp;context&nbsp;manager&nbsp;for&nbsp;managing&nbsp;rc&nbsp;settings.<br>
+&nbsp;<br>
+This&nbsp;allows&nbsp;one&nbsp;to&nbsp;do::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;with&nbsp;mpl.<a href="#rc_context">rc_context</a>(fname='screen.rc'):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;plt.plot(x,&nbsp;a)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with&nbsp;mpl.<a href="#rc_context">rc_context</a>(fname='print.rc'):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;plt.plot(x,&nbsp;b)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;plt.plot(x,&nbsp;c)<br>
+&nbsp;<br>
+The&nbsp;'a'&nbsp;vs&nbsp;'x'&nbsp;and&nbsp;'c'&nbsp;vs&nbsp;'x'&nbsp;plots&nbsp;would&nbsp;have&nbsp;settings&nbsp;from<br>
+'screen.rc',&nbsp;while&nbsp;the&nbsp;'b'&nbsp;vs&nbsp;'x'&nbsp;plot&nbsp;would&nbsp;have&nbsp;settings&nbsp;from<br>
+'print.rc'.<br>
+&nbsp;<br>
+A&nbsp;dictionary&nbsp;can&nbsp;also&nbsp;be&nbsp;passed&nbsp;to&nbsp;the&nbsp;context&nbsp;manager::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;with&nbsp;mpl.<a href="#rc_context">rc_context</a>(rc={'text.usetex':&nbsp;True},&nbsp;fname='screen.rc'):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;plt.plot(x,&nbsp;a)<br>
+&nbsp;<br>
+The&nbsp;'rc'&nbsp;dictionary&nbsp;takes&nbsp;precedence&nbsp;over&nbsp;the&nbsp;settings&nbsp;loaded&nbsp;from<br>
+'fname'.&nbsp;&nbsp;Passing&nbsp;a&nbsp;dictionary&nbsp;only&nbsp;is&nbsp;also&nbsp;valid.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="rc_context-__enter__"><strong>__enter__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="rc_context-__exit__"><strong>__exit__</strong></a>(self, type, value, tb)</dt></dl>
+
+<dl><dt><a name="rc_context-__init__"><strong>__init__</strong></a>(self, rc<font color="#909090">=None</font>, fname<font color="#909090">=None</font>)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-checkdep_dvipng"><strong>checkdep_dvipng</strong></a>()</dt></dl>
+ <dl><dt><a name="-checkdep_ghostscript"><strong>checkdep_ghostscript</strong></a>()</dt></dl>
+ <dl><dt><a name="-checkdep_inkscape"><strong>checkdep_inkscape</strong></a>()</dt></dl>
+ <dl><dt><a name="-checkdep_pdftops"><strong>checkdep_pdftops</strong></a>()</dt></dl>
+ <dl><dt><a name="-checkdep_ps_distiller"><strong>checkdep_ps_distiller</strong></a>(s)</dt></dl>
+ <dl><dt><a name="-checkdep_tex"><strong>checkdep_tex</strong></a>()</dt></dl>
+ <dl><dt><a name="-checkdep_usetex"><strong>checkdep_usetex</strong></a>(s)</dt></dl>
+ <dl><dt><a name="-checkdep_xmllint"><strong>checkdep_xmllint</strong></a>()</dt></dl>
+ <dl><dt><a name="-compare_versions"><strong>compare_versions</strong></a>(a, b)</dt><dd><tt>return&nbsp;True&nbsp;if&nbsp;a&nbsp;is&nbsp;greater&nbsp;than&nbsp;or&nbsp;equal&nbsp;to&nbsp;b</tt></dd></dl>
+ <dl><dt><a name="-get_backend"><strong>get_backend</strong></a>()</dt><dd><tt>Return&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;current&nbsp;backend.</tt></dd></dl>
+ <dl><dt><a name="-get_cachedir"><strong>get_cachedir</strong></a> = wrapper(*args, **kwargs)</dt><dd><tt>Return&nbsp;the&nbsp;location&nbsp;of&nbsp;the&nbsp;cache&nbsp;directory.<br>
+&nbsp;<br>
+The&nbsp;procedure&nbsp;used&nbsp;to&nbsp;find&nbsp;the&nbsp;directory&nbsp;is&nbsp;the&nbsp;same&nbsp;as&nbsp;for<br>
+_get_config_dir,&nbsp;except&nbsp;using&nbsp;`$XDG_CACHE_HOME`/`~/.cache`&nbsp;instead.</tt></dd></dl>
+ <dl><dt><a name="-get_configdir"><strong>get_configdir</strong></a> = wrapper(*args, **kwargs)</dt><dd><tt>Return&nbsp;the&nbsp;string&nbsp;representing&nbsp;the&nbsp;configuration&nbsp;directory.<br>
+&nbsp;<br>
+The&nbsp;directory&nbsp;is&nbsp;chosen&nbsp;as&nbsp;follows:<br>
+&nbsp;<br>
+1.&nbsp;If&nbsp;the&nbsp;MPLCONFIGDIR&nbsp;environment&nbsp;variable&nbsp;is&nbsp;supplied,&nbsp;choose&nbsp;that.<br>
+&nbsp;<br>
+2a.&nbsp;On&nbsp;Linux,&nbsp;if&nbsp;`$HOME/.matplotlib`&nbsp;exists,&nbsp;choose&nbsp;that,&nbsp;but&nbsp;warn&nbsp;that<br>
+&nbsp;&nbsp;&nbsp;&nbsp;that&nbsp;is&nbsp;the&nbsp;old&nbsp;location.&nbsp;&nbsp;Barring&nbsp;that,&nbsp;follow&nbsp;the&nbsp;XDG&nbsp;specification<br>
+&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;look&nbsp;first&nbsp;in&nbsp;`$XDG_CONFIG_HOME`,&nbsp;if&nbsp;defined,&nbsp;or&nbsp;`$HOME/.config`.<br>
+&nbsp;<br>
+2b.&nbsp;On&nbsp;other&nbsp;platforms,&nbsp;choose&nbsp;`$HOME/.matplotlib`.<br>
+&nbsp;<br>
+3.&nbsp;If&nbsp;the&nbsp;chosen&nbsp;directory&nbsp;exists&nbsp;and&nbsp;is&nbsp;writable,&nbsp;use&nbsp;that&nbsp;as&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;configuration&nbsp;directory.<br>
+4.&nbsp;If&nbsp;possible,&nbsp;create&nbsp;a&nbsp;temporary&nbsp;directory,&nbsp;and&nbsp;use&nbsp;it&nbsp;as&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;configuration&nbsp;directory.<br>
+5.&nbsp;A&nbsp;writable&nbsp;directory&nbsp;could&nbsp;not&nbsp;be&nbsp;found&nbsp;or&nbsp;created;&nbsp;return&nbsp;None.</tt></dd></dl>
+ <dl><dt><a name="-get_data_path"><strong>get_data_path</strong></a> = wrapper(*args, **kwargs)</dt></dl>
+ <dl><dt><a name="-get_example_data"><strong>get_example_data</strong></a>(fname)</dt><dd><tt>get_example_data&nbsp;is&nbsp;deprecated&nbsp;--&nbsp;use&nbsp;matplotlib.cbook.get_sample_data<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;instead</tt></dd></dl>
+ <dl><dt><a name="-get_home"><strong>get_home</strong></a> = wrapper(*args, **kwargs)</dt><dd><tt>Find&nbsp;user's&nbsp;home&nbsp;directory&nbsp;if&nbsp;possible.<br>
+Otherwise,&nbsp;returns&nbsp;None.<br>
+&nbsp;<br>
+:see:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://mail.python.org/pipermail/python-list/2005-February/325395.html">http://mail.python.org/pipermail/python-list/2005-February/325395.html</a></tt></dd></dl>
+ <dl><dt><a name="-get_py2exe_datafiles"><strong>get_py2exe_datafiles</strong></a>()</dt></dl>
+ <dl><dt><a name="-interactive"><strong>interactive</strong></a>(b)</dt><dd><tt>Set&nbsp;interactive&nbsp;mode&nbsp;to&nbsp;boolean&nbsp;b.<br>
+&nbsp;<br>
+If&nbsp;b&nbsp;is&nbsp;True,&nbsp;then&nbsp;draw&nbsp;after&nbsp;every&nbsp;plotting&nbsp;command,&nbsp;e.g.,&nbsp;after&nbsp;xlabel</tt></dd></dl>
+ <dl><dt><a name="-is_interactive"><strong>is_interactive</strong></a>()</dt><dd><tt>Return&nbsp;true&nbsp;if&nbsp;plot&nbsp;mode&nbsp;is&nbsp;interactive</tt></dd></dl>
+ <dl><dt><a name="-is_url"><strong>is_url</strong></a>(filename)</dt><dd><tt>Return&nbsp;True&nbsp;if&nbsp;string&nbsp;is&nbsp;an&nbsp;http,&nbsp;ftp,&nbsp;or&nbsp;file&nbsp;URL&nbsp;path.</tt></dd></dl>
+ <dl><dt><a name="-matplotlib_fname"><strong>matplotlib_fname</strong></a>()</dt><dd><tt>Get&nbsp;the&nbsp;location&nbsp;of&nbsp;the&nbsp;config&nbsp;file.<br>
+&nbsp;<br>
+The&nbsp;file&nbsp;location&nbsp;is&nbsp;determined&nbsp;in&nbsp;the&nbsp;following&nbsp;order<br>
+&nbsp;<br>
+-&nbsp;`$PWD/matplotlibrc`<br>
+&nbsp;<br>
+-&nbsp;`$MATPLOTLIBRC/matplotlibrc`<br>
+&nbsp;<br>
+-&nbsp;`$MPLCONFIGDIR/matplotlibrc`<br>
+&nbsp;<br>
+-&nbsp;On&nbsp;Linux,<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;`$HOME/.matplotlib/matplotlibrc`,&nbsp;if&nbsp;it&nbsp;exists<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;or&nbsp;`$XDG_CONFIG_HOME/matplotlib/matplotlibrc`&nbsp;(if<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$XDG_CONFIG_HOME&nbsp;is&nbsp;defined)<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;or&nbsp;`$HOME/.config/matplotlib/matplotlibrc`&nbsp;(if<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$XDG_CONFIG_HOME&nbsp;is&nbsp;not&nbsp;defined)<br>
+&nbsp;<br>
+-&nbsp;On&nbsp;other&nbsp;platforms,<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;`$HOME/.matplotlib/matplotlibrc`&nbsp;if&nbsp;`$HOME`&nbsp;is&nbsp;defined.<br>
+&nbsp;<br>
+-&nbsp;Lastly,&nbsp;it&nbsp;looks&nbsp;in&nbsp;`$MATPLOTLIBDATA/matplotlibrc`&nbsp;for&nbsp;a<br>
+&nbsp;&nbsp;system-defined&nbsp;copy.</tt></dd></dl>
+ <dl><dt><a name="-rc"><strong>rc</strong></a>(group, **kwargs)</dt><dd><tt>Set&nbsp;the&nbsp;current&nbsp;rc&nbsp;params.&nbsp;&nbsp;Group&nbsp;is&nbsp;the&nbsp;grouping&nbsp;for&nbsp;the&nbsp;rc,&nbsp;e.g.,<br>
+for&nbsp;``lines.linewidth``&nbsp;the&nbsp;group&nbsp;is&nbsp;``lines``,&nbsp;for<br>
+``axes.facecolor``,&nbsp;the&nbsp;group&nbsp;is&nbsp;``axes``,&nbsp;and&nbsp;so&nbsp;on.&nbsp;&nbsp;Group&nbsp;may<br>
+also&nbsp;be&nbsp;a&nbsp;list&nbsp;or&nbsp;tuple&nbsp;of&nbsp;group&nbsp;names,&nbsp;e.g.,&nbsp;(*xtick*,&nbsp;*ytick*).<br>
+*kwargs*&nbsp;is&nbsp;a&nbsp;dictionary&nbsp;attribute&nbsp;name/value&nbsp;pairs,&nbsp;e.g.,::<br>
+&nbsp;<br>
+&nbsp;&nbsp;<a href="#-rc">rc</a>('lines',&nbsp;linewidth=2,&nbsp;color='r')<br>
+&nbsp;<br>
+sets&nbsp;the&nbsp;current&nbsp;rc&nbsp;params&nbsp;and&nbsp;is&nbsp;equivalent&nbsp;to::<br>
+&nbsp;<br>
+&nbsp;&nbsp;rcParams['lines.linewidth']&nbsp;=&nbsp;2<br>
+&nbsp;&nbsp;rcParams['lines.color']&nbsp;=&nbsp;'r'<br>
+&nbsp;<br>
+The&nbsp;following&nbsp;aliases&nbsp;are&nbsp;available&nbsp;to&nbsp;save&nbsp;typing&nbsp;for&nbsp;interactive<br>
+users:<br>
+&nbsp;<br>
+=====&nbsp;&nbsp;&nbsp;=================<br>
+Alias&nbsp;&nbsp;&nbsp;Property<br>
+=====&nbsp;&nbsp;&nbsp;=================<br>
+'lw'&nbsp;&nbsp;&nbsp;&nbsp;'linewidth'<br>
+'ls'&nbsp;&nbsp;&nbsp;&nbsp;'linestyle'<br>
+'c'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'color'<br>
+'fc'&nbsp;&nbsp;&nbsp;&nbsp;'facecolor'<br>
+'ec'&nbsp;&nbsp;&nbsp;&nbsp;'edgecolor'<br>
+'mew'&nbsp;&nbsp;&nbsp;'markeredgewidth'<br>
+'aa'&nbsp;&nbsp;&nbsp;&nbsp;'antialiased'<br>
+=====&nbsp;&nbsp;&nbsp;=================<br>
+&nbsp;<br>
+Thus&nbsp;you&nbsp;could&nbsp;abbreviate&nbsp;the&nbsp;above&nbsp;rc&nbsp;command&nbsp;as::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#-rc">rc</a>('lines',&nbsp;lw=2,&nbsp;c='r')<br>
+&nbsp;<br>
+&nbsp;<br>
+Note&nbsp;you&nbsp;can&nbsp;use&nbsp;python's&nbsp;kwargs&nbsp;dictionary&nbsp;facility&nbsp;to&nbsp;store<br>
+dictionaries&nbsp;of&nbsp;default&nbsp;parameters.&nbsp;&nbsp;e.g.,&nbsp;you&nbsp;can&nbsp;customize&nbsp;the<br>
+font&nbsp;rc&nbsp;as&nbsp;follows::<br>
+&nbsp;<br>
+&nbsp;&nbsp;font&nbsp;=&nbsp;{'family'&nbsp;:&nbsp;'monospace',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'weight'&nbsp;:&nbsp;'bold',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'size'&nbsp;&nbsp;&nbsp;:&nbsp;'larger'}<br>
+&nbsp;<br>
+&nbsp;&nbsp;<a href="#-rc">rc</a>('font',&nbsp;**font)&nbsp;&nbsp;#&nbsp;pass&nbsp;in&nbsp;the&nbsp;font&nbsp;<a href="__builtin__.html#dict">dict</a>&nbsp;as&nbsp;kwargs<br>
+&nbsp;<br>
+This&nbsp;enables&nbsp;you&nbsp;to&nbsp;easily&nbsp;switch&nbsp;between&nbsp;several&nbsp;configurations.<br>
+Use&nbsp;:func:`~matplotlib.pyplot.rcdefaults`&nbsp;to&nbsp;restore&nbsp;the&nbsp;default<br>
+rc&nbsp;params&nbsp;after&nbsp;changes.</tt></dd></dl>
+ <dl><dt><a name="-rc_file"><strong>rc_file</strong></a>(fname)</dt><dd><tt>Update&nbsp;rc&nbsp;params&nbsp;from&nbsp;file.</tt></dd></dl>
+ <dl><dt><a name="-rc_file_defaults"><strong>rc_file_defaults</strong></a>()</dt><dd><tt>Restore&nbsp;the&nbsp;default&nbsp;rc&nbsp;params&nbsp;from&nbsp;the&nbsp;original&nbsp;matplotlib&nbsp;rc&nbsp;that<br>
+was&nbsp;loaded</tt></dd></dl>
+ <dl><dt><a name="-rc_params"><strong>rc_params</strong></a>(fail_on_error<font color="#909090">=False</font>)</dt><dd><tt>Return&nbsp;a&nbsp;:class:`matplotlib.<a href="#RcParams">RcParams</a>`&nbsp;instance&nbsp;from&nbsp;the<br>
+default&nbsp;matplotlib&nbsp;rc&nbsp;file.</tt></dd></dl>
+ <dl><dt><a name="-rc_params_from_file"><strong>rc_params_from_file</strong></a>(fname, fail_on_error<font color="#909090">=False</font>, use_default_template<font color="#909090">=True</font>)</dt><dd><tt>Return&nbsp;:class:`matplotlib.<a href="#RcParams">RcParams</a>`&nbsp;from&nbsp;the&nbsp;contents&nbsp;of&nbsp;the&nbsp;given&nbsp;file.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+fname&nbsp;:&nbsp;str<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Name&nbsp;of&nbsp;file&nbsp;parsed&nbsp;for&nbsp;matplotlib&nbsp;settings.<br>
+fail_on_error&nbsp;:&nbsp;bool<br>
+&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;True,&nbsp;raise&nbsp;an&nbsp;error&nbsp;when&nbsp;the&nbsp;parser&nbsp;fails&nbsp;to&nbsp;convert&nbsp;a&nbsp;parameter.<br>
+use_default_template&nbsp;:&nbsp;bool<br>
+&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;True,&nbsp;initialize&nbsp;with&nbsp;default&nbsp;parameters&nbsp;before&nbsp;updating&nbsp;with&nbsp;those<br>
+&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;the&nbsp;given&nbsp;file.&nbsp;If&nbsp;False,&nbsp;the&nbsp;configuration&nbsp;class&nbsp;only&nbsp;contains&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;parameters&nbsp;specified&nbsp;in&nbsp;the&nbsp;file.&nbsp;(Useful&nbsp;for&nbsp;updating&nbsp;dicts.)</tt></dd></dl>
+ <dl><dt><a name="-rcdefaults"><strong>rcdefaults</strong></a>()</dt><dd><tt>Restore&nbsp;the&nbsp;default&nbsp;rc&nbsp;params.&nbsp;&nbsp;These&nbsp;are&nbsp;not&nbsp;the&nbsp;params&nbsp;loaded&nbsp;by<br>
+the&nbsp;rc&nbsp;file,&nbsp;but&nbsp;mpl's&nbsp;internal&nbsp;params.&nbsp;&nbsp;See&nbsp;rc_file_defaults&nbsp;for<br>
+reloading&nbsp;the&nbsp;default&nbsp;params&nbsp;from&nbsp;the&nbsp;rc&nbsp;file</tt></dd></dl>
+ <dl><dt><a name="-reload"><strong>reload</strong></a>(...)</dt><dd><tt><a href="#-reload">reload</a>(module)&nbsp;-&gt;&nbsp;module<br>
+&nbsp;<br>
+Reload&nbsp;the&nbsp;module.&nbsp;&nbsp;The&nbsp;module&nbsp;must&nbsp;have&nbsp;been&nbsp;successfully&nbsp;imported&nbsp;before.</tt></dd></dl>
+ <dl><dt><a name="-test"><strong>test</strong></a>(verbosity<font color="#909090">=1</font>)</dt><dd><tt>run&nbsp;the&nbsp;matplotlib&nbsp;test&nbsp;suite</tt></dd></dl>
+ <dl><dt><a name="-tk_window_focus"><strong>tk_window_focus</strong></a>()</dt><dd><tt>Return&nbsp;true&nbsp;if&nbsp;focus&nbsp;maintenance&nbsp;under&nbsp;TkAgg&nbsp;on&nbsp;win32&nbsp;is&nbsp;on.<br>
+This&nbsp;currently&nbsp;works&nbsp;only&nbsp;for&nbsp;python.exe&nbsp;and&nbsp;IPython.exe.<br>
+Both&nbsp;IDLE&nbsp;and&nbsp;Pythonwin.exe&nbsp;fail&nbsp;badly&nbsp;when&nbsp;tk_window_focus&nbsp;is&nbsp;on.</tt></dd></dl>
+ <dl><dt><a name="-unpack_labeled_data"><strong>unpack_labeled_data</strong></a>(replace_names<font color="#909090">=None</font>, replace_all_args<font color="#909090">=False</font>, label_namer<font color="#909090">=None</font>, positional_parameter_names<font color="#909090">=None</font>)</dt><dd><tt>A&nbsp;decorator&nbsp;to&nbsp;add&nbsp;a&nbsp;'data'&nbsp;kwarg&nbsp;to&nbsp;any&nbsp;a&nbsp;function.&nbsp;&nbsp;The&nbsp;signature<br>
+of&nbsp;the&nbsp;input&nbsp;function&nbsp;must&nbsp;include&nbsp;the&nbsp;ax&nbsp;argument&nbsp;at&nbsp;the&nbsp;first&nbsp;position&nbsp;::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;def&nbsp;foo(ax,&nbsp;*args,&nbsp;**kwargs)<br>
+&nbsp;<br>
+so&nbsp;this&nbsp;is&nbsp;suitable&nbsp;for&nbsp;use&nbsp;with&nbsp;Axes&nbsp;methods.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+replace_names&nbsp;:&nbsp;list&nbsp;of&nbsp;strings,&nbsp;optional,&nbsp;default:&nbsp;None<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;list&nbsp;of&nbsp;parameter&nbsp;names&nbsp;which&nbsp;arguments&nbsp;should&nbsp;be&nbsp;replaced&nbsp;by<br>
+&nbsp;&nbsp;&nbsp;&nbsp;`data[name]`.&nbsp;If&nbsp;None,&nbsp;all&nbsp;arguments&nbsp;are&nbsp;replaced&nbsp;if&nbsp;they&nbsp;are<br>
+&nbsp;&nbsp;&nbsp;&nbsp;included&nbsp;in&nbsp;`data`.<br>
+replace_all_args&nbsp;:&nbsp;bool,&nbsp;default:&nbsp;False<br>
+&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;True,&nbsp;all&nbsp;arguments&nbsp;in&nbsp;*args&nbsp;get&nbsp;replaced,&nbsp;even&nbsp;if&nbsp;they&nbsp;are&nbsp;not<br>
+&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;replace_names.<br>
+label_namer&nbsp;:&nbsp;string,&nbsp;optional,&nbsp;default:&nbsp;None<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;parameter&nbsp;which&nbsp;argument&nbsp;should&nbsp;be&nbsp;used&nbsp;as&nbsp;label,&nbsp;if<br>
+&nbsp;&nbsp;&nbsp;&nbsp;label&nbsp;is&nbsp;not&nbsp;set.&nbsp;If&nbsp;None,&nbsp;the&nbsp;label&nbsp;keyword&nbsp;argument&nbsp;is&nbsp;not&nbsp;set.<br>
+positional_parameter_names&nbsp;:&nbsp;list&nbsp;of&nbsp;strings&nbsp;or&nbsp;callable,&nbsp;optional<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;full&nbsp;list&nbsp;of&nbsp;positional&nbsp;parameter&nbsp;names&nbsp;(excluding&nbsp;an&nbsp;explicit<br>
+&nbsp;&nbsp;&nbsp;&nbsp;`ax`/'self'&nbsp;argument&nbsp;at&nbsp;the&nbsp;first&nbsp;place&nbsp;and&nbsp;including&nbsp;all&nbsp;possible<br>
+&nbsp;&nbsp;&nbsp;&nbsp;positional&nbsp;parameter&nbsp;in&nbsp;`*args`),&nbsp;in&nbsp;the&nbsp;right&nbsp;order.&nbsp;Can&nbsp;also&nbsp;include<br>
+&nbsp;&nbsp;&nbsp;&nbsp;all&nbsp;other&nbsp;keyword&nbsp;parameter.&nbsp;Only&nbsp;needed&nbsp;if&nbsp;the&nbsp;wrapped&nbsp;function&nbsp;does<br>
+&nbsp;&nbsp;&nbsp;&nbsp;contain&nbsp;`*args`&nbsp;and&nbsp;(replace_names&nbsp;is&nbsp;not&nbsp;None&nbsp;or&nbsp;replace_all_args&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;False).&nbsp;If&nbsp;it&nbsp;is&nbsp;a&nbsp;callable,&nbsp;it&nbsp;will&nbsp;be&nbsp;called&nbsp;with&nbsp;the&nbsp;actual<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tuple&nbsp;of&nbsp;*args&nbsp;and&nbsp;the&nbsp;data&nbsp;and&nbsp;should&nbsp;return&nbsp;a&nbsp;list&nbsp;like<br>
+&nbsp;&nbsp;&nbsp;&nbsp;above.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;NOTE:&nbsp;callables&nbsp;should&nbsp;only&nbsp;be&nbsp;used&nbsp;when&nbsp;the&nbsp;names&nbsp;and&nbsp;order&nbsp;of&nbsp;*args<br>
+&nbsp;&nbsp;&nbsp;&nbsp;can&nbsp;only&nbsp;be&nbsp;determined&nbsp;at&nbsp;runtime.&nbsp;Please&nbsp;use&nbsp;list&nbsp;of&nbsp;names<br>
+&nbsp;&nbsp;&nbsp;&nbsp;when&nbsp;the&nbsp;order&nbsp;and&nbsp;names&nbsp;of&nbsp;*args&nbsp;is&nbsp;clear&nbsp;before&nbsp;runtime!</tt></dd></dl>
+ <dl><dt><a name="-use"><strong>use</strong></a>(arg, warn<font color="#909090">=True</font>, force<font color="#909090">=False</font>)</dt><dd><tt>Set&nbsp;the&nbsp;matplotlib&nbsp;backend&nbsp;to&nbsp;one&nbsp;of&nbsp;the&nbsp;known&nbsp;backends.<br>
+&nbsp;<br>
+The&nbsp;argument&nbsp;is&nbsp;case-insensitive.&nbsp;*warn*&nbsp;specifies&nbsp;whether&nbsp;a<br>
+warning&nbsp;should&nbsp;be&nbsp;issued&nbsp;if&nbsp;a&nbsp;backend&nbsp;has&nbsp;already&nbsp;been&nbsp;set&nbsp;up.<br>
+*force*&nbsp;is&nbsp;an&nbsp;**experimental**&nbsp;flag&nbsp;that&nbsp;tells&nbsp;matplotlib&nbsp;to<br>
+attempt&nbsp;to&nbsp;initialize&nbsp;a&nbsp;new&nbsp;backend&nbsp;by&nbsp;reloading&nbsp;the&nbsp;backend<br>
+module.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;function&nbsp;must&nbsp;be&nbsp;called&nbsp;*before*&nbsp;importing&nbsp;pyplot&nbsp;for<br>
+&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;first&nbsp;time;&nbsp;or,&nbsp;if&nbsp;you&nbsp;are&nbsp;not&nbsp;using&nbsp;pyplot,&nbsp;it&nbsp;must&nbsp;be&nbsp;called<br>
+&nbsp;&nbsp;&nbsp;&nbsp;before&nbsp;importing&nbsp;matplotlib.backends.&nbsp;&nbsp;If&nbsp;warn&nbsp;is&nbsp;True,&nbsp;a&nbsp;warning<br>
+&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;issued&nbsp;if&nbsp;you&nbsp;try&nbsp;and&nbsp;call&nbsp;this&nbsp;after&nbsp;pylab&nbsp;or&nbsp;pyplot&nbsp;have&nbsp;been<br>
+&nbsp;&nbsp;&nbsp;&nbsp;loaded.&nbsp;&nbsp;In&nbsp;certain&nbsp;black&nbsp;magic&nbsp;use&nbsp;cases,&nbsp;e.g.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:func:`pyplot.switch_backend`,&nbsp;we&nbsp;are&nbsp;doing&nbsp;the&nbsp;reloading&nbsp;necessary&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;make&nbsp;the&nbsp;backend&nbsp;switch&nbsp;work&nbsp;(in&nbsp;some&nbsp;cases,&nbsp;e.g.,&nbsp;pure&nbsp;image<br>
+&nbsp;&nbsp;&nbsp;&nbsp;backends)&nbsp;so&nbsp;one&nbsp;can&nbsp;set&nbsp;warn=False&nbsp;to&nbsp;suppress&nbsp;the&nbsp;warnings.<br>
+&nbsp;<br>
+To&nbsp;find&nbsp;out&nbsp;which&nbsp;backend&nbsp;is&nbsp;currently&nbsp;set,&nbsp;see<br>
+:func:`matplotlib.get_backend`.</tt></dd></dl>
+ <dl><dt><a name="-verify_test_dependencies"><strong>verify_test_dependencies</strong></a>()</dt></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>URL_REGEX</strong> = &lt;_sre.SRE_Pattern object&gt;<br>
+<strong>__version__</strong> = '1.5.1'<br>
+<strong>__version__numpy__</strong> = '1.6'<br>
+<strong>absolute_import</strong> = _Feature((2, 5, 0, 'alpha', 1), (3, 0, 0, 'alpha', 0), 16384)<br>
+<strong>bad_pyparsing</strong> = False<br>
+<strong>default</strong> = True<br>
+<strong>defaultParams</strong> = {u'agg.path.chunksize': [0, &lt;function validate_int&gt;], u'animation.avconv_args': [[], &lt;function f&gt;], u'animation.avconv_path': [u'avconv', &lt;type 'unicode'&gt;], u'animation.bitrate': [-1, &lt;function validate_int&gt;], u'animation.codec': [u'mpeg4', &lt;type 'unicode'&gt;], u'animation.convert_args': [[], &lt;function f&gt;], u'animation.convert_path': [u'convert', &lt;type 'unicode'&gt;], u'animation.ffmpeg_args': [[], &lt;function f&gt;], u'animation.ffmpeg_path': [u'ffmpeg', &lt;type 'unicode'&gt;], u'animation.frame_format': [u'png', &lt;matplotlib.rcsetup.ValidateInStrings object&gt;], ...}<br>
+<strong>default_test_modules</strong> = [u'matplotlib.tests.test_agg', u'matplotlib.tests.test_animation', u'matplotlib.tests.test_arrow_patches', u'matplotlib.tests.test_artist', u'matplotlib.tests.test_axes', u'matplotlib.tests.test_backend_bases', u'matplotlib.tests.test_backend_pdf', u'matplotlib.tests.test_backend_pgf', u'matplotlib.tests.test_backend_ps', u'matplotlib.tests.test_backend_qt4', u'matplotlib.tests.test_backend_qt5', u'matplotlib.tests.test_backend_svg', u'matplotlib.tests.test_basic', u'matplotlib.tests.test_bbox_tight', u'matplotlib.tests.test_cbook', u'matplotlib.tests.test_coding_standards', u'matplotlib.tests.test_collections', u'matplotlib.tests.test_colorbar', u'matplotlib.tests.test_colors', u'matplotlib.tests.test_compare_images', ...]<br>
+<strong>division</strong> = _Feature((2, 2, 0, 'alpha', 2), (3, 0, 0, 'alpha', 0), 8192)<br>
+<strong>f</strong> = Forward: "a"<br>
+<strong>key</strong> = u'svg.embed_char_paths'<br>
+<strong>major</strong> = 2<br>
+<strong>minor1</strong> = 7<br>
+<strong>minor2</strong> = 12<br>
+<strong>print_function</strong> = _Feature((2, 6, 0, 'alpha', 2), (3, 0, 0, 'alpha', 0), 65536)<br>
+<strong>rcParams</strong> = RcParams({u'agg.path.chunksize': 0,
+          u'...le': False,
+          u'ytick.minor.width': 0.5})<br>
+<strong>rcParamsDefault</strong> = RcParams({u'agg.path.chunksize': 0,
+          u'...le': False,
+          u'ytick.minor.width': 0.5})<br>
+<strong>rcParamsOrig</strong> = {u'agg.path.chunksize': 0, u'animation.avconv_args': [], u'animation.avconv_path': u'avconv', u'animation.bitrate': -1, u'animation.codec': u'mpeg4', u'animation.convert_args': [], u'animation.convert_path': u'convert', u'animation.ffmpeg_args': [], u'animation.ffmpeg_path': u'ffmpeg', u'animation.frame_format': u'png', ...}<br>
+<strong>s</strong> = 'matplotlib'<br>
+<strong>tmp</strong> = 0<br>
+<strong>unicode_literals</strong> = _Feature((2, 6, 0, 'alpha', 2), (3, 0, 0, 'alpha', 0), 131072)<br>
+<strong>verbose</strong> = &lt;matplotlib.Verbose object&gt;</td></tr></table>
+</body></html>

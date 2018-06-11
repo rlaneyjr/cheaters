@@ -1,0 +1,71 @@
+VirtualBox Commands Cheat Sheet
+
+Monday, August 24, 2015
+
+VirtualBox has always been the go-to piece of software to spin up virtual machines on your workstation.
+
+More often than not, you will work with VirtualBox using its GUI. However, for those occasions where you are SSH’ing into a remote workstation running VirtualBox, it is often easier to work with it using the command line instead of forwarding X.
+
+This post will be an ever growing list of useful VirtualBox commands.
+
+Import Virtual Machine
+
+Import a virtual machine file into VirtualBox:
+
+vboxmanage import <FILE>
+In certain scenarios, you may not want virtual machine file you are importing should to regenerate its virtual NIC MAC addresses. In that case, pass the keepallmacs flag:
+
+vboxmanage import --options keepallmacs <FILE>
+Start Virtual Machine
+
+Start one virtual machine:
+
+vboxmanage startvm <NAME>
+Start many virtual machines:
+
+for i in <VM1> <VM2> <VM3>; do vboxmanage startvm $i; done
+Stop Virtual Machine
+
+Stop one virtual machine:
+
+vboxmanage controlvm <NAME> poweroffip
+Stop many virtual machines:
+
+for i in <VM1> <VM2> <VM3>; do vboxmanage controlvm $i poweroff; done
+Create hostonlyif Network Adapter
+
+Create host only network interface adapter:
+
+vboxmanage hostonlyif create
+Create host only network interface adapter with specific subnet:
+
+vboxmanage hostonlyif create ipconfig vboxnet0 --ip 192.168.122.0
+Remove hostonlyif Network Adapter
+
+Remove host only network interface adapter:
+
+vboxmanage hostonlyif remove vboxnet0
+NAT SSH to Virtual Machine
+
+By default, a VirtualBox virtual machine will use an IP address you cannot route to. If you want to SSH to that virtual machine without adding another host only network interface, you will need to setup a NAT to port 22.
+
+NAT SSH to virtual machine:
+
+vboxmanage modifyvm "vm1" --natpf1 "guestssh,tcp,,22111,,22"
+Delete NAT SSH on virtual machine:
+
+VBoxManage modifyvm "vm1" --natpf1 delete "guestssh"
+
+Adjust the video settings for a VM.
+1. Close your virtual machine before executing the command – otherwise the settings won't take effect.
+
+2. You can check whether the custom video mode is added by the following command:
+VBoxManage.exe getextradata "VM-Name" CustomVideoMode1
+
+3. The command should return the specified resolution:
+Value: 1920x1200x32
+
+4. Or, alternatively, you can check the whole extra data list:
+VBoxManage.exe getextradata "VM-Name" enumerate
+
+

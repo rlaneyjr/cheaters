@@ -1,0 +1,196 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: package blessings</title>
+<meta charset="utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>blessings</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/lib/python2.7/site-packages/blessings/__init__.py">/usr/local/lib/python2.7/site-packages/blessings/__init__.py</a></font></td></tr></table>
+    <p><tt>A&nbsp;thin,&nbsp;practical&nbsp;wrapper&nbsp;around&nbsp;terminal&nbsp;coloring,&nbsp;styling,&nbsp;and<br>
+positioning</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Package Contents</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="blessings.tests.html">tests</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="__builtin__.html#object">__builtin__.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="blessings.html#Terminal">Terminal</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Terminal">class <strong>Terminal</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>An&nbsp;abstraction&nbsp;around&nbsp;terminal&nbsp;capabilities<br>
+&nbsp;<br>
+Unlike&nbsp;curses,&nbsp;this&nbsp;doesn't&nbsp;require&nbsp;clearing&nbsp;the&nbsp;screen&nbsp;before&nbsp;doing<br>
+anything,&nbsp;and&nbsp;it's&nbsp;friendlier&nbsp;to&nbsp;use.&nbsp;It&nbsp;keeps&nbsp;the&nbsp;endless&nbsp;calls&nbsp;to<br>
+``tigetstr()``&nbsp;and&nbsp;``tparm()``&nbsp;out&nbsp;of&nbsp;your&nbsp;code,&nbsp;and&nbsp;it&nbsp;acts&nbsp;intelligently<br>
+when&nbsp;somebody&nbsp;pipes&nbsp;your&nbsp;output&nbsp;to&nbsp;a&nbsp;non-terminal.<br>
+&nbsp;<br>
+Instance&nbsp;attributes:<br>
+&nbsp;<br>
+&nbsp;&nbsp;``stream``<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;stream&nbsp;the&nbsp;terminal&nbsp;outputs&nbsp;to.&nbsp;It's&nbsp;convenient&nbsp;to&nbsp;pass&nbsp;the&nbsp;stream<br>
+&nbsp;&nbsp;&nbsp;&nbsp;around&nbsp;with&nbsp;the&nbsp;terminal;&nbsp;it's&nbsp;almost&nbsp;always&nbsp;needed&nbsp;when&nbsp;the&nbsp;terminal<br>
+&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;and&nbsp;saves&nbsp;sticking&nbsp;lots&nbsp;of&nbsp;extra&nbsp;args&nbsp;on&nbsp;client&nbsp;functions&nbsp;in<br>
+&nbsp;&nbsp;&nbsp;&nbsp;practice.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Terminal-__getattr__"><strong>__getattr__</strong></a>(self, attr)</dt><dd><tt>Return&nbsp;a&nbsp;terminal&nbsp;capability,&nbsp;like&nbsp;bold.<br>
+&nbsp;<br>
+For&nbsp;example,&nbsp;you&nbsp;can&nbsp;say&nbsp;``term.bold``&nbsp;to&nbsp;get&nbsp;the&nbsp;string&nbsp;that&nbsp;turns&nbsp;on<br>
+bold&nbsp;formatting&nbsp;and&nbsp;``term.normal``&nbsp;to&nbsp;get&nbsp;the&nbsp;string&nbsp;that&nbsp;turns&nbsp;it&nbsp;off<br>
+again.&nbsp;Or&nbsp;you&nbsp;can&nbsp;take&nbsp;a&nbsp;shortcut:&nbsp;``term.bold('hi')``&nbsp;bolds&nbsp;its<br>
+argument&nbsp;and&nbsp;sets&nbsp;everything&nbsp;to&nbsp;normal&nbsp;afterward.&nbsp;You&nbsp;can&nbsp;even&nbsp;combine<br>
+things:&nbsp;``term.bold_underline_red_on_bright_green('yowzers!')``.<br>
+&nbsp;<br>
+For&nbsp;a&nbsp;parametrized&nbsp;capability&nbsp;like&nbsp;``cup``,&nbsp;pass&nbsp;the&nbsp;parameters&nbsp;too:<br>
+``some_term.cup(line,&nbsp;column)``.<br>
+&nbsp;<br>
+``man&nbsp;terminfo``&nbsp;for&nbsp;a&nbsp;complete&nbsp;list&nbsp;of&nbsp;capabilities.<br>
+&nbsp;<br>
+Return&nbsp;values&nbsp;are&nbsp;always&nbsp;Unicode.</tt></dd></dl>
+
+<dl><dt><a name="Terminal-__init__"><strong>__init__</strong></a>(self, kind<font color="#909090">=None</font>, stream<font color="#909090">=None</font>, force_styling<font color="#909090">=False</font>)</dt><dd><tt>Initialize&nbsp;the&nbsp;terminal.<br>
+&nbsp;<br>
+If&nbsp;``stream``&nbsp;is&nbsp;not&nbsp;a&nbsp;tty,&nbsp;I&nbsp;will&nbsp;default&nbsp;to&nbsp;returning&nbsp;an&nbsp;empty<br>
+Unicode&nbsp;string&nbsp;for&nbsp;all&nbsp;capability&nbsp;values,&nbsp;so&nbsp;things&nbsp;like&nbsp;piping&nbsp;your<br>
+output&nbsp;to&nbsp;a&nbsp;file&nbsp;won't&nbsp;strew&nbsp;escape&nbsp;sequences&nbsp;all&nbsp;over&nbsp;the&nbsp;place.&nbsp;The<br>
+``ls``&nbsp;command&nbsp;sets&nbsp;a&nbsp;precedent&nbsp;for&nbsp;this:&nbsp;it&nbsp;defaults&nbsp;to&nbsp;columnar<br>
+output&nbsp;when&nbsp;being&nbsp;sent&nbsp;to&nbsp;a&nbsp;tty&nbsp;and&nbsp;one-item-per-line&nbsp;when&nbsp;not.<br>
+&nbsp;<br>
+:arg&nbsp;kind:&nbsp;A&nbsp;terminal&nbsp;string&nbsp;as&nbsp;taken&nbsp;by&nbsp;``setupterm()``.&nbsp;Defaults&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;value&nbsp;of&nbsp;the&nbsp;``TERM``&nbsp;environment&nbsp;variable.<br>
+:arg&nbsp;stream:&nbsp;A&nbsp;file-like&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;representing&nbsp;the&nbsp;terminal.&nbsp;Defaults&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;original&nbsp;value&nbsp;of&nbsp;stdout,&nbsp;like&nbsp;``curses.initscr()``&nbsp;does.<br>
+:arg&nbsp;force_styling:&nbsp;Whether&nbsp;to&nbsp;force&nbsp;the&nbsp;emission&nbsp;of&nbsp;capabilities,&nbsp;even<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;we&nbsp;don't&nbsp;seem&nbsp;to&nbsp;be&nbsp;in&nbsp;a&nbsp;terminal.&nbsp;This&nbsp;comes&nbsp;in&nbsp;handy&nbsp;if&nbsp;users<br>
+&nbsp;&nbsp;&nbsp;&nbsp;are&nbsp;trying&nbsp;to&nbsp;pipe&nbsp;your&nbsp;output&nbsp;through&nbsp;something&nbsp;like&nbsp;``less&nbsp;-r``,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;which&nbsp;supports&nbsp;terminal&nbsp;codes&nbsp;just&nbsp;fine&nbsp;but&nbsp;doesn't&nbsp;appear&nbsp;itself<br>
+&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;be&nbsp;a&nbsp;terminal.&nbsp;Just&nbsp;expose&nbsp;a&nbsp;command-line&nbsp;option,&nbsp;and&nbsp;set<br>
+&nbsp;&nbsp;&nbsp;&nbsp;``force_styling``&nbsp;based&nbsp;on&nbsp;it.&nbsp;<a href="#Terminal">Terminal</a>&nbsp;initialization&nbsp;sequences<br>
+&nbsp;&nbsp;&nbsp;&nbsp;will&nbsp;be&nbsp;sent&nbsp;to&nbsp;``stream``&nbsp;if&nbsp;it&nbsp;has&nbsp;a&nbsp;file&nbsp;descriptor&nbsp;and&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;``sys.__stdout__``&nbsp;otherwise.&nbsp;(``setupterm()``&nbsp;demands&nbsp;to&nbsp;send&nbsp;them<br>
+&nbsp;&nbsp;&nbsp;&nbsp;somewhere,&nbsp;and&nbsp;stdout&nbsp;is&nbsp;probably&nbsp;where&nbsp;the&nbsp;output&nbsp;is&nbsp;ultimately<br>
+&nbsp;&nbsp;&nbsp;&nbsp;headed.&nbsp;If&nbsp;not,&nbsp;stderr&nbsp;is&nbsp;probably&nbsp;bound&nbsp;to&nbsp;the&nbsp;same&nbsp;terminal.)<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;you&nbsp;want&nbsp;to&nbsp;force&nbsp;styling&nbsp;to&nbsp;not&nbsp;happen,&nbsp;pass<br>
+&nbsp;&nbsp;&nbsp;&nbsp;``force_styling=None``.</tt></dd></dl>
+
+<dl><dt><a name="Terminal-fullscreen"><strong>fullscreen</strong></a>(*args, **kwds)</dt><dd><tt>Return&nbsp;a&nbsp;context&nbsp;manager&nbsp;that&nbsp;enters&nbsp;fullscreen&nbsp;mode&nbsp;while&nbsp;inside&nbsp;it<br>
+and&nbsp;restores&nbsp;normal&nbsp;mode&nbsp;on&nbsp;leaving.</tt></dd></dl>
+
+<dl><dt><a name="Terminal-hidden_cursor"><strong>hidden_cursor</strong></a>(*args, **kwds)</dt><dd><tt>Return&nbsp;a&nbsp;context&nbsp;manager&nbsp;that&nbsp;hides&nbsp;the&nbsp;cursor&nbsp;while&nbsp;inside&nbsp;it&nbsp;and<br>
+makes&nbsp;it&nbsp;visible&nbsp;on&nbsp;leaving.</tt></dd></dl>
+
+<dl><dt><a name="Terminal-location"><strong>location</strong></a>(*args, **kwds)</dt><dd><tt>Return&nbsp;a&nbsp;context&nbsp;manager&nbsp;for&nbsp;temporarily&nbsp;moving&nbsp;the&nbsp;cursor.<br>
+&nbsp;<br>
+Move&nbsp;the&nbsp;cursor&nbsp;to&nbsp;a&nbsp;certain&nbsp;position&nbsp;on&nbsp;entry,&nbsp;let&nbsp;you&nbsp;print&nbsp;stuff<br>
+there,&nbsp;then&nbsp;return&nbsp;the&nbsp;cursor&nbsp;to&nbsp;its&nbsp;original&nbsp;position::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;term&nbsp;=&nbsp;<a href="#Terminal">Terminal</a>()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;with&nbsp;term.<a href="#Terminal-location">location</a>(2,&nbsp;5):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;'Hello,&nbsp;world!'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;x&nbsp;in&nbsp;xrange(10):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;'I&nbsp;can&nbsp;do&nbsp;it&nbsp;%i&nbsp;times!'&nbsp;%&nbsp;x<br>
+&nbsp;<br>
+Specify&nbsp;``x``&nbsp;to&nbsp;move&nbsp;to&nbsp;a&nbsp;certain&nbsp;column,&nbsp;``y``&nbsp;to&nbsp;move&nbsp;to&nbsp;a&nbsp;certain<br>
+row,&nbsp;both,&nbsp;or&nbsp;neither.&nbsp;If&nbsp;you&nbsp;specify&nbsp;neither,&nbsp;only&nbsp;the&nbsp;saving&nbsp;and<br>
+restoration&nbsp;of&nbsp;cursor&nbsp;position&nbsp;will&nbsp;happen.&nbsp;This&nbsp;can&nbsp;be&nbsp;useful&nbsp;if&nbsp;you<br>
+simply&nbsp;want&nbsp;to&nbsp;restore&nbsp;your&nbsp;place&nbsp;after&nbsp;doing&nbsp;some&nbsp;manual&nbsp;cursor<br>
+movement.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>color</strong></dt>
+<dd><tt>Return&nbsp;a&nbsp;capability&nbsp;that&nbsp;sets&nbsp;the&nbsp;foreground&nbsp;color.<br>
+&nbsp;<br>
+The&nbsp;capability&nbsp;is&nbsp;unparametrized&nbsp;until&nbsp;called&nbsp;and&nbsp;passed&nbsp;a&nbsp;number<br>
+(0-15),&nbsp;at&nbsp;which&nbsp;point&nbsp;it&nbsp;returns&nbsp;another&nbsp;string&nbsp;which&nbsp;represents&nbsp;a<br>
+specific&nbsp;color&nbsp;change.&nbsp;This&nbsp;second&nbsp;string&nbsp;can&nbsp;further&nbsp;be&nbsp;called&nbsp;to<br>
+color&nbsp;a&nbsp;piece&nbsp;of&nbsp;text&nbsp;and&nbsp;set&nbsp;everything&nbsp;back&nbsp;to&nbsp;normal&nbsp;afterward.<br>
+&nbsp;<br>
+:arg&nbsp;num:&nbsp;The&nbsp;number,&nbsp;0-15,&nbsp;of&nbsp;the&nbsp;color</tt></dd>
+</dl>
+<dl><dt><strong>does_styling</strong></dt>
+<dd><tt>Whether&nbsp;attempt&nbsp;to&nbsp;emit&nbsp;capabilities<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;influenced&nbsp;by&nbsp;the&nbsp;``is_a_tty``&nbsp;property&nbsp;and&nbsp;by&nbsp;the<br>
+``force_styling``&nbsp;argument&nbsp;to&nbsp;the&nbsp;constructor.&nbsp;You&nbsp;can&nbsp;examine<br>
+this&nbsp;value&nbsp;to&nbsp;decide&nbsp;whether&nbsp;to&nbsp;draw&nbsp;progress&nbsp;bars&nbsp;or&nbsp;other&nbsp;frippery.</tt></dd>
+</dl>
+<dl><dt><strong>height</strong></dt>
+<dd><tt>The&nbsp;height&nbsp;of&nbsp;the&nbsp;terminal&nbsp;in&nbsp;characters<br>
+&nbsp;<br>
+If&nbsp;no&nbsp;stream&nbsp;or&nbsp;a&nbsp;stream&nbsp;not&nbsp;representing&nbsp;a&nbsp;terminal&nbsp;was&nbsp;passed&nbsp;in&nbsp;at<br>
+construction,&nbsp;return&nbsp;the&nbsp;dimension&nbsp;of&nbsp;the&nbsp;controlling&nbsp;terminal&nbsp;so<br>
+piping&nbsp;to&nbsp;things&nbsp;that&nbsp;eventually&nbsp;display&nbsp;on&nbsp;the&nbsp;terminal&nbsp;(like&nbsp;``less<br>
+-R``)&nbsp;work.&nbsp;If&nbsp;a&nbsp;stream&nbsp;representing&nbsp;a&nbsp;terminal&nbsp;was&nbsp;passed&nbsp;in,&nbsp;return<br>
+the&nbsp;dimensions&nbsp;of&nbsp;that&nbsp;terminal.&nbsp;If&nbsp;there&nbsp;somehow&nbsp;is&nbsp;no&nbsp;controlling<br>
+terminal,&nbsp;return&nbsp;``None``.&nbsp;(Thus,&nbsp;you&nbsp;should&nbsp;check&nbsp;that&nbsp;the&nbsp;property<br>
+``is_a_tty``&nbsp;is&nbsp;true&nbsp;before&nbsp;doing&nbsp;any&nbsp;math&nbsp;on&nbsp;the&nbsp;result.)</tt></dd>
+</dl>
+<dl><dt><strong>is_a_tty</strong></dt>
+<dd><tt>Whether&nbsp;my&nbsp;``stream``&nbsp;appears&nbsp;to&nbsp;be&nbsp;associated&nbsp;with&nbsp;a&nbsp;terminal</tt></dd>
+</dl>
+<dl><dt><strong>number_of_colors</strong></dt>
+<dd><tt>Return&nbsp;the&nbsp;number&nbsp;of&nbsp;colors&nbsp;the&nbsp;terminal&nbsp;supports.<br>
+&nbsp;<br>
+Common&nbsp;values&nbsp;are&nbsp;0,&nbsp;8,&nbsp;16,&nbsp;88,&nbsp;and&nbsp;256.<br>
+&nbsp;<br>
+Though&nbsp;the&nbsp;underlying&nbsp;capability&nbsp;returns&nbsp;-1&nbsp;when&nbsp;there&nbsp;is&nbsp;no&nbsp;color<br>
+support,&nbsp;we&nbsp;return&nbsp;0.&nbsp;This&nbsp;lets&nbsp;you&nbsp;test&nbsp;more&nbsp;Pythonically::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;term.number_of_colors:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br>
+&nbsp;<br>
+We&nbsp;also&nbsp;return&nbsp;0&nbsp;if&nbsp;the&nbsp;terminal&nbsp;won't&nbsp;tell&nbsp;us&nbsp;how&nbsp;many&nbsp;colors&nbsp;it<br>
+supports,&nbsp;which&nbsp;I&nbsp;think&nbsp;is&nbsp;rare.</tt></dd>
+</dl>
+<dl><dt><strong>on_color</strong></dt>
+<dd><tt>Return&nbsp;a&nbsp;capability&nbsp;that&nbsp;sets&nbsp;the&nbsp;background&nbsp;color.<br>
+&nbsp;<br>
+See&nbsp;``color()``.</tt></dd>
+</dl>
+<dl><dt><strong>width</strong></dt>
+<dd><tt>The&nbsp;width&nbsp;of&nbsp;the&nbsp;terminal&nbsp;in&nbsp;characters<br>
+&nbsp;<br>
+See&nbsp;``height()``&nbsp;for&nbsp;some&nbsp;corner&nbsp;cases.</tt></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>__all__</strong> = ['Terminal']</td></tr></table>
+</body></html>

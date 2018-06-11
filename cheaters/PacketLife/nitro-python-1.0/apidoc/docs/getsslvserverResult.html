@@ -1,0 +1,244 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>Citrix NetScaler XML API User&#39;s Guide - Structure Definition</title>
+<link rel="stylesheet" type="text/css" href="help_ns.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body onload="initial()" class="ns_body">
+<div class="ns_content"><table cellpadding="0" cellspacing="0"><script type="text/javascript">
+function changeContext(id,lang,flag){
+	parent.banner.document.language.select.value = lang;
+	if( lang == "C" ){
+		if(flag == "1"){
+			showContent(cfirstcontent,id,lang);
+		}
+		else{
+			showContent(csecondcontent,id,lang);
+		}
+	}
+	if( lang == "Perl" ){
+		if(flag == "1"){
+			showContent(perlfirstcontent,id,lang);
+		}
+		else{
+			showContent(perlsecondcontent,id,lang);
+		}
+	}
+	if( lang == "Java" ){
+		if(flag == "1"){
+			showContent(javafirstcontent,id,lang);	
+		}
+		else{
+			showContent(javasecondcontent,id,lang);
+		}
+	}
+	if( lang == "C#" ){
+		if(flag == "1"){
+			showContent(csharpfirstcontent,id,lang);
+		}
+		else{
+			showContent(csharpsecondcontent,id,lang);
+		}
+	}
+	if( lang == "VB" ){
+		if(flag == "1"){
+			showContent(vbfirstcontent,id,lang);
+		}
+		else{
+			showContent(vbsecondcontent,id,lang);
+		}
+	}
+	if(flag == "1"){
+		showInside(lang,"0");
+	}
+	else{
+		showOutside(lang);
+	}
+}
+function showContent(content,id,lang){
+	if(ie4){
+	   showContentObj=document.all.id;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById(id);
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+  showLangSelect(lang);
+}
+function showInside(str,cond){
+	if(str == "C"){
+ 		var inside_content = csecondcontent;
+ 	}
+ 	if(str == "Perl"){
+ 		var inside_content = perlsecondcontent;
+ 	}
+ 	if(str == "Java"){
+ 		var inside_content = javasecondcontent;
+ 	}
+ 	if(str == "C#"){
+		var inside_content = csharpsecondcontent;
+ 	}
+ 	if(str == "VB"){
+		var inside_content = vbsecondcontent;
+ 	}
+	showContent(inside_content,'qiksearch_div1',str);
+ 	if ( cond == "1" ){
+ 		var page = 'apidoc/docs/getsslvserverResult.html#sslvserverList';
+ 		document.location.href = page;
+ 	}
+}
+function showOutside(str){
+	if(str == "C" ){
+ 		var inside_content = cfirstcontent;
+ 	}
+ 	if(str == "Perl" ){
+ 		var inside_content = perlfirstcontent;
+ 	}
+ 	if(str == "Java" ){
+ 		var inside_content = javafirstcontent;
+ 	}
+ 	if(str == "C#" ){
+ 		var inside_content = csharpfirstcontent;
+ 	}
+ 	if(str == "VB" ){
+ 		var inside_content = vbfirstcontent;
+ 	}
+ 	showContent(inside_content,'qiksearch_div',str);
+}
+function initial(){
+	ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+	ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+	ns4=document.layers;
+	langSelected = parent.banner.document.language.select.value
+	var plink = parent.banner.document.language.plink.value
+	var my_array=plink.split("&");
+	var temp = my_array[0];
+ 	var grp = temp.split("@");
+	var cmd = my_array[1];
+	var regex = /^stat/i;
+	if( cmd.match(regex) != null ){
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex_stat.html\">Statistics</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getsslvserverResult");
+	}
+	else{
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex.htm\">Configuration</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getsslvserverResult");
+	}
+	if( langSelected == "C" ){
+ 		var content = cfirstcontent;
+	}
+	else if( langSelected == "Perl" ){
+		var content = perlfirstcontent;
+	}
+	else if( langSelected == "Java" ){
+		var content = javafirstcontent;
+	}
+	else if( langSelected == "C#" ){
+		var content = csharpfirstcontent;
+	}
+	else if( langSelected == "VB" ){
+		var content = vbfirstcontent;
+	}
+	else{
+		var content = cfirstcontent;
+		langSelected="C";
+	}
+	showContent(content,'qiksearch_div',langSelected);
+	showInside(langSelected,"0");
+}
+function showPLink(content){
+	if(ie4){
+	   showContentObj=document.all.progressive_link;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById("progressive_link");
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+}
+function showLangSelect(id){
+	   if(ie4)
+       {
+       	showObj=document.all.first_url;
+       	showObj1=document.all.second_url;
+       }
+       if(ns6)
+       {
+       	showObj=document.getElementById("first_url");
+       	showObj1=document.getElementById("second_url");
+       }
+       if( id == "C" ){
+       	newlink = "<b>C</b>";
+       	newlink1 = "<b>C</b>";
+       }
+       else{
+       	newlink = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C','1');\"><b>C</b></a>";
+       	newlink1 = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C','0');\"><b>C</b></a>";
+       }
+       if( id == "Perl" ){
+       	newlink = newlink + " | <b>Perl</b>";
+       	newlink1 = newlink1 + " | <b>Perl</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Perl','1');\"><b>Perl</b></a>";
+      	       newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Perl','0');\"><b>Perl</b></a>";
+       }
+       if( id == "Java" ){
+       	newlink = newlink + " | <b>Java</b>";
+       	newlink1 = newlink1 + " | <b>Java</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Java','1');\"><b>Java</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Java','0');\"><b>Java</b></a>";
+       }
+       if( id == "C#" ){
+       	newlink = newlink + " | <b>C#</b>";
+       	newlink1 = newlink1 + " | <b>C#</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C#','1');\"><b>C#</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C#','0');\"><b>C#</b></a>";
+       }
+       showObj.innerHTML = newlink;
+       showObj1.innerHTML = newlink1;
+}
+</script>
+<tr><td><div><div id="progressive_link"></div></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>getsslvserverResult Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>getsslvserverResult</b> structure defines the return type for getsslvserver API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="first_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+cfirstcontent = "<pre>struct getsslvserverResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; struct <a href=\'getsslvserverResult.html\#sslvserver\'>sslvserver</a> list[];<br> };<br></pre></td></tr></table></div>"
+perlfirstcontent = "<pre>$getsslvserverResult = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rc => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; message => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; List => \'@<a href=\'getsslvserverResult.html\#sslvserver\'>sslvserver</a>\',<br> };<br></pre></td></tr></table></div>"
+javafirstcontent = "<pre>class getsslvserverResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getsslvserverResult.html\#sslvserver\'>sslvserver</a>[] list;<br> };<br></pre></td></tr></table></div>"
+csharpfirstcontent = "<pre>class getsslvserverResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getsslvserverResult.html\#sslvserver\'>sslvserver</a>[] list;<br> };<br></pre></td></tr></table></div>"
+vbfirstcontent = "<pre>Public <b>Structure</b> getsslvserverResult <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rc As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public message As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public  sslvserverList() As  <a href=\'getsslvserverResult.html\#sslvserver\'>sslvserver</a><br> <b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rc</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, rc is 0 else rc > 0. Values above 0x8000 indicate Warnings.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>message</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, message is NULL else message contains <a href="errorlisting.html">Error/Warning</a> message.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sslvserverList</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">List of sslvservers</div></td></tr><tr><td><br></td></tr><tr><td><div><a name="sslvserver"></a></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>sslvserver  Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>sslvserver</b> structure defines the actual return type values for getsslvserver API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="second_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div1" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+csecondcontent = "<pre>struct sslvserver {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * vservername;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * cipherdetails;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int cleartextport;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * dh;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * dhfile;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int dhcount;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * ersa;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ersacount;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * sessreuse;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int sesstimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * cipherredirect;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * crlcheck;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * cipherurl;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * sslv2redirect;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * sslv2url;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * clientauth;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * clientcert;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * sslredirect;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int priority [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int polinherit [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * redirectportrewrite;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * nonfipsciphers;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * ssl2;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * ssl3;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * tls1;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * tls11;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * tls12;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * snienable;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * cipheraliasname/ciphername/ciphergroupname [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * ciphername [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * description [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int service;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * certkeyname [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * policyname [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * invoke [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * labeltype [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * labelname [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * servicename;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * ocspcheck;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * pushenctrigger;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * gotopriorityexpression [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * ca;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * snicert;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * ecccurvename [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * skipcaname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * sendclosenotify;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * dtlsprofilename;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * dtlsflag;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * sslprofile;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * boundcrlcheck []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * boundocspcheck []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int boundcleartextport []   ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * boundcacert []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * boundsnicert []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * boundskipcaname []  ;<br> };<br></pre></td></tr></table></div>"
+perlsecondcontent = "<pre>$sslvserver = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; vservername => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; cipherdetails => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; cleartextport => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; dh => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; dhfile => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; dhcount => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ersa => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ersacount => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; sessreuse => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; sesstimeout => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; cipherredirect => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; crlcheck => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; cipherurl => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; sslv2redirect => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; sslv2url => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; clientauth => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; clientcert => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; sslredirect => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; priority => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; polinherit => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; redirectportrewrite => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; nonfipsciphers => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ssl2 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ssl3 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; tls1 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; tls11 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; tls12 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; snienable => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; cipheraliasname/ciphername/ciphergroupname => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ciphername => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; description => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; service => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; certkeyname => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; policyname => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; invoke => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; labeltype => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; labelname => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; servicename => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ocspcheck => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; pushenctrigger => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; gotopriorityexpression => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ca => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; snicert => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ecccurvename => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; skipcaname => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; sendclosenotify => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; dtlsprofilename => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; dtlsflag => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; sslprofile => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; boundcrlcheck => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; boundocspcheck => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; boundcleartextport => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; boundcacert => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; boundsnicert => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; boundskipcaname => \'@\',<br> };<br></pre></td></tr></table></div>"
+javasecondcontent = "<pre>class sslvserver {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String vservername;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String cipherdetails;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt cleartextport;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String dh;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String dhfile;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt dhcount;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String ersa;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt ersacount;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String sessreuse;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt sesstimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String cipherredirect;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String crlcheck;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String cipherurl;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String sslv2redirect;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String sslv2url;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String clientauth;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String clientcert;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String sslredirect;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt priority [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt polinherit [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String redirectportrewrite;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String nonfipsciphers;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String ssl2;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String ssl3;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String tls1;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String tls11;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String tls12;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String snienable;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String cipheraliasname/ciphername/ciphergroupname [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String ciphername [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String description [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt service;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String certkeyname [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String policyname [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String invoke [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String labeltype [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String labelname [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String servicename;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String ocspcheck;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String pushenctrigger;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String gotopriorityexpression [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String ca;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String snicert;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String ecccurvename [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String skipcaname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String sendclosenotify;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String dtlsprofilename;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String dtlsflag;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String sslprofile;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] boundcrlcheck;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] boundocspcheck;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt [] boundcleartextport;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] boundcacert;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] boundsnicert;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] boundskipcaname;<br> };<br></pre></td></tr></table></div>"
+csharpsecondcontent = "<pre>class sslvserver {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string vservername;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string cipherdetails;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 cleartextport;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string dh;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string dhfile;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 dhcount;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string ersa;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 ersacount;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string sessreuse;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 sesstimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string cipherredirect;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string crlcheck;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string cipherurl;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string sslv2redirect;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string sslv2url;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string clientauth;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string clientcert;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string sslredirect;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 priority [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 polinherit [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string redirectportrewrite;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string nonfipsciphers;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string ssl2;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string ssl3;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string tls1;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string tls11;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string tls12;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string snienable;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string cipheraliasname/ciphername/ciphergroupname [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string ciphername [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string description [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 service;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string certkeyname [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string policyname [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string invoke [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string labeltype [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string labelname [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string servicename;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string ocspcheck;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string pushenctrigger;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string gotopriorityexpression [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string ca;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string snicert;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string ecccurvename [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string skipcaname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string sendclosenotify;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string dtlsprofilename;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string dtlsflag;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string sslprofile;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] boundcrlcheck;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] boundocspcheck;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 [] boundcleartextport;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] boundcacert;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] boundsnicert;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] boundskipcaname;<br> };<br></pre></td></tr></table></div>"
+vbsecondcontent = "<pre>Public <b>Structure</b> sslvserver <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public vservername As String  <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public cipherdetails As String  <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public cleartextport As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public dh As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public dhfile As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public dhcount As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ersa As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ersacount As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public sessreuse As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public sesstimeout As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public cipherredirect As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public crlcheck As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public cipherurl As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public sslv2redirect As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public sslv2url As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public clientauth As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public clientcert As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public sslredirect As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public priority As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public polinherit As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public redirectportrewrite As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public nonfipsciphers As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ssl2 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ssl3 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public tls1 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public tls11 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public tls12 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public snienable As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public cipheraliasname/ciphername/ciphergroupname As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ciphername As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public description As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public service As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public certkeyname As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public policyname As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public invoke As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public labeltype As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public labelname As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public servicename As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ocspcheck As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public pushenctrigger As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public gotopriorityexpression As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ca As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public snicert As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ecccurvename As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public skipcaname As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public sendclosenotify As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public dtlsprofilename As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public dtlsflag As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public sslprofile As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public boundcrlcheck As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public boundocspcheck As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public boundcleartextport As UInteger()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public boundcacert As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public boundsnicert As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public boundskipcaname As String()<br><b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>vservername</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the SSL virtual server for which to show detailed information.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>cipherdetails</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Display details of the individual ciphers bound to the SSL virtual server.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>cleartextport</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The  clearTextPort settings.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>dh</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The  state  of  Diffie-Hellman (DH) key exchange support.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>dhfile</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The file name and path for the DH parameter.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>dhcount</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The  refresh  count  for  the re-generation of DH public-key and private-key from the DH parameter.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ersa</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The state of Ephemeral RSA key exchange support.Ephemeral RSA is used for export ciphers</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ersacount</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The  refresh  count  for the re-generation of RSA public-key and private-key pair.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sessreuse</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The  state of session re-use support.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sesstimeout</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The Session timeout value in seconds.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>cipherredirect</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The state of Cipher Redirect feature.Cipher Redirect feature can be used to provide more readable information to SSL clients about mismatch in ciphers between the client and the SSL vserver. </div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>crlcheck</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The state of the CRL check parameter. (Mandatory/Optional)</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>cipherurl</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The redirect URL to be used with the Cipher Redirect feature.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sslv2redirect</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The state of SSLv2 Redirect feature. SSLv2 Redirect feature can be used to provide more readable information to SSL client about non-support of SSLv2 protocol on the SSL vserver.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sslv2url</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The  redirect URL to be used with SSLv2 Redirect feature.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>clientauth</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The state of Client-Authentication support.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>clientcert</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The rule for client certificate requirement in client authentication.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sslredirect</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The state of HTTPS redirect feature support.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>priority</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The priority of the policies bound to this SSL service</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>polinherit</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Whether the bound policy is a inherited policy or not</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>redirectportrewrite</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The state of port rewrite feature support.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>nonfipsciphers</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The state of usage of non FIPS approved ciphers.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ssl2</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The  state of SSLv2 protocol support.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ssl3</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The state of SSLv3 protocol support.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>tls1</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The  state of TLSv1.0 protocol support.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>tls11</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The  state of TLSv1.1 protocol support.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>tls12</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The  state of TLSv1.2 protocol support.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>snienable</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The state of SNI extension.Server Name Indication (SNI) helps to enable SSL encryption on multiple subdomains if the domains are controlled by the same organization and share the same second-level domain name. State of SNI feature on service</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>cipheraliasname/ciphername/ciphergroupname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The name of the cipher group/alias/individual cipheri bindings.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ciphername</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The cipher group/alias/individual cipher configuration</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>description</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The cipher suite description.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>service</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Service</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>certkeyname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The name of the certificate key pair binding.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>policyname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The name of the SSL policy binding.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>invoke</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Invoke flag. This attribute is relevant only for ADVANCED policies</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>labeltype</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Type of policy label invocation.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>labelname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the label to invoke if the current policy rule evaluates to TRUE.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>servicename</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Service name.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ocspcheck</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The state of the OCSP check parameter. (Mandatory/Optional)</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>pushenctrigger</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">PUSH packet triggering encryption: Always, Ignore, Merge</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>gotopriorityexpression</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Expression specifying the priority of the next policy which will get evaluated if the current policy rule evaluates to TRUE.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ca</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">CA certificate.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>snicert</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The name of the CertKey. Use this option to bind Certkey(s) which will be used in SNI processing.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ecccurvename</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Named ECC curve bound to vserver/service.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>skipcaname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The flag is used to indicate whether this particular CA certificate's CA_Name needs to be sent to the SSL client while requesting for client certificate in a SSL handshake</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sendclosenotify</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Enable sending SSL Close-Notify at the end of a transaction</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>dtlsprofilename</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the DTLS profile whose settings are to be applied to the virtual server.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>dtlsflag</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The flag is used to indicate whether DTLS is set or not</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sslprofile</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">SSL profile associated to vserver</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>boundcrlcheck</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>boundocspcheck</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>boundcleartextport</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>boundcacert</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>boundsnicert</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>boundskipcaname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div><b>See Also</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="getsslvserver.html">getsslvserver</a></div></td></tr><tr><td><br></td></tr></table></div>
+</body>
+</html>

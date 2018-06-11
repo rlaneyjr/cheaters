@@ -1,0 +1,245 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>Citrix NetScaler XML API User&#39;s Guide - Structure Definition</title>
+<link rel="stylesheet" type="text/css" href="help_ns.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body onload="initial()" class="ns_body">
+<div class="ns_content"><table cellpadding="0" cellspacing="0"><script type="text/javascript">
+function changeContext(id,lang,flag){
+	parent.banner.document.language.select.value = lang;
+	if( lang == "C" ){
+		if(flag == "1"){
+			showContent(cfirstcontent,id,lang);
+		}
+		else{
+			showContent(csecondcontent,id,lang);
+		}
+	}
+	if( lang == "Perl" ){
+		if(flag == "1"){
+			showContent(perlfirstcontent,id,lang);
+		}
+		else{
+			showContent(perlsecondcontent,id,lang);
+		}
+	}
+	if( lang == "Java" ){
+		if(flag == "1"){
+			showContent(javafirstcontent,id,lang);	
+		}
+		else{
+			showContent(javasecondcontent,id,lang);
+		}
+	}
+	if( lang == "C#" ){
+		if(flag == "1"){
+			showContent(csharpfirstcontent,id,lang);
+		}
+		else{
+			showContent(csharpsecondcontent,id,lang);
+		}
+	}
+	if( lang == "VB" ){
+		if(flag == "1"){
+			showContent(vbfirstcontent,id,lang);
+		}
+		else{
+			showContent(vbsecondcontent,id,lang);
+		}
+	}
+	if(flag == "1"){
+		showInside(lang,"0");
+	}
+	else{
+		showOutside(lang);
+	}
+}
+function showContent(content,id,lang){
+	if(ie4){
+	   showContentObj=document.all.id;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById(id);
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+  showLangSelect(lang);
+}
+function showInside(str,cond){
+	if(str == "C"){
+ 		var inside_content = csecondcontent;
+ 	}
+ 	if(str == "Perl"){
+ 		var inside_content = perlsecondcontent;
+ 	}
+ 	if(str == "Java"){
+ 		var inside_content = javasecondcontent;
+ 	}
+ 	if(str == "C#"){
+		var inside_content = csharpsecondcontent;
+ 	}
+ 	if(str == "VB"){
+		var inside_content = vbsecondcontent;
+ 	}
+	showContent(inside_content,'qiksearch_div1',str);
+ 	if ( cond == "1" ){
+ 		var page = 'apidoc/docs/getauthenticationwebauthactionResult.html#webauthactionList';
+ 		document.location.href = page;
+ 	}
+}
+function showOutside(str){
+	if(str == "C" ){
+ 		var inside_content = cfirstcontent;
+ 	}
+ 	if(str == "Perl" ){
+ 		var inside_content = perlfirstcontent;
+ 	}
+ 	if(str == "Java" ){
+ 		var inside_content = javafirstcontent;
+ 	}
+ 	if(str == "C#" ){
+ 		var inside_content = csharpfirstcontent;
+ 	}
+ 	if(str == "VB" ){
+ 		var inside_content = vbfirstcontent;
+ 	}
+ 	showContent(inside_content,'qiksearch_div',str);
+}
+function initial(){
+	ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+	ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+	ns4=document.layers;
+	langSelected = parent.banner.document.language.select.value
+	var plink = parent.banner.document.language.plink.value
+	var my_array=plink.split("&");
+	var temp = my_array[0];
+ 	var grp = temp.split("@");
+	var cmd = my_array[1];
+	var regex = /^stat/i;
+	if( cmd.match(regex) != null ){
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex_stat.html\">Statistics</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getauthenticationwebauthactionResult");
+	}
+	else{
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex.htm\">Configuration</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getauthenticationwebauthactionResult");
+	}
+	if( langSelected == "C" ){
+ 		var content = cfirstcontent;
+	}
+	else if( langSelected == "Perl" ){
+		var content = perlfirstcontent;
+	}
+	else if( langSelected == "Java" ){
+		var content = javafirstcontent;
+	}
+	else if( langSelected == "C#" ){
+		var content = csharpfirstcontent;
+	}
+	else if( langSelected == "VB" ){
+		var content = vbfirstcontent;
+	}
+	else{
+		var content = cfirstcontent;
+		langSelected="C";
+	}
+	showContent(content,'qiksearch_div',langSelected);
+	showInside(langSelected,"0");
+}
+function showPLink(content){
+	if(ie4){
+	   showContentObj=document.all.progressive_link;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById("progressive_link");
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+}
+function showLangSelect(id){
+	   if(ie4)
+       {
+       	showObj=document.all.first_url;
+       	showObj1=document.all.second_url;
+       }
+       if(ns6)
+       {
+       	showObj=document.getElementById("first_url");
+       	showObj1=document.getElementById("second_url");
+       }
+       if( id == "C" ){
+       	newlink = "<b>C</b>";
+       	newlink1 = "<b>C</b>";
+       }
+       else{
+       	newlink = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C','1');\"><b>C</b></a>";
+       	newlink1 = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C','0');\"><b>C</b></a>";
+       }
+       if( id == "Perl" ){
+       	newlink = newlink + " | <b>Perl</b>";
+       	newlink1 = newlink1 + " | <b>Perl</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Perl','1');\"><b>Perl</b></a>";
+      	       newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Perl','0');\"><b>Perl</b></a>";
+       }
+       if( id == "Java" ){
+       	newlink = newlink + " | <b>Java</b>";
+       	newlink1 = newlink1 + " | <b>Java</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Java','1');\"><b>Java</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Java','0');\"><b>Java</b></a>";
+       }
+       if( id == "C#" ){
+       	newlink = newlink + " | <b>C#</b>";
+       	newlink1 = newlink1 + " | <b>C#</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C#','1');\"><b>C#</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C#','0');\"><b>C#</b></a>";
+       }
+       showObj.innerHTML = newlink;
+       showObj1.innerHTML = newlink1;
+}
+</script>
+<tr><td><div><div id="progressive_link"></div></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>getauthenticationwebauthactionResult Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>getauthenticationwebauthactionResult</b> structure defines the return type for getauthenticationwebauthaction API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="first_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+cfirstcontent = "<pre>struct getauthenticationwebauthactionResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; struct <a href=\'getauthenticationwebauthactionResult.html\#authenticationwebauthaction\'>authenticationwebauthaction</a> list[];<br> };<br></pre></td></tr></table></div>"
+perlfirstcontent = "<pre>$getauthenticationwebauthactionResult = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rc => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; message => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; List => \'@<a href=\'getauthenticationwebauthactionResult.html\#authenticationwebauthaction\'>authenticationwebauthaction</a>\',<br> };<br></pre></td></tr></table></div>"
+javafirstcontent = "<pre>class getauthenticationwebauthactionResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getauthenticationwebauthactionResult.html\#authenticationwebauthaction\'>authenticationwebauthaction</a>[] list;<br> };<br></pre></td></tr></table></div>"
+csharpfirstcontent = "<pre>class getauthenticationwebauthactionResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getauthenticationwebauthactionResult.html\#authenticationwebauthaction\'>authenticationwebauthaction</a>[] list;<br> };<br></pre></td></tr></table></div>"
+vbfirstcontent = "<pre>Public <b>Structure</b> getauthenticationwebauthactionResult <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rc As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public message As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public  authenticationwebauthactionList() As  <a href=\'getauthenticationwebauthactionResult.html\#authenticationwebauthaction\'>authenticationwebauthaction</a><br> <b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rc</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, rc is 0 else rc > 0. Values above 0x8000 indicate Warnings.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>message</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, message is NULL else message contains <a href="errorlisting.html">Error/Warning</a> message.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>authenticationwebauthactionList</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">List of authenticationwebauthactions</div></td></tr><tr><td><br></td></tr><tr><td><div><a name="authenticationwebauthaction"></a></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>authenticationwebauthaction  Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>authenticationwebauthaction</b> structure defines the actual return type values for getauthenticationwebauthaction API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="second_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div1" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+csecondcontent = "<pre>struct authenticationwebauthaction {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * name;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * serverip;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int serverport;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * fullreqexpr;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * scheme;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * successrule;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * defaultauthenticationgroup;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * attribute1;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * attribute2;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * attribute3;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * attribute4;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * attribute5;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * attribute6;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * attribute7;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * attribute8;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * attribute9;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * attribute10;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * attribute11;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * attribute12;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * attribute13;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * attribute14;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * attribute15;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * attribute16;<br> };<br></pre></td></tr></table></div>"
+perlsecondcontent = "<pre>$authenticationwebauthaction = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; name => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; serverip => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; serverport => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; fullreqexpr => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; scheme => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; successrule => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; defaultauthenticationgroup => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; attribute1 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; attribute2 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; attribute3 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; attribute4 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; attribute5 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; attribute6 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; attribute7 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; attribute8 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; attribute9 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; attribute10 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; attribute11 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; attribute12 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; attribute13 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; attribute14 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; attribute15 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; attribute16 => \'$\',<br> };<br></pre></td></tr></table></div>"
+javasecondcontent = "<pre>class authenticationwebauthaction {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String name;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String serverip;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt serverport;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String fullreqexpr;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String scheme;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String successrule;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String defaultauthenticationgroup;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String attribute1;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String attribute2;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String attribute3;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String attribute4;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String attribute5;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String attribute6;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String attribute7;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String attribute8;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String attribute9;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String attribute10;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String attribute11;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String attribute12;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String attribute13;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String attribute14;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String attribute15;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String attribute16;<br> };<br></pre></td></tr></table></div>"
+csharpsecondcontent = "<pre>class authenticationwebauthaction {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string name;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string serverip;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 serverport;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string fullreqexpr;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string scheme;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string successrule;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string defaultauthenticationgroup;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string attribute1;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string attribute2;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string attribute3;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string attribute4;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string attribute5;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string attribute6;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string attribute7;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string attribute8;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string attribute9;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string attribute10;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string attribute11;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string attribute12;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string attribute13;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string attribute14;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string attribute15;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string attribute16;<br> };<br></pre></td></tr></table></div>"
+vbsecondcontent = "<pre>Public <b>Structure</b> authenticationwebauthaction <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public name As String  <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public serverip As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public serverport As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public fullreqexpr As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public scheme As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public successrule As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public defaultauthenticationgroup As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public attribute1 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public attribute2 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public attribute3 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public attribute4 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public attribute5 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public attribute6 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public attribute7 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public attribute8 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public attribute9 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public attribute10 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public attribute11 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public attribute12 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public attribute13 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public attribute14 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public attribute15 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public attribute16 As String<br><b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>name</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the web authentication action to display.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>serverip</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">IP address of the web server to be used for authentication.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>serverport</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Port on which the web server accepts connections.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>fullreqexpr</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Exact HTTP request, in the form of a default syntax expression, which the NetScaler appliance sends to the authentication server.
+The NetScaler appliance does not check the validity of this request. One must manually validate the request.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>scheme</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Type of scheme for the web server.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>successrule</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Expression, that checks to see if authentication is successful.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>defaultauthenticationgroup</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">This is the default group that is chosen when the authentication succeeds in addition to extracted groups.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>attribute1</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Expression that would be evaluated to extract attribute1 from the webauth response</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>attribute2</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Expression that would be evaluated to extract attribute2 from the webauth response</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>attribute3</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Expression that would be evaluated to extract attribute3 from the webauth response</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>attribute4</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Expression that would be evaluated to extract attribute4 from the webauth response</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>attribute5</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Expression that would be evaluated to extract attribute5 from the webauth response</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>attribute6</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Expression that would be evaluated to extract attribute6 from the webauth response</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>attribute7</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Expression that would be evaluated to extract attribute7 from the webauth response</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>attribute8</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Expression that would be evaluated to extract attribute8 from the webauth response</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>attribute9</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Expression that would be evaluated to extract attribute9 from the webauth response</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>attribute10</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Expression that would be evaluated to extract attribute10 from the webauth response</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>attribute11</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Expression that would be evaluated to extract attribute11 from the webauth response</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>attribute12</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Expression that would be evaluated to extract attribute12 from the webauth response</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>attribute13</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Expression that would be evaluated to extract attribute13 from the webauth response</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>attribute14</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Expression that would be evaluated to extract attribute14 from the webauth response</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>attribute15</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Expression that would be evaluated to extract attribute15 from the webauth response</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>attribute16</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Expression that would be evaluated to extract attribute16 from the webauth response</div></td></tr><tr><td><br></td></tr><tr><td><div><b>See Also</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="getauthenticationwebauthaction.html">getauthenticationwebauthaction</a></div></td></tr><tr><td><br></td></tr></table></div>
+</body>
+</html>

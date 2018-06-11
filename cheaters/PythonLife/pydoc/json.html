@@ -1,0 +1,534 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: package json</title>
+<meta charset="utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>json</strong></big></big> (version 2.0.9)</font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/Cellar/python/2.7.12/Frameworks/Python.framework/Versions/2.7/lib/python2.7/json/__init__.py">/usr/local/Cellar/python/2.7.12/Frameworks/Python.framework/Versions/2.7/lib/python2.7/json/__init__.py</a><br><a href="http://docs.python.org/library/json">Module Docs</a></font></td></tr></table>
+    <p><tt>JSON&nbsp;(JavaScript&nbsp;Object&nbsp;Notation)&nbsp;&lt;<a href="http://json.org">http://json.org</a>&gt;&nbsp;is&nbsp;a&nbsp;subset&nbsp;of<br>
+JavaScript&nbsp;syntax&nbsp;(ECMA-262&nbsp;3rd&nbsp;edition)&nbsp;used&nbsp;as&nbsp;a&nbsp;lightweight&nbsp;data<br>
+interchange&nbsp;format.<br>
+&nbsp;<br>
+:mod:`json`&nbsp;exposes&nbsp;an&nbsp;API&nbsp;familiar&nbsp;to&nbsp;users&nbsp;of&nbsp;the&nbsp;standard&nbsp;library<br>
+:mod:`marshal`&nbsp;and&nbsp;:mod:`pickle`&nbsp;modules.&nbsp;It&nbsp;is&nbsp;the&nbsp;externally&nbsp;maintained<br>
+version&nbsp;of&nbsp;the&nbsp;:mod:`json`&nbsp;library&nbsp;contained&nbsp;in&nbsp;Python&nbsp;2.6,&nbsp;but&nbsp;maintains<br>
+compatibility&nbsp;with&nbsp;Python&nbsp;2.4&nbsp;and&nbsp;Python&nbsp;2.5&nbsp;and&nbsp;(currently)&nbsp;has<br>
+significant&nbsp;performance&nbsp;advantages,&nbsp;even&nbsp;without&nbsp;using&nbsp;the&nbsp;optional&nbsp;C<br>
+extension&nbsp;for&nbsp;speedups.<br>
+&nbsp;<br>
+Encoding&nbsp;basic&nbsp;Python&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;hierarchies::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;import&nbsp;json<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;json.<a href="#-dumps">dumps</a>(['foo',&nbsp;{'bar':&nbsp;('baz',&nbsp;None,&nbsp;1.0,&nbsp;2)}])<br>
+&nbsp;&nbsp;&nbsp;&nbsp;'["foo",&nbsp;{"bar":&nbsp;["baz",&nbsp;null,&nbsp;1.0,&nbsp;2]}]'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;print&nbsp;json.<a href="#-dumps">dumps</a>("\"foo\bar")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"\"foo\bar"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;print&nbsp;json.<a href="#-dumps">dumps</a>(u'\u1234')<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"\u1234"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;print&nbsp;json.<a href="#-dumps">dumps</a>('\\')<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"\\"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;print&nbsp;json.<a href="#-dumps">dumps</a>({"c":&nbsp;0,&nbsp;"b":&nbsp;0,&nbsp;"a":&nbsp;0},&nbsp;sort_keys=True)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{"a":&nbsp;0,&nbsp;"b":&nbsp;0,&nbsp;"c":&nbsp;0}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;from&nbsp;StringIO&nbsp;import&nbsp;StringIO<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;io&nbsp;=&nbsp;StringIO()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;json.<a href="#-dump">dump</a>(['streaming&nbsp;API'],&nbsp;io)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;io.getvalue()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;'["streaming&nbsp;API"]'<br>
+&nbsp;<br>
+Compact&nbsp;encoding::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;import&nbsp;json<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;json.<a href="#-dumps">dumps</a>([1,2,3,{'4':&nbsp;5,&nbsp;'6':&nbsp;7}],&nbsp;sort_keys=True,&nbsp;separators=(',',':'))<br>
+&nbsp;&nbsp;&nbsp;&nbsp;'[1,2,3,{"4":5,"6":7}]'<br>
+&nbsp;<br>
+Pretty&nbsp;printing::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;import&nbsp;json<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;print&nbsp;json.<a href="#-dumps">dumps</a>({'4':&nbsp;5,&nbsp;'6':&nbsp;7},&nbsp;sort_keys=True,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;indent=4,&nbsp;separators=(',',&nbsp;':&nbsp;'))<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"4":&nbsp;5,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"6":&nbsp;7<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;<br>
+Decoding&nbsp;JSON::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;import&nbsp;json<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;obj&nbsp;=&nbsp;[u'foo',&nbsp;{u'bar':&nbsp;[u'baz',&nbsp;None,&nbsp;1.0,&nbsp;2]}]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;json.<a href="#-loads">loads</a>('["foo",&nbsp;{"bar":["baz",&nbsp;null,&nbsp;1.0,&nbsp;2]}]')&nbsp;==&nbsp;obj<br>
+&nbsp;&nbsp;&nbsp;&nbsp;True<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;json.<a href="#-loads">loads</a>('"\\"foo\\bar"')&nbsp;==&nbsp;u'"foo\x08ar'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;True<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;from&nbsp;StringIO&nbsp;import&nbsp;StringIO<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;io&nbsp;=&nbsp;StringIO('["streaming&nbsp;API"]')<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;json.<a href="#-load">load</a>(io)[0]&nbsp;==&nbsp;'streaming&nbsp;API'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;True<br>
+&nbsp;<br>
+Specializing&nbsp;JSON&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;decoding::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;import&nbsp;json<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;def&nbsp;as_complex(dct):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;'__complex__'&nbsp;in&nbsp;dct:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;complex(dct['real'],&nbsp;dct['imag'])<br>
+&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;dct<br>
+&nbsp;&nbsp;&nbsp;&nbsp;...<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;json.<a href="#-loads">loads</a>('{"__complex__":&nbsp;true,&nbsp;"real":&nbsp;1,&nbsp;"imag":&nbsp;2}',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;object_hook=as_complex)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(1+2j)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;from&nbsp;decimal&nbsp;import&nbsp;Decimal<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;json.<a href="#-loads">loads</a>('1.1',&nbsp;parse_float=Decimal)&nbsp;==&nbsp;Decimal('1.1')<br>
+&nbsp;&nbsp;&nbsp;&nbsp;True<br>
+&nbsp;<br>
+Specializing&nbsp;JSON&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;encoding::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;import&nbsp;json<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;def&nbsp;encode_complex(obj):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;isinstance(obj,&nbsp;complex):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;[obj.real,&nbsp;obj.imag]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;raise&nbsp;TypeError(repr(o)&nbsp;+&nbsp;"&nbsp;is&nbsp;not&nbsp;JSON&nbsp;serializable")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;...<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;json.<a href="#-dumps">dumps</a>(2&nbsp;+&nbsp;1j,&nbsp;default=encode_complex)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;'[2.0,&nbsp;1.0]'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;json.<a href="#JSONEncoder">JSONEncoder</a>(default=encode_complex).encode(2&nbsp;+&nbsp;1j)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;'[2.0,&nbsp;1.0]'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;''.join(json.<a href="#JSONEncoder">JSONEncoder</a>(default=encode_complex).iterencode(2&nbsp;+&nbsp;1j))<br>
+&nbsp;&nbsp;&nbsp;&nbsp;'[2.0,&nbsp;1.0]'<br>
+&nbsp;<br>
+&nbsp;<br>
+Using&nbsp;json.tool&nbsp;from&nbsp;the&nbsp;shell&nbsp;to&nbsp;validate&nbsp;and&nbsp;pretty-print::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$&nbsp;echo&nbsp;'{"json":"obj"}'&nbsp;|&nbsp;python&nbsp;-m&nbsp;json.tool<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"json":&nbsp;"obj"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$&nbsp;echo&nbsp;'{&nbsp;1.2:3.4}'&nbsp;|&nbsp;python&nbsp;-m&nbsp;json.tool<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Expecting&nbsp;property&nbsp;name&nbsp;enclosed&nbsp;in&nbsp;double&nbsp;quotes:&nbsp;line&nbsp;1&nbsp;column&nbsp;3&nbsp;(char&nbsp;2)</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Package Contents</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="json.decoder.html">decoder</a><br>
+<a href="json.encoder.html">encoder</a><br>
+</td><td width="25%" valign=top><a href="json.scanner.html">scanner</a><br>
+<a href="json.tests.html"><strong>tests</strong>&nbsp;(package)</a><br>
+</td><td width="25%" valign=top><a href="json.tool.html">tool</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="__builtin__.html#object">__builtin__.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="json.decoder.html#JSONDecoder">json.decoder.JSONDecoder</a>
+</font></dt><dt><font face="helvetica, arial"><a href="json.encoder.html#JSONEncoder">json.encoder.JSONEncoder</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="JSONDecoder">class <strong>JSONDecoder</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Simple&nbsp;JSON&nbsp;&lt;<a href="http://json.org">http://json.org</a>&gt;&nbsp;decoder<br>
+&nbsp;<br>
+Performs&nbsp;the&nbsp;following&nbsp;translations&nbsp;in&nbsp;decoding&nbsp;by&nbsp;default:<br>
+&nbsp;<br>
++---------------+-------------------+<br>
+|&nbsp;JSON&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;Python&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<br>
++===============+===================+<br>
+|&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;dict&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<br>
++---------------+-------------------+<br>
+|&nbsp;array&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;list&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<br>
++---------------+-------------------+<br>
+|&nbsp;string&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;unicode&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<br>
++---------------+-------------------+<br>
+|&nbsp;number&nbsp;(int)&nbsp;&nbsp;|&nbsp;int,&nbsp;long&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<br>
++---------------+-------------------+<br>
+|&nbsp;number&nbsp;(real)&nbsp;|&nbsp;float&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<br>
++---------------+-------------------+<br>
+|&nbsp;true&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;True&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<br>
++---------------+-------------------+<br>
+|&nbsp;false&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;False&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<br>
++---------------+-------------------+<br>
+|&nbsp;null&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;None&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<br>
++---------------+-------------------+<br>
+&nbsp;<br>
+It&nbsp;also&nbsp;understands&nbsp;``NaN``,&nbsp;``Infinity``,&nbsp;and&nbsp;``-Infinity``&nbsp;as<br>
+their&nbsp;corresponding&nbsp;``float``&nbsp;values,&nbsp;which&nbsp;is&nbsp;outside&nbsp;the&nbsp;JSON&nbsp;spec.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="JSONDecoder-__init__"><strong>__init__</strong></a>(self, encoding<font color="#909090">=None</font>, object_hook<font color="#909090">=None</font>, parse_float<font color="#909090">=None</font>, parse_int<font color="#909090">=None</font>, parse_constant<font color="#909090">=None</font>, strict<font color="#909090">=True</font>, object_pairs_hook<font color="#909090">=None</font>)</dt><dd><tt>``encoding``&nbsp;determines&nbsp;the&nbsp;encoding&nbsp;used&nbsp;to&nbsp;interpret&nbsp;any&nbsp;``str``<br>
+objects&nbsp;decoded&nbsp;by&nbsp;this&nbsp;instance&nbsp;(utf-8&nbsp;by&nbsp;default).&nbsp;&nbsp;It&nbsp;has&nbsp;no<br>
+effect&nbsp;when&nbsp;decoding&nbsp;``unicode``&nbsp;objects.<br>
+&nbsp;<br>
+Note&nbsp;that&nbsp;currently&nbsp;only&nbsp;encodings&nbsp;that&nbsp;are&nbsp;a&nbsp;superset&nbsp;of&nbsp;ASCII&nbsp;work,<br>
+strings&nbsp;of&nbsp;other&nbsp;encodings&nbsp;should&nbsp;be&nbsp;passed&nbsp;in&nbsp;as&nbsp;``unicode``.<br>
+&nbsp;<br>
+``object_hook``,&nbsp;if&nbsp;specified,&nbsp;will&nbsp;be&nbsp;called&nbsp;with&nbsp;the&nbsp;result<br>
+of&nbsp;every&nbsp;JSON&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;decoded&nbsp;and&nbsp;its&nbsp;return&nbsp;value&nbsp;will&nbsp;be&nbsp;used&nbsp;in<br>
+place&nbsp;of&nbsp;the&nbsp;given&nbsp;``dict``.&nbsp;&nbsp;This&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;provide&nbsp;custom<br>
+deserializations&nbsp;(e.g.&nbsp;to&nbsp;support&nbsp;JSON-RPC&nbsp;class&nbsp;hinting).<br>
+&nbsp;<br>
+``object_pairs_hook``,&nbsp;if&nbsp;specified&nbsp;will&nbsp;be&nbsp;called&nbsp;with&nbsp;the&nbsp;result&nbsp;of<br>
+every&nbsp;JSON&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;decoded&nbsp;with&nbsp;an&nbsp;ordered&nbsp;list&nbsp;of&nbsp;pairs.&nbsp;&nbsp;The&nbsp;return<br>
+value&nbsp;of&nbsp;``object_pairs_hook``&nbsp;will&nbsp;be&nbsp;used&nbsp;instead&nbsp;of&nbsp;the&nbsp;``dict``.<br>
+This&nbsp;feature&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;implement&nbsp;custom&nbsp;decoders&nbsp;that&nbsp;rely&nbsp;on&nbsp;the<br>
+order&nbsp;that&nbsp;the&nbsp;key&nbsp;and&nbsp;value&nbsp;pairs&nbsp;are&nbsp;decoded&nbsp;(for&nbsp;example,<br>
+collections.OrderedDict&nbsp;will&nbsp;remember&nbsp;the&nbsp;order&nbsp;of&nbsp;insertion).&nbsp;If<br>
+``object_hook``&nbsp;is&nbsp;also&nbsp;defined,&nbsp;the&nbsp;``object_pairs_hook``&nbsp;takes<br>
+priority.<br>
+&nbsp;<br>
+``parse_float``,&nbsp;if&nbsp;specified,&nbsp;will&nbsp;be&nbsp;called&nbsp;with&nbsp;the&nbsp;string<br>
+of&nbsp;every&nbsp;JSON&nbsp;float&nbsp;to&nbsp;be&nbsp;decoded.&nbsp;By&nbsp;default&nbsp;this&nbsp;is&nbsp;equivalent&nbsp;to<br>
+float(num_str).&nbsp;This&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;use&nbsp;another&nbsp;datatype&nbsp;or&nbsp;parser<br>
+for&nbsp;JSON&nbsp;floats&nbsp;(e.g.&nbsp;decimal.Decimal).<br>
+&nbsp;<br>
+``parse_int``,&nbsp;if&nbsp;specified,&nbsp;will&nbsp;be&nbsp;called&nbsp;with&nbsp;the&nbsp;string<br>
+of&nbsp;every&nbsp;JSON&nbsp;int&nbsp;to&nbsp;be&nbsp;decoded.&nbsp;By&nbsp;default&nbsp;this&nbsp;is&nbsp;equivalent&nbsp;to<br>
+int(num_str).&nbsp;This&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;use&nbsp;another&nbsp;datatype&nbsp;or&nbsp;parser<br>
+for&nbsp;JSON&nbsp;integers&nbsp;(e.g.&nbsp;float).<br>
+&nbsp;<br>
+``parse_constant``,&nbsp;if&nbsp;specified,&nbsp;will&nbsp;be&nbsp;called&nbsp;with&nbsp;one&nbsp;of&nbsp;the<br>
+following&nbsp;strings:&nbsp;-Infinity,&nbsp;Infinity,&nbsp;NaN.<br>
+This&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;raise&nbsp;an&nbsp;exception&nbsp;if&nbsp;invalid&nbsp;JSON&nbsp;numbers<br>
+are&nbsp;encountered.<br>
+&nbsp;<br>
+If&nbsp;``strict``&nbsp;is&nbsp;false&nbsp;(true&nbsp;is&nbsp;the&nbsp;default),&nbsp;then&nbsp;control<br>
+characters&nbsp;will&nbsp;be&nbsp;allowed&nbsp;inside&nbsp;strings.&nbsp;&nbsp;Control&nbsp;characters&nbsp;in<br>
+this&nbsp;context&nbsp;are&nbsp;those&nbsp;with&nbsp;character&nbsp;codes&nbsp;in&nbsp;the&nbsp;0-31&nbsp;range,<br>
+including&nbsp;``'\t'``&nbsp;(tab),&nbsp;``'\n'``,&nbsp;``'\r'``&nbsp;and&nbsp;``'\0'``.</tt></dd></dl>
+
+<dl><dt><a name="JSONDecoder-decode"><strong>decode</strong></a>(self, s, _w<font color="#909090">=&lt;built-in method match of _sre.SRE_Pattern object&gt;</font>)</dt><dd><tt>Return&nbsp;the&nbsp;Python&nbsp;representation&nbsp;of&nbsp;``s``&nbsp;(a&nbsp;``str``&nbsp;or&nbsp;``unicode``<br>
+instance&nbsp;containing&nbsp;a&nbsp;JSON&nbsp;document)</tt></dd></dl>
+
+<dl><dt><a name="JSONDecoder-raw_decode"><strong>raw_decode</strong></a>(self, s, idx<font color="#909090">=0</font>)</dt><dd><tt>Decode&nbsp;a&nbsp;JSON&nbsp;document&nbsp;from&nbsp;``s``&nbsp;(a&nbsp;``str``&nbsp;or&nbsp;``unicode``<br>
+beginning&nbsp;with&nbsp;a&nbsp;JSON&nbsp;document)&nbsp;and&nbsp;return&nbsp;a&nbsp;2-tuple&nbsp;of&nbsp;the&nbsp;Python<br>
+representation&nbsp;and&nbsp;the&nbsp;index&nbsp;in&nbsp;``s``&nbsp;where&nbsp;the&nbsp;document&nbsp;ended.<br>
+&nbsp;<br>
+This&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;decode&nbsp;a&nbsp;JSON&nbsp;document&nbsp;from&nbsp;a&nbsp;string&nbsp;that&nbsp;may<br>
+have&nbsp;extraneous&nbsp;data&nbsp;at&nbsp;the&nbsp;end.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="JSONEncoder">class <strong>JSONEncoder</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Extensible&nbsp;JSON&nbsp;&lt;<a href="http://json.org">http://json.org</a>&gt;&nbsp;encoder&nbsp;for&nbsp;Python&nbsp;data&nbsp;structures.<br>
+&nbsp;<br>
+Supports&nbsp;the&nbsp;following&nbsp;objects&nbsp;and&nbsp;types&nbsp;by&nbsp;default:<br>
+&nbsp;<br>
++-------------------+---------------+<br>
+|&nbsp;Python&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;JSON&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<br>
++===================+===============+<br>
+|&nbsp;dict&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<br>
++-------------------+---------------+<br>
+|&nbsp;list,&nbsp;tuple&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;array&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<br>
++-------------------+---------------+<br>
+|&nbsp;str,&nbsp;unicode&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;string&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<br>
++-------------------+---------------+<br>
+|&nbsp;int,&nbsp;long,&nbsp;float&nbsp;&nbsp;|&nbsp;number&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<br>
++-------------------+---------------+<br>
+|&nbsp;True&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;true&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<br>
++-------------------+---------------+<br>
+|&nbsp;False&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;false&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<br>
++-------------------+---------------+<br>
+|&nbsp;None&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;null&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<br>
++-------------------+---------------+<br>
+&nbsp;<br>
+To&nbsp;extend&nbsp;this&nbsp;to&nbsp;recognize&nbsp;other&nbsp;objects,&nbsp;subclass&nbsp;and&nbsp;implement&nbsp;a<br>
+``.<a href="#JSONEncoder-default">default</a>()``&nbsp;method&nbsp;with&nbsp;another&nbsp;method&nbsp;that&nbsp;returns&nbsp;a&nbsp;serializable<br>
+<a href="__builtin__.html#object">object</a>&nbsp;for&nbsp;``o``&nbsp;if&nbsp;possible,&nbsp;otherwise&nbsp;it&nbsp;should&nbsp;call&nbsp;the&nbsp;superclass<br>
+implementation&nbsp;(to&nbsp;raise&nbsp;``TypeError``).<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="JSONEncoder-__init__"><strong>__init__</strong></a>(self, skipkeys<font color="#909090">=False</font>, ensure_ascii<font color="#909090">=True</font>, check_circular<font color="#909090">=True</font>, allow_nan<font color="#909090">=True</font>, sort_keys<font color="#909090">=False</font>, indent<font color="#909090">=None</font>, separators<font color="#909090">=None</font>, encoding<font color="#909090">='utf-8'</font>, default<font color="#909090">=None</font>)</dt><dd><tt>Constructor&nbsp;for&nbsp;<a href="#JSONEncoder">JSONEncoder</a>,&nbsp;with&nbsp;sensible&nbsp;defaults.<br>
+&nbsp;<br>
+If&nbsp;skipkeys&nbsp;is&nbsp;false,&nbsp;then&nbsp;it&nbsp;is&nbsp;a&nbsp;TypeError&nbsp;to&nbsp;attempt<br>
+encoding&nbsp;of&nbsp;keys&nbsp;that&nbsp;are&nbsp;not&nbsp;str,&nbsp;int,&nbsp;long,&nbsp;float&nbsp;or&nbsp;None.&nbsp;&nbsp;If<br>
+skipkeys&nbsp;is&nbsp;True,&nbsp;such&nbsp;items&nbsp;are&nbsp;simply&nbsp;skipped.<br>
+&nbsp;<br>
+If&nbsp;*ensure_ascii*&nbsp;is&nbsp;true&nbsp;(the&nbsp;default),&nbsp;all&nbsp;non-ASCII<br>
+characters&nbsp;in&nbsp;the&nbsp;output&nbsp;are&nbsp;escaped&nbsp;with&nbsp;\uXXXX&nbsp;sequences,<br>
+and&nbsp;the&nbsp;results&nbsp;are&nbsp;str&nbsp;instances&nbsp;consisting&nbsp;of&nbsp;ASCII<br>
+characters&nbsp;only.&nbsp;&nbsp;If&nbsp;ensure_ascii&nbsp;is&nbsp;False,&nbsp;a&nbsp;result&nbsp;may&nbsp;be&nbsp;a<br>
+unicode&nbsp;instance.&nbsp;&nbsp;This&nbsp;usually&nbsp;happens&nbsp;if&nbsp;the&nbsp;input&nbsp;contains<br>
+unicode&nbsp;strings&nbsp;or&nbsp;the&nbsp;*encoding*&nbsp;parameter&nbsp;is&nbsp;used.<br>
+&nbsp;<br>
+If&nbsp;check_circular&nbsp;is&nbsp;true,&nbsp;then&nbsp;lists,&nbsp;dicts,&nbsp;and&nbsp;custom&nbsp;encoded<br>
+objects&nbsp;will&nbsp;be&nbsp;checked&nbsp;for&nbsp;circular&nbsp;references&nbsp;during&nbsp;encoding&nbsp;to<br>
+prevent&nbsp;an&nbsp;infinite&nbsp;recursion&nbsp;(which&nbsp;would&nbsp;cause&nbsp;an&nbsp;OverflowError).<br>
+Otherwise,&nbsp;no&nbsp;such&nbsp;check&nbsp;takes&nbsp;place.<br>
+&nbsp;<br>
+If&nbsp;allow_nan&nbsp;is&nbsp;true,&nbsp;then&nbsp;NaN,&nbsp;Infinity,&nbsp;and&nbsp;-Infinity&nbsp;will&nbsp;be<br>
+encoded&nbsp;as&nbsp;such.&nbsp;&nbsp;This&nbsp;behavior&nbsp;is&nbsp;not&nbsp;JSON&nbsp;specification&nbsp;compliant,<br>
+but&nbsp;is&nbsp;consistent&nbsp;with&nbsp;most&nbsp;JavaScript&nbsp;based&nbsp;encoders&nbsp;and&nbsp;decoders.<br>
+Otherwise,&nbsp;it&nbsp;will&nbsp;be&nbsp;a&nbsp;ValueError&nbsp;to&nbsp;encode&nbsp;such&nbsp;floats.<br>
+&nbsp;<br>
+If&nbsp;sort_keys&nbsp;is&nbsp;true,&nbsp;then&nbsp;the&nbsp;output&nbsp;of&nbsp;dictionaries&nbsp;will&nbsp;be<br>
+sorted&nbsp;by&nbsp;key;&nbsp;this&nbsp;is&nbsp;useful&nbsp;for&nbsp;regression&nbsp;tests&nbsp;to&nbsp;ensure<br>
+that&nbsp;JSON&nbsp;serializations&nbsp;can&nbsp;be&nbsp;compared&nbsp;on&nbsp;a&nbsp;day-to-day&nbsp;basis.<br>
+&nbsp;<br>
+If&nbsp;indent&nbsp;is&nbsp;a&nbsp;non-negative&nbsp;integer,&nbsp;then&nbsp;JSON&nbsp;array<br>
+elements&nbsp;and&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;members&nbsp;will&nbsp;be&nbsp;pretty-printed&nbsp;with&nbsp;that<br>
+indent&nbsp;level.&nbsp;&nbsp;An&nbsp;indent&nbsp;level&nbsp;of&nbsp;0&nbsp;will&nbsp;only&nbsp;insert&nbsp;newlines.<br>
+None&nbsp;is&nbsp;the&nbsp;most&nbsp;compact&nbsp;representation.&nbsp;&nbsp;Since&nbsp;the&nbsp;default<br>
+item&nbsp;separator&nbsp;is&nbsp;',&nbsp;',&nbsp;&nbsp;the&nbsp;output&nbsp;might&nbsp;include&nbsp;trailing<br>
+whitespace&nbsp;when&nbsp;indent&nbsp;is&nbsp;specified.&nbsp;&nbsp;You&nbsp;can&nbsp;use<br>
+separators=(',',&nbsp;':&nbsp;')&nbsp;to&nbsp;avoid&nbsp;this.<br>
+&nbsp;<br>
+If&nbsp;specified,&nbsp;separators&nbsp;should&nbsp;be&nbsp;a&nbsp;(item_separator,&nbsp;key_separator)<br>
+tuple.&nbsp;&nbsp;The&nbsp;default&nbsp;is&nbsp;(',&nbsp;',&nbsp;':&nbsp;').&nbsp;&nbsp;To&nbsp;get&nbsp;the&nbsp;most&nbsp;compact&nbsp;JSON<br>
+representation&nbsp;you&nbsp;should&nbsp;specify&nbsp;(',',&nbsp;':')&nbsp;to&nbsp;eliminate&nbsp;whitespace.<br>
+&nbsp;<br>
+If&nbsp;specified,&nbsp;default&nbsp;is&nbsp;a&nbsp;function&nbsp;that&nbsp;gets&nbsp;called&nbsp;for&nbsp;objects<br>
+that&nbsp;can't&nbsp;otherwise&nbsp;be&nbsp;serialized.&nbsp;&nbsp;It&nbsp;should&nbsp;return&nbsp;a&nbsp;JSON&nbsp;encodable<br>
+version&nbsp;of&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;or&nbsp;raise&nbsp;a&nbsp;``TypeError``.<br>
+&nbsp;<br>
+If&nbsp;encoding&nbsp;is&nbsp;not&nbsp;None,&nbsp;then&nbsp;all&nbsp;input&nbsp;strings&nbsp;will&nbsp;be<br>
+transformed&nbsp;into&nbsp;unicode&nbsp;using&nbsp;that&nbsp;encoding&nbsp;prior&nbsp;to&nbsp;JSON-encoding.<br>
+The&nbsp;default&nbsp;is&nbsp;UTF-8.</tt></dd></dl>
+
+<dl><dt><a name="JSONEncoder-default"><strong>default</strong></a>(self, o)</dt><dd><tt>Implement&nbsp;this&nbsp;method&nbsp;in&nbsp;a&nbsp;subclass&nbsp;such&nbsp;that&nbsp;it&nbsp;returns<br>
+a&nbsp;serializable&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;for&nbsp;``o``,&nbsp;or&nbsp;calls&nbsp;the&nbsp;base&nbsp;implementation<br>
+(to&nbsp;raise&nbsp;a&nbsp;``TypeError``).<br>
+&nbsp;<br>
+For&nbsp;example,&nbsp;to&nbsp;support&nbsp;arbitrary&nbsp;iterators,&nbsp;you&nbsp;could<br>
+implement&nbsp;default&nbsp;like&nbsp;this::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;def&nbsp;<a href="#JSONEncoder-default">default</a>(self,&nbsp;o):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;iterable&nbsp;=&nbsp;iter(o)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;except&nbsp;TypeError:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pass<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;list(iterable)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;Let&nbsp;the&nbsp;base&nbsp;class&nbsp;default&nbsp;method&nbsp;raise&nbsp;the&nbsp;TypeError<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;<a href="#JSONEncoder">JSONEncoder</a>.<a href="#JSONEncoder-default">default</a>(self,&nbsp;o)</tt></dd></dl>
+
+<dl><dt><a name="JSONEncoder-encode"><strong>encode</strong></a>(self, o)</dt><dd><tt>Return&nbsp;a&nbsp;JSON&nbsp;string&nbsp;representation&nbsp;of&nbsp;a&nbsp;Python&nbsp;data&nbsp;structure.<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;<a href="#JSONEncoder">JSONEncoder</a>().<a href="#JSONEncoder-encode">encode</a>({"foo":&nbsp;["bar",&nbsp;"baz"]})<br>
+'{"foo":&nbsp;["bar",&nbsp;"baz"]}'</tt></dd></dl>
+
+<dl><dt><a name="JSONEncoder-iterencode"><strong>iterencode</strong></a>(self, o, _one_shot<font color="#909090">=False</font>)</dt><dd><tt>Encode&nbsp;the&nbsp;given&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;and&nbsp;yield&nbsp;each&nbsp;string<br>
+representation&nbsp;as&nbsp;available.<br>
+&nbsp;<br>
+For&nbsp;example::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;chunk&nbsp;in&nbsp;<a href="#JSONEncoder">JSONEncoder</a>().<a href="#JSONEncoder-iterencode">iterencode</a>(bigobject):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mysocket.write(chunk)</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>item_separator</strong> = ', '</dl>
+
+<dl><dt><strong>key_separator</strong> = ': '</dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-dump"><strong>dump</strong></a>(obj, fp, skipkeys<font color="#909090">=False</font>, ensure_ascii<font color="#909090">=True</font>, check_circular<font color="#909090">=True</font>, allow_nan<font color="#909090">=True</font>, cls<font color="#909090">=None</font>, indent<font color="#909090">=None</font>, separators<font color="#909090">=None</font>, encoding<font color="#909090">='utf-8'</font>, default<font color="#909090">=None</font>, sort_keys<font color="#909090">=False</font>, **kw)</dt><dd><tt>Serialize&nbsp;``obj``&nbsp;as&nbsp;a&nbsp;JSON&nbsp;formatted&nbsp;stream&nbsp;to&nbsp;``fp``&nbsp;(a<br>
+``.write()``-supporting&nbsp;file-like&nbsp;<a href="__builtin__.html#object">object</a>).<br>
+&nbsp;<br>
+If&nbsp;``skipkeys``&nbsp;is&nbsp;true&nbsp;then&nbsp;``dict``&nbsp;keys&nbsp;that&nbsp;are&nbsp;not&nbsp;basic&nbsp;types<br>
+(``str``,&nbsp;``unicode``,&nbsp;``int``,&nbsp;``long``,&nbsp;``float``,&nbsp;``bool``,&nbsp;``None``)<br>
+will&nbsp;be&nbsp;skipped&nbsp;instead&nbsp;of&nbsp;raising&nbsp;a&nbsp;``TypeError``.<br>
+&nbsp;<br>
+If&nbsp;``ensure_ascii``&nbsp;is&nbsp;true&nbsp;(the&nbsp;default),&nbsp;all&nbsp;non-ASCII&nbsp;characters&nbsp;in&nbsp;the<br>
+output&nbsp;are&nbsp;escaped&nbsp;with&nbsp;``\uXXXX``&nbsp;sequences,&nbsp;and&nbsp;the&nbsp;result&nbsp;is&nbsp;a&nbsp;``str``<br>
+instance&nbsp;consisting&nbsp;of&nbsp;ASCII&nbsp;characters&nbsp;only.&nbsp;&nbsp;If&nbsp;``ensure_ascii``&nbsp;is<br>
+``False``,&nbsp;some&nbsp;chunks&nbsp;written&nbsp;to&nbsp;``fp``&nbsp;may&nbsp;be&nbsp;``unicode``&nbsp;instances.<br>
+This&nbsp;usually&nbsp;happens&nbsp;because&nbsp;the&nbsp;input&nbsp;contains&nbsp;unicode&nbsp;strings&nbsp;or&nbsp;the<br>
+``encoding``&nbsp;parameter&nbsp;is&nbsp;used.&nbsp;Unless&nbsp;``fp.write()``&nbsp;explicitly<br>
+understands&nbsp;``unicode``&nbsp;(as&nbsp;in&nbsp;``codecs.getwriter``)&nbsp;this&nbsp;is&nbsp;likely&nbsp;to<br>
+cause&nbsp;an&nbsp;error.<br>
+&nbsp;<br>
+If&nbsp;``check_circular``&nbsp;is&nbsp;false,&nbsp;then&nbsp;the&nbsp;circular&nbsp;reference&nbsp;check<br>
+for&nbsp;container&nbsp;types&nbsp;will&nbsp;be&nbsp;skipped&nbsp;and&nbsp;a&nbsp;circular&nbsp;reference&nbsp;will<br>
+result&nbsp;in&nbsp;an&nbsp;``OverflowError``&nbsp;(or&nbsp;worse).<br>
+&nbsp;<br>
+If&nbsp;``allow_nan``&nbsp;is&nbsp;false,&nbsp;then&nbsp;it&nbsp;will&nbsp;be&nbsp;a&nbsp;``ValueError``&nbsp;to<br>
+serialize&nbsp;out&nbsp;of&nbsp;range&nbsp;``float``&nbsp;values&nbsp;(``nan``,&nbsp;``inf``,&nbsp;``-inf``)<br>
+in&nbsp;strict&nbsp;compliance&nbsp;of&nbsp;the&nbsp;JSON&nbsp;specification,&nbsp;instead&nbsp;of&nbsp;using&nbsp;the<br>
+JavaScript&nbsp;equivalents&nbsp;(``NaN``,&nbsp;``Infinity``,&nbsp;``-Infinity``).<br>
+&nbsp;<br>
+If&nbsp;``indent``&nbsp;is&nbsp;a&nbsp;non-negative&nbsp;integer,&nbsp;then&nbsp;JSON&nbsp;array&nbsp;elements&nbsp;and<br>
+<a href="__builtin__.html#object">object</a>&nbsp;members&nbsp;will&nbsp;be&nbsp;pretty-printed&nbsp;with&nbsp;that&nbsp;indent&nbsp;level.&nbsp;An&nbsp;indent<br>
+level&nbsp;of&nbsp;0&nbsp;will&nbsp;only&nbsp;insert&nbsp;newlines.&nbsp;``None``&nbsp;is&nbsp;the&nbsp;most&nbsp;compact<br>
+representation.&nbsp;&nbsp;Since&nbsp;the&nbsp;default&nbsp;item&nbsp;separator&nbsp;is&nbsp;``',&nbsp;'``,&nbsp;&nbsp;the<br>
+output&nbsp;might&nbsp;include&nbsp;trailing&nbsp;whitespace&nbsp;when&nbsp;``indent``&nbsp;is&nbsp;specified.<br>
+You&nbsp;can&nbsp;use&nbsp;``separators=(',',&nbsp;':&nbsp;')``&nbsp;to&nbsp;avoid&nbsp;this.<br>
+&nbsp;<br>
+If&nbsp;``separators``&nbsp;is&nbsp;an&nbsp;``(item_separator,&nbsp;dict_separator)``&nbsp;tuple<br>
+then&nbsp;it&nbsp;will&nbsp;be&nbsp;used&nbsp;instead&nbsp;of&nbsp;the&nbsp;default&nbsp;``(',&nbsp;',&nbsp;':&nbsp;')``&nbsp;separators.<br>
+``(',',&nbsp;':')``&nbsp;is&nbsp;the&nbsp;most&nbsp;compact&nbsp;JSON&nbsp;representation.<br>
+&nbsp;<br>
+``encoding``&nbsp;is&nbsp;the&nbsp;character&nbsp;encoding&nbsp;for&nbsp;str&nbsp;instances,&nbsp;default&nbsp;is&nbsp;UTF-8.<br>
+&nbsp;<br>
+``default(obj)``&nbsp;is&nbsp;a&nbsp;function&nbsp;that&nbsp;should&nbsp;return&nbsp;a&nbsp;serializable&nbsp;version<br>
+of&nbsp;obj&nbsp;or&nbsp;raise&nbsp;TypeError.&nbsp;The&nbsp;default&nbsp;simply&nbsp;raises&nbsp;TypeError.<br>
+&nbsp;<br>
+If&nbsp;*sort_keys*&nbsp;is&nbsp;``True``&nbsp;(default:&nbsp;``False``),&nbsp;then&nbsp;the&nbsp;output&nbsp;of<br>
+dictionaries&nbsp;will&nbsp;be&nbsp;sorted&nbsp;by&nbsp;key.<br>
+&nbsp;<br>
+To&nbsp;use&nbsp;a&nbsp;custom&nbsp;``<a href="#JSONEncoder">JSONEncoder</a>``&nbsp;subclass&nbsp;(e.g.&nbsp;one&nbsp;that&nbsp;overrides&nbsp;the<br>
+``.default()``&nbsp;method&nbsp;to&nbsp;serialize&nbsp;additional&nbsp;types),&nbsp;specify&nbsp;it&nbsp;with<br>
+the&nbsp;``cls``&nbsp;kwarg;&nbsp;otherwise&nbsp;``<a href="#JSONEncoder">JSONEncoder</a>``&nbsp;is&nbsp;used.</tt></dd></dl>
+ <dl><dt><a name="-dumps"><strong>dumps</strong></a>(obj, skipkeys<font color="#909090">=False</font>, ensure_ascii<font color="#909090">=True</font>, check_circular<font color="#909090">=True</font>, allow_nan<font color="#909090">=True</font>, cls<font color="#909090">=None</font>, indent<font color="#909090">=None</font>, separators<font color="#909090">=None</font>, encoding<font color="#909090">='utf-8'</font>, default<font color="#909090">=None</font>, sort_keys<font color="#909090">=False</font>, **kw)</dt><dd><tt>Serialize&nbsp;``obj``&nbsp;to&nbsp;a&nbsp;JSON&nbsp;formatted&nbsp;``str``.<br>
+&nbsp;<br>
+If&nbsp;``skipkeys``&nbsp;is&nbsp;true&nbsp;then&nbsp;``dict``&nbsp;keys&nbsp;that&nbsp;are&nbsp;not&nbsp;basic&nbsp;types<br>
+(``str``,&nbsp;``unicode``,&nbsp;``int``,&nbsp;``long``,&nbsp;``float``,&nbsp;``bool``,&nbsp;``None``)<br>
+will&nbsp;be&nbsp;skipped&nbsp;instead&nbsp;of&nbsp;raising&nbsp;a&nbsp;``TypeError``.<br>
+&nbsp;<br>
+&nbsp;<br>
+If&nbsp;``ensure_ascii``&nbsp;is&nbsp;false,&nbsp;all&nbsp;non-ASCII&nbsp;characters&nbsp;are&nbsp;not&nbsp;escaped,&nbsp;and<br>
+the&nbsp;return&nbsp;value&nbsp;may&nbsp;be&nbsp;a&nbsp;``unicode``&nbsp;instance.&nbsp;See&nbsp;``dump``&nbsp;for&nbsp;details.<br>
+&nbsp;<br>
+If&nbsp;``check_circular``&nbsp;is&nbsp;false,&nbsp;then&nbsp;the&nbsp;circular&nbsp;reference&nbsp;check<br>
+for&nbsp;container&nbsp;types&nbsp;will&nbsp;be&nbsp;skipped&nbsp;and&nbsp;a&nbsp;circular&nbsp;reference&nbsp;will<br>
+result&nbsp;in&nbsp;an&nbsp;``OverflowError``&nbsp;(or&nbsp;worse).<br>
+&nbsp;<br>
+If&nbsp;``allow_nan``&nbsp;is&nbsp;false,&nbsp;then&nbsp;it&nbsp;will&nbsp;be&nbsp;a&nbsp;``ValueError``&nbsp;to<br>
+serialize&nbsp;out&nbsp;of&nbsp;range&nbsp;``float``&nbsp;values&nbsp;(``nan``,&nbsp;``inf``,&nbsp;``-inf``)&nbsp;in<br>
+strict&nbsp;compliance&nbsp;of&nbsp;the&nbsp;JSON&nbsp;specification,&nbsp;instead&nbsp;of&nbsp;using&nbsp;the<br>
+JavaScript&nbsp;equivalents&nbsp;(``NaN``,&nbsp;``Infinity``,&nbsp;``-Infinity``).<br>
+&nbsp;<br>
+If&nbsp;``indent``&nbsp;is&nbsp;a&nbsp;non-negative&nbsp;integer,&nbsp;then&nbsp;JSON&nbsp;array&nbsp;elements&nbsp;and<br>
+<a href="__builtin__.html#object">object</a>&nbsp;members&nbsp;will&nbsp;be&nbsp;pretty-printed&nbsp;with&nbsp;that&nbsp;indent&nbsp;level.&nbsp;An&nbsp;indent<br>
+level&nbsp;of&nbsp;0&nbsp;will&nbsp;only&nbsp;insert&nbsp;newlines.&nbsp;``None``&nbsp;is&nbsp;the&nbsp;most&nbsp;compact<br>
+representation.&nbsp;&nbsp;Since&nbsp;the&nbsp;default&nbsp;item&nbsp;separator&nbsp;is&nbsp;``',&nbsp;'``,&nbsp;&nbsp;the<br>
+output&nbsp;might&nbsp;include&nbsp;trailing&nbsp;whitespace&nbsp;when&nbsp;``indent``&nbsp;is&nbsp;specified.<br>
+You&nbsp;can&nbsp;use&nbsp;``separators=(',',&nbsp;':&nbsp;')``&nbsp;to&nbsp;avoid&nbsp;this.<br>
+&nbsp;<br>
+If&nbsp;``separators``&nbsp;is&nbsp;an&nbsp;``(item_separator,&nbsp;dict_separator)``&nbsp;tuple<br>
+then&nbsp;it&nbsp;will&nbsp;be&nbsp;used&nbsp;instead&nbsp;of&nbsp;the&nbsp;default&nbsp;``(',&nbsp;',&nbsp;':&nbsp;')``&nbsp;separators.<br>
+``(',',&nbsp;':')``&nbsp;is&nbsp;the&nbsp;most&nbsp;compact&nbsp;JSON&nbsp;representation.<br>
+&nbsp;<br>
+``encoding``&nbsp;is&nbsp;the&nbsp;character&nbsp;encoding&nbsp;for&nbsp;str&nbsp;instances,&nbsp;default&nbsp;is&nbsp;UTF-8.<br>
+&nbsp;<br>
+``default(obj)``&nbsp;is&nbsp;a&nbsp;function&nbsp;that&nbsp;should&nbsp;return&nbsp;a&nbsp;serializable&nbsp;version<br>
+of&nbsp;obj&nbsp;or&nbsp;raise&nbsp;TypeError.&nbsp;The&nbsp;default&nbsp;simply&nbsp;raises&nbsp;TypeError.<br>
+&nbsp;<br>
+If&nbsp;*sort_keys*&nbsp;is&nbsp;``True``&nbsp;(default:&nbsp;``False``),&nbsp;then&nbsp;the&nbsp;output&nbsp;of<br>
+dictionaries&nbsp;will&nbsp;be&nbsp;sorted&nbsp;by&nbsp;key.<br>
+&nbsp;<br>
+To&nbsp;use&nbsp;a&nbsp;custom&nbsp;``<a href="#JSONEncoder">JSONEncoder</a>``&nbsp;subclass&nbsp;(e.g.&nbsp;one&nbsp;that&nbsp;overrides&nbsp;the<br>
+``.default()``&nbsp;method&nbsp;to&nbsp;serialize&nbsp;additional&nbsp;types),&nbsp;specify&nbsp;it&nbsp;with<br>
+the&nbsp;``cls``&nbsp;kwarg;&nbsp;otherwise&nbsp;``<a href="#JSONEncoder">JSONEncoder</a>``&nbsp;is&nbsp;used.</tt></dd></dl>
+ <dl><dt><a name="-load"><strong>load</strong></a>(fp, encoding<font color="#909090">=None</font>, cls<font color="#909090">=None</font>, object_hook<font color="#909090">=None</font>, parse_float<font color="#909090">=None</font>, parse_int<font color="#909090">=None</font>, parse_constant<font color="#909090">=None</font>, object_pairs_hook<font color="#909090">=None</font>, **kw)</dt><dd><tt>Deserialize&nbsp;``fp``&nbsp;(a&nbsp;``.read()``-supporting&nbsp;file-like&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;containing<br>
+a&nbsp;JSON&nbsp;document)&nbsp;to&nbsp;a&nbsp;Python&nbsp;<a href="__builtin__.html#object">object</a>.<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;contents&nbsp;of&nbsp;``fp``&nbsp;is&nbsp;encoded&nbsp;with&nbsp;an&nbsp;ASCII&nbsp;based&nbsp;encoding&nbsp;other<br>
+than&nbsp;utf-8&nbsp;(e.g.&nbsp;latin-1),&nbsp;then&nbsp;an&nbsp;appropriate&nbsp;``encoding``&nbsp;name&nbsp;must<br>
+be&nbsp;specified.&nbsp;Encodings&nbsp;that&nbsp;are&nbsp;not&nbsp;ASCII&nbsp;based&nbsp;(such&nbsp;as&nbsp;UCS-2)&nbsp;are<br>
+not&nbsp;allowed,&nbsp;and&nbsp;should&nbsp;be&nbsp;wrapped&nbsp;with<br>
+``codecs.getreader(fp)(encoding)``,&nbsp;or&nbsp;simply&nbsp;decoded&nbsp;to&nbsp;a&nbsp;``unicode``<br>
+<a href="__builtin__.html#object">object</a>&nbsp;and&nbsp;passed&nbsp;to&nbsp;``<a href="#-loads">loads</a>()``<br>
+&nbsp;<br>
+``object_hook``&nbsp;is&nbsp;an&nbsp;optional&nbsp;function&nbsp;that&nbsp;will&nbsp;be&nbsp;called&nbsp;with&nbsp;the<br>
+result&nbsp;of&nbsp;any&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;literal&nbsp;decode&nbsp;(a&nbsp;``dict``).&nbsp;The&nbsp;return&nbsp;value&nbsp;of<br>
+``object_hook``&nbsp;will&nbsp;be&nbsp;used&nbsp;instead&nbsp;of&nbsp;the&nbsp;``dict``.&nbsp;This&nbsp;feature<br>
+can&nbsp;be&nbsp;used&nbsp;to&nbsp;implement&nbsp;custom&nbsp;decoders&nbsp;(e.g.&nbsp;JSON-RPC&nbsp;class&nbsp;hinting).<br>
+&nbsp;<br>
+``object_pairs_hook``&nbsp;is&nbsp;an&nbsp;optional&nbsp;function&nbsp;that&nbsp;will&nbsp;be&nbsp;called&nbsp;with&nbsp;the<br>
+result&nbsp;of&nbsp;any&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;literal&nbsp;decoded&nbsp;with&nbsp;an&nbsp;ordered&nbsp;list&nbsp;of&nbsp;pairs.&nbsp;&nbsp;The<br>
+return&nbsp;value&nbsp;of&nbsp;``object_pairs_hook``&nbsp;will&nbsp;be&nbsp;used&nbsp;instead&nbsp;of&nbsp;the&nbsp;``dict``.<br>
+This&nbsp;feature&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;implement&nbsp;custom&nbsp;decoders&nbsp;that&nbsp;rely&nbsp;on&nbsp;the<br>
+order&nbsp;that&nbsp;the&nbsp;key&nbsp;and&nbsp;value&nbsp;pairs&nbsp;are&nbsp;decoded&nbsp;(for&nbsp;example,<br>
+collections.OrderedDict&nbsp;will&nbsp;remember&nbsp;the&nbsp;order&nbsp;of&nbsp;insertion).&nbsp;If<br>
+``object_hook``&nbsp;is&nbsp;also&nbsp;defined,&nbsp;the&nbsp;``object_pairs_hook``&nbsp;takes&nbsp;priority.<br>
+&nbsp;<br>
+To&nbsp;use&nbsp;a&nbsp;custom&nbsp;``<a href="#JSONDecoder">JSONDecoder</a>``&nbsp;subclass,&nbsp;specify&nbsp;it&nbsp;with&nbsp;the&nbsp;``cls``<br>
+kwarg;&nbsp;otherwise&nbsp;``<a href="#JSONDecoder">JSONDecoder</a>``&nbsp;is&nbsp;used.</tt></dd></dl>
+ <dl><dt><a name="-loads"><strong>loads</strong></a>(s, encoding<font color="#909090">=None</font>, cls<font color="#909090">=None</font>, object_hook<font color="#909090">=None</font>, parse_float<font color="#909090">=None</font>, parse_int<font color="#909090">=None</font>, parse_constant<font color="#909090">=None</font>, object_pairs_hook<font color="#909090">=None</font>, **kw)</dt><dd><tt>Deserialize&nbsp;``s``&nbsp;(a&nbsp;``str``&nbsp;or&nbsp;``unicode``&nbsp;instance&nbsp;containing&nbsp;a&nbsp;JSON<br>
+document)&nbsp;to&nbsp;a&nbsp;Python&nbsp;<a href="__builtin__.html#object">object</a>.<br>
+&nbsp;<br>
+If&nbsp;``s``&nbsp;is&nbsp;a&nbsp;``str``&nbsp;instance&nbsp;and&nbsp;is&nbsp;encoded&nbsp;with&nbsp;an&nbsp;ASCII&nbsp;based&nbsp;encoding<br>
+other&nbsp;than&nbsp;utf-8&nbsp;(e.g.&nbsp;latin-1)&nbsp;then&nbsp;an&nbsp;appropriate&nbsp;``encoding``&nbsp;name<br>
+must&nbsp;be&nbsp;specified.&nbsp;Encodings&nbsp;that&nbsp;are&nbsp;not&nbsp;ASCII&nbsp;based&nbsp;(such&nbsp;as&nbsp;UCS-2)<br>
+are&nbsp;not&nbsp;allowed&nbsp;and&nbsp;should&nbsp;be&nbsp;decoded&nbsp;to&nbsp;``unicode``&nbsp;first.<br>
+&nbsp;<br>
+``object_hook``&nbsp;is&nbsp;an&nbsp;optional&nbsp;function&nbsp;that&nbsp;will&nbsp;be&nbsp;called&nbsp;with&nbsp;the<br>
+result&nbsp;of&nbsp;any&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;literal&nbsp;decode&nbsp;(a&nbsp;``dict``).&nbsp;The&nbsp;return&nbsp;value&nbsp;of<br>
+``object_hook``&nbsp;will&nbsp;be&nbsp;used&nbsp;instead&nbsp;of&nbsp;the&nbsp;``dict``.&nbsp;This&nbsp;feature<br>
+can&nbsp;be&nbsp;used&nbsp;to&nbsp;implement&nbsp;custom&nbsp;decoders&nbsp;(e.g.&nbsp;JSON-RPC&nbsp;class&nbsp;hinting).<br>
+&nbsp;<br>
+``object_pairs_hook``&nbsp;is&nbsp;an&nbsp;optional&nbsp;function&nbsp;that&nbsp;will&nbsp;be&nbsp;called&nbsp;with&nbsp;the<br>
+result&nbsp;of&nbsp;any&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;literal&nbsp;decoded&nbsp;with&nbsp;an&nbsp;ordered&nbsp;list&nbsp;of&nbsp;pairs.&nbsp;&nbsp;The<br>
+return&nbsp;value&nbsp;of&nbsp;``object_pairs_hook``&nbsp;will&nbsp;be&nbsp;used&nbsp;instead&nbsp;of&nbsp;the&nbsp;``dict``.<br>
+This&nbsp;feature&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;implement&nbsp;custom&nbsp;decoders&nbsp;that&nbsp;rely&nbsp;on&nbsp;the<br>
+order&nbsp;that&nbsp;the&nbsp;key&nbsp;and&nbsp;value&nbsp;pairs&nbsp;are&nbsp;decoded&nbsp;(for&nbsp;example,<br>
+collections.OrderedDict&nbsp;will&nbsp;remember&nbsp;the&nbsp;order&nbsp;of&nbsp;insertion).&nbsp;If<br>
+``object_hook``&nbsp;is&nbsp;also&nbsp;defined,&nbsp;the&nbsp;``object_pairs_hook``&nbsp;takes&nbsp;priority.<br>
+&nbsp;<br>
+``parse_float``,&nbsp;if&nbsp;specified,&nbsp;will&nbsp;be&nbsp;called&nbsp;with&nbsp;the&nbsp;string<br>
+of&nbsp;every&nbsp;JSON&nbsp;float&nbsp;to&nbsp;be&nbsp;decoded.&nbsp;By&nbsp;default&nbsp;this&nbsp;is&nbsp;equivalent&nbsp;to<br>
+float(num_str).&nbsp;This&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;use&nbsp;another&nbsp;datatype&nbsp;or&nbsp;parser<br>
+for&nbsp;JSON&nbsp;floats&nbsp;(e.g.&nbsp;decimal.Decimal).<br>
+&nbsp;<br>
+``parse_int``,&nbsp;if&nbsp;specified,&nbsp;will&nbsp;be&nbsp;called&nbsp;with&nbsp;the&nbsp;string<br>
+of&nbsp;every&nbsp;JSON&nbsp;int&nbsp;to&nbsp;be&nbsp;decoded.&nbsp;By&nbsp;default&nbsp;this&nbsp;is&nbsp;equivalent&nbsp;to<br>
+int(num_str).&nbsp;This&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;use&nbsp;another&nbsp;datatype&nbsp;or&nbsp;parser<br>
+for&nbsp;JSON&nbsp;integers&nbsp;(e.g.&nbsp;float).<br>
+&nbsp;<br>
+``parse_constant``,&nbsp;if&nbsp;specified,&nbsp;will&nbsp;be&nbsp;called&nbsp;with&nbsp;one&nbsp;of&nbsp;the<br>
+following&nbsp;strings:&nbsp;-Infinity,&nbsp;Infinity,&nbsp;NaN,&nbsp;null,&nbsp;true,&nbsp;false.<br>
+This&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;raise&nbsp;an&nbsp;exception&nbsp;if&nbsp;invalid&nbsp;JSON&nbsp;numbers<br>
+are&nbsp;encountered.<br>
+&nbsp;<br>
+To&nbsp;use&nbsp;a&nbsp;custom&nbsp;``<a href="#JSONDecoder">JSONDecoder</a>``&nbsp;subclass,&nbsp;specify&nbsp;it&nbsp;with&nbsp;the&nbsp;``cls``<br>
+kwarg;&nbsp;otherwise&nbsp;``<a href="#JSONDecoder">JSONDecoder</a>``&nbsp;is&nbsp;used.</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>__all__</strong> = ['dump', 'dumps', 'load', 'loads', 'JSONDecoder', 'JSONEncoder']<br>
+<strong>__author__</strong> = 'Bob Ippolito &lt;bob@redivi.com&gt;'<br>
+<strong>__version__</strong> = '2.0.9'</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#7799ee">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Author</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#7799ee"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Bob&nbsp;Ippolito&nbsp;&lt;bob@redivi.com&gt;</td></tr></table>
+</body></html>

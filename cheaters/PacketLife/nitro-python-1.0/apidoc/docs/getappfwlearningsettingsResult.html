@@ -1,0 +1,244 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>Citrix NetScaler XML API User&#39;s Guide - Structure Definition</title>
+<link rel="stylesheet" type="text/css" href="help_ns.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body onload="initial()" class="ns_body">
+<div class="ns_content"><table cellpadding="0" cellspacing="0"><script type="text/javascript">
+function changeContext(id,lang,flag){
+	parent.banner.document.language.select.value = lang;
+	if( lang == "C" ){
+		if(flag == "1"){
+			showContent(cfirstcontent,id,lang);
+		}
+		else{
+			showContent(csecondcontent,id,lang);
+		}
+	}
+	if( lang == "Perl" ){
+		if(flag == "1"){
+			showContent(perlfirstcontent,id,lang);
+		}
+		else{
+			showContent(perlsecondcontent,id,lang);
+		}
+	}
+	if( lang == "Java" ){
+		if(flag == "1"){
+			showContent(javafirstcontent,id,lang);	
+		}
+		else{
+			showContent(javasecondcontent,id,lang);
+		}
+	}
+	if( lang == "C#" ){
+		if(flag == "1"){
+			showContent(csharpfirstcontent,id,lang);
+		}
+		else{
+			showContent(csharpsecondcontent,id,lang);
+		}
+	}
+	if( lang == "VB" ){
+		if(flag == "1"){
+			showContent(vbfirstcontent,id,lang);
+		}
+		else{
+			showContent(vbsecondcontent,id,lang);
+		}
+	}
+	if(flag == "1"){
+		showInside(lang,"0");
+	}
+	else{
+		showOutside(lang);
+	}
+}
+function showContent(content,id,lang){
+	if(ie4){
+	   showContentObj=document.all.id;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById(id);
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+  showLangSelect(lang);
+}
+function showInside(str,cond){
+	if(str == "C"){
+ 		var inside_content = csecondcontent;
+ 	}
+ 	if(str == "Perl"){
+ 		var inside_content = perlsecondcontent;
+ 	}
+ 	if(str == "Java"){
+ 		var inside_content = javasecondcontent;
+ 	}
+ 	if(str == "C#"){
+		var inside_content = csharpsecondcontent;
+ 	}
+ 	if(str == "VB"){
+		var inside_content = vbsecondcontent;
+ 	}
+	showContent(inside_content,'qiksearch_div1',str);
+ 	if ( cond == "1" ){
+ 		var page = 'apidoc/docs/getappfwlearningsettingsResult.html#as_learningsettingsList';
+ 		document.location.href = page;
+ 	}
+}
+function showOutside(str){
+	if(str == "C" ){
+ 		var inside_content = cfirstcontent;
+ 	}
+ 	if(str == "Perl" ){
+ 		var inside_content = perlfirstcontent;
+ 	}
+ 	if(str == "Java" ){
+ 		var inside_content = javafirstcontent;
+ 	}
+ 	if(str == "C#" ){
+ 		var inside_content = csharpfirstcontent;
+ 	}
+ 	if(str == "VB" ){
+ 		var inside_content = vbfirstcontent;
+ 	}
+ 	showContent(inside_content,'qiksearch_div',str);
+}
+function initial(){
+	ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+	ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+	ns4=document.layers;
+	langSelected = parent.banner.document.language.select.value
+	var plink = parent.banner.document.language.plink.value
+	var my_array=plink.split("&");
+	var temp = my_array[0];
+ 	var grp = temp.split("@");
+	var cmd = my_array[1];
+	var regex = /^stat/i;
+	if( cmd.match(regex) != null ){
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex_stat.html\">Statistics</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getappfwlearningsettingsResult");
+	}
+	else{
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex.htm\">Configuration</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getappfwlearningsettingsResult");
+	}
+	if( langSelected == "C" ){
+ 		var content = cfirstcontent;
+	}
+	else if( langSelected == "Perl" ){
+		var content = perlfirstcontent;
+	}
+	else if( langSelected == "Java" ){
+		var content = javafirstcontent;
+	}
+	else if( langSelected == "C#" ){
+		var content = csharpfirstcontent;
+	}
+	else if( langSelected == "VB" ){
+		var content = vbfirstcontent;
+	}
+	else{
+		var content = cfirstcontent;
+		langSelected="C";
+	}
+	showContent(content,'qiksearch_div',langSelected);
+	showInside(langSelected,"0");
+}
+function showPLink(content){
+	if(ie4){
+	   showContentObj=document.all.progressive_link;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById("progressive_link");
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+}
+function showLangSelect(id){
+	   if(ie4)
+       {
+       	showObj=document.all.first_url;
+       	showObj1=document.all.second_url;
+       }
+       if(ns6)
+       {
+       	showObj=document.getElementById("first_url");
+       	showObj1=document.getElementById("second_url");
+       }
+       if( id == "C" ){
+       	newlink = "<b>C</b>";
+       	newlink1 = "<b>C</b>";
+       }
+       else{
+       	newlink = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C','1');\"><b>C</b></a>";
+       	newlink1 = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C','0');\"><b>C</b></a>";
+       }
+       if( id == "Perl" ){
+       	newlink = newlink + " | <b>Perl</b>";
+       	newlink1 = newlink1 + " | <b>Perl</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Perl','1');\"><b>Perl</b></a>";
+      	       newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Perl','0');\"><b>Perl</b></a>";
+       }
+       if( id == "Java" ){
+       	newlink = newlink + " | <b>Java</b>";
+       	newlink1 = newlink1 + " | <b>Java</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Java','1');\"><b>Java</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Java','0');\"><b>Java</b></a>";
+       }
+       if( id == "C#" ){
+       	newlink = newlink + " | <b>C#</b>";
+       	newlink1 = newlink1 + " | <b>C#</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C#','1');\"><b>C#</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C#','0');\"><b>C#</b></a>";
+       }
+       showObj.innerHTML = newlink;
+       showObj1.innerHTML = newlink1;
+}
+</script>
+<tr><td><div><div id="progressive_link"></div></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>getappfwlearningsettingsResult Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>getappfwlearningsettingsResult</b> structure defines the return type for getappfwlearningsettings API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="first_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+cfirstcontent = "<pre>struct getappfwlearningsettingsResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; struct <a href=\'getappfwlearningsettingsResult.html\#appfwlearningsettings\'>appfwlearningsettings</a> list[];<br> };<br></pre></td></tr></table></div>"
+perlfirstcontent = "<pre>$getappfwlearningsettingsResult = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rc => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; message => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; List => \'@<a href=\'getappfwlearningsettingsResult.html\#appfwlearningsettings\'>appfwlearningsettings</a>\',<br> };<br></pre></td></tr></table></div>"
+javafirstcontent = "<pre>class getappfwlearningsettingsResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getappfwlearningsettingsResult.html\#appfwlearningsettings\'>appfwlearningsettings</a>[] list;<br> };<br></pre></td></tr></table></div>"
+csharpfirstcontent = "<pre>class getappfwlearningsettingsResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getappfwlearningsettingsResult.html\#appfwlearningsettings\'>appfwlearningsettings</a>[] list;<br> };<br></pre></td></tr></table></div>"
+vbfirstcontent = "<pre>Public <b>Structure</b> getappfwlearningsettingsResult <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rc As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public message As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public  appfwlearningsettingsList() As  <a href=\'getappfwlearningsettingsResult.html\#appfwlearningsettings\'>appfwlearningsettings</a><br> <b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rc</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, rc is 0 else rc > 0. Values above 0x8000 indicate Warnings.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>message</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, message is NULL else message contains <a href="errorlisting.html">Error/Warning</a> message.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>appfwlearningsettingsList</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">List of appfwlearningsettingss</div></td></tr><tr><td><br></td></tr><tr><td><div><a name="appfwlearningsettings"></a></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>appfwlearningsettings  Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>appfwlearningsettings</b> structure defines the actual return type values for getappfwlearningsettings API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="second_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div1" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+csecondcontent = "<pre>struct appfwlearningsettings {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * profilename;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int starturlminthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int starturlpercentthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int cookieconsistencyminthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int cookieconsistencypercentthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int csrftagminthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int csrftagpercentthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int fieldconsistencyminthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int fieldconsistencypercentthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int crosssitescriptingminthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int crosssitescriptingpercentthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int sqlinjectionminthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int sqlinjectionpercentthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int fieldformatminthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int fieldformatpercentthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int xmlwsiminthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int xmlwsipercentthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int xmlattachmentminthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int xmlattachmentpercentthreshold;<br> };<br></pre></td></tr></table></div>"
+perlsecondcontent = "<pre>$appfwlearningsettings = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; profilename => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; starturlminthreshold => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; starturlpercentthreshold => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; cookieconsistencyminthreshold => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; cookieconsistencypercentthreshold => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; csrftagminthreshold => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; csrftagpercentthreshold => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; fieldconsistencyminthreshold => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; fieldconsistencypercentthreshold => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; crosssitescriptingminthreshold => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; crosssitescriptingpercentthreshold => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; sqlinjectionminthreshold => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; sqlinjectionpercentthreshold => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; fieldformatminthreshold => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; fieldformatpercentthreshold => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; xmlwsiminthreshold => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; xmlwsipercentthreshold => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; xmlattachmentminthreshold => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; xmlattachmentpercentthreshold => \'$\',<br> };<br></pre></td></tr></table></div>"
+javasecondcontent = "<pre>class appfwlearningsettings {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String profilename;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt starturlminthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt starturlpercentthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt cookieconsistencyminthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt cookieconsistencypercentthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt csrftagminthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt csrftagpercentthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt fieldconsistencyminthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt fieldconsistencypercentthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt crosssitescriptingminthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt crosssitescriptingpercentthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt sqlinjectionminthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt sqlinjectionpercentthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt fieldformatminthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt fieldformatpercentthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt xmlwsiminthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt xmlwsipercentthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt xmlattachmentminthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt xmlattachmentpercentthreshold;<br> };<br></pre></td></tr></table></div>"
+csharpsecondcontent = "<pre>class appfwlearningsettings {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string profilename;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 starturlminthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 starturlpercentthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 cookieconsistencyminthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 cookieconsistencypercentthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 csrftagminthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 csrftagpercentthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 fieldconsistencyminthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 fieldconsistencypercentthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 crosssitescriptingminthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 crosssitescriptingpercentthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 sqlinjectionminthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 sqlinjectionpercentthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 fieldformatminthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 fieldformatpercentthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 xmlwsiminthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 xmlwsipercentthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 xmlattachmentminthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 xmlattachmentpercentthreshold;<br> };<br></pre></td></tr></table></div>"
+vbsecondcontent = "<pre>Public <b>Structure</b> appfwlearningsettings <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public profilename As String  <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public starturlminthreshold As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public starturlpercentthreshold As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public cookieconsistencyminthreshold As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public cookieconsistencypercentthreshold As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public csrftagminthreshold As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public csrftagpercentthreshold As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public fieldconsistencyminthreshold As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public fieldconsistencypercentthreshold As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public crosssitescriptingminthreshold As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public crosssitescriptingpercentthreshold As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public sqlinjectionminthreshold As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public sqlinjectionpercentthreshold As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public fieldformatminthreshold As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public fieldformatpercentthreshold As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public xmlwsiminthreshold As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public xmlwsipercentthreshold As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public xmlattachmentminthreshold As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public xmlattachmentpercentthreshold As UInteger<br><b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>profilename</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the profile.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>starturlminthreshold</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Minimum number of application firewall sessions that the learning engine must observe to learn start URLs.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>starturlpercentthreshold</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Minimum percentage of application firewall sessions that must contain a particular start URL pattern for the learning engine to learn that start URL.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>cookieconsistencyminthreshold</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Minimum number of application firewall sessions that the learning engine must observe to learn cookies.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>cookieconsistencypercentthreshold</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Minimum percentage of application firewall sessions that must contain a particular cookie pattern for the learning engine to learn that cookie.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>csrftagminthreshold</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Minimum number of application firewall sessions that the learning engine must observe to learn cross-site request forgery (CSRF) tags.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>csrftagpercentthreshold</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Minimum percentage of application firewall sessions that must contain a particular CSRF tag for the learning engine to learn that CSRF tag.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>fieldconsistencyminthreshold</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Minimum number of application firewall sessions that the learning engine must observe to learn field consistency information.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>fieldconsistencypercentthreshold</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Minimum percentage of application firewall sessions that must contain a particular field consistency pattern for the learning engine to learn that field consistency pattern.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>crosssitescriptingminthreshold</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Minimum number of application firewall sessions that the learning engine must observe to learn HTML cross-site scripting patterns.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>crosssitescriptingpercentthreshold</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Minimum percentage of application firewall sessions that must contain a particular cross-site scripting pattern for the learning engine to learn that cross-site scripting pattern.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sqlinjectionminthreshold</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Minimum number of application firewall sessions that the learning engine must observe to learn HTML SQL injection patterns.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sqlinjectionpercentthreshold</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Minimum percentage of application firewall sessions that must contain a particular HTML SQL injection pattern for the learning engine to learn that HTML SQL injection pattern.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>fieldformatminthreshold</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Minimum number of application firewall sessions that the learning engine must observe to learn field formats.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>fieldformatpercentthreshold</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Minimum percentage of application firewall sessions that must contain a particular web form field pattern for the learning engine to recommend a field format for that form field.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>xmlwsiminthreshold</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Minimum threshold to learn XML Web Services Interoperability.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>xmlwsipercentthreshold</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Minimum threshold (in percent) to learn XML Web Services Interoperability.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>xmlattachmentminthreshold</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Minimum threshold to learn XML Attachments.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>xmlattachmentpercentthreshold</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Minimum threshold (in percent) to learn XML Attachments.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>See Also</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="getappfwlearningsettings.html">getappfwlearningsettings</a></div></td></tr><tr><td><br></td></tr></table></div>
+</body>
+</html>

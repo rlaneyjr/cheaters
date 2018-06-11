@@ -1,0 +1,265 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>Citrix NetScaler XML API User&#39;s Guide - Structure Definition</title>
+<link rel="stylesheet" type="text/css" href="help_ns.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body onload="initial()" class="ns_body">
+<div class="ns_content"><table cellpadding="0" cellspacing="0"><script type="text/javascript">
+function changeContext(id,lang,flag){
+	parent.banner.document.language.select.value = lang;
+	if( lang == "C" ){
+		if(flag == "1"){
+			showContent(cfirstcontent,id,lang);
+		}
+		else{
+			showContent(csecondcontent,id,lang);
+		}
+	}
+	if( lang == "Perl" ){
+		if(flag == "1"){
+			showContent(perlfirstcontent,id,lang);
+		}
+		else{
+			showContent(perlsecondcontent,id,lang);
+		}
+	}
+	if( lang == "Java" ){
+		if(flag == "1"){
+			showContent(javafirstcontent,id,lang);	
+		}
+		else{
+			showContent(javasecondcontent,id,lang);
+		}
+	}
+	if( lang == "C#" ){
+		if(flag == "1"){
+			showContent(csharpfirstcontent,id,lang);
+		}
+		else{
+			showContent(csharpsecondcontent,id,lang);
+		}
+	}
+	if( lang == "VB" ){
+		if(flag == "1"){
+			showContent(vbfirstcontent,id,lang);
+		}
+		else{
+			showContent(vbsecondcontent,id,lang);
+		}
+	}
+	if(flag == "1"){
+		showInside(lang,"0");
+	}
+	else{
+		showOutside(lang);
+	}
+}
+function showContent(content,id,lang){
+	if(ie4){
+	   showContentObj=document.all.id;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById(id);
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+  showLangSelect(lang);
+}
+function showInside(str,cond){
+	if(str == "C"){
+ 		var inside_content = csecondcontent;
+ 	}
+ 	if(str == "Perl"){
+ 		var inside_content = perlsecondcontent;
+ 	}
+ 	if(str == "Java"){
+ 		var inside_content = javasecondcontent;
+ 	}
+ 	if(str == "C#"){
+		var inside_content = csharpsecondcontent;
+ 	}
+ 	if(str == "VB"){
+		var inside_content = vbsecondcontent;
+ 	}
+	showContent(inside_content,'qiksearch_div1',str);
+ 	if ( cond == "1" ){
+ 		var page = 'apidoc/docs/getsslprofileResult.html#ssl_profileList';
+ 		document.location.href = page;
+ 	}
+}
+function showOutside(str){
+	if(str == "C" ){
+ 		var inside_content = cfirstcontent;
+ 	}
+ 	if(str == "Perl" ){
+ 		var inside_content = perlfirstcontent;
+ 	}
+ 	if(str == "Java" ){
+ 		var inside_content = javafirstcontent;
+ 	}
+ 	if(str == "C#" ){
+ 		var inside_content = csharpfirstcontent;
+ 	}
+ 	if(str == "VB" ){
+ 		var inside_content = vbfirstcontent;
+ 	}
+ 	showContent(inside_content,'qiksearch_div',str);
+}
+function initial(){
+	ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+	ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+	ns4=document.layers;
+	langSelected = parent.banner.document.language.select.value
+	var plink = parent.banner.document.language.plink.value
+	var my_array=plink.split("&");
+	var temp = my_array[0];
+ 	var grp = temp.split("@");
+	var cmd = my_array[1];
+	var regex = /^stat/i;
+	if( cmd.match(regex) != null ){
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex_stat.html\">Statistics</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getsslprofileResult");
+	}
+	else{
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex.htm\">Configuration</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getsslprofileResult");
+	}
+	if( langSelected == "C" ){
+ 		var content = cfirstcontent;
+	}
+	else if( langSelected == "Perl" ){
+		var content = perlfirstcontent;
+	}
+	else if( langSelected == "Java" ){
+		var content = javafirstcontent;
+	}
+	else if( langSelected == "C#" ){
+		var content = csharpfirstcontent;
+	}
+	else if( langSelected == "VB" ){
+		var content = vbfirstcontent;
+	}
+	else{
+		var content = cfirstcontent;
+		langSelected="C";
+	}
+	showContent(content,'qiksearch_div',langSelected);
+	showInside(langSelected,"0");
+}
+function showPLink(content){
+	if(ie4){
+	   showContentObj=document.all.progressive_link;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById("progressive_link");
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+}
+function showLangSelect(id){
+	   if(ie4)
+       {
+       	showObj=document.all.first_url;
+       	showObj1=document.all.second_url;
+       }
+       if(ns6)
+       {
+       	showObj=document.getElementById("first_url");
+       	showObj1=document.getElementById("second_url");
+       }
+       if( id == "C" ){
+       	newlink = "<b>C</b>";
+       	newlink1 = "<b>C</b>";
+       }
+       else{
+       	newlink = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C','1');\"><b>C</b></a>";
+       	newlink1 = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C','0');\"><b>C</b></a>";
+       }
+       if( id == "Perl" ){
+       	newlink = newlink + " | <b>Perl</b>";
+       	newlink1 = newlink1 + " | <b>Perl</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Perl','1');\"><b>Perl</b></a>";
+      	       newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Perl','0');\"><b>Perl</b></a>";
+       }
+       if( id == "Java" ){
+       	newlink = newlink + " | <b>Java</b>";
+       	newlink1 = newlink1 + " | <b>Java</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Java','1');\"><b>Java</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Java','0');\"><b>Java</b></a>";
+       }
+       if( id == "C#" ){
+       	newlink = newlink + " | <b>C#</b>";
+       	newlink1 = newlink1 + " | <b>C#</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C#','1');\"><b>C#</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C#','0');\"><b>C#</b></a>";
+       }
+       showObj.innerHTML = newlink;
+       showObj1.innerHTML = newlink1;
+}
+</script>
+<tr><td><div><div id="progressive_link"></div></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>getsslprofileResult Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>getsslprofileResult</b> structure defines the return type for getsslprofile API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="first_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+cfirstcontent = "<pre>struct getsslprofileResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; struct <a href=\'getsslprofileResult.html\#sslprofile\'>sslprofile</a> list[];<br> };<br></pre></td></tr></table></div>"
+perlfirstcontent = "<pre>$getsslprofileResult = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rc => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; message => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; List => \'@<a href=\'getsslprofileResult.html\#sslprofile\'>sslprofile</a>\',<br> };<br></pre></td></tr></table></div>"
+javafirstcontent = "<pre>class getsslprofileResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getsslprofileResult.html\#sslprofile\'>sslprofile</a>[] list;<br> };<br></pre></td></tr></table></div>"
+csharpfirstcontent = "<pre>class getsslprofileResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getsslprofileResult.html\#sslprofile\'>sslprofile</a>[] list;<br> };<br></pre></td></tr></table></div>"
+vbfirstcontent = "<pre>Public <b>Structure</b> getsslprofileResult <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rc As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public message As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public  sslprofileList() As  <a href=\'getsslprofileResult.html\#sslprofile\'>sslprofile</a><br> <b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rc</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, rc is 0 else rc > 0. Values above 0x8000 indicate Warnings.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>message</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, message is NULL else message contains <a href="errorlisting.html">Error/Warning</a> message.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sslprofileList</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">List of sslprofiles</div></td></tr><tr><td><br></td></tr><tr><td><div><a name="sslprofile"></a></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>sslprofile  Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>sslprofile</b> structure defines the actual return type values for getsslprofile API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="second_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div1" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+csecondcontent = "<pre>struct sslprofile {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * name;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * dh;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * dhfile;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int dhcount;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * ersa;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ersacount;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * sessreuse;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int sesstimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * cipherredirect;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * cipherurl;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * clientauth;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * clientcert;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * sslredirect;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * redirectportrewrite;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * nonfipsciphers;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * ssl3;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * tls1;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * tls11;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * tls12;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * snienable;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * serverauth;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * commonname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * pushenctrigger;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * sendclosenotify;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int cleartextport;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * insertionencoding;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * denysslreneg;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * quantumsize;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * strictcachecks;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int encrypttriggerpktcount;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int pushflag;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * dropreqwithnohostheader;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int pushenctriggertimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int ssltriggertimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * sslprofiletype;<br> };<br></pre></td></tr></table></div>"
+perlsecondcontent = "<pre>$sslprofile = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; name => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; dh => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; dhfile => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; dhcount => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ersa => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ersacount => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; sessreuse => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; sesstimeout => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; cipherredirect => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; cipherurl => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; clientauth => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; clientcert => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; sslredirect => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; redirectportrewrite => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; nonfipsciphers => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ssl3 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; tls1 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; tls11 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; tls12 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; snienable => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; serverauth => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; commonname => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; pushenctrigger => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; sendclosenotify => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; cleartextport => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; insertionencoding => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; denysslreneg => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; quantumsize => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; strictcachecks => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; encrypttriggerpktcount => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; pushflag => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; dropreqwithnohostheader => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; pushenctriggertimeout => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ssltriggertimeout => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; sslprofiletype => \'$\',<br> };<br></pre></td></tr></table></div>"
+javasecondcontent = "<pre>class sslprofile {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String name;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String dh;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String dhfile;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt dhcount;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String ersa;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt ersacount;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String sessreuse;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt sesstimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String cipherredirect;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String cipherurl;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String clientauth;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String clientcert;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String sslredirect;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String redirectportrewrite;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String nonfipsciphers;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String ssl3;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String tls1;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String tls11;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String tls12;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String snienable;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String serverauth;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String commonname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String pushenctrigger;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String sendclosenotify;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt cleartextport;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String insertionencoding;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String denysslreneg;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String quantumsize;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String strictcachecks;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt encrypttriggerpktcount;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt pushflag;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String dropreqwithnohostheader;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt pushenctriggertimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt ssltriggertimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String sslprofiletype;<br> };<br></pre></td></tr></table></div>"
+csharpsecondcontent = "<pre>class sslprofile {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string name;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string dh;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string dhfile;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 dhcount;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string ersa;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 ersacount;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string sessreuse;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 sesstimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string cipherredirect;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string cipherurl;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string clientauth;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string clientcert;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string sslredirect;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string redirectportrewrite;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string nonfipsciphers;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string ssl3;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string tls1;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string tls11;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string tls12;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string snienable;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string serverauth;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string commonname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string pushenctrigger;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string sendclosenotify;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 cleartextport;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string insertionencoding;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string denysslreneg;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string quantumsize;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string strictcachecks;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 encrypttriggerpktcount;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 pushflag;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string dropreqwithnohostheader;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 pushenctriggertimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 ssltriggertimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string sslprofiletype;<br> };<br></pre></td></tr></table></div>"
+vbsecondcontent = "<pre>Public <b>Structure</b> sslprofile <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public name As String  <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public dh As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public dhfile As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public dhcount As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ersa As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ersacount As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public sessreuse As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public sesstimeout As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public cipherredirect As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public cipherurl As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public clientauth As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public clientcert As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public sslredirect As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public redirectportrewrite As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public nonfipsciphers As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ssl3 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public tls1 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public tls11 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public tls12 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public snienable As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public serverauth As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public commonname As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public pushenctrigger As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public sendclosenotify As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public cleartextport As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public insertionencoding As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public denysslreneg As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public quantumsize As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public strictcachecks As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public encrypttriggerpktcount As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public pushflag As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public dropreqwithnohostheader As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public pushenctriggertimeout As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ssltriggertimeout As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public sslprofiletype As String<br><b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>name</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the SSL profile for which to show detailed information.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>dh</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">State of Diffie-Hellman (DH) key exchange. This parameter is not applicable when configuring a backend profile.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>dhfile</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name for and, optionally, path to the PEM-format DH parameter file to be installed. /nsconfig/ssl/ is the default path. This parameter is not applicable when configuring a backend profile.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>dhcount</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of interactions, between the client and the NetScaler appliance, after which the DH private-public pair is regenerated. A value of zero (0) specifies infinite use (no refresh). This parameter is not applicable when configuring a backend profile.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ersa</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">State of Ephemeral RSA (eRSA) key exchange. Ephemeral RSA allows clients that support only export ciphers to communicate with the secure server even if the server certificate does not support export clients. The ephemeral RSA key is automatically generated when you bind an export cipher to an SSL or TCP-based SSL virtual server or service. When you remove the export cipher, the eRSA key is not deleted. It is reused at a later date when another export cipher is bound to an SSL or TCP-based SSL virtual server or service. The eRSA key is deleted when the appliance restarts.This parameter is not applicable when configuring a backend profile.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ersacount</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Refresh count for regeneration of RSA public-key and private-key pair. Zero (0) specifies infinite usage (no refresh).This parameter is not applicable when configuring a backend profile.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sessreuse</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">State of session reuse. Establishing the initial handshake requires CPU-intensive public key encryption operations. With the ENABLED setting, session key exchange is avoided for session resumption requests received from the client.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sesstimeout</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Time, in seconds, for which to keep the session active. Any session resumption request receivedafter the timeout period will require a fresh SSL handshake and establishment of a new SSL session.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>cipherredirect</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">State of Cipher Redirect. If this parameter is set to ENABLED, you can configure an SSL virtual server or service to display meaningful error messages if the SSL handshake fails because of a cipher mismatch between the virtual server or service and the client.This parameter is not applicable when configuring a backend profile.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>cipherurl</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">URL of the page to which to redirect the client in case of a cipher mismatch. Typically, this page has a clear explanation of the error or an alternative location that the transaction can continue from.This parameter is not applicable when configuring a backend profile.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>clientauth</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">State of client authentication. In service-based SSL offload, the service terminates the SSL handshake if the SSL client does not provide a valid certificate. 
+This parameter is not applicable when configuring a backend profile.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>clientcert</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Type of client authentication. If this parameter is set to MANDATORY, the appliance terminates the SSL handshake if the SSL client does not provide a valid certificate. With the OPTIONAL setting, the appliance requests a certificate from the SSL clients but proceeds with the SSL transaction even if the client presents an invalid certificate.
+This parameter is not applicable when configuring a backend SSL profile.
+Caution: Define proper access control policies before changing this setting to Optional.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sslredirect</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">State of HTTPS redirects for the SSL service. 
+
+For an SSL session, if the client browser receives a redirect message, the browser tries to connect to the new location. However, the secure SSL session breaks if the object has moved from a secure site (https://) to an unsecure site (http://). Typically, a warning message appears on the screen, prompting the user to continue or disconnect.
+If SSL Redirect is ENABLED, the redirect message is automatically converted from http:// to https:// and the SSL session does not break.
+
+This parameter is not applicable when configuring a backend profile.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>redirectportrewrite</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">State of the port rewrite while performing HTTPS redirect. If this parameter is set to ENABLED, and the URL from the server does not contain the standard port, the port is rewritten to the standard.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>nonfipsciphers</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">State of usage of ciphers that are not FIPS approved. Valid only for an SSL service bound with a FIPS key and certificate.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ssl3</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">State of SSLv3 protocol support for the SSL service.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>tls1</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">State of TLSv1.0 protocol support for the SSL service.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>tls11</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">State of TLSv1.1 protocol support for the SSL service.Enabled for Front-end service on MPX-CVM platform only.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>tls12</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">State of TLSv1.2 protocol support for the SSL service.Enabled for Front-end service on MPX-CVM platform only.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>snienable</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">State of the Server Name Indication (SNI) feature on the virtual server and service-based offload. SNI helps to enable SSL encryption on multiple domains on a single virtual server or service if the domains are controlled by the same organization and share the same second-level domain name. For example, *.sports.net can be used to secure domains such as login.sports.net and help.sports.net.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>serverauth</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">State of server authentication support for the SSL Backend profile.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>commonname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name to be checked against the CommonName (CN) field in the server certificate bound to the SSL server</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>pushenctrigger</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Trigger encryption on the basis of the PUSH flag value. Available settings function as follows:
+* ALWAYS - Any PUSH packet triggers encryption.
+* IGNORE - Ignore PUSH packet for triggering encryption.
+* MERGE - For a consecutive sequence of PUSH packets, the last PUSH packet triggers encryption.
+* TIMER - PUSH packet triggering encryption is delayed by the time defined in the set ssl parameter method or in the Change Advanced SSL Settings dialog box.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sendclosenotify</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Enable sending SSL Close-Notify at the end of a transaction</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>cleartextport</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The clearTextPort settings.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>insertionencoding</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Encoding method used to insert the subject or issuer's name in HTTP requests to servers.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>denysslreneg</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Deny renegotiation in specified circumstances. Available settings function as follows:
+* NO - Allow SSL renegotiation.
+* FRONTEND_CLIENT - Deny secure and nonsecure SSL renegotiation initiated by the client.
+* FRONTEND_CLIENTSERVER - Deny secure and nonsecure SSL renegotiation initiated by the client or the NetScaler during policy-based client authentication. 
+* ALL - Deny all secure and nonsecure SSL renegotiation.
+* NONSECURE - Deny nonsecure SSL renegotiation. Allows only clients that support RFC 5746.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>quantumsize</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Amount of data to collect before the data is pushed to the crypto hardware for encryption. For large downloads, a larger quantum size better utilizes the crypto resources.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>strictcachecks</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Enable strict CA certificate checks on the appliance.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>encrypttriggerpktcount</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Maximum number of queued packets after which encryption is triggered. Use this setting for SSL transactions that send small packets from server to NetScaler.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>pushflag</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Insert PUSH flag into decrypted, encrypted, or all records. If the PUSH flag is set to a value other than 0, the buffered records are forwarded on the basis of the value of the PUSH flag. Available settings function as follows:
+0 - Auto (PUSH flag is not set.)
+1 - Insert PUSH flag into every decrypted record.
+2 -Insert PUSH flag into every encrypted record.
+3 - Insert PUSH flag into every decrypted and encrypted record.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>dropreqwithnohostheader</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Host header check for SNI enabled sessions. If this check is enabled and the HTTP request does not contain the host header for SNI enabled sessions, the request is dropped.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>pushenctriggertimeout</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">PUSH encryption trigger timeout value. The timeout value is applied only if you set the Push Encryption Trigger parameter to Timer in the SSL virtual server settings.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ssltriggertimeout</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Time, in milliseconds, after which encryption is triggered for transactions that are not tracked on the NetScaler appliance because their length is not known. There can be a delay of up to 10ms from the specified timeout value before the packet is pushed into the queue.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sslprofiletype</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Type of SSL profile.FrontEnd is for front end SSL service or vserver.BackEnd is for backend SSL service.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>See Also</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="getsslprofile.html">getsslprofile</a></div></td></tr><tr><td><br></td></tr></table></div>
+</body>
+</html>

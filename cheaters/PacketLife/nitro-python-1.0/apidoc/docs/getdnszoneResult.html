@@ -1,0 +1,248 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>Citrix NetScaler XML API User&#39;s Guide - Structure Definition</title>
+<link rel="stylesheet" type="text/css" href="help_ns.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body onload="initial()" class="ns_body">
+<div class="ns_content"><table cellpadding="0" cellspacing="0"><script type="text/javascript">
+function changeContext(id,lang,flag){
+	parent.banner.document.language.select.value = lang;
+	if( lang == "C" ){
+		if(flag == "1"){
+			showContent(cfirstcontent,id,lang);
+		}
+		else{
+			showContent(csecondcontent,id,lang);
+		}
+	}
+	if( lang == "Perl" ){
+		if(flag == "1"){
+			showContent(perlfirstcontent,id,lang);
+		}
+		else{
+			showContent(perlsecondcontent,id,lang);
+		}
+	}
+	if( lang == "Java" ){
+		if(flag == "1"){
+			showContent(javafirstcontent,id,lang);	
+		}
+		else{
+			showContent(javasecondcontent,id,lang);
+		}
+	}
+	if( lang == "C#" ){
+		if(flag == "1"){
+			showContent(csharpfirstcontent,id,lang);
+		}
+		else{
+			showContent(csharpsecondcontent,id,lang);
+		}
+	}
+	if( lang == "VB" ){
+		if(flag == "1"){
+			showContent(vbfirstcontent,id,lang);
+		}
+		else{
+			showContent(vbsecondcontent,id,lang);
+		}
+	}
+	if(flag == "1"){
+		showInside(lang,"0");
+	}
+	else{
+		showOutside(lang);
+	}
+}
+function showContent(content,id,lang){
+	if(ie4){
+	   showContentObj=document.all.id;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById(id);
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+  showLangSelect(lang);
+}
+function showInside(str,cond){
+	if(str == "C"){
+ 		var inside_content = csecondcontent;
+ 	}
+ 	if(str == "Perl"){
+ 		var inside_content = perlsecondcontent;
+ 	}
+ 	if(str == "Java"){
+ 		var inside_content = javasecondcontent;
+ 	}
+ 	if(str == "C#"){
+		var inside_content = csharpsecondcontent;
+ 	}
+ 	if(str == "VB"){
+		var inside_content = vbsecondcontent;
+ 	}
+	showContent(inside_content,'qiksearch_div1',str);
+ 	if ( cond == "1" ){
+ 		var page = 'apidoc/docs/getdnszoneResult.html#dns_zoneList';
+ 		document.location.href = page;
+ 	}
+}
+function showOutside(str){
+	if(str == "C" ){
+ 		var inside_content = cfirstcontent;
+ 	}
+ 	if(str == "Perl" ){
+ 		var inside_content = perlfirstcontent;
+ 	}
+ 	if(str == "Java" ){
+ 		var inside_content = javafirstcontent;
+ 	}
+ 	if(str == "C#" ){
+ 		var inside_content = csharpfirstcontent;
+ 	}
+ 	if(str == "VB" ){
+ 		var inside_content = vbfirstcontent;
+ 	}
+ 	showContent(inside_content,'qiksearch_div',str);
+}
+function initial(){
+	ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+	ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+	ns4=document.layers;
+	langSelected = parent.banner.document.language.select.value
+	var plink = parent.banner.document.language.plink.value
+	var my_array=plink.split("&");
+	var temp = my_array[0];
+ 	var grp = temp.split("@");
+	var cmd = my_array[1];
+	var regex = /^stat/i;
+	if( cmd.match(regex) != null ){
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex_stat.html\">Statistics</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getdnszoneResult");
+	}
+	else{
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex.htm\">Configuration</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getdnszoneResult");
+	}
+	if( langSelected == "C" ){
+ 		var content = cfirstcontent;
+	}
+	else if( langSelected == "Perl" ){
+		var content = perlfirstcontent;
+	}
+	else if( langSelected == "Java" ){
+		var content = javafirstcontent;
+	}
+	else if( langSelected == "C#" ){
+		var content = csharpfirstcontent;
+	}
+	else if( langSelected == "VB" ){
+		var content = vbfirstcontent;
+	}
+	else{
+		var content = cfirstcontent;
+		langSelected="C";
+	}
+	showContent(content,'qiksearch_div',langSelected);
+	showInside(langSelected,"0");
+}
+function showPLink(content){
+	if(ie4){
+	   showContentObj=document.all.progressive_link;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById("progressive_link");
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+}
+function showLangSelect(id){
+	   if(ie4)
+       {
+       	showObj=document.all.first_url;
+       	showObj1=document.all.second_url;
+       }
+       if(ns6)
+       {
+       	showObj=document.getElementById("first_url");
+       	showObj1=document.getElementById("second_url");
+       }
+       if( id == "C" ){
+       	newlink = "<b>C</b>";
+       	newlink1 = "<b>C</b>";
+       }
+       else{
+       	newlink = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C','1');\"><b>C</b></a>";
+       	newlink1 = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C','0');\"><b>C</b></a>";
+       }
+       if( id == "Perl" ){
+       	newlink = newlink + " | <b>Perl</b>";
+       	newlink1 = newlink1 + " | <b>Perl</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Perl','1');\"><b>Perl</b></a>";
+      	       newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Perl','0');\"><b>Perl</b></a>";
+       }
+       if( id == "Java" ){
+       	newlink = newlink + " | <b>Java</b>";
+       	newlink1 = newlink1 + " | <b>Java</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Java','1');\"><b>Java</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Java','0');\"><b>Java</b></a>";
+       }
+       if( id == "C#" ){
+       	newlink = newlink + " | <b>C#</b>";
+       	newlink1 = newlink1 + " | <b>C#</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C#','1');\"><b>C#</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C#','0');\"><b>C#</b></a>";
+       }
+       showObj.innerHTML = newlink;
+       showObj1.innerHTML = newlink1;
+}
+</script>
+<tr><td><div><div id="progressive_link"></div></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>getdnszoneResult Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>getdnszoneResult</b> structure defines the return type for getdnszone API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="first_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+cfirstcontent = "<pre>struct getdnszoneResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; struct <a href=\'getdnszoneResult.html\#dnszone\'>dnszone</a> list[];<br> };<br></pre></td></tr></table></div>"
+perlfirstcontent = "<pre>$getdnszoneResult = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rc => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; message => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; List => \'@<a href=\'getdnszoneResult.html\#dnszone\'>dnszone</a>\',<br> };<br></pre></td></tr></table></div>"
+javafirstcontent = "<pre>class getdnszoneResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getdnszoneResult.html\#dnszone\'>dnszone</a>[] list;<br> };<br></pre></td></tr></table></div>"
+csharpfirstcontent = "<pre>class getdnszoneResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getdnszoneResult.html\#dnszone\'>dnszone</a>[] list;<br> };<br></pre></td></tr></table></div>"
+vbfirstcontent = "<pre>Public <b>Structure</b> getdnszoneResult <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rc As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public message As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public  dnszoneList() As  <a href=\'getdnszoneResult.html\#dnszone\'>dnszone</a><br> <b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rc</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, rc is 0 else rc > 0. Values above 0x8000 indicate Warnings.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>message</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, message is NULL else message contains <a href="errorlisting.html">Error/Warning</a> message.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>dnszoneList</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">List of dnszones</div></td></tr><tr><td><br></td></tr><tr><td><div><a name="dnszone"></a></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>dnszone  Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>dnszone</b> structure defines the actual return type values for getdnszone API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="second_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div1" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+csecondcontent = "<pre>struct dnszone {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * zonename;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * type;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * proxymode;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int flags;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * domain [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * nextrecs[];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * dnssecoffload;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * nsec;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * keyname[];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int siginceptiontime[];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int signeD [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int expires [];<br> };<br></pre></td></tr></table></div>"
+perlsecondcontent = "<pre>$dnszone = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; zonename => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; type => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; proxymode => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; flags => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; domain => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; nextrecs => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; dnssecoffload => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; nsec => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; keyname => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; siginceptiontime => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; signeD => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; expires => \'@\',<br> };<br></pre></td></tr></table></div>"
+javasecondcontent = "<pre>class dnszone {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String zonename;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String type;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String proxymode;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt flags;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String domain [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String nextrecs[];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String dnssecoffload;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String nsec;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String keyname[];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt siginceptiontime[];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt signeD [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt expires [];<br> };<br></pre></td></tr></table></div>"
+csharpsecondcontent = "<pre>class dnszone {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string zonename;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string type;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string proxymode;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 flags;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string domain [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string nextrecs[];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string dnssecoffload;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string nsec;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string keyname[];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 siginceptiontime[];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 signeD [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 expires [];<br> };<br></pre></td></tr></table></div>"
+vbsecondcontent = "<pre>Public <b>Structure</b> dnszone <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public zonename As String  <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public type As String  <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public proxymode As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public flags As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public domain As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public nextrecs() As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public dnssecoffload As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public nsec As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public keyname() As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public siginceptiontime() As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public signeD As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public expires As UInteger<br><b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>zonename</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the zone.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>type</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Type of zone to display.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>proxymode</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Deploy the zone in proxy mode. Enable in the following scenarios:
+* The load balanced DNS servers are authoritative for the zone and all resource records that are part of the zone. 
+* The load balanced DNS servers are authoritative for the zone, but the NetScaler appliance owns a subset of the resource records that belong to the zone (partial zone ownership configuration). Typically seen in global server load balancing (GSLB) configurations, in which the appliance responds authoritatively to queries for GSLB domain names but forwards queries for other domain names in the zone to the load balanced servers.
+In either scenario, do not create the zone's Start of Authority (SOA) and name server (NS) resource records on the appliance. 
+Disable if the appliance is authoritative for the zone, but make sure that you have created the SOA and NS records on the appliance before you create the zone.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>flags</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Flags controlling display.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>domain</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Domain name that belongs to the given zone</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>nextrecs</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">An array of record types associated with the nsec record.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>dnssecoffload</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Enable dnssec offload for this zone.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>nsec</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Enable nsec generation for dnssec offload.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>keyname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the public/private DNS key pair with which to sign the zone. You can sign a zone with up to four keys.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>siginceptiontime</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The time when sign was done with this key.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>signeD</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Integer which denote status of keys.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>expires</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Time period for which to consider the key valid, after the key is used to sign a zone.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>See Also</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="getdnszone.html">getdnszone</a></div></td></tr><tr><td><br></td></tr></table></div>
+</body>
+</html>

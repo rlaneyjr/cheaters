@@ -1,0 +1,2138 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Team Cymru Templates</title>
+<style type="text/css">
+pre {
+	display: block;
+	padding: 9.5px;
+	margin: 0 0 10px;
+	font-size: 13px;
+	line-height: 1.42857143;
+	color: #333;
+	word-break: break-all;
+	word-wrap: break-word;
+	background-color: #f5f5f5;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+</style>
+</head>
+
+<body>
+<header id="menu">
+  <h1>Team Cymru Templates</h1>
+  <ul>
+    <li><a href="#Cisco-BGP-template">Secure CISCO IOS BGP Template</a></li>
+    <li><a href="#junos-bgp-template">JUNOS Secure BGP Template</a></li>
+    <li><a href="#secure-bgp-template-ftos-additions">Secure FTOS BGP Template Additions</a></li>
+    <li><a href="#secure-ios-template">Secure IOS Template Version 6.5</a></li>
+    <li><a href="#junos-template">Secure JunOS Template</a></li>
+    <li><a href="#secure-ntp-template">Secure NTP Template</a></li>
+    <li><a href="#ipv6-router-reference">IPv6 Router Setting Reference</a></li>
+    <ul>
+      <li><a href="#ios">IOS</a></li>
+      <li><a href="#junos">JUNOS</a></li>
+      <li><a href="#ftos">FTOS</a></li>
+      <li><a href="#h3c">H3C</a></li>
+      <li><a href="#alaxala">ALAXALA</a></li>
+      <ul>
+        <li><a href="#ax7800">AX7700R/7800R/7800S series</a></li>
+        <li><a href="#ax6700">AX3600S/AX6300S/AX6700S series</a></li>
+      </ul>
+    </ul>
+  </ul>
+</header>
+<div id="content">
+  <div id="Cisco-BGP-template">
+    <h1>Secure CISCO IOS BGP Template</h1>
+    <pre>! Our ASN is 64496
+<strong>router bgp 64496</strong>
+!
+! Set graceful restart-time to 120 and stalepath-time to 360 for route handling optimization.
+! Time listed is in seconds
+<strong>bgp graceful-restart</strong>
+!
+! Don't wait for the IGP to catch up.
+<strong>no synchronization</strong>
+!
+! Be a little more forgiving of an occasional missed keepalive.
+<strong>no bgp fast-external-fallover</strong>
+!
+! Track and punt, via syslog, all interesting observations about our
+! neighbors.
+<strong>bgp log-neighbor-changes</strong>
+!
+! Set Maximum AS-Path Prepends to 10 to limit an insane number of prepends.
+! The Cisco IOS command, which would limit prepends to a sane level would be :
+<strong>bgp maxas-limit 10</strong>
+! (supported from 12.2, 12.0(17)S, 12.2(33)SRA, 12.2SX and upwards, see
+! http://www.cisco.com/en/US/docs/ios/iproute/command/reference/irp_bgp1.html#wp1013932
+! for more details)
+!
+! Announce our netblock(s) in a manner that does not increase CPU
+! utilization. Redistributing from an IGP is dangerous as it increases
+! the likelihood of flapping and instability. Redistributing static is
+! more stable, but requires the CPU to peruse the routing table at a set
+! interval to capture any changes. The network statement, combined with
+! a null route, is the least expensive (in terms of CPU utilization) and
+! most reliable (in terms of stability) option.
+<strong>network 192.0.2.0 mask 255.255.255.0</strong>
+!
+! Our first neighbor, 10.10.5.1, is an eBGP peer with the ASN of 64511.
+<strong>neighbor 10.10.5.1 remote-as 64511</strong>
+!
+! Cisco provides a TTL security check feature. This is designed
+! to limit the number of remote devices that can send BGP (TCP
+! 179) packets to our router. Ideally this will lock down BGP
+! access to the remote peering router only; it will certainly
+! help, especially when coupled with other security techniques
+! such as ACLs. Note that this isn't a 100% solution in a LAN
+! (e.g. peering exchange) environment. It also must be adjusted
+! so that the correct number of hops is set. Please verify the
+! hop count using the 'trace' command before setting this option.
+! You can read more about this feature here:
+! http://www.cisco.com/en/US/docs/ios/12_3t/12_3t7/feature/guide/gt_btsh.html
+!
+<strong>neighbor 10.10.5.1 ttl-security hops 2</strong>
+!
+!
+! Set for soft reconfiguration, thus preventing a complete withdrawal
+! of all announced prefixes when clear ip bgp x.x.x.x is typed.
+<strong>neighbor 10.10.5.1 soft-reconfiguration inbound</strong>
+!
+! Type in a description for future reference. Not everyone memorizes
+! ASNs. :-)
+<strong>neighbor 10.10.5.1 description eBGP with ISP64511</strong>
+!
+! Set up a password for authentication.
+<strong>neighbor 10.10.5.1 password bgpwith64511</strong>
+!
+! Hard-set for version 4. Disabled BGP version negotiation, thus
+! bringing the peering session on-line more quickly.
+<strong>neighbor 10.10.5.1 version 4</strong>
+!
+! Block any inbound announcments that include bogon networks. A prefix
+! list is used because it is:
+!  1) Easier on the CPU than ACLs, and
+!  2) Easier to modify.
+! See the actual bogons prefix-list below.
+<strong>neighbor 10.10.5.1 prefix-list bogons in</strong>
+!
+! Announce only those networks we specifically list. This also prevents
+! the network from becoming a transit provider. An added bit of protection
+! and good netizenship. See the announce prefix-list below.
+<strong>neighbor 10.10.5.1 prefix-list announce out</strong>
+!
+! Prevent a mistake or mishap by our peer (or someone with whom our peer
+! has a peering agreement) from causing router meltdown by filling the
+! routing and BGP tables. This is a hard limit. At 75% of this limit,
+! the IOS will issue log messages warning that the neighbor is approaching
+! the limit. All log messages should be sent to a remote syslog host.
+! The warning water mark can be modified by placing a value after the
+! maximum prefix value, e.g. maximum-prefix 250000 50. This will set the
+! IOS to issue warning messages when the neighbor reaches 50% of the limit.
+! Note that this number may need to be adjusted upward in the future to
+! account for growth in the Internet routing table.
+<strong>neighbor 10.10.5.1 maximum-prefix 250000</strong>
+!
+! Our next neighbor is 10.10.10.1, an eBGP peer with the ASN of 64500.
+<strong>neighbor 10.10.10.1 remote-as 64500
+neighbor 10.10.10.1 ttl-security hops 2
+neighbor 10.10.10.1 soft-reconfiguration inbound
+neighbor 10.10.10.1 description eBGP with ISP64500
+neighbor 10.10.10.1 password bgpwith64500
+neighbor 10.10.10.1 version 4
+neighbor 10.10.10.1 prefix-list bogons in
+neighbor 10.10.10.1 prefix-list announce out
+neighbor 10.10.10.1 maximum-prefix 350000</strong>
+!
+! This is our iBGP peer, 172.17.70.2.
+<strong>neighbor 172.17.70.2 remote-as 64496
+neighbor 172.17.70.2 ttl-security hops 2
+neighbor 172.17.70.2 soft-reconfiguration inbound</strong>
+!
+! Again, a handy description.
+<strong>neighbor 172.17.70.2 description iBGP with our other router</strong>
+!
+<strong>neighbor 172.17.70.2 password bgpwith64496</strong>
+! Use the loopback interface for iBGP announcements. This increases the
+! stability of iBGP.
+<strong>neighbor 172.17.70.2 update-source Loopback0
+neighbor 172.17.70.2 version 4
+neighbor 172.17.70.2 next-hop-self
+neighbor 172.17.70.2 prefix-list bogons in
+neighbor 172.17.70.2 maximum-prefix 250000</strong>
+!
+! Do not automatically summarize our announcements.
+<strong>no auto-summary</strong>
+!
+! If we have multiple links on the same router to the same AS, we like to
+! put them to good use. Load balance, per destination, with maximum-paths.
+! The limit is six. For our example, we will assume two equal size pipes
+! to the same AS.
+<strong>maximum-paths 2</strong>
+!
+! Now add our null route and the loopback/iBGP route. Remember to add
+! more specific non-null routes so that the packets travel to their
+! intended destination!
+<strong>ip route 192.0.2.0 255.255.255.0 Null0
+ip route 192.0.2.0 255.255.255.128 192.168.50.5
+ip route 192.0.2.128 255.255.255.128 192.168.50.8
+ip route 172.17.70.2 255.255.255.255 192.168.50.2</strong>
+!
+! We protect TCP port 179 (BGP port) from miscreants by limiting
+! access. Allow our peers to connect and log all other attempts.
+! Remember to apply this ACL to the interfaces of the router or
+! add it to existing ACLs.
+! Please note that ACL 185 would block ALL traffic as written. This
+! is designed to focus only on protecting BGP. You MUST modify ACL
+! 185 to fit your environment and approved traffic patterns.
+<strong>access-list 185 permit tcp host 10.10.5.1 host 10.10.5.2 eq 179
+access-list 185 permit tcp host 10.10.5.1 eq bgp host 10.10.5.2
+access-list 185 permit tcp host 10.10.10.1 host 10.10.10.2 eq 179
+access-list 185 permit tcp host 10.10.10.1 eq bgp host 10.10.10.2
+access-list 185 permit tcp host 172.17.70.2 host 172.17.70.1 eq 179
+access-list 185 permit tcp host 172.17.70.2 eq bgp host 172.17.70.1
+access-list 185 deny tcp any any eq 179 log-input</strong>
+!
+! The announce prefix list prevents us from announcing anything beyond
+! our aggregated netblock(s).
+<strong>ip prefix-list announce description Our allowed routing announcements
+ip prefix-list announce seq 5 permit 192.0.2.0/24
+ip prefix-list announce seq 10 deny 0.0.0.0/0 le 32</strong>
+!
+! Team Cymru has removed all static bogon references from this template
+! due to the high probability that the application of these bogon filters
+! will be a one-time event. Unfortunately many of these templates are
+! applied and never re-visited, despite our dire warnings that bogons do
+! change.
+!
+! This doesn't mean bogon filtering can't be accomplished in an automated
+! manner. Why not consider peering with our globally distributed bogon
+! route-server project? Alternately you can obtain a current and well
+! maintained bogon feed from our DNS and RADb services. Read more at the
+! link below to learn how!
+!
+! 	https://www.team-cymru.org/Services/Bogons/
+!
+! END
+</pre>
+    <br>
+    <br>
+    <p><a href="#menu">Back to the menu ^</a></p>
+    <hr>
+    <br>
+    <br>
+  </div>
+  <div id="junos-bgp-template">
+    <h1>JUNOS Secure BGP Template</h1>
+    <pre>
+    	/* ... begin template ... */
+version 4.3R3;
+/* JUNOS 4.3R3 Secure BGP template */
+routing-options {
+    options {
+        /* Turn off DNS resolution */
+        no-resolve;
+    }
+    static {
+        /* This is our aggregate static route */
+        route 1.88.0.0/19 discard;
+        /* More specific routes used with discard route above.  Remove these
+           if using an IGP to discover internal routes. */
+        route 1.88.50.0/24 next-hop 192.168.50.5;
+        route 1.88.55.0/24 next-hop 192.168.50.8;
+        route 1.88.75.128/25 next-hop 192.168.50.10;
+        /* Route to loopback of our iBGP peer */
+        route 172.17.70.2/32 next-hop 192.168.50.2;
+        /* Black-hole routes for traffic destined to these networks */
+        /* Use: http://www.cymru.com/gillsr/documents/junos-discard-
+routes.txt
+/* }
+    /* Our AS Number */
+    autonomous-system 111;
+    /* Export the policy that turns on flow based load balancing */
+    forwarding-table {
+       export load-balancing;
+    }
+/* Keep certain announcements from entering the routing table, but permit specific discard routes to remain there. Use 'show route martians' to view them. */
+   martians {
+/* Use: http://www.cymru.com/gillsr/documents/junos-martians.txt */ }
+}
+/* Routing protocol configuration */
+protocols {
+    bgp {
+        /* Log additional BGP information to aid in troubleshooting.  To
+view, use 'show log log-bgp' */ traceoptions {
+            /* Rotate through 5 files at 1mb each */
+            file log-bgp size 1m files 5;
+            /* Trace BGP state transitions */
+            flag state;
+            /* Trace BGP normal events */
+            flag normal;
+        }
+        /* Log BGP neighbor changes */
+        log-updown;
+        /* Enable bgp route flap damping */
+        damping;
+        /* Keep private AS numbers 64512-65535 from leaking out */
+        remove-private;
+        family inet {
+            any {
+                /* MUST take into account current routing table size and keep
+                   a CLOSE watch on this.  Otherwise do NOT use!  Prefit
+                   limits can be applied at the group level instead if
+                   desired. */
+                prefix-limit {
+                    /* Tear down connection when routes reach maximum */
+                    maximum 130000;
+                    /* Start issuing warning messages at teardown percent */
+                    teardown 90;
+} 
+}
+        }
+        /* iBGP peer-group with AS 111.  Peer-groups save typing and CPU
+           cycles when multiple neighbors exist with same policy */
+        group iBGP_111 {
+            type internal;
+            description "iBGP with AS 111";
+            /* Set my address to that of lo0 */
+            local-address 172.17.70.1;
+            authentication-key bgpwith111;
+            /* Set next-hop-self for eBGP routes sent to our iBGP peer */
+            export next-hop-self;
+            /* The following is assumed if not entered */
+            peer-as 111;
+            /* Loopback address of our internal peer */
+            neighbor 172.17.70.2;
+        }
+        /* eBGP peer-group with AS 222 */
+        group eBGP_222 {
+            type external;
+            description "eBGP with AS 222";
+            authentication-key bgpwith222;
+            
+            /* Inbound filtering: Remove bogons, small prefixes, private ASN
+                advertisements, and set damping parameters. */
+            import [ nobogons nosmallprefixes noprivateasns damping ];
+            /* Only announce our netblock */
+            export announce;
+            peer-as 222;
+            /* Allow installation of equal cost BGP paths into inet.0
+               (routing table), one of which is then selected at random */
+multipath;
+            neighbor 10.10.10.1;
+        }
+        /* eBGP peer-group with AS 333 */
+        group eBGP_333 {
+            type external;
+            description "eBGP with AS 333";
+            authentication-key bgpwith333;
+            import [ nobogons nosmallprefixes noprivateasns damping ];
+            export announce;
+            peer-as 333;
+            multipath;
+            neighbor 10.10.5.1;
+}
+ }
+}
+/* Route filtering configuration */
+policy-options {
+    /* List of root-servers.net as of 09/11/01.
+       Refer to RIPE-229 [6] on keeping this list current. */
+    prefix-list root-servers.net {
+        128.8.0.0/16;
+        128.9.0.0/16;
+        128.63.0.0/16;
+        192.5.4.0/23;
+        192.33.4.0/24;
+        192.36.148.0/24;
+        192.112.36.0/24;
+        192.203.230.0/24;
+        193.0.14.0/24;
+        198.32.64.0/24;
+        198.41.0.0/24;
+        202.12.27.0/24;
+    }
+    /* Match what we configured as our static aggregate netblock */
+    policy-statement announce {
+term 1 { from {
+                protocol static;
+                route-filter 1.88.0.0/19 exact;
+            }
+            then accept;
+        }
+term 2 {
+            then reject;
+        }
+    }
+    /* Martians list will reject bogon routes not listed here. Don't want
+       multicast address range listed in the martian list.  */
+       
+       policy-statement nobogons {
+    from route-filter 224.0.0.0/4 orlonger reject;
+}
+/* Reject advertisements that contain private AS numbers. */
+policy-statement noprivateasns {
+    from as-path private;
+    then reject;
+}
+/* AS-PATH referenced in the noprivateasns policy. */
+as-path private 64512-65535;
+/* Drop prefixes larger than /27.  Other BGP policies may vary */
+policy-statement nosmallprefixes {
+    from route-filter 0.0.0.0/0 prefix-length-range /27-/32 reject;
+}
+/* Set next-hop to self.  Used for eBGP routes sent to iBGP peers */
+policy-statement next-hop-self {
+then {
+        next-hop self;
+    }
+}
+/* Configure load balancing.  IP1 ASIC performs packet load balancing on
+   up to 8 equal cost paths.  IP2 ASIC performs flow based load balancing
+   on up to 16 equal cost paths.  Use only if you have an IP2 ASIC. */
+policy-statement load-balancing {
+    then {
+        load-balance per-packet;
+} 
+}
+/* Configure our damping policy according to RIPE-229 and an updated set
+   of DNS netblocks. */
+policy-statement damping {
+    /* Do NOT dampen DNS root-servers */
+    term 1 {
+from {
+            prefix-list root-servers.net;
+        }
+        then {
+            damping damp-none;
+            /* Ignore rest of terms and jump to next policy called */
+            next policy;
+} 
+}
+    /* Dampen according to prefix length.  JunOS penalises on withdraw
+       and on readvertise. So one flap attracts a total penalty of 2000.
+       An attribute change attracts a penalty of 500. */
+term 2 { from {
+            /* Lower penalty for prefixes of size /21 and smaller */
+            route-filter 0.0.0.0/0 upto /21 damping damp-short;
+            /* Medium penalty for prefixes of size /22 to /23 */
+            route-filter 0.0.0.0/0 upto /23 damping damp-medium;
+            /* Higher penalty for prefixes of size /24 and larger */
+            route-filter 0.0.0.0/0 orlonger damping damp-long;
+        }
+then {
+            next policy;
+        }
+        }
+         }
+    /* Min: 30 min, Max: 60 min, dampen at 3 flaps */
+    damping damp-long {
+        half-life 30;
+        reuse 1640;
+        suppress 6000;
+        max-suppress 60;
+    }
+    /* Min: 15 min, Max: 45 min, dampen at 3 flaps */
+    damping damp-medium {
+        half-life 15;
+        reuse 1500;
+        suppress 6000;
+        max-suppress 45;
+    }
+    /* Min: 10 min, Max: 30 min, dampen at 3 flaps */
+    damping damp-short {
+        half-life 10;
+        reuse 3000;
+        suppress 6000;
+        max-suppress 30;
+    }
+    /* Do not dampen.  Referenced for DNS root-servers */
+    damping damp-none {
+disable; }
+}
+/* Firewall filtering rules need to be applied to an interface.  In this case
+   it should be merged with existing firewall policy and applied to lo0. */
+firewall {
+    filter router-protect {
+        /* Drop and log all unexpected BGP connection attempts */
+        term 1 {
+            from {
+                address {
+                    0.0.0.0/0;
+                    10.10.5.1/32 except;
+                    10.10.10.1/32 except;
+                    172.17.70.1/32 except;
+                    172.17.70.2/32 except;
+                }
+                protocol tcp;
+                port bgp;
+} then {
+count manage-discard-bgp;
+discard; }
+}
+term 2 {
+            then {
+                /* Allow all other traffic */
+                count manage-accept-other;
+                accept;
+} 
+}
+} 
+}
+/* ... end template ... */
+   
+    </pre>
+    <br>
+    <br>
+    <p><a href="#menu">Back to the menu ^</a></p>
+    <hr>
+    <br>
+    <br>
+  </div>
+  <div id="secure-bgp-template-ftos-additions">
+    <h1>Secure FTOS BGP Template Additions</h1>
+    <pre>
+    	<p>
+!<br>
+!&nbsp;Our ASN is 111<br>
+<b>router bgp 111<br></b>
+!<br>
+!&nbsp;Be a little more forgiving of an occasional missed keepalive.<br>
+<b>&nbsp;no bgp fast-external-fallover<br></b>
+!<br>
+!&nbsp;Set the router ID to the loopback IP address of the router.<br>
+<b>&nbsp;bgp router-id 172.17.70.1<br></b>
+!<br>
+!&nbsp;Track and punt, via syslog, all interesting observations about our<br>
+!&nbsp;neighbors.  This command is enabled by default.<br>
+<b>&nbsp;bgp log-neighbor-changes<br></b>
+!<br>
+!&nbsp;Announce our netblock(s) in a manner that does not increase CPU<br>
+!&nbsp;utilization.  Redistributing from an IGP is dangerous as it increases<br>
+!&nbsp;the likelihood of flapping and instability.  Redistributing static is<br>
+!&nbsp;more stable, but requires the CPU to peruse the routing table at a set<br>
+!&nbsp;interval to capture any changes.  The network statement, combined with<br>
+!&nbsp;a null route, is the least expensive (in terms of CPU utilization) and<br>
+!&nbsp;most reliable (in terms of stability) option.<br>
+<b>&nbsp;network 1.88.0.0/19<br></b>
+!<br>
+!&nbsp;Our first neighbor, 10.10.5.1, is an eBGP peer with the ASN of 333.<br>
+<b>&nbsp;neighbor 10.10.5.1 remote-as 333<br></b>
+!<br>
+!&nbsp;Set for soft reconfiguration, thus preventing a complete withdrawal<br>
+!&nbsp;of all announced prefixes when clear ip bgp x.x.x.x is typed.<br>
+<b>&nbsp;neighbor 10.10.5.1 soft-reconfiguration inbound<br></b>
+!<br>
+!&nbsp;Type in a description for future reference.  Not everyone memorizes<br>
+!&nbsp;ASNs.  :-)<br>
+<b>&nbsp;neighbor 10.10.5.1 description "eBGP with ISP333"<br></b>
+!<br>
+!&nbsp;Set up a password for authentication.<br>
+<b>&nbsp;neighbor 10.10.5.1 password bgpwith333<br></b>
+!<br>
+!&nbsp;Block any inbound announcments that include bogon networks.<br>
+!&nbsp;See the actual bogons prefix-list below.<br>
+<b>&nbsp;neighbor 10.10.5.1 distribute-list bogons in<br></b>
+!<br>
+!&nbsp;Announce only those networks we specifically list.  This also prevents<br>
+!&nbsp;the network from becoming a transit provider.  An added bit of protection<br>
+!&nbsp;and good netizenship.  See the announce prefix-list below.<br>
+<b>&nbsp;neighbor 10.10.5.1 distribute-list announce out<br></b>
+!<br>
+!&nbsp;Prevent a mistake or mishap by our peer (or someone with whom our peer<br>
+!&nbsp;has a peering agreement) from causing router meltdown by filling the<br>
+!&nbsp;routing and BGP tables.  This is a hard limit.  At 75% of this limit,<br>
+!&nbsp;FTOS will issue log messages warning that the neighbor is approaching<br>
+!&nbsp;the limit.  All log messages should be sent to a remote syslog host.<br>
+!&nbsp;The warning water mark can be modified by placing a value after the<br>
+!&nbsp;maximum prefix value, e.g. maximum-prefix 250000 50.  This will set<br>
+!&nbsp;FTOS to issue warning messages when the neighbor reaches 50% of the limit.<br>
+!&nbsp;Note that this number may need to be adjusted upward in the future to<br>
+!&nbsp;account for growth in the Internet routing table.<br>
+<b>&nbsp;neighbor 10.10.5.1 maximum-prefix 250000<br></b>
+!<br>
+!&nbsp;Our next neighbor is 10.10.10.1, an eBGP peer with the ASN of 222.<br>
+<b>&nbsp;neighbor 10.10.10.1 remote-as 222<br></b>
+<b>&nbsp;neighbor 10.10.10.1 soft-reconfiguration inbound<br></b>
+<b>&nbsp;neighbor 10.10.10.1 description "eBGP with ISP222"<br></b>
+<b>&nbsp;neighbor 10.10.10.1 password bgpwith222<br></b>
+<b>&nbsp;neighbor 10.10.10.1 distribute-list bogons in<br></b>
+<b>&nbsp;neighbor 10.10.10.1 distribute-list announce out<br></b>
+<b>&nbsp;neighbor 10.10.10.1 maximum-prefix 250000<br></b>
+!<br>
+!&nbsp;This is our iBGP peer, 172.17.70.2.<br>
+<b>&nbsp;neighbor 172.17.70.2 remote-as 111<br></b>
+<b>&nbsp;neighbor 172.17.70.2 soft-reconfiguration inbound<br></b>
+!<br>
+!&nbsp;Again, a handy description.<br>
+<b>&nbsp;neighbor 172.17.70.2 description "iBGP with our other router"<br></b>
+!<br>
+<b>&nbsp;neighbor 172.17.70.2 password bgpwith111<br></b>
+!<br>
+!&nbsp;Use the loopback interface for iBGP announcements.  This increases the<br>
+!&nbsp;stability of iBGP.<br>
+<b>&nbsp;neighbor 172.17.70.2 update-source Loopback0<br></b>
+<b>&nbsp;neighbor 172.17.70.2 next-hop-self<br></b>
+<b>&nbsp;neighbor 172.17.70.2 distribute-list bogons in<br></b>
+<b>&nbsp;neighbor 172.17.70.2 maximum-prefix 250000<br></b>
+!<br>
+!&nbsp;If we have multiple links on the same router to the same AS, we like to<br>
+!&nbsp;put them to good use.  Load balance, per destination, with maximum-paths.<br>
+!&nbsp;The limit is sixteen.  For our example, we will assume two equal size pipes<br>
+!&nbsp;to the same AS.<br>
+<b>&nbsp;maximum-paths ebgp 2<br></b>
+<b>&nbsp;maximum-paths ibgp 2<br></b>
+!<br>
+!&nbsp;Disable proxy ARP on each routed interface<br>
+<b>no ip proxy-arp</b><br>
+!<br>
+!&nbsp;Now add our null route and the loopback/iBGP route.  Remember to add<br>
+!&nbsp;more specific non-null routes so that the packets travel to their<br>
+!&nbsp;intended destination!<br>
+<b>ip route 1.88.0.0/19 Null0<br></b>
+<b>ip route 1.88.50.0/24 192.168.50.5<br></b>
+<b>ip route 1.88.55.0/24 192.168.50.8<br></b>
+<b>ip route 1.88.75.128/17 192.168.50.10<br></b>
+<b>ip route 172.17.70.2/32 192.168.50.2<br></b>
+!<br>
+!&nbsp;We protect TCP port 179 (BGP port) from miscreants by limiting<br>
+!&nbsp;access.  Allow our peers to connect and log all other attempts.<br>
+!&nbsp;Remember to apply this ACL to the interfaces of the router or<br>
+!&nbsp;add it to existing ACLs.<br>
+! Please note that ACL block-bgp would block <b>ALL</b> traffic as written.  This<br>
+! is designed to focus only on protecting BGP.  You <b>MUST</b> modify ACL<br>
+! block-bgp to fit your environment and approved traffic patterns.<br>
+! This access list <b>MUST</b> then be applied to interface Loopback0.<br>
+<b>ip access-list extended block-bgp</b><br>
+<b>&nbsp;seq 5 permit tcp host 10.10.5.1 host 10.10.5.2 eq 179</b><br>
+<b>&nbsp;seq 10 permit tcp host 10.10.5.1 eq 179 host 10.10.5.2</b><br>
+<b>&nbsp;seq 15 permit tcp host 10.10.10.1 host 10.10.10.2 eq 179</b><br>
+<b>&nbsp;seq 20 permit tcp host 10.10.10.1 eq 179 host 10.10.10.2</b><br>
+<b>&nbsp;seq 25 permit tcp host 172.17.70.2 host 172.17.70.1 eq 179</b><br>
+<b>&nbsp;seq 30 permit tcp host 172.17.70.2 eq 179 host 172.17.70.1</b><br>
+<b>&nbsp;seq 35 deny tcp any any eq 179 log</b><br>
+!<br>
+!&nbsp;The announce prefix list prevents us from announcing anything beyond<br>
+!&nbsp;our aggregated netblock(s).<br>
+<b>ip prefix-list announce</b><br>
+<b>&nbsp;description Our allowed routing announcements</b><br>
+<b>&nbsp;seq 5 permit 1.88.0.0/19</b><br>
+<b>&nbsp;seq 10 deny any</b><br>
+!<br>
+!&nbsp;Allow all prefixes up to /27.  Your mileage may vary,<br>
+!&nbsp;so adjust this to fit your specific requirements.<br>
+<b>&nbsp;seq 525 permit 0.0.0.0/0 le 27</b><br>
+!<br>
+!&nbsp;END<br>
+</p>
+    </pre>
+    <br>
+    <br>
+    <p><a href="#menu">Back to the menu ^</a></p>
+    <hr>
+    <br>
+    <br>
+  </div>
+  <div id="secure-ios-template">
+    <h1>Secure IOS Template Version 6.5</h1>
+    <pre>
+!&nbsp;Secure router configuration template.<br>
+!&nbsp;Version 6.5<br>
+!&nbsp;@(#)Secure IOS template v6.5 19 MAY 2014 Team Cymru noc@cymru.com<br>
+!&nbsp;@(#)https://www.cymru.com/Documents/secure-ios-template-65.html<br>
+!<br>
+!&nbsp;This configuration assumes the following topology:<br>
+!<br>
+!&nbsp;<b>Upstream/Internet</b><br>
+!&nbsp;192.0.2.1/28<br>
+!<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|</b><br>
+!&nbsp;192.0.2.14/28 (Ethernet 2/0) <br>
+!&nbsp;<b>THIS ROUTER</b><br>
+!&nbsp;192.0.2.17/28 (Ethernet 2/1)<br>
+!&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<br>
+!&nbsp;192.0.2.30/28<br>
+!&nbsp;<b>Firewall</b><br>
+!&nbsp;192.0.2.33/27<br>
+!&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<br>
+!&nbsp;192.0.2.32/27<br>
+!&nbsp;<b>Intranet</b><br>
+!<br>
+!&nbsp;In this case, 192.0.2.34 is the loghost, FTP server, etc.<br>
+!&nbsp;for the router.  It could also be the firewall if<br>
+!&nbsp;circumstances dictate.<br>
+!<br>
+<b>service nagle<br></b>
+<b>service tcp-keepalives-in<br></b>
+<b>service tcp-keepalives-out<br></b>
+!<br>
+!&nbsp;Show copious timestamps in our logs<br>
+<b>service timestamps debug datetime msec show-timezone localtime<br></b>
+<b>service timestamps log datetime msec show-timezone localtime<br></b>
+!&nbsp;Ensures all passwords and secrets are obfuscated when looking at<br>
+!&nbsp;configuration files<br>
+<b>service password-encryption<br></b>
+<b>no service dhcp<br></b>
+!<br>
+<b>hostname secure-router01<br></b>
+!<br>
+<b>boot system flash slot0:rsp-pv-mz.121-5a.bin<br></b>
+<b>logging buffered 16384 debugging<br></b>
+<b>no logging console<br></b>
+!&nbsp;The keyword 'secret' ensures MD5 is used when 'service password<br>
+!&nbsp;encryption' is used (above.)  The keyword 'password' uses a mechanism<br>
+!&nbsp;which is simple to reverse-engineer and should be avoided<br>
+<b>enable secret &lt;PASSWORD&gt;<br></b>
+<b>no enable password<br></b>
+!<br>
+!&nbsp;Use TACACS+ for AAA. Ensure that the local account is<br>
+!&nbsp;case-sensitive, thus making brute-force attacks less<br>
+!&nbsp;effective.<br>
+<b>aaa new-model<br></b>
+<b>aaa authentication login default group tacacs+ local-case<br></b>
+<b>aaa authentication enable default group tacacs+ enable<br></b>
+<b>aaa authorization commands 15 default group tacacs+ local<br></b>
+<b>aaa accounting exec default stop-only group tacacs+<br></b>
+<b>aaa accounting commands 15 default stop-only group tacacs+<br></b>
+<b>aaa accounting network default stop-only group tacacs+<br></b>
+<b>tacacs-server host 192.0.2.34<br></b>
+<b>tacacs-server key cheezit<br></b>
+!<br>
+!&nbsp;In the event that TACACS+ fails, use case-sensitve local<br>
+!&nbsp;authentication instead.  Keeps the hackers guessing, and<br>
+!&nbsp;the router more secure.<br>
+<b>username &lt;USERNAME&gt; secret &lt;PASSWORD&gt;<br></b>
+!<br>
+!&nbsp;Logging the commands run while at enable level access is<br>
+!&nbsp;a great way to track mistakes, security issues, etc.<br>
+<b>archive</b><br>
+<b>&nbsp;log config</b><br>
+<b>&nbsp;&nbsp;logging enable</b><br>
+<b>&nbsp;&nbsp;logging size 500</b><br>
+<b>&nbsp;&nbsp;notify syslog</b><br>
+<b>&nbsp;&nbsp;hidekeys</b><br>
+!<br>
+!&nbsp;Ensure TCL doesn't use an initilizaion file where available. This won't show up in the<br>
+!&nbsp;config.  It will break your router-based TCL scripts if<br>
+!&nbsp;if you use such, so use with care!<br>
+<b>no scripting tcl init</b><br>
+<b>no scripting tcl encdir</b><br>
+!<br>
+!&nbsp;Enable the netflow top talkers feature.<br>
+!&nbsp;You can see the top N talkers (50 in this example) with the<br>
+!&nbsp;<b>show ip flow top-talkers</b> command.  This is a handy<br>
+!&nbsp;utility to use during DDoS attacks and traffic issues.  You<br>
+!&nbsp;can <b>sort-by</b> either <b>packets</b> or <b>bytes</b>, as you prefer.<br>
+<b>ip flow-top-talkers</b><br>
+<b>&nbsp;top 50</b><br>
+<b>&nbsp;sort-by packets</b><br>
+!<br>
+!&nbsp;Don't run the HTTP server.<br>
+<b>no ip http server<br></b>
+<b>no ip http secure-server<br></b>
+!<br>
+!&nbsp;Allow us to use the low subnet and go classless<br>
+<b>ip subnet-zero<br></b>
+<b>ip classless<br></b>
+!<br>
+!&nbsp;Disable noxious services<br>
+<b>no service pad<br></b>
+<b>no ip source-route<br></b>
+<b>no ip finger<br></b>
+<b>no ip bootp server<br></b>
+<b>no ip domain-lookup<br></b>
+!<br>
+!&nbsp;Block brute force login attempts while maintaining access for legitimate source addresses.<br>
+!&nbsp;<a href="http://www.cisco.com/en/US/docs/ios/sec_user_services/configuration/guide/sec_login_enhance_ps6922_TSD_Products_Configuration_Guide_Chapter.html">http://www.cisco.com/en/US/docs/ios/sec_user_services/configuration/guide/sec_login_enhance_ps6922_TSD_Products_Configuration_Guide_Chapter.html</a><br>
+!&nbsp;This is in theory unnecessary if VTY ACLs are in place, yet things happen and this adds the<br>
+!&nbsp;"belt" to the VTY ACL "suspenders."<br>
+!&nbsp;Note carefully the use of ACL 100 in the login quiet-mode statement.  This ensures our<br>
+!&nbsp;legitimate administrator addresses can still reach the router even after a vigorous<br>
+!&nbsp;bruteforce or attack attempt.<br>
+<b>login block-for 100 attempts 15 within 100<br></b>
+<b>login quiet-mode access-class 100<br></b>
+<b>login on-failure log<br></b>
+<b>login on-success log<br></b>
+!<br>
+!&nbsp;Catch crash dumps; very important with a "security router."<br>
+<b>ip ftp username rooter<br></b>
+<b>ip ftp password &lt;PASSWORD&gt;<br></b>
+!&nbsp;Give our core dump files a unique name.<br>
+<b>exception core-file secure-router01-core<br></b>
+<b>exception protocol ftp<br></b>
+<b>exception dump 192.0.2.34<br></b>
+!<br>
+!&nbsp;Fire up CEF for both performance and security.<br>
+<b>ip cef<br></b>
+!<br>
+!&nbsp;Set the timezone properly.  It is best to standardize on one<br>
+!&nbsp;timezone for all routers, thus making problem tracking easier.<br>
+<b>clock timezone GMT 0<br></b>
+!&nbsp;Synchronize our clocks with a local (trusted and authenticated)<br>
+!&nbsp;NTP server.  The SECRETKEY must be the same on both the router<br>
+!&nbsp;and the NTP server.<br>
+<b>ntp authentication-key 6767 md5 &lt;SECRETKEY&gt;<br></b>
+<b>ntp authenticate<br></b>
+<b>ntp update-calendar<br></b>
+<b>ntp server 192.0.2.34<br></b>
+!<br>
+!&nbsp;Configure the loopback0 interface as the source of our log<br>
+!&nbsp;messages.  This is often used for routing protocols as well.<br>
+!&nbsp;Select an IP address that uniquely identifies this router.<br>
+!&nbsp;One trick is to allocate a netblock for use as the router<br>
+!&nbsp;loopback netblock.<br>
+<b>int loopback0<br></b>
+<b>&nbsp;ip address 10.10.10.10 255.255.255.255<br></b>
+<b>&nbsp;no ip redirects<br></b>
+<b>&nbsp;no ip unreachables<br></b>
+<b>&nbsp;no ip proxy-arp<br></b>
+!<br>
+!&nbsp;Configure null0 as a place to send naughty packets.  This<br>
+!&nbsp;becomes the "roach motel" for packets -- they can route in,<br>
+!&nbsp;but they can't route out.<br>
+<b>interface null0<br></b>
+<b>&nbsp;no ip unreachables<br></b>
+!<br>
+<b>interface Ethernet2/0<br></b>
+<b>&nbsp;description Unprotected interface, facing towards Internet<br></b>
+<b>&nbsp;ip address 192.0.2.14 255.255.255.240<br></b>
+&nbsp;! Do we run CEF verify?  Yes if the data path is symmetric.  No<br>
+&nbsp;! if the data path is asymmetric.<br>
+<b>&nbsp;ip verify unicast reverse-path<br></b>
+&nbsp;! Apply our template ACL<br>
+<b>&nbsp;ip access-group 2010 in<br></b>
+&nbsp;! Allow UDP to occupy no more than 2 Mb/s of the pipe.<br>
+<b>&nbsp;rate-limit input access-group 150 2010000 250000 250000 conform-action transmit exceed-action drop<br></b>
+&nbsp;! Allow ICMP to occupy no more than 500 Kb/s of the pipe.<br>
+<b>&nbsp;rate-limit input access-group 160 500000 62500 62500 conform-action transmit exceed-action drop<br></b>
+&nbsp;! Allow multicast to occupy no more than 5 Mb/s of the pipe.<br>
+<b>&nbsp;rate-limit input access-group 170 5000000 375000 375000 conform-action transmit exceed-action drop<br></b>
+&nbsp;! Don't send redirects.<br>
+<b>&nbsp;no ip redirects<br></b>
+&nbsp;! Don't send unreachables.<br>
+&nbsp;! NOTE WELL that this may break PMTU discovery.<br>
+&nbsp;! For example, if this router is edge for a VPN of any sort, you might need<br>
+&nbsp;! to enable ip unreachables<br>
+&nbsp;! A typical symptom is ping working but a larger transmission doesn't.<br>
+<b>&nbsp;no ip unreachables<br></b>
+&nbsp;! Don't propogate smurf attacks.<br>
+<b>&nbsp;no ip directed-broadcast<br></b>
+&nbsp;! Don't pretend to be something you're not.  :-)<br>
+<b>&nbsp;no ip proxy-arp<br></b>
+&nbsp;! Do not reveal our netmask<br>
+<b>&nbsp;no ip mask-reply<br></b>
+&nbsp;! Log all naughty business.<br>
+<b>&nbsp;ip accounting access-violations<br></b>
+&nbsp;! If you allow multicast in your network or participate in the<br>
+&nbsp;! MBONE, the following multicast filtering steps will help to<br>
+&nbsp;! ensure a secure multicast environment.  These must be applied<br>
+&nbsp;! per interface.<br>
+&nbsp;<b>ip multicast boundary 30<br></b>
+&nbsp;!<br>
+&nbsp;! Keep flow data for analysis.  If possible, export it to a<br>
+&nbsp;! cflowd server.<br>
+<b>&nbsp;ip route-cache flow<br></b>
+&nbsp;! When you configure anything to do with ntp on an IOS box, it will start listening on all<br>
+&nbsp;! interfaces. It is therefore a good idea that interfaces with public addresses have ntp disabled<br>
+&nbsp;! and therefore don't show a socket, unless that is what the interface is intended to do.<br>
+<b>&nbsp;ntp disable<br></b>
+&nbsp;! Disable Maintenance Operations Protocol on all interfaces<br>
+&nbsp;<b>no mop enable<br></b>
+!<br>
+<b>interface Ethernet2/1<br></b>
+<b>&nbsp;description Protected interface, facing towards DMZ<br></b>
+<b>&nbsp;ip address 192.0.2.17 255.255.255.240<br></b>
+&nbsp;! Do we run CEF verify?  Yes if the data path is symmetric.  No<br>
+&nbsp;! if the data path is asymmetric.<br>
+<b>&nbsp;ip verify unicast reverse-path<br></b>
+&nbsp;! If we are using RPF, comment out the ACL below.<br>
+<b>&nbsp;ip access-group 115 in<br></b>
+<b>&nbsp;no ip redirects<br></b>
+<b>&nbsp;no ip unreachables<br></b>
+<b>&nbsp;no ip directed-broadcast<br></b>
+<b>&nbsp;no ip proxy-arp<br></b>
+<b>&nbsp;ip accounting access-violations<br></b>
+<b>&nbsp;ip multicast boundary 30<br></b>
+<b>&nbsp;no ip mask-reply<br></b>
+<b>&nbsp;ip route-cache flow<br></b>
+&nbsp;! Disable Maintenance Operations Protocol on all interfaces<br>
+&nbsp;<b>no mop enable<br></b>
+!<br>
+!&nbsp;Default route to the Internet (could be a routing<br>
+!&nbsp;protocol instead)<br>
+<b>ip route 0.0.0.0 0.0.0.0 192.0.2.1<br></b>
+!&nbsp;Route to network on the other side of the firewall<br>
+<b>ip route 192.0.2.32 255.255.255.224 192.0.2.30<br></b>
+!&nbsp;Black hole routes.  Do not combine this with TCP Intercept;<br>
+!&nbsp;in fact, don't use TCP Intercept at all.<br>
+!<br>
+!&nbsp;Bogons<br>
+!&nbsp;Team Cymru has removed all static bogon references from this template<br>
+!&nbsp;due to the high probability that the application of these bogon filters<br>
+!&nbsp;will be a one-time event. Unfortunately many of these templates are<br>
+!&nbsp;applied and never re-visited, despite our dire warnings that bogons do<br>
+!&nbsp;change.<br>
+!<br>
+!&nbsp;This doesn't mean bogon filtering can't be accomplished in an automated<br>
+!&nbsp;manner. Why not consider peering with our globally distributed bogon<br>
+!&nbsp;route-server project? Alternately you can obtain a current and well<br>
+!&nbsp;maintained bogon feed from our DNS and RADb services. Read more at the<br>
+!&nbsp;link below to learn how!<br>
+!<br>
+!&nbsp;<a href="https://www.team-cymru.org/Services/Bogons/">https://www.team-cymru.org/Services/Bogons/</a><br>
+!<br>
+!&nbsp;Export our NetFlow data to our NetFlow server, 192.0.2.34.  NetFlow<br>
+!&nbsp;provides some statistics that can be of use when tracing the true<br>
+!&nbsp;source of a spoofed attack.<br>
+<b>ip flow-export source loopback0<br></b>
+<b>ip flow-export destination 192.0.2.34 2055<br></b>
+<b>ip flow-export version 5 origin-as<br></b>
+!<br>
+!&nbsp;Log anything interesting to the loghost.  Capture all of<br>
+!&nbsp;the logging output with FACILITY LOCAL5.<br>
+<b>logging trap debugging<br></b>
+<b>logging facility local5<br></b>
+<b>logging source-interface loopback0<br></b>
+<b>logging 192.0.2.34<br></b>
+!<br>
+!&nbsp;With the ACLs, it is important to log the naughty folks.<br>
+!&nbsp;Thus, the implicit drop all ACL is replaced (augmented,<br>
+!&nbsp;actually) with an explicit drop all that logs the attempt.<br>
+!&nbsp;You may wish to keep a second list (e.g. 2011) that does not<br>
+!&nbsp;log.  During an attack, the additional logging can impact the<br>
+!&nbsp;performance of the router.  Simply copy and paste access-list 2010,<br>
+!&nbsp;remove the log-input keyword, and name it access-list 2011.  Then<br>
+!&nbsp;when an attack rages, you can replace access-list 2010 on the<br>
+!&nbsp;Internet-facing interface with access-list 2011.<br>
+!<br>
+!&nbsp;Block SNMP access to all but the loghost<br>
+<b>access-list 20 remark SNMP ACL<br></b>
+<b>access-list 20 permit 192.0.2.34<br></b>
+<b>access-list 20 deny any log<br></b>
+!<br>
+!&nbsp;Multicast - filter out obviously naughty or needless traffic<br>
+<b>access-list 30 remark Multicast filtering ACL<br></b>
+!&nbsp;Link local<br>
+<b>access-list 30 deny   224.0.0.0 0.0.0.255 log<br></b>
+!&nbsp;Locally scoped<br> 
+<b>access-list 30 deny   239.0.0.0 0.255.255.255 log<br></b>
+!&nbsp;sgi-dogfight<br>   
+<b>access-list 30 deny   host 224.0.1.2 log<br></b>
+!&nbsp;rwhod<br>
+<b>access-list 30 deny   host 224.0.1.3 log<br></b>
+!&nbsp;ms-srvloc<br>
+<b>access-list 30 deny   host 224.0.1.22 log<br></b>
+!&nbsp;ms-ds<br>
+<b>access-list 30 deny   host 224.0.1.24 log<br></b>
+!&nbsp;ms-servloc-da<br>  
+<b>access-list 30 deny   host 224.0.1.35 log<br></b>
+!&nbsp;hp-device-disc<br> 
+<b>access-list 30 deny   host 224.0.1.60 log<br></b>
+!&nbsp;Permit all other multicast traffic<br>
+<b>access-list 30 permit  224.0.0.0 15.255.255.255 log<br></b>
+!<br>
+!&nbsp;Block access to all but the loghost and the firewall, and log any<br>
+!&nbsp;denied access attempts.  This also serves to create an audit trail<br>
+!&nbsp;of all access to the router.  Extended ACLs are used to log some<br>
+!&nbsp;additional data.<br>
+<b>access-list 100 remark VTY Access ACL<br></b>
+<b>access-list 100 permit tcp host 192.0.2.34 host 0.0.0.0 range 22 23 log-input<br></b>
+<b>access-list 100 permit tcp host 192.0.2.30 host 0.0.0.0 range 22 23 log-input<br></b>
+<b>access-list 100 deny ip any any log-input<br></b>
+!<br>
+!&nbsp;Leave one VTY safe for access, just in case.  The host<br>
+!&nbsp;192.0.2.40 is a secure host in the NOC.  If all the VTYs are<br>
+!&nbsp;occupied, this leaves one VTY available.<br>
+<b>access-list 105 remark VTY Access ACL<br></b>
+<b>access-list 105 permit tcp host 192.0.2.40 host 0.0.0.0 range 22 23 log-input<br></b>
+<b>access-list 105 deny ip any any log-input<br></b>
+!<br>
+!&nbsp;Configure an ACL that prevents spoofing from within our network.<br>
+!&nbsp;This ACL assumes that we need to access the Internet only from the<br>
+!&nbsp;192.0.2.32/27 network.  If you have additional networks behind<br>
+!&nbsp;192.0.2.32/27, then add them into this ACL.<br>
+<b>access-list 115 remark Anti-spoofing ACL<br></b>
+!&nbsp;First, allow our intranet to access the Internet.<br>
+<b>access-list 115 permit ip 192.0.2.32 0.0.0.31 any<br></b>
+!&nbsp;Second, allow our firewall to access the Internet.  This is useful<br>
+!&nbsp;for testing.<br>
+<b>access-list 115 permit ip host 192.0.2.30 any<br></b>
+!&nbsp;Now log all other such attempts.<br>
+<b>access-list 115 deny ip any any log-input<br></b>
+!<br>
+!&nbsp;Rate limit (CAR) ACLs for UDP, ICMP, and multicast.<br>
+<b>access-list 150 remark CAR-UDP ACL<br></b>
+<b>access-list 150 permit udp any any<br></b>
+<b>access-list 160 remark CAR-ICMP ACL<br></b>
+<b>access-list 160 permit icmp any any<br></b>
+<b>access-list 170 remark CAR-Multicast ACL<br></b>
+<b>access-list 170 permit ip any 224.0.0.0 15.255.255.255<br></b>
+!<br>
+!&nbsp;Deny any packets from the RFC 1918, IANA reserved, test,<br>
+!&nbsp;multicast as a source, and loopback netblocks to block<br>
+!&nbsp;attacks from commonly spoofed IP addresses.<br>
+<b>access-list 2010 remark Anti-bogon ACL<br></b>
+!&nbsp;Claims it came from the inside network, yet arrives on the<br>
+!&nbsp;outside (read: Internet) interface.  Do not use this if CEF<br>
+!&nbsp;has been configured to take care of spoofing.<br>
+<b>!&nbsp;access-list 2010 deny   ip 192.0.2.16 0.0.0.15 any log-input<br></b>
+<b>!&nbsp;access-list 2010 deny   ip 192.0.2.32 0.0.0.31 any log-input<br></b>
+!<br>
+!&nbsp;Bogons<br>
+!&nbsp;Team Cymru has removed all static bogon references from this template<br>
+!&nbsp;due to the high probability that the application of these bogon filters<br>
+!&nbsp;will be a one-time event. Unfortunately many of these templates are<br>
+!&nbsp;applied and never re-visited, despite our dire warnings that bogons do<br>
+!&nbsp;change.<br>
+!&nbsp;<br>
+!&nbsp;This doesn't mean bogon filtering can't be accomplished in an automated<br>
+!&nbsp;manner. Why not consider peering with our globally distributed bogon<br>
+!&nbsp;route-server project? Alternately you can obtain a current and well<br>
+!&nbsp;maintained bogon feed from our DNS and RADb services. Read more at the<br>
+!&nbsp;link below to learn how!<br>
+!&nbsp;<br>
+!&nbsp;<a href="https://www.team-cymru.org/Services/Bogons/">https://www.team-cymru.org/Services/Bogons/</a><br>
+!<br>
+!&nbsp;Drop all ICMP fragments<br>
+<b>access-list 2010 deny   icmp any any fragments log-input<br></b>
+!&nbsp;Allow IP access to the intranet (firewall filters specific ports)<br>
+<b>access-list 2010 permit ip any 192.0.2.32 0.0.0.31<br></b>
+!&nbsp;Allow multicast to enter.  See also access-list 30 for more<br>
+!&nbsp;specific multicast rules.<br>
+<b>access-list 2010 permit    ip any 224.0.0.0 15.255.255.255<br></b>
+!&nbsp;Our explicit (read: logged) drop all rule<br>
+<b>access-list 2010 deny   ip any any log-input<br></b>
+!<br>
+!&nbsp;Do not share CDP information, which contains key bits about our<br>
+!&nbsp;configuration, etc.  This command disabled CDP globally.  If you<br>
+!&nbsp;require CDP on an interface, use cdp run and disable cdp<br>
+!&nbsp;(no cdp enable) on the Internet-facing interface.<br>
+<b>no cdp run<br></b>
+!&nbsp;SNMP is VERY important, particularly with MRTG.<br>
+!&nbsp;Treat the COMMUNITY string as a password - keep it difficult to guess.<br>
+!&nbsp;For SNMP versions 1-2<br>
+<b>snmp-server community &lt;COMMUNITY&gt; RO 20<br></b>
+!<br>
+!&nbsp;Introduce ourselves with an appropriately stern banner.<br>
+<b>banner motd %<br></b>
+<b>Router foo.  Access to this device or the attached<br></b>
+<b>networks is prohibited without express written permission.<br></b>
+<b>Violators will be prosecuted to the fullest extent of both civil<br></b>
+<b>and criminal law.<br></b>
+<br>
+<b>We don't like you.  Go away.<br></b>
+<br>
+<b>%<br></b>
+!<br>
+<b>line con 0<br></b>
+<b>&nbsp;exec-timeout 15 0<br></b>
+<b>&nbsp;transport input none<br></b>
+<b>line aux 0<br></b>
+<b>&nbsp;exec-timeout 15 0<br></b>
+<b>line vty 0 3<br></b>
+<b>&nbsp;access-class 100 in<br></b>
+<b>&nbsp;exec-timeout 15 0<br></b>
+!&nbsp;Enable SSH connectivity.  <br>
+!&nbsp;Obviously, you must have an IOS image that supports SSH, and don't<br>
+!&nbsp;forget to generate the key with <b>crypto key generate rsa</b>.<br>
+!&nbsp;To enable SSH access to the device, you additionally require a domain<br>
+!&nbsp;name to be set via "ip domian name x" before generating RSA keys<br>
+<b>&nbsp;ip domain-name &lt;YOUR.DOMAIN&gt;<br></b>
+!&nbsp;Disable SSHv1<br>
+<b>&nbsp;ip ssh version 2<br></b>
+<b>&nbsp;transport input ssh<br></b>
+<b>line vty 4<br></b>
+<b>&nbsp;access-class 105 in<br></b>
+<b>&nbsp;exec-timeout 15 0<br></b>
+<b>&nbsp;transport input ssh<br></b>
+!<br>
+!&nbsp;End of the configuration.<br>
+!<br>
+</pre>
+    <br>
+    <br>
+    <p><a href="#menu">Back to the menu ^</a></p>
+    <hr>
+    <br>
+    <br>
+  </div>
+  <div id="junos-template">
+    <h1>Secure JunOS Template</h1>
+    <pre>/* ... begin template ... */
+version 4.3R3;
+system {
+    host-name secure-router-01;
+    /* Enable a backup router during boot for ntp. It will be used before
+    	rpd has started or if it fails. */
+    backup-router 6.6.6.1 destination 7.7.7.0/24;
+    time-zone America/Chicago;
+    /* Do not send ICMP redirects */
+    no-redirects;
+    /* Use local password authentication if AAA fails */
+    authentication-order [ radius password ];
+    location country-code US;
+    /* Configure authentication passwords */
+    diag-port-authentication {
+    encrypted-password "<PASSWORD>"; # SECRET-DATA
+    }
+    root-authentication {
+    encrypted-password "<PASSWORD>"; # SECRET-DATA
+    }
+    /* Enable RADIUS authentication. Read ‘JUNOS RADIUS Authentication’ [4]
+    	for further information on configuring and troubleshooting RADIUS */
+    radius-server {
+    	7.7.7.5 {
+            /* Shared secret between client and server */
+            secret "<PASSWORD>"; # SECRET-DATA
+            /* Wait 5 seconds until timeout */
+            timeout 5;
+  	   }
+    }
+    login {
+        /* Same as MOTD banner in Cisco. Extend a stern introduction. */
+        message "********************************************************\n
+                * [WARNING] secure-router-01 							*\n
+                * This system is owned by [COMPANY]. If you are not 	*\n
+                * authorized to access this system, exit immediately.	*\n
+                * Unauthorized access to this system is forbidden by 	*\n
+                * company policies, national, and international laws. 	*\n
+                * Unauthorized users are subject to criminal and civil	*\n
+                * penalties as well as company initiated disciplinary	*\n
+                * proceedings.	     									*\n
+                * 														*\n
+                * By entry into this system you acknowledge that you 	*\n
+                * are authorized access and the level of privilege you	*\n
+                * subsequently execute on this system. You further		*\n
+                * acknowledge that by entry into this system you		*\n
+                * expect no privacy from monitoring.					*\n
+                ********************************************************\n";
+		/* Configure an account classes with specific privileges. We cannot
+			modify the predefined classes, so we must create our own. */
+		class tier1 {
+			/* Session will time out after 15 minutes of inactivity */
+			idle-timeout 15;
+			/* Provides basic read-only privileges */
+			permissions [ configure interface network routing snmp system
+						  trace view firewall ];
+		}
+		class tier2 {
+			idle-timeout 15;
+			/* Provides a controlled subset of read-write privileges */
+			permissions [ admin clear configure interface interfacecontrol
+						  network reset routing routing-control
+						  snmp snmp-control system system-control trace
+  						  trace-control view maintenance firewall
+						  firewall-control secret rollback ];
+		}
+		class tier3 {
+			idle-timeout 15;
+			/* Provides unlimited access */
+			permissions all;
+		}
+		/* This is our local superuser account with a local password. */
+		user admin {
+			full-name Administrator;
+			uid 2000;
+			class tier3;
+			authentication {
+				encrypted-password "<PASSWORD>"; # SECRET-DATA
+			}
+        }
+        /* RADIUS template tier1 user. Read-only */
+        user tier1 {
+       		uid 2001;
+        	class tier1;
+        }
+        /* RADIUS template tier2 user. Read-write limited */
+        user tier2 {
+       		uid 2002;
+        	class tier2;
+        }
+        /* RADIUS template tier3 user. Read-write */
+        user tier3 {
+        	uid 2003;
+        	class tier3;
+        }
+	}
+	/* List of IPs and their hostnames */
+	static-host-mapping {
+		/* Put localhost entry for NTP to work */
+		localhost inet 127.0.0.1;
+        firewall-ext inet 6.6.6.1;
+        firewall-int inet 7.7.7.1;
+        upstream inet 5.5.5.1;
+        utility inet 7.7.7.5;
+        syslog inet 7.7.7.8;
+        
+	}
+    /* Enable router services */
+    services {
+    	/* Enable 5 ssh sessions. Max 10 connection attempts per minute. */
+        ssh connection-limit 5 rate-limit 10;
+        /* JUNOS 5.0 and above: disallow remote root logins */
+        root-login deny;
+        /* JUNOS 5.0 and above: use SSH version 2 only */
+        protocol-version v2;
+    }
+    syslog {
+        /* Archive old files up to 10mb total */
+        archive size 1m files 10;
+        user * {
+        	any emergency;
+        }
+        /* Punt log data over to our syslog server */
+        host 7.7.7.8 {
+        	any info;
+        }
+        file messages {
+        	any notice;
+        	authorization info;
+        }
+    }
+    /* Synchronize our clock with a trusted authenticated NTP server */
+    ntp {
+    	authentication-key 6767 type md5 value "<PASSWORD>"; # SECRET-DATA
+        /* NTP will not sync if times are too distant. Set time at bootup */
+        boot-server 7.7.7.5;
+        server 7.7.7.5;
+    }
+}
+chassis {
+	/* Disable source routing */
+	no-source-route;
+}
+interfaces {
+	/* Log additional interface information to aid in troubleshooting. To
+	   view, use 'show log log-interfaces' */
+		traceoptions {
+			/* Rotate through 5 files at 1mb each */
+			file log-interfaces size 1m files 5;
+			/* Trace changes that produce configuration events */
+			flag change-events;
+	}
+	ge-0/0/0 {
+		description "Upstream Interface - facing Internet";
+		/* Enable snmp-traps for this interface */
+		traps;
+		link-mode full-duplex;
+		unit 0 {
+			family inet {
+				/* Do not send ICMP redirects */
+				no-redirects;
+				/* Filter inbound packets from the Internet */
+				filter {
+					input inbound-filter;
+				}
+				address 5.5.5.254/24;
+            }
+        }
+    }
+    ge-0/1/0 {
+        description "Protected Interface - facing DMZ"
+        traps;
+        link-mode full-duplex;
+        unit 0 {
+        	family inet {
+        		no-redirects;
+        		/* Filter outbound packets from the internal network */
+        		filter {
+        			input outbound-filter;
+        		}
+        		address 6.6.6.254/24;
+			}
+		}
+	}
+	/* Configure management interface. Can NOT route over this. */
+	fxp0 {
+		description "Management Interface – OOB management"
+		unit 0 {
+			family inet {
+				no-redirects;
+				address 10.10.11.11/24;
+			}
+		}
+	}
+	/* Configure loopback interface. Used for routing protocols and other
+	   purposes. */
+	lo0 {
+		description "Loopback Interface – internal"
+		unit 0 {
+			family inet {
+				no-redirects;
+				/* Restrict connections coming to this router */
+				filter {
+					input router-protect;
+				}
+				address 10.10.10.10/32;
+			}
+		}
+	}
+}
+forwarding-options {
+	/* Enable packet sampling for CflowD */
+	sampling {
+		input {
+			family inet {
+				/* Sample 1 out of 100 packets + next 4 in sequence.
+					Total = 4/100 packets. You may want to just sample
+					the SYN/FIN packets instead. */
+				rate 100;
+				run-length 4;
+				/* This is a built-in max throttle, listed here for
+					completeness */
+				max-packets-per-second 7000;
+			}
+	}
+	/* Send our output to the designated CflowD collector using v 8 */
+	output {
+		cflowd 7.7.7.5 {
+			port 2055;
+			version 8;
+			no-local-dump;
+			autonomous-system-type origin;
+			aggregation {
+				autonomous-system;
+			}
+		}
+	}
+}
+snmp {
+	description secure-router-01;
+    location "Site, Row, Rack, Shelf";
+    contact "(555) 555-5555";
+    /* Restrict SNMP requests to a particular interface */
+    interface ge-0/1/0.0;
+    /* Configure our SNMP community. Replace COMMUNITY with your string */
+    community COMMUNITY {
+    	authorization read-only;
+    	/* Determine who is allowed access via SNMP */
+    	clients {
+    		default restrict;
+    		/* Restrict access to ALL but the following */
+   			 7.7.7.5/32;
+   		 }
+   	}
+    /* Send traps using v2 for all categories to designated trap server */
+    trap-group all {
+    	version v2;
+   		categories authentication chassis link routing startup;
+    	targets {
+    		7.7.7.5;
+   		}
+    }
+}
+routing-options {
+    options {
+    	/* Turn off DNS resolution */
+    	no-resolve;
+    	syslog {
+    		level debug;
+		}
+	}
+    /* Configure static routes */
+    static {
+   		/* Default out to the Internet */
+    	route 0.0.0.0/0 next-hop 5.5.5.1;
+    	/* Route to network on the other side of the Firewall */
+    	route 7.7.7.0/24 next-hop 6.6.6.1;
+    	/* Use: http://www.cymru.com/gillsr/documents/junos-discardroutes.txt/*
+    }
+}
+policy-options {
+	prefix-list iana-reserved {
+		/* Use: http://www.cymru.com/gillsr/documents/junos-reserved-prefixlist.txt/*
+	}
+	prefix-list rfc1918 {
+		/* RFC 1918 addresses */
+		10.0.0.0/8;
+		192.168.0.0/16;
+		172.16.0.0/12;
+	}
+	/* Addresses to be used in router-protect-hardcore filter */
+	prefix-list ssh-connect {
+		6.6.6.1/32;
+		7.7.7.5/32;
+		7.7.7.8/32;
+	}
+	/* No BGP is used in this topology, but we allow it for future use */
+	prefix-list bgp-connect {
+	5.5.5.1/32;
+	}
+	prefix-list utility-connect {
+	7.7.7.5/32;
+	}
+}
+firewall {
+	filter inbound-filter {
+		/* Rate-limit for 5m/s used for multicast */
+		policer udp-5m {
+			if-exceeding {
+				bandwidth-limit 5m;
+				burst-size-limit 375k;
+			}
+			then discard;
+		}
+		/* Rate-limit for 500k/s used for ICMP */
+		policer icmp-500k {
+			if-exceeding {
+				bandwidth-limit 500k;
+				burst-size-limit 62k;
+			}
+			then discard;
+		}
+		/* Rate-limit for 2m/s used for UDP */
+		policer udp-2m {
+			if-exceeding {
+				bandwidth-limit 2m;
+				burst-size-limit 250k;
+			}
+			then discard;
+		}
+		/* The first three terms have been separated for accounting only */
+		term 1 {
+			from {
+				source-address {
+					/* Spoof of inside networks */
+					6.6.6.0/24;
+					7.7.7.0/24;
+				}
+			}
+			then {
+				/* Count spoofed traffic. Type 'show firewall' to view */
+				count spoof-inbound-internal;
+				discard;
+			}
+		}
+		/* The following prefix-list can be divided for finer granularity */
+		term 2 {
+			from {
+				prefix-list {
+					iana-reserved;
+				}
+			}
+			then {
+				count spoof-inbound-iana;
+				discard;
+			}
+		}
+		term 3 {
+			from {
+				prefix-list {
+					rfc1918;
+				}
+			}
+			then {
+				count spoof-inbound-rfc1918;
+				discard;
+			}
+		}
+		/* Discard all ICMP fragments */
+		term 4 {
+			from {
+				is-fragment;
+				protocol icmp;
+			}
+			then {
+				count icmp-fragments;
+				discard;
+			}
+		}
+		/* Rate-limit ICMP traffic to 500k/s */
+		term 5 {
+			from {
+				protocol icmp;
+			}
+			then {
+                count policer-icmp-500k;
+                policer icmp-500k;
+        	}
+        }
+		/* Rate-limit Multicast traffic to 5m/s */
+		term 6 {
+			from {
+				destination-address {
+					224.0.0.0/4;
+                }
+                protocol udp;
+            }
+            then {
+                count policer-multicast-5m;
+                policer udp-5m;
+                accept;
+            }
+        }
+        /* Rate-limit other UDP traffic to 2m/s */
+        term 7 {
+            from {
+                protocol udp;
+            }
+            then {
+                count policer-udp-2m;
+                policer udp-2m;
+            }
+        }
+        /* Allow access to Intranet (Firewall filters specific ports) */
+        term 8 {
+            from {
+                destination-address {
+                    7.7.7.0/24;
+                }
+            }
+            then accept;
+        }
+        /* Our explicit (read: logged) drop all rule */
+   		 term 9 {
+   			then {
+    			discard;
+			}
+		}
+	}
+	/* Be a good netizen by preventing spoofing from within our network.
+		You may wish to add further 'terms' if more access is required. */
+	filter outbound-filter {
+		term 1 {
+			from {
+				source-address {
+                    7.7.7.0/24;
+                    6.6.6.1/32;
+                }
+			}
+			then accept;
+		}
+		term 2 {
+			then {
+                count spoof-outbound;
+                discard;
+			}
+		}
+	}
+    /* You may apply this filter outbound on lo0 to count and compare
+        SYN, RST, FIN, and other TCP traffic. This can be used to detect a
+        packet flood if you suspect you are under attack. As an example, a
+        high 'packets-syn' to 'packets-tcp' ratio could be a good indicator.
+        TCP-intercept is not supported. */
+    filter tcp-flood-detect {
+		term 1 {
+            from {
+                protocol tcp;
+                tcp-flags syn;
+			}
+			then {
+                count packets-syn;
+                log;
+                accept;
+			}
+		}
+		term 2 {
+			from {
+                protocol tcp;
+                tcp-flags rst;
+			}
+			then {
+                count packets-rst;
+                log;
+                accept;
+			}
+		}
+		term 3 {
+			from {
+                protocol tcp;
+                tcp-flags fin;
+			}
+			then {
+                count packets-fin;
+                log;
+                accept;
+			}
+		}
+		term 4 {
+			from {
+				protocol tcp;
+			}
+			then {
+                count packets-tcp;
+                accept;
+			}
+		}
+	}
+	/* Two filters are supplied for protecting the RE: router-protect and
+        router-protect-hardcore. The first is easier to manage, but does
+        not rate limit traffic to the RE and allows exception traffic by
+        default. The second is more secure but much more difficult to manage.
+        Customize and apply only one of the router-protect filters inbound on
+        lo0. You may wish to add entries for FTP, VRRP, TACACS, DNS, etc... */
+	filter router-protect {
+		/* Allow SSH from firewall, syslog, and utility server */
+		term 1 {
+			from {
+                source-address {
+                0.0.0.0/0;
+                6.6.6.1/32 except;
+                7.7.7.5/32 except;
+                7.7.7.8/32 except;
+            }
+            protocol tcp;
+            destination-port ssh;
+		}
+		then {
+			count manage-discard-tcp;
+			discard;
+		}
+	}
+	/* Allow access from designated SNMP, NTP, and RADIUS */
+	term 2 {
+			from {
+				source-address {
+                    0.0.0.0/0;
+                    7.7.7.5/32 except;
+				}
+				protocol udp;
+				port [ snmp ntp radius ];
+				}
+			then {
+				count manage-discard-udp;
+				discard;
+			}
+		}
+		/* We only like the ICMP traffic listed below. All other types are
+			logged, counted, and discarded */
+		term 3 {
+			from {
+				protocol icmp;
+				icmp-type-except [ echo-request echo-reply unreachable
+								   time-exceeded source-quench ];
+			}
+			then {
+				count manage-discard-icmp;
+				discard;
+			}
+		}
+		/* We are not running BGP here but reserve this for future use */
+		term 4 {
+			from {
+				address {
+                    0.0.0.0/0;
+                    5.5.5.1/32 except;
+			}
+            protocol tcp;
+            port bgp;
+		}
+		then {
+              count manage-discard-bgp;
+              discard;
+		}
+	}
+		term 5 {
+			then {
+				/* Allow all other traffic */
+				count manage-accept-other;
+				accept;
+			}
+		}
+	}
+    /* Now for a more secure, but tedious RE filter. Remember to apply one
+    	of the router-protect filters inbound on lo0. May need to account
+   		for traffic such as VRRP, FTP, OSPF, ISIS, or DNS here as well */
+    filter router-protect-hardcore {
+   		policer ssh-1m {
+    		if-exceeding {
+                bandwidth-limit 1m;
+                burst-size-limit 100k;
+			}
+			then discard;
+		}
+        policer icmp-1m {
+            if-exceeding {
+                bandwidth-limit 1m;
+                burst-size-limit 100k;
+            }
+            then discard;
+            }
+        policer utility-3m {
+            if-exceeding {
+                bandwidth-limit 3m;
+                burst-size-limit 300k;
+            }
+            then discard;
+        }
+        policer tcp-control-1m {
+            if-exceeding {
+                bandwidth-limit 1m;
+                burst-size-limit 100k;
+            }
+       		then discard;
+        }
+		/* Rate limit TCP control traffic from trusted sources */
+		term 1 {
+			from {
+                source-prefix-list {
+                    ssh-connect;
+                    bgp-connect;
+                }
+                protocol tcp;
+                tcp-flags "(syn & !ack) | fin | rst";
+            }
+            then {
+                policer tcp-control-1m;
+                accept;
+            }
+        }
+        /* We are not running BGP here but reserve this for future use.
+            Do NOT police this! */
+        term 2 {
+            from {
+                source-prefix-list {
+                    bgp-connect;
+                }
+                protocol tcp;
+                port bgp;
+            }
+            then {
+                accept;
+            }
+        }
+        /* SSH is allowed from trusted servers only */
+        term 3 {
+            from {
+                source-prefix-list {
+                    ssh-connect;
+                }
+                protocol tcp;
+                destination-port ssh;
+            }
+            then {
+                policer ssh-1m;
+                accept;
+            }
+        }
+        /* SNMP, NTP, and RADIUS from trusted servers only */
+        term 4 {
+            from {
+                source-prefix-list {
+                    utility-connect;
+                }
+                protocol udp;
+                port [ snmp ntp radius ];
+            }
+            then {
+                policer utility-3m;
+                accept;
+            }
+        }
+        /* Block unwanted ICMP traffic, and rate-limit the rest */
+        term 5 {
+            from {
+                protocol icmp;
+                icmp-type [ echo-request echo-reply unreachable time-exceeded
+                            source-quench ];
+            }
+            then {
+                policer icmp-1m;
+                accept;
+            }
+        }
+        /* Deny and log all other traffic */
+        term 6 {
+            then {
+                count manage-discard-other;
+                discard;
+            }
+		}
+	}
+}
+/* ... end template ... */
+    </pre>
+    <br>
+    <br>
+    <p><a href="#menu">Back to the menu ^</a></p>
+    <hr>
+    <br>
+    <br>
+  </div>
+  <div id="secure-ntp-template">
+    <h1>Secure NTP Template</h1>
+    <br>
+    <h2>Cisco IOS</h2>
+    <pre>! Core NTP configuration
+ntp update-calendar             ! update hardware clock (certain hardware only, i.e. 6509s)
+ntp server 192.0.2.1            ! a time server you sync with
+ntp peer   192.0.2.2            ! a time server you sync with and allow to sync to you
+ntp source Loopback0            ! we recommend using a loopback interface for sending NTP messages if possible
+!
+! NTP access control
+ntp access-group query-only 1   ! deny all NTP control queries
+ntp access-group serve 1        ! deny all NTP time and control queries by default
+ntp access-group peer 10        ! permit time sync to configured peer(s)/server(s) only
+ntp access-group serve-only 20  ! permit NTP time sync requests from a select set of clients
+!
+! access control lists (ACLs)
+access-list 1 remark utility ACL to block everything
+access-list 1 deny any
+!
+access-list 10 remark NTP peers/servers we sync to/with
+access-list 10 permit 192.0.2.1
+access-list 10 permit 192.0.2.2
+access-list 10 deny any
+!
+access-list 20 remark Hosts/Networks we allow to get time from us
+access-list 20 permit 192.0.2.0 0.0.0.255
+access-list 20 deny any
+</pre>
+    <h2>Juniper JunOS</h2>
+    <pre>system {
+    ntp {
+        authentication-key [key-id] type md5 value "[pass-phrase]";
+        trusted-key [key-id];
+        /* Allow NTP to sync if server clock is significantly different than local clock */
+        boot-server 192.0.2.1;
+        /* NTP server to sync to */
+        server 192.0.2.1;
+        server 192.0.2.2 key [key-id] prefer;
+    }
+}
+</pre>
+    <br>
+    <p> You can use your loopback filter that shields the router from other anonymous access to also limit who the local NTP service talks to. The relevant section of that filter might look something like the following: </p>
+    <pre>from {
+    source-address {
+        0.0.0.0/0;
+        /* NTP server to get time from */
+        192.0.2.1/32 except;
+    }
+    protocol udp;
+    port ntp;
+}
+then {
+    discard;
+}
+</pre>
+    <br>
+    <h2>UNIX ntpd</h2>
+    <pre># by default act only as a basic NTP client
+restrict -4 default nomodify nopeer noquery notrap
+restrict -6 default nomodify nopeer noquery notrap
+# allow NTP messages from the loopback address, useful for debugging
+restrict 127.0.0.1
+restrict ::1
+# server(s) we time sync to
+server 192.0.2.1
+server 2001:DB8::1
+server time.example.net
+</pre>
+    <br>
+    <p>You can use your standard host firewall filtering capabilities to limit
+      who the NTP process talks to.  If you're using Linux and the host is acting
+      as an NTP client only, the following iptables rules could be adapted to shield
+      your NTP listener from unwanted remote hosts.</p>
+    <pre>-A INPUT -s 0/0 -d 0/0 -p udp --source-port 123:123 -m state --state ESTABLISHED -j ACCEPT
+-A OUTPUT -s 0/0 -d 0/0 -p udp --destination-port 123:123 -m state --state NEW,ESTABLISHED -j ACCEPT
+</pre>
+    <br>
+    <br>
+    <p><a href="#menu">Back to the menu ^</a></p>
+    <hr>
+    <br>
+    <br>
+  </div>
+  <div id="ipv6-router-reference">
+    <h1>IPv6 Router Setting Reference</h1>
+    <br>
+    <div id="ios">
+      <h2>IPv6 Cisco IOS accept-base-template</h2>
+      <pre>ipv6 prefix-list ipv6-global-route deny   2001:0DB8::/32 le 128
+ipv6 prefix-list ipv6-global-route permit 2001:0000::/32
+ipv6 prefix-list ipv6-global-route permit 2001:0200::/23 le 64
+ipv6 prefix-list ipv6-global-route permit 2001:0400::/23 le 64
+ipv6 prefix-list ipv6-global-route permit 2001:0600::/23 le 64
+ipv6 prefix-list ipv6-global-route permit 2001:0800::/23 le 64
+ipv6 prefix-list ipv6-global-route permit 2001:0A00::/23 le 64
+ipv6 prefix-list ipv6-global-route permit 2001:0C00::/23 le 64
+ipv6 prefix-list ipv6-global-route permit 2001:0E00::/23 le 64
+ipv6 prefix-list ipv6-global-route permit 2001:1200::/23 le 64
+ipv6 prefix-list ipv6-global-route permit 2001:1400::/23 le 64
+ipv6 prefix-list ipv6-global-route permit 2001:1600::/23 le 64
+ipv6 prefix-list ipv6-global-route permit 2001:1800::/23 le 64
+ipv6 prefix-list ipv6-global-route permit 2001:1A00::/23 le 64
+ipv6 prefix-list ipv6-global-route permit 2001:1C00::/22 le 64
+ipv6 prefix-list ipv6-global-route permit 2001:2000::/20 le 64
+ipv6 prefix-list ipv6-global-route permit 2001:3000::/21 le 64
+ipv6 prefix-list ipv6-global-route permit 2001:3800::/22 le 64
+ipv6 prefix-list ipv6-global-route permit 2001:4000::/23 le 64
+ipv6 prefix-list ipv6-global-route permit 2001:4200::/23 le 64
+ipv6 prefix-list ipv6-global-route permit 2001:4400::/23 le 64
+ipv6 prefix-list ipv6-global-route permit 2001:4600::/23 le 64
+ipv6 prefix-list ipv6-global-route permit 2001:4800::/23 le 64
+ipv6 prefix-list ipv6-global-route permit 2001:4A00::/23 le 64
+ipv6 prefix-list ipv6-global-route permit 2001:4C00::/23 le 64
+ipv6 prefix-list ipv6-global-route permit 2001:5000::/20 le 64
+ipv6 prefix-list ipv6-global-route permit 2001:8000::/19 le 64
+ipv6 prefix-list ipv6-global-route permit 2001:A000::/20 le 64
+ipv6 prefix-list ipv6-global-route permit 2001:B000::/20 le 64
+ipv6 prefix-list ipv6-global-route permit 2002:0000::/16 le 64
+ipv6 prefix-list ipv6-global-route permit 2003:0000::/18 le 64
+ipv6 prefix-list ipv6-global-route permit 2400:0000::/12 le 64
+ipv6 prefix-list ipv6-global-route permit 2600:0000::/12 le 64
+ipv6 prefix-list ipv6-global-route permit 2610:0000::/23 le 64
+ipv6 prefix-list ipv6-global-route permit 2620:0000::/23 le 64
+ipv6 prefix-list ipv6-global-route permit 2800:0000::/12 le 64
+ipv6 prefix-list ipv6-global-route permit 2A00:0000::/12 le 64
+ipv6 prefix-list ipv6-global-route permit 2C00:0000::/12 le 64
+</pre>
+    </div>
+    <br>
+    <br>
+    <div id="junos">
+      <h2>IPv6 Juniper JunOS accept-base-template</h2>
+      <pre>policy-options {
+    policy-statement ipv6-route-filter {
+        term ipv6-global-route {
+            from {
+                route-filter 2001:0DB8::/32 orlonger reject;
+                route-filter 2001:0000::/32 exact;
+                route-filter 2001:0200::/23 prefix-length-range /23-/64;
+                route-filter 2001:0400::/23 prefix-length-range /23-/64;
+                route-filter 2001:0600::/23 prefix-length-range /23-/64;
+                route-filter 2001:0800::/23 prefix-length-range /23-/64;
+                route-filter 2001:0A00::/23 prefix-length-range /23-/64;
+                route-filter 2001:0C00::/23 prefix-length-range /23-/64;
+                route-filter 2001:0E00::/23 prefix-length-range /23-/64;
+                route-filter 2001:1200::/23 prefix-length-range /23-/64;
+                route-filter 2001:1400::/23 prefix-length-range /23-/64;
+                route-filter 2001:1600::/23 prefix-length-range /23-/64;
+                route-filter 2001:1800::/23 prefix-length-range /23-/64;
+                route-filter 2001:1A00::/23 prefix-length-range /23-/64;
+                route-filter 2001:1C00::/22 prefix-length-range /22-/64;
+                route-filter 2001:2000::/20 prefix-length-range /20-/64;
+                route-filter 2001:3000::/21 prefix-length-range /21-/64;
+                route-filter 2001:3800::/22 prefix-length-range /22-/64;
+                route-filter 2001:4000::/23 prefix-length-range /23-/64;
+                route-filter 2001:4200::/23 prefix-length-range /23-/64;
+                route-filter 2001:4400::/23 prefix-length-range /23-/64;
+                route-filter 2001:4600::/23 prefix-length-range /23-/64;
+                route-filter 2001:4800::/23 prefix-length-range /23-/64;
+                route-filter 2001:4A00::/23 prefix-length-range /23-/64;
+                route-filter 2001:4C00::/23 prefix-length-range /23-/64;
+                route-filter 2001:5000::/20 prefix-length-range /20-/64;
+                route-filter 2001:8000::/19 prefix-length-range /19-/64;
+                route-filter 2001:A000::/20 prefix-length-range /20-/64;
+                route-filter 2001:B000::/20 prefix-length-range /20-/64;
+                route-filter 2002:0000::/16 prefix-length-range /16-/64;
+                route-filter 2003:0000::/18 prefix-length-range /18-/64;
+                route-filter 2400:0000::/12 prefix-length-range /12-/64;
+                route-filter 2600:0000::/12 prefix-length-range /12-/64;
+                route-filter 2610:0000::/23 prefix-length-range /23-/64;
+                route-filter 2620:0000::/23 prefix-length-range /23-/64;
+                route-filter 2800:0000::/12 prefix-length-range /12-/64;
+                route-filter 2A00:0000::/12 prefix-length-range /12-/64;
+                route-filter 2C00:0000::/12 prefix-length-range /12-/64;
+            }
+            then accept;
+        }
+        then reject;
+    }
+}
+</pre>
+    </div>
+    <br>
+    <br>
+    <div id="ftos">
+      <h2>IPv6 Force10 FTOS accept-base-template</h2>
+      <pre>ipv6 prefix-list global-route
+ deny   2001:0DB8::/32 le 128
+ permit 2001:0000::/32
+ permit 2001:0200::/23 le 64
+ permit 2001:0400::/23 le 64
+ permit 2001:0600::/23 le 64
+ permit 2001:0800::/23 le 64
+ permit 2001:0A00::/23 le 64
+ permit 2001:0C00::/23 le 64
+ permit 2001:0E00::/23 le 64
+ permit 2001:1200::/23 le 64
+ permit 2001:1400::/23 le 64
+ permit 2001:1600::/23 le 64
+ permit 2001:1800::/23 le 64
+ permit 2001:1A00::/23 le 64
+ permit 2001:1C00::/22 le 64
+ permit 2001:2000::/20 le 64
+ permit 2001:3000::/21 le 64
+ permit 2001:3800::/22 le 64
+ permit 2001:4000::/23 le 64
+ permit 2001:4200::/23 le 64
+ permit 2001:4400::/23 le 64
+ permit 2001:4600::/23 le 64
+ permit 2001:4800::/23 le 64
+ permit 2001:4A00::/23 le 64
+ permit 2001:4C00::/23 le 64
+ permit 2001:5000::/20 le 64
+ permit 2001:8000::/19 le 64
+ permit 2001:A000::/20 le 64
+ permit 2001:B000::/20 le 64
+ permit 2002:0000::/16 le 64
+ permit 2003:0000::/18 le 64
+ permit 2400:0000::/12 le 64
+ permit 2600:0000::/12 le 64
+ permit 2610:0000::/23 le 64
+ permit 2620:0000::/23 le 64
+ permit 2800:0000::/12 le 64
+ permit 2A00:0000::/12 le 64
+ permit 2C00:0000::/12 le 64
+</pre>
+    </div>
+    <br>
+    <br>
+    <div id="h3c">
+      <h2>IPv6 H3C accept-base-template</h2>
+      <pre>ip ipv6-prefix global-routes deny   2001:0DB8:: 32 less-equal 128
+ip ipv6-prefix global-routes permit 2001:0200:: 23 less-equal 64
+ip ipv6-prefix global-routes permit 2001:0400:: 23 less-equal 64
+ip ipv6-prefix global-routes permit 2001:0600:: 23 less-equal 64
+ip ipv6-prefix global-routes permit 2001:0800:: 23 less-equal 64
+ip ipv6-prefix global-routes permit 2001:0A00:: 23 less-equal 64
+ip ipv6-prefix global-routes permit 2001:0C00:: 23 less-equal 64
+ip ipv6-prefix global-routes permit 2001:0E00:: 23 less-equal 64
+ip ipv6-prefix global-routes permit 2001:1200:: 23 less-equal 64
+ip ipv6-prefix global-routes permit 2001:1400:: 23 less-equal 64
+ip ipv6-prefix global-routes permit 2001:1600:: 23 less-equal 64
+ip ipv6-prefix global-routes permit 2001:1800:: 23 less-equal 64
+ip ipv6-prefix global-routes permit 2001:1A00:: 23 less-equal 64
+ip ipv6-prefix global-routes permit 2001:1C00:: 22 less-equal 64
+ip ipv6-prefix global-routes permit 2001:2000:: 20 less-equal 64
+ip ipv6-prefix global-routes permit 2001:3000:: 21 less-equal 64
+ip ipv6-prefix global-routes permit 2001:3800:: 22 less-equal 64
+ip ipv6-prefix global-routes permit 2001:4000:: 23 less-equal 64
+ip ipv6-prefix global-routes permit 2001:4200:: 23 less-equal 64
+ip ipv6-prefix global-routes permit 2001:4400:: 23 less-equal 64
+ip ipv6-prefix global-routes permit 2001:4600:: 23 less-equal 64
+ip ipv6-prefix global-routes permit 2001:4800:: 23 less-equal 64
+ip ipv6-prefix global-routes permit 2001:4A00:: 23 less-equal 64
+ip ipv6-prefix global-routes permit 2001:4C00:: 23 less-equal 64
+ip ipv6-prefix global-routes permit 2001:5000:: 20 less-equal 64
+ip ipv6-prefix global-routes permit 2001:8000:: 19 less-equal 64
+ip ipv6-prefix global-routes permit 2001:A000:: 20 less-equal 64
+ip ipv6-prefix global-routes permit 2001:B000:: 20 less-equal 64
+ip ipv6-prefix global-routes permit 2002:0000:: 16 less-equal 64
+ip ipv6-prefix global-routes permit 2003:0000:: 18 less-equal 64
+ip ipv6-prefix global-routes permit 2400:0000:: 12 less-equal 64
+ip ipv6-prefix global-routes permit 2600:0000:: 12 less-equal 64
+ip ipv6-prefix global-routes permit 2610:0000:: 23 less-equal 64
+ip ipv6-prefix global-routes permit 2620:0000:: 23 less-equal 64
+ip ipv6-prefix global-routes permit 2800:0000:: 12 less-equal 64
+ip ipv6-prefix global-routes permit 2A00:0000:: 12 less-equal 64
+ip ipv6-prefix global-routes permit 2C00:0000:: 12 less-equal 64
+</pre>
+    </div>
+    <br>
+    <br>
+    <div id="alaxala">
+      <h2>IPv6 alaxala accept-base-template</h2>
+      <br>
+      <h3 id="ax7800">AX7700R/7800R/7800S series</h3>
+      <pre>network-filter name documentation-prefix
+ 2001:0DB8::/32 between 32 128
+
+network-filter name ipv6-global-prefix
+ 2001:0000::/32 exact
+ 2001:0200::/23 between 23 64
+ 2001:0400::/23 between 23 64
+ 2001:0600::/23 between 23 64
+ 2001:0800::/23 between 23 64
+ 2001:0A00::/23 between 23 64
+ 2001:0C00::/23 between 23 64
+ 2001:0E00::/23 between 23 64
+ 2001:1200::/23 between 23 64
+ 2001:1400::/23 between 23 64
+ 2001:1600::/23 between 23 64
+ 2001:1800::/23 between 23 64
+ 2001:1A00::/23 between 23 64
+ 2001:1C00::/22 between 22 64
+ 2001:2000::/20 between 20 64
+ 2001:3000::/21 between 21 64
+ 2001:3800::/22 between 22 64
+ 2001:4000::/23 between 23 64
+ 2001:4200::/23 between 23 64
+ 2001:4400::/23 between 23 64
+ 2001:4600::/23 between 23 64
+ 2001:4800::/23 between 23 64
+ 2001:4A00::/23 between 23 64
+ 2001:4C00::/23 between 23 64
+ 2001:5000::/20 between 20 64
+ 2001:8000::/19 between 19 64
+ 2001:A000::/20 between 20 64
+ 2001:B000::/20 between 20 64
+ 2002:0000::/16 between 16 64
+ 2003:0000::/18 between 18 64
+ 2400:0000::/12 between 12 64
+ 2600:0000::/12 between 12 64
+ 2610:0000::/23 between 23 64
+ 2620:0000::/23 between 23 64
+ 2800:0000::/12 between 12 64
+ 2A00:0000::/12 between 12 64
+ 2C00:0000::/12 between 12 64
+
+route-filter name ipv6-global-prefix
+ seq 10 match network-filter documentation-prefix
+ seq 10 drop
+ seq 20 match network-filter ipv6-global-prefix
+ seq 20 accept
+ seq 999 drop</pre>
+    </div>
+    <br>
+    <br>
+    <div id="ax6700">
+      <h3>AX3600S/AX6300S/AX6700S series</h3>
+      <pre>ipv6 prefix-list ipv6-global-route seq 10 deny 2001:0DB8::/32 le 128
+ipv6 prefix-list ipv6-global-route seq 20 permit 2001:0000::/32
+ipv6 prefix-list ipv6-global-route seq 30 permit 2001:0200::/23 le 64
+ipv6 prefix-list ipv6-global-route seq 40 permit 2001:0400::/23 le 64
+ipv6 prefix-list ipv6-global-route seq 50 permit 2001:0600::/23 le 64
+ipv6 prefix-list ipv6-global-route seq 60 permit 2001:0800::/23 le 64
+ipv6 prefix-list ipv6-global-route seq 70 permit 2001:0A00::/23 le 64
+ipv6 prefix-list ipv6-global-route seq 80 permit 2001:0C00::/23 le 64
+ipv6 prefix-list ipv6-global-route seq 90 permit 2001:0E00::/23 le 64
+ipv6 prefix-list ipv6-global-route seq 100 permit 2001:1200::/23 le 64
+ipv6 prefix-list ipv6-global-route seq 110 permit 2001:1400::/23 le 64
+ipv6 prefix-list ipv6-global-route seq 120 permit 2001:1600::/23 le 64
+ipv6 prefix-list ipv6-global-route seq 130 permit 2001:1800::/23 le 64
+ipv6 prefix-list ipv6-global-route seq 140 permit 2001:1A00::/23 le 64
+ipv6 prefix-list ipv6-global-route seq 150 permit 2001:1C00::/22 le 64
+ipv6 prefix-list ipv6-global-route seq 160 permit 2001:2000::/20 le 64
+ipv6 prefix-list ipv6-global-route seq 170 permit 2001:3000::/21 le 64
+ipv6 prefix-list ipv6-global-route seq 180 permit 2001:3800::/22 le 64
+ipv6 prefix-list ipv6-global-route seq 190 permit 2001:4000::/23 le 64
+ipv6 prefix-list ipv6-global-route seq 200 permit 2001:4200::/23 le 64
+ipv6 prefix-list ipv6-global-route seq 210 permit 2001:4400::/23 le 64
+ipv6 prefix-list ipv6-global-route seq 220 permit 2001:4600::/23 le 64
+ipv6 prefix-list ipv6-global-route seq 230 permit 2001:4800::/23 le 64
+ipv6 prefix-list ipv6-global-route seq 240 permit 2001:4A00::/23 le 64
+ipv6 prefix-list ipv6-global-route seq 250 permit 2001:4C00::/23 le 64
+ipv6 prefix-list ipv6-global-route seq 260 permit 2001:5000::/20 le 64
+ipv6 prefix-list ipv6-global-route seq 270 permit 2001:8000::/19 le 64
+ipv6 prefix-list ipv6-global-route seq 280 permit 2001:A000::/20 le 64
+ipv6 prefix-list ipv6-global-route seq 290 permit 2001:B000::/20 le 64
+ipv6 prefix-list ipv6-global-route seq 300 permit 2002:0000::/16 le 64
+ipv6 prefix-list ipv6-global-route seq 310 permit 2003:0000::/18 le 64
+ipv6 prefix-list ipv6-global-route seq 320 permit 2400:0000::/12 le 64
+ipv6 prefix-list ipv6-global-route seq 330 permit 2600:0000::/12 le 64
+ipv6 prefix-list ipv6-global-route seq 340 permit 2610:0000::/23 le 64
+ipv6 prefix-list ipv6-global-route seq 350 permit 2620:0000::/23 le 64
+ipv6 prefix-list ipv6-global-route seq 360 permit 2800:0000::/12 le 64
+ipv6 prefix-list ipv6-global-route seq 370 permit 2A00:0000::/12 le 64
+ipv6 prefix-list ipv6-global-route seq 380 permit 2C00:0000::/12 le 64
+</pre>
+      <p><a href="#menu">Back to the menu ^</a></p>
+      <hr>
+      <br>
+      <br>
+    </div>
+  </div>
+</div>
+<footer>
+  <div>
+    <p>Copyright © 2015 Team Cymru. All Rights Reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

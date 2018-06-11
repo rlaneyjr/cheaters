@@ -1,0 +1,695 @@
+<p>Secret to fix for SNMP where FW2 is sending packets to FW1 prior to monitoring system.</p>
+<code>fw ctl set int fwha_forw_packet_to_not_active 1</code>
+
+<p>Clear the dictionary when error: "Load on module failed - no memory".</p>
+<code>fw tab -t string_dictionary_table -x</code>
+
+<p> Check Point CLI Reference Card &#150; v2.0.1<br />
+by Jens Roesen<br />
+ </p>
+
+<p>Useful Secure Knowledge articles<br />
+ <br />
+sk65385<br />
+ List of &quot;How To&quot; Guides for all Check Point products.<br />
+ <br />
+sk97638<br />
+ Check Point Processes and Daemons <br />
+ <br />
+sk52421<br />
+ Ports used by Check Point software <br />
+ <br />
+sk98348<br />
+ Best Practices - Security Gateway Performance <br />
+ <br />
+sk105119 <br />
+ Best Practices - VPN Performance <br />
+ <br />
+There also are a lot of valuable ATRGs (Advanced Technical Reference Guides) available. Search for &#147;ATRG&#148; and a suitable keyword. For instance &#147;artg ipv6&#148;.<br />
+ </p>
+
+<p>Check Point Environment variables (most common ones)<br />
+ <br />
+$FWDIR<br />
+ FW-1 installation directory, with f.i. the conf, log, lib, bin and spool directories.<br />
+ <br />
+$CPDIR<br />
+ SVN Foundation / cpshared tree.<br />
+ <br />
+$CPMDIR<br />
+ Management server installation directory.<br />
+ <br />
+$FGDIR<br />
+ FloodGate-1 installation directory.<br />
+ <br />
+$MDSDIR<br />
+ MDS installation directory. Same as $FWDIR on MDS level.<br />
+ <br />
+$FW_BOOT_DIR<br />
+ Directory with files needed at boot time.<br />
+ </p>
+
+<p>Reference Card Command Shell Indicators<br />
+ <br />
+Expert Mode<br />
+ GAiA clish<br />
+ SPLAT cpshell<br />
+ IPSO clish<br />
+ IPSO shell<br />
+ <br />
+A lot of the expert mode commands are also available within GAiA clish as &#147;extended command&#148;. View complete list with the clish command &#147;show extended commands&#148;.<br />
+ </p>
+
+<p>Basic starting and stopping<br />
+ <br />
+cpstop<br />
+ Stop all Check Point services except cprid. You can also stop specific services by issuing an option with cpstop. For instance cpstop FW1 stops FW-1/VPN-1 or use cpstop WebAccess to stop WebAccess.<br />
+ <br />
+cpstart<br />
+ Start all Check Point services except cprid. cpstart works with the same options as cpstop.<br />
+ <br />
+cprestart<br />
+ Combined cpstop and cpstart. Complete restart.<br />
+ <br />
+cpridstop<br />
+cpridstart<br />
+cpridrestart<br />
+ Stop, start or restart cprid, the Check Point Remote Installation Daemon.<br />
+ <br />
+fw kill [-t sig] proc <br />
+ Kill a Firewall process. PID file in $FWDIR/tmp/ must be present. Per default sends signal 15 (SIGTERM).<br />
+Example: fw kill -t 9 fwm<br />
+ <br />
+fw unloadlocal<br />
+ Uninstalls local security policy and disables IP forwarding.<br />
+ </p>
+
+<p>Basic firewall information gathering<br />
+ <br />
+fw ver [-k]<br />
+fwm [mds] ver<br />
+vpn ver [-k]<br />
+fgate ver<br />
+ Show major and minor version as well as build number and latest installed hotfix of a Check Point module. Show additional kernel version information with -k switch.<br />
+ <br />
+ver<br />
+ Show CP version and build as well as kernel info.<br />
+ <br />
+cpshared_ver<br />
+ Show the version of the SVN Foundation.<br />
+ <br />
+cpview<br />
+ Tool combining several Check Point and Linux commands into a great text based tool providing both OS and software blade information. See sk101878.<br />
+ <br />
+fw stat<br />
+fw stat <-l|--long><br />
+fw stat <-s|--short><br />
+ Show the name of the current policy and a brief interface list. Use -l or -s for more info. Consider using cpstat fw instead of -l or -s switch for better formatted output.<br />
+ <br />
+fw ctl iflist<br />
+ Display interface list.<br />
+ <br />
+fw ctl arp [-n]<br />
+ Display proxy arp table. -n disables name resolution.<br />
+ <br />
+cp_conf finger get<br />
+ Display fingerprint on the management module.<br />
+ <br />
+cp_conf client get<br />
+ Display GUI clients list.<br />
+ <br />
+cp_conf admin get<br />
+ Display admin accounts and permissions. Also fwm -p<br />
+ <br />
+cp_conf auto get <br />
+ <fw1|fg1|rm|all><br />
+ Display autostart state of Check Point modules.<br />
+ <br />
+fgate stat<br />
+ Status and statistics of Flood-Gate-1.<br />
+ <br />
+fwaccel <stat|stats|conns><br />
+ View status, statistics or connection table of SecureXL.<br />
+ <br />
+fw getifs<br />
+ Show list of configured interfaces with IP and netmask.<br />
+ <br />
+cpstat <app_flag> [-f <br />
+ flavour]<br />
+ View OS, HW and CP application status. Issue cpstat without any options to see all possible application flags <app_flag> and corresponding flavours. Examples:<br />
+cpstat fw -f policy &#150; verbose policy info<br />
+cpstat os -f cpu &#150; CPU utilization statistics<br />
+ <br />
+cpinfo -y all<br />
+ List all installed patches and hotfixes.<br />
+ <br />
+cpd_sched_config print<br />
+ Show task scheduled with CPD scheduler.<br />
+ <br />
+enabled_blades<br />
+ View enabled software blades<br />
+ <br />
+avsu_client [-app <app>] <br />
+ get_version<br />
+ Get signature version and status of content security <app>. Without the -app option &#147;Anti Virus&#148; is used.<br />
+ <br />
+show configuration<br />
+ Show running system configuration.<br />
+ <br />
+show commands<br />
+ Show all commands you are allowed to run.<br />
+ <br />
+show asset all<br />
+ Display general hardware information.<br />
+ <br />
+show sysenv all<br />
+ Display system component status (fans, power supply...)<br />
+ <br />
+asset<br />
+ View hw info on IP Series Appliances running GAiA.<br />
+ <br />
+show asset hardware<br />
+ View hw info like serial numbers in Nokia clish. <br />
+ <br />
+ipsctl -a<br />
+ View hw info. Also see cat /var/etc/.nvram output.<br />
+ </p>
+
+<p>Display and manage licenses<br />
+ <br />
+cp_conf lic get<br />
+ View licenses.<br />
+ <br />
+cplic print<br />
+ Display more detailed license information.<br />
+ <br />
+fw lichosts<br />
+ List protected hosts with limited hosts licenses.<br />
+ <br />
+dtps lic<br />
+ SecureClient Policy Server license summary.<br />
+ <br />
+cplic del <sig> <obj><br />
+ Detach license with signature sig from object obj.<br />
+ <br />
+cplid db_rm <sig><br />
+ Remove license <sig> from repository after detaching.<br />
+ <br />
+cplic get <ip host|-all><br />
+ Retrieve all licenses from a certain gateway or all gateways to synchronize SmartCenter license repository with gw(s).<br />
+ <br />
+cplic put <-l file><br />
+ Install local license from file to an local machine. <br />
+ <br />
+cplic put <obj> <-l <br />
+ file><br />
+ Attach one or more central or local licenses from file remotely to obj.<br />
+ <br />
+cprlic<br />
+ Remote license management tool.<br />
+ <br />
+contract_util mgmt <br />
+ Get contracts from Management Server.<br />
+ </p>
+
+<p>View and manage log files<br />
+ <br />
+fw lslogs<br />
+ View a list of available fw log files and their size.<br />
+ <br />
+fwm logexport<br />
+ Export/display current fw.log to stdout.<br />
+ <br />
+fw repairlog <logfile><br />
+ Rebuild pointer files for <logfile>.<br />
+ <br />
+fw logswitch [-audit]<br />
+ Copy current (audit) logfile to YY-MM-DD-HHMMSS.log and start a new fw.log. <br />
+ <br />
+fw log -c <action><br />
+ Show only records with action <action>, e.g. accept, drop, reject etc. Starts from the top of the log, use -t to start a tail at the end.<br />
+ <br />
+fw log -f -t<br />
+ Tail the actual log file from the end of the log. Without the -t switch it starts from the beginning.<br />
+ <br />
+fw log -b <starttime> <br />
+ <endtime><br />
+ View today's log entries between <starttime> and <endtime>.<br />
+ <br />
+fw fetchlogs -f <file> <br />
+ module<br />
+ Fetch a logfile from a remote CP module. NOTE: The log will be deleted from the remote module. Does not work with current fw.log.<br />
+ <br />
+fwm logexport -i <file> -o <br />
+ out.csv -d ',' -p -n <br />
+ Export logfile <file> to file out.csv, use , (comma) as delimiter (CSV) and do not resolve services or hostnames (-n).<br />
+ <br />
+log list<br />
+ Show index of available system and error log files.<br />
+ <br />
+log show <nr><br />
+ View log file number <nr> from the log list index.<br />
+ </p>
+
+<p>Basic troubleshooting<br />
+ <br />
+cpview<br />
+ View OS and software blade statistics. See sk101878.<br />
+ <br />
+cpinfo<br />
+ Collect diagnostic data for CP support cases. See sk92739.<br />
+ <br />
+sar<br />
+ System monitoring tool (GAiA) generating monitoring data every 10 minutes, keeping the data for 7 days. E.g.:<br />
+sar -n EDEV - Interface errors from today<br />
+sar -u -f /var/log/sa/sa04 - CPU stats from the 4th.<br />
+ <br />
+cpsizeme<br />
+ For 24h, monitor gw resource utilization every minute and generate a CSV report to use for sizing considerations or troubleshooting. See sk88160 for additional information.<br />
+ <br />
+ethtool -S<br />
+ View interface statistics and counters.<br />
+ <br />
+emergendisk<br />
+ Create a bootable system on a USB device for system or password recovery and secure HDD wiping.<br />
+ <br />
+cpinfo -z -o <file><br />
+ Create a compressed cpinfo file to open with the InfoView utility or to send to Check Point support.<br />
+ <br />
+cst<br />
+ecst<br />
+ Configuration Summary Tool and its enhanced version. Packs IPSO config, logs, core dumps etc. into a single file.<br />
+ <br />
+fw ctl zdebug drop<br />
+ Real time listing of dropped packets.<br />
+ <br />
+cpwd_admin list<br />
+ Display PID, status and starting time of CP WatchDog monitored processes.<br />
+ <br />
+cpca_client lscert<br />
+ Display all ICA certificates.<br />
+ <br />
+fw tab &#150;t <tbl> [&#150;s]<br />
+ View kernel table contents. Make output short with -s switch. List all available tables with fw tab -s. Example:<br />
+fw tab -t connections -s &#150; View connection table.<br />
+ <br />
+fw ctl multik stat<br />
+ Show connection statistics for each kernel instance.<br />
+ <br />
+fw ctl pstat<br />
+ Display internal statistics including information about memory, inspect, connections, synchronization and NAT.<br />
+ <br />
+fw ctl chain<br />
+ Displays in and out chain of CP modules. Useful for placing fw monitor into the chain with the -p option. <br />
+ <br />
+cp_conf sic state<br />
+cp_conf sic init <key><br />
+ Display SIC trust status or (re)initialize SIC. Also see sk30579 for additional hints on SIC troubleshooting.<br />
+ <br />
+fwm sic_reset<br />
+ Reset Internal Certificate Authority (ICA) and delete certs. Reinitialize ICA with cpconfig or cp_conf ca init.<br />
+ <br />
+cpca_client<br />
+ Manage parts of the ICA. View, create and revoke certificates, start and stop the ICA Web Tool. Examples:<br />
+cpca_client lscert -stat Valid<br />
+cpca_client search <searchstring><br />
+ <br />
+fwaccel <off|on><br />
+ Disable/enable SecureXL.<br />
+ <br />
+cpmonitor<br />
+ Statistics and analysis of snoop/tcpdump/fw monitor traffic capture files. See sk103212 for download link and usage.<br />
+ </p>
+
+<p>fw monitor Examples<br />
+ <br />
+The fw monitor packet sniffer is part of every FW-1 installation. For more info see the Check Point guide (http://bit.ly/fwmonref) or my fw monitor cheat sheet (http://bit.ly/cpfwmon ) . fw6 monitor is working with GAiA. Disable SecureXL (fwaccel off) prior to sniffing.<br />
+Display traffic with 192.168.1.12 as SRC or DST on interface ID 2<br />
+(List interfaces and corresponding IDs with fw ctl iflist)<br />
+fw monitor -e 'accept host(192.168.1.12) and ifid=2;'<br />
+Display all packets from 192.168.1.12 to 192.168.3.3<br />
+fw monitor -e 'accept src=192.168.1.12 and dst=192.168.3.3;'<br />
+UDP port 53 (DNS) packets, pre-in position is before 'ippot_strip'<br />
+fw monitor -pi ipopt_strip -e 'accept udpport(53);'<br />
+UPD traffic from or to unprivileged ports, only show post-out<br />
+fw monitor -m O -e 'accept udp and (sport>1023 or dport>1023);'<br />
+Display Windows traceroute (ICMP, TTL<30) from and to 192.168.1.12<br />
+fw monitor -e 'accept host(192.168.1.12) and tracert;'<br />
+Capture web traffic for VSX virtual system ID 23<br />
+fw monitor -v 23 -e 'accept tcpport(80);'<br />
+Capture traffic on a SecuRemote/SecureClient client into a file<br />
+srfw.exe in $SRDIR/bin (C:\Program Files\CheckPoint\SecuRemote\bin)<br />
+srfw monitor -o output_file.cap<br />
+ </p>
+
+<p>Basic administration and configuration tasks<br />
+ <br />
+cpconfig<br />
+ Menu based configuration tool. Options depend on the installed products and modules.<br />
+ <br />
+sysconfig<br />
+ Start SPLAT OS and Check Point product configuration tool.<br />
+ <br />
+cp_conf admin add <user> <br />
+ <pass> <perm><br />
+ Add admin user with password pass and permissions perm where w is read/write access and r is read only. Note: permission w does not allow account administration.<br />
+ <br />
+cp_admin_convert<br />
+ Export admin definitions created in cpconfig to SmartDashboard.<br />
+ <br />
+fwm lock_admin -v<br />
+ View list of locked administrators.<br />
+ <br />
+fwm lock_admin -u <user><br />
+ Unlock admin user. Unlock all with -ua.<br />
+ <br />
+cp_conf admin del <user><br />
+ Delete the admin account user.<br />
+ <br />
+fwm expdate <dd-mmm-yyy><br />
+ [-f <dd-mmm-yyyy>]<br />
+ Set new expiration date for all users or with -f for all users matching the expiration date filter:<br />
+fwm expdate 31-Dec-2020 -f 31-Dec-2014.<br />
+ <br />
+cp_conf client add <ip><br />
+cp_conf client del <ip><br />
+ Add/delete GUI clients. You can delete multiple clients at once.<br />
+ <br />
+cpca_client<br />
+ Manage parts of the ICA. View, create and revoke certificates, start and stop the ICA Web Tool.<br />
+ <br />
+patch add cd <patch><br />
+ Install the patch <patch> from CD.<br />
+ <br />
+lvm_manager<br />
+ Manage partition sizes on GAiA. See sk95566 for info and download link.<br />
+ <br />
+show users<br />
+ Show configured users and their homedir, UID/GID and shell.<br />
+ <br />
+add user <user><br />
+ Add a new user with username <user>.<br />
+ <br />
+set user <user> shell <br />
+ <shell> <br />
+ Set the login shell of user <user> to <shell>. Setting it to f.i. /bin/bash will log in <user> directly into expert mode.<br />
+ <br />
+set user <user> password<br />
+ Set new password for <user>.<br />
+ <br />
+set selfpasswd<br />
+ Change your own password.<br />
+ <br />
+set expert-password<br />
+ Set or change password for entering expert mode.<br />
+ <br />
+save config<br />
+ Save configuration changes.<br />
+ <br />
+showusers<br />
+ Display a list of configured SecurePlatform administrators.<br />
+ <br />
+adduser <user><br />
+ Add a new user with username <user>.<br />
+ <br />
+chsh -s <shell> <user><br />
+ Change the login shell for <user> to <shell> on SPLAT . <br />
+ <br />
+passwd<br />
+ Change your own password.<br />
+ <br />
+passwd<br />
+ Change expert password in expert mode on SPLAT systems.<br />
+ <br />
+start transaction<br />
+ Start transaction mode. All changes made will be applied at once if you exit transaction mode with commit or discarded if you exit with rollback. <br />
+ <br />
+show version os edition<br />
+ Show which OS edition (32 or 64-bit) is running.<br />
+ <br />
+set edition default<br />
+ 32-bit|64-bit<br />
+ Switch between 32 and 64-bit kernel. 64-bit needs at least 6GB of RAM (or 1GB running in a VM).<br />
+ </p>
+
+<p>VPN<br />
+ <br />
+vpn tu<br />
+ Start a menu based VPN TunnelUtil program where you can list and delete Security Associations (SAs) for peers.<br />
+ <br />
+vpn shell<br />
+ Start the VPN shell.<br />
+ <br />
+vpn debug ikeon|ikeoff<br />
+ Debug IKE into $FWDIR/log/ike.elg. Analyze ike.elg with the IKEView tool. See sk30994.<br />
+ <br />
+vpn debug on|off<br />
+ Debug VPN into $FWDIR/log/vpnd.elg. Analyze vpnd.elg with the IKEView tool. See sk30994.<br />
+ <br />
+vpn debug trunc<br />
+ Truncate and stamp logs, enable IKE &amp; VPN debug.<br />
+ <br />
+vpn drv stat<br />
+ Show status of VPN-1 kernel module.<br />
+ <br />
+vpn overlap_encdom<br />
+ Show, if any, overlapping VPN domains.<br />
+ <br />
+vpn macutil <user><br />
+ Show MAC for Secure Remote user <user>.<br />
+ <br />
+sk60318 - How to troubleshoot VPN issues in Site to Site <br />
+sk89940 - How to debug VPND daemon<br />
+sk33327 - How to generate a valid VPN debug, IKE debug and FW Monitor <br />
+ </p>
+
+<p>Backup and Restore<br />
+ <br />
+add backup<br />
+ Create backup in /var/CPbackup/backups/ or on a remote server (scp/ftp/tftp). Also see sk91400. E.g.:<br />
+add backup local<br />
+add backup scp ip <ip> path </pa/th/> username <br />
+ <user> interactive<br />
+ <br />
+set backup restore<br />
+ Restore backup. Also see sk91400. Examples:<br />
+set backup restore local <TAB><br />
+set backup restore scp ip <ip> path </pa/th/> file <br />
+ <file> username <user> interactive<br />
+ <br />
+show backups <br />
+ List locally stored backups.<br />
+ <br />
+add snapshot<br />
+delete snapshot<br />
+ Add and delete sytstem snapshots. Example<br />
+add snapshot <name> [descr <&#148;my destription&#148;>]<br />
+ <br />
+set snapshot revert<br />
+set snapshot export<br />
+set snapshot import<br />
+ Export/import or revert to a certain system snapshot. E.g.:<br />
+set snapshot revert <name><br />
+set snapshot export <name> path <path> name <name><br />
+ <br />
+show snapshots<br />
+ Show list of local snapshots.<br />
+ <br />
+upgrade_export <file><br />
+migrate export <file> <br />
+ Tool from $FWDIR/bin/upgrade_tools. Saves only Check Point configuration (policy, objects...) and no OS settings.<br />
+ <br />
+upgrade_import <file><br />
+migrate import <file><br />
+ Import config package generated with migrate tools.<br />
+ <br />
+backup<br />
+ Create backup in /var/CPbackup/backups/ or on a remote server (scp/ftp/tftp). Also see sk54100. Examples.:<br />
+backup [-f <file>]<br />
+backup --scp <ip> <user> <pass> [-path </pa/th/> <br />
+ <file>]<br />
+ <br />
+restore<br />
+ Restore backup from local package or via scp/ftp/tftp. Delete local backup packages. Menu based.<br />
+ <br />
+snapshot<br />
+ Take a snapshot of the entire system. Without options it's menu based. Note: cpstop is issued! Examples:<br />
+snapshot --file <file><br />
+snapshot --scp <ip> <user> <pass> <file><br />
+ <br />
+revert<br />
+ Reboot system from snapshot. Same syntax as snapshot.<br />
+ </p>
+
+<p>ClusterXL configuration and troubleshooting &#150; and some VRRP<br />
+ <br />
+cphaprob state<br />
+ View HA state of all cluster members.<br />
+ <br />
+cphaprob -a if<br />
+ View interface status and CCP state.<br />
+ <br />
+cphaprob -ia list<br />
+ View list and state of critical cluster devices.<br />
+ <br />
+fw hastat<br />
+ View HA state of local machine.<br />
+ <br />
+cp_conf ha enable|<br />
+ disable [norestart]<br />
+ Enable or disable HA.<br />
+ <br />
+cphastart<br />
+cphastop<br />
+ Enable / Disable ClusterXL on the cluster member. On HA Legacy Mode cphastop might stop the entire cluster.<br />
+ <br />
+cphaprob syncstat<br />
+ View sync transport layer statistics. Reset with -reset. See sk34475 for detailed description.<br />
+ <br />
+fw ctl pstat<br />
+ View sync status and packet statistics. See sk34476.<br />
+ <br />
+fw ctl setsync <off|start><br />
+ Stop or start synchronization in a cluster.<br />
+ <br />
+fw -d fullsync <member-ip><br />
+ Start a full synchronization with debugging output.<br />
+ <br />
+cphaconf set_ccp <br />
+ <broadcast|multicast><br />
+ Configure Cluster Control Protocol (CCP) to use unicast or multicast messages. By default set to multicast. <br />
+ <br />
+cphaconf debug_data<br />
+ View multicast MAC addresses used.<br />
+ <br />
+clusterXL_admin [-p] <br />
+ <up|down><br />
+ Perform a graceful manual failover by registering a faildevice. Survives a reboot with -p switch set.<br />
+ <br />
+show vrrp interfaces<br />
+ Detailed status of VRRP interfaces. For a brief overview you can also use show vrrp in the iclid shell.<br />
+ <br />
+cphaprob tablestat<br />
+ View IPs and interface IDs for all cluster members.<br />
+ <br />
+cphaprob igmp<br />
+ View IGMP status for CCP multicast mode.<br />
+ <br />
+sk93306 - Advanced Technical Reference Guide: ClusterXL R6x and R7x<br />
+sk56202 - How to troubleshoot failovers in ClusterXL <br />
+sk62570 - How to troubleshoot failovers in ClusterXL - Advanced<br />
+sk43984 - Interface flapping when cluster interfaces are connected through several switches<br />
+ </p>
+
+<p>Multi-Domain Security Management (Provider-1)<br />
+ <br />
+mdsconfig<br />
+ MDS replacement for cpconfig.<br />
+ <br />
+mdsenv [dms_name]<br />
+ Set the environment variables for MDS or DMS level.<br />
+ <br />
+mdsstart [-m|-s]<br />
+mdsstop [-m]<br />
+ Starts/stops the MDS and all DMS (10 at a time). Start only the MDS with -m or DMS subsequently with -s. <br />
+ <br />
+mdsstat [dms_name]|[-m]<br />
+ Show status of the MDS and all DMS or a certain customer's DMS. Use -m for only MDS status.<br />
+ <br />
+cpinfo -c <dms><br />
+ Create a cpinfo for the customer DMS <dms>. Remember to run mdsenv <dms> in advance.<br />
+ <br />
+mcd <dir><br />
+ Change directory to $FWDIR/<dir> of the current DMS.<br />
+ <br />
+mdsstop_customer <dms><br />
+ Stop single DMS <dms>.<br />
+ <br />
+mdsstart_customer <dms><br />
+ Start single DMS <dms>.<br />
+ <br />
+mds_backup [-l] [-d <br />
+ directory]<br />
+ Backup binaries and data to current directory. Change output directory with -d, exclude logs with -l, do a dry run with -v. You can exclude files by specifying them in $MDSDIR/conf/mds_exclude.dat.<br />
+ <br />
+./mds_restore <file><br />
+ Restore MDS backup from file. Notice: you may need to copy mds_backup from $MDSDIR/scripts/ as well as gtar and gzip from $MDS_SYSTEM/shared/ to the directory with the backup file. Normally, mds_backup does this during backup.<br />
+ <br />
+cma_migrate<br />
+ Import and if necessary upgrade an export_database created management server or DMS database package.<br />
+ <br />
+mdscmd <subcmds> [-m mds <br />
+ -u user -p pass]<br />
+ Connect to a (remote) MDS as CPMI client and configure or manage it. See mdscmd help.<br />
+ <br />
+vsx_util <subcommand><br />
+ Perfom VSX maintenance from the main DMS. See vsx_util -h for subcommands.<br />
+ <br />
+sk95329 &#150; Advanced Technical Reference Guide: Multi-Domain Security Management<br />
+sk33207 - How to debug FWM daemon on Provider-1 DMS / CMA<br />
+ </p>
+
+<p>VSX (When two commands are given, the first applies to R68 and the second to R75.40+)<br />
+ <br />
+vsx stat [-v] [-l] [id]<br />
+ Show VSX status. Verbose with -v, interface list with -l or status of single VS with VS ID <id>.<br />
+ <br />
+show virtual-system all<br />
+ List all VS with their VS ID and name.<br />
+ <br />
+vsx get<br />
+vsenv <br />
+ View current shell context. Second line applies to VSX on R75.40VS and up.<br />
+ <br />
+vsx set <id><br />
+vsenv <id><br />
+ Set context to VS with the ID <id>. Second line applies to VSX on R75.40VS and up.<br />
+ <br />
+set virtual-system <id><br />
+ Set context to VS ID <id>.<br />
+ <br />
+fw -vs <id> unloadlocal<br />
+vsenv <id>; fw unloadlocal<br />
+ Unload policy from a VS. To unload policies on all VS use fw vsx unloadall. See sk33065 for details.<br />
+ <br />
+vsx sic reset <id><br />
+vsenv <id>; fw vsx sicreset<br />
+ Reset SIC for VS <id>. For details see sk34098. Second line applies to VSX on R75.40VS and up. <br />
+ <br />
+cpinfo -x <id><br />
+ Start cpinfo collecting data for VS ID <id>.<br />
+ <br />
+vpn -vs <id> debug trunc<br />
+ Empty &amp; stamp logs, enable IKE &amp; VPN debug.<br />
+ <br />
+fw -vs <id> getifs<br />
+vsenv <id>; fw getifs<br />
+ View driver interface list for a VS. You can also use the VS name instead of -vs <id>.<br />
+ <br />
+fw tab -vs <id> -t <table><br />
+vsenv <id>; fw tab -t <table><br />
+ View state tables for virtual system <id>. Second line applies to VSX on R75.40VS and up.<br />
+ <br />
+vsx vspurge<br />
+ Remove unused VSX systems and fetch VS config.<br />
+ <br />
+fw monitor -v <id> -e <br />
+ 'accept;'<br />
+ View traffic for virtual system with ID <id>.<br />
+Attn: with fw monitor use -v instead of -vs.<br />
+ <br />
+cphaprob -vs <id> state<br />
+ View HA state for Virtual System id when &#147;Per Virtual System HA&#148; mode is configured.<br />
+ <br />
+cphaprob -vs <id> register <br />
+ Register a faildevice and switch VS <id> to the next cluster member (only in Per VS HA/VSLS).<br />
+ <br />
+$linux_command -z <id><br />
+traceroute -Z <id><br />
+ In R68 set context for ifconfig, ip, arp, ping or netstat. Uppercase &#147;Z&#148; for traceroute. <br />
+ <br />
+A lot of Check Point's commands up to R68 do understand the -vs <id> switch. With newer versions you often have to change context with vsenv <id> before issuing the commands.<br />
+ </p>
+
+<p>Licensed under Creative Commons BY-NC-SA. SecurePlatform, SofaWare, SmartCenter, ClusterXL, SecureXL, Flood-Gate-1, Provider-1, VSX, IPSO, VPN-1/UTM-1 Edge and GAiA are all registered trademarks of Check Point Software Technologies, Ltd.<br />
+</p>

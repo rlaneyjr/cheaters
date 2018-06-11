@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<h2 id="neutron">Neutron</h2>
+<h3>Configuring Neutron on Controller:</h3>
+<p><em>Warning</em><br />
+<em>Once you configure the ML2 plug-in, changing values in the type_drivers option can lead to database inconsistency.</em></p>
+
+<li>
+    <dt>To finalize installation populate the database on Controller:</dt>
+    <dd><code># su -s /bin/sh -c "neutron-db-manage --config-file /etc/neutron/neutron.conf --config-file \</code></dd>
+    <dd><code>/etc/neutron/plugins/ml2/ml2_conf.ini upgrade head" neutron</code></dd>
+</li>
+
+<li>
+    <dt>Restart Compute and Neutron services on Controller:</dt>
+    <dd><code>sudo service nova-api restart</code></dd>
+    <dd><code>sudo service neutron-server restart</code></dd>
+</li>
+
+<li>
+    <dt>Restart the Networking services on Network Node:</dt>
+    <dd><code>sudo service neutron-plugin-openvswitch-agent restart</code></dd>
+    <dd><code>sudo service neutron-l3-agent restart</code></dd>
+    <dd><code>sudo service neutron-dhcp-agent restart</code></dd>
+    <dd><code>sudo service neutron-metadata-agent restart</code></dd>
+</li>
+
+<h3>Configuring Neutron on Network Node:</h3>
+<p><em>Before you install and configure OpenStack Networking, you must configure certain kernel networking parameters.</em></p>
+
+<li>
+    <dt>Edit the /etc/sysctl.conf file to contain the following parameters:</dt>
+    <dd><code>net.ipv4.ip_forward=1</code></dd>
+    <dd><code>net.ipv4.conf.all.rp_filter=0</code></dd>
+    <dd><code>net.ipv4.conf.default.rp_filter=0</code></dd>
+</li>
+
+<li>
+    <dt>Implement the changes:</dt>
+    <dd><code>sudo sysctl -p</code></dd>
+</li>
+
+<hr />
+
+<table>
+<caption id="commandline"><h4>Neutron CLI Commands for API v2.0</h4></caption>
+<colgroup>
+<col style="text-align:left;"/>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+	<th>Command</th>
+	<th>Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+    <td><code>neutron agent-delete</code></td>
+    <td>Delete a given agent.</td>
+</tr>
+<tr>
+    <td><code>neutron agent-list</code></td>
+    <td>List agents.</td>
+</tr>
+<tr>
+    <td><code>neutron agent-show</code></td>
+    <td>Show information of a given agent.</td>
+</tr>
+<tr>
+    <td><code>neutron agent-update</code></td>
+    <td>Updates the admin status and description for a specified agent.</td>
+</tr>
+<tr>
+    <td><code>neutron bash-completion</code></td>
+    <td>Prints all of the commands and options for bash-completion.</td>
+</tr>
+<tr>
+    <td><code>neutron cisco-credential-create</code></td>
+    <td>Creates a credential.</td>
+</tr>
+<tr>
+    <td><code>neutron cisco-credential-delete</code></td>
+    <td>Delete a  given credential.</td>
+</tr>
+<tr>
+    <td><code>neutron cisco-credential-list</code></td>
+    <td>List credentials that belong to a given tenant.</td>
+</tr>
+<tr>
+    <td><code>neutron cisco-credential-show</code></td>
+    <td>Show information of a given credential.</td>
+</tr>
+<tr>
+    <td><code>neutron cisco-network-profile-create</code></td>
+    <td>Creates a network profile.</td>
+</tr>
+<tr>
+    <td><code>neutron cisco-network-profile-delete</code></td>
+    <td>Delete a given network profile.</td>
+</tr>
+<tr>
+    <td><code>neutron cisco-network-profile-list</code></td>
+    <td>List network profiles that belong to a given tenant.</td>
+</tr>
+<tr>
+    <td><code>neutron cisco-network-profile-show</code></td>
+    <td>Show information of a given network profile.</td>
+</tr>
+<tr>
+    <td><code>neutron cisco-network-profile-update</code></td>
+    <td>Update network profile's information.</td>
+</tr>
+<tr>
+    <td><code>neutron cisco-policy-profile-list</code></td>
+    <td>List policy profiles that belong to a given tenant.</td>
+</tr>
+<tr>
+    <td><code>neutron cisco-policy-profile-show</code></td>
+    <td>Show information of a given policy profile.</td>
+</tr>
+<tr>
+    <td><code>neutron cisco-policy-profile-update</code></td>
+    <td>Update policy profile's information.</td>
+</tr>
+<tr>
+    <td><code>neutron dhcp-agent-list-hosting-net</code></td>
+    <td>List DHCP agents hosting a network.</td>
+</tr>
+<tr>
+    <td><code>neutron dhcp-agent-network-add</code></td>
+    <td>Add </td>a network to a DHCP agent.
+</tr>
+<tr>
+    <td><code>neutron dhcp-agent-network-remove</code></td>
+    <td>Remove a network from a DHCP agent.</td>
+</tr>
+<tr>
+    <td><code>neutron ext-list</code></td>
+    <td>List all extensions.</td>
+</tr>
+<tr>
+    <td><code>neutron ext-show</code></td>
+    <td>Show information of a given resource.</td>
+</tr>
+<tr>
+    <td><code>neutron firewall-create</code></td>
+    <td>Create a firewall.</td>
+</tr>
+<tr>
+    <td><code>neutron firewall-delete</code></td>
+    <td>Delete a given firewall.</td>
+</tr>
+<tr>
+    <td><code>neutron firewall-list</code></td>
+    <td>List firewalls that belong to a given tenant.</td>
+</tr>
+<tr>
+    <td><code>neutron firewall-policy-create</code></td>
+    <td>Create a firewall policy.</td>
+</tr>
+<tr>
+    <td><code>neutron firewall-policy-delete</code></td>
+    <td>Delete a given firewall policy.</td>
+</tr>
+<tr>
+    <td><code>neutron firewall-policy-insert-rule</code></td>
+    <td>Insert a rule into a given firewall policy.</td>
+</tr>
+<tr>
+    <td><code>neutron firewall-policy-list</code></td>
+    <td>List firewall policies that belong to a given tenant.</td>
+</tr>
+<tr>
+    <td><code>neutron firewall-policy-remove-rule</code></td>
+    <td>Remove a rule from a given firewall policy.</td>
+</tr>
+<tr>
+    <td><code>neutron firewall-policy-show</code></td>
+    <td>Show information of a given firewall policy.</td>
+</tr>
+<tr>
+    <td><code>neutron firewall-policy-update</code></td>
+    <td>Update a given firewall policy.</td>
+</tr>
+<tr>
+    <td><code>neutron firewall-rule-create</code></td>
+    <td>Create a firewall rule.</td>
+</tr>
+<tr>
+    <td><code>neutron firewall-rule-delete</code></td>
+    <td>Delete a given firewall rule.</td>
+</tr>
+<tr>
+    <td><code>neutron firewall-rule-list</code></td>
+    <td>List firewall rules that belong to a given tenant.</td>
+</tr>
+<tr>
+    <td><code>neutron firewall-rule-show</code></td>
+    <td>Show information of a given firewall rule.</td>
+</tr>
+<tr>
+    <td><code>neutron firewall-rule-update</code></td>
+    <td>Update a given firewall rule.</td>
+</tr>
+<tr>
+    <td><code>neutron firewall-show</code></td>
+    <td>Show information of a given firewall.</td>
+</tr>
+<tr>
+    <td><code>neutron firewall-update</code></td>
+    <td>Update a given firewall.</td>
+</tr>
+<tr>
+    <td><code>neutron floatingip-associate</code></td>
+    <td>Create a mapping between a floating IP and a fixed IP.</td>
+</tr>
+<tr>
+    <td><code>neutron floatingip-create</code></td>
+    <td>Create a floating IP for a given tenant.</td>
+</tr>
+<tr>
+    <td><code>neutron floatingip-delete</code></td>
+    <td>Delete a given floating IP.</td>
+</tr>
+<tr>
+    <td><code>neutron floatingip-disassociate</code></td>
+    <td>Remove a mapping from a floating IP to a fixed IP.</td>
+</tr>
+<tr>
+    <td><code>neutron floatingip-list</code></td>
+    <td>List floating IPs that belong to a given tenant.</td>
+</tr>
+<tr>
+    <td><code>neutron floatingip-show</code></td>
+    <td>Show information of a given floating IP.</td>
+</tr>
+<tr>
+    <td><code>neutron gateway-device-create</code></td>
+    <td>Create a network gateway device.</td>
+</tr>
+<tr>
+    <td><code>neutron gateway-device-delete</code></td>
+    <td>Delete a given network gateway device.</td>
+</tr>
+<tr>
+    <td><code>neutron gateway-device-list</code></td>
+    <td>List network gateway devices for a given tenant.</td>
+</tr>
+<tr>
+    <td><code>neutron gateway-device-show</code></td>
+    <td>Show information for a given network gateway device.</td>
+</tr>
+<tr>
+    <td><code>neutron gateway-device-update</code></td>
+    <td>Update a network gateway device.</td>
+</tr>
+<tr>
+    <td><code>neutron help</code></td>
+    <td>print detailed help for another command</td>
+</tr>
+<tr>
+    <td><code>neutron ipsec-site-connection-create</code></td>
+    <td>Create an IPsec site connection.</td>
+</tr>
+<tr>
+    <td><code>neutron ipsec-site-connection-delete</code></td>
+    <td>Delete a given IPsec site connection.</td>
+</tr>
+<tr>
+    <td><code>neutron ipsec-site-connection-list</code></td>
+    <td>List IPsec site connections that belong to a given tenant.</td>
+</tr>
+<tr>
+    <td><code>neutron ipsec-site-connection-show</code></td>
+    <td>Show information of a given IPsec site connection.</td>
+</tr>
+<tr>
+    <td><code>neutron ipsec-site-connection-update</code></td>
+    <td>Update a given IPsec site connection.</td>
+</tr>
+<tr>
+    <td><code>neutron l3-agent-list-hosting-router</code></td>
+    <td>List L3 agents hosting a router.</td>
+</tr>
+<tr>
+    <td><code>neutron l3-agent-router-add</code></td>
+    <td>Add </td>a router to a L3 agent.
+</tr>
+<tr>
+    <td><code>neutron l3-agent-router-remove</code></td>
+    <td>Remove a router from a L3 agent.</td>
+</tr>
+<tr>
+    <td><code>neutron lb-agent-hosting-pool</code></td>
+    <td>Get loadbalancer agent hosting a pool.</td>
+</tr>
+<tr>
+    <td><code>neutron lb-healthmonitor-associate</code></td>
+    <td>Create a mapping between a health monitor and a pool.</td>
+</tr>
+<tr>
+    <td><code>neutron lb-healthmonitor-create</code></td>
+    <td>Create a health monitor.</td>
+</tr>
+<tr>
+    <td><code>neutron lb-healthmonitor-delete</code></td>
+    <td>Delete a given health monitor.</td>
+</tr>
+<tr>
+    <td><code>neutron lb-healthmonitor-disassociate</code></td>
+    <td>Remove a mapping from a health monitor to a pool.</td>
+</tr>
+<tr>
+    <td><code>neutron lb-healthmonitor-list</code></td>
+    <td>List health monitors that belong to a given tenant.</td>
+</tr>
+<tr>
+    <td><code>neutron lb-healthmonitor-show</code></td>
+    <td>Show information of a given health monitor.</td>
+</tr>
+<tr>
+    <td><code>neutron lb-healthmonitor-update</code></td>
+    <td>Update a given health monitor.</td>
+</tr>
+<tr>
+    <td><code>neutron lb-member-create</code></td>
+    <td>Create a member.</td>
+</tr>
+<tr>
+    <td><code>neutron lb-member-delete</code></td>
+    <td>Delete a given member.</td>
+</tr>
+<tr>
+    <td><code>neutron lb-member-list</code></td>
+    <td>List members that belong to a given tenant.</td>
+</tr>
+<tr>
+    <td><code>neutron lb-member-show</code></td>
+    <td>Show information of a given member.</td>
+</tr>
+<tr>
+    <td><code>neutron lb-member-update</code></td>
+    <td>Update a given member.</td>
+</tr>
+<tr>
+    <td><code>neutron lb-pool-create</code></td>
+    <td>Create a pool.</td>
+</tr>
+<tr>
+    <td><code>neutron lb-pool-delete</code></td>
+    <td>Delete a given pool.</td>
+</tr>
+<tr>
+    <td><code>neutron lb-pool-list</code></td>
+    <td>List pools that belong to a given tenant.</td>
+</tr>
+<tr>
+    <td><code>neutron lb-pool-list-on-agent</code></td>
+    <td>List the pools on a loadbalancer agent.</td>
+</tr>
+<tr>
+    <td><code>neutron lb-pool-show</code></td>
+    <td>Show information of a given pool.</td>
+</tr>
+<tr>
+    <td><code>neutron lb-pool-stats</code></td>
+    <td>Retrieve stats for a given pool.</td>
+</tr>
+<tr>
+    <td><code>neutron lb-pool-update</code></td>
+    <td>Update a given pool.</td>
+</tr>
+<tr>
+    <td><code>neutron lb-vip-create</code></td>
+    <td>Create a vip.</td>
+</tr>
+<tr>
+    <td><code>neutron lb-vip-delete</code></td>
+    <td>Delete a given vip.</td>
+</tr>
+<tr>
+    <td><code>neutron lb-vip-list</code></td>
+    <td>List vips that belong to a given tenant.</td>
+</tr>
+<tr>
+    <td><code>neutron lb-vip-show</code></td>
+    <td>Show information of a given vip.</td>
+</tr>
+<tr>
+    <td><code>neutron lb-vip-update</code></td>
+    <td>Update a given vip.</td>
+</tr>
+<tr>
+    <td><code>neutron lbaas-healthmonitor-create</code></td>
+    <td>LBaaS v2 Create a healthmonitor.</td>
+</tr>
+<tr>
+    <td><code>neutron lbaas-healthmonitor-delete</code></td>
+    <td>LBaaS v2 Delete a given healthmonitor.</td>
+</tr>
+<tr>
+    <td><code>neutron lbaas-healthmonitor-list</code></td>
+    <td>LBaaS v2 List healthmonitors that belong to a given tenant.</td>
+</tr>
+<tr>
+    <td><code>neutron lbaas-healthmonitor-show</code></td>
+    <td>LBaaS v2 Show information of a given healthmonitor.</td>
+</tr>
+<tr>
+    <td><code>neutron lbaas-healthmonitor-update</code></td>
+    <td>LBaaS v2 Update a given healthmonitor.</td>
+</tr>
+<tr>
+    <td><code>neutron lbaas-listener-create</code></td>
+    <td>LBaaS v2 Create a listener.</td>
+</tr>
+<tr>
+    <td><code>neutron lbaas-listener-delete</code></td>
+    <td>LBaaS v2 Delete a given listener.</td>
+</tr>
+<tr>
+    <td><code>neutron lbaas-listener-list</code></td>
+    <td>LBaaS v2 List listeners that belong to a given tenant.</td>
+</tr>
+<tr>
+    <td><code>neutron lbaas-listener-show</code></td>
+    <td>LBaaS v2 Show information of a given listener.</td>
+</tr>
+<tr>
+    <td><code>neutron lbaas-listener-update</code></td>
+    <td>LBaaS v2 Update a given listener.</td>
+</tr>
+<tr>
+    <td><code>neutron lbaas-loadbalancer-create</code></td>
+    <td>LBaaS v2 Create a loadbalancer.</td>
+</tr>
+<tr>
+    <td><code>neutron lbaas-loadbalancer-delete</code></td>
+    <td>LBaaS v2 Delete a given loadbalancer.</td>
+</tr>
+<tr>
+    <td><code>neutron lbaas-loadbalancer-list</code></td>
+    <td>LBaaS v2 List loadbalancers that belong to a given tenant.</td>
+</tr>
+<tr>
+    <td><code>neutron lbaas-loadbalancer-show</code></td>
+    <td>LBaaS v2 Show information of a given loadbalancer.</td>
+</tr>
+<tr>
+    <td><code>neutron lbaas-loadbalancer-update</code></td>
+    <td>LBaaS v2 Update a given loadbalancer.</td>
+</tr>
+<tr>
+    <td><code>neutron lbaas-member-create</code></td>
+    <td>LBaaS v2 Create a member.</td>
+</tr>
+<tr>
+    <td><code>neutron lbaas-member-delete</code></td>
+    <td>LBaaS v2 Delete a given member.</td>
+</tr>
+<tr>
+    <td><code>neutron lbaas-member-list</code></td>
+    <td>LBaaS v2 List members that belong to a given tenant.</td>
+</tr>
+<tr>
+    <td><code>neutron lbaas-member-show</code></td>
+    <td>LBaaS v2 Show information of a given member.</td>
+</tr>
+<tr>
+    <td><code>neutron lbaas-member-update</code></td>
+    <td>LBaaS v2 Update a given member.</td>
+</tr>
+<tr>
+    <td><code>neutron lbaas-pool-create</code></td>
+    <td>LBaaS v2 Create a pool.</td>
+</tr>
+<tr>
+    <td><code>neutron lbaas-pool-delete</code></td>
+    <td>LBaaS v2 Delete a given pool.</td>
+</tr>
+<tr>
+    <td><code>neutron lbaas-pool-list</code></td>
+    <td>LBaaS v2 List pools that belong to a given tenant.</td>
+</tr>
+<tr>
+    <td><code>neutron lbaas-pool-show</code></td>
+    <td>LBaaS v2 Show information of a given pool.</td>
+</tr>
+<tr>
+    <td><code>neutron lbaas-pool-update</code></td>
+    <td>LBaaS v2 Update a given pool.</td>
+</tr>
+<tr>
+    <td><code>neutron meter-label-create</code></td>
+    <td>Create a metering label for a given tenant.</td>
+</tr>
+<tr>
+    <td><code>neutron meter-label-delete</code></td>
+    <td>Delete a given metering label.</td>
+</tr>
+<tr>
+    <td><code>neutron meter-label-list</code></td>
+    <td>List metering labels that belong to a given tenant.</td>
+</tr>
+<tr>
+    <td><code>neutron meter-label-rule-create</code></td>
+    <td>Create a metering label rule for a given label.</td>
+</tr>
+<tr>
+    <td><code>neutron meter-label-rule-delete</code></td>
+    <td>Delete a given metering label.</td>
+</tr>
+<tr>
+    <td><code>neutron meter-label-rule-list</code></td>
+    <td>List metering labels that belong to a given label.</td>
+</tr>
+<tr>
+    <td><code>neutron meter-label-rule-show</code></td>
+    <td>Show information of a given metering label rule.</td>
+</tr>
+<tr>
+    <td><code>neutron meter-label-show</code></td>
+    <td>Show information of a given metering label.</td>
+</tr>
+<tr>
+    <td><code>neutron nec-packet-filter-create</code></td>
+    <td>Create a packet filter for a given tenant.</td>
+</tr>
+<tr>
+    <td><code>neutron nec-packet-filter-delete</code></td>
+    <td>Delete a given packet filter.</td>
+</tr>
+<tr>
+    <td><code>neutron nec-packet-filter-list</code></td>
+    <td>List packet filters that belong to a given tenant.</td>
+</tr>
+<tr>
+    <td><code>neutron nec-packet-filter-show</code></td>
+    <td>Show information of a given packet filter.</td>
+</tr>
+<tr>
+    <td><code>neutron nec-packet-filter-update</code></td>
+    <td>Update packet filter's information.</td>
+</tr>
+<tr>
+    <td><code>neutron net-create</code></td>
+    <td>Create a network for a given tenant.</td>
+</tr>
+<tr>
+    <td><code>neutron net-delete</code></td>
+    <td>Delete a given network.</td>
+</tr>
+<tr>
+    <td><code>neutron net-external-list</code></td>
+    <td>List external networks that belong to a given tenant.</td>
+</tr>
+<tr>
+    <td><code>neutron net-gateway-connect</code></td>
+    <td>Add </td>an internal network interface to a router.
+</tr>
+<tr>
+    <td><code>neutron net-gateway-create</code></td>
+    <td>Create a network gateway.</td>
+</tr>
+<tr>
+    <td><code>neutron net-gateway-delete</code></td>
+    <td>Delete a given network gateway.</td>
+</tr>
+<tr>
+    <td><code>neutron net-gateway-disconnect</code></td>
+    <td>Remove a network from a network gateway.</td>
+</tr>
+<tr>
+    <td><code>neutron net-gateway-list</code></td>
+    <td>List network gateways for a given tenant.</td>
+</tr>
+<tr>
+    <td><code>neutron net-gateway-show</code></td>
+    <td>Show information of a given network gateway.</td>
+</tr>
+<tr>
+    <td><code>neutron net-gateway-update</code></td>
+    <td>Update the name for a network gateway.</td>
+</tr>
+<tr>
+    <td><code>neutron net-list</code></td>
+    <td>List networks that belong to a given tenant.</td>
+</tr>
+<tr>
+    <td><code>neutron net-list-on-dhcp-agent</code></td>
+    <td>List the networks on a DHCP agent.</td>
+</tr>
+<tr>
+    <td><code>neutron net-show</code></td>
+    <td>Show information of a given network.</td>
+</tr>
+<tr>
+    <td><code>neutron net-update</code></td>
+    <td>Update network's information.</td>
+</tr>
+<tr>
+    <td><code>neutron nuage-netpartition-create</code></td>
+    <td>Create a netpartition for a given tenant.</td>
+</tr>
+<tr>
+    <td><code>neutron nuage-netpartition-delete</code></td>
+    <td>Delete a given netpartition.</td>
+</tr>
+<tr>
+    <td><code>neutron nuage-netpartition-list</code></td>
+    <td>List netpartitions that belong to a given tenant.</td>
+</tr>
+<tr>
+    <td><code>neutron nuage-netpartition-show</code></td>
+    <td>Show information of a given netpartition.</td>
+</tr>
+<tr>
+    <td><code>neutron port-create</code></td>
+    <td>Create a port for a given tenant.</td>
+</tr>
+<tr>
+    <td><code>neutron port-delete</code></td>
+    <td>Delete a given port.</td>
+</tr>
+<tr>
+    <td><code>neutron port-list</code></td>
+    <td>List ports that belong to a given tenant.</td>
+</tr>
+<tr>
+    <td><code>neutron port-show</code></td>
+    <td>Show information of a given port.</td>
+</tr>
+<tr>
+    <td><code>neutron port-update</code></td>
+    <td>Update port's information.</td>
+</tr>
+<tr>
+    <td><code>neutron queue-create</code></td>
+    <td>Create a queue.</td>
+</tr>
+<tr>
+    <td><code>neutron queue-delete</code></td>
+    <td>Delete a given queue.</td>
+</tr>
+<tr>
+    <td><code>neutron queue-list</code></td>
+    <td>List queues that belong to a given tenant.</td>
+</tr>
+<tr>
+    <td><code>neutron queue-show</code></td>
+    <td>Show information of a given queue.</td>
+</tr>
+<tr>
+    <td><code>neutron quota-delete</code></td>
+    <td>Delete defined quotas of a given tenant.</td>
+</tr>
+<tr>
+    <td><code>neutron quota-list</code></td>
+    <td>List quotas of all tenants who have non-default quota values.</td>
+</tr>
+<tr>
+    <td><code>neutron quota-show</code></td>
+    <td>Show quotas of a given tenant.</td>
+</tr>
+<tr>
+    <td><code>neutron quota-update</code></td>
+    <td>Define tenant's quotas not to use defaults.</td>
+</tr>
+<tr>
+    <td><code>neutron router-create</code></td>
+    <td>Create a router for a given tenant.</td>
+</tr>
+<tr>
+    <td><code>neutron router-delete</code></td>
+    <td>Delete a given router.</td>
+</tr>
+<tr>
+    <td><code>neutron router-gateway-clear</code></td>
+    <td>Remove an external network gateway from a router.</td>
+</tr>
+<tr>
+    <td><code>neutron router-gateway-set</code></td>
+    <td>Set the external network gateway for a router.</td>
+</tr>
+<tr>
+    <td><code>neutron router-interface-add</code></td>
+    <td>Add </td>an internal network interface to a router.
+</tr>
+<tr>
+    <td><code>neutron router-interface-delete</code></td>
+    <td>Remove an internal network interface from a router.</td>
+</tr>
+<tr>
+    <td><code>neutron router-list</code></td>
+    <td>List routers that belong to a given tenant.</td>
+</tr>
+<tr>
+    <td><code>neutron router-list-on-l3-agent</code></td>
+    <td>List the routers on a L3 agent.</td>
+</tr>
+<tr>
+    <td><code>neutron router-port-list</code></td>
+    <td>List ports that belong to a given tenant, with specified router.</td>
+</tr>
+<tr>
+    <td><code>neutron router-show</code></td>
+    <td>Show information of a given router.</td>
+</tr>
+<tr>
+    <td><code>neutron router-update</code></td>
+    <td>Update router's information.</td>
+</tr>
+<tr>
+    <td><code>neutron security-group-create</code></td>
+    <td>Create a security group.</td>
+</tr>
+<tr>
+    <td><code>neutron security-group-delete</code></td>
+    <td>Delete a given security group.</td>
+</tr>
+<tr>
+    <td><code>neutron security-group-list</code></td>
+    <td>List security groups that belong to a given tenant.</td>
+</tr>
+<tr>
+    <td><code>neutron security-group-rule-create</code></td>
+    <td>Create a security group rule.</td>
+</tr>
+<tr>
+    <td><code>neutron security-group-rule-delete</code></td>
+    <td>Delete a given security group rule.</td>
+</tr>
+<tr>
+    <td><code>neutron security-group-rule-list</code></td>
+    <td>List security group rules that belong to a given tenant.</td>
+</tr>
+<tr>
+    <td><code>neutron security-group-rule-show</code></td>
+    <td>Show information of a given security group rule.</td>
+</tr>
+<tr>
+    <td><code>neutron security-group-show</code></td>
+    <td>Show information of a given security group.</td>
+</tr>
+<tr>
+    <td><code>neutron security-group-update</code></td>
+    <td>Update a given security group.</td>
+</tr>
+<tr>
+    <td><code>neutron service-provider-list</code></td>
+    <td>List service providers.</td>
+</tr>
+<tr>
+    <td><code>neutron subnet-create</code></td>
+    <td>Create a subnet for a given tenant.</td>
+</tr>
+<tr>
+    <td><code>neutron subnet-delete</code></td>
+    <td>Delete a given subnet.</td>
+</tr>
+<tr>
+    <td><code>neutron subnet-list</code></td>
+    <td>List subnets that belong to a given tenant.</td>
+</tr>
+<tr>
+    <td><code>neutron subnet-show</code></td>
+    <td>Show information of a given subnet.</td>
+</tr>
+<tr>
+    <td><code>neutron subnet-update</code></td>
+    <td>Update subnet's information.</td>
+</tr>
+<tr>
+    <td><code>neutron vpn-ikepolicy-create</code></td>
+    <td>Create an IKE policy.</td>
+</tr>
+<tr>
+    <td><code>neutron vpn-ikepolicy-delete</code></td>
+    <td>Delete a given IKE policy.</td>
+</tr>
+<tr>
+    <td><code>neutron vpn-ikepolicy-list</code></td>
+    <td>List IKE policies that belong to a tenant.</td>
+</tr>
+<tr>
+    <td><code>neutron vpn-ikepolicy-show</code></td>
+    <td>Show information of a given IKE policy.</td>
+</tr>
+<tr>
+    <td><code>neutron vpn-ikepolicy-update</code></td>
+    <td>Update a given IKE policy.</td>
+</tr>
+<tr>
+    <td><code>neutron vpn-ipsecpolicy-create</code></td>
+    <td>Create an IPsec policy.</td>
+</tr>
+<tr>
+    <td><code>neutron vpn-ipsecpolicy-delete</code></td>
+    <td>Delete a given IPsec policy.</td>
+</tr>
+<tr>
+    <td><code>neutron vpn-ipsecpolicy-list</code></td>
+    <td>List IPsec policies that belong to a given tenant connection.</td>
+</tr>
+<tr>
+    <td><code>neutron vpn-ipsecpolicy-show</code></td>
+    <td>Show information of a given IPsec policy.</td>
+</tr>
+<tr>
+    <td><code>neutron vpn-ipsecpolicy-update</code></td>
+    <td>Update a given IPsec policy.</td>
+</tr>
+<tr>
+    <td><code>neutron vpn-service-create</code></td>
+    <td>Create a VPN service.</td>
+</tr>
+<tr>
+    <td><code>neutron vpn-service-delete</code></td>
+    <td>Delete a given VPN service.</td>
+</tr>
+<tr>
+    <td><code>neutron vpn-service-list</code></td>
+    <td>List VPN service configurations that belong to a given tenant.</td>
+</tr>
+<tr>
+    <td><code>neutron vpn-service-show</code></td>
+    <td>Show information of a given VPN service.</td>
+</tr>
+<tr>
+    <td><code>neutron vpn-service-update</code></td>
+    <td>Update a given VPN service.</td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+<h3>Neutron CLI Command Examples</h3>
+<h4>Creating external nets</h4>
+    <dt><code>neutron net-create ext-net1 --router:external --provider:physical_network ext-net1 --provider:network_type flat --shared</code></dt>
+    <dd><em>Be sure to create the physical_network "ext-net1" OVS bridge!</em></dd>
+    <dt><code>neutron net-create ext-net2 --router:external --provider:physical_network ext-net2 --provider:network_type flat --shared</code></dt>
+    <dd><em>Be sure to map the physical_network "ext-net2" bridge to physical interface on the server!</em></dd>
+
+<hr />
+<h3>Current neutron.conf settings:</h3>
+<dl>
+    <dt>[DEFAULT]</dt>
+    <dt>core_plugin = ml2</dt>
+    <dt>service_plugins = router,firewall,lbaas,vpnaas,metering</dt>
+    <dt>auth_strategy = keystone</dt>
+    <dt>allow_overlapping_ips = True</dt>
+    <dt>network_device_mtu = 1450</dt>
+    <dt>advertise_mtu = True</dt>
+    <dt>rpc_backend=rabbit</dt>
+</dl>
+<dl>
+    <dt>[agent]</dt>
+    <dt>root_helper = sudo /usr/bin/neutron-rootwrap /etc/neutron/rootwrap.conf</dt>
+    <dt>comment_iptables_rules = True</dt>
+</dl>
+<dl>
+    <dt>[keystone_authtoken]</dt>
+    <dt>auth_uri = http://controller01:5000</dt>
+    <dt>auth_url = http://controller01:35357</dt>
+    <dt>auth_plugin = password</dt>
+    <dt>project_domain_id = default</dt>
+    <dt>user_domain_id = default</dt>
+    <dt>project_name = service</dt>
+    <dt>username = neutron</dt>
+    <dt>password = ntnrox22</dt>
+</dl>
+<dl>
+    <dt>[oslo_messaging_rabbit]</dt>
+    <dt>rabbit_host = controller01</dt>
+    <dt>rabbit_userid = openstack</dt>
+    <dt>rabbit_password = rabbitrox22</dt>
+</dl>
+<dl>
+    <dt>[vxlan]</dt>
+    <dt>enable_vxlan=true</dt>
+    <dt>vxlan_group = 239.1.1.1</dt>
+    <dt>local_ip = 10.0.24.60</dt>
+</dl>
+<hr />
+<h3>Current ML2 settings:</h3>
+<dl>
+    <dt>[ml2]</dt>
+    <dt>type_drivers = flat,vlan,gre,vxlan</dt>
+    <dt>tenant_network_types = vxlan,vlan</dt>
+    <dt>mechanism_drivers = openvswitch</dt>
+</dl>
+<dl>
+    <dt>[ml2_type_flat]</dt>
+    <dt>flat_networks = external,flat,flat1,ext-net1,ext-net2</dt>
+</dl>
+<dl>
+    <dt>[ml2_type_vlan]</dt>
+    <dt>network_vlan_ranges = vlan:101:110</dt>
+</dl>
+<dl>
+    <dt>[ml2_type_gre]</dt>
+</dl>
+<dl>
+    <dt>[ml2_type_vxlan]</dt>
+    <dt>vni_ranges = 200000:300000</dt>
+    <dt>vxlan_group = 239.1.1.1</dt>
+</dl>
+<dl>
+    <dt>[securitygroup]</dt>
+    <dt>enable_security_group = False</dt>
+    <dt>enable_ipset = False</dt>
+    <dt>#firewall_driver = neutron.agent.linux.iptables_firewall.OVSHybridIptablesFirewallDriver</dt>
+</dl>
+<dl>
+    <dt>[ovs]</dt>
+    <dt>local_ip = 10.0.24.60</dt>
+    <dt>bridge_mappings = external:br-ex,ext-net1:br-ex1,ext-net2:br-ex2</dt>
+</dl>
+<dl>
+    <dt>[agent]</dt>
+    <dt>tunnel_types = vxlan</dt>
+</dl>
+
+<hr />
+<h3>Current l3_agent.ini settings:</h3>
+<dl>
+    <dt>[DEFAULT]</dt>
+    <dt>#interface_driver = neutron.agent.linux.interface.BridgeInterfaceDriver</dt>
+    <dt>interface_driver = neutron.agent.linux.interface.OVSInterfaceDriver</dt>
+    <dt>#l3_agent_manager = neutron.agent.l3_agent.L3NATAgentWithStateReport</dt>
+    <dt>dhcp_driver =       neutron.agent.linux.dhcp.Dnsmasq</dt>
+    <dt>network_device_mtu = 1500</dt>
+    <dt>use_namespaces = True</dt>
+    <dt>gateway_external_network_id =</dt>
+    <dt>external_network_bridge =</dt>
+</dl>
+
+<hr />
+<h3>Current dhcp_agent.ini settings:</h3>
+<dl>
+    <dt>[DEFAULT]</dt>
+    <dt>dnsmasq_dns_servers = 10.0.10.5,10.0.10.6</dt>
+    <dt>interface_driver = neutron.agent.linux.interface.OVSInterfaceDriver</dt>
+    <dt>dhcp_driver = neutron.agent.linux.dhcp.Dnsmasq</dt>
+    <dt>dnsmasq_config_file = /etc/neutron/dnsmasq-neutron.conf</dt>
+    <dt>use_namespaces = True</dt>
+    <dt>dhcp_delete_namespaces = True</dt>
+    <dt>enable_isolated_metadata = True</dt>
+</dl>
+
+<hr />
+<h3>To configure the Modular Layer 2 (ML2) plug-in</h3>
+The ML2 plug-in uses the Open vSwitch (OVS) mechanism (agent) to build the virtual networking framework for instances.
+Edit the /etc/neutron/plugins/ml2/ml2_conf.ini file and complete the following actions:
+
+In the [ml2] section, enable the flat, VLAN, generic routing encapsulation (GRE), and virtual extensible LAN (VXLAN) network type drivers, GRE tenant networks, and the OVS mechanism driver:
+[ml2]
+...
+type_drivers = flat,vlan,gre,vxlan
+tenant_network_types = gre
+mechanism_drivers = openvswitch
+
+In the [ml2_type_flat] section, configure the external flat provider network:
+[ml2_type_flat]
+...
+flat_networks = external
+
+In the [ml2_type_gre] section, configure the tunnel identifier (id) range:
+[ml2_type_gre]
+...
+tunnel_id_ranges = 1:1000
+
+In the [securitygroup] section, enable security groups, enable ipset, and configure the OVS iptables firewall driver:
+[securitygroup]
+...
+enable_security_group = True
+enable_ipset = True
+firewall_driver = neutron.agent.linux.iptables_firewall.OVSHybridIptablesFirewallDriver
+
+In the [ovs] section, enable tunnels, configure the local tunnel endpoint, and map the external flat provider network to the br-ex external network bridge:
+[ovs]
+...
+local_ip = INSTANCE_TUNNELS_INTERFACE_IP_ADDRESS
+bridge_mappings = external:br-ex
+
+Replace INSTANCE_TUNNELS_INTERFACE_IP_ADDRESS with the IP address of the instance tunnels network interface on your network node.
+
+The Layer-3 (L3) agent provides routing services for virtual networks.
+Edit the /etc/neutron/l3_agent.ini file and complete the following actions:
+In the [DEFAULT] section, configure the interface driver, external network bridge, and enable deletion of defunct router namespaces:
+[DEFAULT]
+...
+interface_driver = neutron.agent.linux.interface.OVSInterfaceDriver
+external_network_bridge =
+router_delete_namespaces = True
+
+Note
+The external_network_bridge option intentionally lacks a value to enable multiple external networks on a single agent.
+
+The DHCP agent provides DHCP services for virtual networks.
+Edit the /etc/neutron/dhcp_agent.ini file and complete the following actions:
+In the [DEFAULT] section, configure the interface and DHCP drivers and enable deletion of defunct DHCP namespaces:
+[DEFAULT]
+...
+interface_driver = neutron.agent.linux.interface.OVSInterfaceDriver
+dhcp_driver = neutron.agent.linux.dhcp.Dnsmasq
+dhcp_delete_namespaces = True
+
+OPTIONAL
+Tunneling protocols such as GRE include additional packet headers that increase overhead and decrease space available for the payload or user data. Without knowledge of the virtual network infrastructure, instances attempt to send packets using the default Ethernet maximum transmission unit (MTU) of 1500 bytes. Internet protocol (IP) networks contain the path MTU discovery (PMTUD) mechanism to detect end-to-end MTU and adjust packet size accordingly. However, some operating systems and networks block or otherwise lack support for PMTUD causing performance degradation or connectivity failure.
+
+Ideally, you can prevent these problems by enabling jumbo frames on the physical network that contains your tenant virtual networks. Jumbo frames support MTUs up to approximately 9000 bytes which negates the impact of GRE overhead on virtual networks. However, many network devices lack support for jumbo frames and OpenStack administrators often lack control over network infrastructure. Given the latter complications, you can also prevent MTU problems by reducing the instance MTU to account for GRE overhead. Determining the proper MTU value often takes experimentation, but 1454 bytes works in most environments. You can configure the DHCP server that assigns IP addresses to your instances to also adjust the MTU.
+
+Note
+Some cloud images ignore the DHCP MTU option in which case you should configure it using metadata, a script, or another suitable method.
+
+Edit the /etc/neutron/dhcp_agent.ini file and complete the following action:
+In the [DEFAULT] section, enable the dnsmasq configuration file:
+[DEFAULT]
+...
+dnsmasq_config_file = /etc/neutron/dnsmasq-neutron.conf
+
+Create and edit the /etc/neutron/dnsmasq-neutron.conf file and complete the following action:
+Enable the DHCP MTU option (26) and configure it to 1454 bytes:
+dhcp-option-force=26,1454
+
+Kill any existing dnsmasq processes:
+sudo pkill dnsmasq
+
+To configure the Open vSwitch (OVS) service
+
+The OVS service provides the underlying virtual networking framework for instances. The integration bridge br-int handles internal instance network traffic within OVS. The external bridge br-ex handles external instance network traffic within OVS. The external bridge requires a port on the physical external network interface to provide instances with external network access. In essence, this port connects the virtual and physical external networks in your environment.
+
+Restart the OVS service:
+sudo service openvswitch-switch restart
+
+Add the external bridge:
+sudo ovs-vsctl add-br br-ex
+
+Add a port to the external bridge that connects to the physical external network interface:
+Replace INTERFACE_NAME with the actual interface name. For example, eth2 or ens256.
+sudo ovs-vsctl add-port br-ex INTERFACE_NAME
+
+[Note]  Note
+Depending on your network interface driver, you may need to disable generic receive offload (GRO) to achieve suitable throughput between your instances and the external network.
+
+To temporarily disable GRO on the external network interface while testing your environment:
+sudo ethtool -K INTERFACE_NAME gro off
+
+Restart the Networking services:
+sudo service neutron-plugin-openvswitch-agent restart
+sudo service neutron-l3-agent restart
+sudo service neutron-dhcp-agent restart
+sudo service neutron-metadata-agent restart
+sudo service neutron-metering-agent restart
+
+VIRL Configs:
+neutron.conf:
+[vlans]
+tenant_network_type=vlan
+network_vlan_ranges=flat,flat1,ext-net,ext-net1,ext-net2
+
+[linux_bridge]
+physical_interface_mappings=flat:em1,flat1:em3,ext-net:p2p2,ext-net1:p1p1,ext-net2:p1p2
+
+[vxlan]
+enable_vxlan=true
+vxlan_group = 239.1.1.1
+local_ip = 10.200.10.250
+
+[securitygroup]
+enable_security_group = False
+

@@ -1,0 +1,254 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>Citrix NetScaler XML API User&#39;s Guide - Structure Definition</title>
+<link rel="stylesheet" type="text/css" href="help_ns.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body onload="initial()" class="ns_body">
+<div class="ns_content"><table cellpadding="0" cellspacing="0"><script type="text/javascript">
+function changeContext(id,lang,flag){
+	parent.banner.document.language.select.value = lang;
+	if( lang == "C" ){
+		if(flag == "1"){
+			showContent(cfirstcontent,id,lang);
+		}
+		else{
+			showContent(csecondcontent,id,lang);
+		}
+	}
+	if( lang == "Perl" ){
+		if(flag == "1"){
+			showContent(perlfirstcontent,id,lang);
+		}
+		else{
+			showContent(perlsecondcontent,id,lang);
+		}
+	}
+	if( lang == "Java" ){
+		if(flag == "1"){
+			showContent(javafirstcontent,id,lang);	
+		}
+		else{
+			showContent(javasecondcontent,id,lang);
+		}
+	}
+	if( lang == "C#" ){
+		if(flag == "1"){
+			showContent(csharpfirstcontent,id,lang);
+		}
+		else{
+			showContent(csharpsecondcontent,id,lang);
+		}
+	}
+	if( lang == "VB" ){
+		if(flag == "1"){
+			showContent(vbfirstcontent,id,lang);
+		}
+		else{
+			showContent(vbsecondcontent,id,lang);
+		}
+	}
+	if(flag == "1"){
+		showInside(lang,"0");
+	}
+	else{
+		showOutside(lang);
+	}
+}
+function showContent(content,id,lang){
+	if(ie4){
+	   showContentObj=document.all.id;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById(id);
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+  showLangSelect(lang);
+}
+function showInside(str,cond){
+	if(str == "C"){
+ 		var inside_content = csecondcontent;
+ 	}
+ 	if(str == "Perl"){
+ 		var inside_content = perlsecondcontent;
+ 	}
+ 	if(str == "Java"){
+ 		var inside_content = javasecondcontent;
+ 	}
+ 	if(str == "C#"){
+		var inside_content = csharpsecondcontent;
+ 	}
+ 	if(str == "VB"){
+		var inside_content = vbsecondcontent;
+ 	}
+	showContent(inside_content,'qiksearch_div1',str);
+ 	if ( cond == "1" ){
+ 		var page = 'apidoc/docs/getnstcpparamResult.html#tcpparamList';
+ 		document.location.href = page;
+ 	}
+}
+function showOutside(str){
+	if(str == "C" ){
+ 		var inside_content = cfirstcontent;
+ 	}
+ 	if(str == "Perl" ){
+ 		var inside_content = perlfirstcontent;
+ 	}
+ 	if(str == "Java" ){
+ 		var inside_content = javafirstcontent;
+ 	}
+ 	if(str == "C#" ){
+ 		var inside_content = csharpfirstcontent;
+ 	}
+ 	if(str == "VB" ){
+ 		var inside_content = vbfirstcontent;
+ 	}
+ 	showContent(inside_content,'qiksearch_div',str);
+}
+function initial(){
+	ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+	ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+	ns4=document.layers;
+	langSelected = parent.banner.document.language.select.value
+	var plink = parent.banner.document.language.plink.value
+	var my_array=plink.split("&");
+	var temp = my_array[0];
+ 	var grp = temp.split("@");
+	var cmd = my_array[1];
+	var regex = /^stat/i;
+	if( cmd.match(regex) != null ){
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex_stat.html\">Statistics</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getnstcpparamResult");
+	}
+	else{
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex.htm\">Configuration</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getnstcpparamResult");
+	}
+	if( langSelected == "C" ){
+ 		var content = cfirstcontent;
+	}
+	else if( langSelected == "Perl" ){
+		var content = perlfirstcontent;
+	}
+	else if( langSelected == "Java" ){
+		var content = javafirstcontent;
+	}
+	else if( langSelected == "C#" ){
+		var content = csharpfirstcontent;
+	}
+	else if( langSelected == "VB" ){
+		var content = vbfirstcontent;
+	}
+	else{
+		var content = cfirstcontent;
+		langSelected="C";
+	}
+	showContent(content,'qiksearch_div',langSelected);
+	showInside(langSelected,"0");
+}
+function showPLink(content){
+	if(ie4){
+	   showContentObj=document.all.progressive_link;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById("progressive_link");
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+}
+function showLangSelect(id){
+	   if(ie4)
+       {
+       	showObj=document.all.first_url;
+       	showObj1=document.all.second_url;
+       }
+       if(ns6)
+       {
+       	showObj=document.getElementById("first_url");
+       	showObj1=document.getElementById("second_url");
+       }
+       if( id == "C" ){
+       	newlink = "<b>C</b>";
+       	newlink1 = "<b>C</b>";
+       }
+       else{
+       	newlink = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C','1');\"><b>C</b></a>";
+       	newlink1 = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C','0');\"><b>C</b></a>";
+       }
+       if( id == "Perl" ){
+       	newlink = newlink + " | <b>Perl</b>";
+       	newlink1 = newlink1 + " | <b>Perl</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Perl','1');\"><b>Perl</b></a>";
+      	       newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Perl','0');\"><b>Perl</b></a>";
+       }
+       if( id == "Java" ){
+       	newlink = newlink + " | <b>Java</b>";
+       	newlink1 = newlink1 + " | <b>Java</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Java','1');\"><b>Java</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Java','0');\"><b>Java</b></a>";
+       }
+       if( id == "C#" ){
+       	newlink = newlink + " | <b>C#</b>";
+       	newlink1 = newlink1 + " | <b>C#</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C#','1');\"><b>C#</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C#','0');\"><b>C#</b></a>";
+       }
+       showObj.innerHTML = newlink;
+       showObj1.innerHTML = newlink1;
+}
+</script>
+<tr><td><div><div id="progressive_link"></div></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>getnstcpparamResult Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>getnstcpparamResult</b> structure defines the return type for getnstcpparam API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="first_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+cfirstcontent = "<pre>struct getnstcpparamResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; struct <a href=\'getnstcpparamResult.html\#nstcpparam\'>nstcpparam</a> list[];<br> };<br></pre></td></tr></table></div>"
+perlfirstcontent = "<pre>$getnstcpparamResult = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rc => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; message => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; List => \'@<a href=\'getnstcpparamResult.html\#nstcpparam\'>nstcpparam</a>\',<br> };<br></pre></td></tr></table></div>"
+javafirstcontent = "<pre>class getnstcpparamResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getnstcpparamResult.html\#nstcpparam\'>nstcpparam</a>[] list;<br> };<br></pre></td></tr></table></div>"
+csharpfirstcontent = "<pre>class getnstcpparamResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getnstcpparamResult.html\#nstcpparam\'>nstcpparam</a>[] list;<br> };<br></pre></td></tr></table></div>"
+vbfirstcontent = "<pre>Public <b>Structure</b> getnstcpparamResult <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rc As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public message As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public  nstcpparamList() As  <a href=\'getnstcpparamResult.html\#nstcpparam\'>nstcpparam</a><br> <b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rc</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, rc is 0 else rc > 0. Values above 0x8000 indicate Warnings.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>message</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, message is NULL else message contains <a href="errorlisting.html">Error/Warning</a> message.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>nstcpparamList</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">List of nstcpparams</div></td></tr><tr><td><br></td></tr><tr><td><div><a name="nstcpparam"></a></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>nstcpparam  Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>nstcpparam</b> structure defines the actual return type values for getnstcpparam API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="second_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div1" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+csecondcontent = "<pre>struct nstcpparam {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * ws;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int wsval;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * sack;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * learnvsvrmss;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int maxburst;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int initialcwnd;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int recvbuffsize;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int delayedack;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * downstaterst;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * nagle;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * limitedpersist;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int oooqsize;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * ackonpush;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int maxpktpermss;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int pktperretx;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int minrto;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int slowstartincr;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int maxdynserverprobes;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int synholdfastgiveup;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int maxsynholdperprobe;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int maxsynhold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int msslearninterval;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int msslearndelay;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int maxtimewaitconn;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * kaprobeupdatelastactivity;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int maxsynackretx;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * synattackdetection;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * connflushifnomem;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int connflushthres;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * mptcpconcloseonpassivesf;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * mptcpchecksum;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int mptcpsftimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int mptcpsfreplacetimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int mptcpmaxsf;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int mptcpmaxpendingsf;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int mptcppendingjointhreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int mptcprtostoswitchsf;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * mptcpusebackupondss;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int tcpmaxretries;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * mptcpimmediatesfcloseonfin;<br> };<br></pre></td></tr></table></div>"
+perlsecondcontent = "<pre>$nstcpparam = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ws => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; wsval => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; sack => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; learnvsvrmss => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; maxburst => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; initialcwnd => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; recvbuffsize => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; delayedack => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; downstaterst => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; nagle => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; limitedpersist => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; oooqsize => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ackonpush => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; maxpktpermss => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; pktperretx => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; minrto => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; slowstartincr => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; maxdynserverprobes => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; synholdfastgiveup => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; maxsynholdperprobe => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; maxsynhold => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; msslearninterval => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; msslearndelay => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; maxtimewaitconn => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; kaprobeupdatelastactivity => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; maxsynackretx => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; synattackdetection => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; connflushifnomem => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; connflushthres => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; mptcpconcloseonpassivesf => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; mptcpchecksum => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; mptcpsftimeout => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; mptcpsfreplacetimeout => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; mptcpmaxsf => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; mptcpmaxpendingsf => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; mptcppendingjointhreshold => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; mptcprtostoswitchsf => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; mptcpusebackupondss => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; tcpmaxretries => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; mptcpimmediatesfcloseonfin => \'$\',<br> };<br></pre></td></tr></table></div>"
+javasecondcontent = "<pre>class nstcpparam {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String ws;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt wsval;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String sack;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String learnvsvrmss;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt maxburst;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt initialcwnd;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt recvbuffsize;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt delayedack;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String downstaterst;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String nagle;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String limitedpersist;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt oooqsize;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String ackonpush;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int maxpktpermss;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int pktperretx;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int minrto;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int slowstartincr;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt maxdynserverprobes;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt synholdfastgiveup;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt maxsynholdperprobe;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt maxsynhold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt msslearninterval;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt msslearndelay;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt maxtimewaitconn;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String kaprobeupdatelastactivity;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt maxsynackretx;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String synattackdetection;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String connflushifnomem;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt connflushthres;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String mptcpconcloseonpassivesf;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String mptcpchecksum;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt mptcpsftimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt mptcpsfreplacetimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt mptcpmaxsf;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt mptcpmaxpendingsf;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt mptcppendingjointhreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt mptcprtostoswitchsf;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String mptcpusebackupondss;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt tcpmaxretries;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String mptcpimmediatesfcloseonfin;<br> };<br></pre></td></tr></table></div>"
+csharpsecondcontent = "<pre>class nstcpparam {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string ws;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 wsval;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string sack;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string learnvsvrmss;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 maxburst;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 initialcwnd;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 recvbuffsize;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 delayedack;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string downstaterst;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string nagle;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string limitedpersist;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 oooqsize;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string ackonpush;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 maxpktpermss;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 pktperretx;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 minrto;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 slowstartincr;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 maxdynserverprobes;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 synholdfastgiveup;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 maxsynholdperprobe;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 maxsynhold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 msslearninterval;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 msslearndelay;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 maxtimewaitconn;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string kaprobeupdatelastactivity;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 maxsynackretx;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string synattackdetection;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string connflushifnomem;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 connflushthres;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string mptcpconcloseonpassivesf;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string mptcpchecksum;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 mptcpsftimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 mptcpsfreplacetimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 mptcpmaxsf;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 mptcpmaxpendingsf;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 mptcppendingjointhreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 mptcprtostoswitchsf;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string mptcpusebackupondss;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 tcpmaxretries;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string mptcpimmediatesfcloseonfin;<br> };<br></pre></td></tr></table></div>"
+vbsecondcontent = "<pre>Public <b>Structure</b> nstcpparam <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ws As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public wsval As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public sack As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public learnvsvrmss As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public maxburst As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public initialcwnd As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public recvbuffsize As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public delayedack As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public downstaterst As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public nagle As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public limitedpersist As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public oooqsize As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ackonpush As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public maxpktpermss As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public pktperretx As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public minrto As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public slowstartincr As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public maxdynserverprobes As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public synholdfastgiveup As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public maxsynholdperprobe As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public maxsynhold As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public msslearninterval As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public msslearndelay As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public maxtimewaitconn As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public kaprobeupdatelastactivity As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public maxsynackretx As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public synattackdetection As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public connflushifnomem As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public connflushthres As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public mptcpconcloseonpassivesf As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public mptcpchecksum As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public mptcpsftimeout As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public mptcpsfreplacetimeout As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public mptcpmaxsf As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public mptcpmaxpendingsf As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public mptcppendingjointhreshold As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public mptcprtostoswitchsf As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public mptcpusebackupondss As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public tcpmaxretries As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public mptcpimmediatesfcloseonfin As String<br><b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ws</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Enable or disable window scaling.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>wsval</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Factor used to calculate the new window size.
+This argument is needed only when the window scaling is enabled.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sack</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Enable or disable Selective ACKnowledgement (SACK).</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>learnvsvrmss</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Enable or disable maximum segment size (MSS) learning for virtual servers.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>maxburst</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Maximum number of TCP segments allowed in a burst.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>initialcwnd</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Initial maximum upper limit on the number of TCP packets that can be outstanding on the TCP link to the server.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>recvbuffsize</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">TCP Receive buffer size<br> NOTE: This attribute is deprecated.<br>This option is deprecated in favour of -buffersize</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>delayedack</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Timeout for TCP delayed ACK, in milliseconds.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>downstaterst</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Flag to switch on RST on down services.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>nagle</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Enable or disable the Nagle algorithm on TCP connections.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>limitedpersist</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Limit the number of persist (zero window) probes.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>oooqsize</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Maximum size of out-of-order packets queue. A value of 0 means no limit.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ackonpush</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Immediate ACK on PUSH packet</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>maxpktpermss</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Maximum packets per MSS</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>pktperretx</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Maximum packets per retransmission</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>minrto</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Minimum retransmission timeout, in milliseconds.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>slowstartincr</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">TCP slowstart increment factor</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>maxdynserverprobes</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Maximum number of probes that NetScaler can send out in 10 milliseconds, to dynamically learn a service. NetScaler probes for the existence of the origin in case of wildcard virtual server or services.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>synholdfastgiveup</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Maximum threshold. After crossing this threshold number of outstanding probes for origin, the NetScaler reduces the number of connection retries for probe connections.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>maxsynholdperprobe</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Limit the number of client connections (SYN) waiting for status of single probe. Any new SYN packets will be dropped.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>maxsynhold</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Limit the number of client connections (SYN) waiting for status of probe system wide. Any new SYN packets will be dropped.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>msslearninterval</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Duration, in seconds, to sample the Maximum Segment Size (MSS) of the services. The NetScaler appliance determines the best MSS to set for the virtual server based on this sampling. The argument to enable maximum segment size (MSS) for virtual servers must be enabled.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>msslearndelay</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Frequency, in seconds, at which the virtual servers learn the Maximum segment size (MSS) from the services. The argument to enable maximum segment size (MSS) for virtual servers must be enabled.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>maxtimewaitconn</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Maximum number of connections to hold in the TCP TIME_WAIT state on a packet engine. New connections entering TIME_WAIT state are proactively cleaned up.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>kaprobeupdatelastactivity</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Update last activity for KA probes<br> NOTE: This attribute is deprecated.<br>This option has been moved tcpProfile</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>maxsynackretx</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">When 'syncookie' is disabled in the TCP profile that is bound to the virtual server or service, and the number of TCP SYN+ACK retransmission by NetScaler for that virtual server or service crosses this threshold, the NetScaler appliance responds by using the TCP SYN-Cookie mechanism.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>synattackdetection</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Detect TCP SYN packet flood and send an SNMP trap.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>connflushifnomem</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Flush an existing connection if no memory can be obtained for new connection.
+
+HALF_CLOSED_AND_IDLE: Flush a connection that is closed by us but not by peer, or failing that, a connection that is past configured idle time.  New connection fails if no such connection can be found.
+
+FIFO: If no half-closed or idle connection can be found, flush the oldest non-management connection, even if it is active.  New connection fails if the oldest few connections are management connections.
+
+Note: If you enable this setting, you should also consider lowering the zombie timeout and half-close timeout, while setting the NetScaler timeout.
+
+See Also: connFlushThres argument below.
+</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>connflushthres</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Flush an existing connection (as configured through -connFlushIfNoMem FIFO) if the system has more than specified number of connections, and a new connection is to be established.  Note: This value may be rounded down to be a whole multiple of the number of packet engines running.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>mptcpconcloseonpassivesf</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Accept DATA_FIN/FAST_CLOSE on passive subflow</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>mptcpchecksum</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Use MPTCP DSS checksum</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>mptcpsftimeout</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The timeout value in seconds for idle mptcp subflows. If this timeout is not set, idle subflows are cleared after cltTimeout of vserver</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>mptcpsfreplacetimeout</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The minimum idle time value in seconds for idle mptcp subflows after which the sublow is replaced by new incoming subflow if maximum subflow limit is reached. The priority for replacement is given to those subflow without any transaction</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>mptcpmaxsf</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Maximum number of subflow connections supported in established state per mptcp connection.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>mptcpmaxpendingsf</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Maximum number of subflow connections supported in pending join state per mptcp connection.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>mptcppendingjointhreshold</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Maximum system level pending join connections allowed.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>mptcprtostoswitchsf</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of RTO's at subflow level, after which MPCTP should start using other subflow.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>mptcpusebackupondss</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">When enabled, if NS receives a DSS on a backup subflow, NS will start using that subflow to send data. And if disabled, NS will continue to transmit on current chosen subflow. In case there is some error on a subflow (like RTO's/RST etc.) then NS can choose a backup subflow irrespective of this tunable.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>tcpmaxretries</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of RTO's after which a connection should be freed.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>mptcpimmediatesfcloseonfin</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Allow subflows to close immediately on FIN before the DATA_FIN exchange is completed at mptcp level.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>See Also</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="getnstcpparam.html">getnstcpparam</a></div></td></tr><tr><td><br></td></tr></table></div>
+</body>
+</html>

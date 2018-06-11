@@ -1,0 +1,245 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>Citrix NetScaler XML API User&#39;s Guide - Structure Definition</title>
+<link rel="stylesheet" type="text/css" href="help_ns.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body onload="initial()" class="ns_body">
+<div class="ns_content"><table cellpadding="0" cellspacing="0"><script type="text/javascript">
+function changeContext(id,lang,flag){
+	parent.banner.document.language.select.value = lang;
+	if( lang == "C" ){
+		if(flag == "1"){
+			showContent(cfirstcontent,id,lang);
+		}
+		else{
+			showContent(csecondcontent,id,lang);
+		}
+	}
+	if( lang == "Perl" ){
+		if(flag == "1"){
+			showContent(perlfirstcontent,id,lang);
+		}
+		else{
+			showContent(perlsecondcontent,id,lang);
+		}
+	}
+	if( lang == "Java" ){
+		if(flag == "1"){
+			showContent(javafirstcontent,id,lang);	
+		}
+		else{
+			showContent(javasecondcontent,id,lang);
+		}
+	}
+	if( lang == "C#" ){
+		if(flag == "1"){
+			showContent(csharpfirstcontent,id,lang);
+		}
+		else{
+			showContent(csharpsecondcontent,id,lang);
+		}
+	}
+	if( lang == "VB" ){
+		if(flag == "1"){
+			showContent(vbfirstcontent,id,lang);
+		}
+		else{
+			showContent(vbsecondcontent,id,lang);
+		}
+	}
+	if(flag == "1"){
+		showInside(lang,"0");
+	}
+	else{
+		showOutside(lang);
+	}
+}
+function showContent(content,id,lang){
+	if(ie4){
+	   showContentObj=document.all.id;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById(id);
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+  showLangSelect(lang);
+}
+function showInside(str,cond){
+	if(str == "C"){
+ 		var inside_content = csecondcontent;
+ 	}
+ 	if(str == "Perl"){
+ 		var inside_content = perlsecondcontent;
+ 	}
+ 	if(str == "Java"){
+ 		var inside_content = javasecondcontent;
+ 	}
+ 	if(str == "C#"){
+		var inside_content = csharpsecondcontent;
+ 	}
+ 	if(str == "VB"){
+		var inside_content = vbsecondcontent;
+ 	}
+	showContent(inside_content,'qiksearch_div1',str);
+ 	if ( cond == "1" ){
+ 		var page = 'apidoc/docs/getserverResult.html#serverList';
+ 		document.location.href = page;
+ 	}
+}
+function showOutside(str){
+	if(str == "C" ){
+ 		var inside_content = cfirstcontent;
+ 	}
+ 	if(str == "Perl" ){
+ 		var inside_content = perlfirstcontent;
+ 	}
+ 	if(str == "Java" ){
+ 		var inside_content = javafirstcontent;
+ 	}
+ 	if(str == "C#" ){
+ 		var inside_content = csharpfirstcontent;
+ 	}
+ 	if(str == "VB" ){
+ 		var inside_content = vbfirstcontent;
+ 	}
+ 	showContent(inside_content,'qiksearch_div',str);
+}
+function initial(){
+	ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+	ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+	ns4=document.layers;
+	langSelected = parent.banner.document.language.select.value
+	var plink = parent.banner.document.language.plink.value
+	var my_array=plink.split("&");
+	var temp = my_array[0];
+ 	var grp = temp.split("@");
+	var cmd = my_array[1];
+	var regex = /^stat/i;
+	if( cmd.match(regex) != null ){
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex_stat.html\">Statistics</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getserverResult");
+	}
+	else{
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex.htm\">Configuration</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getserverResult");
+	}
+	if( langSelected == "C" ){
+ 		var content = cfirstcontent;
+	}
+	else if( langSelected == "Perl" ){
+		var content = perlfirstcontent;
+	}
+	else if( langSelected == "Java" ){
+		var content = javafirstcontent;
+	}
+	else if( langSelected == "C#" ){
+		var content = csharpfirstcontent;
+	}
+	else if( langSelected == "VB" ){
+		var content = vbfirstcontent;
+	}
+	else{
+		var content = cfirstcontent;
+		langSelected="C";
+	}
+	showContent(content,'qiksearch_div',langSelected);
+	showInside(langSelected,"0");
+}
+function showPLink(content){
+	if(ie4){
+	   showContentObj=document.all.progressive_link;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById("progressive_link");
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+}
+function showLangSelect(id){
+	   if(ie4)
+       {
+       	showObj=document.all.first_url;
+       	showObj1=document.all.second_url;
+       }
+       if(ns6)
+       {
+       	showObj=document.getElementById("first_url");
+       	showObj1=document.getElementById("second_url");
+       }
+       if( id == "C" ){
+       	newlink = "<b>C</b>";
+       	newlink1 = "<b>C</b>";
+       }
+       else{
+       	newlink = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C','1');\"><b>C</b></a>";
+       	newlink1 = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C','0');\"><b>C</b></a>";
+       }
+       if( id == "Perl" ){
+       	newlink = newlink + " | <b>Perl</b>";
+       	newlink1 = newlink1 + " | <b>Perl</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Perl','1');\"><b>Perl</b></a>";
+      	       newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Perl','0');\"><b>Perl</b></a>";
+       }
+       if( id == "Java" ){
+       	newlink = newlink + " | <b>Java</b>";
+       	newlink1 = newlink1 + " | <b>Java</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Java','1');\"><b>Java</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Java','0');\"><b>Java</b></a>";
+       }
+       if( id == "C#" ){
+       	newlink = newlink + " | <b>C#</b>";
+       	newlink1 = newlink1 + " | <b>C#</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C#','1');\"><b>C#</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C#','0');\"><b>C#</b></a>";
+       }
+       showObj.innerHTML = newlink;
+       showObj1.innerHTML = newlink1;
+}
+</script>
+<tr><td><div><div id="progressive_link"></div></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>getserverResult Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>getserverResult</b> structure defines the return type for getserver API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="first_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+cfirstcontent = "<pre>struct getserverResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; struct <a href=\'getserverResult.html\#server\'>server</a> list[];<br> };<br></pre></td></tr></table></div>"
+perlfirstcontent = "<pre>$getserverResult = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rc => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; message => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; List => \'@<a href=\'getserverResult.html\#server\'>server</a>\',<br> };<br></pre></td></tr></table></div>"
+javafirstcontent = "<pre>class getserverResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getserverResult.html\#server\'>server</a>[] list;<br> };<br></pre></td></tr></table></div>"
+csharpfirstcontent = "<pre>class getserverResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getserverResult.html\#server\'>server</a>[] list;<br> };<br></pre></td></tr></table></div>"
+vbfirstcontent = "<pre>Public <b>Structure</b> getserverResult <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rc As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public message As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public  serverList() As  <a href=\'getserverResult.html\#server\'>server</a><br> <b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rc</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, rc is 0 else rc > 0. Values above 0x8000 indicate Warnings.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>message</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, message is NULL else message contains <a href="errorlisting.html">Error/Warning</a> message.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>serverList</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">List of servers</div></td></tr><tr><td><br></td></tr><tr><td><div><a name="server"></a></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>server  Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>server</b> structure defines the actual return type values for getserver API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="second_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div1" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+csecondcontent = "<pre>struct server {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * name;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * internal;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * ipaddress;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * state;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * domain;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int domainresolveretry;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * servicename [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * servicegroupname [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * translationip;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * translationmask;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * comment;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * servicetype [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * serviceipaddress [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;  [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int port [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * svrstate [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * statechangetimesec;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int tickssincelaststatechange;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * ipv6address;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int port2 [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * servicetype2 [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int svrcfgflags [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * autoscale;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * customserverid;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int monthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int maxclient;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int maxreq;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int maxbandwidth;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * usip;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * cka;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * tcpb;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * cmp;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int clttimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int svrtimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * cipheader;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * cip;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * cacheable;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * sc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * sp;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * downstateflush;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * appflowlog;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int boundtd;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * boundservicegroupsvctype []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * boundservicegroupsvcip []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int boundservicegroupport []   ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * boundservicegroupsvccustomsvrid []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * boundservicegroupsvrstate []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int boundservicegroupsvcmonitorthreshold []   ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int boundservicegroupsvcmaxclient []   ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int boundservicegroupsvcmaxreq []   ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int boundservicegroupsvcmaxbandwidth []   ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * boundservicegroupsvcusip []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * boundservicegroupsvccka []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * boundservicegroupsvctcpb []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * boundservicegroupsvccmp []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int boundservicegroupsvcclttimeout []   ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int boundservicegroupsvcsvrtimeout []   ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * boundservicegroupsvcciphdr []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * boundservicegroupsvccip []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * boundservicegroupsvccachbl []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * boundservicegroupsvcsc []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * boundservicegroupsvcsp []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * boundservicegroupsvcdownstateflush []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * boundservicegroupsvcappflowlog []  ;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int boundservicegrouptd []   ;<br> };<br></pre></td></tr></table></div>"
+perlsecondcontent = "<pre>$server = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; name => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; internal => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipaddress => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; state => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; domain => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; domainresolveretry => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; servicename => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; servicegroupname => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; translationip => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; translationmask => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; comment => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; servicetype => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; serviceipaddress => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; serviceipstr => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; port => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; svrstate => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; statechangetimesec => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; tickssincelaststatechange => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipv6address => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; port2 => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; servicetype2 => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; svrcfgflags => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; autoscale => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; customserverid => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; monthreshold => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; maxclient => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; maxreq => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; maxbandwidth => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; usip => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; cka => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; tcpb => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; cmp => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; clttimeout => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; svrtimeout => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; cipheader => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; cip => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; cacheable => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; sc => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; sp => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; downstateflush => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; appflowlog => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; boundtd => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; boundservicegroupsvctype => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; boundservicegroupsvcip => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; boundservicegroupport => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; boundservicegroupsvccustomsvrid => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; boundservicegroupsvrstate => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; boundservicegroupsvcmonitorthreshold => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; boundservicegroupsvcmaxclient => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; boundservicegroupsvcmaxreq => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; boundservicegroupsvcmaxbandwidth => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; boundservicegroupsvcusip => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; boundservicegroupsvccka => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; boundservicegroupsvctcpb => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; boundservicegroupsvccmp => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; boundservicegroupsvcclttimeout => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; boundservicegroupsvcsvrtimeout => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; boundservicegroupsvcciphdr => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; boundservicegroupsvccip => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; boundservicegroupsvccachbl => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; boundservicegroupsvcsc => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; boundservicegroupsvcsp => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; boundservicegroupsvcdownstateflush => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; boundservicegroupsvcappflowlog => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; boundservicegrouptd => \'@\',<br> };<br></pre></td></tr></table></div>"
+javasecondcontent = "<pre>class server {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String name;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String internal;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String ipaddress;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String state;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String domain;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int domainresolveretry;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String servicename [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String servicegroupname [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String translationip;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String translationmask;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String comment;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String servicetype [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String serviceipaddress [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String serviceipaddress [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt port [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String svrstate [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String statechangetimesec;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt tickssincelaststatechange;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String ipv6address;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt port2 [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String servicetype2 [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt svrcfgflags [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String autoscale;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String customserverid;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt monthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt maxclient;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt maxreq;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt maxbandwidth;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String usip;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String cka;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String tcpb;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String cmp;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt clttimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt svrtimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String cipheader;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String cip;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String cacheable;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String sc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String sp;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String downstateflush;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String appflowlog;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt boundtd;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] boundservicegroupsvctype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] boundservicegroupsvcip;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt [] boundservicegroupport;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] boundservicegroupsvccustomsvrid;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] boundservicegroupsvrstate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt [] boundservicegroupsvcmonitorthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt [] boundservicegroupsvcmaxclient;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt [] boundservicegroupsvcmaxreq;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt [] boundservicegroupsvcmaxbandwidth;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] boundservicegroupsvcusip;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] boundservicegroupsvccka;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] boundservicegroupsvctcpb;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] boundservicegroupsvccmp;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt [] boundservicegroupsvcclttimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt [] boundservicegroupsvcsvrtimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] boundservicegroupsvcciphdr;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] boundservicegroupsvccip;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] boundservicegroupsvccachbl;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] boundservicegroupsvcsc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] boundservicegroupsvcsp;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] boundservicegroupsvcdownstateflush;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String [] boundservicegroupsvcappflowlog;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt [] boundservicegrouptd;<br> };<br></pre></td></tr></table></div>"
+csharpsecondcontent = "<pre>class server {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string name;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string internal;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string ipaddress;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string state;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string domain;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 domainresolveretry;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string servicename [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string servicegroupname [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string translationip;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string translationmask;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string comment;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string servicetype [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string serviceipaddress [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string serviceipaddress [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 port [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string svrstate [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string statechangetimesec;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 tickssincelaststatechange;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string ipv6address;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 port2 [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string servicetype2 [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 svrcfgflags [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string autoscale;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string customserverid;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 monthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 maxclient;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 maxreq;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 maxbandwidth;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string usip;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string cka;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string tcpb;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string cmp;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 clttimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 svrtimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string cipheader;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string cip;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string cacheable;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string sc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string sp;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string downstateflush;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string appflowlog;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 boundtd;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] boundservicegroupsvctype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] boundservicegroupsvcip;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 [] boundservicegroupport;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] boundservicegroupsvccustomsvrid;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] boundservicegroupsvrstate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 [] boundservicegroupsvcmonitorthreshold;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 [] boundservicegroupsvcmaxclient;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 [] boundservicegroupsvcmaxreq;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 [] boundservicegroupsvcmaxbandwidth;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] boundservicegroupsvcusip;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] boundservicegroupsvccka;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] boundservicegroupsvctcpb;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] boundservicegroupsvccmp;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 [] boundservicegroupsvcclttimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 [] boundservicegroupsvcsvrtimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] boundservicegroupsvcciphdr;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] boundservicegroupsvccip;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] boundservicegroupsvccachbl;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] boundservicegroupsvcsc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] boundservicegroupsvcsp;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] boundservicegroupsvcdownstateflush;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string [] boundservicegroupsvcappflowlog;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 [] boundservicegrouptd;<br> };<br></pre></td></tr></table></div>"
+vbsecondcontent = "<pre>Public <b>Structure</b> server <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public name As String  <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public internal As String  <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipaddress As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public state As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public domain As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public domainresolveretry As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public servicename As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public servicegroupname As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public translationip As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public translationmask As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public comment As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public servicetype As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public serviceipaddress As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public serviceipaddress As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public port As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public svrstate As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public statechangetimesec As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public tickssincelaststatechange As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipv6address As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public port2 As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public servicetype2 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public svrcfgflags As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public autoscale As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public customserverid As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public monthreshold As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public maxclient As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public maxreq As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public maxbandwidth As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public usip As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public cka As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public tcpb As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public cmp As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public clttimeout As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public svrtimeout As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public cipheader As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public cip As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public cacheable As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public sc As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public sp As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public downstateflush As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public appflowlog As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public boundtd As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public boundservicegroupsvctype As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public boundservicegroupsvcip As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public boundservicegroupport As UInteger()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public boundservicegroupsvccustomsvrid As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public boundservicegroupsvrstate As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public boundservicegroupsvcmonitorthreshold As UInteger()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public boundservicegroupsvcmaxclient As UInteger()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public boundservicegroupsvcmaxreq As UInteger()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public boundservicegroupsvcmaxbandwidth As UInteger()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public boundservicegroupsvcusip As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public boundservicegroupsvccka As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public boundservicegroupsvctcpb As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public boundservicegroupsvccmp As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public boundservicegroupsvcclttimeout As UInteger()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public boundservicegroupsvcsvrtimeout As UInteger()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public boundservicegroupsvcciphdr As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public boundservicegroupsvccip As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public boundservicegroupsvccachbl As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public boundservicegroupsvcsc As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public boundservicegroupsvcsp As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public boundservicegroupsvcdownstateflush As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public boundservicegroupsvcappflowlog As String()<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public boundservicegrouptd As UInteger()<br><b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>name</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the server for which to display parameters.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>internal</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Display names of the servers that have been created for internal use.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipaddress</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The IP Address of server.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>state</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The State of the server.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>domain</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The domain name of the server.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>domainresolveretry</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Time, in seconds, for which the NetScaler appliance must wait, after DNS resolution fails, before sending the next DNS query to resolve the domain name.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>servicename</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The services attatched to the server.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>servicegroupname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">servicegroups bind to this server</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>translationip</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">IP address used to transform the server's DNS-resolved IP address.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>translationmask</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The netmask of the translation ip</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>comment</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Any information about the server.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>servicetype</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The type of bound service</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>serviceipaddress</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The IP address of the bound service</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>serviceipstr</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">This field has been intorduced to show the dbs services ip</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>port</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The port number to be used for the bound service.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>svrstate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The state of the bound service</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>statechangetimesec</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Time when last state change happened. Seconds part.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>tickssincelaststatechange</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Time in 10 millisecond ticks since the last state change.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipv6address</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Support IPv6 addressing mode. If you configure a server with the IPv6 addressing mode, you cannot use the server in the IPv4 addressing mode.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>port2</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">port of the service.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>servicetype2</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">service type of the service.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>svrcfgflags</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">service flags to denote its a db enabled.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>autoscale</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Auto scale option for a servicegroup</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>customserverid</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">A positive integer to identify the service. Used when the persistency type is set to Custom Server ID.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>monthreshold</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Minimum sum of weights of the monitors that are bound to this service. Used to determine whether to mark a service as UP or DOWN.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>maxclient</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Maximum number of simultaneous open connections for the service group.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>maxreq</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Maximum number of requests that can be sent on a persistent connection to the service group. 
+           Note: Connection requests beyond this value are rejected.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>maxbandwidth</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Maximum bandwidth, in Kbps, allocated for all the services in the service group.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>usip</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Use the client's IP address as the source IP address when initiating a connection to the server. When creating a service, if you do not set this parameter, the service inherits the global Use Source IP setting (available in the enable ns mode and disable ns mode CLI methods, or in the System > Settings > Configure modes > Configure Modes dialog box). However, you can override this setting after you create the service.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>cka</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Enable client keep-alive for the service group.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>tcpb</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Enable TCP buffering for the service group.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>cmp</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Enable compression for the specified service.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>clttimeout</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Time, in seconds, after which to terminate an idle client connection.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>svrtimeout</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Time, in seconds, after which to terminate an idle server connection.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>cipheader</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the HTTP header whose value must be set to the IP address of the client. Used with the Client IP parameter. If client IP insertion is enabled, and the client IP header is not specified, the value of Client IP Header parameter or the value set by the set ns config method is used as client's IP header name.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>cip</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Before forwarding a request to the service, insert an HTTP header with the client's IPv4 or IPv6 address as its value. Used if the server needs the client's IP address for security, accounting, or other purposes, and setting the Use Source IP parameter is not a viable option.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>cacheable</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Use the transparent cache redirection virtual server to forward the request to the cache server.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sc</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">State of the SureConnect feature for the service group.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sp</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Enable surge protection for the service group.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>downstateflush</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Perform delayed clean-up of connections to all services in the service group.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>appflowlog</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Enable logging of AppFlow information for the specified service group.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>boundtd</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Integer value that uniquely identifies the traffic domain in which you want to configure the entity. If you do not specify an ID, the entity becomes part of the default traffic domain, which has an ID of 0.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>boundservicegroupsvctype</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>boundservicegroupsvcip</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>boundservicegroupport</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>boundservicegroupsvccustomsvrid</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>boundservicegroupsvrstate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>boundservicegroupsvcmonitorthreshold</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>boundservicegroupsvcmaxclient</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>boundservicegroupsvcmaxreq</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>boundservicegroupsvcmaxbandwidth</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>boundservicegroupsvcusip</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>boundservicegroupsvccka</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>boundservicegroupsvctcpb</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>boundservicegroupsvccmp</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>boundservicegroupsvcclttimeout</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>boundservicegroupsvcsvrtimeout</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>boundservicegroupsvcciphdr</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>boundservicegroupsvccip</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>boundservicegroupsvccachbl</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>boundservicegroupsvcsc</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>boundservicegroupsvcsp</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>boundservicegroupsvcdownstateflush</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>boundservicegroupsvcappflowlog</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>boundservicegrouptd</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div><b>See Also</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="getserver.html">getserver</a></div></td></tr><tr><td><br></td></tr></table></div>
+</body>
+</html>

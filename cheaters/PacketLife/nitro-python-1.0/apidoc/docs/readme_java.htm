@@ -1,0 +1,350 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+    <title>Citrix NetScaler XML API User's Guide - Java samples</title>
+    <link rel="stylesheet" href="help_ns.css" type="text/css">
+</head>
+<body class="ns_body">
+    <div class="ns_content">
+    <table cellpadding="0" cellspacing="0">
+        <tr>
+            <td>
+                <a href="#Introduction">Introduction</a>&nbsp;|&nbsp;
+                <a href="#Requirement">Requirement</a>&nbsp;|&nbsp;
+                <a href="#Compiling samples">Compiling samples</a>&nbsp;|&nbsp;
+                <a href="#Usage">Usage</a>&nbsp;|&nbsp;
+                <a href="#Cookie">Cookie handling</a>&nbsp;|&nbsp;
+                <a href="#HTTPS">HTTPS support</a>&nbsp;|&nbsp;
+                <a href="#HREF">Disable HREF</a>&nbsp;|&nbsp;
+                <a href="#download">Samples</a>
+            </td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+            <td>
+                <a href="#download1">Feature configuration samples</a>
+            </td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr class="ns_wp_header">
+            <td><a name="Introduction"></a>Introduction</td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr>
+            <td>
+                The example code that accompanies this file uses JAVA to communicate with Netscaler, using XML/SOAP. Here, we describe how to get it up and running.<br><br>The full NSConfig.wsdl file is very large - java WSDL to java class generation utility can take time to parse it. You can avoid this by creating a custom subset of the WSDL, containing just the methods used in these examples:
+            </td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr>
+            <td>
+                <div class="syntax padding_left"><table><tr><td><pre>filterwsdl NSConfig.fullwsdl "add service" "set service*" "show service"<br>                             "bind lbmonitor*" "add lb vserver" "bind lb vserver*"<br>                             "show lb vserver" "rm service" "rm vserver"<br>                             "save nsconfig" > NSConfig.wsdl</pre></td></tr></table></div>
+            </td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr>
+            <td>
+                Note that you need to modify NSConfig.wsdl file at the bottom, where it says location=&quot;http://NetScaler/soap/&quot; to location=&quot;http://10.100.50.25/soap/&quot;, where 10.100.50.25 is assumed to be your Netscaler's IP address.<br><br>The <a href="samples/ns-java-sample/setConfig.java">setConfig.java</a> example uses the Netscaler API to:
+                <ul>
+		            <li>log in to Netscaler</li>
+                    <li>add a service</li>
+                    <li>bind a monitor</li>
+                    <li>add a vserver</li>
+                    <li>bind a service to a vserver</li>
+                    <li>save configuration</li>
+                    <li>remove added vservers and services</li>
+                    <li>log out</li>
+                </ul>
+                The <a href="samples/ns-java-sample/getConfig.java">getConfig.java</a> example fetches information about all configured lb vservers, and prints selected information about each one.<br><br>The <a href="samples/ns-java-sample/rmConfig.java">rmConfig.java</a> example removes all of the configuration that was created by setConfig.cs.<br><br>The <a href="samples/ns-java-sample/getStat.java">getStat.java</a> example demonstrates usage of statistical api.<br><br>Additional documentation is available as inline comments in the java programs.
+            </td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr class="ns_wp_header">
+            <td><a name="Requirement"></a>Requirement</td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr>
+            <td>
+                For the examples to work, you need the JSDK 1.4.2 and later, axis 1.1 and later, xerces-2.5.0. or Sun Java Web Service Development Pack: <a href="http://java.sun.com/webservices/jwsdp/index.jsp">http://java.sun.com/webservices/jwsdp/index.jsp</a>
+            </td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr class="ns_wp_header">
+            <td><a name="Compiling samples"></a>Compiling samples</td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr>
+            <td>
+                Instructions to create Client application using NSConfig.wsdl:
+                <ul>
+                    <li>Modify the path of JDK_HOME, JAVA_HOME, AXIS_HOME,XERCES_HOME in build.bat and run.bat</li>
+                    <li>Compiling sample Client application : build.bat<br>The Client application is compiled with stub sources and generate setConfig.java, setConfig.class, setConfig.class.</li>
+                    <li>Finally, execute the NSConfig to configure the NetScaler box remotely - run.bat/</li>
+            </td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr class="ns_wp_header">
+            <td><a name="Usage"></a>Usage</td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr>
+            <td>
+                The parameters to all of the examples are :<br><br>
+                <div class="syntax padding_left"><table><tr><td><pre><i>run &lt;protocol>://&lt;NSIP> &lt;username> &lt;password></i></pre></td></tr></table></div>
+            </td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr class="ns_wp_header">
+            <td><a name="Cookie"></a>Cookie Handling</td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr>
+            <td>
+                NetScaler uses the cookies for client authentication purposes. Java client needs to        handle the cookies. Please add the following code in client code to handle the cookie.
+            </td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr>
+            <td>
+                <div class="syntax padding_left"><table><tr><td><pre>public static void main(String[] args) {
+    ...
+    client = new NSStatBindingStub(new URL(&lt;url>),null);
+    client.setMaintainSession(true); // This is to handle the cookies.
+    ...
+}</pre></td></tr></table></div>
+            </td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr class="ns_wp_header">
+            <td><a name="HTTPS"></a>HTTPS Support</td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr>
+            <td>
+                Developer need to use the HTTPS protocol to send the secured API request to NetScaler. NetScaler by default uses the self signed CA certificate. All java client need to handle the self signed certificate if user is sending the https request to the NetScaler. <br><br>Please follow the given instruction to use the https protocol in API requests.The JAVA Framework uses the <b>java.security.Provider</b> interface to provide custom security certificate validation for an application.This can be overridden.See the following code to achieve it.<br><br>
+                <div class="syntax padding_left"><table><tr><td><pre>
+import java.security.AccessController; 
+import java.security.InvalidAlgorithmParameterException; 
+import java.security.KeyStore; 
+import java.security.KeyStoreException; 
+import java.security.PrivilegedAction; 
+import java.security.Security; 
+import java.security.cert.X509Certificate; 
+  
+import javax.net.ssl.ManagerFactoryParameters; 
+import javax.net.ssl.TrustManager; 
+import javax.net.ssl.TrustManagerFactorySpi; 
+import javax.net.ssl.X509TrustManager; 
+  
+final class XTrustProvider extends java.security.Provider
+{ 
+    private final static String NAME = "XTrustJSSE"; 
+    private final static String INFO =
+        "XTrust JSSE Provider (implements trust factory with truststore validation disabled)"; 
+    private final static double VERSION = 1.0D; 
+     
+    public XTrustProvider()
+   { 
+       super(NAME, VERSION, INFO); 
+        
+       AccessController.doPrivileged(new PrivilegedAction()
+      { 
+         public Object run()
+         { 
+                 put("TrustManagerFactory." + TrustManagerFactoryImpl.getAlgorithm(),  
+                                               TrustManagerFactoryImpl.class.getName()); 
+                 return null; 
+             } 
+       }); 
+    } 
+     
+    public static void install()
+   { 
+       if(Security.getProvider(NAME) == null)
+      { 
+          Security.insertProviderAt(new XTrustProvider(), 2); 
+          Security.setProperty("ssl.TrustManagerFactory.algorithm",
+              TrustManagerFactoryImpl.getAlgorithm()); 
+       } 
+    } 
+     
+    public final static class TrustManagerFactoryImpl extends TrustManagerFactorySpi
+   { 
+       public TrustManagerFactoryImpl() { } 
+       public static String getAlgorithm() { return "XTrust509"; } 
+       protected void engineInit(KeyStore keystore) throws KeyStoreException { } 
+       protected void engineInit(ManagerFactoryParameters mgrparams)
+         throws InvalidAlgorithmParameterException
+      { 
+          throw new InvalidAlgorithmParameterException(
+              XTrustProvider.NAME + " does not use ManagerFactoryParameters"); 
+       } 
+        
+       protected TrustManager[] engineGetTrustManagers()
+      { 
+            return new TrustManager[] { new X509TrustManager()
+         { 
+             public X509Certificate[] getAcceptedIssuers() { return null; } 
+             public void checkClientTrusted(X509Certificate[] certs, String authType) { } 
+             public void checkServerTrusted(X509Certificate[] certs, String authType) { } 
+            }}; 
+        } 
+    } 
+ }
+                </pre></td></tr></table></div>
+               </td>
+              </tr>
+              <tr>
+		<td nowrap height=10><img src="spacer.gif" alt=""></td>
+		</tr>
+	      <tr>
+		<td>
+		  In application, one needs to call install on XTrustProvider.<br><br>
+		      <div class="syntax padding_left"><table><tr><td><pre>
+				public class getConfig  {
+				public static void main(String[] args) {
+				XTrustProvider.install();
+				...
+				}
+				}
+	      </pre></td></tr></table></div>
+		</td>
+		</tr>
+
+		  <tr>
+		    <td nowrap height=10><img src="spacer.gif" alt=""></td>
+		    </tr>
+		  <tr>
+
+		    <td>Now, all SSL based communications in this application will follow the new security policy of allowing all server certificates.<br><br>
+			  <div class="syntax padding_left"><table><tr><td><pre><i>run https://&lt;NSIP> &lt;username> &lt;password></i></pre></td></tr></table></div>
+            </td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr class="ns_wp_header">
+            <td><a name="HREF"></a>Disable HREF</td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr>
+            <td>
+                Please use following piece of code to disable the href support in Axis java client.<br><br>
+                <div class="syntax padding_left"><table><tr><td><pre>((org.apache.axis.client.Stub)client)._setProperty(<br>    org.apache.axis.AxisEngine.PROP_DOMULTIREFS, Boolean.FALSE);</pre></td></tr></table></div>
+            </td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr class="ns_wp_header">
+            <td><a name="download"></a>Samples</td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr>
+            <td>
+                <table class="ns_st_body" cellspacing="0">
+                    <tr>
+                        <td><a href="samples/ns-java-sample/getConfig.java">getConfig.java</a></td>
+                        <td>The getConfig example fetches information about all configured entities and prints selected information about each one.</td>
+                    </tr>
+                    <tr>
+                        <td class="ns_st_body_alternate_row"><a href="samples/ns-java-sample/setConfig.java">setConfig.java</a></td>
+                        <td class="ns_st_body_alternate_row">The setConfig example uses the Netscaler API to set and bind certain entities in the System.</td>
+                    </tr>
+                    <tr>
+                        <td><a href="samples/ns-java-sample/rmConfig.java">rmConfig.java</a></td>
+                        <td>The rmConfig example removes all of the configuration that was created by setConfig.</td>
+                    </tr>
+                    <tr>
+                        <td class="ns_st_body_alternate_row"><a href="samples/ns-java-sample/getStat.java">getStat.java</a></td>
+                        <td class="ns_st_body_alternate_row">The getStat example demonstrates usage of statistical api.</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr class="ns_wp_header">
+            <td><a name="download1"></a>Feature configuration samples</td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr>
+            <td>
+            <table class="ns_st_body" cellspacing="0">
+                <tr>
+                    <td><a href="samples/ns-java-sample/acl.java">acl.java</a></td>
+                    <td>ACL configuration sample.</td>
+                </tr>
+                <tr>
+                    <td class="ns_st_body_alternate_row"><a href="samples/ns-java-sample/cmp.java">cmp.java</a></td>
+                    <td class="ns_st_body_alternate_row">Compression configuration sample.</td>
+                </tr>
+                <tr>
+                    <td><a href="samples/ns-java-sample/csw.java">csw.java</a></td>
+                    <td>Content Switching configuration sample.</td>
+                </tr>
+                <tr>
+                    <td class="ns_st_body_alternate_row"><a href="samples/ns-java-sample/lb.java">lb.java</a></td>
+                    <td class="ns_st_body_alternate_row">Load Balancer configuration sample.</td>
+                </tr>
+                <tr>
+                    <td><a href="samples/ns-java-sample/rba.java">rba.java</a></td>
+                    <td>RBA configuration sample.</td>
+                </tr>
+                <tr>
+                    <td class="ns_st_body_alternate_row"><a href="samples/ns-java-sample/rewrite.java">rewrite.java</a></td>
+                    <td class="ns_st_body_alternate_row">Rewrite configuration sample.</td>
+                </tr>
+                <tr>
+                    <td><a href="samples/ns-java-sample/ssl.java">ssl.java</a></td>
+                    <td>SSL Base configuration sample.</td>
+                </tr>
+                <tr>
+                    <td class="ns_st_body_alternate_row"><a href="samples/ns-java-sample/ssl_crl.java">ssl_crl.java</a></td>
+                    <td class="ns_st_body_alternate_row">SSL Client-Auth with CRL configuration sample.</td>
+                </tr>
+            </table>
+        </tr>
+    </table>
+    </div>
+</body>
+</html>

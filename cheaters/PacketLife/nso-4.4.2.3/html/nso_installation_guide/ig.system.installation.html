@@ -1,0 +1,642 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      
+      <title>Installation -  - NSO Installation Guide</title>
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+      <link rel="home" href="index.html" title="NSO Installation Guide" />
+      <link rel="up" href="ig.system.html" title="NSO System Install" />
+      <link rel="prev" href="ch03s01.html" title="Introduction" />
+      <link rel="next" href="ch03s03.html" title="NSO Upgrade" />
+      <meta xmlns="" name="Section-title" content="Installation" /><script xmlns="" type="text/javascript">
+      //The id for tree cookie
+      var treeCookieId = "treeview-1879";
+      var language = "en";
+      var w = new Object();
+      //Localization
+      txt_filesfound = 'Results';
+      txt_enter_at_least_1_char = "You must enter at least one character.";
+      txt_browser_not_supported = "JavaScript is disabled on your browser. Please enable JavaScript to enjoy all the features of this site.";
+      txt_please_wait = "Please wait. Search in progress...";
+      txt_results_for = "Results for: ";
+    </script><link xmlns="" rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/css/positioning.css" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/jquery/theme-redmond/jquery-ui-1.8.2.custom.css" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/jquery/treeview/jquery.treeview.css" /><style xmlns="" type="text/css">
+      
+      #noscript{
+      font-weight:bold;
+      background-color: #55AA55;
+      font-weight: bold;
+      height: 25spx;
+      z-index: 3000;
+      top:0px;
+      width:100%;
+      position: relative;
+      border-bottom: solid 5px black;
+      text-align:center;
+      color: white;
+      }
+      
+      input {
+      margin-bottom: 5px;
+      margin-top: 2px;
+      }
+      .folder {
+      display: block;
+      height: 22px;
+      padding-left: 20px;
+      background: transparent url(common/jquery/treeview/images/folder.gif) 0 0px no-repeat;
+      }
+      span.contentsTab {
+      padding-left: 20px;
+      background: url(common/images/toc-icon.png) no-repeat 0 center;
+      }
+      span.searchTab {
+      padding-left: 20px;
+      background: url(common/images/search-icon.png) no-repeat 0 center;
+      }
+      
+      /* Overide jquery treeview's defaults for ul. */
+      .treeview ul {
+      background-color: transparent;
+      margin-top: 4px;
+      }		
+      #webhelp-currentid {
+      /* background-color: #D8D8D8 !important; */
+      background-color: #D8D8D8;
+      }
+      .treeview .hover { color: black; }
+      .filetree li span a { text-decoration: none; font-size: 12px; color: #517291; }
+      
+      /* Override jquery-ui's default css customizations. These are supposed to take precedence over those.*/
+      .ui-widget-content {
+      border: 0px; 
+      background: none; 
+      color: none;     
+      }
+      .ui-widget-header {
+      color: #e9e8e9;
+      border-left: 1px solid #e5e5e5;
+      border-right: 1px solid #e5e5e5;
+      border-bottom: 1px solid #bbc4c5;
+      border-top: 4px solid #e5e5e5;
+      border: medium none;
+      background: #F4F4F4; /* old browsers */
+      background: -moz-linear-gradient(top, #F4F4F4 0%, #E6E4E5 100%); /* firefox */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F4F4F4), color-stop(100%,#E6E4E5)); /* webkit */    
+      font-weight: none;
+      }
+      .ui-widget-header a { color: none; }
+      .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { 
+      border: none; background: none; font-weight: none; color: none; }
+      .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited { color: black; text-decoration: none; }
+      .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus { border: none; background: none; font-weight: none; color: none; }
+      
+      .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { border: none; background: none; font-weight: none; color: none; }
+      .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited { 
+      color: black; text-decoration: none; 	
+      background: #C6C6C6; /* old browsers */
+      background: -moz-linear-gradient(top, #C6C6C6 0%, #D8D8D8 100%); /* firefox */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#C6C6C6), color-stop(100%,#D8D8D8)); /* webkit */
+      -webkit-border-radius:15px; -moz-border-radius:10px;
+      border: 1px solid #f1f1f1;
+      }    
+      .ui-corner-all { border-radius: 0 0 0 0; }
+      
+      .ui-tabs { padding: .2em;}
+      .ui-tabs .ui-tabs-nav li { top: 0px; margin: -2px 0 1px; text-transform: uppercase; font-size: 10.5px;}
+      .ui-tabs .ui-tabs-nav li a { padding: .25em 2em .25em 1em; margin: .5em; text-shadow: 0 1px 0 rgba(255,255,255,.5); }
+      /**
+      *	Basic Layout Theme
+      * 
+      *	This theme uses the default layout class-names for all classes
+      *	Add any 'custom class-names', from options: paneClass, resizerClass, togglerClass
+      */
+      
+      .ui-layout-pane { /* all 'panes' */ 
+      background: #FFF; 
+      border: 1px solid #BBB; 
+      padding: 05x; 
+      overflow: auto;
+      } 
+      
+      .ui-layout-resizer { /* all 'resizer-bars' */ 
+      background: #DDD; 
+      top:100px
+      } 
+      
+      .ui-layout-toggler { /* all 'toggler-buttons' */ 
+      background: #AAA; 
+      } 
+      
+    </style>
+      <!--[if IE]>
+	<link rel="stylesheet" type="text/css" href="../common/css/ie.css"/>
+	<![endif]--><script xmlns="" type="text/javascript" src="common/browserDetect.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery-1.7.2.min.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery.ui.all.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery.cookie.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/treeview/jquery.treeview.min.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/layout/jquery.layout.js">
+         <!----></script><style type="text/css">
+      
+      #header {
+      /* background: url("../images/header-bg.png") scroll top left repeat-x #4d8c83; */
+      background: transparent;
+      }
+      #leftnavigation {
+      /* background-color: #ededed!important; */
+      background-color: transparent;
+      }
+      #navheader {
+      visibility: hidden;
+      }
+      #webhelp-currentid {
+      /* background-color: #D8D8D8 !important; */
+      background-color: #FFFFFF; /*but must be changed in main.js as well*/
+      }
+      .filetree span.file {
+      /* background: url(images/file.gif) 0 0 no-repeat; */
+      background: initial;
+      }
+      .filetree span.folder, .filetree span.file {
+      padding: 1px 0 1px 7px;
+      display: block;
+      }
+
+      /* borrowed from cisco: clientlib.css */
+      .footer {
+      margin: 28px 30px 0 15px;
+      font-size: 80%;
+      line-height: 120%;
+      border-top: 1px solid #ccc;
+      padding-top: 7px;
+      color: #999;
+      }
+      .footer #footer-legal{display:inline;padding-bottom:18px}
+      #framework-footer{margin:0;padding:0 0 15px 0;min-width:900px;width:100%}
+      .footer a,.footer a:visited{color:#999}
+
+      /* from ccimr.css */
+      a:active  { color: #3366CC}
+      a:hover   { color: #3366CC}
+      a:link    { color: #3366CC}
+      a:visited { color: #3366CC}
+
+      #header img {
+      float: left;
+      margin-left: 20px;
+      margin-top: 0px;
+      }
+
+      #header h1 {
+      color: #336666;
+      margin-top: 4px;
+      }
+      #content h1, #content h2 {
+      color: #336666;
+      }
+      .title {
+      color: #336666;
+      }
+      p, pre {
+      margin-left: 0.1in;
+      }
+      p, ul, ol, li {
+        font-size: 95%;
+        font-family: Arial, Helvetica, sans-serif;
+        margin-top: 1px;
+      }
+      body {
+        font: 80.5% Arial, Helvetica, sans-serif;
+      }
+      ol {
+      display: block;
+      list-style-type: decimal;
+      -webkit-margin-before: 1em;
+      -webkit-margin-after: 1em;
+      -webkit-margin-start: 0px;
+      -webkit-margin-end: 0px;
+      -webkit-padding-start: 40px;
+      border: 1;
+      }
+    </style></head>
+   <body>
+      <noscript>
+         <div id="noscript">JavaScript is disabled on your browser. Please enable JavaScript to enjoy all the features of this site.</div>
+      </noscript>
+      <div id="header"><a href="index.html"><img style="margin-right: 2px; width: 110; height: 73; padding-right: 25px; padding-top: 8px" align="right" src="common/images/logo.gif" alt="Cisco Systems, Inc." /></a><h1>NSO Installation Guide<br />NSO System Install
+         </h1>
+         <div id="navheader">
+            <!---->
+            <table class="navLinks">
+               <tr>
+                  <td><a id="showHideButton" href="#" onclick="myLayout.toggle('west')" class="pointLeft" tabindex="5" title="Hide TOC tree">Sidebar
+                                                    </a></td>
+                  <td><a accesskey="p" class="navLinkPrevious" tabindex="5" href="ch03s01.html">Prev</a>
+                                                             |
+                                                             <a accesskey="u" class="navLinkUp" tabindex="5" href="ig.system.html">Up</a>
+                                                         |
+                                                         <a accesskey="n" class="navLinkNext" tabindex="5" href="ch03s03.html">Next</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div id="content">
+         <div class="sect1">
+            <div xmlns="" class="titlepage">
+               <div>
+                  <div>
+                     <h2 xmlns="http://www.w3.org/1999/xhtml" class="title" style="clear: both"><a id="ig.system.installation"></a>Installation
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="procedure"><a id="d0e835"></a><p class="title"><strong>Procedure 1. System Install Steps</strong></p>
+               <ol class="procedure" type="1">
+                  <li class="step">
+                     <p>
+                                  Use <code class="option">--system-install</code> option to perform system
+                                  installation. This option creates a system install of NSO, suitable
+                                  for deployment.  By default, Installation Directory is created in
+                                  <code class="filename">/opt/ncs</code>, Configuration Directory is created in
+                                  <code class="filename">/etc/ncs</code>, Running Directory is created in
+                                  <code class="filename">/var/opt/ncs</code> and Log Directory is created in
+                                  <code class="filename">/var/log/ncs</code>.
+                                
+                     </p>
+                     <div class="informalexample"><pre class="programlisting">$ <strong class="userinput"><code>sudo sh nso-VERSION.OS.ARCH.installer.bin --system-install</code></strong></pre></div>
+                     <p>
+                                  The variables in the command <code class="sgmltag-element">VERSION</code> refers to
+                                  the NSO version to install. <code class="sgmltag-element">OS</code> refers to the
+                                  Operating System (<code class="code">linux</code>). <code class="sgmltag-element">ARCH</code>
+                                  refers to the CPU architecture (<code class="code">x86_64</code> or
+                                  <code class="code">i686</code>).For example:
+                                
+                     </p>
+                     <div class="informalexample"><pre class="programlisting">$ sudo sh nso-4.2.linux.x86_64.installer.bin --system-install</pre></div>
+                     <p>
+                                  Here, as part of the system installation, in the Installation
+                                  directory <code class="filename">/opt/ncs</code> <span class="quote">“<span class="quote">ncs-4.2</span>”</span> distribution is
+                                  available. A symbolic link <code class="filename">/opt/ncs/current</code> is
+                                  created, pointing to the newly installed version, in this example
+                                  <code class="filename">/opt/ncs/ncs-4.2</code>
+                                
+                     </p>
+                     <p>
+                                  In the Configuration directory <code class="filename">/etc/ncs/</code>
+                                  <code class="filename">ncs.conf</code> file, SSH keys, WebUI certificates are
+                                  created. In Run directory <code class="filename">/var/opt/ncs</code> ncs
+                                  run-time state files, CDB database, packages are created.
+                                
+                     </p>
+                     <p>In Log directory <code class="filename">/var/log/ncs</code> ncs log files
+                                  are populated. Also init scripts are created in
+                                  <code class="filename">/etc/init.d/ncs</code> and system wide environment
+                                  variables are created in <code class="filename">/etc/profile.d/ncs.sh</code> .
+                                
+                     </p>
+                     <p>The installation has been configured for PAM authentication,
+                                  with group assignment based on the OS group database (e.g. /etc/group file).
+                                  Users that need access to NCS must belong to either the 'ncsadmin' group (for
+                                  unlimited access rights) or the 'ncsoper' group (for minimal access rights).
+                                
+                     </p>
+                     <p>To create the 'ncsadmin' group, use OS shell command:
+                                  
+                     </p><pre class="programlisting"># <strong class="userinput"><code>groupadd ncsadmin</code></strong></pre><p>
+                                
+                     </p>
+                     <p>To create the 'ncsoper' group, use OS shell command:
+                                  
+                     </p><pre class="programlisting"># <strong class="userinput"><code>groupadd ncsoper</code></strong></pre><p>
+                                
+                     </p>
+                     <p>To add an existing user to one of these groups, use OS shell command:
+                                  
+                     </p><pre class="programlisting"># <strong class="userinput"><code>usermod -a -G 'groupname' 'username' </code></strong></pre><p>
+                                
+                     </p>
+                     <p>For <span class="emphasis"><em>--system-install</em></span> option, you can also
+                                  choose user-defined (non-default) Installation Directory, Config
+                                  Directory, Running Directory, Log Directory with --install-dir,
+                                  --config-dir, --run-dir and --log-dir parameters, and specify
+                                  that NCS should run as different user than
+                                  <code class="literal">root</code> with the --run-as-user parameter.
+                                
+                     </p>
+                     <p>
+                                  For more information on ncs-installer see the
+                                  <a href="man.1.ncs-installer.html" class="olink"><span xmlns:xi="http://www.w3.org/2001/XInclude" class="refentrytitle">ncs-installer</span>(1)</a>
+                                  man page.
+                                
+                     </p>
+                     <p>
+                                  For an extensive guide to NSO deployment, please refer to
+                                  <a href="../nso_admin_guide/ug.admin_guide.deployment.html" class="olink">
+                                             <em xmlns:xi="http://www.w3.org/2001/XInclude">NSO Deployment</em>
+                                           </a> in <span class="olinkdocname">
+                                 NSO 4.4.2.3 Administration Guide
+                               </span>.
+                                
+                     </p>
+                     <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+                        <h3 class="title">Note</h3>
+                        <p>If you choose a non-default installation directory by
+                                     using <code class="option">--install-dir</code>, you need to specify
+                                     <code class="option">--install-dir</code> for subsequent installs and
+                                     also for backup and restore.
+                        </p>
+                     </div>
+                  </li>
+                  <li class="step">
+                     <p>Change to Super User priviliges.</p>
+                     <div class="informalexample"><pre class="programlisting">$ <strong class="userinput"><code>sudo -s</code></strong></pre></div>
+                  </li>
+                  <li class="step">
+                     <p>
+                                  The installation program creates a shell script file in each
+                                  NSO installation which sets environment variables needed to
+                                  run NSO. With <span class="emphasis"><em>--system-install</em></span> option,
+                                  by default these settings are set on the shell. To
+                                  explicitly set the variables, source
+                                  <code class="filename">ncs.sh</code> or <code class="filename">ncs.csh</code>
+                                  depending on your shell type.
+                                
+                     </p>
+                     <div class="informalexample"><pre class="programlisting"># <strong class="userinput"><code>source /etc/profile.d/ncs.sh</code></strong></pre></div>
+                  </li>
+                  <li class="step">
+                     <p>Start NSO.</p>
+                     <div class="informalexample"><pre class="programlisting"># <strong class="userinput"><code>/etc/init.d/ncs start</code></strong></pre></div>
+                     <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+                        <h3 class="title">Note</h3>
+                        <p>Once you log on with the user that belongs to ncsadmin or ncsoper you can directly access the CLI.
+                                    
+                        </p>
+                        <div class="informalexample"><pre class="programlisting">$ <strong class="userinput"><code>ncs_cli -C</code></strong></pre></div>
+                        <p>
+                                   
+                        </p>
+                     </div>
+                  </li>
+                  <li class="step">
+                     <p>
+                            NSO uses Cisco Smart Licensing, as described in
+                            <a href="../nso_admin_guide/ug.admin_guide.smart_licensing.html" class="olink">
+                                             <em xmlns:xi="http://www.w3.org/2001/XInclude">Cisco Smart Licensing</em>
+                                           </a> in <span class="olinkdocname">
+                                 NSO 4.4.2.3 Administration Guide
+                               </span>, to make
+                            it easy to deploy and
+                            manage NSO license entitlements. To conclude the NSO
+                            installation a license registration token must be created using a
+                            <a class="link" href="http://www.cisco.com/web/ordering/smart-software-manager/docs/smart-software-manager-user-guide.pdf" target="_top">Cisco
+                               Smart Software Manager</a> (CSSM) account. Login credentials to
+                            a CSSM account should have been provided by your Cisco contact
+                            and detailed instructions on how to create a registration token
+                            can be found in
+                            <a href="../nso_admin_guide/ug.admin_guide.smart_licensing.html" class="olink">
+                                             <em xmlns:xi="http://www.w3.org/2001/XInclude">Cisco Smart Licensing</em>
+                                           </a> in <span class="olinkdocname">
+                                 NSO 4.4.2.3 Administration Guide
+                               </span>.
+                          
+                     </p>
+                     <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+                        <h3 class="title">Note</h3>
+                        <p>
+                                 If you intend to use NSO instance for development purposes
+                                 you should enable development mode using the command
+                                 <span class="command"><strong>license smart development enable</strong></span>. When
+                                 development mode is enabled
+                                 the NSO instance will only consume a single development
+                                 NSO license entitlement and nothing else.
+                               
+                        </p>
+                     </div>
+                     <p>
+                            When you have a token, start a Cisco CLI towards NSO and enter the
+                            token, i.e.
+                          
+                     </p><pre class="screen">admin@ncs# <strong class="userinput"><code>license smart register idtoken YzIzMDM3MTgtZTRkNC00YjkxLTk2ODQtOGEzMTM3OTg5MG</code></strong>
+Registration process in progress.
+Use the 'show license status' command to check the progress and result.</pre><p>
+                          
+                     </p>
+                     <p>
+                            The command <span class="command"><strong>show license status</strong></span> can be used to
+                            keep track of the registration status, e.g
+                          
+                     </p>
+                     <p>
+                            
+                     </p><pre class="screen">admin@ncs# <strong class="userinput"><code>show license status</code></strong>
+
+Smart Licensing is ENABLED
+
+Registration:
+  Status: REGISTERED
+  Smart Account: Network Service Orchestrator
+  Virtual Account: Default
+  Export-Controlled Functionality: Allowed
+  Initial Registration: SUCCEEDED on Apr 21 09:29:11 2016 UTC
+  Last Renewal Attempt: SUCCEEDED on Apr 21 09:29:16 2016 UTC
+  Next Renewal Attempt: Oct 18 09:29:16 2016 UTC
+  Registration Expires: Apr 21 09:26:13 2017 UTC
+  Export-Controlled Functionality: Allowed
+
+License Authorization:
+
+License Authorization:
+  Status: IN COMPLIANCE on Apr 21 09:29:18 2016 UTC
+  Last Communication Attempt: SUCCEEDED on Apr 21 09:26:30 2016 UTC
+  Next Communication Attempt: Apr 21 21:29:32 2016 UTC
+  Communication Deadline: Apr 21 09:26:13 2017 UTC</pre><p>
+                          
+                     </p>
+                     <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+                        <h3 class="title">Note</h3>
+                        <p>During Upgrades, If you find 'Communication Send Error' while
+                           license registration, please restart the Smart Agent.
+                            
+                        </p>
+                     </div>
+                     <p>
+                            Licensing activities are also logged in the NSO daemon log
+                            as described in
+                            <a href="../nso_admin_guide/ug.ncs_sys_mgmt.monitor.html" class="olink">the section called “Monitoring NSO”</a> in <span class="olinkdocname">
+                                 NSO 4.4.2.3 Administration Guide
+                               </span>.
+                            For example, a successful token registration results in the following
+                            log entry:
+                          
+                     </p>
+                     <p>
+                            
+                     </p><pre class="screen">&lt;INFO&gt; 21-Apr-2016::11:29:18.022 miosaterm confd[8226]:
+  Smart Licensing Global Notification:
+    type = "notifyRegisterSuccess"</pre><p>
+                          
+                     </p>
+                     <p>
+                            If no registration token is provided NSO enters a 90 days
+                            evaluation period and the remaining evaluation time is recorded
+                            hourly in the NSO daemon log:
+                          
+                     </p>
+                     <p>
+                            
+                     </p><pre class="screen">...
+&lt;INFO&gt; 13-Apr-2016::13:22:29.178 miosaterm confd[16260]:
+  Starting the NCS Smart Licensing Java VM
+&lt;INFO&gt; 13-Apr-2016::13:22:34.737 miosaterm confd[16260]:
+  Smart Licensing evaluation time remaining: 90d 0h 0m 0s
+...
+&lt;INFO&gt; 13-Apr-2016::13:22:34.737 miosaterm confd[16260]:
+  Smart Licensing evaluation time remaining: 89d 23h 0m 0s
+...</pre><p>
+                          
+                     </p>
+                     <p>
+                            Upon successful registration NSO automatically requests a
+                            license entitlement for its own instance and for the number
+                            of devices it orchestrates and their NED types. If development
+                            mode has been enabled only an development entitlement for the NSO
+                            instance itself is requested.
+                          
+                     </p>
+                     <p>
+                            The requested entitlements can be inspected using the command
+                            <span class="command"><strong>show license all</strong></span> (or by inspecting the
+                            NSO daemon log):
+                          
+                     </p>
+                     <p>
+                            
+                     </p><pre class="screen">admin@ncs# <strong class="userinput"><code>show license all</code></strong>
+...
+&lt;INFO&gt; 21-Apr-2016::11:29:18.022 miosaterm confd[8226]:
+  Smart Licensing Global Notification:
+    type = "notifyRegisterSuccess",
+    agentID = "sa1",
+    enforceMode = "notApplicable",
+    allowRestricted = false,
+    failReasonCode = "success",
+    failMessage = "Successful."
+&lt;INFO&gt; 21-Apr-2016::11:29:23.029 miosaterm confd[8226]:
+  Smart Licensing Entitlement Notification: type = "notifyEnforcementMode",
+    agentID = "sa1",
+    notificationTime = "Apr 21 11:29:20 2016",
+    version = "1.0",
+    displayName = "regid.2015-10.com.cisco.NSO-network-element",
+    requestedDate = "Apr 21 11:26:19 2016",
+    tag = "regid.2015-10.com.cisco.NSO-network-element",
+    enforceMode = "inCompliance",
+    daysLeft = 90,
+    expiryDate = "Jul 20 11:26:19 2016",
+    requestedCount = 8
+...</pre><p>
+                          
+                     </p>
+                     <div class="tip" style="margin-left: 0.5in; margin-right: 0.5in;">
+                        <h3 class="title">Tip</h3>
+                        <p>
+                                 In a situation whereas the NSO instance has no direct
+                                 access to the Cisco Smart Software Manager a
+                                 <a class="link" href="http://www.cisco.com/go/smartsatellite" target="_top">Cisco
+                                    Smart Software Manager satellite</a> can be installed to
+                                 manage software licenses on the premises. Install the satellite and
+                                 use the command <span class="command"><strong>call-home destination address http
+                                       &lt;url:port&gt;</strong></span> to point to the satellite.
+                               
+                        </p>
+                     </div>
+                     <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+                        <h3 class="title">Note</h3>
+                        <p>
+                                 When configuring NSO in High Availability (HA) mode the
+                                 license registration token must be provided to the CLI running on the
+                                 master node. Read more about HA and master nodes in
+                                 <a href="../nso_admin_guide/ug.ha.html" class="olink">
+                                                <em xmlns:xi="http://www.w3.org/2001/XInclude">High Availability</em>
+                                              </a> in <span class="olinkdocname">
+                                    NSO 4.4.2.3 Administration Guide
+                                  </span>.
+                               
+                        </p>
+                     </div>
+                  </li>
+               </ol>
+            </div>
+         </div><script type="text/javascript" src="common/main.js">
+            <!----></script><script type="text/javascript" src="common/splitterInit.js">
+            <!----></script><div class="footer" id="footer-legal">
+            <div class="footer-legal framework-footer-cq">
+               <div id="framework-footer">
+                  <div id="footer-legal"><a href="http://www.cisco.com/web/siteassets/legal/terms_condition.html">Terms &amp; Conditions</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/privacy.html">Privacy Statement</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/privacy.html#cookies">Cookie Policy</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/trademark.html">Trademarks</a></div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div id="sidebar">
+         <div id="leftnavigation" style="padding-top:3px;">
+            <div id="tabs">
+               <ul style="visibility: hidden;"></ul>
+               <div id="treeDiv"><img src="common/images/loading.gif" alt="loading table of contents..." id="tocLoading" style="display:block;" /><div id="ulTreeDiv" style="display:none">
+                     <ul id="tree" class="filetree">
+                        <li><span class="file"><a href="ig.intro.html" tabindex="1">Introduction</a></span><ul>
+                              <li><span class="file"><a href="ch01s01.html" tabindex="1">Purpose</a></span></li>
+                              <li><span class="file"><a href="ch01s02.html" tabindex="1">Prerequisites</a></span></li>
+                              <li><span class="file"><a href="ch01s03.html" tabindex="1">NED Packages</a></span></li>
+                              <li><span class="file"><a href="ch01s04.html" tabindex="1">Man Pages</a></span></li>
+                              <li><span class="file"><a href="ch01s05.html" tabindex="1">Unpack NSO Installer</a></span></li>
+                              <li><span class="file"><a href="ch01s06.html" tabindex="1">Install Types</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ig.local.html" tabindex="1">NSO Local Install</a></span><ul>
+                              <li><span class="file"><a href="ch02s01.html" tabindex="1">Introduction</a></span></li>
+                              <li><span class="file"><a href="ch02s02.html" tabindex="1">Installation</a></span></li>
+                              <li><span class="file"><a href="ch02s03.html" tabindex="1">NSO Upgrade</a></span><ul>
+                                    <li><span class="file"><a href="ch02s03s01.html" tabindex="1">Upgrade from Local Install to System Install</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch02s04.html" tabindex="1">NSO UnInstallation</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ig.system.html" tabindex="1">NSO System Install</a></span><ul>
+                              <li><span class="file"><a href="ch03s01.html" tabindex="1">Introduction</a></span></li>
+                              <li id="webhelp-currentid"><span class="file"><a href="ig.system.installation.html" tabindex="1">Installation</a></span></li>
+                              <li><span class="file"><a href="ch03s03.html" tabindex="1">NSO Upgrade</a></span></li>
+                              <li><span class="file"><a href="ch03s04.html" tabindex="1">NSO Uninstallation</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ig.support.html" tabindex="1">Other Information</a></span><ul>
+                              <li><span class="file"><a href="ch04s01.html" tabindex="1">References</a></span></li>
+                              <li><span class="file"><a href="ch04s02.html" tabindex="1">FAQs</a></span></li>
+                              <li><span class="file"><a href="ch04s03.html" tabindex="1">Support</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="rn01.html" tabindex="1">Manual pages</a></span><ul>
+                              <li><span class="file"><a href="man.1.ncs-installer.html" tabindex="1">ncs-installer</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-uninstall.html" tabindex="1">ncs-uninstall</a></span></li>
+                           </ul>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

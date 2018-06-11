@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<meta content='width=device-width, initial-scale=1' name='viewport'>
+<title>Open vSwitch and OpenStack Neutron troubleshooting | yet.org</title>
+<link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:400,700' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Brawler' rel='stylesheet' type='text/css'>
+<link href='/style.css' rel='stylesheet' type='text/css'>
+<link href='/coderay.css' media='screen' rel='stylesheet' type='text/css'>
+<link href='/favicon.ico' rel='icon' type='image/x-icon'>
+<script src='/scripts/modernizr.js'></script>
+<script>
+var _gaq = _gaq || [];_gaq.push(['_setAccount', 'UA-36759172-1']);_gaq.push(['_trackPageview']);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+</head>
+<body>
+<section class='container' id='page'>
+<header>
+<h1>yet.org</h1>
+<nav>
+<ol>
+<li class=' yet'><a href='/'>Yet Emerging Technologies</a></li>
+<li class=' tags'><a href='/tags'>tags</a></li>
+<li class=' archives'><a href='/archives'>archives</a></li>
+<li class=' about'><a href='/about'>about</a></li>
+<li class=' contact'><a href='/contact'>contact</a></li>
+</ol>
+</nav>
+
+<aside>
+<a class='github' href='https://github.com/planetrobbie' title='me on GitHub'></a>
+<a class='linkedin' href='http://fr.linkedin.com/in/planetrobbie' title='me on LinkedIn'></a>
+</aside>
+</header>
+<section class='blog' id='content'>
+<div class='blog-entry'>
+<aside>
+<div class='date'>
+<div class='month'>SEP</div>
+<div class='day'>14</div>
+</div>
+</aside>
+<div class='tagRibon'>
+<div class='tagBox'>
+<div class='ar'></div>
+<div class='co'>
+<a href='/tags/howto/'>
+<span class='name'>howto</span>
+</a>
+</div>
+</div>
+<div class='tagBox'>
+<div class='ar'></div>
+<div class='co'>
+<a href='/tags/nsx/'>
+<span class='name'>nsx</span>
+</a>
+</div>
+</div>
+<div class='tagBox'>
+<div class='ar'></div>
+<div class='co'>
+<a href='/tags/openvswitch/'>
+<span class='name'>openvswitch</span>
+</a>
+</div>
+</div>
+</div>
+<article>
+<h2 class='article-title'>Open vSwitch and OpenStack Neutron troubleshooting</h2>
+<p><a href="http://openvswitch.org/">Open vSwitch</a> comes embedded with Linux Kernel 3.3 and up, it became the <a href="http://git.openvswitch.org/cgi-bin/gitweb.cgi?p=openvswitch;a=blob_plain;f=WHY-OVS;hb=HEAD">cornerstone</a> of Network Virtualisation. But if you start having connectivity issues, it’s better to have a great bit of knowledge to really understand it. This article is a cheatsheet that will help you achieve this goal. I hope ;)</p>
+
+<!-- more -->
+
+<h3 id="openvswitchfeatures">Open vSwitch features</h3>
+
+<p>To give you a rough idea of all the greatness of Open vSwitch (OVS), here is a brief <a href="http://openvswitch.org/features/">feature list</a>, as of version 2.3.</p>
+
+<ul>
+<li>IPv6 support</li>
+<li>Multiple tunneling protocols
+
+<ul>
+<li>GRE</li>
+<li>VXLAN</li>
+<li>IPsec</li>
+<li>GRE and VXLAN over IPsec</li>
+<li>LISP (not yet upstream)</li>
+<li>GENEVE</li>
+</ul>
+</li>
+<li>Kernel and user-space forwarding engine options</li>
+<li>Standard 802.1Q VLAN model with trunk and access ports</li>
+<li>NIC bonding
+
+<ul>
+<li>LACP (IEEE 802.1AX–2008) on upstream switch (only static it seems)</li>
+<li>source-MAC load balancing</li>
+<li>active backup</li>
+<li>L4 hashing</li>
+</ul>
+</li>
+<li>Visibility into inter-VM communication via NetFlow, sFlow(R), IPFIX, SPAN, RSPAN, and GRE-tunneled mirrors</li>
+<li>QoS (Quality of Service) configuration, plus policing</li>
+<li>BFD and 802.1ag link monitoring</li>
+<li>OpenFlow 1.0 plus numerous extensions</li>
+<li>Transactional configuration database with C and Python bindings</li>
+<li>High-performance forwarding using a Linux kernel module</li>
+<li>STP (IEEE 802.1D–1998)</li>
+<li>Support for HFSC qdisc</li>
+</ul><h3 id="openvswitcharchitecture">Open vSwitch Architecture</h3>
+
+<p>OVS is composed of three main components:</p>
+
+<figure><img src="/images/posts/ovs-archi.png" alt="" id="ovs-archi" title="Open vSwitch Architecture"></figure><ul>
+<li>
+<strong>ovs-vswitchd</strong> - Open vSwitch <a href="http://openvswitch.org/cgi-bin/ovsman.cgi?page=vswitchd%2Fovs-vswitchd.8">daemon</a> (Slow Path)
+
+<ul>
+<li>Forwarding Logic - learning, mirroring, VLANs, bonding.</li>
+<li>Remote Configuration and visibility</li>
+</ul>
+</li>
+<li>
+<strong>ovsdb-server</strong> - Open vSwitch <a href="http://openvswitch.org/cgi-bin/ovsman.cgi?page=ovsdb%2Fovsdb-server.1.in">database</a> server</li>
+<li>
+<strong>openvswitch_mod.ko</strong> - kernel module (Fast Path)
+
+<ul>
+<li>Packet lookup, modification and forwarding</li>
+<li>Tunnel encap/decap.</li>
+</ul>
+</li>
+</ul><p>Note: The Controller Cluster isn’t part of OVS.</p>
+
+<h3 id="br-intbr-tunbridges">br-int, br-tun Bridges</h3>
+
+<p>Network virtualization, like <em><a href="http://www.vmware.com/products/nsx">NSX</a></em> or <em><a href="http://www.opendaylight.org/">OpenDaylight</a></em> solutions brings a centralized controller cluster that leverage this switch. As a best practice, they separate the bridge that the VMs connect to (managed by the controller) vs. the bridges for everything else. Each OVS Bridge have by default a Port with the same name as the bridge itself. For example the Integration Bridge, where VMs are connected, is named <code>br-int</code> and contains a port called <code>br-int</code>. And the Bridge that will connect to the Transport Network on Hypervisor will be called <code>br-tun</code> with a port named <code>br-tun</code>.</p>
+
+<p>For each packet a logical interface on <code>br-int</code> for Egress tunnel traffic and a Tunnel Endpoint will be determined. The packets forwarding is a host function and so will use the host routing table to find a way to get there. So the source IP address bound on the <code>br-tun</code> bridge is directly attached to a physical Nic, this is where the packet will Egress to the physical network. Sometimes <code>br-tun</code> is named <code>br0</code> instead.</p>
+
+<h3 id="openvswitchcli">Open vSwitch CLI</h3>
+
+<p>Before goind any deeper with command line interface, you have to know that OVS does manage two kinds of flow:</p>
+
+<ul>
+<li>
+<strong>OpenFlows</strong> - User Space based</li>
+<li>
+<strong>Datapath</strong> - kernel based, a kind of cached version of the OpenFlow ones.</li>
+</ul><p>So different commands will be used to interact with each of them:</p>
+
+<ul>
+<li>
+<strong>ovs-ofctl</strong> - speak to OpenFlow module</li>
+<li>
+<strong>ovs-dpctl</strong> - speak to Kernel module</li>
+</ul><p>But lets start our cheatsheet with <code>ovs-vsctl</code>, an utility for querying and configuring <em>ovs−vswitchd</em>.</p>
+
+<p><strong><a href="http://openvswitch.org/cgi-bin/ovsman.cgi?page=utilities%2Fovs-vsctl.8">ovs-vsctl</a></strong> provides a high level interface for Open vSwitch Database. It allow you to query and configure <em>ovs−vswitchd</em> and is more convenient than <em>ovsdb-</em>* tools that are lower level commands.</p>
+
+<p><code>ovs-vsctl –V</code> version of openvswitch<br><code>ovs-vsctl show</code> print a brief overview of database configuration<br><code>ovs-vsctl list-br</code> list of configured bridges<br><code>ovs-vsctl list-ports &lt;bridge&gt;</code> list of ports on a specific bridge<br><code>ovs-vsctl get-manager &lt;bridge&gt;</code> list of NVP Controllers (TCP 6632)<br><code>ovs-vsctl get-controller &lt;bridge&gt;</code> list of NVP Controllers (TCP 6633)<br><code>ovs-vsctl list manager</code> list of NVP Controllers (TCP 6632)<br><code>ovs-vsctl list controller</code> list of NVP Controllers (TCP 6633)<br><code>ovs-vsctl list interface</code> list of interfaces </p>
+
+<p><strong><a href="http://openvswitch.org/cgi-bin/ovsman.cgi?page=utilities%2Fovs-ofctl.8">ovs-ofctl</a></strong> will allow you to monitor and administer OpenFlow switches.</p>
+
+<p><code>ovs-ofctl dump-flows &lt;br&gt;</code> Examine OpenFlow tables<br><code>ovs-ofctl show &lt;br&gt;</code> port number to port name mapping<br><code>ovs-ofctl dump-ports &lt;br&gt;</code> port statistics by port number </p>
+
+<p>You can use <code>watch</code> like this</p>
+
+<pre><code>watch "ovs-ofctl dump-flows br-tun"&#x000A;</code></pre>
+
+<p>Note: read the <a href="http://openvswitch.org/cgi-bin/ovsman.cgi?page=utilities%2Fovs-ofctl.8">man page</a> of ovs-ofctl to better understand how to decode flow tables</p>
+
+<p><strong><a href="http://openvswitch.org/cgi-bin/ovsman.cgi?page=utilities%2Fovs-appctl.8">ovs-appctl</a></strong> offer a way to send commands to a running Open vSwitch.</p>
+
+<p><code>ovs-appctl bridge/dumpflows &lt;br&gt;</code> examine flow tables, offers direct connectivity for VMs on the same hosts<br><code>ovs-appctl fdb/show &lt;br&gt;</code> list mac/vlan pairs learned</p>
+
+<p><strong><a href="http://openvswitch.org/cgi-bin/ovsman.cgi?page=utilities%2Fovs-dpctl.8">ovs-dpctl</a></strong> can show, create, modify, and delete Open vSwitch datapaths.</p>
+
+<p><code>ovs-dpctl dump-flows</code> dump Datapath (kernel cached) flows</p>
+
+<h3 id="openvswitchandopenstackneutron">Open vSwitch and OpenStack Neutron</h3>
+
+<p>Since the introduction of Security Group rules after OpenStack Folsom, which filters egress/ingress VM traffic. It was necessary to add a Tap interface to connect the VM to instead of connecting the VM directly to the <code>br-int</code> because we couldn’t connect User Space program to another User Space program if we wanted IP Tables filtering. Tap interface offer a route to the kernel for filtering.</p>
+
+<figure><img src="/images/posts/neutron-networking.png" alt="" id="neutron-networking" title="Neutron Networking" style="width:850px;"></figure><h3 id="neutronflowtables">Neutron Flow Tables</h3>
+
+<p>The flows are divided in different tables.</p>
+
+<p><code>table 0</code> all packets enter into this table<br><code>table 1</code> Packets coming from VM to Outside (Ingress)<br><code>table 2</code> Packets coming from outside Open vSwitch (tunnel) to VM (Egress) which need to go to a VM coming from VM are directed to 20 for Unicast and 21 for Multicast<br><code>table 3</code> not used<br><code>table 10</code> Inject a rule into table 20 to cause a return Path, so when VM repond to the Packet it will work.<br><code>table 20</code> does unicast packet<br><code>table 21</code> does broadcast packet </p>
+
+<h3 id="openvswitchmirroring">Open vSwitch Mirroring</h3>
+
+<p>Sometime it becomes quite usefull to mirror traffic for deeper analysis.</p>
+
+<p>To do so, first create a virtual ethernet interface (veth)</p>
+
+<pre><code>ip link add type veth&#x000A;ip link set veth0 up&#x000A;</code></pre>
+
+<p>Add it into the Open vSwitch bridge <code>br-int</code></p>
+
+<pre><code>ovs-vsctl add-port br-int "veth0"&#x000A;</code></pre>
+
+<p>Create the mirror and mirror the packet from <code>eth1</code>, <code>br-int</code>, <code>patch-tun</code>:</p>
+
+<pre><code>ovs-vsctl -- set Bridge br-int mirrors=@m \&#x000A;  --id=@veth0 get Port veth0 \&#x000A;  --id=@eth1 get Port eth1 \&#x000A;  --id=@patch-tun get Port patch-tun \&#x000A;  --id=@br-int get Port br-int \&#x000A;  --id=@m create Mirror name=veth select-src-port=@eth1,@patch-tun,@br-int \&#x000A;  select-dst-port=@eth1,@patch-tun,@br-int output-port=@veth0&#x000A;</code></pre>
+
+<p>You can now <code>tcpdump</code> the veth0 interface to dump all mirrored traffic.</p>
+
+<p>When finished delete the mirror</p>
+
+<pre><code>ovs-vsctl clear Bridge br-int mirrors&#x000A;</code></pre>
+
+<h3 id="neutrontroubleshootingprocess">Neutron Troubleshooting process</h3>
+
+<p>At the Atlanta OpenStack summit, <em>Phil Hopkins</em> have done a great <a href="https://www.openstack.org/summit/openstack-summit-atlanta-2014/session-videos/presentation/troubleshooting-neutron-virtual-networks">presentation</a>, let me extract here his formal process for troubleshooting Neutron Networking.</p>
+
+<ol>
+<li>Gather Data
+
+<ul>
+<li>Mac and IP of VMs, DHCP server, router</li>
+<li>Mac and IP of Data Network Node</li>
+<li>Set the neutron service to log a debug level</li>
+</ul>
+</li>
+<li>Where the problem is located
+
+<ul>
+<li>one tenant or all ?</li>
+<li>one network or all ?</li>
+<li>what protocols used ?</li>
+<li>is it a L2 or L3 problem</li>
+</ul>
+</li>
+<li>Examine/locate
+
+<ul>
+<li>look carefully at what is happening</li>
+<li>Isolate to tenant, network VM, compute or network node.</li>
+</ul>
+</li>
+<li>Consider causes</li>
+<li>Need more data ?</li>
+<li>Consider solutions</li>
+<li>Test
+
+<ul>
+<li>adjust only one thing at a time, put it back if it didn’t work</li>
+<li>Always keep a log of what you’ve done or you’ll get lost in the process !!!</li>
+</ul>
+</li>
+<li>Repeat the process.</li>
+</ol><h3 id="neutrondebugcommand">Neutron Debug command</h3>
+
+<p><strong><a href="https://github.com/openstack/neutron/tree/master/neutron/debug">neutron-debug</a></strong> is a great way to troubleshoot Neutron connectivity.</p>
+
+<p><code>neutron-debug probe-clear</code> clear all probes<br><code>neutron-debug probe-create</code> create probe ports and interface, then plug it in.<br><code>neutron-debug probe-delete</code> Delete probe, unplug and delete port
+<code>neutron-debug probe-exec</code> Execute commands in the namespace of the probe
+<code>neutron-debug probe-list</code> List probes
+<code>neutron-debug ping-all</code> Ping all fixed_ips</p>
+
+<p>Note: this section need some practical example !!!</p>
+
+<h3 id="linuxcli">Linux CLI</h3>
+
+<p>You’ll have to forget about ifconfig, netstat, route, arp soon, they are all deprecated and replaced with IProute2 package which brings <code>ip</code>command. So the new commands are:</p>
+
+<h4 id="basicnetworking">basic networking</h4>
+
+<pre><code>ip a - replace ifconfig&#x000A;ip route - replace route&#x000A;ip netns - network namespace&#x000A;ip neighbor - replace ARP, also shows if a route is active. [goes stale after 60s by default]&#x000A;udhcp -T 1 -A 1 - send a DHCP request on the wire&#x000A;</code></pre>
+
+<p>Below you’ll find an example of iptable with <code>-v</code> which shows the stats associated with a rule.</p>
+
+<pre><code>watch iptable -v&#x000A;</code></pre>
+
+<h4 id="tcpdump">tcpdump</h4>
+
+<pre><code>tcpdump -n -e -i &lt;interface&gt;&#x000A;</code></pre>
+
+<p><code>-e</code> will show layer 2 communication</p>
+
+<h4 id="namespace">namespace</h4>
+
+<pre><code>ip netns&#x000A;ip netns exec &lt;namespace&gt; ip a&#x000A;ip netns exec &lt;namespace&gt; tcpdump -e -n -l -i tap0ee66e73-48&#x000A;</code></pre>
+
+<p><code>-l</code> will output packet on the fly, if you don’t use it, you will only see them when you interupt the command.</p>
+
+<h3 id="packetflowtrackingexamplefromvmcomputenodetonetworknode.">Packet Flow tracking example from VM/Compute node to Network Node.</h3>
+
+<p>on Compute node type:</p>
+
+<pre><code>ip a&#x000A;</code></pre>
+
+<p>Find the network interface that is pluged in the OVS, to dump the traffic like that</p>
+
+<pre><code>tcpdump -e -n -i &lt;VM_VNIC_NAME&gt;&#x000A;</code></pre>
+
+<p>Now dump the br-tun flows</p>
+
+<pre><code>watch "ovs-ofctl dump-flows br-tun"&#x000A;</code></pre>
+
+<p>In the output above, look closely at the n_packets values. If for example you don’t get a number increasing for resubmit(,2) flows, it means no packets are coming back from the tunnel. Remenber we said earlier that table 2 process packets coming from outside.</p>
+
+<p>Still on the Compute node you can look at what’s happening on the physical interface</p>
+
+<pre><code>tcpdump -e -n -i &lt;PHYSICAL_NIC_ON_TRANSPORT_NETWORK&gt;&#x000A;</code></pre>
+
+<p>on the Network node tcpdump on physical interface</p>
+
+<pre><code>tcpdump -e -n -i &lt;PHYSICAL_NIC_ON_TRANSPORT_NETWORK&gt;&#x000A;</code></pre>
+
+<p>Dump the flows</p>
+
+<pre><code>watch "ovs-ofctl dump-flows br-tun"&#x000A;</code></pre>
+
+<p>Now enter corresponding namespace</p>
+
+<pre><code>ip netns&#x000A;ip netns exec &lt;NAMESPACE_ID&gt; ip a&#x000A;</code></pre>
+
+<p>Grap the TAP interface of the namespace to tcpdump it</p>
+
+<pre><code>ip netns exec &lt;NAMESPACE_ID&gt; tcpdump -e -n -l -i  &lt;TAP_INTERFACE&gt;&#x000A;</code></pre>
+
+<p><code>-l</code> is required inside a namespace or you won’t see the packets dynamically flowing, everything will shown when you interupt the command which isn’t that great.</p>
+
+<p>Check dnsmasq process is running</p>
+
+<pre><code>ps aux | grep dnsmasq&#x000A;</code></pre>
+
+<p>You can restart it with</p>
+
+<pre><code>restart neutron-dhcp-agent&#x000A;</code></pre>
+
+<h3 id="conclusion">Conclusion</h3>
+
+<p>I’ll make sure to update this article as soon as I find new tricks to troubleshooting the Open vSwitch/Neutron Environment. Stay tuned !</p>
+
+<h3 id="links">Links</h3>
+
+<ul>
+<li>Phil Hopkins, <a href="https://www.openstack.org/summit/openstack-summit-atlanta-2014/session-videos/presentation/troubleshooting-neutron-virtual-networks">Troubleshooting Neutron Networking</a>
+</li>
+<li>Scott Lowe <a href="http://blog.scottlowe.org/2012/10/19/link-aggregation-and-lacp-with-open-vswitch/">Article</a> on how to setup LACP on OVS.</li>
+</ul>
+</article>
+</div>
+</section>
+
+</section>
+<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
+<script src='/scripts/lightbox.js'></script>
+</body>
+</html>

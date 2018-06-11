@@ -1,0 +1,822 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: package mock</title>
+<meta charset="utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>mock</strong></big></big> (version 1.3.0)</font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/Cellar/matplotlib/1.5.1/libexec/lib/python2.7/site-packages/mock/__init__.py">/usr/local/Cellar/matplotlib/1.5.1/libexec/lib/python2.7/site-packages/mock/__init__.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Package Contents</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="mock.mock.html">mock</a><br>
+</td><td width="25%" valign=top><a href="mock.tests.html"><strong>tests</strong>&nbsp;(package)</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="mock.mock.html#Base">mock.mock.Base</a>(<a href="__builtin__.html#object">__builtin__.object</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="mock.mock.html#CallableMixin">mock.mock.CallableMixin</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="mock.mock.html#Mock">mock.mock.Mock</a>(<a href="mock.mock.html#CallableMixin">mock.mock.CallableMixin</a>, <a href="mock.mock.html#NonCallableMock">mock.mock.NonCallableMock</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="mock.mock.html#MagicMock">mock.mock.MagicMock</a>(<a href="mock.mock.html#MagicMixin">mock.mock.MagicMixin</a>, <a href="mock.mock.html#Mock">mock.mock.Mock</a>)
+</font></dt><dt><font face="helvetica, arial"><a href="mock.mock.html#PropertyMock">mock.mock.PropertyMock</a>
+</font></dt></dl>
+</dd>
+</dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="mock.mock.html#NonCallableMock">mock.mock.NonCallableMock</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="mock.mock.html#NonCallableMagicMock">mock.mock.NonCallableMagicMock</a>(<a href="mock.mock.html#MagicMixin">mock.mock.MagicMixin</a>, <a href="mock.mock.html#NonCallableMock">mock.mock.NonCallableMock</a>)
+</font></dt></dl>
+</dd>
+</dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="mock.mock.html#MagicMixin">mock.mock.MagicMixin</a>(<a href="__builtin__.html#object">__builtin__.object</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="mock.mock.html#MagicMock">mock.mock.MagicMock</a>(<a href="mock.mock.html#MagicMixin">mock.mock.MagicMixin</a>, <a href="mock.mock.html#Mock">mock.mock.Mock</a>)
+</font></dt><dt><font face="helvetica, arial"><a href="mock.mock.html#NonCallableMagicMock">mock.mock.NonCallableMagicMock</a>(<a href="mock.mock.html#MagicMixin">mock.mock.MagicMixin</a>, <a href="mock.mock.html#NonCallableMock">mock.mock.NonCallableMock</a>)
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="CallableMixin">class <strong>CallableMixin</strong></a>(<a href="mock.mock.html#Base">Base</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="mock.mock.html#CallableMixin">CallableMixin</a></dd>
+<dd><a href="mock.mock.html#Base">Base</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="CallableMixin-__call__"><strong>__call__</strong></a>(_mock_self, *args, **kwargs)</dt></dl>
+
+<dl><dt><a name="CallableMixin-__init__"><strong>__init__</strong></a>(self, spec<font color="#909090">=None</font>, side_effect<font color="#909090">=None</font>, return_value<font color="#909090">=sentinel.DEFAULT</font>, wraps<font color="#909090">=None</font>, name<font color="#909090">=None</font>, spec_set<font color="#909090">=None</font>, parent<font color="#909090">=None</font>, _spec_state<font color="#909090">=None</font>, _new_name<font color="#909090">=''</font>, _new_parent<font color="#909090">=None</font>, **kwargs)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="mock.mock.html#Base">Base</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="MagicMock">class <strong>MagicMock</strong></a>(<a href="mock.mock.html#MagicMixin">MagicMixin</a>, <a href="mock.mock.html#Mock">Mock</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#MagicMock">MagicMock</a>&nbsp;is&nbsp;a&nbsp;subclass&nbsp;of&nbsp;<a href="#Mock">Mock</a>&nbsp;with&nbsp;default&nbsp;implementations<br>
+of&nbsp;most&nbsp;of&nbsp;the&nbsp;magic&nbsp;methods.&nbsp;You&nbsp;can&nbsp;use&nbsp;<a href="#MagicMock">MagicMock</a>&nbsp;without&nbsp;having&nbsp;to<br>
+configure&nbsp;the&nbsp;magic&nbsp;methods&nbsp;yourself.<br>
+&nbsp;<br>
+If&nbsp;you&nbsp;use&nbsp;the&nbsp;`spec`&nbsp;or&nbsp;`spec_set`&nbsp;arguments&nbsp;then&nbsp;*only*&nbsp;magic<br>
+methods&nbsp;that&nbsp;exist&nbsp;in&nbsp;the&nbsp;spec&nbsp;will&nbsp;be&nbsp;created.<br>
+&nbsp;<br>
+Attributes&nbsp;and&nbsp;the&nbsp;return&nbsp;value&nbsp;of&nbsp;a&nbsp;`<a href="#MagicMock">MagicMock</a>`&nbsp;will&nbsp;also&nbsp;be&nbsp;`MagicMocks`.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="mock.mock.html#MagicMock">MagicMock</a></dd>
+<dd><a href="mock.mock.html#MagicMixin">MagicMixin</a></dd>
+<dd><a href="mock.mock.html#Mock">Mock</a></dd>
+<dd><a href="mock.mock.html#CallableMixin">CallableMixin</a></dd>
+<dd><a href="mock.mock.html#NonCallableMock">NonCallableMock</a></dd>
+<dd><a href="mock.mock.html#Base">Base</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="MagicMock-mock_add_spec"><strong>mock_add_spec</strong></a>(self, spec, spec_set<font color="#909090">=False</font>)</dt><dd><tt>Add&nbsp;a&nbsp;spec&nbsp;to&nbsp;a&nbsp;mock.&nbsp;`spec`&nbsp;can&nbsp;either&nbsp;be&nbsp;an&nbsp;object&nbsp;or&nbsp;a<br>
+list&nbsp;of&nbsp;strings.&nbsp;Only&nbsp;attributes&nbsp;on&nbsp;the&nbsp;`spec`&nbsp;can&nbsp;be&nbsp;fetched&nbsp;as<br>
+attributes&nbsp;from&nbsp;the&nbsp;mock.<br>
+&nbsp;<br>
+If&nbsp;`spec_set`&nbsp;is&nbsp;True&nbsp;then&nbsp;only&nbsp;attributes&nbsp;on&nbsp;the&nbsp;spec&nbsp;can&nbsp;be&nbsp;set.</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="mock.mock.html#MagicMixin">MagicMixin</a>:<br>
+<dl><dt><a name="MagicMock-__init__"><strong>__init__</strong></a>(self, *args, **kw)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="mock.mock.html#MagicMixin">MagicMixin</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="mock.mock.html#CallableMixin">CallableMixin</a>:<br>
+<dl><dt><a name="MagicMock-__call__"><strong>__call__</strong></a>(_mock_self, *args, **kwargs)</dt></dl>
+
+<hr>
+Methods inherited from <a href="mock.mock.html#NonCallableMock">NonCallableMock</a>:<br>
+<dl><dt><a name="MagicMock-__delattr__"><strong>__delattr__</strong></a>(self, name)</dt></dl>
+
+<dl><dt><a name="MagicMock-__dir__"><strong>__dir__</strong></a>(self)</dt><dd><tt>Filter&nbsp;the&nbsp;output&nbsp;of&nbsp;`dir(mock)`&nbsp;to&nbsp;only&nbsp;useful&nbsp;members.</tt></dd></dl>
+
+<dl><dt><a name="MagicMock-__getattr__"><strong>__getattr__</strong></a>(self, name)</dt></dl>
+
+<dl><dt><a name="MagicMock-__repr__"><strong>__repr__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="MagicMock-__setattr__"><strong>__setattr__</strong></a>(self, name, value)</dt></dl>
+
+<dl><dt><a name="MagicMock-assert_any_call"><strong>assert_any_call</strong></a>(self, *args, **kwargs)</dt><dd><tt>assert&nbsp;the&nbsp;mock&nbsp;has&nbsp;been&nbsp;called&nbsp;with&nbsp;the&nbsp;specified&nbsp;arguments.<br>
+&nbsp;<br>
+The&nbsp;assert&nbsp;passes&nbsp;if&nbsp;the&nbsp;mock&nbsp;has&nbsp;*ever*&nbsp;been&nbsp;called,&nbsp;unlike<br>
+`assert_called_with`&nbsp;and&nbsp;`assert_called_once_with`&nbsp;that&nbsp;only&nbsp;pass&nbsp;if<br>
+the&nbsp;call&nbsp;is&nbsp;the&nbsp;most&nbsp;recent&nbsp;one.</tt></dd></dl>
+
+<dl><dt><a name="MagicMock-assert_called_once_with"><strong>assert_called_once_with</strong></a>(_mock_self, *args, **kwargs)</dt><dd><tt>assert&nbsp;that&nbsp;the&nbsp;mock&nbsp;was&nbsp;called&nbsp;exactly&nbsp;once&nbsp;and&nbsp;with&nbsp;the&nbsp;specified<br>
+arguments.</tt></dd></dl>
+
+<dl><dt><a name="MagicMock-assert_called_with"><strong>assert_called_with</strong></a>(_mock_self, *args, **kwargs)</dt><dd><tt>assert&nbsp;that&nbsp;the&nbsp;mock&nbsp;was&nbsp;called&nbsp;with&nbsp;the&nbsp;specified&nbsp;arguments.<br>
+&nbsp;<br>
+Raises&nbsp;an&nbsp;AssertionError&nbsp;if&nbsp;the&nbsp;args&nbsp;and&nbsp;keyword&nbsp;args&nbsp;passed&nbsp;in&nbsp;are<br>
+different&nbsp;to&nbsp;the&nbsp;last&nbsp;call&nbsp;to&nbsp;the&nbsp;mock.</tt></dd></dl>
+
+<dl><dt><a name="MagicMock-assert_has_calls"><strong>assert_has_calls</strong></a>(self, calls, any_order<font color="#909090">=False</font>)</dt><dd><tt>assert&nbsp;the&nbsp;mock&nbsp;has&nbsp;been&nbsp;called&nbsp;with&nbsp;the&nbsp;specified&nbsp;calls.<br>
+The&nbsp;`mock_calls`&nbsp;list&nbsp;is&nbsp;checked&nbsp;for&nbsp;the&nbsp;calls.<br>
+&nbsp;<br>
+If&nbsp;`any_order`&nbsp;is&nbsp;False&nbsp;(the&nbsp;default)&nbsp;then&nbsp;the&nbsp;calls&nbsp;must&nbsp;be<br>
+sequential.&nbsp;There&nbsp;can&nbsp;be&nbsp;extra&nbsp;calls&nbsp;before&nbsp;or&nbsp;after&nbsp;the<br>
+specified&nbsp;calls.<br>
+&nbsp;<br>
+If&nbsp;`any_order`&nbsp;is&nbsp;True&nbsp;then&nbsp;the&nbsp;calls&nbsp;can&nbsp;be&nbsp;in&nbsp;any&nbsp;order,&nbsp;but<br>
+they&nbsp;must&nbsp;all&nbsp;appear&nbsp;in&nbsp;`mock_calls`.</tt></dd></dl>
+
+<dl><dt><a name="MagicMock-assert_not_called"><strong>assert_not_called</strong></a>(_mock_self)</dt><dd><tt>assert&nbsp;that&nbsp;the&nbsp;mock&nbsp;was&nbsp;never&nbsp;called.</tt></dd></dl>
+
+<dl><dt><a name="MagicMock-attach_mock"><strong>attach_mock</strong></a>(self, mock, attribute)</dt><dd><tt>Attach&nbsp;a&nbsp;mock&nbsp;as&nbsp;an&nbsp;attribute&nbsp;of&nbsp;this&nbsp;one,&nbsp;replacing&nbsp;its&nbsp;name&nbsp;and<br>
+parent.&nbsp;Calls&nbsp;to&nbsp;the&nbsp;attached&nbsp;mock&nbsp;will&nbsp;be&nbsp;recorded&nbsp;in&nbsp;the<br>
+`method_calls`&nbsp;and&nbsp;`mock_calls`&nbsp;attributes&nbsp;of&nbsp;this&nbsp;one.</tt></dd></dl>
+
+<dl><dt><a name="MagicMock-configure_mock"><strong>configure_mock</strong></a>(self, **kwargs)</dt><dd><tt>Set&nbsp;attributes&nbsp;on&nbsp;the&nbsp;mock&nbsp;through&nbsp;keyword&nbsp;arguments.<br>
+&nbsp;<br>
+Attributes&nbsp;plus&nbsp;return&nbsp;values&nbsp;and&nbsp;side&nbsp;effects&nbsp;can&nbsp;be&nbsp;set&nbsp;on&nbsp;child<br>
+mocks&nbsp;using&nbsp;standard&nbsp;dot&nbsp;notation&nbsp;and&nbsp;unpacking&nbsp;a&nbsp;dictionary&nbsp;in&nbsp;the<br>
+method&nbsp;call:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;attrs&nbsp;=&nbsp;{'method.return_value':&nbsp;3,&nbsp;'other.side_effect':&nbsp;KeyError}<br>
+&gt;&gt;&gt;&nbsp;mock.<a href="#MagicMock-configure_mock">configure_mock</a>(**attrs)</tt></dd></dl>
+
+<dl><dt><a name="MagicMock-reset_mock"><strong>reset_mock</strong></a>(self, visited<font color="#909090">=None</font>)</dt><dd><tt>Restore&nbsp;the&nbsp;mock&nbsp;object&nbsp;to&nbsp;its&nbsp;initial&nbsp;state.</tt></dd></dl>
+
+<hr>
+Static methods inherited from <a href="mock.mock.html#NonCallableMock">NonCallableMock</a>:<br>
+<dl><dt><a name="MagicMock-__new__"><strong>__new__</strong></a>(cls, *args, **kw)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="mock.mock.html#NonCallableMock">NonCallableMock</a>:<br>
+<dl><dt><strong>__class__</strong></dt>
+</dl>
+<dl><dt><strong>call_args</strong></dt>
+</dl>
+<dl><dt><strong>call_args_list</strong></dt>
+</dl>
+<dl><dt><strong>call_count</strong></dt>
+</dl>
+<dl><dt><strong>called</strong></dt>
+</dl>
+<dl><dt><strong>mock_calls</strong></dt>
+</dl>
+<dl><dt><strong>return_value</strong></dt>
+</dl>
+<dl><dt><strong>side_effect</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Mock">class <strong>Mock</strong></a>(<a href="mock.mock.html#CallableMixin">CallableMixin</a>, <a href="mock.mock.html#NonCallableMock">NonCallableMock</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Create&nbsp;a&nbsp;new&nbsp;`<a href="#Mock">Mock</a>`&nbsp;object.&nbsp;`<a href="#Mock">Mock</a>`&nbsp;takes&nbsp;several&nbsp;optional&nbsp;arguments<br>
+that&nbsp;specify&nbsp;the&nbsp;behaviour&nbsp;of&nbsp;the&nbsp;<a href="#Mock">Mock</a>&nbsp;object:<br>
+&nbsp;<br>
+*&nbsp;`spec`:&nbsp;This&nbsp;can&nbsp;be&nbsp;either&nbsp;a&nbsp;list&nbsp;of&nbsp;strings&nbsp;or&nbsp;an&nbsp;existing&nbsp;object&nbsp;(a<br>
+&nbsp;&nbsp;class&nbsp;or&nbsp;instance)&nbsp;that&nbsp;acts&nbsp;as&nbsp;the&nbsp;specification&nbsp;for&nbsp;the&nbsp;mock&nbsp;object.&nbsp;If<br>
+&nbsp;&nbsp;you&nbsp;pass&nbsp;in&nbsp;an&nbsp;object&nbsp;then&nbsp;a&nbsp;list&nbsp;of&nbsp;strings&nbsp;is&nbsp;formed&nbsp;by&nbsp;calling&nbsp;dir&nbsp;on<br>
+&nbsp;&nbsp;the&nbsp;object&nbsp;(excluding&nbsp;unsupported&nbsp;magic&nbsp;attributes&nbsp;and&nbsp;methods).&nbsp;Accessing<br>
+&nbsp;&nbsp;any&nbsp;attribute&nbsp;not&nbsp;in&nbsp;this&nbsp;list&nbsp;will&nbsp;raise&nbsp;an&nbsp;`AttributeError`.<br>
+&nbsp;<br>
+&nbsp;&nbsp;If&nbsp;`spec`&nbsp;is&nbsp;an&nbsp;object&nbsp;(rather&nbsp;than&nbsp;a&nbsp;list&nbsp;of&nbsp;strings)&nbsp;then<br>
+&nbsp;&nbsp;`mock.__class__`&nbsp;returns&nbsp;the&nbsp;class&nbsp;of&nbsp;the&nbsp;spec&nbsp;object.&nbsp;This&nbsp;allows&nbsp;mocks<br>
+&nbsp;&nbsp;to&nbsp;pass&nbsp;`isinstance`&nbsp;tests.<br>
+&nbsp;<br>
+*&nbsp;`spec_set`:&nbsp;A&nbsp;stricter&nbsp;variant&nbsp;of&nbsp;`spec`.&nbsp;If&nbsp;used,&nbsp;attempting&nbsp;to&nbsp;*set*<br>
+&nbsp;&nbsp;or&nbsp;get&nbsp;an&nbsp;attribute&nbsp;on&nbsp;the&nbsp;mock&nbsp;that&nbsp;isn't&nbsp;on&nbsp;the&nbsp;object&nbsp;passed&nbsp;as<br>
+&nbsp;&nbsp;`spec_set`&nbsp;will&nbsp;raise&nbsp;an&nbsp;`AttributeError`.<br>
+&nbsp;<br>
+*&nbsp;`side_effect`:&nbsp;A&nbsp;function&nbsp;to&nbsp;be&nbsp;called&nbsp;whenever&nbsp;the&nbsp;<a href="#Mock">Mock</a>&nbsp;is&nbsp;called.&nbsp;See<br>
+&nbsp;&nbsp;the&nbsp;`side_effect`&nbsp;attribute.&nbsp;Useful&nbsp;for&nbsp;raising&nbsp;exceptions&nbsp;or<br>
+&nbsp;&nbsp;dynamically&nbsp;changing&nbsp;return&nbsp;values.&nbsp;The&nbsp;function&nbsp;is&nbsp;called&nbsp;with&nbsp;the&nbsp;same<br>
+&nbsp;&nbsp;arguments&nbsp;as&nbsp;the&nbsp;mock,&nbsp;and&nbsp;unless&nbsp;it&nbsp;returns&nbsp;`DEFAULT`,&nbsp;the&nbsp;return<br>
+&nbsp;&nbsp;value&nbsp;of&nbsp;this&nbsp;function&nbsp;is&nbsp;used&nbsp;as&nbsp;the&nbsp;return&nbsp;value.<br>
+&nbsp;<br>
+&nbsp;&nbsp;Alternatively&nbsp;`side_effect`&nbsp;can&nbsp;be&nbsp;an&nbsp;exception&nbsp;class&nbsp;or&nbsp;instance.&nbsp;In<br>
+&nbsp;&nbsp;this&nbsp;case&nbsp;the&nbsp;exception&nbsp;will&nbsp;be&nbsp;raised&nbsp;when&nbsp;the&nbsp;mock&nbsp;is&nbsp;called.<br>
+&nbsp;<br>
+&nbsp;&nbsp;If&nbsp;`side_effect`&nbsp;is&nbsp;an&nbsp;iterable&nbsp;then&nbsp;each&nbsp;call&nbsp;to&nbsp;the&nbsp;mock&nbsp;will&nbsp;return<br>
+&nbsp;&nbsp;the&nbsp;next&nbsp;value&nbsp;from&nbsp;the&nbsp;iterable.&nbsp;If&nbsp;any&nbsp;of&nbsp;the&nbsp;members&nbsp;of&nbsp;the&nbsp;iterable<br>
+&nbsp;&nbsp;are&nbsp;exceptions&nbsp;they&nbsp;will&nbsp;be&nbsp;raised&nbsp;instead&nbsp;of&nbsp;returned.<br>
+&nbsp;<br>
+*&nbsp;`return_value`:&nbsp;The&nbsp;value&nbsp;returned&nbsp;when&nbsp;the&nbsp;mock&nbsp;is&nbsp;called.&nbsp;By&nbsp;default<br>
+&nbsp;&nbsp;this&nbsp;is&nbsp;a&nbsp;new&nbsp;<a href="#Mock">Mock</a>&nbsp;(created&nbsp;on&nbsp;first&nbsp;access).&nbsp;See&nbsp;the<br>
+&nbsp;&nbsp;`return_value`&nbsp;attribute.<br>
+&nbsp;<br>
+*&nbsp;`wraps`:&nbsp;Item&nbsp;for&nbsp;the&nbsp;mock&nbsp;object&nbsp;to&nbsp;wrap.&nbsp;If&nbsp;`wraps`&nbsp;is&nbsp;not&nbsp;None&nbsp;then<br>
+&nbsp;&nbsp;calling&nbsp;the&nbsp;<a href="#Mock">Mock</a>&nbsp;will&nbsp;pass&nbsp;the&nbsp;call&nbsp;through&nbsp;to&nbsp;the&nbsp;wrapped&nbsp;object<br>
+&nbsp;&nbsp;(returning&nbsp;the&nbsp;real&nbsp;result).&nbsp;Attribute&nbsp;access&nbsp;on&nbsp;the&nbsp;mock&nbsp;will&nbsp;return&nbsp;a<br>
+&nbsp;&nbsp;<a href="#Mock">Mock</a>&nbsp;object&nbsp;that&nbsp;wraps&nbsp;the&nbsp;corresponding&nbsp;attribute&nbsp;of&nbsp;the&nbsp;wrapped&nbsp;object<br>
+&nbsp;&nbsp;(so&nbsp;attempting&nbsp;to&nbsp;access&nbsp;an&nbsp;attribute&nbsp;that&nbsp;doesn't&nbsp;exist&nbsp;will&nbsp;raise&nbsp;an<br>
+&nbsp;&nbsp;`AttributeError`).<br>
+&nbsp;<br>
+&nbsp;&nbsp;If&nbsp;the&nbsp;mock&nbsp;has&nbsp;an&nbsp;explicit&nbsp;`return_value`&nbsp;set&nbsp;then&nbsp;calls&nbsp;are&nbsp;not&nbsp;passed<br>
+&nbsp;&nbsp;to&nbsp;the&nbsp;wrapped&nbsp;object&nbsp;and&nbsp;the&nbsp;`return_value`&nbsp;is&nbsp;returned&nbsp;instead.<br>
+&nbsp;<br>
+*&nbsp;`name`:&nbsp;If&nbsp;the&nbsp;mock&nbsp;has&nbsp;a&nbsp;name&nbsp;then&nbsp;it&nbsp;will&nbsp;be&nbsp;used&nbsp;in&nbsp;the&nbsp;repr&nbsp;of&nbsp;the<br>
+&nbsp;&nbsp;mock.&nbsp;This&nbsp;can&nbsp;be&nbsp;useful&nbsp;for&nbsp;debugging.&nbsp;The&nbsp;name&nbsp;is&nbsp;propagated&nbsp;to&nbsp;child<br>
+&nbsp;&nbsp;mocks.<br>
+&nbsp;<br>
+Mocks&nbsp;can&nbsp;also&nbsp;be&nbsp;called&nbsp;with&nbsp;arbitrary&nbsp;keyword&nbsp;arguments.&nbsp;These&nbsp;will&nbsp;be<br>
+used&nbsp;to&nbsp;set&nbsp;attributes&nbsp;on&nbsp;the&nbsp;mock&nbsp;after&nbsp;it&nbsp;is&nbsp;created.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="mock.mock.html#Mock">Mock</a></dd>
+<dd><a href="mock.mock.html#CallableMixin">CallableMixin</a></dd>
+<dd><a href="mock.mock.html#NonCallableMock">NonCallableMock</a></dd>
+<dd><a href="mock.mock.html#Base">Base</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods inherited from <a href="mock.mock.html#CallableMixin">CallableMixin</a>:<br>
+<dl><dt><a name="Mock-__call__"><strong>__call__</strong></a>(_mock_self, *args, **kwargs)</dt></dl>
+
+<dl><dt><a name="Mock-__init__"><strong>__init__</strong></a>(self, spec<font color="#909090">=None</font>, side_effect<font color="#909090">=None</font>, return_value<font color="#909090">=sentinel.DEFAULT</font>, wraps<font color="#909090">=None</font>, name<font color="#909090">=None</font>, spec_set<font color="#909090">=None</font>, parent<font color="#909090">=None</font>, _spec_state<font color="#909090">=None</font>, _new_name<font color="#909090">=''</font>, _new_parent<font color="#909090">=None</font>, **kwargs)</dt></dl>
+
+<hr>
+Methods inherited from <a href="mock.mock.html#NonCallableMock">NonCallableMock</a>:<br>
+<dl><dt><a name="Mock-__delattr__"><strong>__delattr__</strong></a>(self, name)</dt></dl>
+
+<dl><dt><a name="Mock-__dir__"><strong>__dir__</strong></a>(self)</dt><dd><tt>Filter&nbsp;the&nbsp;output&nbsp;of&nbsp;`dir(mock)`&nbsp;to&nbsp;only&nbsp;useful&nbsp;members.</tt></dd></dl>
+
+<dl><dt><a name="Mock-__getattr__"><strong>__getattr__</strong></a>(self, name)</dt></dl>
+
+<dl><dt><a name="Mock-__repr__"><strong>__repr__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Mock-__setattr__"><strong>__setattr__</strong></a>(self, name, value)</dt></dl>
+
+<dl><dt><a name="Mock-assert_any_call"><strong>assert_any_call</strong></a>(self, *args, **kwargs)</dt><dd><tt>assert&nbsp;the&nbsp;mock&nbsp;has&nbsp;been&nbsp;called&nbsp;with&nbsp;the&nbsp;specified&nbsp;arguments.<br>
+&nbsp;<br>
+The&nbsp;assert&nbsp;passes&nbsp;if&nbsp;the&nbsp;mock&nbsp;has&nbsp;*ever*&nbsp;been&nbsp;called,&nbsp;unlike<br>
+`assert_called_with`&nbsp;and&nbsp;`assert_called_once_with`&nbsp;that&nbsp;only&nbsp;pass&nbsp;if<br>
+the&nbsp;call&nbsp;is&nbsp;the&nbsp;most&nbsp;recent&nbsp;one.</tt></dd></dl>
+
+<dl><dt><a name="Mock-assert_called_once_with"><strong>assert_called_once_with</strong></a>(_mock_self, *args, **kwargs)</dt><dd><tt>assert&nbsp;that&nbsp;the&nbsp;mock&nbsp;was&nbsp;called&nbsp;exactly&nbsp;once&nbsp;and&nbsp;with&nbsp;the&nbsp;specified<br>
+arguments.</tt></dd></dl>
+
+<dl><dt><a name="Mock-assert_called_with"><strong>assert_called_with</strong></a>(_mock_self, *args, **kwargs)</dt><dd><tt>assert&nbsp;that&nbsp;the&nbsp;mock&nbsp;was&nbsp;called&nbsp;with&nbsp;the&nbsp;specified&nbsp;arguments.<br>
+&nbsp;<br>
+Raises&nbsp;an&nbsp;AssertionError&nbsp;if&nbsp;the&nbsp;args&nbsp;and&nbsp;keyword&nbsp;args&nbsp;passed&nbsp;in&nbsp;are<br>
+different&nbsp;to&nbsp;the&nbsp;last&nbsp;call&nbsp;to&nbsp;the&nbsp;mock.</tt></dd></dl>
+
+<dl><dt><a name="Mock-assert_has_calls"><strong>assert_has_calls</strong></a>(self, calls, any_order<font color="#909090">=False</font>)</dt><dd><tt>assert&nbsp;the&nbsp;mock&nbsp;has&nbsp;been&nbsp;called&nbsp;with&nbsp;the&nbsp;specified&nbsp;calls.<br>
+The&nbsp;`mock_calls`&nbsp;list&nbsp;is&nbsp;checked&nbsp;for&nbsp;the&nbsp;calls.<br>
+&nbsp;<br>
+If&nbsp;`any_order`&nbsp;is&nbsp;False&nbsp;(the&nbsp;default)&nbsp;then&nbsp;the&nbsp;calls&nbsp;must&nbsp;be<br>
+sequential.&nbsp;There&nbsp;can&nbsp;be&nbsp;extra&nbsp;calls&nbsp;before&nbsp;or&nbsp;after&nbsp;the<br>
+specified&nbsp;calls.<br>
+&nbsp;<br>
+If&nbsp;`any_order`&nbsp;is&nbsp;True&nbsp;then&nbsp;the&nbsp;calls&nbsp;can&nbsp;be&nbsp;in&nbsp;any&nbsp;order,&nbsp;but<br>
+they&nbsp;must&nbsp;all&nbsp;appear&nbsp;in&nbsp;`mock_calls`.</tt></dd></dl>
+
+<dl><dt><a name="Mock-assert_not_called"><strong>assert_not_called</strong></a>(_mock_self)</dt><dd><tt>assert&nbsp;that&nbsp;the&nbsp;mock&nbsp;was&nbsp;never&nbsp;called.</tt></dd></dl>
+
+<dl><dt><a name="Mock-attach_mock"><strong>attach_mock</strong></a>(self, mock, attribute)</dt><dd><tt>Attach&nbsp;a&nbsp;mock&nbsp;as&nbsp;an&nbsp;attribute&nbsp;of&nbsp;this&nbsp;one,&nbsp;replacing&nbsp;its&nbsp;name&nbsp;and<br>
+parent.&nbsp;Calls&nbsp;to&nbsp;the&nbsp;attached&nbsp;mock&nbsp;will&nbsp;be&nbsp;recorded&nbsp;in&nbsp;the<br>
+`method_calls`&nbsp;and&nbsp;`mock_calls`&nbsp;attributes&nbsp;of&nbsp;this&nbsp;one.</tt></dd></dl>
+
+<dl><dt><a name="Mock-configure_mock"><strong>configure_mock</strong></a>(self, **kwargs)</dt><dd><tt>Set&nbsp;attributes&nbsp;on&nbsp;the&nbsp;mock&nbsp;through&nbsp;keyword&nbsp;arguments.<br>
+&nbsp;<br>
+Attributes&nbsp;plus&nbsp;return&nbsp;values&nbsp;and&nbsp;side&nbsp;effects&nbsp;can&nbsp;be&nbsp;set&nbsp;on&nbsp;child<br>
+mocks&nbsp;using&nbsp;standard&nbsp;dot&nbsp;notation&nbsp;and&nbsp;unpacking&nbsp;a&nbsp;dictionary&nbsp;in&nbsp;the<br>
+method&nbsp;call:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;attrs&nbsp;=&nbsp;{'method.return_value':&nbsp;3,&nbsp;'other.side_effect':&nbsp;KeyError}<br>
+&gt;&gt;&gt;&nbsp;mock.<a href="#Mock-configure_mock">configure_mock</a>(**attrs)</tt></dd></dl>
+
+<dl><dt><a name="Mock-mock_add_spec"><strong>mock_add_spec</strong></a>(self, spec, spec_set<font color="#909090">=False</font>)</dt><dd><tt>Add&nbsp;a&nbsp;spec&nbsp;to&nbsp;a&nbsp;mock.&nbsp;`spec`&nbsp;can&nbsp;either&nbsp;be&nbsp;an&nbsp;object&nbsp;or&nbsp;a<br>
+list&nbsp;of&nbsp;strings.&nbsp;Only&nbsp;attributes&nbsp;on&nbsp;the&nbsp;`spec`&nbsp;can&nbsp;be&nbsp;fetched&nbsp;as<br>
+attributes&nbsp;from&nbsp;the&nbsp;mock.<br>
+&nbsp;<br>
+If&nbsp;`spec_set`&nbsp;is&nbsp;True&nbsp;then&nbsp;only&nbsp;attributes&nbsp;on&nbsp;the&nbsp;spec&nbsp;can&nbsp;be&nbsp;set.</tt></dd></dl>
+
+<dl><dt><a name="Mock-reset_mock"><strong>reset_mock</strong></a>(self, visited<font color="#909090">=None</font>)</dt><dd><tt>Restore&nbsp;the&nbsp;mock&nbsp;object&nbsp;to&nbsp;its&nbsp;initial&nbsp;state.</tt></dd></dl>
+
+<hr>
+Static methods inherited from <a href="mock.mock.html#NonCallableMock">NonCallableMock</a>:<br>
+<dl><dt><a name="Mock-__new__"><strong>__new__</strong></a>(cls, *args, **kw)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="mock.mock.html#NonCallableMock">NonCallableMock</a>:<br>
+<dl><dt><strong>__class__</strong></dt>
+</dl>
+<dl><dt><strong>call_args</strong></dt>
+</dl>
+<dl><dt><strong>call_args_list</strong></dt>
+</dl>
+<dl><dt><strong>call_count</strong></dt>
+</dl>
+<dl><dt><strong>called</strong></dt>
+</dl>
+<dl><dt><strong>mock_calls</strong></dt>
+</dl>
+<dl><dt><strong>return_value</strong></dt>
+</dl>
+<dl><dt><strong>side_effect</strong></dt>
+</dl>
+<hr>
+Data descriptors inherited from <a href="mock.mock.html#Base">Base</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="NonCallableMagicMock">class <strong>NonCallableMagicMock</strong></a>(<a href="mock.mock.html#MagicMixin">MagicMixin</a>, <a href="mock.mock.html#NonCallableMock">NonCallableMock</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;version&nbsp;of&nbsp;`<a href="#MagicMock">MagicMock</a>`&nbsp;that&nbsp;isn't&nbsp;callable.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="mock.mock.html#NonCallableMagicMock">NonCallableMagicMock</a></dd>
+<dd><a href="mock.mock.html#MagicMixin">MagicMixin</a></dd>
+<dd><a href="mock.mock.html#NonCallableMock">NonCallableMock</a></dd>
+<dd><a href="mock.mock.html#Base">Base</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="NonCallableMagicMock-mock_add_spec"><strong>mock_add_spec</strong></a>(self, spec, spec_set<font color="#909090">=False</font>)</dt><dd><tt>Add&nbsp;a&nbsp;spec&nbsp;to&nbsp;a&nbsp;mock.&nbsp;`spec`&nbsp;can&nbsp;either&nbsp;be&nbsp;an&nbsp;object&nbsp;or&nbsp;a<br>
+list&nbsp;of&nbsp;strings.&nbsp;Only&nbsp;attributes&nbsp;on&nbsp;the&nbsp;`spec`&nbsp;can&nbsp;be&nbsp;fetched&nbsp;as<br>
+attributes&nbsp;from&nbsp;the&nbsp;mock.<br>
+&nbsp;<br>
+If&nbsp;`spec_set`&nbsp;is&nbsp;True&nbsp;then&nbsp;only&nbsp;attributes&nbsp;on&nbsp;the&nbsp;spec&nbsp;can&nbsp;be&nbsp;set.</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="mock.mock.html#MagicMixin">MagicMixin</a>:<br>
+<dl><dt><a name="NonCallableMagicMock-__init__"><strong>__init__</strong></a>(self, *args, **kw)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="mock.mock.html#MagicMixin">MagicMixin</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="mock.mock.html#NonCallableMock">NonCallableMock</a>:<br>
+<dl><dt><a name="NonCallableMagicMock-__delattr__"><strong>__delattr__</strong></a>(self, name)</dt></dl>
+
+<dl><dt><a name="NonCallableMagicMock-__dir__"><strong>__dir__</strong></a>(self)</dt><dd><tt>Filter&nbsp;the&nbsp;output&nbsp;of&nbsp;`dir(mock)`&nbsp;to&nbsp;only&nbsp;useful&nbsp;members.</tt></dd></dl>
+
+<dl><dt><a name="NonCallableMagicMock-__getattr__"><strong>__getattr__</strong></a>(self, name)</dt></dl>
+
+<dl><dt><a name="NonCallableMagicMock-__repr__"><strong>__repr__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="NonCallableMagicMock-__setattr__"><strong>__setattr__</strong></a>(self, name, value)</dt></dl>
+
+<dl><dt><a name="NonCallableMagicMock-assert_any_call"><strong>assert_any_call</strong></a>(self, *args, **kwargs)</dt><dd><tt>assert&nbsp;the&nbsp;mock&nbsp;has&nbsp;been&nbsp;called&nbsp;with&nbsp;the&nbsp;specified&nbsp;arguments.<br>
+&nbsp;<br>
+The&nbsp;assert&nbsp;passes&nbsp;if&nbsp;the&nbsp;mock&nbsp;has&nbsp;*ever*&nbsp;been&nbsp;called,&nbsp;unlike<br>
+`assert_called_with`&nbsp;and&nbsp;`assert_called_once_with`&nbsp;that&nbsp;only&nbsp;pass&nbsp;if<br>
+the&nbsp;call&nbsp;is&nbsp;the&nbsp;most&nbsp;recent&nbsp;one.</tt></dd></dl>
+
+<dl><dt><a name="NonCallableMagicMock-assert_called_once_with"><strong>assert_called_once_with</strong></a>(_mock_self, *args, **kwargs)</dt><dd><tt>assert&nbsp;that&nbsp;the&nbsp;mock&nbsp;was&nbsp;called&nbsp;exactly&nbsp;once&nbsp;and&nbsp;with&nbsp;the&nbsp;specified<br>
+arguments.</tt></dd></dl>
+
+<dl><dt><a name="NonCallableMagicMock-assert_called_with"><strong>assert_called_with</strong></a>(_mock_self, *args, **kwargs)</dt><dd><tt>assert&nbsp;that&nbsp;the&nbsp;mock&nbsp;was&nbsp;called&nbsp;with&nbsp;the&nbsp;specified&nbsp;arguments.<br>
+&nbsp;<br>
+Raises&nbsp;an&nbsp;AssertionError&nbsp;if&nbsp;the&nbsp;args&nbsp;and&nbsp;keyword&nbsp;args&nbsp;passed&nbsp;in&nbsp;are<br>
+different&nbsp;to&nbsp;the&nbsp;last&nbsp;call&nbsp;to&nbsp;the&nbsp;mock.</tt></dd></dl>
+
+<dl><dt><a name="NonCallableMagicMock-assert_has_calls"><strong>assert_has_calls</strong></a>(self, calls, any_order<font color="#909090">=False</font>)</dt><dd><tt>assert&nbsp;the&nbsp;mock&nbsp;has&nbsp;been&nbsp;called&nbsp;with&nbsp;the&nbsp;specified&nbsp;calls.<br>
+The&nbsp;`mock_calls`&nbsp;list&nbsp;is&nbsp;checked&nbsp;for&nbsp;the&nbsp;calls.<br>
+&nbsp;<br>
+If&nbsp;`any_order`&nbsp;is&nbsp;False&nbsp;(the&nbsp;default)&nbsp;then&nbsp;the&nbsp;calls&nbsp;must&nbsp;be<br>
+sequential.&nbsp;There&nbsp;can&nbsp;be&nbsp;extra&nbsp;calls&nbsp;before&nbsp;or&nbsp;after&nbsp;the<br>
+specified&nbsp;calls.<br>
+&nbsp;<br>
+If&nbsp;`any_order`&nbsp;is&nbsp;True&nbsp;then&nbsp;the&nbsp;calls&nbsp;can&nbsp;be&nbsp;in&nbsp;any&nbsp;order,&nbsp;but<br>
+they&nbsp;must&nbsp;all&nbsp;appear&nbsp;in&nbsp;`mock_calls`.</tt></dd></dl>
+
+<dl><dt><a name="NonCallableMagicMock-assert_not_called"><strong>assert_not_called</strong></a>(_mock_self)</dt><dd><tt>assert&nbsp;that&nbsp;the&nbsp;mock&nbsp;was&nbsp;never&nbsp;called.</tt></dd></dl>
+
+<dl><dt><a name="NonCallableMagicMock-attach_mock"><strong>attach_mock</strong></a>(self, mock, attribute)</dt><dd><tt>Attach&nbsp;a&nbsp;mock&nbsp;as&nbsp;an&nbsp;attribute&nbsp;of&nbsp;this&nbsp;one,&nbsp;replacing&nbsp;its&nbsp;name&nbsp;and<br>
+parent.&nbsp;Calls&nbsp;to&nbsp;the&nbsp;attached&nbsp;mock&nbsp;will&nbsp;be&nbsp;recorded&nbsp;in&nbsp;the<br>
+`method_calls`&nbsp;and&nbsp;`mock_calls`&nbsp;attributes&nbsp;of&nbsp;this&nbsp;one.</tt></dd></dl>
+
+<dl><dt><a name="NonCallableMagicMock-configure_mock"><strong>configure_mock</strong></a>(self, **kwargs)</dt><dd><tt>Set&nbsp;attributes&nbsp;on&nbsp;the&nbsp;mock&nbsp;through&nbsp;keyword&nbsp;arguments.<br>
+&nbsp;<br>
+Attributes&nbsp;plus&nbsp;return&nbsp;values&nbsp;and&nbsp;side&nbsp;effects&nbsp;can&nbsp;be&nbsp;set&nbsp;on&nbsp;child<br>
+mocks&nbsp;using&nbsp;standard&nbsp;dot&nbsp;notation&nbsp;and&nbsp;unpacking&nbsp;a&nbsp;dictionary&nbsp;in&nbsp;the<br>
+method&nbsp;call:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;attrs&nbsp;=&nbsp;{'method.return_value':&nbsp;3,&nbsp;'other.side_effect':&nbsp;KeyError}<br>
+&gt;&gt;&gt;&nbsp;mock.<a href="#NonCallableMagicMock-configure_mock">configure_mock</a>(**attrs)</tt></dd></dl>
+
+<dl><dt><a name="NonCallableMagicMock-reset_mock"><strong>reset_mock</strong></a>(self, visited<font color="#909090">=None</font>)</dt><dd><tt>Restore&nbsp;the&nbsp;mock&nbsp;object&nbsp;to&nbsp;its&nbsp;initial&nbsp;state.</tt></dd></dl>
+
+<hr>
+Static methods inherited from <a href="mock.mock.html#NonCallableMock">NonCallableMock</a>:<br>
+<dl><dt><a name="NonCallableMagicMock-__new__"><strong>__new__</strong></a>(cls, *args, **kw)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="mock.mock.html#NonCallableMock">NonCallableMock</a>:<br>
+<dl><dt><strong>__class__</strong></dt>
+</dl>
+<dl><dt><strong>call_args</strong></dt>
+</dl>
+<dl><dt><strong>call_args_list</strong></dt>
+</dl>
+<dl><dt><strong>call_count</strong></dt>
+</dl>
+<dl><dt><strong>called</strong></dt>
+</dl>
+<dl><dt><strong>mock_calls</strong></dt>
+</dl>
+<dl><dt><strong>return_value</strong></dt>
+</dl>
+<dl><dt><strong>side_effect</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="NonCallableMock">class <strong>NonCallableMock</strong></a>(<a href="mock.mock.html#Base">Base</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;non-callable&nbsp;version&nbsp;of&nbsp;`<a href="#Mock">Mock</a>`<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="mock.mock.html#NonCallableMock">NonCallableMock</a></dd>
+<dd><a href="mock.mock.html#Base">Base</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="NonCallableMock-__delattr__"><strong>__delattr__</strong></a>(self, name)</dt></dl>
+
+<dl><dt><a name="NonCallableMock-__dir__"><strong>__dir__</strong></a>(self)</dt><dd><tt>Filter&nbsp;the&nbsp;output&nbsp;of&nbsp;`dir(mock)`&nbsp;to&nbsp;only&nbsp;useful&nbsp;members.</tt></dd></dl>
+
+<dl><dt><a name="NonCallableMock-__getattr__"><strong>__getattr__</strong></a>(self, name)</dt></dl>
+
+<dl><dt><a name="NonCallableMock-__init__"><strong>__init__</strong></a>(self, spec<font color="#909090">=None</font>, wraps<font color="#909090">=None</font>, name<font color="#909090">=None</font>, spec_set<font color="#909090">=None</font>, parent<font color="#909090">=None</font>, _spec_state<font color="#909090">=None</font>, _new_name<font color="#909090">=''</font>, _new_parent<font color="#909090">=None</font>, _spec_as_instance<font color="#909090">=False</font>, _eat_self<font color="#909090">=None</font>, unsafe<font color="#909090">=False</font>, **kwargs)</dt></dl>
+
+<dl><dt><a name="NonCallableMock-__repr__"><strong>__repr__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="NonCallableMock-__setattr__"><strong>__setattr__</strong></a>(self, name, value)</dt></dl>
+
+<dl><dt><a name="NonCallableMock-assert_any_call"><strong>assert_any_call</strong></a>(self, *args, **kwargs)</dt><dd><tt>assert&nbsp;the&nbsp;mock&nbsp;has&nbsp;been&nbsp;called&nbsp;with&nbsp;the&nbsp;specified&nbsp;arguments.<br>
+&nbsp;<br>
+The&nbsp;assert&nbsp;passes&nbsp;if&nbsp;the&nbsp;mock&nbsp;has&nbsp;*ever*&nbsp;been&nbsp;called,&nbsp;unlike<br>
+`assert_called_with`&nbsp;and&nbsp;`assert_called_once_with`&nbsp;that&nbsp;only&nbsp;pass&nbsp;if<br>
+the&nbsp;call&nbsp;is&nbsp;the&nbsp;most&nbsp;recent&nbsp;one.</tt></dd></dl>
+
+<dl><dt><a name="NonCallableMock-assert_called_once_with"><strong>assert_called_once_with</strong></a>(_mock_self, *args, **kwargs)</dt><dd><tt>assert&nbsp;that&nbsp;the&nbsp;mock&nbsp;was&nbsp;called&nbsp;exactly&nbsp;once&nbsp;and&nbsp;with&nbsp;the&nbsp;specified<br>
+arguments.</tt></dd></dl>
+
+<dl><dt><a name="NonCallableMock-assert_called_with"><strong>assert_called_with</strong></a>(_mock_self, *args, **kwargs)</dt><dd><tt>assert&nbsp;that&nbsp;the&nbsp;mock&nbsp;was&nbsp;called&nbsp;with&nbsp;the&nbsp;specified&nbsp;arguments.<br>
+&nbsp;<br>
+Raises&nbsp;an&nbsp;AssertionError&nbsp;if&nbsp;the&nbsp;args&nbsp;and&nbsp;keyword&nbsp;args&nbsp;passed&nbsp;in&nbsp;are<br>
+different&nbsp;to&nbsp;the&nbsp;last&nbsp;call&nbsp;to&nbsp;the&nbsp;mock.</tt></dd></dl>
+
+<dl><dt><a name="NonCallableMock-assert_has_calls"><strong>assert_has_calls</strong></a>(self, calls, any_order<font color="#909090">=False</font>)</dt><dd><tt>assert&nbsp;the&nbsp;mock&nbsp;has&nbsp;been&nbsp;called&nbsp;with&nbsp;the&nbsp;specified&nbsp;calls.<br>
+The&nbsp;`mock_calls`&nbsp;list&nbsp;is&nbsp;checked&nbsp;for&nbsp;the&nbsp;calls.<br>
+&nbsp;<br>
+If&nbsp;`any_order`&nbsp;is&nbsp;False&nbsp;(the&nbsp;default)&nbsp;then&nbsp;the&nbsp;calls&nbsp;must&nbsp;be<br>
+sequential.&nbsp;There&nbsp;can&nbsp;be&nbsp;extra&nbsp;calls&nbsp;before&nbsp;or&nbsp;after&nbsp;the<br>
+specified&nbsp;calls.<br>
+&nbsp;<br>
+If&nbsp;`any_order`&nbsp;is&nbsp;True&nbsp;then&nbsp;the&nbsp;calls&nbsp;can&nbsp;be&nbsp;in&nbsp;any&nbsp;order,&nbsp;but<br>
+they&nbsp;must&nbsp;all&nbsp;appear&nbsp;in&nbsp;`mock_calls`.</tt></dd></dl>
+
+<dl><dt><a name="NonCallableMock-assert_not_called"><strong>assert_not_called</strong></a>(_mock_self)</dt><dd><tt>assert&nbsp;that&nbsp;the&nbsp;mock&nbsp;was&nbsp;never&nbsp;called.</tt></dd></dl>
+
+<dl><dt><a name="NonCallableMock-attach_mock"><strong>attach_mock</strong></a>(self, mock, attribute)</dt><dd><tt>Attach&nbsp;a&nbsp;mock&nbsp;as&nbsp;an&nbsp;attribute&nbsp;of&nbsp;this&nbsp;one,&nbsp;replacing&nbsp;its&nbsp;name&nbsp;and<br>
+parent.&nbsp;Calls&nbsp;to&nbsp;the&nbsp;attached&nbsp;mock&nbsp;will&nbsp;be&nbsp;recorded&nbsp;in&nbsp;the<br>
+`method_calls`&nbsp;and&nbsp;`mock_calls`&nbsp;attributes&nbsp;of&nbsp;this&nbsp;one.</tt></dd></dl>
+
+<dl><dt><a name="NonCallableMock-configure_mock"><strong>configure_mock</strong></a>(self, **kwargs)</dt><dd><tt>Set&nbsp;attributes&nbsp;on&nbsp;the&nbsp;mock&nbsp;through&nbsp;keyword&nbsp;arguments.<br>
+&nbsp;<br>
+Attributes&nbsp;plus&nbsp;return&nbsp;values&nbsp;and&nbsp;side&nbsp;effects&nbsp;can&nbsp;be&nbsp;set&nbsp;on&nbsp;child<br>
+mocks&nbsp;using&nbsp;standard&nbsp;dot&nbsp;notation&nbsp;and&nbsp;unpacking&nbsp;a&nbsp;dictionary&nbsp;in&nbsp;the<br>
+method&nbsp;call:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;attrs&nbsp;=&nbsp;{'method.return_value':&nbsp;3,&nbsp;'other.side_effect':&nbsp;KeyError}<br>
+&gt;&gt;&gt;&nbsp;mock.<a href="#NonCallableMock-configure_mock">configure_mock</a>(**attrs)</tt></dd></dl>
+
+<dl><dt><a name="NonCallableMock-mock_add_spec"><strong>mock_add_spec</strong></a>(self, spec, spec_set<font color="#909090">=False</font>)</dt><dd><tt>Add&nbsp;a&nbsp;spec&nbsp;to&nbsp;a&nbsp;mock.&nbsp;`spec`&nbsp;can&nbsp;either&nbsp;be&nbsp;an&nbsp;object&nbsp;or&nbsp;a<br>
+list&nbsp;of&nbsp;strings.&nbsp;Only&nbsp;attributes&nbsp;on&nbsp;the&nbsp;`spec`&nbsp;can&nbsp;be&nbsp;fetched&nbsp;as<br>
+attributes&nbsp;from&nbsp;the&nbsp;mock.<br>
+&nbsp;<br>
+If&nbsp;`spec_set`&nbsp;is&nbsp;True&nbsp;then&nbsp;only&nbsp;attributes&nbsp;on&nbsp;the&nbsp;spec&nbsp;can&nbsp;be&nbsp;set.</tt></dd></dl>
+
+<dl><dt><a name="NonCallableMock-reset_mock"><strong>reset_mock</strong></a>(self, visited<font color="#909090">=None</font>)</dt><dd><tt>Restore&nbsp;the&nbsp;mock&nbsp;object&nbsp;to&nbsp;its&nbsp;initial&nbsp;state.</tt></dd></dl>
+
+<hr>
+Static methods defined here:<br>
+<dl><dt><a name="NonCallableMock-__new__"><strong>__new__</strong></a>(cls, *args, **kw)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__class__</strong></dt>
+</dl>
+<dl><dt><strong>call_args</strong></dt>
+</dl>
+<dl><dt><strong>call_args_list</strong></dt>
+</dl>
+<dl><dt><strong>call_count</strong></dt>
+</dl>
+<dl><dt><strong>called</strong></dt>
+</dl>
+<dl><dt><strong>mock_calls</strong></dt>
+</dl>
+<dl><dt><strong>return_value</strong></dt>
+</dl>
+<dl><dt><strong>side_effect</strong></dt>
+</dl>
+<hr>
+Data descriptors inherited from <a href="mock.mock.html#Base">Base</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="PropertyMock">class <strong>PropertyMock</strong></a>(<a href="mock.mock.html#Mock">Mock</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;mock&nbsp;intended&nbsp;to&nbsp;be&nbsp;used&nbsp;as&nbsp;a&nbsp;property,&nbsp;or&nbsp;other&nbsp;descriptor,&nbsp;on&nbsp;a&nbsp;class.<br>
+`<a href="#PropertyMock">PropertyMock</a>`&nbsp;provides&nbsp;`__get__`&nbsp;and&nbsp;`__set__`&nbsp;methods&nbsp;so&nbsp;you&nbsp;can&nbsp;specify<br>
+a&nbsp;return&nbsp;value&nbsp;when&nbsp;it&nbsp;is&nbsp;fetched.<br>
+&nbsp;<br>
+Fetching&nbsp;a&nbsp;`<a href="#PropertyMock">PropertyMock</a>`&nbsp;instance&nbsp;from&nbsp;an&nbsp;object&nbsp;calls&nbsp;the&nbsp;mock,&nbsp;with<br>
+no&nbsp;args.&nbsp;Setting&nbsp;it&nbsp;calls&nbsp;the&nbsp;mock&nbsp;with&nbsp;the&nbsp;value&nbsp;being&nbsp;set.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="mock.mock.html#PropertyMock">PropertyMock</a></dd>
+<dd><a href="mock.mock.html#Mock">Mock</a></dd>
+<dd><a href="mock.mock.html#CallableMixin">CallableMixin</a></dd>
+<dd><a href="mock.mock.html#NonCallableMock">NonCallableMock</a></dd>
+<dd><a href="mock.mock.html#Base">Base</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="PropertyMock-__get__"><strong>__get__</strong></a>(self, obj, obj_type)</dt></dl>
+
+<dl><dt><a name="PropertyMock-__set__"><strong>__set__</strong></a>(self, obj, val)</dt></dl>
+
+<hr>
+Methods inherited from <a href="mock.mock.html#CallableMixin">CallableMixin</a>:<br>
+<dl><dt><a name="PropertyMock-__call__"><strong>__call__</strong></a>(_mock_self, *args, **kwargs)</dt></dl>
+
+<dl><dt><a name="PropertyMock-__init__"><strong>__init__</strong></a>(self, spec<font color="#909090">=None</font>, side_effect<font color="#909090">=None</font>, return_value<font color="#909090">=sentinel.DEFAULT</font>, wraps<font color="#909090">=None</font>, name<font color="#909090">=None</font>, spec_set<font color="#909090">=None</font>, parent<font color="#909090">=None</font>, _spec_state<font color="#909090">=None</font>, _new_name<font color="#909090">=''</font>, _new_parent<font color="#909090">=None</font>, **kwargs)</dt></dl>
+
+<hr>
+Methods inherited from <a href="mock.mock.html#NonCallableMock">NonCallableMock</a>:<br>
+<dl><dt><a name="PropertyMock-__delattr__"><strong>__delattr__</strong></a>(self, name)</dt></dl>
+
+<dl><dt><a name="PropertyMock-__dir__"><strong>__dir__</strong></a>(self)</dt><dd><tt>Filter&nbsp;the&nbsp;output&nbsp;of&nbsp;`dir(mock)`&nbsp;to&nbsp;only&nbsp;useful&nbsp;members.</tt></dd></dl>
+
+<dl><dt><a name="PropertyMock-__getattr__"><strong>__getattr__</strong></a>(self, name)</dt></dl>
+
+<dl><dt><a name="PropertyMock-__repr__"><strong>__repr__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="PropertyMock-__setattr__"><strong>__setattr__</strong></a>(self, name, value)</dt></dl>
+
+<dl><dt><a name="PropertyMock-assert_any_call"><strong>assert_any_call</strong></a>(self, *args, **kwargs)</dt><dd><tt>assert&nbsp;the&nbsp;mock&nbsp;has&nbsp;been&nbsp;called&nbsp;with&nbsp;the&nbsp;specified&nbsp;arguments.<br>
+&nbsp;<br>
+The&nbsp;assert&nbsp;passes&nbsp;if&nbsp;the&nbsp;mock&nbsp;has&nbsp;*ever*&nbsp;been&nbsp;called,&nbsp;unlike<br>
+`assert_called_with`&nbsp;and&nbsp;`assert_called_once_with`&nbsp;that&nbsp;only&nbsp;pass&nbsp;if<br>
+the&nbsp;call&nbsp;is&nbsp;the&nbsp;most&nbsp;recent&nbsp;one.</tt></dd></dl>
+
+<dl><dt><a name="PropertyMock-assert_called_once_with"><strong>assert_called_once_with</strong></a>(_mock_self, *args, **kwargs)</dt><dd><tt>assert&nbsp;that&nbsp;the&nbsp;mock&nbsp;was&nbsp;called&nbsp;exactly&nbsp;once&nbsp;and&nbsp;with&nbsp;the&nbsp;specified<br>
+arguments.</tt></dd></dl>
+
+<dl><dt><a name="PropertyMock-assert_called_with"><strong>assert_called_with</strong></a>(_mock_self, *args, **kwargs)</dt><dd><tt>assert&nbsp;that&nbsp;the&nbsp;mock&nbsp;was&nbsp;called&nbsp;with&nbsp;the&nbsp;specified&nbsp;arguments.<br>
+&nbsp;<br>
+Raises&nbsp;an&nbsp;AssertionError&nbsp;if&nbsp;the&nbsp;args&nbsp;and&nbsp;keyword&nbsp;args&nbsp;passed&nbsp;in&nbsp;are<br>
+different&nbsp;to&nbsp;the&nbsp;last&nbsp;call&nbsp;to&nbsp;the&nbsp;mock.</tt></dd></dl>
+
+<dl><dt><a name="PropertyMock-assert_has_calls"><strong>assert_has_calls</strong></a>(self, calls, any_order<font color="#909090">=False</font>)</dt><dd><tt>assert&nbsp;the&nbsp;mock&nbsp;has&nbsp;been&nbsp;called&nbsp;with&nbsp;the&nbsp;specified&nbsp;calls.<br>
+The&nbsp;`mock_calls`&nbsp;list&nbsp;is&nbsp;checked&nbsp;for&nbsp;the&nbsp;calls.<br>
+&nbsp;<br>
+If&nbsp;`any_order`&nbsp;is&nbsp;False&nbsp;(the&nbsp;default)&nbsp;then&nbsp;the&nbsp;calls&nbsp;must&nbsp;be<br>
+sequential.&nbsp;There&nbsp;can&nbsp;be&nbsp;extra&nbsp;calls&nbsp;before&nbsp;or&nbsp;after&nbsp;the<br>
+specified&nbsp;calls.<br>
+&nbsp;<br>
+If&nbsp;`any_order`&nbsp;is&nbsp;True&nbsp;then&nbsp;the&nbsp;calls&nbsp;can&nbsp;be&nbsp;in&nbsp;any&nbsp;order,&nbsp;but<br>
+they&nbsp;must&nbsp;all&nbsp;appear&nbsp;in&nbsp;`mock_calls`.</tt></dd></dl>
+
+<dl><dt><a name="PropertyMock-assert_not_called"><strong>assert_not_called</strong></a>(_mock_self)</dt><dd><tt>assert&nbsp;that&nbsp;the&nbsp;mock&nbsp;was&nbsp;never&nbsp;called.</tt></dd></dl>
+
+<dl><dt><a name="PropertyMock-attach_mock"><strong>attach_mock</strong></a>(self, mock, attribute)</dt><dd><tt>Attach&nbsp;a&nbsp;mock&nbsp;as&nbsp;an&nbsp;attribute&nbsp;of&nbsp;this&nbsp;one,&nbsp;replacing&nbsp;its&nbsp;name&nbsp;and<br>
+parent.&nbsp;Calls&nbsp;to&nbsp;the&nbsp;attached&nbsp;mock&nbsp;will&nbsp;be&nbsp;recorded&nbsp;in&nbsp;the<br>
+`method_calls`&nbsp;and&nbsp;`mock_calls`&nbsp;attributes&nbsp;of&nbsp;this&nbsp;one.</tt></dd></dl>
+
+<dl><dt><a name="PropertyMock-configure_mock"><strong>configure_mock</strong></a>(self, **kwargs)</dt><dd><tt>Set&nbsp;attributes&nbsp;on&nbsp;the&nbsp;mock&nbsp;through&nbsp;keyword&nbsp;arguments.<br>
+&nbsp;<br>
+Attributes&nbsp;plus&nbsp;return&nbsp;values&nbsp;and&nbsp;side&nbsp;effects&nbsp;can&nbsp;be&nbsp;set&nbsp;on&nbsp;child<br>
+mocks&nbsp;using&nbsp;standard&nbsp;dot&nbsp;notation&nbsp;and&nbsp;unpacking&nbsp;a&nbsp;dictionary&nbsp;in&nbsp;the<br>
+method&nbsp;call:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;attrs&nbsp;=&nbsp;{'method.return_value':&nbsp;3,&nbsp;'other.side_effect':&nbsp;KeyError}<br>
+&gt;&gt;&gt;&nbsp;mock.<a href="#PropertyMock-configure_mock">configure_mock</a>(**attrs)</tt></dd></dl>
+
+<dl><dt><a name="PropertyMock-mock_add_spec"><strong>mock_add_spec</strong></a>(self, spec, spec_set<font color="#909090">=False</font>)</dt><dd><tt>Add&nbsp;a&nbsp;spec&nbsp;to&nbsp;a&nbsp;mock.&nbsp;`spec`&nbsp;can&nbsp;either&nbsp;be&nbsp;an&nbsp;object&nbsp;or&nbsp;a<br>
+list&nbsp;of&nbsp;strings.&nbsp;Only&nbsp;attributes&nbsp;on&nbsp;the&nbsp;`spec`&nbsp;can&nbsp;be&nbsp;fetched&nbsp;as<br>
+attributes&nbsp;from&nbsp;the&nbsp;mock.<br>
+&nbsp;<br>
+If&nbsp;`spec_set`&nbsp;is&nbsp;True&nbsp;then&nbsp;only&nbsp;attributes&nbsp;on&nbsp;the&nbsp;spec&nbsp;can&nbsp;be&nbsp;set.</tt></dd></dl>
+
+<dl><dt><a name="PropertyMock-reset_mock"><strong>reset_mock</strong></a>(self, visited<font color="#909090">=None</font>)</dt><dd><tt>Restore&nbsp;the&nbsp;mock&nbsp;object&nbsp;to&nbsp;its&nbsp;initial&nbsp;state.</tt></dd></dl>
+
+<hr>
+Static methods inherited from <a href="mock.mock.html#NonCallableMock">NonCallableMock</a>:<br>
+<dl><dt><a name="PropertyMock-__new__"><strong>__new__</strong></a>(cls, *args, **kw)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="mock.mock.html#NonCallableMock">NonCallableMock</a>:<br>
+<dl><dt><strong>__class__</strong></dt>
+</dl>
+<dl><dt><strong>call_args</strong></dt>
+</dl>
+<dl><dt><strong>call_args_list</strong></dt>
+</dl>
+<dl><dt><strong>call_count</strong></dt>
+</dl>
+<dl><dt><strong>called</strong></dt>
+</dl>
+<dl><dt><strong>mock_calls</strong></dt>
+</dl>
+<dl><dt><strong>return_value</strong></dt>
+</dl>
+<dl><dt><strong>side_effect</strong></dt>
+</dl>
+<hr>
+Data descriptors inherited from <a href="mock.mock.html#Base">Base</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-create_autospec"><strong>create_autospec</strong></a>(spec, spec_set<font color="#909090">=False</font>, instance<font color="#909090">=False</font>, _parent<font color="#909090">=None</font>, _name<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>Create&nbsp;a&nbsp;mock&nbsp;object&nbsp;using&nbsp;another&nbsp;object&nbsp;as&nbsp;a&nbsp;spec.&nbsp;Attributes&nbsp;on&nbsp;the<br>
+mock&nbsp;will&nbsp;use&nbsp;the&nbsp;corresponding&nbsp;attribute&nbsp;on&nbsp;the&nbsp;`spec`&nbsp;object&nbsp;as&nbsp;their<br>
+spec.<br>
+&nbsp;<br>
+Functions&nbsp;or&nbsp;methods&nbsp;being&nbsp;mocked&nbsp;will&nbsp;have&nbsp;their&nbsp;arguments&nbsp;checked<br>
+to&nbsp;check&nbsp;that&nbsp;they&nbsp;are&nbsp;called&nbsp;with&nbsp;the&nbsp;correct&nbsp;signature.<br>
+&nbsp;<br>
+If&nbsp;`spec_set`&nbsp;is&nbsp;True&nbsp;then&nbsp;attempting&nbsp;to&nbsp;set&nbsp;attributes&nbsp;that&nbsp;don't&nbsp;exist<br>
+on&nbsp;the&nbsp;spec&nbsp;object&nbsp;will&nbsp;raise&nbsp;an&nbsp;`AttributeError`.<br>
+&nbsp;<br>
+If&nbsp;a&nbsp;class&nbsp;is&nbsp;used&nbsp;as&nbsp;a&nbsp;spec&nbsp;then&nbsp;the&nbsp;return&nbsp;value&nbsp;of&nbsp;the&nbsp;mock&nbsp;(the<br>
+instance&nbsp;of&nbsp;the&nbsp;class)&nbsp;will&nbsp;have&nbsp;the&nbsp;same&nbsp;spec.&nbsp;You&nbsp;can&nbsp;use&nbsp;a&nbsp;class&nbsp;as&nbsp;the<br>
+spec&nbsp;for&nbsp;an&nbsp;instance&nbsp;object&nbsp;by&nbsp;passing&nbsp;`instance=True`.&nbsp;The&nbsp;returned&nbsp;mock<br>
+will&nbsp;only&nbsp;be&nbsp;callable&nbsp;if&nbsp;instances&nbsp;of&nbsp;the&nbsp;mock&nbsp;are&nbsp;callable.<br>
+&nbsp;<br>
+`create_autospec`&nbsp;also&nbsp;takes&nbsp;arbitrary&nbsp;keyword&nbsp;arguments&nbsp;that&nbsp;are&nbsp;passed&nbsp;to<br>
+the&nbsp;constructor&nbsp;of&nbsp;the&nbsp;created&nbsp;mock.</tt></dd></dl>
+ <dl><dt><a name="-mock_open"><strong>mock_open</strong></a>(mock<font color="#909090">=None</font>, read_data<font color="#909090">=''</font>)</dt><dd><tt>A&nbsp;helper&nbsp;function&nbsp;to&nbsp;create&nbsp;a&nbsp;mock&nbsp;to&nbsp;replace&nbsp;the&nbsp;use&nbsp;of&nbsp;`open`.&nbsp;It&nbsp;works<br>
+for&nbsp;`open`&nbsp;called&nbsp;directly&nbsp;or&nbsp;used&nbsp;as&nbsp;a&nbsp;context&nbsp;manager.<br>
+&nbsp;<br>
+The&nbsp;`mock`&nbsp;argument&nbsp;is&nbsp;the&nbsp;mock&nbsp;object&nbsp;to&nbsp;configure.&nbsp;If&nbsp;`None`&nbsp;(the<br>
+default)&nbsp;then&nbsp;a&nbsp;`<a href="#MagicMock">MagicMock</a>`&nbsp;will&nbsp;be&nbsp;created&nbsp;for&nbsp;you,&nbsp;with&nbsp;the&nbsp;API&nbsp;limited<br>
+to&nbsp;methods&nbsp;or&nbsp;attributes&nbsp;available&nbsp;on&nbsp;standard&nbsp;file&nbsp;handles.<br>
+&nbsp;<br>
+`read_data`&nbsp;is&nbsp;a&nbsp;string&nbsp;for&nbsp;the&nbsp;`read`&nbsp;methoddline`,&nbsp;and&nbsp;`readlines`&nbsp;of&nbsp;the<br>
+file&nbsp;handle&nbsp;to&nbsp;return.&nbsp;&nbsp;This&nbsp;is&nbsp;an&nbsp;empty&nbsp;string&nbsp;by&nbsp;default.</tt></dd></dl>
+ <dl><dt><a name="-patch"><strong>patch</strong></a>(target, new<font color="#909090">=sentinel.DEFAULT</font>, spec<font color="#909090">=None</font>, create<font color="#909090">=False</font>, spec_set<font color="#909090">=None</font>, autospec<font color="#909090">=None</font>, new_callable<font color="#909090">=None</font>, **kwargs)</dt><dd><tt>`patch`&nbsp;acts&nbsp;as&nbsp;a&nbsp;function&nbsp;decorator,&nbsp;class&nbsp;decorator&nbsp;or&nbsp;a&nbsp;context<br>
+manager.&nbsp;Inside&nbsp;the&nbsp;body&nbsp;of&nbsp;the&nbsp;function&nbsp;or&nbsp;with&nbsp;statement,&nbsp;the&nbsp;`target`<br>
+is&nbsp;patched&nbsp;with&nbsp;a&nbsp;`new`&nbsp;object.&nbsp;When&nbsp;the&nbsp;function/with&nbsp;statement&nbsp;exits<br>
+the&nbsp;patch&nbsp;is&nbsp;undone.<br>
+&nbsp;<br>
+If&nbsp;`new`&nbsp;is&nbsp;omitted,&nbsp;then&nbsp;the&nbsp;target&nbsp;is&nbsp;replaced&nbsp;with&nbsp;a<br>
+`<a href="#MagicMock">MagicMock</a>`.&nbsp;If&nbsp;`patch`&nbsp;is&nbsp;used&nbsp;as&nbsp;a&nbsp;decorator&nbsp;and&nbsp;`new`&nbsp;is<br>
+omitted,&nbsp;the&nbsp;created&nbsp;mock&nbsp;is&nbsp;passed&nbsp;in&nbsp;as&nbsp;an&nbsp;extra&nbsp;argument&nbsp;to&nbsp;the<br>
+decorated&nbsp;function.&nbsp;If&nbsp;`patch`&nbsp;is&nbsp;used&nbsp;as&nbsp;a&nbsp;context&nbsp;manager&nbsp;the&nbsp;created<br>
+mock&nbsp;is&nbsp;returned&nbsp;by&nbsp;the&nbsp;context&nbsp;manager.<br>
+&nbsp;<br>
+`target`&nbsp;should&nbsp;be&nbsp;a&nbsp;string&nbsp;in&nbsp;the&nbsp;form&nbsp;`'package.module.ClassName'`.&nbsp;The<br>
+`target`&nbsp;is&nbsp;imported&nbsp;and&nbsp;the&nbsp;specified&nbsp;object&nbsp;replaced&nbsp;with&nbsp;the&nbsp;`new`<br>
+object,&nbsp;so&nbsp;the&nbsp;`target`&nbsp;must&nbsp;be&nbsp;importable&nbsp;from&nbsp;the&nbsp;environment&nbsp;you&nbsp;are<br>
+calling&nbsp;`patch`&nbsp;from.&nbsp;The&nbsp;target&nbsp;is&nbsp;imported&nbsp;when&nbsp;the&nbsp;decorated&nbsp;function<br>
+is&nbsp;executed,&nbsp;not&nbsp;at&nbsp;decoration&nbsp;time.<br>
+&nbsp;<br>
+The&nbsp;`spec`&nbsp;and&nbsp;`spec_set`&nbsp;keyword&nbsp;arguments&nbsp;are&nbsp;passed&nbsp;to&nbsp;the&nbsp;`<a href="#MagicMock">MagicMock</a>`<br>
+if&nbsp;patch&nbsp;is&nbsp;creating&nbsp;one&nbsp;for&nbsp;you.<br>
+&nbsp;<br>
+In&nbsp;addition&nbsp;you&nbsp;can&nbsp;pass&nbsp;`spec=True`&nbsp;or&nbsp;`spec_set=True`,&nbsp;which&nbsp;causes<br>
+patch&nbsp;to&nbsp;pass&nbsp;in&nbsp;the&nbsp;object&nbsp;being&nbsp;mocked&nbsp;as&nbsp;the&nbsp;spec/spec_set&nbsp;object.<br>
+&nbsp;<br>
+`new_callable`&nbsp;allows&nbsp;you&nbsp;to&nbsp;specify&nbsp;a&nbsp;different&nbsp;class,&nbsp;or&nbsp;callable&nbsp;object,<br>
+that&nbsp;will&nbsp;be&nbsp;called&nbsp;to&nbsp;create&nbsp;the&nbsp;`new`&nbsp;object.&nbsp;By&nbsp;default&nbsp;`<a href="#MagicMock">MagicMock</a>`&nbsp;is<br>
+used.<br>
+&nbsp;<br>
+A&nbsp;more&nbsp;powerful&nbsp;form&nbsp;of&nbsp;`spec`&nbsp;is&nbsp;`autospec`.&nbsp;If&nbsp;you&nbsp;set&nbsp;`autospec=True`<br>
+then&nbsp;the&nbsp;mock&nbsp;will&nbsp;be&nbsp;created&nbsp;with&nbsp;a&nbsp;spec&nbsp;from&nbsp;the&nbsp;object&nbsp;being&nbsp;replaced.<br>
+All&nbsp;attributes&nbsp;of&nbsp;the&nbsp;mock&nbsp;will&nbsp;also&nbsp;have&nbsp;the&nbsp;spec&nbsp;of&nbsp;the&nbsp;corresponding<br>
+attribute&nbsp;of&nbsp;the&nbsp;object&nbsp;being&nbsp;replaced.&nbsp;Methods&nbsp;and&nbsp;functions&nbsp;being<br>
+mocked&nbsp;will&nbsp;have&nbsp;their&nbsp;arguments&nbsp;checked&nbsp;and&nbsp;will&nbsp;raise&nbsp;a&nbsp;`TypeError`&nbsp;if<br>
+they&nbsp;are&nbsp;called&nbsp;with&nbsp;the&nbsp;wrong&nbsp;signature.&nbsp;For&nbsp;mocks&nbsp;replacing&nbsp;a&nbsp;class,<br>
+their&nbsp;return&nbsp;value&nbsp;(the&nbsp;'instance')&nbsp;will&nbsp;have&nbsp;the&nbsp;same&nbsp;spec&nbsp;as&nbsp;the&nbsp;class.<br>
+&nbsp;<br>
+Instead&nbsp;of&nbsp;`autospec=True`&nbsp;you&nbsp;can&nbsp;pass&nbsp;`autospec=some_object`&nbsp;to&nbsp;use&nbsp;an<br>
+arbitrary&nbsp;object&nbsp;as&nbsp;the&nbsp;spec&nbsp;instead&nbsp;of&nbsp;the&nbsp;one&nbsp;being&nbsp;replaced.<br>
+&nbsp;<br>
+By&nbsp;default&nbsp;`patch`&nbsp;will&nbsp;fail&nbsp;to&nbsp;replace&nbsp;attributes&nbsp;that&nbsp;don't&nbsp;exist.&nbsp;If<br>
+you&nbsp;pass&nbsp;in&nbsp;`create=True`,&nbsp;and&nbsp;the&nbsp;attribute&nbsp;doesn't&nbsp;exist,&nbsp;patch&nbsp;will<br>
+create&nbsp;the&nbsp;attribute&nbsp;for&nbsp;you&nbsp;when&nbsp;the&nbsp;patched&nbsp;function&nbsp;is&nbsp;called,&nbsp;and<br>
+delete&nbsp;it&nbsp;again&nbsp;afterwards.&nbsp;This&nbsp;is&nbsp;useful&nbsp;for&nbsp;writing&nbsp;tests&nbsp;against<br>
+attributes&nbsp;that&nbsp;your&nbsp;production&nbsp;code&nbsp;creates&nbsp;at&nbsp;runtime.&nbsp;It&nbsp;is&nbsp;off&nbsp;by<br>
+default&nbsp;because&nbsp;it&nbsp;can&nbsp;be&nbsp;dangerous.&nbsp;With&nbsp;it&nbsp;switched&nbsp;on&nbsp;you&nbsp;can&nbsp;write<br>
+passing&nbsp;tests&nbsp;against&nbsp;APIs&nbsp;that&nbsp;don't&nbsp;actually&nbsp;exist!<br>
+&nbsp;<br>
+Patch&nbsp;can&nbsp;be&nbsp;used&nbsp;as&nbsp;a&nbsp;`TestCase`&nbsp;class&nbsp;decorator.&nbsp;It&nbsp;works&nbsp;by<br>
+decorating&nbsp;each&nbsp;test&nbsp;method&nbsp;in&nbsp;the&nbsp;class.&nbsp;This&nbsp;reduces&nbsp;the&nbsp;boilerplate<br>
+code&nbsp;when&nbsp;your&nbsp;test&nbsp;methods&nbsp;share&nbsp;a&nbsp;common&nbsp;patchings&nbsp;set.&nbsp;`patch`&nbsp;finds<br>
+tests&nbsp;by&nbsp;looking&nbsp;for&nbsp;method&nbsp;names&nbsp;that&nbsp;start&nbsp;with&nbsp;`patch.TEST_PREFIX`.<br>
+By&nbsp;default&nbsp;this&nbsp;is&nbsp;`test`,&nbsp;which&nbsp;matches&nbsp;the&nbsp;way&nbsp;`unittest`&nbsp;finds&nbsp;tests.<br>
+You&nbsp;can&nbsp;specify&nbsp;an&nbsp;alternative&nbsp;prefix&nbsp;by&nbsp;setting&nbsp;`patch.TEST_PREFIX`.<br>
+&nbsp;<br>
+Patch&nbsp;can&nbsp;be&nbsp;used&nbsp;as&nbsp;a&nbsp;context&nbsp;manager,&nbsp;with&nbsp;the&nbsp;with&nbsp;statement.&nbsp;Here&nbsp;the<br>
+patching&nbsp;applies&nbsp;to&nbsp;the&nbsp;indented&nbsp;block&nbsp;after&nbsp;the&nbsp;with&nbsp;statement.&nbsp;If&nbsp;you<br>
+use&nbsp;"as"&nbsp;then&nbsp;the&nbsp;patched&nbsp;object&nbsp;will&nbsp;be&nbsp;bound&nbsp;to&nbsp;the&nbsp;name&nbsp;after&nbsp;the<br>
+"as";&nbsp;very&nbsp;useful&nbsp;if&nbsp;`patch`&nbsp;is&nbsp;creating&nbsp;a&nbsp;mock&nbsp;object&nbsp;for&nbsp;you.<br>
+&nbsp;<br>
+`patch`&nbsp;takes&nbsp;arbitrary&nbsp;keyword&nbsp;arguments.&nbsp;These&nbsp;will&nbsp;be&nbsp;passed&nbsp;to<br>
+the&nbsp;`<a href="#Mock">Mock</a>`&nbsp;(or&nbsp;`new_callable`)&nbsp;on&nbsp;construction.<br>
+&nbsp;<br>
+`patch.dict(...)`,&nbsp;`patch.multiple(...)`&nbsp;and&nbsp;`patch.object(...)`&nbsp;are<br>
+available&nbsp;for&nbsp;alternate&nbsp;use-cases.</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>ANY</strong> = &lt;ANY&gt;<br>
+<strong>DEFAULT</strong> = sentinel.DEFAULT<br>
+<strong>FILTER_DIR</strong> = True<br>
+<strong>__all__</strong> = ('__version__', 'version_info', 'Mock', 'MagicMock', 'patch', 'sentinel', 'DEFAULT', 'ANY', 'call', 'create_autospec', 'FILTER_DIR', 'CallableMixin', 'NonCallableMock', 'NonCallableMagicMock', 'mock_open', 'PropertyMock')<br>
+<strong>__version__</strong> = '1.3.0'<br>
+<strong>call</strong> = call<br>
+<strong>sentinel</strong> = &lt;mock.mock._Sentinel object&gt;<br>
+<strong>version_info</strong> = (1, 3, 0, 'final', 0)</td></tr></table>
+</body></html>

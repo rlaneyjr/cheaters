@@ -1,0 +1,244 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>Citrix NetScaler XML API User&#39;s Guide - Structure Definition</title>
+<link rel="stylesheet" type="text/css" href="help_ns.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body onload="initial()" class="ns_body">
+<div class="ns_content"><table cellpadding="0" cellspacing="0"><script type="text/javascript">
+function changeContext(id,lang,flag){
+	parent.banner.document.language.select.value = lang;
+	if( lang == "C" ){
+		if(flag == "1"){
+			showContent(cfirstcontent,id,lang);
+		}
+		else{
+			showContent(csecondcontent,id,lang);
+		}
+	}
+	if( lang == "Perl" ){
+		if(flag == "1"){
+			showContent(perlfirstcontent,id,lang);
+		}
+		else{
+			showContent(perlsecondcontent,id,lang);
+		}
+	}
+	if( lang == "Java" ){
+		if(flag == "1"){
+			showContent(javafirstcontent,id,lang);	
+		}
+		else{
+			showContent(javasecondcontent,id,lang);
+		}
+	}
+	if( lang == "C#" ){
+		if(flag == "1"){
+			showContent(csharpfirstcontent,id,lang);
+		}
+		else{
+			showContent(csharpsecondcontent,id,lang);
+		}
+	}
+	if( lang == "VB" ){
+		if(flag == "1"){
+			showContent(vbfirstcontent,id,lang);
+		}
+		else{
+			showContent(vbsecondcontent,id,lang);
+		}
+	}
+	if(flag == "1"){
+		showInside(lang,"0");
+	}
+	else{
+		showOutside(lang);
+	}
+}
+function showContent(content,id,lang){
+	if(ie4){
+	   showContentObj=document.all.id;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById(id);
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+  showLangSelect(lang);
+}
+function showInside(str,cond){
+	if(str == "C"){
+ 		var inside_content = csecondcontent;
+ 	}
+ 	if(str == "Perl"){
+ 		var inside_content = perlsecondcontent;
+ 	}
+ 	if(str == "Java"){
+ 		var inside_content = javasecondcontent;
+ 	}
+ 	if(str == "C#"){
+		var inside_content = csharpsecondcontent;
+ 	}
+ 	if(str == "VB"){
+		var inside_content = vbsecondcontent;
+ 	}
+	showContent(inside_content,'qiksearch_div1',str);
+ 	if ( cond == "1" ){
+ 		var page = 'apidoc/docs/getvpnclientlessaccessprofileResult.html#vpnclientlessrwprofileList';
+ 		document.location.href = page;
+ 	}
+}
+function showOutside(str){
+	if(str == "C" ){
+ 		var inside_content = cfirstcontent;
+ 	}
+ 	if(str == "Perl" ){
+ 		var inside_content = perlfirstcontent;
+ 	}
+ 	if(str == "Java" ){
+ 		var inside_content = javafirstcontent;
+ 	}
+ 	if(str == "C#" ){
+ 		var inside_content = csharpfirstcontent;
+ 	}
+ 	if(str == "VB" ){
+ 		var inside_content = vbfirstcontent;
+ 	}
+ 	showContent(inside_content,'qiksearch_div',str);
+}
+function initial(){
+	ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+	ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+	ns4=document.layers;
+	langSelected = parent.banner.document.language.select.value
+	var plink = parent.banner.document.language.plink.value
+	var my_array=plink.split("&");
+	var temp = my_array[0];
+ 	var grp = temp.split("@");
+	var cmd = my_array[1];
+	var regex = /^stat/i;
+	if( cmd.match(regex) != null ){
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex_stat.html\">Statistics</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getvpnclientlessaccessprofileResult");
+	}
+	else{
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex.htm\">Configuration</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getvpnclientlessaccessprofileResult");
+	}
+	if( langSelected == "C" ){
+ 		var content = cfirstcontent;
+	}
+	else if( langSelected == "Perl" ){
+		var content = perlfirstcontent;
+	}
+	else if( langSelected == "Java" ){
+		var content = javafirstcontent;
+	}
+	else if( langSelected == "C#" ){
+		var content = csharpfirstcontent;
+	}
+	else if( langSelected == "VB" ){
+		var content = vbfirstcontent;
+	}
+	else{
+		var content = cfirstcontent;
+		langSelected="C";
+	}
+	showContent(content,'qiksearch_div',langSelected);
+	showInside(langSelected,"0");
+}
+function showPLink(content){
+	if(ie4){
+	   showContentObj=document.all.progressive_link;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById("progressive_link");
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+}
+function showLangSelect(id){
+	   if(ie4)
+       {
+       	showObj=document.all.first_url;
+       	showObj1=document.all.second_url;
+       }
+       if(ns6)
+       {
+       	showObj=document.getElementById("first_url");
+       	showObj1=document.getElementById("second_url");
+       }
+       if( id == "C" ){
+       	newlink = "<b>C</b>";
+       	newlink1 = "<b>C</b>";
+       }
+       else{
+       	newlink = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C','1');\"><b>C</b></a>";
+       	newlink1 = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C','0');\"><b>C</b></a>";
+       }
+       if( id == "Perl" ){
+       	newlink = newlink + " | <b>Perl</b>";
+       	newlink1 = newlink1 + " | <b>Perl</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Perl','1');\"><b>Perl</b></a>";
+      	       newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Perl','0');\"><b>Perl</b></a>";
+       }
+       if( id == "Java" ){
+       	newlink = newlink + " | <b>Java</b>";
+       	newlink1 = newlink1 + " | <b>Java</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Java','1');\"><b>Java</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Java','0');\"><b>Java</b></a>";
+       }
+       if( id == "C#" ){
+       	newlink = newlink + " | <b>C#</b>";
+       	newlink1 = newlink1 + " | <b>C#</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C#','1');\"><b>C#</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C#','0');\"><b>C#</b></a>";
+       }
+       showObj.innerHTML = newlink;
+       showObj1.innerHTML = newlink1;
+}
+</script>
+<tr><td><div><div id="progressive_link"></div></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>getvpnclientlessaccessprofileResult Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>getvpnclientlessaccessprofileResult</b> structure defines the return type for getvpnclientlessaccessprofile API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="first_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+cfirstcontent = "<pre>struct getvpnclientlessaccessprofileResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; struct <a href=\'getvpnclientlessaccessprofileResult.html\#vpnclientlessaccessprofile\'>vpnclientlessaccessprofile</a> list[];<br> };<br></pre></td></tr></table></div>"
+perlfirstcontent = "<pre>$getvpnclientlessaccessprofileResult = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rc => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; message => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; List => \'@<a href=\'getvpnclientlessaccessprofileResult.html\#vpnclientlessaccessprofile\'>vpnclientlessaccessprofile</a>\',<br> };<br></pre></td></tr></table></div>"
+javafirstcontent = "<pre>class getvpnclientlessaccessprofileResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getvpnclientlessaccessprofileResult.html\#vpnclientlessaccessprofile\'>vpnclientlessaccessprofile</a>[] list;<br> };<br></pre></td></tr></table></div>"
+csharpfirstcontent = "<pre>class getvpnclientlessaccessprofileResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getvpnclientlessaccessprofileResult.html\#vpnclientlessaccessprofile\'>vpnclientlessaccessprofile</a>[] list;<br> };<br></pre></td></tr></table></div>"
+vbfirstcontent = "<pre>Public <b>Structure</b> getvpnclientlessaccessprofileResult <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rc As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public message As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public  vpnclientlessaccessprofileList() As  <a href=\'getvpnclientlessaccessprofileResult.html\#vpnclientlessaccessprofile\'>vpnclientlessaccessprofile</a><br> <b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rc</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, rc is 0 else rc > 0. Values above 0x8000 indicate Warnings.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>message</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, message is NULL else message contains <a href="errorlisting.html">Error/Warning</a> message.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>vpnclientlessaccessprofileList</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">List of vpnclientlessaccessprofiles</div></td></tr><tr><td><br></td></tr><tr><td><div><a name="vpnclientlessaccessprofile"></a></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>vpnclientlessaccessprofile  Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>vpnclientlessaccessprofile</b> structure defines the actual return type values for getvpnclientlessaccessprofile API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="second_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div1" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+csecondcontent = "<pre>struct vpnclientlessaccessprofile {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * profilename;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * urlrewritepolicylabel;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * javascriptrewritepolicylabel;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * cssrewritepolicylabel;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * xmlrewritepolicylabel;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * xcomponentrewritepolicylabel;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * reqhdrrewritepolicylabel;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * reshdrrewritepolicylabel;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * regexforfindingurlinjavascript;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * regexforfindingurlincss;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * regexforfindingurlinxcomponent;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * regexforfindingurlinxml;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * regexforfindingcustomurls;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * clientconsumedcookies;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * requirepersistentcookie;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * description;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * builtin[];<br> };<br></pre></td></tr></table></div>"
+perlsecondcontent = "<pre>$vpnclientlessaccessprofile = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; profilename => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; urlrewritepolicylabel => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; javascriptrewritepolicylabel => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; cssrewritepolicylabel => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; xmlrewritepolicylabel => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; xcomponentrewritepolicylabel => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; reqhdrrewritepolicylabel => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; reshdrrewritepolicylabel => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; regexforfindingurlinjavascript => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; regexforfindingurlincss => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; regexforfindingurlinxcomponent => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; regexforfindingurlinxml => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; regexforfindingcustomurls => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; clientconsumedcookies => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; requirepersistentcookie => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; description => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; builtin => \'@\',<br> };<br></pre></td></tr></table></div>"
+javasecondcontent = "<pre>class vpnclientlessaccessprofile {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String profilename;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String urlrewritepolicylabel;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String javascriptrewritepolicylabel;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String cssrewritepolicylabel;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String xmlrewritepolicylabel;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String xcomponentrewritepolicylabel;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String reqhdrrewritepolicylabel;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String reshdrrewritepolicylabel;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String regexforfindingurlinjavascript;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String regexforfindingurlincss;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String regexforfindingurlinxcomponent;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String regexforfindingurlinxml;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String regexforfindingcustomurls;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String clientconsumedcookies;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String requirepersistentcookie;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String description;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String builtin[];<br> };<br></pre></td></tr></table></div>"
+csharpsecondcontent = "<pre>class vpnclientlessaccessprofile {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string profilename;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string urlrewritepolicylabel;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string javascriptrewritepolicylabel;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string cssrewritepolicylabel;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string xmlrewritepolicylabel;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string xcomponentrewritepolicylabel;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string reqhdrrewritepolicylabel;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string reshdrrewritepolicylabel;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string regexforfindingurlinjavascript;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string regexforfindingurlincss;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string regexforfindingurlinxcomponent;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string regexforfindingurlinxml;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string regexforfindingcustomurls;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string clientconsumedcookies;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string requirepersistentcookie;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string description;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string builtin[];<br> };<br></pre></td></tr></table></div>"
+vbsecondcontent = "<pre>Public <b>Structure</b> vpnclientlessaccessprofile <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public profilename As String  <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public urlrewritepolicylabel As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public javascriptrewritepolicylabel As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public cssrewritepolicylabel As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public xmlrewritepolicylabel As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public xcomponentrewritepolicylabel As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public reqhdrrewritepolicylabel As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public reshdrrewritepolicylabel As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public regexforfindingurlinjavascript As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public regexforfindingurlincss As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public regexforfindingurlinxcomponent As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public regexforfindingurlinxml As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public regexforfindingcustomurls As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public clientconsumedcookies As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public requirepersistentcookie As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public description As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public builtin() As String<br><b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>profilename</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the clientless access profile for which to display detailed information.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>urlrewritepolicylabel</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the configured URL rewrite policy label. If you do not specify a policy label name, then URLs are not rewritten.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>javascriptrewritepolicylabel</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the configured JavaScript rewrite policy label.  If you do not specify a policy label name, then JAVA scripts are not rewritten.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>cssrewritepolicylabel</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The configured CSS rewrite policylabel.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>xmlrewritepolicylabel</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The configured XML rewrite policylabel.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>xcomponentrewritepolicylabel</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The configured X-Component rewrite policylabel.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>reqhdrrewritepolicylabel</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the configured Request rewrite policy label.  If you do not specify a policy label name, then requests are not rewritten.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>reshdrrewritepolicylabel</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the configured Response rewrite policy label.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>regexforfindingurlinjavascript</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the pattern set that contains the regular expressions, which match the URL in Java script.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>regexforfindingurlincss</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the pattern set that contains the regular expressions, which match the URL in the CSS.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>regexforfindingurlinxcomponent</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the pattern set that contains the regular expressions, which match the URL in X Component.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>regexforfindingurlinxml</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the pattern set that contains the regular expressions, which match the URL in XML.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>regexforfindingcustomurls</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the pattern set that contains the regular expressions, which match the URLs in the custom content type other than HTML, CSS, XML, XCOMP, and JavaScript. The custom content type should be included in the patset ns_cvpn_custom_content_types.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>clientconsumedcookies</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Specify the name of the pattern set containing the names of the cookies, which are allowed between the client and the server. If a pattern set is not specified, NetSCaler Gateway does not allow any cookies between the client and the server. A cookie that is not specified in the pattern set is handled by NetScaler Gateway on behalf of the client.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>requirepersistentcookie</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Specify whether a persistent session cookie is set and accepted for clientless access. If this parameter is set to ON, COM objects, such as MSOffice, which are invoked by the browser can access the files using clientless access. Use caution because the persistent cookie is stored on the disk.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>description</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Description of the clientless access profile.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>builtin</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Flag to determine if vpn clientless rewrite profile is built-in or not</div></td></tr><tr><td><br></td></tr><tr><td><div><b>See Also</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="getvpnclientlessaccessprofile.html">getvpnclientlessaccessprofile</a></div></td></tr><tr><td><br></td></tr></table></div>
+</body>
+</html>

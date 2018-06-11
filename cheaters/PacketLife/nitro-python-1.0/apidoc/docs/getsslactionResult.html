@@ -1,0 +1,244 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>Citrix NetScaler XML API User&#39;s Guide - Structure Definition</title>
+<link rel="stylesheet" type="text/css" href="help_ns.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body onload="initial()" class="ns_body">
+<div class="ns_content"><table cellpadding="0" cellspacing="0"><script type="text/javascript">
+function changeContext(id,lang,flag){
+	parent.banner.document.language.select.value = lang;
+	if( lang == "C" ){
+		if(flag == "1"){
+			showContent(cfirstcontent,id,lang);
+		}
+		else{
+			showContent(csecondcontent,id,lang);
+		}
+	}
+	if( lang == "Perl" ){
+		if(flag == "1"){
+			showContent(perlfirstcontent,id,lang);
+		}
+		else{
+			showContent(perlsecondcontent,id,lang);
+		}
+	}
+	if( lang == "Java" ){
+		if(flag == "1"){
+			showContent(javafirstcontent,id,lang);	
+		}
+		else{
+			showContent(javasecondcontent,id,lang);
+		}
+	}
+	if( lang == "C#" ){
+		if(flag == "1"){
+			showContent(csharpfirstcontent,id,lang);
+		}
+		else{
+			showContent(csharpsecondcontent,id,lang);
+		}
+	}
+	if( lang == "VB" ){
+		if(flag == "1"){
+			showContent(vbfirstcontent,id,lang);
+		}
+		else{
+			showContent(vbsecondcontent,id,lang);
+		}
+	}
+	if(flag == "1"){
+		showInside(lang,"0");
+	}
+	else{
+		showOutside(lang);
+	}
+}
+function showContent(content,id,lang){
+	if(ie4){
+	   showContentObj=document.all.id;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById(id);
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+  showLangSelect(lang);
+}
+function showInside(str,cond){
+	if(str == "C"){
+ 		var inside_content = csecondcontent;
+ 	}
+ 	if(str == "Perl"){
+ 		var inside_content = perlsecondcontent;
+ 	}
+ 	if(str == "Java"){
+ 		var inside_content = javasecondcontent;
+ 	}
+ 	if(str == "C#"){
+		var inside_content = csharpsecondcontent;
+ 	}
+ 	if(str == "VB"){
+		var inside_content = vbsecondcontent;
+ 	}
+	showContent(inside_content,'qiksearch_div1',str);
+ 	if ( cond == "1" ){
+ 		var page = 'apidoc/docs/getsslactionResult.html#ssl_actionList';
+ 		document.location.href = page;
+ 	}
+}
+function showOutside(str){
+	if(str == "C" ){
+ 		var inside_content = cfirstcontent;
+ 	}
+ 	if(str == "Perl" ){
+ 		var inside_content = perlfirstcontent;
+ 	}
+ 	if(str == "Java" ){
+ 		var inside_content = javafirstcontent;
+ 	}
+ 	if(str == "C#" ){
+ 		var inside_content = csharpfirstcontent;
+ 	}
+ 	if(str == "VB" ){
+ 		var inside_content = vbfirstcontent;
+ 	}
+ 	showContent(inside_content,'qiksearch_div',str);
+}
+function initial(){
+	ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+	ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+	ns4=document.layers;
+	langSelected = parent.banner.document.language.select.value
+	var plink = parent.banner.document.language.plink.value
+	var my_array=plink.split("&");
+	var temp = my_array[0];
+ 	var grp = temp.split("@");
+	var cmd = my_array[1];
+	var regex = /^stat/i;
+	if( cmd.match(regex) != null ){
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex_stat.html\">Statistics</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getsslactionResult");
+	}
+	else{
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex.htm\">Configuration</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getsslactionResult");
+	}
+	if( langSelected == "C" ){
+ 		var content = cfirstcontent;
+	}
+	else if( langSelected == "Perl" ){
+		var content = perlfirstcontent;
+	}
+	else if( langSelected == "Java" ){
+		var content = javafirstcontent;
+	}
+	else if( langSelected == "C#" ){
+		var content = csharpfirstcontent;
+	}
+	else if( langSelected == "VB" ){
+		var content = vbfirstcontent;
+	}
+	else{
+		var content = cfirstcontent;
+		langSelected="C";
+	}
+	showContent(content,'qiksearch_div',langSelected);
+	showInside(langSelected,"0");
+}
+function showPLink(content){
+	if(ie4){
+	   showContentObj=document.all.progressive_link;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById("progressive_link");
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+}
+function showLangSelect(id){
+	   if(ie4)
+       {
+       	showObj=document.all.first_url;
+       	showObj1=document.all.second_url;
+       }
+       if(ns6)
+       {
+       	showObj=document.getElementById("first_url");
+       	showObj1=document.getElementById("second_url");
+       }
+       if( id == "C" ){
+       	newlink = "<b>C</b>";
+       	newlink1 = "<b>C</b>";
+       }
+       else{
+       	newlink = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C','1');\"><b>C</b></a>";
+       	newlink1 = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C','0');\"><b>C</b></a>";
+       }
+       if( id == "Perl" ){
+       	newlink = newlink + " | <b>Perl</b>";
+       	newlink1 = newlink1 + " | <b>Perl</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Perl','1');\"><b>Perl</b></a>";
+      	       newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Perl','0');\"><b>Perl</b></a>";
+       }
+       if( id == "Java" ){
+       	newlink = newlink + " | <b>Java</b>";
+       	newlink1 = newlink1 + " | <b>Java</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Java','1');\"><b>Java</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Java','0');\"><b>Java</b></a>";
+       }
+       if( id == "C#" ){
+       	newlink = newlink + " | <b>C#</b>";
+       	newlink1 = newlink1 + " | <b>C#</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C#','1');\"><b>C#</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C#','0');\"><b>C#</b></a>";
+       }
+       showObj.innerHTML = newlink;
+       showObj1.innerHTML = newlink1;
+}
+</script>
+<tr><td><div><div id="progressive_link"></div></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>getsslactionResult Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>getsslactionResult</b> structure defines the return type for getsslaction API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="first_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+cfirstcontent = "<pre>struct getsslactionResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; struct <a href=\'getsslactionResult.html\#sslaction\'>sslaction</a> list[];<br> };<br></pre></td></tr></table></div>"
+perlfirstcontent = "<pre>$getsslactionResult = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rc => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; message => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; List => \'@<a href=\'getsslactionResult.html\#sslaction\'>sslaction</a>\',<br> };<br></pre></td></tr></table></div>"
+javafirstcontent = "<pre>class getsslactionResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getsslactionResult.html\#sslaction\'>sslaction</a>[] list;<br> };<br></pre></td></tr></table></div>"
+csharpfirstcontent = "<pre>class getsslactionResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getsslactionResult.html\#sslaction\'>sslaction</a>[] list;<br> };<br></pre></td></tr></table></div>"
+vbfirstcontent = "<pre>Public <b>Structure</b> getsslactionResult <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rc As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public message As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public  sslactionList() As  <a href=\'getsslactionResult.html\#sslaction\'>sslaction</a><br> <b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rc</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, rc is 0 else rc > 0. Values above 0x8000 indicate Warnings.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>message</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, message is NULL else message contains <a href="errorlisting.html">Error/Warning</a> message.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sslactionList</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">List of sslactions</div></td></tr><tr><td><br></td></tr><tr><td><div><a name="sslaction"></a></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>sslaction  Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>sslaction</b> structure defines the actual return type values for getsslaction API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="second_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div1" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+csecondcontent = "<pre>struct sslaction {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * name;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * clientauth;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * clientcert;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * certheader;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * clientcertserialnumber;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * certserialheader;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * clientcertsubject;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * certsubjectheader;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * clientcerthash;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * certhashheader;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * clientcertissuer;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * certissuerheader;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * sessionid;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * sessionidheader;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * cipher;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * cipherheader;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * owasupport;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * clientcertnotbefore;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * certnotbeforeheader;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * clientcertnotafter;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * certnotafterheader;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int hits;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int undefhits;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int referencecount;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * description;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * builtin[];<br> };<br></pre></td></tr></table></div>"
+perlsecondcontent = "<pre>$sslaction = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; name => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; clientauth => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; clientcert => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; certheader => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; clientcertserialnumber => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; certserialheader => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; clientcertsubject => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; certsubjectheader => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; clientcerthash => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; certhashheader => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; clientcertissuer => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; certissuerheader => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; sessionid => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; sessionidheader => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; cipher => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; cipherheader => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; owasupport => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; clientcertnotbefore => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; certnotbeforeheader => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; clientcertnotafter => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; certnotafterheader => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; hits => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; undefhits => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; referencecount => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; description => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; builtin => \'@\',<br> };<br></pre></td></tr></table></div>"
+javasecondcontent = "<pre>class sslaction {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String name;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String clientauth;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String clientcert;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String certheader;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String clientcertserialnumber;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String certserialheader;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String clientcertsubject;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String certsubjectheader;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String clientcerthash;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String certhashheader;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String clientcertissuer;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String certissuerheader;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String sessionid;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String sessionidheader;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String cipher;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String cipherheader;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String owasupport;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String clientcertnotbefore;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String certnotbeforeheader;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String clientcertnotafter;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String certnotafterheader;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt hits;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt undefhits;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt referencecount;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String description;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String builtin[];<br> };<br></pre></td></tr></table></div>"
+csharpsecondcontent = "<pre>class sslaction {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string name;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string clientauth;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string clientcert;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string certheader;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string clientcertserialnumber;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string certserialheader;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string clientcertsubject;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string certsubjectheader;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string clientcerthash;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string certhashheader;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string clientcertissuer;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string certissuerheader;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string sessionid;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string sessionidheader;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string cipher;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string cipherheader;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string owasupport;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string clientcertnotbefore;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string certnotbeforeheader;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string clientcertnotafter;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string certnotafterheader;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 hits;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 undefhits;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 referencecount;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string description;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string builtin[];<br> };<br></pre></td></tr></table></div>"
+vbsecondcontent = "<pre>Public <b>Structure</b> sslaction <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public name As String  <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public clientauth As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public clientcert As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public certheader As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public clientcertserialnumber As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public certserialheader As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public clientcertsubject As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public certsubjectheader As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public clientcerthash As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public certhashheader As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public clientcertissuer As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public certissuerheader As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public sessionid As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public sessionidheader As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public cipher As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public cipherheader As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public owasupport As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public clientcertnotbefore As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public certnotbeforeheader As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public clientcertnotafter As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public certnotafterheader As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public hits As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public undefhits As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public referencecount As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public description As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public builtin() As String<br><b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>name</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the SSL action for which to show detailed information.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>clientauth</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Perform client certificate authentication.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>clientcert</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Insert the entire client certificate into the HTTP header of the request being sent to the web server. The certificate is inserted in ASCII (PEM) format.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>certheader</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the header into which to insert the client certificate.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>clientcertserialnumber</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Insert the entire client serial number into the HTTP header of the request being sent to the web server.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>certserialheader</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the header into which to insert the client serial number.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>clientcertsubject</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Insert the client certificate subject, also known as the distinguished name (DN), into the HTTP header of the request being sent to the web server.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>certsubjectheader</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the header into which to insert the client certificate subject.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>clientcerthash</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Insert the certificate signature (hash) into the HTTP header of the request being sent to the web server.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>certhashheader</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the header into which to insert the client certificate signature (hash).</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>clientcertissuer</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Insert the certificate issuer details into the HTTP header of the request being sent to the web server.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>certissuerheader</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the header into which to insert the client certificate issuer details.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sessionid</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Insert the SSL session ID into the HTTP header of the request being sent to the web server. Every SSL connection that the client and the NetScaler share has a unique ID that identifies the specific connection.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sessionidheader</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the header into which to insert the Session ID.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>cipher</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Insert the cipher suite that the client and the NetScaler appliance negotiated for the SSL session into the HTTP header of the request being sent to the web server. The appliance inserts the cipher-suite name, SSL protocol, export or non-export string, and cipher strength bit, depending on the type of browser connecting to the SSL virtual server or service (for example, Cipher-Suite: RC4- MD5 SSLv3 Non-Export 128-bit).</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>cipherheader</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the header into which to insert the name of the cipher suite.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>owasupport</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the appliance is in front of an Outlook Web Access (OWA) server, insert a special header field, FRONT-END-HTTPS: ON, into the HTTP requests going to the OWA server. This header communicates to the server that the transaction is HTTPS and not HTTP.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>clientcertnotbefore</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Insert the date from which the certificate is valid into the HTTP header of the request being sent to the web server. Every certificate is configured with the date and time from which it is valid.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>certnotbeforeheader</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the header into which to insert the date and time from which the certificate is valid.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>clientcertnotafter</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Insert the date of expiry of the certificate into the HTTP header of the request being sent to the web server. Every certificate is configured with the date and time at which the certificate expires.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>certnotafterheader</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the header into which to insert the certificate's expiry date.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>hits</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The number of times the action has been taken.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>undefhits</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The number of times the action resulted in UNDEF.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>referencecount</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The number of references to the action.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>description</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Description of the action</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>builtin</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Flag to determine whether ssl action is built-in or not</div></td></tr><tr><td><br></td></tr><tr><td><div><b>See Also</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="getsslaction.html">getsslaction</a></div></td></tr><tr><td><br></td></tr></table></div>
+</body>
+</html>

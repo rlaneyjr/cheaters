@@ -1,0 +1,295 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+    <title>Citrix NetScaler XML API User's Guide - C# samples</title>
+    <link rel="stylesheet" href="help_ns.css" type="text/css">
+</head>
+<body class="ns_body">
+    <div class="ns_content">
+    <table cellpadding="0" cellspacing="0">
+        <tr>
+            <td>
+                <a href="#Introduction">Introduction</a>&nbsp;|&nbsp;
+                <a href="#Requirement">Requirement</a>&nbsp;|&nbsp;
+                <a href="#Compiling samples">Compiling samples</a>&nbsp;|&nbsp;
+                <a href="#Usage">Usage</a>&nbsp;|&nbsp;
+                <a href="#Cookie">Cookie handling</a>&nbsp;|&nbsp;
+                <a href="#HTTPS">HTTPS support</a>&nbsp;|&nbsp;
+                <a href="#download">Samples</a>
+            </td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+            <td>
+                <a href="#download1">Feature configuration samples</a>
+            </td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr class="ns_wp_header">
+            <td><a name="Introduction"></a>Introduction</td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr>
+            <td>
+                The example code that accompanies this file uses c# to communicate with Netscaler, using XML/SOAP.  Here, we describe how to get it up and running.<br><br>The full NSConfig.wsdl file is very large - WSDL to C# class generation utility can take time to parse it.  You can avoid this by creating a custom subset of the WSDL, containing just the methods used in these examples:</td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr>
+            <td>
+                <div class="syntax padding_left"><table><tr><td><pre>filterwsdl NSConfig.fullwsdl "add service" "set service*" "show service"<br>                             "bind lbmonitor*" "add lb vserver" "bind lb vserver*"<br>                             "show lb vserver" "rm service" "rm vserver"<br>                             "save nsconfig" > NSConfig.wsdl</pre></td></tr></table></div>
+            </td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr>
+            <td>
+                Note that you need to modify NSConfig.wsdl file at the bottom, where it says location="http://NetScaler/soap/" to location="http://10.100.50.25/soap/", where 10.100.50.25 is assumed to be your Netscaler's IP address.<br><br>The <a href="samples/ns-csharp-sample/setConfig.cs">setConfig.cs</a> example uses the Netscaler API to:
+                <ul>
+                    <li>log in to Netscaler</li>
+                    <li>add a service</li>
+                    <li>bind a monitor</li>
+                    <li>add a vserver</li>
+                    <li>bind a service to a vserver</li>
+                    <li>save configuration</li>
+                    <li>remove added vservers and services</li>
+                    <li>log out</li>
+                </ul>
+                The <a href="samples/ns-csharp-sample/getConfig.cs">getConfig.cs</a> example fetches information about all configured lb vservers, and prints selected information about each one.<br><br>The <a href="samples/ns-csharp-sample/rmConfig.cs">rmConfig.cs</a> example removes all of the configuration that was created by setConfig.cs.<br><br>The <a href="samples/ns-csharp-sample/getStat.cs">getStat.cs</a> example demonstrates usage of statistical api.<br><br>Additional documentation is available as inline comments in the C# programs.
+            </td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr class="ns_wp_header">
+            <td><a name="Requirement"></a>Requirement</td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr>
+            <td>
+                For the examples to work, you need the .Net Framework 1.0 and later.
+            </td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr class="ns_wp_header">
+            <td><a name="Compiling samples"></a>Compiling samples</td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr>
+            <td>
+                Instructions to create Client application using NSConfig.wsdl;
+                <ul>
+	                <li>Invoke the .Net Framework Command prompt.&nbsp;</li>
+	                <li>Create the client service class from wsdl by  using wsdl utility .<br><br>C:\&lt;c # sample path>>wsdl NSConfig.wsdl<br><br>Microsoft (R) Web Services Description Language Utility<br>[Microsoft (R) .NET Framework, Version 1.0.3705.0]<br>Copyright (C) Microsoft Corporation 1998-2001. All rights reserved.<br>Writing file '&lt;c# sample path>\NSConfigService.cs'.<br><br>
+	                It will generate the client class to create the client class.</li>
+                </ul>Compiliing and Executing the Client application:
+                <ul>
+                    <li>run the build.bat<br>
+                    <li>The Client application is compiled with stub sources and generate set.exe get.exe rm.exe executable.&nbsp;<br>
+                    <li>Finally, execute the NSConfig to configure the NetScaler box remotely.<br><br>
+                    <div class="syntax"><table><tr><td><pre><i>setConfig &lt;protocol>://&lt;NSIP> &lt;username> &lt;password><br>getConfig &lt;protocol>://&lt;NSIP> &lt;username> &lt;password><br>rmConfig &lt;protocol&gt;://&lt;NSIP> &lt;username> &lt;password></i></pre></td></tr></table></div></li>
+                </ul>
+            </td>
+        </tr>
+        <tr class="ns_wp_header">
+            <td><a name="Usage"></a>Usage</td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr>
+            <td>
+                The parameters to all of the examples are:<br><br>
+                <div class="syntax padding_left"><table><tr><td><pre><i>run &lt;protocol>://&lt;NSIP> &lt;username> &lt;password></i></pre></td></tr></table></div>
+            </td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr class="ns_wp_header">
+            <td><a name="Cookie"></a>Cookie Handling</td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr>
+            <td>
+                NetScaler uses the cookies for client authentication purposes. C# client needs to handle the cookies. Please add the following code in client code to handle the cookie.<br><br>
+                <div class="syntax padding_left"><table><tr><td><pre>/*
+ * Inherit the generated class from wsdl NSConfigServer and override
+ * the method GetWebRequest and GetWebResponse method.
+ */
+public class ClientService : NSConfigService {
+
+    private string cookie = null;
+
+    /* override the getWebRequest to send cookie */
+    protected override System.Net.WebRequest GetWebRequest(Uri uri) {
+        System.Net.HttpWebRequest req =
+            (System.Net.HttpWebRequest) base.GetWebRequest(uri);
+        if (cookie != null) {
+            req.Headers.Add(&quot;Set-Cookie&quot;, cookie);
+        }
+        return req;
+    }
+
+    /* override the getWebResponse to get the cookie */</i><i>
+    protected override System.Net.WebResponse GetWebResponse(System.Net.WebRequest req) {
+        System.Net.HttpWebResponserep =
+            (System.Net.HttpWebResponse) base.GetWebResponse(req);
+        if (rep.Headers[&quot;Set-Cookie&quot;] != null) {
+            cookie = rep.Headers[&quot;Set-Cookie&quot;];
+        }
+        return rep;
+    }
+}</pre></td></tr></table></div>
+            </td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr class="ns_wp_header">
+            <td><a name="HTTPS"></a>HTTPS Support</td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr>
+            <td>
+                Developers need to use the HTTPS protocol to send the secured API request to NetScaler. NetScaler by default uses the self signed CA certificate. All C# client need to handle the self signed certificate if user is sending the https request to the NetScaler.<br><br>Please follow the given instruction to use the https protocol in API requests. The .NET Framework uses the <b>System.NET.ICertificatePolicy</b> interface to provide custom security certificate validation for an application.This can be overridden.See the following code to achieve it.<br><br>
+                <div class="syntax padding_left"><table><tr><td><pre>using System;
+using System.Net;
+using System.Security;
+using System.Security.Cryptography.X509Certificates;
+
+namespace NSConfig {
+    public class trustedCertificatePolicy : System.Net.ICertificatePolicy {
+        public trustedCertificatePolicy() {}
+        public bool CheckValidationResult(
+            System.Net.ServicePoint sp,
+            System.Security.Cryptography.X509Certificates.X509Certificate certificate,
+            System.Net.WebRequest request, int problem) {
+            return true;
+        }
+    }
+}
+                </pre></td></tr></table></div>
+            </td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr>
+            <td>
+                In application, the default Certificate Policy needs to be overridden with the new trustedCertificatePolicy class.<br><br><div class="syntax padding_left"><table><tr><td><pre>class NSConfig {
+    static void Main(string[] args) {
+        System.Net.ServicePointManager.CertificatePolicy = new trustedCertificatePolicy();
+        ...
+    }
+};
+                </pre></td></tr></table></div>
+            </td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr>
+            <td>Now, all SSL based communications in this application will follow the new security policy of allowing all server certificates.<br><br><div class="syntax padding_left"><table><tr><td><pre><i>setconfig https://&lt;NSIP> &lt;username> &lt;password><br>getconfig https://&lt;NSIP> &lt;username> &lt;password><br>rmconfig https://&lt;NSIP> &lt;username> &lt;password><br></i></pre></td></tr></table></div>
+            </td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr class="ns_wp_header">
+            <td><a name="download"></a>Samples</td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr>
+            <td>
+                <table class="ns_st_body" cellspacing="0">
+                    <tr>
+                        <td><a href="samples/ns-csharp-sample/getConfig.cs">getConfig.cs</a></td>
+                        <td>The getConfig example fetches information about all configured entities, and prints selected information about each one.</td>
+                    </tr>
+                    <tr>
+                        <td class="ns_st_body_alternate_row"><a href="samples/ns-csharp-sample/setConfig.cs">setConfig.cs</a></td>
+                        <td class="ns_st_body_alternate_row">The setConfig example uses the Netscaler API to set and bind certain entities in the System.</td>
+                    </tr>
+                    <tr>
+                        <td><a href="samples/ns-csharp-sample/rmConfig.cs">rmConfig.cs</a></td>
+                        <td>The rmConfig example removes all of the configuration that was created by setConfig.</td>
+                    </tr>
+                    <tr>
+                        <td class="ns_st_body_alternate_row"><a href="samples/ns-csharp-sample/getStat.cs">getStat.cs</a></td>
+                        <td class="ns_st_body_alternate_row">The getStat example demonstrates usage of statistical api.</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr class="ns_wp_header">
+            <td><a name="download1"></a>Feature configuration samples</td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr>
+            <td>
+                <table class="ns_st_body" cellspacing="0">
+                    <tr>
+                        <td><a href="samples/ns-csharp-sample/acl.cs">acl.cs</a></td>
+                        <td>ACL configuration sample.</td>
+                    </tr>
+                    <tr>
+                        <td class="ns_st_body_alternate_row"><a href="samples/ns-csharp-sample/cmp.cs">cmp.cs</a></td>
+                        <td class="ns_st_body_alternate_row">Compression configuration sample.</td>
+                    </tr>
+                    <tr>
+                        <td><a href="samples/ns-csharp-sample/csw.cs">csw.cs</a></td>
+                        <td>Content Switching configuration sample.</td>
+                    </tr>
+                    <tr>
+                        <td class="ns_st_body_alternate_row"><a href="samples/ns-csharp-sample/lb.cs">lb.cs</a></td>
+                        <td class="ns_st_body_alternate_row">Load Balancer configuration sample.</td>
+                    </tr>
+                    <tr>
+                        <td><a href="samples/ns-csharp-sample/rba.cs">rba.cs</a></td>
+                        <td>RBA configuration sample.</td>
+                    </tr>
+                    <tr>
+                        <td class="ns_st_body_alternate_row"><a href="samples/ns-csharp-sample/rewrite.cs">rewrite.cs</a></td>
+                        <td class="ns_st_body_alternate_row">Rewrite configuration sample.</td>
+                    </tr>
+                    <tr>
+                        <td><a href="samples/ns-csharp-sample/ssl.cs">ssl.cs</a></td>
+                        <td>SSL Base configuration sample.</td>
+                    </tr>
+                    <tr>
+                        <td class="ns_st_body_alternate_row"><a href="samples/ns-csharp-sample/ssl_crl.cs">ssl_crl.cs</a></td>
+                        <td class="ns_st_body_alternate_row">SSL Client-Auth with CRL configuration sample.</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    </div>
+</body>
+</html>

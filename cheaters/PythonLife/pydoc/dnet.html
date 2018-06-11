@@ -1,0 +1,681 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module dnet</title>
+<meta charset="utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>dnet</strong></big></big> (version 1.12)</font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/lib/python2.7/site-packages/dnet.so">/usr/local/lib/python2.7/site-packages/dnet.so</a></font></td></tr></table>
+    <p><tt>dumb&nbsp;networking&nbsp;library<br>
+&nbsp;<br>
+This&nbsp;module&nbsp;provides&nbsp;a&nbsp;simplified&nbsp;interface&nbsp;to&nbsp;several&nbsp;low-level<br>
+networking&nbsp;routines,&nbsp;including&nbsp;network&nbsp;address&nbsp;manipulation,&nbsp;kernel<br>
+<a href="#arp">arp</a>(4)&nbsp;cache&nbsp;and&nbsp;<a href="#route">route</a>(4)&nbsp;table&nbsp;lookup&nbsp;and&nbsp;manipulation,&nbsp;network<br>
+firewalling,&nbsp;network&nbsp;interface&nbsp;lookup&nbsp;and&nbsp;manipulation,&nbsp;IP&nbsp;tunnelling,<br>
+and&nbsp;raw&nbsp;IP&nbsp;packet&nbsp;and&nbsp;Ethernet&nbsp;frame&nbsp;transmission.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="__builtin__.html">__builtin__</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="__builtin__.html#object">__builtin__.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="dnet.html#addr">addr</a>
+</font></dt><dt><font face="helvetica, arial"><a href="dnet.html#arp">arp</a>
+</font></dt><dt><font face="helvetica, arial"><a href="dnet.html#eth">eth</a>
+</font></dt><dt><font face="helvetica, arial"><a href="dnet.html#fw">fw</a>
+</font></dt><dt><font face="helvetica, arial"><a href="dnet.html#intf">intf</a>
+</font></dt><dt><font face="helvetica, arial"><a href="dnet.html#ip">ip</a>
+</font></dt><dt><font face="helvetica, arial"><a href="dnet.html#rand">rand</a>
+</font></dt><dt><font face="helvetica, arial"><a href="dnet.html#route">route</a>
+</font></dt><dt><font face="helvetica, arial"><a href="dnet.html#tun">tun</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="addr">class <strong>addr</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#addr">addr</a>(addrtxt=None,&nbsp;type=ADDR_TYPE_NONE)&nbsp;-&gt;&nbsp;network&nbsp;address&nbsp;<a href="__builtin__.html#object">object</a><br>
+&nbsp;<br>
+Create&nbsp;a&nbsp;network&nbsp;address&nbsp;<a href="__builtin__.html#object">object</a>,&nbsp;optionally&nbsp;initialized&nbsp;from&nbsp;a<br>
+human-readable&nbsp;Ethernet,&nbsp;IP,&nbsp;or&nbsp;IPv6&nbsp;address&nbsp;string.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="addr-__add__"><strong>__add__</strong></a>(...)</dt><dd><tt>x.<a href="#addr-__add__">__add__</a>(y)&nbsp;&lt;==&gt;&nbsp;x+y</tt></dd></dl>
+
+<dl><dt><a name="addr-__cmp__"><strong>__cmp__</strong></a>(...)</dt><dd><tt>x.<a href="#addr-__cmp__">__cmp__</a>(y)&nbsp;&lt;==&gt;&nbsp;cmp(x,y)</tt></dd></dl>
+
+<dl><dt><a name="addr-__contains__"><strong>__contains__</strong></a>(...)</dt><dd><tt>x.<a href="#addr-__contains__">__contains__</a>(y)&nbsp;&lt;==&gt;&nbsp;y&nbsp;in&nbsp;x</tt></dd></dl>
+
+<dl><dt><a name="addr-__copy__"><strong>__copy__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="addr-__hash__"><strong>__hash__</strong></a>(...)</dt><dd><tt>x.<a href="#addr-__hash__">__hash__</a>()&nbsp;&lt;==&gt;&nbsp;hash(x)</tt></dd></dl>
+
+<dl><dt><a name="addr-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#addr-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;help(<a href="#addr-type">type</a>(x))&nbsp;for&nbsp;signature</tt></dd></dl>
+
+<dl><dt><a name="addr-__int__"><strong>__int__</strong></a>(...)</dt><dd><tt>x.<a href="#addr-__int__">__int__</a>()&nbsp;&lt;==&gt;&nbsp;int(x)</tt></dd></dl>
+
+<dl><dt><a name="addr-__iter__"><strong>__iter__</strong></a>(...)</dt><dd><tt>x.<a href="#addr-__iter__">__iter__</a>()&nbsp;&lt;==&gt;&nbsp;iter(x)</tt></dd></dl>
+
+<dl><dt><a name="addr-__long__"><strong>__long__</strong></a>(...)</dt><dd><tt>x.<a href="#addr-__long__">__long__</a>()&nbsp;&lt;==&gt;&nbsp;long(x)</tt></dd></dl>
+
+<dl><dt><a name="addr-__radd__"><strong>__radd__</strong></a>(...)</dt><dd><tt>x.<a href="#addr-__radd__">__radd__</a>(y)&nbsp;&lt;==&gt;&nbsp;y+x</tt></dd></dl>
+
+<dl><dt><a name="addr-__repr__"><strong>__repr__</strong></a>(...)</dt><dd><tt>x.<a href="#addr-__repr__">__repr__</a>()&nbsp;&lt;==&gt;&nbsp;repr(x)</tt></dd></dl>
+
+<dl><dt><a name="addr-bcast"><strong>bcast</strong></a>(...)</dt><dd><tt>Return&nbsp;an&nbsp;<a href="#addr">addr</a>&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;for&nbsp;our&nbsp;broadcast&nbsp;address.</tt></dd></dl>
+
+<dl><dt><a name="addr-net"><strong>net</strong></a>(...)</dt><dd><tt>Return&nbsp;an&nbsp;<a href="#addr">addr</a>&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;for&nbsp;our&nbsp;network&nbsp;address.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>bits</strong></dt>
+<dd><tt>Address&nbsp;bitlength&nbsp;integer.</tt></dd>
+</dl>
+<dl><dt><strong>data</strong></dt>
+<dd><tt>Raw&nbsp;address&nbsp;string.</tt></dd>
+</dl>
+<dl><dt><strong>eth</strong></dt>
+<dd><tt>Ethernet&nbsp;MAC&nbsp;address&nbsp;as&nbsp;binary&nbsp;string.</tt></dd>
+</dl>
+<dl><dt><strong>ip</strong></dt>
+<dd><tt>IPv4&nbsp;address&nbsp;as&nbsp;binary&nbsp;string.</tt></dd>
+</dl>
+<dl><dt><strong>ip6</strong></dt>
+<dd><tt>IPv6&nbsp;address&nbsp;as&nbsp;binary&nbsp;string.</tt></dd>
+</dl>
+<dl><dt><strong>type</strong></dt>
+<dd><tt>Address&nbsp;type&nbsp;(ADDR_TYPE_*)&nbsp;integer.</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object&gt;<dd><tt>T.<a href="#addr-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="arp">class <strong>arp</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#arp">arp</a>()&nbsp;-&gt;&nbsp;ARP&nbsp;table&nbsp;<a href="__builtin__.html#object">object</a><br>
+&nbsp;<br>
+Open&nbsp;a&nbsp;handle&nbsp;to&nbsp;the&nbsp;system&nbsp;ARP&nbsp;table.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="arp-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#arp-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;help(type(x))&nbsp;for&nbsp;signature</tt></dd></dl>
+
+<dl><dt><a name="arp-__iter__"><strong>__iter__</strong></a>(...)</dt><dd><tt>x.<a href="#arp-__iter__">__iter__</a>()&nbsp;&lt;==&gt;&nbsp;iter(x)</tt></dd></dl>
+
+<dl><dt><a name="arp-add"><strong>add</strong></a>(...)</dt><dd><tt>Add&nbsp;an&nbsp;entry&nbsp;to&nbsp;the&nbsp;system&nbsp;ARP&nbsp;table.<br>
+&nbsp;<br>
+Arguments:<br>
+pa&nbsp;--&nbsp;ADDR_TYPE_IP&nbsp;network&nbsp;address&nbsp;<a href="__builtin__.html#object">object</a><br>
+ha&nbsp;--&nbsp;ADDR_TYPE_ETH&nbsp;network&nbsp;address&nbsp;<a href="__builtin__.html#object">object</a></tt></dd></dl>
+
+<dl><dt><a name="arp-delete"><strong>delete</strong></a>(...)</dt><dd><tt>Delete&nbsp;an&nbsp;entry&nbsp;from&nbsp;the&nbsp;system&nbsp;ARP&nbsp;table.<br>
+&nbsp;<br>
+Arguments:<br>
+pa&nbsp;--&nbsp;ADDR_TYPE_IP&nbsp;network&nbsp;address&nbsp;<a href="__builtin__.html#object">object</a></tt></dd></dl>
+
+<dl><dt><a name="arp-get"><strong>get</strong></a>(...)</dt><dd><tt>Return&nbsp;the&nbsp;hardware&nbsp;address&nbsp;for&nbsp;a&nbsp;given&nbsp;protocol&nbsp;address<br>
+in&nbsp;the&nbsp;system&nbsp;ARP&nbsp;table.<br>
+&nbsp;<br>
+Arguments:<br>
+pa&nbsp;--&nbsp;ADDR_TYPE_IP&nbsp;network&nbsp;address&nbsp;<a href="__builtin__.html#object">object</a></tt></dd></dl>
+
+<dl><dt><a name="arp-loop"><strong>loop</strong></a>(...)</dt><dd><tt>Iterate&nbsp;over&nbsp;the&nbsp;system&nbsp;ARP&nbsp;table,&nbsp;invoking&nbsp;a&nbsp;user&nbsp;callback<br>
+with&nbsp;each&nbsp;entry,&nbsp;returning&nbsp;the&nbsp;status&nbsp;of&nbsp;the&nbsp;callback&nbsp;routine.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+callback&nbsp;--&nbsp;callback&nbsp;function&nbsp;with&nbsp;((pa,&nbsp;ha),&nbsp;arg)&nbsp;prototype.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;this&nbsp;function&nbsp;returns&nbsp;a&nbsp;non-zero&nbsp;value,&nbsp;the&nbsp;loop<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;will&nbsp;break&nbsp;early.<br>
+arg&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;optional&nbsp;callback&nbsp;argument</tt></dd></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object&gt;<dd><tt>T.<a href="#arp-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="eth">class <strong>eth</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#eth">eth</a>(device)&nbsp;-&gt;&nbsp;Ethernet&nbsp;device&nbsp;<a href="__builtin__.html#object">object</a><br>
+&nbsp;<br>
+Open&nbsp;the&nbsp;specified&nbsp;Ethernet&nbsp;device&nbsp;for&nbsp;sending.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="eth-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#eth-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;help(type(x))&nbsp;for&nbsp;signature</tt></dd></dl>
+
+<dl><dt><a name="eth-get"><strong>get</strong></a>(...)</dt><dd><tt>Return&nbsp;the&nbsp;MAC&nbsp;address&nbsp;associated&nbsp;with&nbsp;the&nbsp;device&nbsp;as&nbsp;a<br>
+binary&nbsp;string.</tt></dd></dl>
+
+<dl><dt><a name="eth-send"><strong>send</strong></a>(...)</dt><dd><tt>Send&nbsp;an&nbsp;Ethernet&nbsp;frame,&nbsp;returning&nbsp;the&nbsp;number&nbsp;of&nbsp;bytes&nbsp;sent<br>
+or&nbsp;-1&nbsp;on&nbsp;failure.<br>
+&nbsp;<br>
+Arguments:<br>
+frame&nbsp;--&nbsp;binary&nbsp;string&nbsp;representing&nbsp;an&nbsp;Ethernet&nbsp;frame</tt></dd></dl>
+
+<dl><dt><a name="eth-set"><strong>set</strong></a>(...)</dt><dd><tt>Set&nbsp;the&nbsp;MAC&nbsp;address&nbsp;for&nbsp;the&nbsp;device,&nbsp;returning&nbsp;0&nbsp;on&nbsp;success,<br>
+-1&nbsp;on&nbsp;failure.<br>
+&nbsp;<br>
+Arguments:<br>
+eth_addr&nbsp;--&nbsp;6-byte&nbsp;binary&nbsp;string&nbsp;(e.g.&nbsp;'\x00\xde\xad\xbe\xef\x00')</tt></dd></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object&gt;<dd><tt>T.<a href="#eth-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="fw">class <strong>fw</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#fw">fw</a>()&nbsp;-&gt;&nbsp;Firewall&nbsp;ruleset&nbsp;<a href="__builtin__.html#object">object</a><br>
+&nbsp;<br>
+Open&nbsp;a&nbsp;handle&nbsp;to&nbsp;the&nbsp;local&nbsp;network&nbsp;firewall&nbsp;configuration.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="fw-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#fw-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;help(type(x))&nbsp;for&nbsp;signature</tt></dd></dl>
+
+<dl><dt><a name="fw-__iter__"><strong>__iter__</strong></a>(...)</dt><dd><tt>x.<a href="#fw-__iter__">__iter__</a>()&nbsp;&lt;==&gt;&nbsp;iter(x)</tt></dd></dl>
+
+<dl><dt><a name="fw-add"><strong>add</strong></a>(...)</dt><dd><tt>Add&nbsp;a&nbsp;firewall&nbsp;rule&nbsp;specified&nbsp;as&nbsp;a&nbsp;dict.<br>
+&nbsp;<br>
+Dict&nbsp;values:<br>
+device&nbsp;--&nbsp;interface&nbsp;name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(string)<br>
+op&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;operation&nbsp;(FW_OP_*)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(integer)<br>
+dir&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;direction&nbsp;(FW_DIR_*)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(integer)<br>
+proto&nbsp;&nbsp;--&nbsp;IP&nbsp;protocol&nbsp;(IP_PROTO_*)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(integer)<br>
+src&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;source&nbsp;address&nbsp;/&nbsp;net&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a href="#addr">addr</a>&nbsp;<a href="__builtin__.html#object">object</a>)<br>
+dst&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;destination&nbsp;address&nbsp;/&nbsp;net&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a href="#addr">addr</a>&nbsp;<a href="__builtin__.html#object">object</a>)<br>
+sport&nbsp;&nbsp;--&nbsp;source&nbsp;port&nbsp;range&nbsp;or&nbsp;ICMP&nbsp;type/mask&nbsp;&nbsp;&nbsp;(list&nbsp;of&nbsp;2&nbsp;integers)<br>
+dport&nbsp;&nbsp;--&nbsp;dest&nbsp;port&nbsp;range&nbsp;or&nbsp;ICMP&nbsp;code/mask&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(list&nbsp;of&nbsp;2&nbsp;integers)</tt></dd></dl>
+
+<dl><dt><a name="fw-delete"><strong>delete</strong></a>(...)</dt><dd><tt>Delete&nbsp;a&nbsp;firewall&nbsp;rule&nbsp;specified&nbsp;as&nbsp;a&nbsp;dict.</tt></dd></dl>
+
+<dl><dt><a name="fw-loop"><strong>loop</strong></a>(...)</dt><dd><tt>Iterate&nbsp;over&nbsp;the&nbsp;local&nbsp;firewall&nbsp;ruleset,&nbsp;invoking&nbsp;a&nbsp;user&nbsp;callback<br>
+with&nbsp;each&nbsp;entry,&nbsp;returning&nbsp;the&nbsp;status&nbsp;of&nbsp;the&nbsp;callback&nbsp;routine.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+callback&nbsp;--&nbsp;callback&nbsp;function&nbsp;with&nbsp;(dict,&nbsp;arg)&nbsp;prototype.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;this&nbsp;function&nbsp;returns&nbsp;a&nbsp;non-zero&nbsp;value,&nbsp;the&nbsp;loop<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;will&nbsp;break&nbsp;early.<br>
+arg&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;optional&nbsp;callback&nbsp;argument</tt></dd></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object&gt;<dd><tt>T.<a href="#fw-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="intf">class <strong>intf</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#intf">intf</a>()&nbsp;-&gt;&nbsp;Interface&nbsp;table&nbsp;<a href="__builtin__.html#object">object</a><br>
+&nbsp;<br>
+Open&nbsp;a&nbsp;handle&nbsp;to&nbsp;the&nbsp;system&nbsp;network&nbsp;interface&nbsp;table.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="intf-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#intf-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;help(type(x))&nbsp;for&nbsp;signature</tt></dd></dl>
+
+<dl><dt><a name="intf-__iter__"><strong>__iter__</strong></a>(...)</dt><dd><tt>x.<a href="#intf-__iter__">__iter__</a>()&nbsp;&lt;==&gt;&nbsp;iter(x)</tt></dd></dl>
+
+<dl><dt><a name="intf-get"><strong>get</strong></a>(...)</dt><dd><tt>Return&nbsp;the&nbsp;configuration&nbsp;for&nbsp;a&nbsp;network&nbsp;interface&nbsp;as&nbsp;a&nbsp;dict.</tt></dd></dl>
+
+<dl><dt><a name="intf-get_dst"><strong>get_dst</strong></a>(...)</dt><dd><tt>Return&nbsp;the&nbsp;configuration&nbsp;for&nbsp;the&nbsp;best&nbsp;interface&nbsp;with&nbsp;which&nbsp;to<br>
+reach&nbsp;the&nbsp;specified&nbsp;dst&nbsp;address.</tt></dd></dl>
+
+<dl><dt><a name="intf-get_src"><strong>get_src</strong></a>(...)</dt><dd><tt>Return&nbsp;the&nbsp;configuration&nbsp;for&nbsp;the&nbsp;interface&nbsp;whose&nbsp;primary&nbsp;address<br>
+matches&nbsp;the&nbsp;specified&nbsp;source&nbsp;address.</tt></dd></dl>
+
+<dl><dt><a name="intf-loop"><strong>loop</strong></a>(...)</dt><dd><tt>Iterate&nbsp;over&nbsp;the&nbsp;system&nbsp;interface&nbsp;table,&nbsp;invoking&nbsp;a&nbsp;user&nbsp;callback<br>
+with&nbsp;each&nbsp;entry,&nbsp;returning&nbsp;the&nbsp;status&nbsp;of&nbsp;the&nbsp;callback&nbsp;routine.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+callback&nbsp;--&nbsp;callback&nbsp;function&nbsp;with&nbsp;(dict,&nbsp;arg)&nbsp;prototype.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;this&nbsp;function&nbsp;returns&nbsp;a&nbsp;non-zero&nbsp;value,&nbsp;the&nbsp;loop<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;will&nbsp;break&nbsp;early.<br>
+arg&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;optional&nbsp;callback&nbsp;argument</tt></dd></dl>
+
+<dl><dt><a name="intf-set"><strong>set</strong></a>(...)</dt><dd><tt>Set&nbsp;the&nbsp;configuration&nbsp;for&nbsp;an&nbsp;interface&nbsp;from&nbsp;a&nbsp;dict.<br>
+&nbsp;<br>
+Dict&nbsp;values:<br>
+name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;name&nbsp;of&nbsp;interface&nbsp;to&nbsp;set&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(string)<br>
+flags&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;interface&nbsp;flags&nbsp;(INTF_FLAG_*)&nbsp;&nbsp;&nbsp;&nbsp;(integer&nbsp;bitmask)<br>
+mtu&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;interface&nbsp;MTU&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(integer)<br>
+<a href="#addr">addr</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;primary&nbsp;network&nbsp;address&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a href="#addr">addr</a>&nbsp;<a href="__builtin__.html#object">object</a>)<br>
+dst_addr&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;point-to-point&nbsp;dst&nbsp;address&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a href="#addr">addr</a>&nbsp;<a href="__builtin__.html#object">object</a>)<br>
+link_addr&nbsp;&nbsp;&nbsp;--&nbsp;link-layer&nbsp;address&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a href="#addr">addr</a>&nbsp;<a href="__builtin__.html#object">object</a>)<br>
+alias_addrs&nbsp;--&nbsp;additional&nbsp;network&nbsp;addresses&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(list&nbsp;of&nbsp;<a href="#addr">addr</a>&nbsp;objects)</tt></dd></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object&gt;<dd><tt>T.<a href="#intf-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ip">class <strong>ip</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#ip">ip</a>()&nbsp;-&gt;&nbsp;Raw&nbsp;IP&nbsp;<a href="__builtin__.html#object">object</a><br>
+&nbsp;<br>
+Open&nbsp;a&nbsp;raw&nbsp;IP&nbsp;socket&nbsp;for&nbsp;sending.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="ip-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#ip-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;help(type(x))&nbsp;for&nbsp;signature</tt></dd></dl>
+
+<dl><dt><a name="ip-send"><strong>send</strong></a>(...)</dt><dd><tt>Send&nbsp;an&nbsp;IP&nbsp;packet,&nbsp;returning&nbsp;the&nbsp;number&nbsp;of&nbsp;bytes&nbsp;sent<br>
+or&nbsp;-1&nbsp;on&nbsp;failure.<br>
+&nbsp;<br>
+Arguments:<br>
+pkt&nbsp;--&nbsp;binary&nbsp;string&nbsp;representing&nbsp;an&nbsp;IP&nbsp;packet</tt></dd></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object&gt;<dd><tt>T.<a href="#ip-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="rand">class <strong>rand</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#rand">rand</a>()&nbsp;-&gt;&nbsp;Pseudo-random&nbsp;number&nbsp;generator<br>
+&nbsp;<br>
+Obtain&nbsp;a&nbsp;handle&nbsp;for&nbsp;fast,&nbsp;cryptographically&nbsp;strong&nbsp;pseudo-random<br>
+number&nbsp;generation.&nbsp;The&nbsp;starting&nbsp;seed&nbsp;is&nbsp;derived&nbsp;from&nbsp;the&nbsp;system<br>
+random&nbsp;data&nbsp;source&nbsp;device&nbsp;(if&nbsp;one&nbsp;exists),&nbsp;or&nbsp;from&nbsp;the&nbsp;current&nbsp;time<br>
+and&nbsp;random&nbsp;stack&nbsp;contents.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="rand-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#rand-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;help(type(x))&nbsp;for&nbsp;signature</tt></dd></dl>
+
+<dl><dt><a name="rand-add"><strong>add</strong></a>(...)</dt><dd><tt>Add&nbsp;additional&nbsp;entropy&nbsp;into&nbsp;the&nbsp;PRNG&nbsp;mix.<br>
+&nbsp;<br>
+Arguments:<br>
+string&nbsp;--&nbsp;binary&nbsp;string</tt></dd></dl>
+
+<dl><dt><a name="rand-get"><strong>get</strong></a>(...)</dt><dd><tt>Return&nbsp;a&nbsp;string&nbsp;of&nbsp;random&nbsp;bytes.<br>
+&nbsp;<br>
+Arguments:<br>
+len&nbsp;--&nbsp;number&nbsp;of&nbsp;random&nbsp;bytes&nbsp;to&nbsp;generate</tt></dd></dl>
+
+<dl><dt><a name="rand-set"><strong>set</strong></a>(...)</dt><dd><tt>Initialize&nbsp;the&nbsp;PRNG&nbsp;from&nbsp;a&nbsp;known&nbsp;seed.<br>
+&nbsp;<br>
+Arguments:<br>
+string&nbsp;--&nbsp;binary&nbsp;string&nbsp;seed&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="rand-uint16"><strong>uint16</strong></a>(...)</dt><dd><tt>Return&nbsp;a&nbsp;random&nbsp;16-bit&nbsp;integer.</tt></dd></dl>
+
+<dl><dt><a name="rand-uint32"><strong>uint32</strong></a>(...)</dt><dd><tt>Return&nbsp;a&nbsp;random&nbsp;32-bit&nbsp;integer.</tt></dd></dl>
+
+<dl><dt><a name="rand-uint8"><strong>uint8</strong></a>(...)</dt><dd><tt>Return&nbsp;a&nbsp;random&nbsp;8-bit&nbsp;integer.</tt></dd></dl>
+
+<dl><dt><a name="rand-xrange"><strong>xrange</strong></a>(...)</dt><dd><tt><a href="#rand-xrange">xrange</a>([start,]&nbsp;stop)&nbsp;-&gt;&nbsp;xrange&nbsp;<a href="__builtin__.html#object">object</a><br>
+&nbsp;<br>
+Return&nbsp;a&nbsp;random&nbsp;permutation&nbsp;iterator&nbsp;to&nbsp;walk&nbsp;an&nbsp;unsigned&nbsp;integer&nbsp;range,<br>
+like&nbsp;<a href="#rand-xrange">xrange</a>().</tt></dd></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object&gt;<dd><tt>T.<a href="#rand-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="route">class <strong>route</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#route">route</a>()&nbsp;-&gt;&nbsp;Routing&nbsp;table&nbsp;<a href="__builtin__.html#object">object</a><br>
+&nbsp;<br>
+Open&nbsp;a&nbsp;handle&nbsp;to&nbsp;the&nbsp;system&nbsp;routing&nbsp;table.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="route-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#route-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;help(type(x))&nbsp;for&nbsp;signature</tt></dd></dl>
+
+<dl><dt><a name="route-__iter__"><strong>__iter__</strong></a>(...)</dt><dd><tt>x.<a href="#route-__iter__">__iter__</a>()&nbsp;&lt;==&gt;&nbsp;iter(x)</tt></dd></dl>
+
+<dl><dt><a name="route-add"><strong>add</strong></a>(...)</dt><dd><tt>Add&nbsp;an&nbsp;entry&nbsp;to&nbsp;the&nbsp;system&nbsp;routing&nbsp;table.<br>
+&nbsp;<br>
+Arguments:<br>
+dst&nbsp;--&nbsp;ADDR_TYPE_IP&nbsp;network&nbsp;address&nbsp;<a href="__builtin__.html#object">object</a><br>
+gw&nbsp;--&nbsp;ADDR_TYPE_IP&nbsp;network&nbsp;address&nbsp;<a href="__builtin__.html#object">object</a></tt></dd></dl>
+
+<dl><dt><a name="route-delete"><strong>delete</strong></a>(...)</dt><dd><tt>Delete&nbsp;an&nbsp;entry&nbsp;from&nbsp;the&nbsp;system&nbsp;routing&nbsp;table.<br>
+&nbsp;<br>
+Arguments:<br>
+dst&nbsp;--&nbsp;ADDR_TYPE_IP&nbsp;network&nbsp;address&nbsp;<a href="__builtin__.html#object">object</a></tt></dd></dl>
+
+<dl><dt><a name="route-get"><strong>get</strong></a>(...)</dt><dd><tt>Return&nbsp;the&nbsp;hardware&nbsp;address&nbsp;for&nbsp;a&nbsp;given&nbsp;protocol&nbsp;address<br>
+in&nbsp;the&nbsp;system&nbsp;routing&nbsp;table.<br>
+&nbsp;<br>
+Arguments:<br>
+dst&nbsp;--&nbsp;ADDR_TYPE_IP&nbsp;network&nbsp;address&nbsp;<a href="__builtin__.html#object">object</a></tt></dd></dl>
+
+<dl><dt><a name="route-loop"><strong>loop</strong></a>(...)</dt><dd><tt>Iterate&nbsp;over&nbsp;the&nbsp;system&nbsp;routing&nbsp;table,&nbsp;invoking&nbsp;a&nbsp;user&nbsp;callback<br>
+with&nbsp;each&nbsp;entry,&nbsp;returning&nbsp;the&nbsp;status&nbsp;of&nbsp;the&nbsp;callback&nbsp;routine.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+callback&nbsp;--&nbsp;callback&nbsp;function&nbsp;with&nbsp;((dst,&nbsp;gw),&nbsp;arg)&nbsp;prototype.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;this&nbsp;function&nbsp;returns&nbsp;a&nbsp;non-zero&nbsp;value,&nbsp;the&nbsp;loop<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;will&nbsp;break&nbsp;early.<br>
+arg&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;optional&nbsp;callback&nbsp;argument</tt></dd></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object&gt;<dd><tt>T.<a href="#route-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="tun">class <strong>tun</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#tun">tun</a>(src,&nbsp;dst[,&nbsp;mtu])&nbsp;-&gt;&nbsp;Network&nbsp;tunnel&nbsp;interface&nbsp;handle<br>
+&nbsp;<br>
+Obtain&nbsp;a&nbsp;handle&nbsp;to&nbsp;a&nbsp;network&nbsp;tunnel&nbsp;interface,&nbsp;to&nbsp;which&nbsp;packets<br>
+destined&nbsp;for&nbsp;dst&nbsp;are&nbsp;delivered&nbsp;(with&nbsp;source&nbsp;addresses&nbsp;rewritten&nbsp;to<br>
+src),&nbsp;where&nbsp;they&nbsp;may&nbsp;be&nbsp;read&nbsp;by&nbsp;a&nbsp;userland&nbsp;process&nbsp;and&nbsp;processed<br>
+as&nbsp;desired.&nbsp;Packets&nbsp;written&nbsp;back&nbsp;to&nbsp;the&nbsp;handle&nbsp;are&nbsp;injected&nbsp;into<br>
+the&nbsp;kernel&nbsp;networking&nbsp;subsystem.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="tun-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#tun-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;help(type(x))&nbsp;for&nbsp;signature</tt></dd></dl>
+
+<dl><dt><a name="tun-close"><strong>close</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="tun-fileno"><strong>fileno</strong></a>(...)</dt><dd><tt>Return&nbsp;file&nbsp;descriptor&nbsp;for&nbsp;tunnel&nbsp;handle.</tt></dd></dl>
+
+<dl><dt><a name="tun-recv"><strong>recv</strong></a>(...)</dt><dd><tt>Return&nbsp;the&nbsp;next&nbsp;packet&nbsp;delivered&nbsp;to&nbsp;the&nbsp;tunnel&nbsp;interface.</tt></dd></dl>
+
+<dl><dt><a name="tun-send"><strong>send</strong></a>(...)</dt><dd><tt>Send&nbsp;an&nbsp;IP&nbsp;packet,&nbsp;returning&nbsp;the&nbsp;number&nbsp;of&nbsp;bytes&nbsp;sent<br>
+or&nbsp;-1&nbsp;on&nbsp;failure.<br>
+&nbsp;<br>
+Arguments:<br>
+pkt&nbsp;--&nbsp;binary&nbsp;string&nbsp;representing&nbsp;an&nbsp;IP&nbsp;packet</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>fd</strong></dt>
+<dd><tt>File&nbsp;descriptor&nbsp;for&nbsp;tunnel&nbsp;handle.</tt></dd>
+</dl>
+<dl><dt><strong>name</strong></dt>
+<dd><tt>Tunnel&nbsp;interface&nbsp;name.</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object&gt;<dd><tt>T.<a href="#tun-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-arp_pack_hdr_ethip"><strong>arp_pack_hdr_ethip</strong></a>(...)</dt><dd><tt>Return&nbsp;a&nbsp;packed&nbsp;binary&nbsp;string&nbsp;representing&nbsp;an&nbsp;Ethernet/IP&nbsp;ARP&nbsp;message.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+op&nbsp;&nbsp;--&nbsp;operation&nbsp;(ARP_OP_*)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(16-bit&nbsp;integer)<br>
+sha&nbsp;--&nbsp;sender&nbsp;Ethernet&nbsp;address&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(6-byte&nbsp;binary&nbsp;string)<br>
+spa&nbsp;--&nbsp;sender&nbsp;IP&nbsp;address&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(4-byte&nbsp;binary&nbsp;string)<br>
+dha&nbsp;--&nbsp;destination&nbsp;Ethernet&nbsp;address&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(6-byte&nbsp;binary&nbsp;string)<br>
+dpa&nbsp;--&nbsp;destination&nbsp;IP&nbsp;address&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(4-byte&nbsp;binary&nbsp;string)</tt></dd></dl>
+ <dl><dt><a name="-eth_aton"><strong>eth_aton</strong></a>(...)</dt><dd><tt>Convert&nbsp;an&nbsp;Ethernet&nbsp;MAC&nbsp;address&nbsp;from&nbsp;a&nbsp;printable&nbsp;string&nbsp;to&nbsp;a<br>
+packed&nbsp;binary&nbsp;string&nbsp;('\x00\xde\xad\xbe\xef\x00').</tt></dd></dl>
+ <dl><dt><a name="-eth_ntoa"><strong>eth_ntoa</strong></a>(...)</dt><dd><tt>Convert&nbsp;an&nbsp;Ethernet&nbsp;MAC&nbsp;address&nbsp;from&nbsp;6-byte&nbsp;packed&nbsp;binary&nbsp;string&nbsp;to<br>
+a&nbsp;printable&nbsp;string&nbsp;('00:de:ad:be:ef:00').</tt></dd></dl>
+ <dl><dt><a name="-eth_pack_hdr"><strong>eth_pack_hdr</strong></a>(...)</dt><dd><tt>Return&nbsp;a&nbsp;packed&nbsp;binary&nbsp;string&nbsp;representing&nbsp;an&nbsp;Ethernet&nbsp;header.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+dst&nbsp;&nbsp;--&nbsp;destination&nbsp;address&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(6-byte&nbsp;binary&nbsp;string)<br>
+src&nbsp;&nbsp;--&nbsp;source&nbsp;address&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(6-byte&nbsp;binary&nbsp;string)<br>
+type&nbsp;--&nbsp;Ethernet&nbsp;payload&nbsp;type&nbsp;(ETH_TYPE_*)&nbsp;&nbsp;(16-bit&nbsp;integer)</tt></dd></dl>
+ <dl><dt><a name="-icmp_pack_hdr"><strong>icmp_pack_hdr</strong></a>(...)</dt><dd><tt>Return&nbsp;a&nbsp;packed&nbsp;binary&nbsp;string&nbsp;representing&nbsp;an&nbsp;ICMP&nbsp;header.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+type&nbsp;--&nbsp;ICMP&nbsp;type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(8-bit&nbsp;integer)<br>
+code&nbsp;--&nbsp;ICMP&nbsp;code&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(8-bit&nbsp;integer)</tt></dd></dl>
+ <dl><dt><a name="-ip6_aton"><strong>ip6_aton</strong></a>(...)</dt><dd><tt>Convert&nbsp;an&nbsp;IPv6&nbsp;address&nbsp;from&nbsp;a&nbsp;printable&nbsp;string&nbsp;to&nbsp;a<br>
+packed&nbsp;binary&nbsp;string&nbsp;('\x0a\x00\x00\x01').</tt></dd></dl>
+ <dl><dt><a name="-ip6_checksum"><strong>ip6_checksum</strong></a>(...)</dt><dd><tt>Return&nbsp;a&nbsp;packed&nbsp;binary&nbsp;string&nbsp;representing&nbsp;an&nbsp;IPv6&nbsp;packet&nbsp;<br>
+with&nbsp;the&nbsp;IPv6&nbsp;and&nbsp;transport-layer&nbsp;checksums&nbsp;set.<br>
+&nbsp;<br>
+Arguments:<br>
+pkt&nbsp;--&nbsp;binary&nbsp;string&nbsp;representing&nbsp;an&nbsp;IPv6&nbsp;packet</tt></dd></dl>
+ <dl><dt><a name="-ip6_ntoa"><strong>ip6_ntoa</strong></a>(...)</dt><dd><tt>Convert&nbsp;an&nbsp;IPv6&nbsp;address&nbsp;from&nbsp;a&nbsp;16-byte&nbsp;packed&nbsp;binary&nbsp;string&nbsp;to&nbsp;a<br>
+printable&nbsp;string&nbsp;('10.0.0.1').</tt></dd></dl>
+ <dl><dt><a name="-ip6_pack_hdr"><strong>ip6_pack_hdr</strong></a>(...)</dt><dd><tt>Return&nbsp;a&nbsp;packed&nbsp;binary&nbsp;string&nbsp;representing&nbsp;an&nbsp;IPv6&nbsp;header.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+fc&nbsp;&nbsp;&nbsp;--&nbsp;flow&nbsp;class&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(8-bit&nbsp;integer)<br>
+fl&nbsp;&nbsp;&nbsp;--&nbsp;flow&nbsp;label&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(20-bit&nbsp;integer)<br>
+plen&nbsp;--&nbsp;payload&nbsp;length&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(16-bit&nbsp;integer)<br>
+nxt&nbsp;&nbsp;--&nbsp;next&nbsp;header&nbsp;(IP_PROTO_*)&nbsp;&nbsp;&nbsp;&nbsp;(8-bit&nbsp;integer)<br>
+hlim&nbsp;--&nbsp;hop&nbsp;limit&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(8-bit&nbsp;integer)<br>
+src&nbsp;&nbsp;--&nbsp;source&nbsp;address&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(16-byte&nbsp;binary&nbsp;string)<br>
+dst&nbsp;&nbsp;--&nbsp;destination&nbsp;address&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(16-byte&nbsp;binary&nbsp;string)</tt></dd></dl>
+ <dl><dt><a name="-ip_aton"><strong>ip_aton</strong></a>(...)</dt><dd><tt>Convert&nbsp;an&nbsp;IP&nbsp;address&nbsp;from&nbsp;a&nbsp;printable&nbsp;string&nbsp;to&nbsp;a<br>
+packed&nbsp;binary&nbsp;string&nbsp;('\x0a\x00\x00\x01').</tt></dd></dl>
+ <dl><dt><a name="-ip_checksum"><strong>ip_checksum</strong></a>(...)</dt><dd><tt>Return&nbsp;packed&nbsp;binary&nbsp;string&nbsp;representing&nbsp;an&nbsp;IP&nbsp;packet&nbsp;<br>
+with&nbsp;the&nbsp;IP&nbsp;and&nbsp;transport-layer&nbsp;checksums&nbsp;set.<br>
+&nbsp;<br>
+Arguments:<br>
+pkt&nbsp;--&nbsp;binary&nbsp;string&nbsp;representing&nbsp;an&nbsp;IP&nbsp;packet</tt></dd></dl>
+ <dl><dt><a name="-ip_cksum_add"><strong>ip_cksum_add</strong></a>(...)</dt></dl>
+ <dl><dt><a name="-ip_cksum_carry"><strong>ip_cksum_carry</strong></a>(...)</dt></dl>
+ <dl><dt><a name="-ip_ntoa"><strong>ip_ntoa</strong></a>(...)</dt><dd><tt>Convert&nbsp;an&nbsp;IP&nbsp;address&nbsp;from&nbsp;a&nbsp;4-byte&nbsp;packed&nbsp;binary&nbsp;string&nbsp;or<br>
+integer&nbsp;to&nbsp;a&nbsp;printable&nbsp;string&nbsp;('10.0.0.1').</tt></dd></dl>
+ <dl><dt><a name="-ip_pack_hdr"><strong>ip_pack_hdr</strong></a>(...)</dt><dd><tt>Return&nbsp;a&nbsp;packed&nbsp;binary&nbsp;string&nbsp;representing&nbsp;an&nbsp;IP&nbsp;header.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+tos&nbsp;&nbsp;--&nbsp;type&nbsp;of&nbsp;service&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(8-bit&nbsp;integer)<br>
+len&nbsp;--&nbsp;length&nbsp;(IP_HDR_LEN&nbsp;+&nbsp;payload)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(16-bit&nbsp;integer)<br>
+id&nbsp;&nbsp;&nbsp;--&nbsp;packet&nbsp;ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(16-bit&nbsp;integer)<br>
+off&nbsp;&nbsp;--&nbsp;fragmentation&nbsp;offset&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(16-bit&nbsp;integer)<br>
+ttl&nbsp;&nbsp;--&nbsp;time-to-live&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(8-bit&nbsp;integer)<br>
+p&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;protocol&nbsp;(IP_PROTO_*)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(8-bit&nbsp;integer)<br>
+src&nbsp;&nbsp;--&nbsp;source&nbsp;address&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(4-byte&nbsp;binary&nbsp;string)<br>
+dst&nbsp;&nbsp;--&nbsp;destination&nbsp;address&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(4-byte&nbsp;binary&nbsp;string)</tt></dd></dl>
+ <dl><dt><a name="-tcp_pack_hdr"><strong>tcp_pack_hdr</strong></a>(...)</dt><dd><tt>Return&nbsp;a&nbsp;packed&nbsp;binary&nbsp;string&nbsp;representing&nbsp;a&nbsp;TCP&nbsp;header.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+sport&nbsp;--&nbsp;source&nbsp;port&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(16-bit&nbsp;integer)<br>
+dport&nbsp;--&nbsp;destination&nbsp;port&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(16-bit&nbsp;integer)<br>
+seq&nbsp;&nbsp;&nbsp;--&nbsp;sequence&nbsp;number&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(32-bit&nbsp;integer)<br>
+ack&nbsp;&nbsp;&nbsp;--&nbsp;acknowledgment&nbsp;number&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(32-bit&nbsp;integer)<br>
+flags&nbsp;--&nbsp;control&nbsp;flags&nbsp;(TH_*)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(8-bit&nbsp;integer&nbsp;bitmask)<br>
+win&nbsp;&nbsp;&nbsp;--&nbsp;window&nbsp;size&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(16-bit&nbsp;integer)<br>
+urp&nbsp;&nbsp;&nbsp;--&nbsp;urgent&nbsp;pointer&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(16-bit&nbsp;integer)</tt></dd></dl>
+ <dl><dt><a name="-udp_pack_hdr"><strong>udp_pack_hdr</strong></a>(...)</dt><dd><tt>Return&nbsp;a&nbsp;packed&nbsp;binary&nbsp;string&nbsp;representing&nbsp;a&nbsp;UDP&nbsp;header.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+sport&nbsp;--&nbsp;source&nbsp;port&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(16-bit&nbsp;integer)<br>
+dport&nbsp;--&nbsp;destination&nbsp;port&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(16-bit&nbsp;integer)<br>
+ulen&nbsp;&nbsp;--&nbsp;UDP&nbsp;header&nbsp;+&nbsp;data&nbsp;length&nbsp;&nbsp;&nbsp;(16-bit&nbsp;integer)</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>ADDR_TYPE_ETH</strong> = 1<br>
+<strong>ADDR_TYPE_IP</strong> = 2<br>
+<strong>ADDR_TYPE_IP6</strong> = 3<br>
+<strong>ADDR_TYPE_NONE</strong> = 0<br>
+<strong>ARP_ETHIP_LEN</strong> = 20<br>
+<strong>ARP_HDR_LEN</strong> = 8<br>
+<strong>ARP_HRD_ETH</strong> = 1<br>
+<strong>ARP_HRD_IEEE802</strong> = 6<br>
+<strong>ARP_OP_REPLY</strong> = 2<br>
+<strong>ARP_OP_REQUEST</strong> = 1<br>
+<strong>ARP_OP_REVREPLY</strong> = 4<br>
+<strong>ARP_OP_REVREQUEST</strong> = 3<br>
+<strong>ARP_PRO_IP</strong> = 2048<br>
+<strong>ETH_ADDR_BITS</strong> = 48<br>
+<strong>ETH_ADDR_BROADCAST</strong> = '<font color="#c040c0">\xff\xff\xff\xff\xff\xff</font>'<br>
+<strong>ETH_ADDR_LEN</strong> = 6<br>
+<strong>ETH_ADDR_UNSPEC</strong> = '<font color="#c040c0">\x00\x00\x00\x00\x00\x00</font>'<br>
+<strong>ETH_CRC_LEN</strong> = 4<br>
+<strong>ETH_HDR_LEN</strong> = 14<br>
+<strong>ETH_LEN_MAX</strong> = 1518<br>
+<strong>ETH_LEN_MIN</strong> = 64<br>
+<strong>ETH_MIN</strong> = 46<br>
+<strong>ETH_MTU</strong> = 1500<br>
+<strong>ETH_TYPE_8021Q</strong> = 33024<br>
+<strong>ETH_TYPE_ARP</strong> = 2054<br>
+<strong>ETH_TYPE_IP</strong> = 2048<br>
+<strong>ETH_TYPE_IPV6</strong> = 34525<br>
+<strong>ETH_TYPE_LEN</strong> = 2<br>
+<strong>ETH_TYPE_LOOPBACK</strong> = 36864<br>
+<strong>ETH_TYPE_MPLS</strong> = 34887<br>
+<strong>ETH_TYPE_MPLS_MCAST</strong> = 34888<br>
+<strong>ETH_TYPE_PPPOE</strong> = 34916<br>
+<strong>ETH_TYPE_PPPOEDISC</strong> = 34915<br>
+<strong>ETH_TYPE_PUP</strong> = 512<br>
+<strong>ETH_TYPE_REVARP</strong> = 32821<br>
+<strong>FW_DIR_IN</strong> = 1<br>
+<strong>FW_DIR_OUT</strong> = 2<br>
+<strong>FW_OP_ALLOW</strong> = 1<br>
+<strong>FW_OP_BLOCK</strong> = 2<br>
+<strong>INTF_FLAG_BROADCAST</strong> = 16<br>
+<strong>INTF_FLAG_LOOPBACK</strong> = 2<br>
+<strong>INTF_FLAG_MULTICAST</strong> = 32<br>
+<strong>INTF_FLAG_NOARP</strong> = 8<br>
+<strong>INTF_FLAG_POINTOPOINT</strong> = 4<br>
+<strong>INTF_FLAG_UP</strong> = 1<br>
+<strong>INTF_TYPE_ETH</strong> = 6<br>
+<strong>INTF_TYPE_LOOPBACK</strong> = 24<br>
+<strong>INTF_TYPE_OTHER</strong> = 1<br>
+<strong>INTF_TYPE_TUN</strong> = 53<br>
+<strong>IP6_ADDR_BITS</strong> = 128<br>
+<strong>IP6_ADDR_LEN</strong> = 16<br>
+<strong>IP6_ADDR_LOOPBACK</strong> = '<font color="#c040c0">\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01</font>'<br>
+<strong>IP6_ADDR_UNSPEC</strong> = '<font color="#c040c0">\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00</font>'<br>
+<strong>IP6_HDR_LEN</strong> = 40<br>
+<strong>IP6_HLIM_DEFAULT</strong> = 64<br>
+<strong>IP6_HLIM_MAX</strong> = 255<br>
+<strong>IP6_LEN_MAX</strong> = 65535<br>
+<strong>IP6_LEN_MIN</strong> = 40<br>
+<strong>IP6_MTU_MIN</strong> = 1280<br>
+<strong>IP_ADDR_ANY</strong> = '<font color="#c040c0">\x00\x00\x00\x00</font>'<br>
+<strong>IP_ADDR_BITS</strong> = 32<br>
+<strong>IP_ADDR_BROADCAST</strong> = '<font color="#c040c0">\xff\xff\xff\xff</font>'<br>
+<strong>IP_ADDR_LEN</strong> = 4<br>
+<strong>IP_ADDR_LOOPBACK</strong> = '<font color="#c040c0">\x7f\x00\x00\x01</font>'<br>
+<strong>IP_ADDR_MCAST_ALL</strong> = '<font color="#c040c0">\xe0\x00\x00\x01</font>'<br>
+<strong>IP_ADDR_MCAST_LOCAL</strong> = '<font color="#c040c0">\xe0\x00\x00\xff</font>'<br>
+<strong>IP_DF</strong> = 16384<br>
+<strong>IP_HDR_LEN</strong> = 20<br>
+<strong>IP_HDR_LEN_MAX</strong> = 60<br>
+<strong>IP_LEN_MAX</strong> = 65535<br>
+<strong>IP_LEN_MIN</strong> = 20<br>
+<strong>IP_MF</strong> = 8192<br>
+<strong>IP_OFFMASK</strong> = 8191<br>
+<strong>IP_OPT_LEN</strong> = 2<br>
+<strong>IP_OPT_LEN_MAX</strong> = 40<br>
+<strong>IP_PROTO_AH</strong> = 51<br>
+<strong>IP_PROTO_ESP</strong> = 50<br>
+<strong>IP_PROTO_GRE</strong> = 47<br>
+<strong>IP_PROTO_ICMP</strong> = 1<br>
+<strong>IP_PROTO_ICMPV6</strong> = 58<br>
+<strong>IP_PROTO_IGMP</strong> = 2<br>
+<strong>IP_PROTO_IP</strong> = 0<br>
+<strong>IP_PROTO_IPV6</strong> = 41<br>
+<strong>IP_PROTO_MAX</strong> = 255<br>
+<strong>IP_PROTO_RAW</strong> = 255<br>
+<strong>IP_PROTO_RESERVED</strong> = 255<br>
+<strong>IP_PROTO_TCP</strong> = 6<br>
+<strong>IP_PROTO_UDP</strong> = 17<br>
+<strong>IP_RF</strong> = 32768<br>
+<strong>IP_TOS_DEFAULT</strong> = 0<br>
+<strong>IP_TTL_DEFAULT</strong> = 64<br>
+<strong>IP_TTL_MAX</strong> = 255<br>
+<strong>TCP_HDR_LEN</strong> = 20<br>
+<strong>TCP_OPT_ALTSUM</strong> = 14<br>
+<strong>TCP_OPT_ALTSUMDATA</strong> = 15<br>
+<strong>TCP_OPT_BUBBA</strong> = 17<br>
+<strong>TCP_OPT_CC</strong> = 11<br>
+<strong>TCP_OPT_CCECHO</strong> = 13<br>
+<strong>TCP_OPT_CCNEW</strong> = 12<br>
+<strong>TCP_OPT_CORRUPT</strong> = 23<br>
+<strong>TCP_OPT_ECHO</strong> = 6<br>
+<strong>TCP_OPT_ECHOREPLY</strong> = 7<br>
+<strong>TCP_OPT_EOL</strong> = 0<br>
+<strong>TCP_OPT_MAX</strong> = 27<br>
+<strong>TCP_OPT_MD5</strong> = 19<br>
+<strong>TCP_OPT_MSS</strong> = 2<br>
+<strong>TCP_OPT_NOP</strong> = 1<br>
+<strong>TCP_OPT_POCONN</strong> = 9<br>
+<strong>TCP_OPT_POSVC</strong> = 10<br>
+<strong>TCP_OPT_REC</strong> = 22<br>
+<strong>TCP_OPT_SACK</strong> = 5<br>
+<strong>TCP_OPT_SACKOK</strong> = 4<br>
+<strong>TCP_OPT_SCPS</strong> = 20<br>
+<strong>TCP_OPT_SKEETER</strong> = 16<br>
+<strong>TCP_OPT_SNACK</strong> = 21<br>
+<strong>TCP_OPT_SNAP</strong> = 24<br>
+<strong>TCP_OPT_TCPCOMP</strong> = 26<br>
+<strong>TCP_OPT_TIMESTAMP</strong> = 8<br>
+<strong>TCP_OPT_TRAILSUM</strong> = 18<br>
+<strong>TCP_OPT_WSCALE</strong> = 3<br>
+<strong>TCP_PORT_MAX</strong> = 65535<br>
+<strong>TCP_WIN_MAX</strong> = 65535<br>
+<strong>TH_ACK</strong> = 16<br>
+<strong>TH_CWR</strong> = 128<br>
+<strong>TH_ECE</strong> = 64<br>
+<strong>TH_FIN</strong> = 1<br>
+<strong>TH_PUSH</strong> = 8<br>
+<strong>TH_RST</strong> = 4<br>
+<strong>TH_SYN</strong> = 2<br>
+<strong>TH_URG</strong> = 32<br>
+<strong>UDP_HDR_LEN</strong> = 8<br>
+<strong>UDP_PORT_MAX</strong> = 65535<br>
+<strong>__author__</strong> = 'Dug Song &lt;dugsong@monkey.org&gt;'<br>
+<strong>__copyright__</strong> = 'Copyright (c) 2003 Dug Song'<br>
+<strong>__license__</strong> = 'BSD'<br>
+<strong>__url__</strong> = 'http://libdnet.sourceforge.net/'<br>
+<strong>__version__</strong> = '1.12'</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#7799ee">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Author</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#7799ee"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Dug&nbsp;Song&nbsp;&lt;dugsong@monkey.org&gt;</td></tr></table>
+</body></html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>Citrix NetScaler XML API User&#39;s Guide - Structure Definition</title>
+<link rel="stylesheet" type="text/css" href="help_ns.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body onload="initial()" class="ns_body">
+<div class="ns_content"><table cellpadding="0" cellspacing="0"><script type="text/javascript">
+function changeContext(id,lang,flag){
+	parent.banner.document.language.select.value = lang;
+	if( lang == "C" ){
+		if(flag == "1"){
+			showContent(cfirstcontent,id,lang);
+		}
+		else{
+			showContent(csecondcontent,id,lang);
+		}
+	}
+	if( lang == "Perl" ){
+		if(flag == "1"){
+			showContent(perlfirstcontent,id,lang);
+		}
+		else{
+			showContent(perlsecondcontent,id,lang);
+		}
+	}
+	if( lang == "Java" ){
+		if(flag == "1"){
+			showContent(javafirstcontent,id,lang);	
+		}
+		else{
+			showContent(javasecondcontent,id,lang);
+		}
+	}
+	if( lang == "C#" ){
+		if(flag == "1"){
+			showContent(csharpfirstcontent,id,lang);
+		}
+		else{
+			showContent(csharpsecondcontent,id,lang);
+		}
+	}
+	if( lang == "VB" ){
+		if(flag == "1"){
+			showContent(vbfirstcontent,id,lang);
+		}
+		else{
+			showContent(vbsecondcontent,id,lang);
+		}
+	}
+	if(flag == "1"){
+		showInside(lang,"0");
+	}
+	else{
+		showOutside(lang);
+	}
+}
+function showContent(content,id,lang){
+	if(ie4){
+	   showContentObj=document.all.id;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById(id);
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+  showLangSelect(lang);
+}
+function showInside(str,cond){
+	if(str == "C"){
+ 		var inside_content = csecondcontent;
+ 	}
+ 	if(str == "Perl"){
+ 		var inside_content = perlsecondcontent;
+ 	}
+ 	if(str == "Java"){
+ 		var inside_content = javasecondcontent;
+ 	}
+ 	if(str == "C#"){
+		var inside_content = csharpsecondcontent;
+ 	}
+ 	if(str == "VB"){
+		var inside_content = vbsecondcontent;
+ 	}
+	showContent(inside_content,'qiksearch_div1',str);
+ 	if ( cond == "1" ){
+ 		var page = 'apidoc/docs/getappfwsettingsResult.html#as_enginesettingsList';
+ 		document.location.href = page;
+ 	}
+}
+function showOutside(str){
+	if(str == "C" ){
+ 		var inside_content = cfirstcontent;
+ 	}
+ 	if(str == "Perl" ){
+ 		var inside_content = perlfirstcontent;
+ 	}
+ 	if(str == "Java" ){
+ 		var inside_content = javafirstcontent;
+ 	}
+ 	if(str == "C#" ){
+ 		var inside_content = csharpfirstcontent;
+ 	}
+ 	if(str == "VB" ){
+ 		var inside_content = vbfirstcontent;
+ 	}
+ 	showContent(inside_content,'qiksearch_div',str);
+}
+function initial(){
+	ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+	ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+	ns4=document.layers;
+	langSelected = parent.banner.document.language.select.value
+	var plink = parent.banner.document.language.plink.value
+	var my_array=plink.split("&");
+	var temp = my_array[0];
+ 	var grp = temp.split("@");
+	var cmd = my_array[1];
+	var regex = /^stat/i;
+	if( cmd.match(regex) != null ){
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex_stat.html\">Statistics</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getappfwsettingsResult");
+	}
+	else{
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex.htm\">Configuration</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getappfwsettingsResult");
+	}
+	if( langSelected == "C" ){
+ 		var content = cfirstcontent;
+	}
+	else if( langSelected == "Perl" ){
+		var content = perlfirstcontent;
+	}
+	else if( langSelected == "Java" ){
+		var content = javafirstcontent;
+	}
+	else if( langSelected == "C#" ){
+		var content = csharpfirstcontent;
+	}
+	else if( langSelected == "VB" ){
+		var content = vbfirstcontent;
+	}
+	else{
+		var content = cfirstcontent;
+		langSelected="C";
+	}
+	showContent(content,'qiksearch_div',langSelected);
+	showInside(langSelected,"0");
+}
+function showPLink(content){
+	if(ie4){
+	   showContentObj=document.all.progressive_link;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById("progressive_link");
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+}
+function showLangSelect(id){
+	   if(ie4)
+       {
+       	showObj=document.all.first_url;
+       	showObj1=document.all.second_url;
+       }
+       if(ns6)
+       {
+       	showObj=document.getElementById("first_url");
+       	showObj1=document.getElementById("second_url");
+       }
+       if( id == "C" ){
+       	newlink = "<b>C</b>";
+       	newlink1 = "<b>C</b>";
+       }
+       else{
+       	newlink = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C','1');\"><b>C</b></a>";
+       	newlink1 = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C','0');\"><b>C</b></a>";
+       }
+       if( id == "Perl" ){
+       	newlink = newlink + " | <b>Perl</b>";
+       	newlink1 = newlink1 + " | <b>Perl</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Perl','1');\"><b>Perl</b></a>";
+      	       newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Perl','0');\"><b>Perl</b></a>";
+       }
+       if( id == "Java" ){
+       	newlink = newlink + " | <b>Java</b>";
+       	newlink1 = newlink1 + " | <b>Java</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Java','1');\"><b>Java</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Java','0');\"><b>Java</b></a>";
+       }
+       if( id == "C#" ){
+       	newlink = newlink + " | <b>C#</b>";
+       	newlink1 = newlink1 + " | <b>C#</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C#','1');\"><b>C#</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C#','0');\"><b>C#</b></a>";
+       }
+       showObj.innerHTML = newlink;
+       showObj1.innerHTML = newlink1;
+}
+</script>
+<tr><td><div><div id="progressive_link"></div></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>getappfwsettingsResult Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>getappfwsettingsResult</b> structure defines the return type for getappfwsettings API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="first_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+cfirstcontent = "<pre>struct getappfwsettingsResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; struct <a href=\'getappfwsettingsResult.html\#appfwsettings\'>appfwsettings</a> list[];<br> };<br></pre></td></tr></table></div>"
+perlfirstcontent = "<pre>$getappfwsettingsResult = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rc => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; message => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; List => \'@<a href=\'getappfwsettingsResult.html\#appfwsettings\'>appfwsettings</a>\',<br> };<br></pre></td></tr></table></div>"
+javafirstcontent = "<pre>class getappfwsettingsResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getappfwsettingsResult.html\#appfwsettings\'>appfwsettings</a>[] list;<br> };<br></pre></td></tr></table></div>"
+csharpfirstcontent = "<pre>class getappfwsettingsResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getappfwsettingsResult.html\#appfwsettings\'>appfwsettings</a>[] list;<br> };<br></pre></td></tr></table></div>"
+vbfirstcontent = "<pre>Public <b>Structure</b> getappfwsettingsResult <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rc As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public message As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public  appfwsettingsList() As  <a href=\'getappfwsettingsResult.html\#appfwsettings\'>appfwsettings</a><br> <b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rc</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, rc is 0 else rc > 0. Values above 0x8000 indicate Warnings.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>message</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, message is NULL else message contains <a href="errorlisting.html">Error/Warning</a> message.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>appfwsettingsList</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">List of appfwsettingss</div></td></tr><tr><td><br></td></tr><tr><td><div><a name="appfwsettings"></a></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>appfwsettings  Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>appfwsettings</b> structure defines the actual return type values for getappfwsettings API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="second_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div1" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+csecondcontent = "<pre>struct appfwsettings {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * defaultprofile;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * undefaction;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int sessiontimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int learnratelimit;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int sessionlifetime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * sessioncookiename;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * clientiploggingheader;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int importsizelimit;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * signatureautoupdate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * signatureurl;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * cookiepostencryptprefix;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * logmalformedreq;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * ceflogging;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * entitydecoding;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * useconfigurablesecretkey;<br> };<br></pre></td></tr></table></div>"
+perlsecondcontent = "<pre>$appfwsettings = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; defaultprofile => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; undefaction => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; sessiontimeout => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; learnratelimit => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; sessionlifetime => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; sessioncookiename => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; clientiploggingheader => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; importsizelimit => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; signatureautoupdate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; signatureurl => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; cookiepostencryptprefix => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; logmalformedreq => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ceflogging => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; entitydecoding => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; useconfigurablesecretkey => \'$\',<br> };<br></pre></td></tr></table></div>"
+javasecondcontent = "<pre>class appfwsettings {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String defaultprofile;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String undefaction;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt sessiontimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt learnratelimit;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt sessionlifetime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String sessioncookiename;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String clientiploggingheader;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt importsizelimit;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String signatureautoupdate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String signatureurl;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String cookiepostencryptprefix;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String logmalformedreq;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String ceflogging;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String entitydecoding;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String useconfigurablesecretkey;<br> };<br></pre></td></tr></table></div>"
+csharpsecondcontent = "<pre>class appfwsettings {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string defaultprofile;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string undefaction;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 sessiontimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 learnratelimit;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 sessionlifetime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string sessioncookiename;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string clientiploggingheader;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 importsizelimit;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string signatureautoupdate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string signatureurl;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string cookiepostencryptprefix;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string logmalformedreq;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string ceflogging;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string entitydecoding;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string useconfigurablesecretkey;<br> };<br></pre></td></tr></table></div>"
+vbsecondcontent = "<pre>Public <b>Structure</b> appfwsettings <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public defaultprofile As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public undefaction As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public sessiontimeout As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public learnratelimit As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public sessionlifetime As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public sessioncookiename As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public clientiploggingheader As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public importsizelimit As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public signatureautoupdate As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public signatureurl As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public cookiepostencryptprefix As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public logmalformedreq As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ceflogging As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public entitydecoding As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public useconfigurablesecretkey As String<br><b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>defaultprofile</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Profile to use when a connection does not match any policy. Default setting is APPFW_BYPASS, which sends unmatched connections back to the NetScaler appliance without attempting to filter them further.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>undefaction</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Profile to use when an application firewall policy evaluates to undefined (UNDEF). 
+An UNDEF event indicates an internal error condition. The APPFW_BLOCK built-in profile is the default setting. You can specify a different built-in or user-created profile as the UNDEF profile.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sessiontimeout</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Session timeout (in seconds).</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>learnratelimit</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Learn messages rate limit value (in messages per second).</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sessionlifetime</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Session lifetime (in seconds). Zero means no limit.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sessioncookiename</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the session cookie that the application firewall uses to track user sessions. 
+Must begin with a letter or number, and can consist of from 1 to 31 letters, numbers, and the hyphen (-) and underscore (_) symbols.
+
+The following requirement applies only to the NetScaler CLI:
+If the name includes one or more spaces, enclose the name in double or single quotation marks (for example, "my cookie name" or 'my cookie name').</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>clientiploggingheader</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of header that holds downstream IP address for logging purposes.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>importsizelimit</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Cumulative total maximum number of bytes in web forms imported to a protected web site. If a user attempts to upload files with a total byte count higher than the specified limit, the application firewall blocks the request.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>signatureautoupdate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Flag used to enable/disable auto update signatures</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>signatureurl</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">URL to download the mapping file from server</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>cookiepostencryptprefix</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">String that is prepended to all encrypted cookie values.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>logmalformedreq</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Log requests that are so malformed that application firewall parsing doesn't occur.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ceflogging</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Enable CEF format logs.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>entitydecoding</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Transform multibyte (double- or half-width) characters to single width characters.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>useconfigurablesecretkey</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Use configurable secret key in AppFw operations</div></td></tr><tr><td><br></td></tr><tr><td><div><b>See Also</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="getappfwsettings.html">getappfwsettings</a></div></td></tr><tr><td><br></td></tr></table></div>
+</body>
+</html>

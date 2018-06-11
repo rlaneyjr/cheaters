@@ -1,0 +1,518 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>rewriteaction module &mdash; Nitro  documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Nitro  documentation" href="index.html" />
+    <link rel="up" title="rewrite package" href="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.html" />
+    <link rel="next" title="rewriteglobal_binding module" href="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteglobal_binding.html" />
+    <link rel="prev" title="rewrite package" href="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteglobal_binding.html" title="rewriteglobal_binding module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.html" title="rewrite package"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Nitro  documentation</a> &raquo;</li>
+          <li><a href="nssrc.com.citrix.netscaler.nitro.resource.config.html" >config package</a> &raquo;</li>
+          <li><a href="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.html" accesskey="U">rewrite package</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction">
+<span id="rewriteaction-module"></span><h1>rewriteaction module<a class="headerlink" href="#module-nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction">
+<em class="property">class </em><tt class="descname">rewriteaction</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.html#nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource" title="nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource"><tt class="xref py py-class docutils literal"><span class="pre">nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource</span></tt></a></p>
+<p>Configuration for rewrite action resource.</p>
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.name">
+<tt class="descname">name</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name for the user-defined rewrite action. Must begin with a letter, number, or the underscore character (_), and must contain only letters, numbers, and the hyphen (-), period (.) hash (#), space ( ), at (&#64;), equals (=), colon (:), and underscore characters. Can be changed after the rewrite policy is added.
+The following requirement applies only to the NetScaler CLI:
+If the name includes one or more spaces, enclose the name in double or single quotation marks (for example, &#8220;my rewrite action&#8221; or &#8216;my rewrite action&#8217;).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.type">
+<tt class="descname">type</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Type of user-defined rewrite action. The information that you provide for, and the effect of, each type are as follows:: 
+* REPLACE &lt;target&gt; &lt;string_builder_expr&gt;. Replaces the string with the string-builder expression.
+* REPLACE_ALL &lt;target&gt; &lt;string_builder_expr1&gt; -(pattern|search) &lt;string_builder_expr2&gt;. In the request or response specified by &lt;target&gt;, replaces all occurrences of the string defined by &lt;string_builder_expr1&gt; with the string defined by &lt;string_builder_expr2&gt;. You can use a PCRE-format pattern or the search facility to find the strings to be replaced.
+* REPLACE_HTTP_RES &lt;string_builder_expr&gt;. Replaces the complete HTTP response with the string defined by the string-builder expression.
+* REPLACE_SIP_RES &lt;target&gt; - Replaces the complete SIP response with the string specified by &lt;target&gt;.
+* INSERT_HTTP_HEADER &lt;header_string_builder_expr&gt; &lt;contents_string_builder_expr&gt;. Inserts the HTTP header specified by &lt;header_string_builder_expr&gt; and header contents specified by &lt;contents_string_builder_expr&gt;.
+* DELETE_HTTP_HEADER &lt;target&gt;. Deletes the HTTP header specified by &lt;target&gt;.
+* CORRUPT_HTTP_HEADER &lt;target&gt;. Replaces the header name of all occurrences of the HTTP header specified by &lt;target&gt; with a corrupted name, so that it will not be recognized by the receiver  Example: MY_HEADER is changed to MHEY_ADER.
+* INSERT_BEFORE &lt;string_builder_expr1&gt; &lt;string_builder_expr1&gt;. Finds the string specified in &lt;string_builder_expr1&gt; and inserts the string in &lt;string_builder_expr2&gt; before it.
+* INSERT_BEFORE_ALL &lt;target&gt; &lt;string_builder_expr1&gt; -(pattern|search) &lt;string_builder_expr2&gt;. In the request or response specified by &lt;target&gt;, locates all occurrences of the string specified in &lt;string_builder_expr1&gt; and inserts the string specified in &lt;string_builder_expr2&gt; before each. You can use a PCRE-format pattern or the search facility to find the strings.
+* INSERT_AFTER &lt;string_builder_expr1&gt; &lt;string_builder_expr2&gt;. Finds the string specified in &lt;string_builder_expr1&gt;, and inserts the string specified in &lt;string_builder_expr2&gt; after it.
+* INSERT_AFTER_ALL &lt;target&gt; &lt;string_builder_expr1&gt; -(pattern|search) &lt;string_builder_expr&gt;. In the request or response specified by &lt;target&gt;, locates all occurrences of the string specified by &lt;string_builder_expr1&gt; and inserts the string specified by &lt;string_builder_expr2&gt; after each. You can use a PCRE-format pattern or the search facility to find the strings.
+* DELETE &lt;target&gt;. Finds and deletes the specified target.
+* DELETE_ALL &lt;target&gt; -(pattern|search) &lt;string_builder_expr&gt;. In the request or response specified by &lt;target&gt;, locates and deletes all occurrences of the string specified by &lt;string_builder_expr&gt;. You can use a PCRE-format pattern or the search facility to find the strings.
+* REPLACE_DIAMETER_HEADER_FIELD &lt;target&gt; &lt;field value&gt;. In the request or response modify the header field specified by &lt;target&gt;. Use Diameter.req.flags.SET(&lt;flag&gt;) or Diameter.req.flags.UNSET&lt;flag&gt; as &#8216;stringbuilderexpression&#8217; to set or unset flags.&lt;br/&gt;Possible values = noop, delete, insert_http_header, delete_http_header, corrupt_http_header, insert_before, insert_after, replace, replace_http_res, delete_all, replace_all, insert_before_all, insert_after_all, clientless_vpn_encode, clientless_vpn_encode_all, clientless_vpn_decode, clientless_vpn_decode_all, insert_sip_header, delete_sip_header, corrupt_sip_header, replace_sip_res, replace_diameter_header_field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.target">
+<tt class="descname">target</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.target" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default syntax expression that specifies which part of the request or response to rewrite.&lt;br/&gt;Minimum length =  1.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.stringbuilderexpr">
+<tt class="descname">stringbuilderexpr</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.stringbuilderexpr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default syntax expression that specifies the content to insert into the request or response at the specified location, or that replaces the specified string.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.pattern">
+<tt class="descname">pattern</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.pattern" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pattern that is used to match multiple strings in the request or response. The pattern may be a string literal (without quotes) or a PCRE-format regular expression with a delimiter that consists of any printable ASCII non-alphanumeric character except for the underscore (_) and space ( ) that is not otherwise used in the expression. Example: re~https?://<a href="#id1"><span class="problematic" id="id2">|</span></a>HTTPS?://~ The preceding regular expression can use the tilde (~) as the delimiter because that character does not appear in the regular expression itself. Used in the INSERT_BEFORE_ALL, INSERT_AFTER_ALL, REPLACE_ALL, and DELETE_ALL action types.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.search">
+<tt class="descname">search</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.search" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search facility that is used to match multiple strings in the request or response. Used in the INSERT_BEFORE_ALL, INSERT_AFTER_ALL, REPLACE_ALL, and DELETE_ALL action types. The following search types are supported:
+* Text (&#8220;text(string)&#8221;) - A literal string. Example: -search text(&#8220;hello&#8221;)
+* Regular expression (&#8220;regex(re&lt;delimiter&gt;regular exp&lt;delimiter&gt;)&#8221;) - Pattern that is used to match multiple strings in the request or response. The pattern may be a string literal (without quotes) or a PCRE-format regular expression with a delimiter that consists of any printable ASCII non-alphanumeric character except for the underscore (_) and space ( ) that is not otherwise used in the expression. Example: -search regex(re~^hello~) The preceding regular expression can use the tilde (~) as the delimiter because that character does not appear in the regular expression itself.
+* XPath (&#8220;xpath(xp&lt;delimiter&gt;xpath expression&lt;delimiter&gt;)&#8221;) - An XPath expression. Example: -search xpath(xp%/a/b%)
+* JSON (&#8220;xpath_json(xp&lt;delimiter&gt;xpath expression&lt;delimiter&gt;)&#8221;) - An XPath JSON expression. Example: -search xpath_json(xp%/a/b%)
+NOTE: JSON searches use the same syntax as XPath searches, but operate on JSON files instead of standard XML files.
+* Patset (&#8220;patset(patset)&#8221;) - A predefined pattern set. Example: -search patset(&#8220;patset1&#8221;).
+* Datset (&#8220;dataset(dataset)&#8221;) - A predefined dataset. Example: -search dataset(&#8220;dataset1&#8221;).
+* AVP (&#8220;avp(avp number)&#8221;) - AVP number that is used to match multiple AVPs in a Diameter Message. Example: -search avp(999).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.bypasssafetycheck">
+<tt class="descname">bypasssafetycheck</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.bypasssafetycheck" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bypass the safety check and allow unsafe expressions. An unsafe expression is one that contains references to message elements that might not be present in all messages. If an expression refers to a missing request element, an empty string is used instead.&lt;br/&gt;Default value: NO&lt;br/&gt;Possible values = YES, NO.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.refinesearch">
+<tt class="descname">refinesearch</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.refinesearch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specify additional criteria to refine the results of the search. 
+Always starts with the &#8220;extend(m,n)&#8221; operation, where &#8216;m&#8217; specifies number of bytes to the left of selected data and &#8216;n&#8217; specifies number of bytes to the right of selected data.
+You can use refineSearch only on body expressions, and for the INSERT_BEFORE_ALL, INSERT_AFTER_ALL, REPLACE_ALL, and DELETE_ALL action types.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.comment">
+<tt class="descname">comment</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.comment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Comment. Can be used to preserve information about this rewrite action.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.newname">
+<tt class="descname">newname</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.newname" title="Permalink to this definition">¶</a></dt>
+<dd><p>New name for the rewrite action. 
+Must begin with a letter, number, or the underscore character (_), and must contain only letters, numbers, and the hyphen (-), period (.) hash (#), space ( ), at (&#64;), equals (=), colon (:), and underscore characters. Can be changed after the rewrite policy is added.
+The following requirement applies only to the NetScaler CLI:
+If the name includes one or more spaces, enclose the name in double or single quotation marks (for example, &#8220;my rewrite action&#8221; or &#8216;my rewrite action&#8217;).&lt;br/&gt;Minimum length =  1.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.hits">
+<tt class="descname">hits</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.hits" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of times the action has been taken.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.undefhits">
+<tt class="descname">undefhits</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.undefhits" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of times the action resulted in UNDEF.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.referencecount">
+<tt class="descname">referencecount</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.referencecount" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of references to the action.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.description">
+<tt class="descname">description</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.description" title="Permalink to this definition">¶</a></dt>
+<dd><p>Description of the action.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.isdefault">
+<tt class="descname">isdefault</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.isdefault" title="Permalink to this definition">¶</a></dt>
+<dd><p>A value of true is returned if it is a default rewriteaction.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.builtin">
+<tt class="descname">builtin</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.builtin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flag to determine whether rewrite action is built-in or not.&lt;br/&gt;Possible values = MODIFIABLE, DELETABLE, IMMUTABLE.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.add">
+<em class="property">classmethod </em><tt class="descname">add</tt><big>(</big><em>client</em>, <em>resource</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this API to add rewriteaction.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.delete">
+<em class="property">classmethod </em><tt class="descname">delete</tt><big>(</big><em>client</em>, <em>resource</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this API to delete rewriteaction.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.update">
+<em class="property">classmethod </em><tt class="descname">update</tt><big>(</big><em>client</em>, <em>resource</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this API to update rewriteaction.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.unset">
+<em class="property">classmethod </em><tt class="descname">unset</tt><big>(</big><em>client</em>, <em>resource</em>, <em>args</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.unset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this API to unset the properties of rewriteaction resource.
+Properties that need to be unset are specified in args array.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.rename">
+<em class="property">classmethod </em><tt class="descname">rename</tt><big>(</big><em>client</em>, <em>resource</em>, <em>new_name</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.rename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this API to rename a rewriteaction resource.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.get">
+<em class="property">classmethod </em><tt class="descname">get</tt><big>(</big><em>client</em>, <em>name=''</em>, <em>option_=''</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this API to fetch all the rewriteaction resources that are configured on netscaler.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.get_filtered">
+<em class="property">classmethod </em><tt class="descname">get_filtered</tt><big>(</big><em>client</em>, <em>filter_</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.get_filtered" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this API to fetch filtered set of rewriteaction resources.
+filter string should be in JSON format.eg: &#8220;port:80,servicetype:HTTP&#8221;.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.count">
+<em class="property">classmethod </em><tt class="descname">count</tt><big>(</big><em>client</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this API to count the rewriteaction resources configured on NetScaler.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.count_filtered">
+<em class="property">classmethod </em><tt class="descname">count_filtered</tt><big>(</big><em>client</em>, <em>filter_</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.count_filtered" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this API to count filtered the set of rewriteaction resources.
+Filter string should be in JSON format.eg: &#8220;port:80,servicetype:HTTP&#8221;.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Builtin">
+<em class="property">class </em><tt class="descname">Builtin</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Builtin" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Builtin.MODIFIABLE">
+<tt class="descname">MODIFIABLE</tt><em class="property"> = 'MODIFIABLE'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Builtin.MODIFIABLE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Builtin.DELETABLE">
+<tt class="descname">DELETABLE</tt><em class="property"> = 'DELETABLE'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Builtin.DELETABLE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Builtin.IMMUTABLE">
+<tt class="descname">IMMUTABLE</tt><em class="property"> = 'IMMUTABLE'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Builtin.IMMUTABLE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Type">
+<em class="property">class </em><tt class="descclassname">rewriteaction.</tt><tt class="descname">Type</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Type" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Type.noop">
+<tt class="descname">noop</tt><em class="property"> = 'noop'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Type.noop" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Type.delete">
+<tt class="descname">delete</tt><em class="property"> = 'delete'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Type.delete" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Type.insert_http_header">
+<tt class="descname">insert_http_header</tt><em class="property"> = 'insert_http_header'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Type.insert_http_header" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Type.delete_http_header">
+<tt class="descname">delete_http_header</tt><em class="property"> = 'delete_http_header'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Type.delete_http_header" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Type.corrupt_http_header">
+<tt class="descname">corrupt_http_header</tt><em class="property"> = 'corrupt_http_header'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Type.corrupt_http_header" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Type.insert_before">
+<tt class="descname">insert_before</tt><em class="property"> = 'insert_before'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Type.insert_before" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Type.insert_after">
+<tt class="descname">insert_after</tt><em class="property"> = 'insert_after'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Type.insert_after" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Type.replace">
+<tt class="descname">replace</tt><em class="property"> = 'replace'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Type.replace" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Type.replace_http_res">
+<tt class="descname">replace_http_res</tt><em class="property"> = 'replace_http_res'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Type.replace_http_res" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Type.delete_all">
+<tt class="descname">delete_all</tt><em class="property"> = 'delete_all'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Type.delete_all" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Type.replace_all">
+<tt class="descname">replace_all</tt><em class="property"> = 'replace_all'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Type.replace_all" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Type.insert_before_all">
+<tt class="descname">insert_before_all</tt><em class="property"> = 'insert_before_all'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Type.insert_before_all" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Type.insert_after_all">
+<tt class="descname">insert_after_all</tt><em class="property"> = 'insert_after_all'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Type.insert_after_all" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Type.clientless_vpn_encode">
+<tt class="descname">clientless_vpn_encode</tt><em class="property"> = 'clientless_vpn_encode'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Type.clientless_vpn_encode" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Type.clientless_vpn_encode_all">
+<tt class="descname">clientless_vpn_encode_all</tt><em class="property"> = 'clientless_vpn_encode_all'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Type.clientless_vpn_encode_all" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Type.clientless_vpn_decode">
+<tt class="descname">clientless_vpn_decode</tt><em class="property"> = 'clientless_vpn_decode'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Type.clientless_vpn_decode" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Type.clientless_vpn_decode_all">
+<tt class="descname">clientless_vpn_decode_all</tt><em class="property"> = 'clientless_vpn_decode_all'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Type.clientless_vpn_decode_all" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Type.insert_sip_header">
+<tt class="descname">insert_sip_header</tt><em class="property"> = 'insert_sip_header'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Type.insert_sip_header" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Type.delete_sip_header">
+<tt class="descname">delete_sip_header</tt><em class="property"> = 'delete_sip_header'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Type.delete_sip_header" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Type.corrupt_sip_header">
+<tt class="descname">corrupt_sip_header</tt><em class="property"> = 'corrupt_sip_header'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Type.corrupt_sip_header" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Type.replace_sip_res">
+<tt class="descname">replace_sip_res</tt><em class="property"> = 'replace_sip_res'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Type.replace_sip_res" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Type.replace_diameter_header_field">
+<tt class="descname">replace_diameter_header_field</tt><em class="property"> = 'replace_diameter_header_field'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Type.replace_diameter_header_field" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Bypasssafetycheck">
+<em class="property">class </em><tt class="descclassname">rewriteaction.</tt><tt class="descname">Bypasssafetycheck</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Bypasssafetycheck" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Bypasssafetycheck.YES">
+<tt class="descname">YES</tt><em class="property"> = 'YES'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Bypasssafetycheck.YES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Bypasssafetycheck.NO">
+<tt class="descname">NO</tt><em class="property"> = 'NO'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction.Bypasssafetycheck.NO" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction_response">
+<em class="property">class </em><tt class="descname">rewriteaction_response</tt><big>(</big><em>length=1</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.rewriteaction_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.base.base_response.html#nssrc.com.citrix.netscaler.nitro.resource.base.base_response.base_response" title="nssrc.com.citrix.netscaler.nitro.resource.base.base_response.base_response"><tt class="xref py py-class docutils literal"><span class="pre">nssrc.com.citrix.netscaler.nitro.resource.base.base_response.base_response</span></tt></a></p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper"><ul class="globaltoc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.exception.html">Nitro exception Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.base.html">Base Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.service.html">Service Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.util.html">Util Package</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.html">Config Package</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.aaa.html">aaa</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.app.html">app</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.appflow.html">appflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.appfw.html">appfw</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.appqoe.html">appqoe</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.audit.html">audit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.authentication.html">authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.authorization.html">authorization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.autoscale.html">autoscale</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.basic.html">basic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.ca.html">ca</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.cache.html">cache</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.html">cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.cmp.html">cmp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.cr.html">cr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.cs.html">cs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.db.html">db</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.dns.html">dns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.dos.html">dos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.feo.html">feo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.filter.html">filter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.gslb.html">gslb</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.ha.html">ha</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.ipsec.html">ipsec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.lb.html">lb</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.lldp.html">lldp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.network.html">network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.ns.html">ns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.ntp.html">ntp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.policy.html">policy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.pq.html">pq</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.protocol.html">protocol</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.responder.html">responder</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.html">rewrite</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="">rewriteaction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteglobal_binding.html">rewriteglobal_binding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteglobal_rewritepolicy_binding.html">rewriteglobal_rewritepolicy_binding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteparam.html">rewriteparam</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewritepolicy.html">rewritepolicy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewritepolicy_binding.html">rewritepolicy_binding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewritepolicy_csvserver_binding.html">rewritepolicy_csvserver_binding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewritepolicy_lbvserver_binding.html">rewritepolicy_lbvserver_binding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewritepolicy_rewriteglobal_binding.html">rewritepolicy_rewriteglobal_binding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewritepolicy_rewritepolicylabel_binding.html">rewritepolicy_rewritepolicylabel_binding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewritepolicylabel.html">rewritepolicylabel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewritepolicylabel_binding.html">rewritepolicylabel_binding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewritepolicylabel_policybinding_binding.html">rewritepolicylabel_policybinding_binding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewritepolicylabel_rewritepolicy_binding.html">rewritepolicylabel_rewritepolicy_binding</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.rise.html">rise</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.router.html">router</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.sc.html">sc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.snmp.html">snmp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.spillover.html">spillover</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.ssl.html">ssl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.stream.html">stream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.system.html">system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.tm.html">tm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.transform.html">transform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.tunnel.html">tunnel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.utility.html">utility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.vpn.html">vpn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.wi.html">wi</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.stat.html">Stat Package</a></li>
+</ul>
+</ul>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.html"
+                        title="previous chapter">rewrite package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteglobal_binding.html"
+                        title="next chapter">rewriteglobal_binding module</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.rewriteaction.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div> 
+
+    <div class="footer">
+        &copy; Copyright © 1999-2014 Citrix Systems, Inc. All Rights Reserved.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.
+    </div>
+  </body>
+</html>

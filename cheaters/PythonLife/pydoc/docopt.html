@@ -1,0 +1,104 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module docopt</title>
+<meta charset="utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>docopt</strong></big></big> (version 0.6.2)</font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/lib/python2.7/site-packages/docopt.py">/usr/local/lib/python2.7/site-packages/docopt.py</a></font></td></tr></table>
+    <p><tt>Pythonic&nbsp;command-line&nbsp;interface&nbsp;parser&nbsp;that&nbsp;will&nbsp;make&nbsp;you&nbsp;smile.<br>
+&nbsp;<br>
+*&nbsp;<a href="http://docopt.org">http://docopt.org</a><br>
+*&nbsp;Repository&nbsp;and&nbsp;issue-tracker:&nbsp;https://github.com/docopt/docopt<br>
+*&nbsp;Licensed&nbsp;under&nbsp;terms&nbsp;of&nbsp;MIT&nbsp;license&nbsp;(see&nbsp;LICENSE-MIT)<br>
+*&nbsp;Copyright&nbsp;(c)&nbsp;2013&nbsp;Vladimir&nbsp;Keleshev,&nbsp;vladimir@keleshev.com</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="re.html">re</a><br>
+</td><td width="25%" valign=top><a href="sys.html">sys</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-docopt"><strong>docopt</strong></a>(doc, argv<font color="#909090">=None</font>, help<font color="#909090">=True</font>, version<font color="#909090">=None</font>, options_first<font color="#909090">=False</font>)</dt><dd><tt>Parse&nbsp;`argv`&nbsp;based&nbsp;on&nbsp;command-line&nbsp;interface&nbsp;described&nbsp;in&nbsp;`doc`.<br>
+&nbsp;<br>
+`docopt`&nbsp;creates&nbsp;your&nbsp;command-line&nbsp;interface&nbsp;based&nbsp;on&nbsp;its<br>
+description&nbsp;that&nbsp;you&nbsp;pass&nbsp;as&nbsp;`doc`.&nbsp;Such&nbsp;description&nbsp;can&nbsp;contain<br>
+--options,&nbsp;&lt;positional-argument&gt;,&nbsp;commands,&nbsp;which&nbsp;could&nbsp;be<br>
+[optional],&nbsp;(required),&nbsp;(mutually&nbsp;|&nbsp;exclusive)&nbsp;or&nbsp;repeated...<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+doc&nbsp;:&nbsp;str<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Description&nbsp;of&nbsp;your&nbsp;command-line&nbsp;interface.<br>
+argv&nbsp;:&nbsp;list&nbsp;of&nbsp;str,&nbsp;optional<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Argument&nbsp;vector&nbsp;to&nbsp;be&nbsp;parsed.&nbsp;sys.argv[1:]&nbsp;is&nbsp;used&nbsp;if&nbsp;not<br>
+&nbsp;&nbsp;&nbsp;&nbsp;provided.<br>
+help&nbsp;:&nbsp;bool&nbsp;(default:&nbsp;True)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Set&nbsp;to&nbsp;False&nbsp;to&nbsp;disable&nbsp;automatic&nbsp;help&nbsp;on&nbsp;-h&nbsp;or&nbsp;--help<br>
+&nbsp;&nbsp;&nbsp;&nbsp;options.<br>
+version&nbsp;:&nbsp;any&nbsp;object<br>
+&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;passed,&nbsp;the&nbsp;object&nbsp;will&nbsp;be&nbsp;printed&nbsp;if&nbsp;--version&nbsp;is&nbsp;in<br>
+&nbsp;&nbsp;&nbsp;&nbsp;`argv`.<br>
+options_first&nbsp;:&nbsp;bool&nbsp;(default:&nbsp;False)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Set&nbsp;to&nbsp;True&nbsp;to&nbsp;require&nbsp;options&nbsp;preceed&nbsp;positional&nbsp;arguments,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;i.e.&nbsp;to&nbsp;forbid&nbsp;options&nbsp;and&nbsp;positional&nbsp;arguments&nbsp;intermix.<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+args&nbsp;:&nbsp;dict<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;dictionary,&nbsp;where&nbsp;keys&nbsp;are&nbsp;names&nbsp;of&nbsp;command-line&nbsp;elements<br>
+&nbsp;&nbsp;&nbsp;&nbsp;such&nbsp;as&nbsp;e.g.&nbsp;"--verbose"&nbsp;and&nbsp;"&lt;path&gt;",&nbsp;and&nbsp;values&nbsp;are&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;parsed&nbsp;values&nbsp;of&nbsp;those&nbsp;elements.<br>
+&nbsp;<br>
+Example<br>
+-------<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;docopt&nbsp;import&nbsp;docopt<br>
+&gt;&gt;&gt;&nbsp;doc&nbsp;=&nbsp;'''<br>
+Usage:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;my_program&nbsp;tcp&nbsp;&lt;host&gt;&nbsp;&lt;port&gt;&nbsp;[--timeout=&lt;seconds&gt;]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;my_program&nbsp;serial&nbsp;&lt;port&gt;&nbsp;[--baud=&lt;n&gt;]&nbsp;[--timeout=&lt;seconds&gt;]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;my_program&nbsp;(-h&nbsp;|&nbsp;--help&nbsp;|&nbsp;--version)<br>
+&nbsp;<br>
+Options:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-h,&nbsp;--help&nbsp;&nbsp;Show&nbsp;this&nbsp;screen&nbsp;and&nbsp;exit.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;--baud=&lt;n&gt;&nbsp;&nbsp;Baudrate&nbsp;[default:&nbsp;9600]<br>
+'''<br>
+&gt;&gt;&gt;&nbsp;argv&nbsp;=&nbsp;['tcp',&nbsp;'127.0.0.1',&nbsp;'80',&nbsp;'--timeout',&nbsp;'30']<br>
+&gt;&gt;&gt;&nbsp;<a href="#-docopt">docopt</a>(doc,&nbsp;argv)<br>
+{'--baud':&nbsp;'9600',<br>
+&nbsp;'--help':&nbsp;False,<br>
+&nbsp;'--timeout':&nbsp;'30',<br>
+&nbsp;'--version':&nbsp;False,<br>
+&nbsp;'&lt;host&gt;':&nbsp;'127.0.0.1',<br>
+&nbsp;'&lt;port&gt;':&nbsp;'80',<br>
+&nbsp;'serial':&nbsp;False,<br>
+&nbsp;'tcp':&nbsp;True}<br>
+&nbsp;<br>
+See&nbsp;also<br>
+--------<br>
+*&nbsp;For&nbsp;video&nbsp;introduction&nbsp;see&nbsp;<a href="http://docopt.org">http://docopt.org</a><br>
+*&nbsp;Full&nbsp;documentation&nbsp;is&nbsp;available&nbsp;in&nbsp;README.rst&nbsp;as&nbsp;well&nbsp;as&nbsp;online<br>
+&nbsp;&nbsp;at&nbsp;https://github.com/docopt/docopt#readme</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>__all__</strong> = ['docopt']<br>
+<strong>__version__</strong> = '0.6.2'</td></tr></table>
+</body></html>

@@ -1,0 +1,357 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>cacheparameter module &mdash; Nitro  documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Nitro  documentation" href="index.html" />
+    <link rel="up" title="cache package" href="nssrc.com.citrix.netscaler.nitro.resource.config.cache.html" />
+    <link rel="next" title="cachepolicy module" href="nssrc.com.citrix.netscaler.nitro.resource.config.cache.cachepolicy.html" />
+    <link rel="prev" title="cacheobject module" href="nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheobject.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="nssrc.com.citrix.netscaler.nitro.resource.config.cache.cachepolicy.html" title="cachepolicy module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheobject.html" title="cacheobject module"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Nitro  documentation</a> &raquo;</li>
+          <li><a href="nssrc.com.citrix.netscaler.nitro.resource.config.html" >config package</a> &raquo;</li>
+          <li><a href="nssrc.com.citrix.netscaler.nitro.resource.config.cache.html" accesskey="U">cache package</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter">
+<span id="cacheparameter-module"></span><h1>cacheparameter module<a class="headerlink" href="#module-nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter">
+<em class="property">class </em><tt class="descname">cacheparameter</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.html#nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource" title="nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource"><tt class="xref py py-class docutils literal"><span class="pre">nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource</span></tt></a></p>
+<p>Configuration for cache parameter resource.</p>
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.memlimit">
+<tt class="descname">memlimit</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.memlimit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Amount of memory available for storing the cache objects. In practice, the amount of memory available for caching can be less than half the total memory of the NetScaler appliance.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.via">
+<tt class="descname">via</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.via" title="Permalink to this definition">¶</a></dt>
+<dd><p>String to include in the Via header. A Via header is inserted into all responses served from a content group if its Insert Via flag is set.&lt;br/&gt;Minimum length =  1.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.verifyusing">
+<tt class="descname">verifyusing</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.verifyusing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Criteria for deciding whether a cached object can be served for an incoming HTTP request. Available settings function as follows:
+HOSTNAME - The URL, host name, and host port values in the incoming HTTP request header must match the cache policy. The IP address and the TCP port of the destination host are not evaluated. Do not use the HOSTNAME setting unless you are certain that no rogue client can access a rogue server through the cache. 
+HOSTNAME_AND_IP - The URL, host name, host port in the incoming HTTP request header, and the IP address and TCP port of
+the destination server, must match the cache policy.
+DNS - The URL, host name and host port in the incoming HTTP request, and the TCP port must match the cache policy. The host name is used for DNS lookup of the destination server&#8217;s IP address, and is compared with the set of addresses returned by the DNS lookup.&lt;br/&gt;Possible values = HOSTNAME, HOSTNAME_AND_IP, DNS.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.maxpostlen">
+<tt class="descname">maxpostlen</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.maxpostlen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Maximum number of POST body bytes to consider when evaluating parameters for a content group for which you have configured hit parameters and invalidation parameters.&lt;br/&gt;Default value: 4096&lt;br/&gt;Maximum length =  131072.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.prefetchmaxpending">
+<tt class="descname">prefetchmaxpending</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.prefetchmaxpending" title="Permalink to this definition">¶</a></dt>
+<dd><p>Maximum number of outstanding prefetches in the Integrated Cache.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.enablebypass">
+<tt class="descname">enablebypass</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.enablebypass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluate the request-time policies before attempting hit selection. If set to NO, an incoming request for which a matching object is found in cache storage results in a response regardless of the policy configuration.
+If the request matches a policy with a NOCACHE action, the request bypasses all cache processing. 
+This parameter does not affect processing of requests that match any invalidation policy.&lt;br/&gt;Possible values = YES, NO.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.undefaction">
+<tt class="descname">undefaction</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.undefaction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Action to take when a policy cannot be evaluated.&lt;br/&gt;Possible values = NOCACHE, RESET.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.enablehaobjpersist">
+<tt class="descname">enablehaobjpersist</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.enablehaobjpersist" title="Permalink to this definition">¶</a></dt>
+<dd><p>The HA object persisting parameter. When this value is set to YES, cache objects can be synced to Secondary in a HA deployment.  If set to NO, objects will never be synced to Secondary node.&lt;br/&gt;Default value: NO&lt;br/&gt;Possible values = YES, NO.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.disklimit">
+<tt class="descname">disklimit</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.disklimit" title="Permalink to this definition">¶</a></dt>
+<dd><p>The disk limit for the Integrated Cache.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.maxdisklimit">
+<tt class="descname">maxdisklimit</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.maxdisklimit" title="Permalink to this definition">¶</a></dt>
+<dd><p>The maximum value of the memory limit for the Integrated Cache.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.memlimitactive">
+<tt class="descname">memlimitactive</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.memlimitactive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Active value of the memory limit for the Integrated Cache.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.maxmemlimit">
+<tt class="descname">maxmemlimit</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.maxmemlimit" title="Permalink to this definition">¶</a></dt>
+<dd><p>The maximum value of the memory limit for the Integrated Cache.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.prefetchcur">
+<tt class="descname">prefetchcur</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.prefetchcur" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of current outstanding prefetches in the IC.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.update">
+<em class="property">classmethod </em><tt class="descname">update</tt><big>(</big><em>client</em>, <em>resource</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this API to update cacheparameter.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.unset">
+<em class="property">classmethod </em><tt class="descname">unset</tt><big>(</big><em>client</em>, <em>resource</em>, <em>args</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.unset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this API to unset the properties of cacheparameter resource.
+Properties that need to be unset are specified in args array.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.get">
+<em class="property">classmethod </em><tt class="descname">get</tt><big>(</big><em>client</em>, <em>name=''</em>, <em>option_=''</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this API to fetch all the cacheparameter resources that are configured on netscaler.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.Verifyusing">
+<em class="property">class </em><tt class="descname">Verifyusing</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.Verifyusing" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.Verifyusing.HOSTNAME">
+<tt class="descname">HOSTNAME</tt><em class="property"> = 'HOSTNAME'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.Verifyusing.HOSTNAME" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.Verifyusing.HOSTNAME_AND_IP">
+<tt class="descname">HOSTNAME_AND_IP</tt><em class="property"> = 'HOSTNAME_AND_IP'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.Verifyusing.HOSTNAME_AND_IP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.Verifyusing.DNS">
+<tt class="descname">DNS</tt><em class="property"> = 'DNS'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.Verifyusing.DNS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.Enablehaobjpersist">
+<em class="property">class </em><tt class="descclassname">cacheparameter.</tt><tt class="descname">Enablehaobjpersist</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.Enablehaobjpersist" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.Enablehaobjpersist.YES">
+<tt class="descname">YES</tt><em class="property"> = 'YES'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.Enablehaobjpersist.YES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.Enablehaobjpersist.NO">
+<tt class="descname">NO</tt><em class="property"> = 'NO'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.Enablehaobjpersist.NO" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.Undefaction">
+<em class="property">class </em><tt class="descclassname">cacheparameter.</tt><tt class="descname">Undefaction</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.Undefaction" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.Undefaction.NOCACHE">
+<tt class="descname">NOCACHE</tt><em class="property"> = 'NOCACHE'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.Undefaction.NOCACHE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.Undefaction.RESET">
+<tt class="descname">RESET</tt><em class="property"> = 'RESET'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.Undefaction.RESET" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.Enablebypass">
+<em class="property">class </em><tt class="descclassname">cacheparameter.</tt><tt class="descname">Enablebypass</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.Enablebypass" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.Enablebypass.YES">
+<tt class="descname">YES</tt><em class="property"> = 'YES'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.Enablebypass.YES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.Enablebypass.NO">
+<tt class="descname">NO</tt><em class="property"> = 'NO'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter.Enablebypass.NO" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter_response">
+<em class="property">class </em><tt class="descname">cacheparameter_response</tt><big>(</big><em>length=1</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.cacheparameter_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.base.base_response.html#nssrc.com.citrix.netscaler.nitro.resource.base.base_response.base_response" title="nssrc.com.citrix.netscaler.nitro.resource.base.base_response.base_response"><tt class="xref py py-class docutils literal"><span class="pre">nssrc.com.citrix.netscaler.nitro.resource.base.base_response.base_response</span></tt></a></p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper"><ul class="globaltoc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.exception.html">Nitro exception Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.base.html">Base Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.service.html">Service Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.util.html">Util Package</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.html">Config Package</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.aaa.html">aaa</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.app.html">app</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.appflow.html">appflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.appfw.html">appfw</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.appqoe.html">appqoe</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.audit.html">audit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.authentication.html">authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.authorization.html">authorization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.autoscale.html">autoscale</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.basic.html">basic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.ca.html">ca</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.cache.html">cache</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.cache.cachecontentgroup.html">cachecontentgroup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheforwardproxy.html">cacheforwardproxy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheglobal_binding.html">cacheglobal_binding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheglobal_cachepolicy_binding.html">cacheglobal_cachepolicy_binding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheobject.html">cacheobject</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">cacheparameter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.cache.cachepolicy.html">cachepolicy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.cache.cachepolicy_binding.html">cachepolicy_binding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.cache.cachepolicy_cacheglobal_binding.html">cachepolicy_cacheglobal_binding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.cache.cachepolicy_cachepolicylabel_binding.html">cachepolicy_cachepolicylabel_binding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.cache.cachepolicy_csvserver_binding.html">cachepolicy_csvserver_binding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.cache.cachepolicy_lbvserver_binding.html">cachepolicy_lbvserver_binding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.cache.cachepolicylabel.html">cachepolicylabel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.cache.cachepolicylabel_binding.html">cachepolicylabel_binding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.cache.cachepolicylabel_cachepolicy_binding.html">cachepolicylabel_cachepolicy_binding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.cache.cachepolicylabel_policybinding_binding.html">cachepolicylabel_policybinding_binding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheselector.html">cacheselector</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.html">cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.cmp.html">cmp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.cr.html">cr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.cs.html">cs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.db.html">db</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.dns.html">dns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.dos.html">dos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.feo.html">feo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.filter.html">filter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.gslb.html">gslb</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.ha.html">ha</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.ipsec.html">ipsec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.lb.html">lb</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.lldp.html">lldp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.network.html">network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.ns.html">ns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.ntp.html">ntp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.policy.html">policy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.pq.html">pq</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.protocol.html">protocol</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.responder.html">responder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.html">rewrite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.rise.html">rise</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.router.html">router</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.sc.html">sc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.snmp.html">snmp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.spillover.html">spillover</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.ssl.html">ssl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.stream.html">stream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.system.html">system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.tm.html">tm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.transform.html">transform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.tunnel.html">tunnel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.utility.html">utility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.vpn.html">vpn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.wi.html">wi</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.stat.html">Stat Package</a></li>
+</ul>
+</ul>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheobject.html"
+                        title="previous chapter">cacheobject module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="nssrc.com.citrix.netscaler.nitro.resource.config.cache.cachepolicy.html"
+                        title="next chapter">cachepolicy module</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/nssrc.com.citrix.netscaler.nitro.resource.config.cache.cacheparameter.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div> 
+
+    <div class="footer">
+        &copy; Copyright © 1999-2014 Citrix Systems, Inc. All Rights Reserved.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.
+    </div>
+  </body>
+</html>

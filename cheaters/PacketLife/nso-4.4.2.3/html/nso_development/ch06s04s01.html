@@ -1,0 +1,1351 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      
+      <title>Transaction and Data Callbacks -  - NSO 4.4.2.3 Development</title>
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+      <link rel="home" href="index.html" title="NSO 4.4.2.3 Development" />
+      <link rel="up" href="ug.java_api_overview.dp.html" title="DP API" />
+      <link rel="prev" href="ug.java_api_overview.dp.html" title="DP API" />
+      <link rel="next" href="ch06s04s02.html" title="Service and Action Callbacks" />
+      <meta xmlns="" name="Section-title" content="Transaction and Data Callbacks" /><script xmlns="" type="text/javascript">
+      //The id for tree cookie
+      var treeCookieId = "treeview-14938";
+      var language = "en";
+      var w = new Object();
+      //Localization
+      txt_filesfound = 'Results';
+      txt_enter_at_least_1_char = "You must enter at least one character.";
+      txt_browser_not_supported = "JavaScript is disabled on your browser. Please enable JavaScript to enjoy all the features of this site.";
+      txt_please_wait = "Please wait. Search in progress...";
+      txt_results_for = "Results for: ";
+    </script><link xmlns="" rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/css/positioning.css" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/jquery/theme-redmond/jquery-ui-1.8.2.custom.css" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/jquery/treeview/jquery.treeview.css" /><style xmlns="" type="text/css">
+      
+      #noscript{
+      font-weight:bold;
+      background-color: #55AA55;
+      font-weight: bold;
+      height: 25spx;
+      z-index: 3000;
+      top:0px;
+      width:100%;
+      position: relative;
+      border-bottom: solid 5px black;
+      text-align:center;
+      color: white;
+      }
+      
+      input {
+      margin-bottom: 5px;
+      margin-top: 2px;
+      }
+      .folder {
+      display: block;
+      height: 22px;
+      padding-left: 20px;
+      background: transparent url(common/jquery/treeview/images/folder.gif) 0 0px no-repeat;
+      }
+      span.contentsTab {
+      padding-left: 20px;
+      background: url(common/images/toc-icon.png) no-repeat 0 center;
+      }
+      span.searchTab {
+      padding-left: 20px;
+      background: url(common/images/search-icon.png) no-repeat 0 center;
+      }
+      
+      /* Overide jquery treeview's defaults for ul. */
+      .treeview ul {
+      background-color: transparent;
+      margin-top: 4px;
+      }		
+      #webhelp-currentid {
+      /* background-color: #D8D8D8 !important; */
+      background-color: #D8D8D8;
+      }
+      .treeview .hover { color: black; }
+      .filetree li span a { text-decoration: none; font-size: 12px; color: #517291; }
+      
+      /* Override jquery-ui's default css customizations. These are supposed to take precedence over those.*/
+      .ui-widget-content {
+      border: 0px; 
+      background: none; 
+      color: none;     
+      }
+      .ui-widget-header {
+      color: #e9e8e9;
+      border-left: 1px solid #e5e5e5;
+      border-right: 1px solid #e5e5e5;
+      border-bottom: 1px solid #bbc4c5;
+      border-top: 4px solid #e5e5e5;
+      border: medium none;
+      background: #F4F4F4; /* old browsers */
+      background: -moz-linear-gradient(top, #F4F4F4 0%, #E6E4E5 100%); /* firefox */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F4F4F4), color-stop(100%,#E6E4E5)); /* webkit */    
+      font-weight: none;
+      }
+      .ui-widget-header a { color: none; }
+      .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { 
+      border: none; background: none; font-weight: none; color: none; }
+      .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited { color: black; text-decoration: none; }
+      .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus { border: none; background: none; font-weight: none; color: none; }
+      
+      .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { border: none; background: none; font-weight: none; color: none; }
+      .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited { 
+      color: black; text-decoration: none; 	
+      background: #C6C6C6; /* old browsers */
+      background: -moz-linear-gradient(top, #C6C6C6 0%, #D8D8D8 100%); /* firefox */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#C6C6C6), color-stop(100%,#D8D8D8)); /* webkit */
+      -webkit-border-radius:15px; -moz-border-radius:10px;
+      border: 1px solid #f1f1f1;
+      }    
+      .ui-corner-all { border-radius: 0 0 0 0; }
+      
+      .ui-tabs { padding: .2em;}
+      .ui-tabs .ui-tabs-nav li { top: 0px; margin: -2px 0 1px; text-transform: uppercase; font-size: 10.5px;}
+      .ui-tabs .ui-tabs-nav li a { padding: .25em 2em .25em 1em; margin: .5em; text-shadow: 0 1px 0 rgba(255,255,255,.5); }
+      /**
+      *	Basic Layout Theme
+      * 
+      *	This theme uses the default layout class-names for all classes
+      *	Add any 'custom class-names', from options: paneClass, resizerClass, togglerClass
+      */
+      
+      .ui-layout-pane { /* all 'panes' */ 
+      background: #FFF; 
+      border: 1px solid #BBB; 
+      padding: 05x; 
+      overflow: auto;
+      } 
+      
+      .ui-layout-resizer { /* all 'resizer-bars' */ 
+      background: #DDD; 
+      top:100px
+      } 
+      
+      .ui-layout-toggler { /* all 'toggler-buttons' */ 
+      background: #AAA; 
+      } 
+      
+    </style>
+      <!--[if IE]>
+	<link rel="stylesheet" type="text/css" href="../common/css/ie.css"/>
+	<![endif]--><script xmlns="" type="text/javascript" src="common/browserDetect.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery-1.7.2.min.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery.ui.all.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery.cookie.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/treeview/jquery.treeview.min.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/layout/jquery.layout.js">
+         <!----></script><style type="text/css">
+      
+      #header {
+      /* background: url("../images/header-bg.png") scroll top left repeat-x #4d8c83; */
+      background: transparent;
+      }
+      #leftnavigation {
+      /* background-color: #ededed!important; */
+      background-color: transparent;
+      }
+      #navheader {
+      visibility: hidden;
+      }
+      #webhelp-currentid {
+      /* background-color: #D8D8D8 !important; */
+      background-color: #FFFFFF; /*but must be changed in main.js as well*/
+      }
+      .filetree span.file {
+      /* background: url(images/file.gif) 0 0 no-repeat; */
+      background: initial;
+      }
+      .filetree span.folder, .filetree span.file {
+      padding: 1px 0 1px 7px;
+      display: block;
+      }
+
+      /* borrowed from cisco: clientlib.css */
+      .footer {
+      margin: 28px 30px 0 15px;
+      font-size: 80%;
+      line-height: 120%;
+      border-top: 1px solid #ccc;
+      padding-top: 7px;
+      color: #999;
+      }
+      .footer #footer-legal{display:inline;padding-bottom:18px}
+      #framework-footer{margin:0;padding:0 0 15px 0;min-width:900px;width:100%}
+      .footer a,.footer a:visited{color:#999}
+
+      /* from ccimr.css */
+      a:active  { color: #3366CC}
+      a:hover   { color: #3366CC}
+      a:link    { color: #3366CC}
+      a:visited { color: #3366CC}
+
+      #header img {
+      float: left;
+      margin-left: 20px;
+      margin-top: 0px;
+      }
+
+      #header h1 {
+      color: #336666;
+      margin-top: 4px;
+      }
+      #content h1, #content h2 {
+      color: #336666;
+      }
+      .title {
+      color: #336666;
+      }
+      p, pre {
+      margin-left: 0.1in;
+      }
+      p, ul, ol, li {
+        font-size: 95%;
+        font-family: Arial, Helvetica, sans-serif;
+        margin-top: 1px;
+      }
+      body {
+        font: 80.5% Arial, Helvetica, sans-serif;
+      }
+      ol {
+      display: block;
+      list-style-type: decimal;
+      -webkit-margin-before: 1em;
+      -webkit-margin-after: 1em;
+      -webkit-margin-start: 0px;
+      -webkit-margin-end: 0px;
+      -webkit-padding-start: 40px;
+      border: 1;
+      }
+    </style></head>
+   <body>
+      <noscript>
+         <div id="noscript">JavaScript is disabled on your browser. Please enable JavaScript to enjoy all the features of this site.</div>
+      </noscript>
+      <div id="header"><a href="index.html"><img style="margin-right: 2px; width: 110; height: 73; padding-right: 25px; padding-top: 8px" align="right" src="common/images/logo.gif" alt="Cisco Systems, Inc." /></a><h1>NSO 4.4.2.3 Development<br />DP API
+         </h1>
+         <div id="navheader">
+            <!---->
+            <table class="navLinks">
+               <tr>
+                  <td><a id="showHideButton" href="#" onclick="myLayout.toggle('west')" class="pointLeft" tabindex="5" title="Hide TOC tree">Sidebar
+                                                    </a></td>
+                  <td><a accesskey="p" class="navLinkPrevious" tabindex="5" href="ug.java_api_overview.dp.html">Prev</a>
+                                                             |
+                                                             <a accesskey="u" class="navLinkUp" tabindex="5" href="ug.java_api_overview.dp.html">Up</a>
+                                                         |
+                                                         <a accesskey="n" class="navLinkNext" tabindex="5" href="ch06s04s02.html">Next</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div id="content">
+         <div class="sect2">
+            <div xmlns="" class="titlepage">
+               <div>
+                  <div>
+                     <h3 xmlns="http://www.w3.org/1999/xhtml" class="title"><a id="d0e3534"></a>Transaction and Data Callbacks
+                     </h3>
+                  </div>
+               </div>
+            </div>
+            <p>
+                     By default NSO stores all configuration data in its CDB data store.
+                     We may wish to store and configure other data in NSO than
+                     what is defined by the NSO built-in YANG models, alternatively
+                     we may wish store parts of the NSO tree outside
+                     NSO (CDB) i.e. in an external database. Say for example that we
+                     have our customer database stored in a relational database
+                     disjunct from NSO. To implement this, we must do a number of things:
+                     We must define a <span class="emphasis"><em>callpoint</em></span> somewhere in the
+                     configuration tree, and we must implement what is referred to
+                     as a data provider.
+                     Also NSO executes all configuration changes inside transactions and
+                     if we want NSO (CDB) and our external database to participate in
+                     the same two-phase commit transactions we must also implement a
+                     transaction callback.
+                     All together it will appear as if the external data is part of
+                     the overall NSO configuration, thus the service model data can
+                     refer directly into this external data - typically in
+                     order to validate service instances.
+                   
+            </p>
+            <p>
+                     The basic idea for a data provider, is that it participates
+                     entirely in each NSO transaction, and it is also responsible
+                     for reading and writing all data in the configuration tree
+                     below the callpoint.
+                     Before explaining how to write a data provider and what
+                     the responsibilities of a data provider are, we must explain
+                     how the NSO transaction manager drives all participants in a
+                     lock step manner through the phases of a transaction.
+                   
+            </p>
+            <p>
+                     A transaction has a number of phases, the external data provider
+                     gets called in all the different phases. This is done by implementing a
+                     <span class="emphasis"><em>Transaction callback</em></span> class and then registering
+                     that class. We have the following distinct phases of a NSO transaction:
+                   
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>
+                                  <code class="function">init()</code> In this phase the Transaction callback
+                                 class <code class="code">init()</code> methods gets invoked.
+                                 We use annotation on the method to indicate that it's the
+                                 <code class="code">init()</code> method as in:
+                                
+                     </p>
+                     <div class="informalexample"><pre class="screen">    public  class MyTransCb {
+
+        @TransCallback(callType=TransCBType.INIT)
+        public void init(DpTrans trans) throws DpCallbackException {
+            return;
+        }</pre></div>
+                     <p>
+                                  Each different callback method we wish to register, must be annotated
+                                  with an annotation from <code class="code">TransCBType</code>
+                                
+                     </p>
+                     <p>
+                                  The callback is invoked when a transaction starts, but NSO delays the
+                                  actual invocation as an optimization. For a data provider providing
+                                  configuration data, <code class="function">init()</code> is invoked just before
+                                  the first data-reading callback, or just before the
+                                  <code class="function">transLock()</code> callback (see below), whichever comes
+                                  first. When a transaction has started, it is in a state we refer to as
+                                  <code class="constant">READ</code>. NSO will, while the transaction is in the
+                                  <code class="constant">READ</code> state, execute a series of read operations
+                                  towards (possibly) different callpoints in the data provider.
+                                
+                     </p>
+                     <p>
+                                  Any write operations performed by the management station
+                                  are accumulated by NSO and the data provider doesn't see them
+                                  while in the <code class="constant">READ</code> state.
+                                
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                                  <code class="function">transLock()</code> - This callback gets invoked by NSO
+                                  at the end of the transaction. NSO has accumulated a number of write
+                                  operations and will now initiate the final write phases. Once the
+                                  <code class="function">transLock()</code> callback has returned, the
+                                  transaction is in the <code class="constant">VALIDATE</code>state. In the
+                                  <code class="constant">VALIDATE</code> state, NSO will (possibly) execute a
+                                  number of read operations in order to validate the new configuration.
+                                  Following the read operations for validations comes the invocation of
+                                  one of the <code class="function">writeStart()</code> or
+                                  <code class="function">transUnlock()</code> callbacks.
+                                
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                                  <code class="function">transUnlock()</code> - This callback gets
+                                  invoked by NSO if the validation failed or if the
+                                  validation was done separate from the commit (e.g. by
+                                  giving a <span class="command"><strong>validate</strong></span> command in the CLI). Depending
+                                  on where the transaction originated, the behavior after
+                                  a call to <code class="function">transUnlock()</code> differs. If the
+                                  transaction originated from the CLI, the CLI reports to the
+                                  user that the configuration is invalid and the transaction
+                                  remains in the <code class="constant">READ</code> state whereas if the
+                                  transaction originated from a NETCONF client, the NETCONF operation
+                                  fails and a NETCONF <code class="sgmltag-element">rpc</code> error is reported to the
+                                  NETCONF client/manager.
+                                
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                                  <code class="function">writeStart()</code> - If the validation
+                                   succeeded, the <code class="function">writeStart()</code> callback will
+                                   be called and the transaction enters the
+                                   <code class="constant">WRITE</code> state. While in
+                                   <code class="constant">WRITE</code> state, a number of
+                                   calls to the write data callbacks <code class="function">setElem()</code>,
+                                   <code class="function">create()</code> and
+                                   <code class="function">remove()</code> will be performed.
+                                
+                     </p>
+                     <p>
+                                  If the underlying database supports real atomic transactions, this is
+                                  a good place to start such a transaction.
+                                
+                     </p>
+                     <p>
+                                  The application should not modify the real running data
+                                  here. If, later, the <code class="function">abort()</code> callback is called,
+                                  all write operations performed in this state must be undone.
+                                
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                                  <code class="function">prepare()</code> -  Once all write operations are
+                                  executed, the <code class="function">prepare()</code> callback is executed.
+                                  This callback ensures that all participants have succeeded in writing
+                                  all elements.  The purpose of the callback is merely to indicate
+                                  to NSO that the data provider is ok, and has not yet encountered
+                                  any errors.
+                                
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                                  <code class="function">abort()</code> - If any of the participants die or fail
+                                  to reply in the <code class="function">prepare()</code>  callback, the
+                                  remaining participants all get invoked in the
+                                  <code class="function">abort()</code> callback. All data written so far in this
+                                  transaction should be disposed of.
+                                
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                                  <code class="function">commit()</code> - If all participants successfully
+                                  replied in their respective <code class="function">prepare()</code>  callbacks,
+                                  all participants get invoked in their respective
+                                  <code class="function">commit()</code> callbacks. This is the place to make all
+                                  data written by the write callbacks in <code class="constant">WRITE</code>
+                                  state permanent.
+                                
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                                  <code class="function">finish()</code> - And finally, the
+                                  <code class="function">finish()</code> callback gets invoked at the end. This
+                                  is a good place to deallocate any local resources for the transaction.
+                                
+                     </p>
+                     <p>
+                                  The <code class="function">finish()</code> callback can be called from several
+                                  different states.
+                                
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>
+                     The following picture illustrates the conceptual
+                     state machine a NSO transaction goes through.
+                   
+            </p>
+            <div class="mediaobject" align="center">
+               <table border="0" summary="manufactured viewport for HTML img" style="cellpadding: 0; cellspacing: 0;" width="425">
+                  <tr>
+                     <td align="center"><img src="pics/trans_state.png" align="middle" width="425" /></td>
+                  </tr>
+               </table>
+               <div class="caption">
+                  <p>
+                               NSO transaction state machine
+                             
+                  </p>
+               </div>
+            </div>
+            <p>
+                     All callbacks methods are optional. If a callback method is not
+                     implemented, it is the same as having an  empty callback which simply
+                     returns.
+                   
+            </p>
+            <p>
+                     Similar to how we have to register Transaction callbacks, we must also
+                     register data callbacks.
+                     The transaction callbacks cover the life span of the transaction, and
+                     the data callbacks are used to read and write data inside a transaction.
+                     The data callbacks have access to what is referred to as the
+                     transaction context in the form of a <code class="code">DpTrans</code> object.
+                   
+            </p>
+            <p>
+                     We have the following data callbacks:
+                   
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>
+                                  <code class="function">getElem()</code>
+                                  This callback is invoked by NSO when NSO needs to
+                                  read the actual value of a leaf element. We must
+                                  also implement the <code class="function">getElem()</code> callback for the
+                                  keys. NSO invokes <code class="function">getElem()</code> on a key as an
+                                  existence test.
+                     </p>
+                     <p>
+                                  We define the <code class="function">getElem</code> callback inside a class as:
+                                
+                     </p>
+                     <div class="informalexample"><pre class="screen">public static class DataCb {
+
+    @DataCallback(callPoint="foo", callType=DataCBType.GET_ELEM)
+        public ConfValue getElem(DpTrans trans, ConfObject[] kp)
+        throws DpCallbackException {
+           .....</pre></div>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                                  <code class="function">existsOptional()</code>
+                                  This callback is called for all type less and optional
+                                  elements, i.e. <code class="code">presence</code> containers and leafs
+                                  of type <code class="code">empty</code>.
+                                  If we have presence containers or leafs of type empty
+                                  we cannot use the getElem() callback to read the value of
+                                  such a node, since it does not have a type. An example of a data
+                                  model could be:
+                                
+                     </p>
+                     <div class="informalexample"><pre class="screen">  container bs {
+    presence "";
+    tailf:callpoint bcp;
+    list b {
+      key name;
+      max-elements 64;
+      leaf name {
+        type string;
+      }
+      container opt {
+        presence "";
+        leaf ii {
+          type int32;
+        }
+      }
+      leaf foo {
+        type empty;
+      }
+    }
+  }</pre></div>
+                     <p>
+                                  The above YANG fragment has 3 nodes that may or may not exist and
+                                  that do not have a type. If we do not have any such elements, nor
+                                  any operational data lists without keys (see below), we do not need
+                                  to implement the existsOptional() callback.
+                                
+                     </p>
+                     <p>
+                                  If we have the above data model, we must implement the
+                                  existsOptional(), and our implementation must be prepared to reply
+                                  on calls of the function for the paths /bs, /bs/b/opt, and
+                                  /bs/b/foo. The leaf /bs/b/opt/ii is not mandatory, but it does have
+                                  a type namely int32, and thus the existence of that leaf will be
+                                  determined through a call to the getElem() callback.
+                                
+                     </p>
+                     <p>
+                                  The existsOptional() callback may also be invoked by NSO as
+                                  "existence test" for an entry in an operational data list without
+                                  keys. Normally
+                                  this existence test is done with a getElem() request for the first
+                                  key, but since there are no keys, this callback is used instead.
+                                  Thus if we have such lists, we must also implement this callback,
+                                  and handle a request where the keypath identifies a list entry.
+                                
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                                  <code class="function">iterator() and getKey()</code>
+                                  This pair of callback is used when NSO wants to traverse a YANG list.
+                                  The job of the <code class="function">iterator()</code> callback is to return a
+                                  <code class="code">Iterator</code> object that is invoked by the library.
+                                  For each <code class="code">Object</code> returned by the <code class="code">iterator</code>,
+                                  the NSO library will invoke the <code class="code">getKey()</code>
+                                  callback on the returned object. The <code class="code">getkey</code> callback
+                                  shall return a <code class="code">ConfKey</code> value.
+                                
+                     </p>
+                     <p>
+                                  An alternative to the <code class="code">getKey()</code> callback is to
+                                  register the optional <code class="code">getObject()</code> callback whose
+                                  job it is to return not just the key, but the entire
+                                  YANG list entry. It is possible to register both
+                                  <code class="code">getKey()</code> and <code class="code">getObject()</code>
+                                  or either. If the <code class="code">getObject()</code> is registered,
+                                  NSO will attempt to use it
+                                  only when bulk retrieval is executed.
+                                
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>
+                     We also have two additional optional callbacks that may be
+                     implemented for efficiency reasons.
+                   
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>
+                                  <code class="function">getObject()</code>
+                                  If this optional callback is implemented, the work of the callback
+                                  is to return an entire <code class="literal">object</code>, i.e. a
+                                  list instance. This is not the same
+                                  <code class="code">getObject()</code> as the one that
+                                  is used in combination with the <code class="code">iterator()</code>
+                                
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                                  <code class="function">numInstances()</code>
+                                  When NSO needs to figure out how many instances we have
+                                  of a certain element, by default NSO will repeatedly
+                                  invoke the <code class="function">iterator()</code> callback.
+                                  If this callback is installed, it will be called instead.
+                                
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>
+                     The following example illustrates an external data provider.
+                     The example is possible to run from the examples collection. It resides
+                     under <code class="code">${NCS_DIR}/examples.ncs/getting-started/developing-with-ncs/6-extern-db</code>.
+                   
+            </p>
+            <p>
+                     The example comes with a tailor made database - <code class="code">MyDb</code>.
+                     That source code is provided with the example but not shown here.
+                     However the functionality will be obvious from the method names
+                     like newItem(), lock(), save() etc.
+                   
+            </p>
+            <p>
+                     Two classes are implemented, one for the Transaction callbacks
+                     and another for the Data callbacks.
+                   
+            </p>
+            <p>
+                     The data model we wish to incorporate into NSO is a trivial list of
+                     work items. It looks like:
+                   
+            </p>
+            <div class="example"><a id="d0e3853"></a><p class="title"><strong>Example 62. work.yang</strong></p>
+               <div class="example-contents"><pre class="programlisting">        module work {
+  namespace "http://example.com/work";
+  prefix w;
+  import ietf-yang-types {
+    prefix yang;
+  }
+  import tailf-common {
+    prefix tailf;
+  }
+  description "This model is used as a simple example model
+               illustrating how to have NCS configuration data
+               that is stored outside of NCS - i.e not in CDB";
+
+  revision 2010-04-26 {
+    description "Initial revision.";
+  }
+
+  container work {
+    tailf:callpoint workPoint;
+    list item {
+      key key;
+      leaf key {
+        type int32;
+      }
+      leaf title {
+        type string;
+      }
+      leaf responsible {
+        type string;
+      }
+      leaf comment {
+        type string;
+      }
+    }
+  }
+}</pre></div>
+            </div><br class="example-break" /><p>
+                     Note the callpoint directive in the model, it indicates that an external
+                     Java callback must register itself using that name. That callback will be
+                     responsible for all data below the callpoint.
+                   
+            </p>
+            <p>
+                     To compile the <code class="code">work.yang</code>
+                     data model and then also to generate Java code for the data model we
+                     invoke <code class="code">make all</code> in the example package src directory.
+                     The Makefile will compile the yang files in the package, generate
+                     Java code for those data models and then also invoke ant in the
+                     Java src directory.
+                   
+            </p>
+            <p>
+                     The Data callback class looks as follows:
+                   
+            </p>
+            <div class="example"><a id="d0e3870"></a><p class="title"><strong>Example 63. DataCb class</strong></p>
+               <div class="example-contents"><pre class="programlisting">    @DataCallback(callPoint=work.callpoint_workPoint,
+                  callType=DataCBType.ITERATOR)
+    public Iterator&lt;Object&gt; iterator(DpTrans trans,
+                                     ConfObject[] keyPath)
+        throws DpCallbackException {
+        return MyDb.iterator();
+    }
+
+    @DataCallback(callPoint=work.callpoint_workPoint,
+                  callType=DataCBType.GET_NEXT)
+    public ConfKey getKey(DpTrans trans, ConfObject[] keyPath,
+                          Object obj)
+        throws DpCallbackException {
+        Item i = (Item) obj;
+        return new ConfKey( new ConfObject[] { new ConfInt32(i.key) });
+    }
+
+
+    @DataCallback(callPoint=work.callpoint_workPoint,
+                  callType=DataCBType.GET_ELEM)
+    public ConfValue getElem(DpTrans trans, ConfObject[] keyPath)
+        throws DpCallbackException {
+
+        ConfInt32 kv = (ConfInt32) ((ConfKey) keyPath[1]).elementAt(0);
+        Item i = MyDb.findItem( kv.intValue() );
+        if (i == null) return null; // not found
+
+        // switch on xml elem tag
+        ConfTag leaf = (ConfTag) keyPath[0];
+        switch (leaf.getTagHash()) {
+        case work._key:
+            return new ConfInt32(i.key);
+        case work._title:
+            return new ConfBuf(i.title);
+        case work._responsible:
+            return new ConfBuf(i.responsible);
+        case work._comment:
+            return new ConfBuf(i.comment);
+        default:
+            throw new DpCallbackException("xml tag not handled");
+        }
+    }
+
+    @DataCallback(callPoint=work.callpoint_workPoint,
+                  callType=DataCBType.SET_ELEM)
+    public int setElem(DpTrans trans, ConfObject[] keyPath,
+                       ConfValue newval)
+        throws DpCallbackException {
+        return Conf.REPLY_ACCUMULATE;
+    }
+
+    @DataCallback(callPoint=work.callpoint_workPoint,
+                  callType=DataCBType.CREATE)
+    public int create(DpTrans trans, ConfObject[] keyPath)
+        throws DpCallbackException {
+        return Conf.REPLY_ACCUMULATE;
+    }
+
+    @DataCallback(callPoint=work.callpoint_workPoint,
+                  callType=DataCBType.REMOVE)
+    public int remove(DpTrans trans, ConfObject[] keyPath)
+        throws DpCallbackException {
+        return Conf.REPLY_ACCUMULATE;
+    }
+
+    @DataCallback(callPoint=work.callpoint_workPoint,
+                  callType=DataCBType.NUM_INSTANCES)
+    public int numInstances(DpTrans trans, ConfObject[] keyPath)
+        throws DpCallbackException {
+        return MyDb.numItems();
+    }
+
+
+    @DataCallback(callPoint=work.callpoint_workPoint,
+                  callType=DataCBType.GET_OBJECT)
+    public ConfValue[] getObject(DpTrans trans, ConfObject[] keyPath)
+        throws DpCallbackException {
+        ConfInt32 kv = (ConfInt32) ((ConfKey) keyPath[0]).elementAt(0);
+        Item i = MyDb.findItem( kv.intValue() );
+        if (i == null) return null; // not found
+        return getObject(trans, keyPath, i);
+    }
+
+    @DataCallback(callPoint=work.callpoint_workPoint,
+                  callType=DataCBType.GET_NEXT_OBJECT)
+    public ConfValue[] getObject(DpTrans trans, ConfObject[] keyPath,
+                                 Object obj)
+        throws DpCallbackException {
+        Item i = (Item) obj;
+        return new ConfValue[] {
+            new ConfInt32(i.key),
+            new ConfBuf(i.title),
+            new ConfBuf(i.responsible),
+            new ConfBuf(i.comment)
+        };
+    }</pre></div>
+            </div><br class="example-break" /><p>
+                     First we see how the Java annotations are used to declare the type of
+                     callback for each method.
+                     Secondly, we see how the
+                     <code class="function">getElem()</code> callback inspects the
+                     <code class="code">keyPath</code> parameter passed to it
+                     to figure out exactly which element NSO wants to read.
+                     The <code class="code">keyPath</code> is an array of <code class="code">ConfObject</code> values.
+                     Keypaths are central to the understanding of the NSO Java library
+                     since they are used to denote objects in the configuration.
+                     A keypath uniquely identifies an element in the instantiated
+                     configuration tree.
+                   
+            </p>
+            <p>
+                     Furthermore, the <code class="function">getElem()</code> switches on the tag
+                     <code class="code">keyPath[0]</code> which is a <code class="code">ConfTag</code> using
+                     symbolic constants from the class "work". The "work" class was generated
+                     through the call to <code class="code">ncsc --emit-java ...</code>.
+               
+                   
+            </p>
+            <p>
+                     The three write callbacks, <code class="code">setElem()</code>,
+                     <code class="code">create()</code> and <code class="code">remove()</code>
+                     all return the value <code class="code">Conf.REPLY_ACCUMULATE</code>.
+                     If our backend database has real support to abort transactions,
+                     it is a good idea to initiate a new backend database transaction
+                     in the Transaction callback
+                     <code class="code">init()</code> (more on that later), whereas if our
+                     backend database doesn't support proper
+                     transactions, we can fake real transactions by
+                     returning <code class="code">Conf.REPLY_ACCUMULATE</code> instead
+                     of actually writing the data. Since the final verdict of the NSO
+                     transaction as a whole may very well be
+                     to abort the transaction, we must be prepared to undo all write
+                     operations. The
+                     <code class="code">Conf.REPLY_ACCUMULATE</code> return value means that we ask
+                     the library to cache the write
+                     for us.
+                   
+            </p>
+            <p>
+                     The Transaction callback class, looks like:
+                   
+            </p>
+            <div class="example"><a id="d0e3928"></a><p class="title"><strong>Example 64. TransCb class</strong></p>
+               <div class="example-contents"><pre class="programlisting">    @TransCallback(callType=TransCBType.INIT)
+    public void init(DpTrans trans) throws DpCallbackException {
+        return;
+    }
+
+    @TransCallback(callType=TransCBType.TRANS_LOCK)
+    public void transLock(DpTrans trans) throws DpCallbackException {
+        MyDb.lock();
+    }
+
+    @TransCallback(callType=TransCBType.TRANS_UNLOCK)
+    public void transUnlock(DpTrans trans) throws DpCallbackException {
+        MyDb.unlock();
+    }
+
+    @TransCallback(callType=TransCBType.PREPARE)
+    public void prepare(DpTrans trans) throws DpCallbackException {
+        Item i;
+        ConfInt32 kv;
+        for (Iterator&lt;DpAccumulate&gt; it = trans.accumulated();
+             it.hasNext(); ) {
+            DpAccumulate ack= it.next();
+            // check op
+            switch (ack.getOperation()) {
+            case DpAccumulate.SET_ELEM:
+                kv = (ConfInt32)  ((ConfKey) ack.getKP()[1]).elementAt(0);
+                if ((i = MyDb.findItem( kv.intValue())) == null)
+                    break;
+                // check leaf tag
+                ConfTag leaf = (ConfTag) ack.getKP()[0];
+                switch (leaf.getTagHash()) {
+                case work._title:
+                    i.title = ack.getValue().toString();
+                    break;
+                case work._responsible:
+                    i.responsible = ack.getValue().toString();
+                    break;
+                case work._comment:
+                    i.comment = ack.getValue().toString();
+                    break;
+                }
+                break;
+            case DpAccumulate.CREATE:
+                kv = (ConfInt32)  ((ConfKey) ack.getKP()[0]).elementAt(0);
+                MyDb.newItem(new Item(kv.intValue()));
+                break;
+            case DpAccumulate.REMOVE:
+                kv = (ConfInt32)  ((ConfKey) ack.getKP()[0]).elementAt(0);
+                MyDb.removeItem(kv.intValue());
+                break;
+            }
+        }
+        try {
+            MyDb.save("running.prep");
+        } catch (Exception e) {
+            throw
+              new DpCallbackException("failed to save file: running.prep",
+                                      e);
+        }
+    }
+
+    @TransCallback(callType=TransCBType.ABORT)
+    public void abort(DpTrans trans) throws DpCallbackException {
+        MyDb.restore("running.DB");
+        MyDb.unlink("running.prep");
+    }
+
+    @TransCallback(callType=TransCBType.COMMIT)
+    public void commit(DpTrans trans) throws DpCallbackException {
+        try {
+            MyDb.rename("running.prep","running.DB");
+        } catch (DpCallbackException e) {
+            throw new DpCallbackException("commit failed");
+        }
+    }
+
+    @TransCallback(callType=TransCBType.FINISH)
+    public void finish(DpTrans trans) throws DpCallbackException {
+        ;
+    }
+}</pre></div>
+            </div><br class="example-break" /><p>
+                     We can see how the <code class="code">prepare()</code> callback goes through all
+                     write operations and actually execute them towards our
+                     database <code class="code">MyDb</code>.
+                   
+            </p>
+         </div><script type="text/javascript" src="common/main.js">
+            <!----></script><script type="text/javascript" src="common/splitterInit.js">
+            <!----></script><div class="footer" id="footer-legal">
+            <div class="footer-legal framework-footer-cq">
+               <div id="framework-footer">
+                  <div id="footer-legal"><a href="http://www.cisco.com/web/siteassets/legal/terms_condition.html">Terms &amp; Conditions</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/privacy.html">Privacy Statement</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/privacy.html#cookies">Cookie Policy</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/trademark.html">Trademarks</a></div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div id="sidebar">
+         <div id="leftnavigation" style="padding-top:3px;">
+            <div id="tabs">
+               <ul style="visibility: hidden;"></ul>
+               <div id="treeDiv"><img src="common/images/loading.gif" alt="loading table of contents..." id="tocLoading" style="display:block;" /><div id="ulTreeDiv" style="display:none">
+                     <ul id="tree" class="filetree">
+                        <li><span class="file"><a href="ncs.ug.architecture.html" tabindex="1">NSO Architecture</a></span><ul>
+                              <li><span class="file"><a href="ch01s01.html" tabindex="1">Introduction</a></span></li>
+                              <li><span class="file"><a href="ch01s02.html" tabindex="1">Architecture Overview</a></span></li>
+                              <li><span class="file"><a href="ch01s03.html" tabindex="1">The NSO Data Model</a></span></li>
+                              <li><span class="file"><a href="ch01s04.html" tabindex="1">Process Architecture</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ug.javavm.html" tabindex="1">The NSO Java VM</a></span><ul>
+                              <li><span class="file"><a href="ch02s01.html" tabindex="1">Introduction</a></span></li>
+                              <li><span class="file"><a href="ch02s02.html" tabindex="1">The NED component type</a></span></li>
+                              <li><span class="file"><a href="ch02s03.html" tabindex="1">The callback component type</a></span></li>
+                              <li><span class="file"><a href="ch02s04.html" tabindex="1">The application component type</a></span></li>
+                              <li><span class="file"><a href="ncs.ug.javavm.resman.html" tabindex="1">The Resource Manager</a></span></li>
+                              <li><span class="file"><a href="ch02s06.html" tabindex="1">The Alarm centrals</a></span></li>
+                              <li><span class="file"><a href="ch02s07.html" tabindex="1">Embedding the NSO Java VM</a></span></li>
+                              <li><span class="file"><a href="ch02s08.html" tabindex="1">JMX interface</a></span></li>
+                              <li><span class="file"><a href="ch02s09.html" tabindex="1">Logging</a></span><ul>
+                                    <li><span class="file"><a href="ch02s09s01.html" tabindex="1">The NSO Java VM timeouts</a></span></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ncs.development.pythonvm.html" tabindex="1">The NSO Python VM</a></span><ul>
+                              <li><span class="file"><a href="ch03s01.html" tabindex="1">Introduction</a></span></li>
+                              <li><span class="file"><a href="ch03s02.html" tabindex="1">YANG model</a></span></li>
+                              <li><span class="file"><a href="ncs.development.pythonvm.ucode.html" tabindex="1">Structure of the User provided code</a></span><ul>
+                                    <li><span class="file"><a href="ncs.development.pythonvm.cthread.html" tabindex="1">The application component</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ncs.development.pythonvm.debug.html" tabindex="1">Debugging of Python packages</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ncs.development.embedded_erlang.html" tabindex="1">Embedded Erlang applications</a></span><ul>
+                              <li><span class="file"><a href="ch04s01.html" tabindex="1">Introduction</a></span></li>
+                              <li><span class="file"><a href="ch04s02.html" tabindex="1">Erlang API</a></span></li>
+                              <li><span class="file"><a href="ch04s03.html" tabindex="1">Application configuration</a></span></li>
+                              <li><span class="file"><a href="ch04s04.html" tabindex="1">Example</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ug.cdb.html" tabindex="1">CDB - The NSO Configuration Database</a></span><ul>
+                              <li><span class="file"><a href="ch05s01.html" tabindex="1">Introduction</a></span><ul>
+                                    <li><span class="file"><a href="ch05s01s01.html" tabindex="1">Key Features of CDB</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch05s02.html" tabindex="1">Addressing Data Using Keypaths</a></span></li>
+                              <li><span class="file"><a href="ug.cdb.subscriptions.html" tabindex="1">Subscriptions</a></span></li>
+                              <li><span class="file"><a href="ch05s04.html" tabindex="1">Sessions</a></span></li>
+                              <li><span class="file"><a href="ug.cdb.init.html" tabindex="1">Loading Initial Data Into CDB</a></span></li>
+                              <li><span class="file"><a href="ug.cdb.opdata.html" tabindex="1">Operational Data in CDB</a></span><ul>
+                                    <li><span class="file"><a href="ch05s06s01.html" tabindex="1">Subscriptions</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch05s07.html" tabindex="1">Example</a></span><ul>
+                                    <li><span class="file"><a href="ch05s07s01.html" tabindex="1">Operational Data</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.cdb.upgrade.html" tabindex="1">Automatic Schema Upgrades and Downgrades</a></span></li>
+                              <li><span class="file"><a href="ch05s09.html" tabindex="1">Using Initialization Files for Upgrade</a></span></li>
+                              <li><span class="file"><a href="ncs.cdb.upgrade.comp.html" tabindex="1">Writing an Upgrade Package Component</a></span></li>
+                              <li><span class="file"><a href="ch05s11.html" tabindex="1">Automatic Service Upgrade from NCS 2.x to NCS 3.0</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ug.java_api_overview.html" tabindex="1">Java API Overview</a></span><ul>
+                              <li><span class="file"><a href="ch06s01.html" tabindex="1">Introduction</a></span></li>
+                              <li><span class="file"><a href="ug.ncs.api.maapi.html" tabindex="1">MAAPI</a></span></li>
+                              <li><span class="file"><a href="ch06s03.html" tabindex="1">CDB API</a></span></li>
+                              <li><span class="file"><a href="ug.java_api_overview.dp.html" tabindex="1">DP API</a></span><ul>
+                                    <li id="webhelp-currentid"><span class="file"><a href="ch06s04s01.html" tabindex="1">Transaction and Data Callbacks</a></span></li>
+                                    <li><span class="file"><a href="ch06s04s02.html" tabindex="1">Service and Action Callbacks</a></span></li>
+                                    <li><span class="file"><a href="ch06s04s03.html" tabindex="1">Validation Callbacks</a></span></li>
+                                    <li><span class="file"><a href="ch06s04s04.html" tabindex="1">Transforms</a></span></li>
+                                    <li><span class="file"><a href="ch06s04s05.html" tabindex="1">Hooks</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch06s05.html" tabindex="1">NED API</a></span></li>
+                              <li><span class="file"><a href="ug.java_api_overview.navu.html" tabindex="1">NAVU API</a></span></li>
+                              <li><span class="file"><a href="ch06s07.html" tabindex="1">ALARM API</a></span></li>
+                              <li><span class="file"><a href="ug.java_api_overview.notif.html" tabindex="1">NOTIF API</a></span></li>
+                              <li><span class="file"><a href="ch06s09.html" tabindex="1">HA API</a></span></li>
+                              <li><span class="file"><a href="ch06s10.html" tabindex="1">Java API Conf Package</a></span></li>
+                              <li><span class="file"><a href="ch06s11.html" tabindex="1">Namespace classes and the loaded schema</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ug.python_api_overview.html" tabindex="1">Python API Overview</a></span><ul>
+                              <li><span class="file"><a href="ch07s01.html" tabindex="1">Introduction</a></span></li>
+                              <li><span class="file"><a href="ch07s02.html" tabindex="1">Python API overview</a></span></li>
+                              <li><span class="file"><a href="ch07s03.html" tabindex="1">Python scripting</a></span></li>
+                              <li><span class="file"><a href="ch07s04.html" tabindex="1">High-level MAAPI API</a></span></li>
+                              <li><span class="file"><a href="ch07s05.html" tabindex="1">Maagic API</a></span><ul>
+                                    <li><span class="file"><a href="ch07s05s01.html" tabindex="1">Namespaces</a></span></li>
+                                    <li><span class="file"><a href="ch07s05s02.html" tabindex="1">Reading data</a></span></li>
+                                    <li><span class="file"><a href="ch07s05s03.html" tabindex="1">Writing data</a></span></li>
+                                    <li><span class="file"><a href="ch07s05s04.html" tabindex="1">Deleting data</a></span></li>
+                                    <li><span class="file"><a href="ch07s05s05.html" tabindex="1">Containers</a></span></li>
+                                    <li><span class="file"><a href="ch07s05s06.html" tabindex="1">Presence containers</a></span></li>
+                                    <li><span class="file"><a href="ch07s05s07.html" tabindex="1">Choices</a></span></li>
+                                    <li><span class="file"><a href="ch07s05s08.html" tabindex="1">Lists and List elements</a></span></li>
+                                    <li><span class="file"><a href="ch07s05s09.html" tabindex="1">Unions</a></span></li>
+                                    <li><span class="file"><a href="ch07s05s10.html" tabindex="1">Enumeration</a></span></li>
+                                    <li><span class="file"><a href="ch07s05s11.html" tabindex="1">Leafref</a></span></li>
+                                    <li><span class="file"><a href="ch07s05s12.html" tabindex="1">Identityref</a></span></li>
+                                    <li><span class="file"><a href="ch07s05s13.html" tabindex="1">Instance-identifier</a></span></li>
+                                    <li><span class="file"><a href="ch07s05s14.html" tabindex="1">Leaf-list</a></span></li>
+                                    <li><span class="file"><a href="ch07s05s15.html" tabindex="1">Binary</a></span></li>
+                                    <li><span class="file"><a href="ch07s05s16.html" tabindex="1">Bits</a></span></li>
+                                    <li><span class="file"><a href="ch07s05s17.html" tabindex="1">Empty leaf</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch07s06.html" tabindex="1">Maagic examples</a></span><ul>
+                                    <li><span class="file"><a href="ch07s06s01.html" tabindex="1">Action requests</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch07s07.html" tabindex="1">PlanComponent</a></span></li>
+                              <li><span class="file"><a href="ch07s08.html" tabindex="1">Python packages</a></span><ul>
+                                    <li><span class="file"><a href="ch07s08s01.html" tabindex="1">Action handler</a></span></li>
+                                    <li><span class="file"><a href="ch07s08s02.html" tabindex="1">Service handler</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch07s09.html" tabindex="1">Low-level APIs</a></span><ul>
+                                    <li><span class="file"><a href="ch07s09s01.html" tabindex="1">Low-level MAAPI API</a></span></li>
+                                    <li><span class="file"><a href="ch07s09s02.html" tabindex="1">Low-level CDB API</a></span></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ug.packages.html" tabindex="1">NSO Packages</a></span><ul>
+                              <li><span class="file"><a href="ug.packages.overview.html" tabindex="1">Package Overview</a></span></li>
+                              <li><span class="file"><a href="ch08s02.html" tabindex="1">An Example Package</a></span></li>
+                              <li><span class="file"><a href="ch08s03.html" tabindex="1">Components</a></span></li>
+                              <li><span class="file"><a href="ug.packages.creating.html" tabindex="1">Creating Packages </a></span><ul>
+                                    <li><span class="file"><a href="ch08s04s01.html" tabindex="1">Creating a NETCONF NED Package</a></span></li>
+                                    <li><span class="file"><a href="ch08s04s02.html" tabindex="1">Creating an SNMP NED Package</a></span></li>
+                                    <li><span class="file"><a href="ch08s04s03.html" tabindex="1">Creating a CLI NED Package or a Generic NED Package</a></span></li>
+                                    <li><span class="file"><a href="ch08s04s04.html" tabindex="1">Creating a Service Package or a Data Provider Package</a></span></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ug.package_dev.html" tabindex="1">Package Development</a></span><ul>
+                              <li><span class="file"><a href="ch09s01.html" tabindex="1">Developing a Service Package</a></span></li>
+                              <li><span class="file"><a href="ch09s02.html" tabindex="1">ncs-setup</a></span></li>
+                              <li><span class="file"><a href="ch09s03.html" tabindex="1">The netsim Part of a NED Package</a></span></li>
+                              <li><span class="file"><a href="ug.scripting_devel.html" tabindex="1">Plug-and-play scripting</a></span></li>
+                              <li><span class="file"><a href="ch09s05.html" tabindex="1">Creating a Service Package</a></span></li>
+                              <li><span class="file"><a href="ch09s06.html" tabindex="1">Java Service Implementation</a></span></li>
+                              <li><span class="file"><a href="ch09s07.html" tabindex="1">Developing our First Service Application</a></span></li>
+                              <li><span class="file"><a href="ch09s08.html" tabindex="1">Tracing Within the NSO Service Manager</a></span></li>
+                              <li><span class="file"><a href="ch09s09.html" tabindex="1">Controlling error messages info level from Java</a></span></li>
+                              <li><span class="file"><a href="ug.package_dev.loading.html" tabindex="1">Loading Packages</a></span></li>
+                              <li><span class="file"><a href="ch09s11.html" tabindex="1">Debugging the Service and Using Eclipse IDE</a></span><ul>
+                                    <li><span class="file"><a href="ch09s11s01.html" tabindex="1">Running the NSO Java VM Standalone</a></span></li>
+                                    <li><span class="file"><a href="ch09s11s02.html" tabindex="1">Using Eclipse to Debug the Package Java Code</a></span></li>
+                                    <li><span class="file"><a href="ch09s11s03.html" tabindex="1">Remote Connecting with Eclipse to the NSO Java VM</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch09s12.html" tabindex="1">Working with ncs-project</a></span><ul>
+                                    <li><span class="file"><a href="ch09s12s01.html" tabindex="1">Create a new project</a></span></li>
+                                    <li><span class="file"><a href="ch09s12s02.html" tabindex="1">Project setup</a></span></li>
+                                    <li><span class="file"><a href="ch09s12s03.html" tabindex="1">Export</a></span></li>
+                                    <li><span class="file"><a href="ch09s12s04.html" tabindex="1">NCS Project man pages</a></span></li>
+                                    <li><span class="file"><a href="ch09s12s05.html" tabindex="1">NCS Project YANG model</a></span></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ncs.development.services.html" tabindex="1">Developing NSO Services</a></span><ul>
+                              <li><span class="file"><a href="ch10s01.html" tabindex="1">Introduction</a></span></li>
+                              <li><span class="file"><a href="ch10s02.html" tabindex="1">Definitions</a></span></li>
+                              <li><span class="file"><a href="ch10s03.html" tabindex="1">The Fundamentals</a></span><ul>
+                                    <li><span class="file"><a href="ch10s03s01.html" tabindex="1">Mapping</a></span></li>
+                                    <li><span class="file"><a href="ch10s03s02.html" tabindex="1">
+                                                     FASTMAP and Transactions
+                                                   </a></span></li>
+                                    <li><span class="file"><a href="ch10s03s03.html" tabindex="1">Auto-rendering from the Service Model</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch10s04.html" tabindex="1">Writing the Service Model</a></span></li>
+                              <li><span class="file"><a href="ch10s05.html" tabindex="1">Finding the Mapping</a></span><ul>
+                                    <li><span class="file"><a href="ch10s05s01.html" tabindex="1">
+                                                     Mapping Iterations
+                                                   </a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch10s06.html" tabindex="1">Strategies to Implement the Mapping</a></span></li>
+                              <li><span class="file"><a href="ch10s07.html" tabindex="1">Creating an NSO Service Application</a></span></li>
+                              <li><span class="file"><a href="ncs.development.services.mapping_template.html" tabindex="1">
+                                           Mapping using Service Templates</a></span><ul>
+                                    <li><span class="file"><a href="ch10s08s01.html" tabindex="1">Preparation</a></span></li>
+                                    <li><span class="file"><a href="ch10s08s02.html" tabindex="1">Defining the Service Model</a></span></li>
+                                    <li><span class="file"><a href="ch10s08s03.html" tabindex="1">Defining the Template</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ncs.development.services.mapping_java.html" tabindex="1">Mapping using Java</a></span><ul>
+                                    <li><span class="file"><a href="ch10s09s01.html" tabindex="1">Overview</a></span></li>
+                                    <li><span class="file"><a href="ch10s09s02.html" tabindex="1">Setting up the environment</a></span></li>
+                                    <li><span class="file"><a href="ch10s09s03.html" tabindex="1">Creating a service package</a></span></li>
+                                    <li><span class="file"><a href="ch10s09s04.html" tabindex="1">The Service Model</a></span></li>
+                                    <li><span class="file"><a href="ch10s09s05.html" tabindex="1">Managing the NSO Java VM</a></span></li>
+                                    <li><span class="file"><a href="ch10s09s06.html" tabindex="1">A first look at Java Development</a></span></li>
+                                    <li><span class="file"><a href="ch10s09s07.html" tabindex="1">Using Eclipse</a></span></li>
+                                    <li><span class="file"><a href="ch10s09s08.html" tabindex="1">Writing the service code</a></span><ul>
+                                          <li><span class="file"><a href="ch10s09s08.html#d0e9155" tabindex="1">Fetching the service attributes</a></span></li>
+                                          <li><span class="file"><a href="ch10s09s08.html#d0e9243" tabindex="1">Mapping service attributes to device configuration</a></span></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch10s10.html" tabindex="1">Mapping using Java combined with Templates</a></span><ul>
+                                    <li><span class="file"><a href="ch10s10s01.html" tabindex="1">Overview</a></span></li>
+                                    <li><span class="file"><a href="ch10s10s02.html" tabindex="1">The VLAN Feature Template</a></span></li>
+                                    <li><span class="file"><a href="ch10s10s03.html" tabindex="1">The VLAN Java Logic</a></span></li>
+                                    <li><span class="file"><a href="ch10s10s04.html" tabindex="1">Steps to Build a Java and Template Solution</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch10s11.html" tabindex="1">Service Mapping: Putting Things Together</a></span><ul>
+                                    <li><span class="file"><a href="ch10s11s01.html" tabindex="1">Auxiliary Service Data</a></span></li>
+                                    <li><span class="file"><a href="ch10s11s02.html" tabindex="1">Topology</a></span></li>
+                                    <li><span class="file"><a href="ch10s11s03.html" tabindex="1">Creating a Multi-Vendor Service</a></span><ul>
+                                          <li><span class="file"><a href="ch10s11s03.html#d0e9646" tabindex="1">YANG Service Model Design</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ch10s11s04.html" tabindex="1">Defining the Mapping</a></span><ul>
+                                          <li><span class="file"><a href="ch10s11s04.html#d0e9831" tabindex="1">The Java Code</a></span></li>
+                                          <li><span class="file"><a href="ch10s11s04.html#d0e9861" tabindex="1">Configuration Templates</a></span></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch10s12.html" tabindex="1">FASTMAP Description</a></span></li>
+                              <li><span class="file"><a href="ncs.development.reactive_fastmap.html" tabindex="1">
+                                           Reactive FASTMAP
+                                         </a></span><ul>
+                                    <li><span class="file"><a href="ncs.development.reactive_fastmap.plan.html" tabindex="1">Progress reporting using plan-data</a></span><ul>
+                                          <li><span class="file"><a href="ncs.development.reactive_fastmap.plan.html#d0e10284" tabindex="1">Example: use of plan-data in the virtual-mpls-vpn</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ch10s13s02.html" tabindex="1">Performance Considerations</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch10s14.html" tabindex="1">Services that involve virtual devices, NFV</a></span><ul>
+                                    <li><span class="file"><a href="ch10s14s01.html" tabindex="1">
+                                                   Starting a virtual machine
+                                                 </a></span></li>
+                                    <li><span class="file"><a href="ch10s14s02.html" tabindex="1">
+                                                   Stopping a virtual machine
+                                                 </a></span></li>
+                                    <li><span class="file"><a href="ch10s14s03.html" tabindex="1">
+                                                   How to handle Licenses
+                                                 </a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch10s15.html" tabindex="1">
+                                           Advanced Mapping Techniques
+                                         </a></span><ul>
+                                    <li><span class="file"><a href="ch10s15s01.html" tabindex="1">
+                                                   Create Methods
+                                                 </a></span></li>
+                                    <li><span class="file"><a href="ncs.development.services.opaque.html" tabindex="1">
+                                                   Persistent FASTMAP Properties
+                                                 </a></span></li>
+                                    <li><span class="file"><a href="ncs.development.services.prepost.html" tabindex="1">
+                                                   Pre and post hooks
+                                                 </a></span></li>
+                                    <li><span class="file"><a href="ncs.development.services.stacked_services.html" tabindex="1">Stacked Services and Shared Structures</a></span></li>
+                                    <li><span class="file"><a href="ch10s15s05.html" tabindex="1">FASTMAP pre-lock create option</a></span></li>
+                                    <li><span class="file"><a href="ch10s15s06.html" tabindex="1">
+                                                   Service Caveats
+                                                 </a></span><ul>
+                                          <li><span class="file"><a href="ch10s15s06.html#d0e10914" tabindex="1">
+                                                           Finding Caveats
+                                                         </a></span></li>
+                                          <li><span class="file"><a href="ch10s15s06.html#d0e10942" tabindex="1">delete</a></span></li>
+                                          <li><span class="file"><a href="ch10s15s06.html#d0e10993" tabindex="1">leaf-list</a></span></li>
+                                          <li><span class="file"><a href="ch10s15s06.html#d0e11008" tabindex="1">set</a></span></li>
+                                          <li><span class="file"><a href="ch10s15s06.html#d0e11019" tabindex="1">create</a></span></li>
+                                          <li><span class="file"><a href="ch10s15s06.html#d0e11030" tabindex="1">move</a></span></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch10s16.html" tabindex="1">Service Discovery</a></span><ul>
+                                    <li><span class="file"><a href="ch10s16s01.html" tabindex="1">Discovery basics</a></span></li>
+                                    <li><span class="file"><a href="ch10s16s02.html" tabindex="1">Reconciliation caveats</a></span></li>
+                                    <li><span class="file"><a href="ch10s16s03.html" tabindex="1">Reconciling in bulk</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ncs.development.services.partialsync.html" tabindex="1">Partial sync-from</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ncs.development.templates.html" tabindex="1">Templates</a></span><ul>
+                              <li><span class="file"><a href="ncs.development.templates.intro.html" tabindex="1">Introduction</a></span></li>
+                              <li><span class="file"><a href="ug.templates.dev.config.templates.html" tabindex="1">Config templates</a></span><ul>
+                                    <li><span class="file"><a href="ncs.development.templates.dev.tmpl.html" tabindex="1">Create a Config-template from a Device-template</a></span></li>
+                                    <li><span class="file"><a href="ch11s02s02.html" tabindex="1">Create a Config-template from a device configuration</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ncs.development.templates.basicPrinciples.html" tabindex="1">Basic principles</a></span><ul>
+                                    <li><span class="file"><a href="ch11s03s01.html" tabindex="1">Values in a template</a></span></li>
+                                    <li><span class="file"><a href="ncs.development.templates.contexts.html" tabindex="1">XPath Context in config-templates</a></span></li>
+                                    <li><span class="file"><a href="ch11s03s03.html" tabindex="1">Conditional Statements</a></span></li>
+                                    <li><span class="file"><a href="ch11s03s04.html" tabindex="1">Loop Statements</a></span></li>
+                                    <li><span class="file"><a href="ch11s03s05.html" tabindex="1">Capabilities and Namespaces</a></span></li>
+                                    <li><span class="file"><a href="ch11s03s06.html" tabindex="1">Template tag operations</a></span></li>
+                                    <li><span class="file"><a href="ch11s03s07.html" tabindex="1">Operations on ordered-by user lists and leaf-lists</a></span></li>
+                                    <li><span class="file"><a href="ch11s03s08.html" tabindex="1">Debugging templates</a></span><ul>
+                                          <li><span class="file"><a href="ch11s03s08.html#d0e12199" tabindex="1">debug template output examples</a></span></li>
+                                          <li><span class="file"><a href="ch11s03s08.html#d0e12288" tabindex="1">XPath help</a></span></li>
+                                          <li><span class="file"><a href="ch11s03s08.html#d0e12315" tabindex="1">XPath trace log</a></span></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ncs.development.templates.service.templates.html" tabindex="1">Service Templates</a></span></li>
+                              <li><span class="file"><a href="ncs.development.templates.api.templates.html" tabindex="1">Templates applied from an API</a></span><ul>
+                                    <li><span class="file"><a href="ch11s05s01.html" tabindex="1">Feature Template</a></span></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ug.ncs.alarmmgr_dev.html" tabindex="1">Developing Alarm Applications</a></span><ul>
+                              <li><span class="file"><a href="ch12s01.html" tabindex="1">Introduction</a></span></li>
+                              <li><span class="file"><a href="ch12s02.html" tabindex="1">Using the Alarms Sink</a></span></li>
+                              <li><span class="file"><a href="ch12s03.html" tabindex="1">Using the Alarms Source</a></span></li>
+                              <li><span class="file"><a href="ch12s04.html" tabindex="1">Extending the alarm manager,
+                                                  adding user defined alarm types and fields</a></span></li>
+                              <li><span class="file"><a href="ch12s05.html" tabindex="1">Mapping alarms to objects</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ncs.development.snmp_notif_recv.html" tabindex="1">SNMP Notification Receiver</a></span><ul>
+                              <li><span class="file"><a href="ncs.development.snmp_notf_recv.introduction.html" tabindex="1">Introduction</a></span></li>
+                              <li><span class="file"><a href="ch13s02.html" tabindex="1">Configuring NSO to Receive SNMP Notifications</a></span></li>
+                              <li><span class="file"><a href="ch13s03.html" tabindex="1">Built-in Filters</a></span></li>
+                              <li><span class="file"><a href="ch13s04.html" tabindex="1">Notification Handlers</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ch14.html" tabindex="1">The web server</a></span><ul>
+                              <li><span class="file"><a href="ch14s01.html" tabindex="1">Introduction</a></span></li>
+                              <li><span class="file"><a href="ch14s02.html" tabindex="1">Web server capabilities</a></span></li>
+                              <li><span class="file"><a href="ch14s03.html" tabindex="1">CGI support</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ug.kicker.html" tabindex="1">Kicker </a></span><ul>
+                              <li><span class="file"><a href="ch15s01.html" tabindex="1">Introduction</a></span></li>
+                              <li><span class="file"><a href="ug.kicker.actions.html" tabindex="1">Kicker action invocation</a></span></li>
+                              <li><span class="file"><a href="ug.kicker.data-concepts.html" tabindex="1">Data Kicker Concepts</a></span><ul>
+                                    <li><span class="file"><a href="ch15s03s01.html" tabindex="1">Generalized Monitors</a></span></li>
+                                    <li><span class="file"><a href="ch15s03s02.html" tabindex="1">Kicker Constraints/Filters</a></span></li>
+                                    <li><span class="file"><a href="ug.data.kicker.named_xpath.html" tabindex="1">Variable Bindings</a></span></li>
+                                    <li><span class="file"><a href="ug.kicker.simple_data_example.html" tabindex="1">A Simple Data Kicker Example</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.kicker.notif-concepts.html" tabindex="1">Notification Kicker Concepts</a></span><ul>
+                                    <li><span class="file"><a href="ch15s04s01.html" tabindex="1">Notification selector expression</a></span></li>
+                                    <li><span class="file"><a href="ug.notif.kicker.named_xpath.html" tabindex="1">Variable Bindings</a></span></li>
+                                    <li><span class="file"><a href="ug.kicker.simple_notif_example.html" tabindex="1">A Simple Notification Kicker Example</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.kicker.rfm.html" tabindex="1">Reactive FastMap with Kicker</a></span><ul>
+                                    <li><span class="file"><a href="ug.kicker.rfm.use_cases.html" tabindex="1">Use Cases</a></span></li>
+                                    <li><span class="file"><a href="ug.kicker.rfm.example.html" tabindex="1">RFM Example</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.kicker.debugging.html" tabindex="1">Debugging kickers</a></span><ul>
+                                    <li><span class="file"><a href="ug.kicker.debugging.pipe.html" tabindex="1">Kicker CLI Debug target</a></span></li>
+                                    <li><span class="file"><a href="ug.kicker.debugging.unhide.html" tabindex="1">Unhide Kickers</a></span></li>
+                                    <li><span class="file"><a href="ch15s06s03.html" tabindex="1">XPath log</a></span></li>
+                                    <li><span class="file"><a href="ch15s06s04.html" tabindex="1">Devel Log</a></span></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ch16.html" tabindex="1">Experimental Feature - Nano services</a></span><ul>
+                              <li><span class="file"><a href="ch16s01.html" tabindex="1">Introduction</a></span></li>
+                              <li><span class="file"><a href="ch16s02.html" tabindex="1">Principles</a></span><ul>
+                                    <li><span class="file"><a href="ch16s02s01.html" tabindex="1">Normal service</a></span></li>
+                                    <li><span class="file"><a href="ch16s02s02.html" tabindex="1">Nano service</a></span></li>
+                                    <li><span class="file"><a href="ch16s02s03.html" tabindex="1">Back-tracking</a></span><ul>
+                                          <li><span class="file"><a href="ch16s02s03.html#d0e14085" tabindex="1">State pre-condition not satisfied</a></span></li>
+                                          <li><span class="file"><a href="ch16s02s03.html#d0e14115" tabindex="1">Plan component is removed</a></span></li>
+                                          <li><span class="file"><a href="ch16s02s03.html#d0e14142" tabindex="1">Service is deleted</a></span></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch16s03.html" tabindex="1">Zombie services</a></span></li>
+                              <li><span class="file"><a href="ch16s04.html" tabindex="1">Behaviour tree</a></span></li>
+                              <li><span class="file"><a href="ch16s05.html" tabindex="1">Nano services</a></span><ul>
+                                    <li><span class="file"><a href="ch16s05s01.html" tabindex="1">Nano service opaque</a></span></li>
+                                    <li><span class="file"><a href="ch16s05s02.html" tabindex="1">Nano service callbacks</a></span></li>
+                                    <li><span class="file"><a href="ch16s05s03.html" tabindex="1">Generic service callbacks</a></span></li>
+                                    <li><span class="file"><a href="ch16s05s04.html" tabindex="1">Nano service pre/post modifications</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch16s06.html" tabindex="1">Side effects</a></span></li>
+                              <li><span class="file"><a href="ch16s07.html" tabindex="1">How it all comes together</a></span></li>
+                           </ul>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

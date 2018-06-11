@@ -1,0 +1,616 @@
+\documentclass[10pt,a4paper]{article}
+
+% Packages
+\usepackage{fancyhdr}           % For header and footer
+\usepackage{multicol}           % Allows multicols in tables
+\usepackage{tabularx}           % Intelligent column widths
+\usepackage{tabulary}           % Used in header and footer
+\usepackage{hhline}             % Border under tables
+\usepackage{graphicx}           % For images
+\usepackage{xcolor}             % For hex colours
+%\usepackage[utf8x]{inputenc}    % For unicode character support
+\usepackage[T1]{fontenc}        % Without this we get weird character replacements
+\usepackage{colortbl}           % For coloured tables
+\usepackage{setspace}           % For line height
+\usepackage{lastpage}           % Needed for total page number
+\usepackage{seqsplit}           % Splits long words.
+%\usepackage{opensans}          % Can't make this work so far. Shame. Would be lovely.
+\usepackage[normalem]{ulem}     % For underlining links
+% Most of the following are not required for the majority
+% of cheat sheets but are needed for some symbol support.
+\usepackage{amsmath}            % Symbols
+\usepackage{MnSymbol}           % Symbols
+\usepackage{wasysym}            % Symbols
+%\usepackage[english,german,french,spanish,italian]{babel}              % Languages
+
+% Document Info
+\author{Dave Child (DaveChild)}
+\pdfinfo{
+  /Title (wikipedia.pdf)
+  /Creator (Cheatography)
+  /Author (Dave Child (DaveChild))
+  /Subject (Wikipedia Cheat Sheet)
+}
+
+% Lengths and widths
+\addtolength{\textwidth}{6cm}
+\addtolength{\textheight}{-1cm}
+\addtolength{\hoffset}{-3cm}
+\addtolength{\voffset}{-2cm}
+\setlength{\tabcolsep}{0.2cm} % Space between columns
+\setlength{\headsep}{-12pt} % Reduce space between header and content
+\setlength{\headheight}{85pt} % If less, LaTeX automatically increases it
+\renewcommand{\footrulewidth}{0pt} % Remove footer line
+\renewcommand{\headrulewidth}{0pt} % Remove header line
+\renewcommand{\seqinsert}{\ifmmode\allowbreak\else\-\fi} % Hyphens in seqsplit
+% This two commands together give roughly
+% the right line height in the tables
+\renewcommand{\arraystretch}{1.3}
+\onehalfspacing
+
+% Commands
+\newcommand{\SetRowColor}[1]{\noalign{\gdef\RowColorName{#1}}\rowcolor{\RowColorName}} % Shortcut for row colour
+\newcommand{\mymulticolumn}[3]{\multicolumn{#1}{>{\columncolor{\RowColorName}}#2}{#3}} % For coloured multi-cols
+\newcolumntype{x}[1]{>{\raggedright}p{#1}} % New column types for ragged-right paragraph columns
+\newcommand{\tn}{\tabularnewline} % Required as custom column type in use
+
+% Font and Colours
+\definecolor{HeadBackground}{HTML}{333333}
+\definecolor{FootBackground}{HTML}{666666}
+\definecolor{TextColor}{HTML}{333333}
+\definecolor{DarkBackground}{HTML}{A3A3A3}
+\definecolor{LightBackground}{HTML}{EFEFEF}
+\renewcommand{\familydefault}{\sfdefault}
+\color{TextColor}
+
+% Header and Footer
+\pagestyle{fancy}
+\fancyhead{} % Set header to blank
+\fancyfoot{} % Set footer to blank
+\fancyhead[L]{
+\noindent
+\begin{multicols}{3}
+\begin{tabulary}{5.8cm}{C}
+    \SetRowColor{DarkBackground}
+    \vspace{-7pt}
+    {\parbox{\dimexpr\textwidth-2\fboxsep\relax}{\noindent
+        \hspace*{-6pt}\includegraphics[width=5.8cm]{/web/www.cheatography.com/public/images/cheatography_logo.pdf}}
+    }
+\end{tabulary}
+\columnbreak
+\begin{tabulary}{11cm}{L}
+    \vspace{-2pt}\large{\bf{\textcolor{DarkBackground}{\textrm{Wikipedia Cheat Sheet}}}} \\
+    \normalsize{by \textcolor{DarkBackground}{Dave Child (DaveChild)} via \textcolor{DarkBackground}{\uline{cheatography.com/1/cs/155/}}}
+\end{tabulary}
+\end{multicols}}
+
+\fancyfoot[L]{ \footnotesize
+\noindent
+\begin{multicols}{3}
+\begin{tabulary}{5.8cm}{LL}
+  \SetRowColor{FootBackground}
+  \mymulticolumn{2}{p{5.377cm}}{\bf\textcolor{white}{Cheatographer}}  \\
+  \vspace{-2pt}Dave Child (DaveChild) \\
+  \uline{cheatography.com/davechild} \\
+        \uline{\seqsplit{www}.getpostcookie.com}
+  \end{tabulary}
+\vfill
+\columnbreak
+\begin{tabulary}{5.8cm}{L}
+  \SetRowColor{FootBackground}
+  \mymulticolumn{1}{p{5.377cm}}{\bf\textcolor{white}{Cheat Sheet}}  \\
+   \vspace{-2pt}Published 2nd January, 2012.\\
+   Updated 9th February, 2015.\\
+   Page {\thepage} of \pageref{LastPage}.
+\end{tabulary}
+\vfill
+\columnbreak
+\begin{tabulary}{5.8cm}{L}
+  \SetRowColor{FootBackground}
+  \mymulticolumn{1}{p{5.377cm}}{\bf\textcolor{white}{Sponsor}}  \\
+  \SetRowColor{white}
+  \vspace{-5pt}
+  %\includegraphics[width=48px,height=48px]{dave.jpeg}
+  Measure your website readability!\\
+  www.readability-score.com
+\end{tabulary}
+\end{multicols}}
+
+
+
+
+\begin{document}
+\raggedright
+\raggedcolumns
+
+% Set font size to small. Switch to any value
+% from this page to resize cheat sheet text:
+% www.emerson.emory.edu/services/latex/latex_169.html
+\footnotesize % Small font.
+
+\begin{multicols*}{3}
+
+\begin{tabularx}{5.377cm}{x{0.84609 cm} x{4.13091 cm} }
+\SetRowColor{DarkBackground}
+\mymulticolumn{2}{x{5.377cm}}{\bf\textcolor{white}{Five Pillars}}  \tn
+% Row 0
+\SetRowColor{LightBackground}
+\mymulticolumn{2}{x{5.377cm}}{The "Five Pillars" are the fundamental principles of Wikipedia:} \tn 
+% Row Count 2 (+ 2)
+% Row 1
+\SetRowColor{white}
+\{\{ar\}\}1. & \{\{link="https://en.wikipedia.org/wiki/Wikipedia:What\_Wikipedia\_is\_not"\}\}Wikipedia is an encyclopedia \tn 
+% Row Count 6 (+ 4)
+% Row 2
+\SetRowColor{LightBackground}
+\{\{ar\}\}2. & \{\{link="https://en.wikipedia.org/wiki/Wikipedia:Neutral\_point\_of\_view"\}\}Wikipedia is written from a neutral point of view \tn 
+% Row Count 10 (+ 4)
+% Row 3
+\SetRowColor{white}
+\{\{ar\}\}3. & \{\{link="https://en.wikipedia.org/wiki/Wikipedia:Copyrights"\}\}Wikipedia is free content that anyone can use, edit, and distribute \tn 
+% Row Count 14 (+ 4)
+% Row 4
+\SetRowColor{LightBackground}
+\{\{ar\}\}4. & \{\{link="https://en.wikipedia.org/wiki/Wikipedia:Civility"\}\}Editors should treat each other with respect and civility \tn 
+% Row Count 18 (+ 4)
+% Row 5
+\SetRowColor{white}
+\{\{ar\}\}5. & \{\{link="https://en.wikipedia.org/wiki/Wikipedia:Ignore\_all\_rules"\}\}Wikipedia has no firm rules \tn 
+% Row Count 21 (+ 3)
+\hhline{>{\arrayrulecolor{DarkBackground}}--}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{5.377cm}{x{2.18988 cm} x{2.78712 cm} }
+\SetRowColor{DarkBackground}
+\mymulticolumn{2}{x{5.377cm}}{\bf\textcolor{white}{Wikipedia Headings}}  \tn
+% Row 0
+\SetRowColor{LightBackground}
+==Text== & Level 1 heading \tn 
+% Row Count 1 (+ 1)
+% Row 1
+\SetRowColor{white}
+===Text=== & Level 2 \tn 
+% Row Count 2 (+ 1)
+% Row 2
+\SetRowColor{LightBackground}
+====Text==== & Level 3 \tn 
+% Row Count 3 (+ 1)
+\hhline{>{\arrayrulecolor{DarkBackground}}--}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{5.377cm}{x{3.08574 cm} x{1.89126 cm} }
+\SetRowColor{DarkBackground}
+\mymulticolumn{2}{x{5.377cm}}{\bf\textcolor{white}{Wikipedia Text Effects}}  \tn
+% Row 0
+\SetRowColor{LightBackground}
+''text'' & Italics \tn 
+% Row Count 1 (+ 1)
+% Row 1
+\SetRowColor{white}
+'''text''' & Bold \tn 
+% Row Count 2 (+ 1)
+% Row 2
+\SetRowColor{LightBackground}
+\textless{}s\textgreater{}text\textless{}/s\textgreater{} & Strikethrough \tn 
+% Row Count 3 (+ 1)
+% Row 3
+\SetRowColor{white}
+\textless{}sup\textgreater{}text\textless{}/sup\textgreater{} & Superscript \tn 
+% Row Count 4 (+ 1)
+% Row 4
+\SetRowColor{LightBackground}
+\textless{}nowiki\textgreater{}no ''markup''\textless{}/nowiki\textgreater{} & Escape wiki markup \tn 
+% Row Count 6 (+ 2)
+\hhline{>{\arrayrulecolor{DarkBackground}}--}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{5.377cm}{X}
+\SetRowColor{DarkBackground}
+\mymulticolumn{1}{x{5.377cm}}{\bf\textcolor{white}{Wikipedia Links}}  \tn
+% Row 0
+\SetRowColor{LightBackground}
+\mymulticolumn{1}{x{5.377cm}}{{[}{[}Article Name{]}{]}} \tn 
+\mymulticolumn{1}{x{5.377cm}}{\hspace*{6 px}\rule{2px}{6px}\hspace*{6 px}Link to article "Article Name"} \tn 
+% Row Count 2 (+ 2)
+% Row 1
+\SetRowColor{white}
+\mymulticolumn{1}{x{5.377cm}}{{[}{[}Article Name{]}{]}s} \tn 
+\mymulticolumn{1}{x{5.377cm}}{\hspace*{6 px}\rule{2px}{6px}\hspace*{6 px}Link with text  "Article Names"} \tn 
+% Row Count 4 (+ 2)
+% Row 2
+\SetRowColor{LightBackground}
+\mymulticolumn{1}{x{5.377cm}}{{[}{[}Article Name|Link Text{]}{]}} \tn 
+\mymulticolumn{1}{x{5.377cm}}{\hspace*{6 px}\rule{2px}{6px}\hspace*{6 px}Link with text "Link Text"} \tn 
+% Row Count 6 (+ 2)
+% Row 3
+\SetRowColor{white}
+\mymulticolumn{1}{x{5.377cm}}{{[}{[}Article Name\#Subsection|Link Text{]}{]}} \tn 
+\mymulticolumn{1}{x{5.377cm}}{\hspace*{6 px}\rule{2px}{6px}\hspace*{6 px}Link to subsection of article} \tn 
+% Row Count 8 (+ 2)
+% Row 4
+\SetRowColor{LightBackground}
+\mymulticolumn{1}{x{5.377cm}}{{[}http://www.example.com Link Text{]}} \tn 
+\mymulticolumn{1}{x{5.377cm}}{\hspace*{6 px}\rule{2px}{6px}\hspace*{6 px}Link to example.com} \tn 
+% Row Count 10 (+ 2)
+% Row 5
+\SetRowColor{white}
+\mymulticolumn{1}{x{5.377cm}}{{[}{[}Category:Category Name{]}{]}} \tn 
+\mymulticolumn{1}{x{5.377cm}}{\hspace*{6 px}\rule{2px}{6px}\hspace*{6 px}Add article to "Category Name"} \tn 
+% Row Count 12 (+ 2)
+% Row 6
+\SetRowColor{LightBackground}
+\mymulticolumn{1}{x{5.377cm}}{{[}{[}:Category:Category Name{]}{]}} \tn 
+\mymulticolumn{1}{x{5.377cm}}{\hspace*{6 px}\rule{2px}{6px}\hspace*{6 px}Link to category} \tn 
+% Row Count 14 (+ 2)
+\hhline{>{\arrayrulecolor{DarkBackground}}-}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{5.377cm}{x{1.4931 cm} x{3.4839 cm} }
+\SetRowColor{DarkBackground}
+\mymulticolumn{2}{x{5.377cm}}{\bf\textcolor{white}{Wikipedia Lists and Indents}}  \tn
+% Row 0
+\SetRowColor{LightBackground}
+* Text & Bullet list \tn 
+% Row Count 1 (+ 1)
+% Row 1
+\SetRowColor{white}
+** Text & Bullet list (second level) \tn 
+% Row Count 2 (+ 1)
+% Row 2
+\SetRowColor{LightBackground}
+\# Text & Numbered list \tn 
+% Row Count 3 (+ 1)
+% Row 3
+\SetRowColor{white}
+\#\# Text & Numbered list (second level) \tn 
+% Row Count 4 (+ 1)
+% Row 4
+\SetRowColor{LightBackground}
+; Item & Definition list item \tn 
+% Row Count 5 (+ 1)
+% Row 5
+\SetRowColor{white}
+: Definition & Definition list definition \tn 
+% Row Count 6 (+ 1)
+% Row 6
+\SetRowColor{LightBackground}
+: Text & Indented text \tn 
+% Row Count 7 (+ 1)
+% Row 7
+\SetRowColor{white}
+:: Text & Indented text (second level) \tn 
+% Row Count 8 (+ 1)
+\hhline{>{\arrayrulecolor{DarkBackground}}--}
+\SetRowColor{LightBackground}
+\mymulticolumn{2}{x{5.377cm}}{Can be nested, e.g., use {\bf{\#*}} to put a bullet list within a numbered list.}  \tn 
+\hhline{>{\arrayrulecolor{DarkBackground}}--}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{5.377cm}{x{2.04057 cm} x{2.93643 cm} }
+\SetRowColor{DarkBackground}
+\mymulticolumn{2}{x{5.377cm}}{\bf\textcolor{white}{Wikipedia Lines and Signatures}}  \tn
+% Row 0
+\SetRowColor{LightBackground}
+\{\{literal\}\}-{}-{}-{}- & Horizontal Line \tn 
+% Row Count 1 (+ 1)
+% Row 1
+\SetRowColor{white}
+\{\{literal\}\}\textless{}br /\textgreater{} & Line break \tn 
+% Row Count 3 (+ 2)
+% Row 2
+\SetRowColor{LightBackground}
+\{\{literal\}\}\textasciitilde{}\textasciitilde{}\textasciitilde{} & Signature \tn 
+% Row Count 4 (+ 1)
+% Row 3
+\SetRowColor{white}
+\{\{literal\}\}\textasciitilde{}\textasciitilde{}\textasciitilde{}\textasciitilde{} & Signature with timestamp \tn 
+% Row Count 6 (+ 2)
+% Row 4
+\SetRowColor{LightBackground}
+\{\{literal\}\}\textasciitilde{}\textasciitilde{}\textasciitilde{}\textasciitilde{}\textasciitilde{} & Timestamp \tn 
+% Row Count 7 (+ 1)
+\hhline{>{\arrayrulecolor{DarkBackground}}--}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{5.377cm}{x{3.63321 cm} p{1.34379 cm} }
+\SetRowColor{DarkBackground}
+\mymulticolumn{2}{x{5.377cm}}{\bf\textcolor{white}{Wikipedia Allowed HTML Tags}}  \tn
+% Row 0
+\SetRowColor{LightBackground}
+\textless{}!-{}- Comment -{}-\textgreater{} & \textless{}pre\textgreater{} \tn 
+% Row Count 1 (+ 1)
+% Row 1
+\SetRowColor{white}
+\textless{}abbr\textgreater{} & \textless{}tt\textgreater{} \tn 
+% Row Count 2 (+ 1)
+% Row 2
+\SetRowColor{LightBackground}
+\textless{}div\textgreater{} & \textless{}font\textgreater{} \tn 
+% Row Count 3 (+ 1)
+% Row 3
+\SetRowColor{white}
+\textless{}span\textgreater{} & \textless{}del\textgreater{} \tn 
+% Row Count 4 (+ 1)
+% Row 4
+\SetRowColor{LightBackground}
+\textless{}br /\textgreater{} & \textless{}ins\textgreater{} \tn 
+% Row Count 5 (+ 1)
+% Row 5
+\SetRowColor{white}
+\textless{}blockquote\textgreater{} & \textless{}sub\textgreater{} \tn 
+% Row Count 6 (+ 1)
+% Row 6
+\SetRowColor{LightBackground}
+\textless{}code\textgreater{} & \textless{}sup\textgreater{} \tn 
+% Row Count 7 (+ 1)
+\hhline{>{\arrayrulecolor{DarkBackground}}--}
+\SetRowColor{LightBackground}
+\mymulticolumn{2}{x{5.377cm}}{Full list of allowed tags at \seqsplit{http://en.wikipedia.org/wiki/Help:HTML\_in\_wikitext}}  \tn 
+\hhline{>{\arrayrulecolor{DarkBackground}}--}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{5.377cm}{x{2.88666 cm} x{2.09034 cm} }
+\SetRowColor{DarkBackground}
+\mymulticolumn{2}{x{5.377cm}}{\bf\textcolor{white}{Wikipedia Tables}}  \tn
+% Row 0
+\SetRowColor{LightBackground}
+\{| class="name" & Start table \tn 
+% Row Count 1 (+ 1)
+% Row 1
+\SetRowColor{white}
+|- & Start row \tn 
+% Row Count 2 (+ 1)
+% Row 2
+\SetRowColor{LightBackground}
+! Header 1 & Headings \tn 
+% Row Count 3 (+ 1)
+% Row 3
+\SetRowColor{white}
+\mymulticolumn{2}{x{5.377cm}}{! Header 2} \tn 
+% Row Count 4 (+ 1)
+% Row 4
+\SetRowColor{LightBackground}
+\mymulticolumn{2}{x{5.377cm}}{|-} \tn 
+% Row Count 5 (+ 1)
+% Row 5
+\SetRowColor{white}
+| row 1, cell 1 & Data \tn 
+% Row Count 6 (+ 1)
+% Row 6
+\SetRowColor{LightBackground}
+\mymulticolumn{2}{x{5.377cm}}{| row 1, cell 2} \tn 
+% Row Count 7 (+ 1)
+% Row 7
+\SetRowColor{white}
+\mymulticolumn{2}{x{5.377cm}}{|-} \tn 
+% Row Count 8 (+ 1)
+% Row 8
+\SetRowColor{LightBackground}
+\mymulticolumn{2}{x{5.377cm}}{| row 2, cell 1} \tn 
+% Row Count 9 (+ 1)
+% Row 9
+\SetRowColor{white}
+\mymulticolumn{2}{x{5.377cm}}{| row 2, cell 2} \tn 
+% Row Count 10 (+ 1)
+% Row 10
+\SetRowColor{LightBackground}
+|\} & End Table \tn 
+% Row Count 11 (+ 1)
+\hhline{>{\arrayrulecolor{DarkBackground}}--}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{5.377cm}{X}
+\SetRowColor{DarkBackground}
+\mymulticolumn{1}{x{5.377cm}}{\bf\textcolor{white}{Wikipedia Images}}  \tn
+% Row 0
+\SetRowColor{LightBackground}
+\mymulticolumn{1}{x{5.377cm}}{{[}{[}File:img.jpg|thumb|alt=Text|Caption{]}{]}} \tn 
+\mymulticolumn{1}{x{5.377cm}}{\hspace*{6 px}\rule{2px}{6px}\hspace*{6 px}Place an image} \tn 
+% Row Count 2 (+ 2)
+% Row 1
+\SetRowColor{white}
+\mymulticolumn{1}{x{5.377cm}}{{[}{[}File:img.jpg|thumb|left{]}{]}} \tn 
+\mymulticolumn{1}{x{5.377cm}}{\hspace*{6 px}\rule{2px}{6px}\hspace*{6 px}Image on the left} \tn 
+% Row Count 4 (+ 2)
+% Row 2
+\SetRowColor{LightBackground}
+\mymulticolumn{1}{x{5.377cm}}{{[}{[}File:img.jpg|thumb|none{]}{]}} \tn 
+\mymulticolumn{1}{x{5.377cm}}{\hspace*{6 px}\rule{2px}{6px}\hspace*{6 px}Image with no text flowing around it} \tn 
+% Row Count 6 (+ 2)
+\hhline{>{\arrayrulecolor{DarkBackground}}-}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{5.377cm}{X}
+\SetRowColor{DarkBackground}
+\mymulticolumn{1}{x{5.377cm}}{\bf\textcolor{white}{Wikipedia Citations}}  \tn
+% Row 0
+\SetRowColor{LightBackground}
+\mymulticolumn{1}{x{5.377cm}}{\textless{}ref\textgreater{}Smith, John. 'Reference Title''. Journal, 2011, p. 1.\textless{}/ref\textgreater{}} \tn 
+\mymulticolumn{1}{x{5.377cm}}{\hspace*{6 px}\rule{2px}{6px}\hspace*{6 px}Inline citation.} \tn 
+% Row Count 3 (+ 3)
+% Row 1
+\SetRowColor{white}
+\mymulticolumn{1}{x{5.377cm}}{\textless{}ref name="refname"\textgreater{}text\textless{}/ref\textgreater{}} \tn 
+\mymulticolumn{1}{x{5.377cm}}{\hspace*{6 px}\rule{2px}{6px}\hspace*{6 px}Named inline citation.} \tn 
+% Row Count 5 (+ 2)
+% Row 2
+\SetRowColor{LightBackground}
+\mymulticolumn{1}{x{5.377cm}}{\textless{}ref name="refname" /\textgreater{}} \tn 
+\mymulticolumn{1}{x{5.377cm}}{\hspace*{6 px}\rule{2px}{6px}\hspace*{6 px}Use earlier named citation.} \tn 
+% Row Count 7 (+ 2)
+% Row 3
+\SetRowColor{white}
+\mymulticolumn{1}{x{5.377cm}}{\{\{citation needed\}\}} \tn 
+\mymulticolumn{1}{x{5.377cm}}{\hspace*{6 px}\rule{2px}{6px}\hspace*{6 px}Citation needed.} \tn 
+% Row Count 9 (+ 2)
+% Row 4
+\SetRowColor{LightBackground}
+\mymulticolumn{1}{x{5.377cm}}{\{\{reflist\}\}} \tn 
+\mymulticolumn{1}{x{5.377cm}}{\hspace*{6 px}\rule{2px}{6px}\hspace*{6 px}Citations list.} \tn 
+% Row Count 11 (+ 2)
+\hhline{>{\arrayrulecolor{DarkBackground}}-}
+\SetRowColor{LightBackground}
+\mymulticolumn{1}{x{5.377cm}}{More information at \seqsplit{http://en.wikipedia.org/wiki/Wikipedia:Citing\_sources}}  \tn 
+\hhline{>{\arrayrulecolor{DarkBackground}}-}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{5.377cm}{X}
+\SetRowColor{DarkBackground}
+\mymulticolumn{1}{x{5.377cm}}{\bf\textcolor{white}{Wikipedia Useful Pages}}  \tn
+% Row 0
+\SetRowColor{LightBackground}
+\mymulticolumn{1}{x{5.377cm}}{\seqsplit{http://en.wikipedia.org/wiki/Help:Editing}} \tn 
+\mymulticolumn{1}{x{5.377cm}}{\hspace*{6 px}\rule{2px}{6px}\hspace*{6 px}Help with editing} \tn 
+% Row Count 2 (+ 2)
+% Row 1
+\SetRowColor{white}
+\mymulticolumn{1}{x{5.377cm}}{\seqsplit{http://en.wikipedia.org/wiki/Wikipedia:List\_of\_guidelines}} \tn 
+\mymulticolumn{1}{x{5.377cm}}{\hspace*{6 px}\rule{2px}{6px}\hspace*{6 px}Wikipedia guidelines} \tn 
+% Row Count 5 (+ 3)
+% Row 2
+\SetRowColor{LightBackground}
+\mymulticolumn{1}{x{5.377cm}}{\seqsplit{http://en.wikipedia.org/wiki/Wikipedia:List\_of\_policies}} \tn 
+\mymulticolumn{1}{x{5.377cm}}{\hspace*{6 px}\rule{2px}{6px}\hspace*{6 px}Wikipedia policies} \tn 
+% Row Count 8 (+ 3)
+% Row 3
+\SetRowColor{white}
+\mymulticolumn{1}{x{5.377cm}}{\seqsplit{http://en.wikipedia.org/wiki/Wikipedia:Manual\_of\_Style}} \tn 
+\mymulticolumn{1}{x{5.377cm}}{\hspace*{6 px}\rule{2px}{6px}\hspace*{6 px}Wikipedia manual of style} \tn 
+% Row Count 11 (+ 3)
+% Row 4
+\SetRowColor{LightBackground}
+\mymulticolumn{1}{x{5.377cm}}{\seqsplit{http://en.wikipedia.org/wiki/Wikipedia:Notability}} \tn 
+\mymulticolumn{1}{x{5.377cm}}{\hspace*{6 px}\rule{2px}{6px}\hspace*{6 px}Guide to notability} \tn 
+% Row Count 13 (+ 2)
+% Row 5
+\SetRowColor{white}
+\mymulticolumn{1}{x{5.377cm}}{\seqsplit{http://en.wikipedia.org/wiki/Wikipedia:Help\_desk}} \tn 
+\mymulticolumn{1}{x{5.377cm}}{\hspace*{6 px}\rule{2px}{6px}\hspace*{6 px}Wikipedia help desk} \tn 
+% Row Count 15 (+ 2)
+% Row 6
+\SetRowColor{LightBackground}
+\mymulticolumn{1}{x{5.377cm}}{\seqsplit{http://en.wikipedia.org/wiki/User:A.\_B./Useful\_Wikipedia\_links}} \tn 
+\mymulticolumn{1}{x{5.377cm}}{\hspace*{6 px}\rule{2px}{6px}\hspace*{6 px}Comprehensive list of useful links} \tn 
+% Row Count 18 (+ 3)
+\hhline{>{\arrayrulecolor{DarkBackground}}-}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\columnbreak
+\begin{tabularx}{5.377cm}{x{1.14471 cm} x{3.83229 cm} }
+\SetRowColor{DarkBackground}
+\mymulticolumn{2}{x{5.377cm}}{\bf\textcolor{white}{Wikipedia Abbreviations and Shortcuts}}  \tn
+% Row 0
+\SetRowColor{LightBackground}
+WP:3RR & Three Revert Rule \tn 
+% Row Count 1 (+ 1)
+% Row 1
+\SetRowColor{white}
+WP:AFC & Articles For Creation \tn 
+% Row Count 2 (+ 1)
+% Row 2
+\SetRowColor{LightBackground}
+WP:AFD & Articles For Deletion \tn 
+% Row Count 3 (+ 1)
+% Row 3
+\SetRowColor{white}
+WP:AGF & Assume Good Faith \tn 
+% Row Count 4 (+ 1)
+% Row 4
+\SetRowColor{LightBackground}
+WP:AN & Administrator's Noticeboard \tn 
+% Row Count 5 (+ 1)
+% Row 5
+\SetRowColor{white}
+WP:AP & Arbitration Policy \tn 
+% Row Count 6 (+ 1)
+% Row 6
+\SetRowColor{LightBackground}
+WP:BOT & Bots \tn 
+% Row Count 7 (+ 1)
+% Row 7
+\SetRowColor{white}
+WP:BCRAT & Bureaucrats \tn 
+% Row Count 8 (+ 1)
+% Row 8
+\SetRowColor{LightBackground}
+WP:CIVIL & Civility \tn 
+% Row Count 9 (+ 1)
+% Row 9
+\SetRowColor{white}
+WP:D & Disambiguation \tn 
+% Row Count 10 (+ 1)
+% Row 10
+\SetRowColor{LightBackground}
+WP:DEL & Deletion Policy \tn 
+% Row Count 11 (+ 1)
+% Row 11
+\SetRowColor{white}
+WP:NEW & New user log \tn 
+% Row Count 12 (+ 1)
+% Row 12
+\SetRowColor{LightBackground}
+WP:NOR & No Original Research \tn 
+% Row Count 13 (+ 1)
+% Row 13
+\SetRowColor{white}
+WP:NOT & What Wikipedia is not \tn 
+% Row Count 14 (+ 1)
+% Row 14
+\SetRowColor{LightBackground}
+WP:NPA & No Personal Attacks \tn 
+% Row Count 15 (+ 1)
+% Row 15
+\SetRowColor{white}
+WP:NPOV & Neutral Point Of View \tn 
+% Row Count 16 (+ 1)
+% Row 16
+\SetRowColor{LightBackground}
+WP:PD & Public Domain \tn 
+% Row Count 17 (+ 1)
+% Row 17
+\SetRowColor{white}
+WP:PN & Patent Nonsense \tn 
+% Row Count 18 (+ 1)
+% Row 18
+\SetRowColor{LightBackground}
+WP:PROD & Proposed Deletion \tn 
+% Row Count 19 (+ 1)
+% Row 19
+\SetRowColor{white}
+WP:SELF & Avoid self-references \tn 
+% Row Count 20 (+ 1)
+% Row 20
+\SetRowColor{LightBackground}
+WP:V & Verifiability \tn 
+% Row Count 21 (+ 1)
+% Row 21
+\SetRowColor{white}
+WP:VAND & Vandalism \tn 
+% Row Count 22 (+ 1)
+% Row 22
+\SetRowColor{LightBackground}
+WP:VIE & Voting Is Evil \tn 
+% Row Count 23 (+ 1)
+\hhline{>{\arrayrulecolor{DarkBackground}}--}
+\SetRowColor{LightBackground}
+\mymulticolumn{2}{x{5.377cm}}{More at \seqsplit{http://en.wikipedia.org/wiki/User:Kjkolb/Abbreviations} and \seqsplit{http://en.wikipedia.org/wiki/Wikipedia:Shortcuts}}  \tn 
+\hhline{>{\arrayrulecolor{DarkBackground}}--}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+
+% That's all folks
+\end{multicols*}
+
+\end{document}

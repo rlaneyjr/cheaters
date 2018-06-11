@@ -1,0 +1,237 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: built-in module signal</title>
+<meta charset="utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>signal</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br>(built-in)<br><a href="http://docs.python.org/library/signal">Module Docs</a></font></td></tr></table>
+    <p><tt>This&nbsp;module&nbsp;provides&nbsp;mechanisms&nbsp;to&nbsp;use&nbsp;signal&nbsp;handlers&nbsp;in&nbsp;Python.<br>
+&nbsp;<br>
+Functions:<br>
+&nbsp;<br>
+<a href="#-alarm">alarm</a>()&nbsp;--&nbsp;cause&nbsp;SIGALRM&nbsp;after&nbsp;a&nbsp;specified&nbsp;time&nbsp;[Unix&nbsp;only]<br>
+<a href="#-setitimer">setitimer</a>()&nbsp;--&nbsp;cause&nbsp;a&nbsp;signal&nbsp;(described&nbsp;below)&nbsp;after&nbsp;a&nbsp;specified<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;time&nbsp;and&nbsp;the&nbsp;timer&nbsp;may&nbsp;restart&nbsp;then&nbsp;[Unix&nbsp;only]<br>
+<a href="#-getitimer">getitimer</a>()&nbsp;--&nbsp;get&nbsp;current&nbsp;value&nbsp;of&nbsp;timer&nbsp;[Unix&nbsp;only]<br>
+<a href="#-signal">signal</a>()&nbsp;--&nbsp;set&nbsp;the&nbsp;action&nbsp;for&nbsp;a&nbsp;given&nbsp;signal<br>
+<a href="#-getsignal">getsignal</a>()&nbsp;--&nbsp;get&nbsp;the&nbsp;signal&nbsp;action&nbsp;for&nbsp;a&nbsp;given&nbsp;signal<br>
+<a href="#-pause">pause</a>()&nbsp;--&nbsp;wait&nbsp;until&nbsp;a&nbsp;signal&nbsp;arrives&nbsp;[Unix&nbsp;only]<br>
+<a href="#-default_int_handler">default_int_handler</a>()&nbsp;--&nbsp;default&nbsp;SIGINT&nbsp;handler<br>
+&nbsp;<br>
+signal&nbsp;constants:<br>
+SIG_DFL&nbsp;--&nbsp;used&nbsp;to&nbsp;refer&nbsp;to&nbsp;the&nbsp;system&nbsp;default&nbsp;handler<br>
+SIG_IGN&nbsp;--&nbsp;used&nbsp;to&nbsp;ignore&nbsp;the&nbsp;signal<br>
+NSIG&nbsp;--&nbsp;number&nbsp;of&nbsp;defined&nbsp;signals<br>
+SIGINT,&nbsp;SIGTERM,&nbsp;etc.&nbsp;--&nbsp;signal&nbsp;numbers<br>
+&nbsp;<br>
+itimer&nbsp;constants:<br>
+ITIMER_REAL&nbsp;--&nbsp;decrements&nbsp;in&nbsp;real&nbsp;time,&nbsp;and&nbsp;delivers&nbsp;SIGALRM&nbsp;upon<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expiration<br>
+ITIMER_VIRTUAL&nbsp;--&nbsp;decrements&nbsp;only&nbsp;when&nbsp;the&nbsp;process&nbsp;is&nbsp;executing,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;delivers&nbsp;SIGVTALRM&nbsp;upon&nbsp;expiration<br>
+ITIMER_PROF&nbsp;--&nbsp;decrements&nbsp;both&nbsp;when&nbsp;the&nbsp;process&nbsp;is&nbsp;executing&nbsp;and<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;when&nbsp;the&nbsp;system&nbsp;is&nbsp;executing&nbsp;on&nbsp;behalf&nbsp;of&nbsp;the&nbsp;process.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Coupled&nbsp;with&nbsp;ITIMER_VIRTUAL,&nbsp;this&nbsp;timer&nbsp;is&nbsp;usually<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;used&nbsp;to&nbsp;profile&nbsp;the&nbsp;time&nbsp;spent&nbsp;by&nbsp;the&nbsp;application<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;user&nbsp;and&nbsp;kernel&nbsp;space.&nbsp;SIGPROF&nbsp;is&nbsp;delivered&nbsp;upon<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expiration.<br>
+&nbsp;<br>
+&nbsp;<br>
+***&nbsp;IMPORTANT&nbsp;NOTICE&nbsp;***<br>
+A&nbsp;signal&nbsp;handler&nbsp;function&nbsp;is&nbsp;called&nbsp;with&nbsp;two&nbsp;arguments:<br>
+the&nbsp;first&nbsp;is&nbsp;the&nbsp;signal&nbsp;number,&nbsp;the&nbsp;second&nbsp;is&nbsp;the&nbsp;interrupted&nbsp;stack&nbsp;frame.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="exceptions.html#IOError">exceptions.IOError</a>(<a href="exceptions.html#EnvironmentError">exceptions.EnvironmentError</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="signal.html#ItimerError">ItimerError</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ItimerError">class <strong>ItimerError</strong></a>(<a href="exceptions.html#IOError">exceptions.IOError</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="signal.html#ItimerError">ItimerError</a></dd>
+<dd><a href="exceptions.html#IOError">exceptions.IOError</a></dd>
+<dd><a href="exceptions.html#EnvironmentError">exceptions.EnvironmentError</a></dd>
+<dd><a href="exceptions.html#StandardError">exceptions.StandardError</a></dd>
+<dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
+<dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="exceptions.html#IOError">exceptions.IOError</a>:<br>
+<dl><dt><a name="ItimerError-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#ItimerError-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;help(type(x))&nbsp;for&nbsp;signature</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="exceptions.html#IOError">exceptions.IOError</a>:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object&gt;<dd><tt>T.<a href="#ItimerError-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+<hr>
+Methods inherited from <a href="exceptions.html#EnvironmentError">exceptions.EnvironmentError</a>:<br>
+<dl><dt><a name="ItimerError-__reduce__"><strong>__reduce__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="ItimerError-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#ItimerError-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="exceptions.html#EnvironmentError">exceptions.EnvironmentError</a>:<br>
+<dl><dt><strong>errno</strong></dt>
+<dd><tt>exception&nbsp;errno</tt></dd>
+</dl>
+<dl><dt><strong>filename</strong></dt>
+<dd><tt>exception&nbsp;filename</tt></dd>
+</dl>
+<dl><dt><strong>strerror</strong></dt>
+<dd><tt>exception&nbsp;strerror</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><a name="ItimerError-__delattr__"><strong>__delattr__</strong></a>(...)</dt><dd><tt>x.<a href="#ItimerError-__delattr__">__delattr__</a>('name')&nbsp;&lt;==&gt;&nbsp;del&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="ItimerError-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#ItimerError-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="ItimerError-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#ItimerError-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="ItimerError-__getslice__"><strong>__getslice__</strong></a>(...)</dt><dd><tt>x.<a href="#ItimerError-__getslice__">__getslice__</a>(i,&nbsp;j)&nbsp;&lt;==&gt;&nbsp;x[i:j]<br>
+&nbsp;<br>
+Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd></dl>
+
+<dl><dt><a name="ItimerError-__repr__"><strong>__repr__</strong></a>(...)</dt><dd><tt>x.<a href="#ItimerError-__repr__">__repr__</a>()&nbsp;&lt;==&gt;&nbsp;repr(x)</tt></dd></dl>
+
+<dl><dt><a name="ItimerError-__setattr__"><strong>__setattr__</strong></a>(...)</dt><dd><tt>x.<a href="#ItimerError-__setattr__">__setattr__</a>('name',&nbsp;value)&nbsp;&lt;==&gt;&nbsp;x.name&nbsp;=&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="ItimerError-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="ItimerError-__unicode__"><strong>__unicode__</strong></a>(...)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>args</strong></dt>
+</dl>
+<dl><dt><strong>message</strong></dt>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-alarm"><strong>alarm</strong></a>(...)</dt><dd><tt><a href="#-alarm">alarm</a>(seconds)<br>
+&nbsp;<br>
+Arrange&nbsp;for&nbsp;SIGALRM&nbsp;to&nbsp;arrive&nbsp;after&nbsp;the&nbsp;given&nbsp;number&nbsp;of&nbsp;seconds.</tt></dd></dl>
+ <dl><dt><a name="-default_int_handler"><strong>default_int_handler</strong></a>(...)</dt><dd><tt><a href="#-default_int_handler">default_int_handler</a>(...)<br>
+&nbsp;<br>
+The&nbsp;default&nbsp;handler&nbsp;for&nbsp;SIGINT&nbsp;installed&nbsp;by&nbsp;Python.<br>
+It&nbsp;raises&nbsp;KeyboardInterrupt.</tt></dd></dl>
+ <dl><dt><a name="-getitimer"><strong>getitimer</strong></a>(...)</dt><dd><tt><a href="#-getitimer">getitimer</a>(which)<br>
+&nbsp;<br>
+Returns&nbsp;current&nbsp;value&nbsp;of&nbsp;given&nbsp;itimer.</tt></dd></dl>
+ <dl><dt><a name="-getsignal"><strong>getsignal</strong></a>(...)</dt><dd><tt><a href="#-getsignal">getsignal</a>(sig)&nbsp;-&gt;&nbsp;action<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;current&nbsp;action&nbsp;for&nbsp;the&nbsp;given&nbsp;signal.&nbsp;&nbsp;The&nbsp;return&nbsp;value&nbsp;can&nbsp;be:<br>
+SIG_IGN&nbsp;--&nbsp;if&nbsp;the&nbsp;signal&nbsp;is&nbsp;being&nbsp;ignored<br>
+SIG_DFL&nbsp;--&nbsp;if&nbsp;the&nbsp;default&nbsp;action&nbsp;for&nbsp;the&nbsp;signal&nbsp;is&nbsp;in&nbsp;effect<br>
+None&nbsp;--&nbsp;if&nbsp;an&nbsp;unknown&nbsp;handler&nbsp;is&nbsp;in&nbsp;effect<br>
+anything&nbsp;else&nbsp;--&nbsp;the&nbsp;callable&nbsp;Python&nbsp;object&nbsp;used&nbsp;as&nbsp;a&nbsp;handler</tt></dd></dl>
+ <dl><dt><a name="-pause"><strong>pause</strong></a>(...)</dt><dd><tt><a href="#-pause">pause</a>()<br>
+&nbsp;<br>
+Wait&nbsp;until&nbsp;a&nbsp;signal&nbsp;arrives.</tt></dd></dl>
+ <dl><dt><a name="-set_wakeup_fd"><strong>set_wakeup_fd</strong></a>(...)</dt><dd><tt><a href="#-set_wakeup_fd">set_wakeup_fd</a>(fd)&nbsp;-&gt;&nbsp;fd<br>
+&nbsp;<br>
+Sets&nbsp;the&nbsp;fd&nbsp;to&nbsp;be&nbsp;written&nbsp;to&nbsp;(with&nbsp;'\0')&nbsp;when&nbsp;a&nbsp;signal<br>
+comes&nbsp;in.&nbsp;&nbsp;A&nbsp;library&nbsp;can&nbsp;use&nbsp;this&nbsp;to&nbsp;wakeup&nbsp;select&nbsp;or&nbsp;poll.<br>
+The&nbsp;previous&nbsp;fd&nbsp;is&nbsp;returned.<br>
+&nbsp;<br>
+The&nbsp;fd&nbsp;must&nbsp;be&nbsp;non-blocking.</tt></dd></dl>
+ <dl><dt><a name="-setitimer"><strong>setitimer</strong></a>(...)</dt><dd><tt><a href="#-setitimer">setitimer</a>(which,&nbsp;seconds[,&nbsp;interval])<br>
+&nbsp;<br>
+Sets&nbsp;given&nbsp;itimer&nbsp;(one&nbsp;of&nbsp;ITIMER_REAL,&nbsp;ITIMER_VIRTUAL<br>
+or&nbsp;ITIMER_PROF)&nbsp;to&nbsp;fire&nbsp;after&nbsp;value&nbsp;seconds&nbsp;and&nbsp;after<br>
+that&nbsp;every&nbsp;interval&nbsp;seconds.<br>
+The&nbsp;itimer&nbsp;can&nbsp;be&nbsp;cleared&nbsp;by&nbsp;setting&nbsp;seconds&nbsp;to&nbsp;zero.<br>
+&nbsp;<br>
+Returns&nbsp;old&nbsp;values&nbsp;as&nbsp;a&nbsp;tuple:&nbsp;(delay,&nbsp;interval).</tt></dd></dl>
+ <dl><dt><a name="-siginterrupt"><strong>siginterrupt</strong></a>(...)</dt><dd><tt><a href="#-siginterrupt">siginterrupt</a>(sig,&nbsp;flag)&nbsp;-&gt;&nbsp;None<br>
+change&nbsp;system&nbsp;call&nbsp;restart&nbsp;behaviour:&nbsp;if&nbsp;flag&nbsp;is&nbsp;False,&nbsp;system&nbsp;calls<br>
+will&nbsp;be&nbsp;restarted&nbsp;when&nbsp;interrupted&nbsp;by&nbsp;signal&nbsp;sig,&nbsp;else&nbsp;system&nbsp;calls<br>
+will&nbsp;be&nbsp;interrupted.</tt></dd></dl>
+ <dl><dt><a name="-signal"><strong>signal</strong></a>(...)</dt><dd><tt><a href="#-signal">signal</a>(sig,&nbsp;action)&nbsp;-&gt;&nbsp;action<br>
+&nbsp;<br>
+Set&nbsp;the&nbsp;action&nbsp;for&nbsp;the&nbsp;given&nbsp;signal.&nbsp;&nbsp;The&nbsp;action&nbsp;can&nbsp;be&nbsp;SIG_DFL,<br>
+SIG_IGN,&nbsp;or&nbsp;a&nbsp;callable&nbsp;Python&nbsp;object.&nbsp;&nbsp;The&nbsp;previous&nbsp;action&nbsp;is<br>
+returned.&nbsp;&nbsp;See&nbsp;<a href="#-getsignal">getsignal</a>()&nbsp;for&nbsp;possible&nbsp;return&nbsp;values.<br>
+&nbsp;<br>
+***&nbsp;IMPORTANT&nbsp;NOTICE&nbsp;***<br>
+A&nbsp;signal&nbsp;handler&nbsp;function&nbsp;is&nbsp;called&nbsp;with&nbsp;two&nbsp;arguments:<br>
+the&nbsp;first&nbsp;is&nbsp;the&nbsp;signal&nbsp;number,&nbsp;the&nbsp;second&nbsp;is&nbsp;the&nbsp;interrupted&nbsp;stack&nbsp;frame.</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>ITIMER_PROF</strong> = 2L<br>
+<strong>ITIMER_REAL</strong> = 0L<br>
+<strong>ITIMER_VIRTUAL</strong> = 1L<br>
+<strong>NSIG</strong> = 32<br>
+<strong>SIGABRT</strong> = 6<br>
+<strong>SIGALRM</strong> = 14<br>
+<strong>SIGBUS</strong> = 10<br>
+<strong>SIGCHLD</strong> = 20<br>
+<strong>SIGCONT</strong> = 19<br>
+<strong>SIGEMT</strong> = 7<br>
+<strong>SIGFPE</strong> = 8<br>
+<strong>SIGHUP</strong> = 1<br>
+<strong>SIGILL</strong> = 4<br>
+<strong>SIGINFO</strong> = 29<br>
+<strong>SIGINT</strong> = 2<br>
+<strong>SIGIO</strong> = 23<br>
+<strong>SIGIOT</strong> = 6<br>
+<strong>SIGKILL</strong> = 9<br>
+<strong>SIGPIPE</strong> = 13<br>
+<strong>SIGPROF</strong> = 27<br>
+<strong>SIGQUIT</strong> = 3<br>
+<strong>SIGSEGV</strong> = 11<br>
+<strong>SIGSTOP</strong> = 17<br>
+<strong>SIGSYS</strong> = 12<br>
+<strong>SIGTERM</strong> = 15<br>
+<strong>SIGTRAP</strong> = 5<br>
+<strong>SIGTSTP</strong> = 18<br>
+<strong>SIGTTIN</strong> = 21<br>
+<strong>SIGTTOU</strong> = 22<br>
+<strong>SIGURG</strong> = 16<br>
+<strong>SIGUSR1</strong> = 30<br>
+<strong>SIGUSR2</strong> = 31<br>
+<strong>SIGVTALRM</strong> = 26<br>
+<strong>SIGWINCH</strong> = 28<br>
+<strong>SIGXCPU</strong> = 24<br>
+<strong>SIGXFSZ</strong> = 25<br>
+<strong>SIG_DFL</strong> = 0<br>
+<strong>SIG_IGN</strong> = 1</td></tr></table>
+</body></html>

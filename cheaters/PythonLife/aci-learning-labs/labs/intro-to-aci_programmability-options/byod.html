@@ -1,0 +1,218 @@
+<div>
+  <p>
+    To work on this lab from your own machine, you'll need to meet the following 
+    requirements.  
+  </p>
+  <h3>Client Pre-Reqs</h3>
+  <ul>
+    <li>Python 2.7</li>
+      <ul>
+        <li>virtual environment (suggested but not required)</li>
+        <li>pip</li>
+      </ul>
+    <li>"git" command line tools</li>
+    <li>Google Chrome + Postman</li>
+    <li>ACI Toolkit</li>
+    <li>Cobra SDK</li>
+  </ul>
+
+  <h3>Workstation Setup Instructions</h4>
+  <p>
+    This lab can be completed from a Windows, Mac, or Linux workstation as long 
+    as the above pre-reqs are installed. If you are using a Linux distribution,
+    then it is likely you already have Python 2.7 installed. To assist with completion,
+    here are some suggested steps to prepare common platforms.  
+  </p>
+  <p>
+    If your environment requires a proxy server to access internet resources, be 
+    sure that it is configured correctly on your system, and adjust any steps/commands
+    listed below as needed.  
+  </p>
+  <ul>
+    <li>CentOS Sample Setup Instructions Example</li>
+      <ul>
+        <li>Standard Development Tools
+          <pre>
+sudo yum -y groupinstall development
+          <pre>
+        </li>
+        <li>Python 2.7
+          <pre>
+# CentOS
+sudo yum -y install gcc
+sudo yum -y install wget
+wget https://www.python.org/ftp/python/2.7.13/Python-2.7.13.tgz
+tar xzf Python-2.7.13.tgz
+cd Python-2.7.13
+./configure  --prefix=/usr/local --enable-unicode=ucs4 --enable-shared LDFLAGS="-Wl,-rpath /usr/local/lib"
+make altinstall
+sudo yum -y install python-pip
+sudo pip install virtualenv
+          </pre>
+        </li>
+        <li>OpenSSL Development Library
+          <pre>
+sudo yum -y install openssl-devel
+          </pre>
+        </li>
+      </ul>
+
+    <li>Ubuntu Sample Setup Instructions Example</li>
+      <ul>
+        <li>Standard Development Tools
+          <pre>
+sudo yum -y groupinstall development
+          </pre>
+        </li>
+        <li>Python 2.7
+          <pre>
+# Ubuntu
+wget https://www.python.org/ftp/python/2.7.13/Python-2.7.13.tgz
+tar xzf Python-2.7.13.tgz
+cd Python-2.7.13
+./configure  --prefix=/usr/local --enable-unicode=ucs4
+make altinstall
+sudo apt -y install python-pip
+sudo pip2 install virtualenv
+          </pre>
+        </li>
+        <li>OpenSSL Development Library
+          <pre>
+sudo apt -y install libssl-dev
+          </pre>
+        </li>
+      </ul>
+
+    <li>Mac OS X Installation</li>
+      <ul>
+        <li>git installation - <a href="https://git-scm.com/download/mac" target="_blank">https://git-scm.com/download/mac</a> </li>
+        <li>Python 2.7 installation - <a href="https://www.python.org/downloads/release/python-2713/" target="_blank">https://www.python.org/downloads/release/python-2713/</a><br>
+        <li>Python pip installation 
+          <pre>
+curl -o get-pip.py https://bootstrap.pypa.io/get-pip.py
+sudo python get-pip.py          
+          </pre>
+        </li>
+        <li>Python 2.7 Customization 
+          <pre>
+sudo pip install virtualenv
+          </pre>
+        </li>
+        <li>Command Line Developer Tools Installation
+          <pre>
+xcode-select --install
+          </pre>
+          After running command, complete installation using the GUI.  
+        </li>          
+      </ul>
+       
+    <li>Windows Installation</li>
+      <ul>
+        <li>git installation - <a href="https://git-scm.com/download/win" target="_blank">https://git-scm.com/download/win</a></li>
+        <li>Python 2.7 installation - <a href="https://www.python.org/downloads/release/python-2713/" target="_blank">https://www.python.org/downloads/release/python-2713/</a><br>
+            <strong>Be sure to check box for "Add Python 2.7 to PATH" on the first page of the installer</strong>
+        </li>
+        <li>Python 2.7 Customization
+          <pre>
+pip install virtualenv
+          </pre>
+        </li>
+      </ul>   
+
+  </ul>
+
+<h3>Install Postman</h3>
+  <p>
+    This lab uses Postman to make API calls; if you do
+    not have it installed, it can be downloaded from:
+    <ul>
+      <li>https://www.getpostman.com/apps</li>
+    </ul>
+  </p>
+
+<h3>Setup a virtual envirnment</h3>
+  <p>
+    A virtual environment is recommended to provide an
+    isolated python environment.
+  </p>
+<h4>Mac or Linux</h4>
+  <pre>
+#From your working directory
+virtualenv aci --python=python2.7
+source aci/bin/activate
+  </pre>
+<h4>Windows</h4>
+  <pre>
+#From your working directory
+virtualenv aci
+aci\Scripts\activate
+  </pre>
+
+<h3>Install ACI Toolkit</h3>
+  <p>
+    Once you have activated your virtual environment,
+    you can proceed to install the rest of the python
+    packages. ACI Toolkit is installed using git.
+  </p>
+<h4>Mac or Linux</h4>
+  <pre>
+# From your working directory
+git clone https://github.com/datacenter/acitoolkit.git
+cd acitoolkit
+sudo python setup.py install
+  </pre>
+<h4>Windows</h4>
+  <pre>
+# From your working directory
+git clone https://github.com/datacenter/acitoolkit.git
+cd acitoolkit
+python setup.py install
+  </pre>
+
+<h3>Install Cobra SDK</h3>
+<p>
+  The Cobra SDK files must be downloaded from a physical APIC appliance.
+  Browse to the APIC address and download both Python 2.7 egg files:
+  <ul>
+    <li>https://[APIC Address]/cobra/_downloads/</li>
+    <li>acicobra-[apic_version]-py2.7.egg</li>
+    <li>acimodel-[apic_version]-py2.7.egg</li>
+  </ul>
+</p>
+<h4>Mac or Linux</h4>
+  <pre>
+# From your Downloads Dirctory
+sudo easy_install -Z acicobra-[apic_version]-py2.7.egg
+sudo easy_install -Z acimodel-[apic_version]-py2.7.egg
+  </pre>
+<h4>Windows</h4>
+  <pre>
+# From your Downloads Dirctory
+easy_install -Z acicobra-[apic_version]-py2.7.egg
+easy_install -Z acimodel-[apic_version]-py2.7.egg
+  </pre>
+
+<h3>Pull Down and Prep Sample Code Repository</h3>
+  <p>
+    Once all the pre-reqs are installed on your workstation, all you need 
+    to do is get the sample code from GitHub and install any additional
+    requirements with pip.
+  </p>  
+<h4>Mac or Linux</h4>
+  <pre>
+#From your working directory
+git clone https://github.com/CiscoDevNet/intro-to-aci_sample-code
+cd intro-to-aci_sample-code
+sudo pip install -r requirements.txt
+  </pre>
+
+<h4>Windows</h4>
+  <pre>
+#From your working directory
+git clone https://github.com/CiscoDevNet/intro-to-aci_sample-code
+cd intro-to-aci_sample-code
+pip install -r requirements.txt
+  </pre>
+  
+  
+</div>

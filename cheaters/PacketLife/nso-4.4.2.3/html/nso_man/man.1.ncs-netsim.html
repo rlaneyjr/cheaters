@@ -1,0 +1,781 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      
+      <title>ncs-netsim -  - NSO 4.4.2.3 Manual Pages</title>
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+      <link rel="home" href="index.html" title="NSO 4.4.2.3 Manual Pages" />
+      <link rel="up" href="ncs.man.volume.1.html" title="NCS man-pages, Volume 1" />
+      <link rel="prev" href="man.1.ncs-make-package.html" title="ncs-make-package" />
+      <link rel="next" href="man.1.ncs-project-create.html" title="ncs-project-create" />
+      <meta xmlns="" name="Section-title" content="ncs-netsim" /><script xmlns="" type="text/javascript">
+      //The id for tree cookie
+      var treeCookieId = "treeview-73142";
+      var language = "en";
+      var w = new Object();
+      //Localization
+      txt_filesfound = 'Results';
+      txt_enter_at_least_1_char = "You must enter at least one character.";
+      txt_browser_not_supported = "JavaScript is disabled on your browser. Please enable JavaScript to enjoy all the features of this site.";
+      txt_please_wait = "Please wait. Search in progress...";
+      txt_results_for = "Results for: ";
+    </script><link xmlns="" rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/css/positioning.css" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/jquery/theme-redmond/jquery-ui-1.8.2.custom.css" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/jquery/treeview/jquery.treeview.css" /><style xmlns="" type="text/css">
+      
+      #noscript{
+      font-weight:bold;
+      background-color: #55AA55;
+      font-weight: bold;
+      height: 25spx;
+      z-index: 3000;
+      top:0px;
+      width:100%;
+      position: relative;
+      border-bottom: solid 5px black;
+      text-align:center;
+      color: white;
+      }
+      
+      input {
+      margin-bottom: 5px;
+      margin-top: 2px;
+      }
+      .folder {
+      display: block;
+      height: 22px;
+      padding-left: 20px;
+      background: transparent url(common/jquery/treeview/images/folder.gif) 0 0px no-repeat;
+      }
+      span.contentsTab {
+      padding-left: 20px;
+      background: url(common/images/toc-icon.png) no-repeat 0 center;
+      }
+      span.searchTab {
+      padding-left: 20px;
+      background: url(common/images/search-icon.png) no-repeat 0 center;
+      }
+      
+      /* Overide jquery treeview's defaults for ul. */
+      .treeview ul {
+      background-color: transparent;
+      margin-top: 4px;
+      }		
+      #webhelp-currentid {
+      /* background-color: #D8D8D8 !important; */
+      background-color: #D8D8D8;
+      }
+      .treeview .hover { color: black; }
+      .filetree li span a { text-decoration: none; font-size: 12px; color: #517291; }
+      
+      /* Override jquery-ui's default css customizations. These are supposed to take precedence over those.*/
+      .ui-widget-content {
+      border: 0px; 
+      background: none; 
+      color: none;     
+      }
+      .ui-widget-header {
+      color: #e9e8e9;
+      border-left: 1px solid #e5e5e5;
+      border-right: 1px solid #e5e5e5;
+      border-bottom: 1px solid #bbc4c5;
+      border-top: 4px solid #e5e5e5;
+      border: medium none;
+      background: #F4F4F4; /* old browsers */
+      background: -moz-linear-gradient(top, #F4F4F4 0%, #E6E4E5 100%); /* firefox */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F4F4F4), color-stop(100%,#E6E4E5)); /* webkit */    
+      font-weight: none;
+      }
+      .ui-widget-header a { color: none; }
+      .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { 
+      border: none; background: none; font-weight: none; color: none; }
+      .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited { color: black; text-decoration: none; }
+      .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus { border: none; background: none; font-weight: none; color: none; }
+      
+      .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { border: none; background: none; font-weight: none; color: none; }
+      .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited { 
+      color: black; text-decoration: none; 	
+      background: #C6C6C6; /* old browsers */
+      background: -moz-linear-gradient(top, #C6C6C6 0%, #D8D8D8 100%); /* firefox */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#C6C6C6), color-stop(100%,#D8D8D8)); /* webkit */
+      -webkit-border-radius:15px; -moz-border-radius:10px;
+      border: 1px solid #f1f1f1;
+      }    
+      .ui-corner-all { border-radius: 0 0 0 0; }
+      
+      .ui-tabs { padding: .2em;}
+      .ui-tabs .ui-tabs-nav li { top: 0px; margin: -2px 0 1px; text-transform: uppercase; font-size: 10.5px;}
+      .ui-tabs .ui-tabs-nav li a { padding: .25em 2em .25em 1em; margin: .5em; text-shadow: 0 1px 0 rgba(255,255,255,.5); }
+      /**
+      *	Basic Layout Theme
+      * 
+      *	This theme uses the default layout class-names for all classes
+      *	Add any 'custom class-names', from options: paneClass, resizerClass, togglerClass
+      */
+      
+      .ui-layout-pane { /* all 'panes' */ 
+      background: #FFF; 
+      border: 1px solid #BBB; 
+      padding: 05x; 
+      overflow: auto;
+      } 
+      
+      .ui-layout-resizer { /* all 'resizer-bars' */ 
+      background: #DDD; 
+      top:100px
+      } 
+      
+      .ui-layout-toggler { /* all 'toggler-buttons' */ 
+      background: #AAA; 
+      } 
+      
+    </style>
+      <!--[if IE]>
+	<link rel="stylesheet" type="text/css" href="../common/css/ie.css"/>
+	<![endif]--><script xmlns="" type="text/javascript" src="common/browserDetect.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery-1.7.2.min.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery.ui.all.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery.cookie.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/treeview/jquery.treeview.min.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/layout/jquery.layout.js">
+         <!----></script><style type="text/css">
+      
+      #header {
+      /* background: url("../images/header-bg.png") scroll top left repeat-x #4d8c83; */
+      background: transparent;
+      }
+      #leftnavigation {
+      /* background-color: #ededed!important; */
+      background-color: transparent;
+      }
+      #navheader {
+      visibility: hidden;
+      }
+      #webhelp-currentid {
+      /* background-color: #D8D8D8 !important; */
+      background-color: #FFFFFF; /*but must be changed in main.js as well*/
+      }
+      .filetree span.file {
+      /* background: url(images/file.gif) 0 0 no-repeat; */
+      background: initial;
+      }
+      .filetree span.folder, .filetree span.file {
+      padding: 1px 0 1px 7px;
+      display: block;
+      }
+
+      /* borrowed from cisco: clientlib.css */
+      .footer {
+      margin: 28px 30px 0 15px;
+      font-size: 80%;
+      line-height: 120%;
+      border-top: 1px solid #ccc;
+      padding-top: 7px;
+      color: #999;
+      }
+      .footer #footer-legal{display:inline;padding-bottom:18px}
+      #framework-footer{margin:0;padding:0 0 15px 0;min-width:900px;width:100%}
+      .footer a,.footer a:visited{color:#999}
+
+      /* from ccimr.css */
+      a:active  { color: #3366CC}
+      a:hover   { color: #3366CC}
+      a:link    { color: #3366CC}
+      a:visited { color: #3366CC}
+
+      #header img {
+      float: left;
+      margin-left: 20px;
+      margin-top: 0px;
+      }
+
+      #header h1 {
+      color: #336666;
+      margin-top: 4px;
+      }
+      #content h1, #content h2 {
+      color: #336666;
+      }
+      .title {
+      color: #336666;
+      }
+      p, pre {
+      margin-left: 0.1in;
+      }
+      p, ul, ol, li {
+        font-size: 95%;
+        font-family: Arial, Helvetica, sans-serif;
+        margin-top: 1px;
+      }
+      body {
+        font: 80.5% Arial, Helvetica, sans-serif;
+      }
+      ol {
+      display: block;
+      list-style-type: decimal;
+      -webkit-margin-before: 1em;
+      -webkit-margin-after: 1em;
+      -webkit-margin-start: 0px;
+      -webkit-margin-end: 0px;
+      -webkit-padding-start: 40px;
+      border: 1;
+      }
+    </style></head>
+   <body>
+      <noscript>
+         <div id="noscript">JavaScript is disabled on your browser. Please enable JavaScript to enjoy all the features of this site.</div>
+      </noscript>
+      <div id="header"><a href="index.html"><img style="margin-right: 2px; width: 110; height: 73; padding-right: 25px; padding-top: 8px" align="right" src="common/images/logo.gif" alt="Cisco Systems, Inc." /></a><h1>NSO 4.4.2.3 Manual Pages
+                <br />NCS man-pages, Volume 1
+         </h1>
+         <div id="navheader">
+            <!---->
+            <table class="navLinks">
+               <tr>
+                  <td><a id="showHideButton" href="#" onclick="myLayout.toggle('west')" class="pointLeft" tabindex="5" title="Hide TOC tree">Sidebar
+                                                    </a></td>
+                  <td><a accesskey="p" class="navLinkPrevious" tabindex="5" href="man.1.ncs-make-package.html">Prev</a>
+                                                             |
+                                                             <a accesskey="u" class="navLinkUp" tabindex="5" href="ncs.man.volume.1.html">Up</a>
+                                                         |
+                                                         <a accesskey="n" class="navLinkNext" tabindex="5" href="man.1.ncs-project-create.html">Next</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div id="content">
+         <div class="refentry"><a id="man.1.ncs-netsim"></a><div xmlns="" class="titlepage"></div>
+            <div class="refnamediv"><a id="man.1.ncs-netsim.name"></a><h2>Name</h2>
+               <p>ncs-netsim — Command to create and manipulate a simulated
+                      network
+               </p>
+            </div>
+            <div class="refsynopsisdiv">
+               <h2>Synopsis</h2>
+               <div class="cmdsynopsis">
+                  <p><code class="command">ncs-netsim</code>   create-network <em class="replaceable"><code>NcsPackage </code></em><em class="replaceable"><code>NumDevices </code></em><em class="replaceable"><code>Prefix</code></em>  [ <em class="replaceable"><code>--dir NetsimDir</code></em>]
+                  </p>
+               </div>
+               <div class="cmdsynopsis">
+                  <p><code class="command">ncs-netsim</code>   add-to-network <em class="replaceable"><code>NcsPackage </code></em><em class="replaceable"><code>NumDevices </code></em><em class="replaceable"><code>Prefix</code></em>  [ <em class="replaceable"><code>--dir NetsimDir</code></em>]
+                  </p>
+               </div>
+               <div class="cmdsynopsis">
+                  <p><code class="command">ncs-netsim</code>   delete-network  [ <em class="replaceable"><code>--dir NetsimDir</code></em>]
+                  </p>
+               </div>
+               <div class="cmdsynopsis">
+                  <p><code class="command">ncs-netsim</code>   start | stop | is-alive | reset | restart | status  [ <em class="replaceable"><code>Devicename</code></em>] [ <em class="replaceable"><code>--dir NetsimDir</code></em>] [ <em class="replaceable"><code>--async | -a </code></em>]
+                  </p>
+               </div>
+               <div class="cmdsynopsis">
+                  <p><code class="command">ncs-netsim</code>   netconf-console    <em class="replaceable"><code>Devicename</code></em>  [ <em class="replaceable"><code>XPathFilter</code></em>] [ <em class="replaceable"><code>--dir NetsimDir</code></em>]
+                  </p>
+               </div>
+               <div class="cmdsynopsis">
+                  <p><code class="command">ncs-netsim</code>   -w | --window   cli | cli-c | cli-i    <em class="replaceable"><code>Devicename</code></em>  [ <em class="replaceable"><code>--dir NetsimDir</code></em>]
+                  </p>
+               </div>
+               <div class="cmdsynopsis">
+                  <p><code class="command">ncs-netsim</code>   list | ncs-xml-init | packages | whichdir  [ <em class="replaceable"><code>--dir NetsimDir</code></em>]
+                  </p>
+               </div>
+            </div>
+            <div class="refsect1"><a id="d0e1842"></a><h2>DESCRIPTION</h2>
+               <p><span class="command"><strong>ncs-netsim</strong></span> is a script to create, control
+                      and manipulate
+                      simulated networks of managed devices. It is a tool targeted at NCS
+                      application developers. Each network element is simulated by ConfD,
+                      a Tail-f tool
+                      that acts as a NETCONF server, a Cisco CLI engine, or an SNMP agent.
+                      
+               </p>
+            </div>
+            <div class="refsect1"><a id="d0e1849"></a><h2>OPTIONS</h2>
+               <div class="refsect2"><a id="d0e1852"></a><h3>Commands</h3>
+                  <div class="variablelist">
+                     <dl class="variablelist">
+                        <dt><span class="term"><code class="option">create-network</code>
+                                        <em class="replaceable"><code>NcsPackage </code></em>
+                                        <em class="replaceable"><code>NumDevices </code></em>
+                                        <em class="replaceable"><code>Prefix</code></em>
+                                        </span></dt>
+                        <dd>
+                           <p>Is used to create a new simulation network. The simulation
+                                          network is written into a directory. This directory contains
+                                          references to NCS packages that are used to emulate the network.
+                                          These references are in the form of relative filenames, thus
+                                          the simulation network can be moved as long as the packages
+                                          that are used in the network are also moved.
+                                          
+                           </p>
+                           <p>
+                                          This command can be given multiple times in one invocation
+                                          of <span class="command"><strong>ncs-netsim</strong></span>. The mandatory
+                                          parameters are:
+                                          
+                           </p>
+                           <div class="orderedlist">
+                              <ol class="orderedlist" type="1">
+                                 <li class="listitem">
+                                    <p>
+                                                         <code class="option">NcsPackage</code> is a either directory where
+                                                         an NCS NED package (that supports netsim) resides.
+                                                         Alternatively, just the name of one of the packages
+                                                         in <code class="filename">$NCS_DIR/packages/neds</code> can
+                                                         be used.
+                                                         Alternatively the <code class="option">NcsPackage</code> is tar.gz
+                                                         package.
+                                                       
+                                    </p>
+                                 </li>
+                                 <li class="listitem">
+                                    <p>
+                                                         <code class="option">NumDevices</code> indicates how many devices
+                                                         we wish to have of the type that is defined by the
+                                                         NED package.
+                                                       
+                                    </p>
+                                 </li>
+                                 <li class="listitem">
+                                    <p>
+                                                         <code class="option">Prefix</code> is a string that will be used as
+                                                         prefix for the name of the devices
+                                                       
+                                    </p>
+                                 </li>
+                              </ol>
+                           </div>
+                        </dd>
+                        <dt><span class="term"><code class="option">add-to-network</code>
+                                        <em class="replaceable"><code>NcsPackage </code></em>
+                                        <em class="replaceable"><code>NumDevices </code></em>
+                                        <em class="replaceable"><code>Prefix</code></em>
+                                        </span></dt>
+                        <dd>
+                           <p>Is used to add additional devices to a previously
+                                            existing simulation network. This command can be given
+                                            multiple times. The mandatory parameters are the same as for
+                                            <code class="option">create-network</code>.
+                           </p>
+                           <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+                              <h3 class="title">Note</h3>
+                              <p>If we have already started NCS with an XML
+                                                 initialization file for the existing network, an updated
+                                                 initialization file will not take effect unless we
+                                                 remove the CDB database files, loosing all NCS
+                                                 configuration. But we can replace the original
+                                                 initialization data with data for the complete new
+                                                 network when we have
+                                                 run <code class="option">add-to-network</code>, by
+                                                 using <span class="command"><strong>ncs_load</strong></span> while NCS is running,
+                                                 e.g. like this:
+                              </p>
+                           </div>
+                           <div class="informalexample"><pre class="screen">$ ncs-netsim ncs-xml-init &gt; devices.xml
+$ ncs_load -l -m devices.xml</pre></div>
+                        </dd>
+                        <dt><span class="term"><code class="option">delete-network</code>
+                                        </span></dt>
+                        <dd>
+                           <p>Completely removes an existing simulation network.
+                                            The devices are stopped, and the network directory is
+                                            removed along with all files and directories inside
+                                            it.
+                           </p>
+                           <p>This command does not do any search for the network
+                                            directory, but only uses <code class="filename">./netsim</code>
+                                            unless the <code class="option">--dir NetsimDir</code> option is
+                                            given. If the directory does not exist, the command does
+                                            nothing, and does not return an error. Thus we can use it
+                                            in e.g. scripts or Makefiles to make sure we have a clean
+                                            starting point for a subsequent
+                                            <code class="option">create-network</code> command.
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">start</code>
+                                        <em class="replaceable"><code> [DeviceName] </code></em>
+                                        </span></dt>
+                        <dd>
+                           <p>Is used to start the entire network, or optionally
+                                          the individual device called
+                                          <code class="option">DeviceName</code>
+                                          
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">stop</code>
+                                        <em class="replaceable"><code> [DeviceName] </code></em>
+                                        </span></dt>
+                        <dd>
+                           <p>Is used to stop the entire network, or optionally
+                                          the individual device called
+                                          <code class="option">DeviceName</code>
+                                          
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">is-alive</code>
+                                        <em class="replaceable"><code> [DeviceName] </code></em>
+                                        </span></dt>
+                        <dd>
+                           <p>Is used to query the 'liveness' of the entire network,
+                                          or optionally
+                                          the individual device called
+                                          <code class="option">DeviceName</code>
+                                          
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">status</code>
+                                        <em class="replaceable"><code> [DeviceName] </code></em>
+                                        </span></dt>
+                        <dd>
+                           <p>Is used to check the status of the entire network,
+                                          or optionally
+                                          the individual device called
+                                          <code class="option">DeviceName</code>.
+                                          
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">reset</code>
+                                        <em class="replaceable"><code> [DeviceName] </code></em>
+                                        </span></dt>
+                        <dd>
+                           <p>Is used to reset the entire network back into the
+                                          state it was before it was started for the first
+                                          time. This means that the devices are stopped, and all cdb
+                                          files, log files and state files are removed.  The command
+                                          can also be performed on an individual device
+                                          <code class="option">DeviceName</code>.
+                                          
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">restart</code>
+                                        <em class="replaceable"><code> [DeviceName] </code></em>
+                                        </span></dt>
+                        <dd>
+                           <p>This is the equivalent of 'stop', 'reset', 'start'
+                                          
+                           </p>
+                        </dd>
+                        <dt><span class="term">
+                                          <code class="option">-w | -window</code>
+                                        , </span><span class="term">
+                                          <code class="option">cli | cli-c | cli-i
+                                             </code>
+                                        <em class="replaceable"><code> DeviceName </code></em>
+                                        </span></dt>
+                        <dd>
+                           <p>Invokes the ConfD CLI on the device called
+                                          <code class="option">DeviceName</code>. The flavor of the CLI
+                                          will be either of Juniper (default) Cisco IOS (cli-i) or
+                                          Cisco XR (cli-c).
+                                          The -w option creates a new window for the CLI
+                                          
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">whichdir </code>
+                                        </span></dt>
+                        <dd>
+                           <p>
+                                            When we create the netsim environment with the
+                                            <code class="option">create-network</code> command, the data will by default be written
+                                            into the <code class="filename">./netsim</code> directory unless the
+                                            <code class="option">--dir NetsimDir</code> is given.
+                                          
+                           </p>
+                           <p>
+                                            All the control commands to stop, start, etc., the network
+                                            need access to the netsim directory where the netsim data
+                                            resides.
+                                            Unless the <code class="option">--dir NetsimDir</code> option is given
+                                            we will search for the netsim directory in $PWD, and if not found
+                                            there go upwards in the directory hierarchy until we find
+                                            a netsim directory.
+                                          
+                           </p>
+                           <p>
+                                            This command prints the result of that netsim directory search.
+                                          
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">list</code>
+                                        </span></dt>
+                        <dd>
+                           <p>
+                                            The netsim directory that got created by the
+                                            <code class="option">create-network</code> command contains a static
+                                            file (by default <code class="filename">./netsim/.netsiminfo</code>) - this command
+                                            prints the file content formatted. This command thus
+                                            works without the network running.
+                                          
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">netconf-console</code>
+                                        <em class="replaceable"><code>DeviceName</code></em>
+                                        <em class="replaceable"><code>[XpathFilter]</code></em>
+                                        </span></dt>
+                        <dd>
+                           <p>Invokes the <span class="command"><strong>netconf-console</strong></span> NETCONF client program
+                                          towards the device called <code class="option">DeviceName</code>.
+                                          This is an easy way to get the configuration from a
+                                          simulated device in XML format.
+                                          
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">ncs-xml-init</code>
+                                        <em class="replaceable"><code> [DeviceName] </code></em>
+                                        </span></dt>
+                        <dd>
+                           <p>Usually the purpose of running <span class="command"><strong>ncs-netsim</strong></span> is that
+                                          we wish to experiment with running NCS towards that
+                                          network. This command produces the XML data that can
+                                          be used as initialization data for NCS and the network defined
+                                          by this ncs-netsim installation.
+                              
+                                          
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">packages</code>
+                                        </span></dt>
+                        <dd>
+                           <p>List the NCS NED packages that were used to produce this
+                                          ncs-netsim network.
+                                          
+                           </p>
+                        </dd>
+                     </dl>
+                  </div>
+               </div>
+               <div class="refsect2"><a id="d0e2135"></a><h3>Common options</h3>
+                  <div class="variablelist">
+                     <dl class="variablelist">
+                        <dt><span class="term"><code class="option">--dir</code>
+                                        <em class="replaceable"><code>NetsimDir</code></em>
+                                        </span></dt>
+                        <dd>
+                           <p>
+                                            When we create a network, by default it's created in
+                                            <code class="filename">./netsim</code>. When we invoke the control
+                                            commands, the netsim directory is searched for in the
+                                            current directory and then upwards.
+                                            The <code class="option">--dir</code> option overrides this and
+                                            creates/searches and instead
+                                            uses <code class="option">NetsimDir</code> for the netsim directory.
+                                          
+                           </p>
+                        </dd>
+                        <dt><span class="term"><code class="option">--async | -a</code>
+                                        </span></dt>
+                        <dd>
+                           <p>
+                                            The start, stop, restart and reset commands can use this
+                                            additional flag that runs everything in the background.
+                                            This typically reduces the time to start or stop a netsim
+                                            network.
+                                          
+                           </p>
+                        </dd>
+                     </dl>
+                  </div>
+               </div>
+            </div>
+            <div class="refsect1"><a id="d0e2167"></a><h2>EXAMPLES</h2>
+               <p>
+                        To create a simulation network we need at least one NCS
+                        NED package that supports netsim. An NCS NED package supports
+                        netsim if it has a <code class="filename">netsim</code> directory at the top of the package.
+                        The NCS distribution contains a number of packages in
+                        $NCS_DIR/packages/neds. So given those NED packages, we can
+                        create a simulation network that use ConfD, together with the
+                        YANG modules for the device to emulate the device.
+                      
+               </p>
+               <div class="informalexample"><pre class="screen">$ ncs-netsim create-network $NCS_DIR/packages/neds/c7200 3 c \
+             create-network $NCS_DIR/packages/neds/nexus 3 n</pre></div>
+               <p>
+                        The above command creates a test network with 6 routers in it.
+                        The data as well the execution environment for the individual
+                        ConfD devices reside in (by default) directory  ./netsim.
+                        At this point we can start/stop/control the network as well
+                        as the individual devices with the ncs-netsim control commands.
+                      
+               </p>
+               <div class="informalexample"><pre class="screen">$ ncs-netsim -a start
+DEVICE c0 OK STARTED
+DEVICE c1 OK STARTED
+DEVICE c2 OK STARTED
+DEVICE n0 OK STARTED
+DEVICE n1 OK STARTED
+DEVICE n2 OK STARTED</pre></div>
+               <p>Starts the entire network.</p>
+               <div class="informalexample"><pre class="screen">$ ncs-netsim stop c0</pre></div>
+               <p>Stops the simulated router named <span class="emphasis"><em>c0</em></span>.
+               </p>
+               <div class="informalexample"><pre class="screen">$ ncs-netsim cli n1</pre></div>
+               <p>Starts a Juniper CLI towards the device called
+                      <span class="emphasis"><em>n1</em></span>.
+               </p>
+            </div>
+            <div class="refsect1"><a id="d0e2201"></a><h2>ENVIRONMENT VARIABLES</h2>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p><span class="emphasis"><em>NETSIM_DIR</em></span> if set, the value will be
+                                   used instead of the <code class="option">--dir Netsimdir</code> option
+                                   to search for the netsim directory containing the environment
+                                   for the emulated network
+                        </p>
+                        <p>Thus, if we always use the same netsim directory in a
+                                   development project, it may make sense to set this environment
+                                   variable, making the netsim environment available regardless
+                                   of where we are in the directory structure.
+                                   
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><span class="emphasis"><em>IPC_PORT</em></span> if set, the ConfD instances
+                                   will use the indicated number and upwards for the local IPC port.
+                                   Default is 5010. Use this if your host occupies some of the
+                                   ports from 5010 and upwards.
+                                   
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><span class="emphasis"><em>NETCONF_SSH_PORT</em></span> if set, the ConfD instances
+                                   will use the indicated number and upwards for the NETCONF ssh
+                                   (if configured in confd.conf)
+                                   Default is 12022. Use this if your host occupies some of the
+                                   ports from 12022 and upwards.
+                                   
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><span class="emphasis"><em>NETCONF_TCP_PORT</em></span> if set, the ConfD instances
+                                   will use the indicated number and upwards for the NETCONF tcp
+                                   (if configured in confd.conf)
+                                   Default is 13022. Use this if your host occupies some of the
+                                   ports from 13022 and upwards.
+                                   
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><span class="emphasis"><em>SNMP_PORT</em></span> if set, the ConfD instances
+                                   will use the indicated number and upwards for the SNMP udp traffic.
+                                   (if configured in confd.conf)
+                                   Default is 11022. Use this if your host occupies some of the
+                                   ports from 11022 and upwards.
+                                   
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><span class="emphasis"><em>CLI_SSH_PORT</em></span> if set, the ConfD instances
+                                   will use the indicated number and upwards for the CLI ssh traffic.
+                                   (if configured in confd.conf)
+                                   Default is 10022. Use this if your host occupies some of the
+                                   ports from 10022 and upwards.
+                                   
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <p>
+                        The <code class="code">ncs-setup</code> tool will use these numbers as well
+                        when it generates the init XML for the network in the
+                        <code class="code">ncs-netsim</code> network.
+                      
+               </p>
+            </div>
+         </div><script type="text/javascript" src="common/main.js">
+            <!----></script><script type="text/javascript" src="common/splitterInit.js">
+            <!----></script><div class="footer" id="footer-legal">
+            <div class="footer-legal framework-footer-cq">
+               <div id="framework-footer">
+                  <div id="footer-legal"><a href="http://www.cisco.com/web/siteassets/legal/terms_condition.html">Terms &amp; Conditions</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/privacy.html">Privacy Statement</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/privacy.html#cookies">Cookie Policy</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/trademark.html">Trademarks</a></div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div id="sidebar">
+         <div id="leftnavigation" style="padding-top:3px;">
+            <div id="tabs">
+               <ul style="visibility: hidden;"></ul>
+               <div id="treeDiv"><img src="common/images/loading.gif" alt="loading table of contents..." id="tocLoading" style="display:block;" /><div id="ulTreeDiv" style="display:none">
+                     <ul id="tree" class="filetree">
+                        <li><span class="file"><a href="ncs.man.volume.1.html" tabindex="1">NCS man-pages, Volume 1</a></span><ul>
+                              <li><span class="file"><a href="man.1.ncs-backup.html" tabindex="1">ncs-backup</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-collect-tech-report.html" tabindex="1">ncs-collect-tech-report</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-installer.html" tabindex="1">ncs-installer</a></span></li>
+                              <li><span class="file"><a href="man.1.maapi.html" tabindex="1">ncs-maapi</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-make-package.html" tabindex="1">ncs-make-package</a></span></li>
+                              <li id="webhelp-currentid"><span class="file"><a href="man.1.ncs-netsim.html" tabindex="1">ncs-netsim</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-project-create.html" tabindex="1">ncs-project-create</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-project-make-bundle.html" tabindex="1">ncs-project-export</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-project-git.html" tabindex="1">ncs-project-git</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-project-setup.html" tabindex="1">ncs-project-setup</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-project-update.html" tabindex="1">ncs-project-update</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-project.html" tabindex="1">ncs-project</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-setup.html" tabindex="1">ncs-setup</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-uninstall.html" tabindex="1">ncs-uninstall</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs.html" tabindex="1">ncs</a></span></li>
+                              <li><span class="file"><a href="man.1.confd_cli.html" tabindex="1">confdncs_cli</a></span></li>
+                              <li><span class="file"><a href="man.1.confd_cmd.html" tabindex="1">
+                                             confdncs_cmd</a></span></li>
+                              <li><span class="file"><a href="man.1.confd_load.html" tabindex="1">confdncs_load</a></span></li>
+                              <li><span class="file"><a href="man.1.confdc.html" tabindex="1">confdc
+                                           ncsc</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-backup.html" tabindex="1">nct-backup</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-check.html" tabindex="1">nct-check</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-cli-cmd.html" tabindex="1">nct-cli-cmd</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-copy.html" tabindex="1">nct-copy</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-get-logs.html" tabindex="1">nct-get-logs</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-ha.html" tabindex="1">nct-ha</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-hostsfile.html" tabindex="1">nct-hostsfile</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-install.html" tabindex="1">nct-install</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-load-config.html" tabindex="1">nct-load-config</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-move-device.html" tabindex="1">nct-move-device</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-packages.html" tabindex="1">nct-packages</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-patch.html" tabindex="1">nct-patch</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-ssh-cmd.html" tabindex="1">nct-ssh-cmd</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-start.html" tabindex="1">nct-start</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-stop.html" tabindex="1">nct-stop</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-upgrade.html" tabindex="1">nct-upgrade</a></span></li>
+                              <li><span class="file"><a href="man.1.nct.html" tabindex="1">nct</a></span></li>
+                              <li><span class="file"><a href="man.1.pyang.html" tabindex="1">pyang</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ncs.man.volume.3.html" tabindex="1">NCS man-pages, Volume 3</a></span><ul>
+                              <li><span class="file"><a href="man.3.confd_lib.html" tabindex="1">confd_lib</a></span></li>
+                              <li><span class="file"><a href="man.3.confd_lib_cdb.html" tabindex="1">confd_lib_cdb</a></span></li>
+                              <li><span class="file"><a href="man.3.confd_lib_dp.html" tabindex="1">confd_lib_dp</a></span></li>
+                              <li><span class="file"><a href="man.3.confd_lib_events.html" tabindex="1">confd_lib_events</a></span></li>
+                              <li><span class="file"><a href="man.3.confd_lib_ha.html" tabindex="1">confd_lib_ha</a></span></li>
+                              <li><span class="file"><a href="man.3.confd_lib_lib.html" tabindex="1">confd_lib_lib</a></span></li>
+                              <li><span class="file"><a href="man.3.confd_lib_maapi.html" tabindex="1">confd_lib_maapi</a></span></li>
+                              <li><span class="file"><a href="man.3.confd_types.html" tabindex="1">confd_types</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ncs.man.volume.5.html" tabindex="1">NCS man-pages, Volume 5</a></span><ul>
+                              <li><span class="file"><a href="man.5.clispec.html" tabindex="1">clispec</a></span></li>
+                              <li><span class="file"><a href="man.5.mib_annotations.html" tabindex="1">mib_annotations</a></span></li>
+                              <li><span class="file"><a href="man.5.ncs.conf.html" tabindex="1">ncs.conf</a></span></li>
+                              <li><span class="file"><a href="man.5.tailf_yang_cli_extensions.html" tabindex="1">tailf_yang_cli_extensions</a></span></li>
+                              <li><span class="file"><a href="man.5.tailf_yang_extensions.html" tabindex="1">tailf_yang_extensions</a></span></li>
+                           </ul>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

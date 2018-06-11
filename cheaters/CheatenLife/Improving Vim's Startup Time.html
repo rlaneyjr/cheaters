@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Improving Vim's Startup Time</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <script type="text/javascript" src="/javascripts/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="/javascripts/site.js"></script>
+    <link href="/stylesheets/screen.css" media="screen" rel="stylesheet" type="text/css">
+    <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://feeds.feedburner.com/usevim">
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="http://feeds.feedburner.com/usevim">
+    <link rel="shortcut icon" href="/favicon.ico">
+  </head>
+  <body>
+<header id="header">
+  <hgroup>
+    <h1><a href="/">usevim</a></h1>
+    <h2>Vim links, plugins, screenshots, tutorials, and themes</h2>
+  </hgroup>
+</header>
+<div class="subnav">
+  <ul class="nav nav-pills">
+    <li><a href="/" class="active">Home</a></li>
+    <li><a href="/contact.html">Contact</a></li>
+    <li><a target="_blank" href="http://feeds.feedburner.com/usevim">Subscribe</a></li>
+  </ul>
+</div>
+    <nav id="breadcrumb"><a href="/" class="read-more">&larr; Back</a></nav>
+    <section id="container" class="content">
+      <div id="content">
+        
+<article class="hentry">
+  <header>
+    <h1 class="entry-title"><a href="/2012/04/18/startuptime">Improving Vim's Startup Time</a></h1>
+    <time datetime="2012-04-18T01:04:00Z" pubdate="pubdate" class="updated">18 April 2012</time>
+    <p class="byline author vcard">by <span class="fn">Alex Young</span></p>
+    <div class="tags"><a href="/tags.html#startuptime">startuptime</a>, <a href="/tags.html#performance">performance</a></div>
+  </header><p>Once you've installed <a href="http://www.vim.org/scripts/script.php?script_id=2332">pathogen.vim</a> or <a href="http://www.vim.org/scripts/script.php?script_id=3458">Vundle</a>, installing Vim scripts becomes almost... addictive.  Eventually Vim's startup time may start to suffer.  Or perhaps you've installed a new OS and you can't work out why Vim is loading slowly.</p>
+
+<p>Fortunately, recent versions of Vim come with the <code>--startuptime</code> command-line option:</p>
+
+<pre class="prettyprint lang-text">
+$ vim --startuptime vim.log
+</pre>
+
+<p>This file should contain a heading and a list of timing messages:</p>
+
+<pre class="prettyprint lang-text">
+times in msec
+ clock   self+sourced   self:  sourced script
+ clock   elapsed:              other lines
+
+000.006  000.006: --- VIM STARTING ---
+000.082  000.076: Allocated generic buffers
+000.299  000.217: locale set
+000.303  000.004: clipboard setup
+000.308  000.005: window checked
+000.787  000.479: inits 1
+000.793  000.006: parsing arguments
+000.793  000.000: expanding arguments
+003.495  002.702: shell init
+003.874  000.379: Termcap init
+003.890  000.016: inits 2
+003.996  000.106: init highlight
+052.048  000.250  000.250: sourcing /usr/local/Cellar/vim/7.3.333/share/vim/vim73/syntax/syncolor.vim
+</pre>
+
+<p>The header is two lines and refers to each type of timing message.  It's easier to understand if it's broken down like this:</p>
+
+<pre class="prettyprint lang-text">
+ clock   self+sourced   self:  sourced script
+052.048  000.250  000.250: sourcing /usr/local/Cellar/vim/7.3.333/share/vim/vim73/syntax/syncolor.vim
+
+ clock   elapsed:              other lines
+000.006  000.006: --- VIM STARTING ---
+</pre>
+
+<p>What can we do with this?  Well, let's try piping it through <code>sort -k 2</code> to easily find the slowest sourced scripts:</p>
+
+<pre class="prettyprint lang-text">
+$ cat vim.log | sort -k 2
+387.346  100.634: loading plugins
+169.582  145.276  005.804: sourcing /usr/local/Cellar/vim/7.3.333/share/vim/vim73/syntax/syntax.vim
+230.845  206.734  039.239: sourcing $HOME/.vimrc
+</pre>
+
+<p>It's also worth launching Vim with different files so <code>--startuptime</code> measures what happens when a particular file type is read.</p>
+
+<h3>Slow Start</h3>
+
+<p>Typing <code>:help slow-start</code> shows Vim's built-in guidance on startup performance -- it suggests checking if Vim was compiled with X11, because loading shared libraries might be taking a noticeable amount of time.  Starting Vim with <code>-X</code> will prevent Vim from trying to connect to an X server.</p>
+
+<p>Loading the viminfo file can take a while too.  Running Vim with <code>-i NONE</code> will stop it from loading viminfo files.</p>
+
+<p>It's also possible to load Vim without <code>~/.vimrc</code>.  This can be useful for determining if the problem is caused by your settings or the way Vim was built on your system:</p>
+
+<pre class="prettyprint lang-text">
+vim -u NONE --startuptime vim-NONE.log
+</pre>
+
+<h3>Profiling</h3>
+
+<p>Vim includes profiling tools that can be essential when debugging scripts.  This can be used from the command-line to measure how long each function takes when Vim is started:</p>
+
+<pre class="prettyprint lang-text">
+vim -c 'profile start vim.log' -c 'profile func *' -c 'q'
+</pre>
+
+<p>The <code>profile start</code> command expects a file name argument, and this file will be truncated and written to with debugging information.</p>
+
+<h3>References</h3>
+
+<p>I found the startup time measurement with <code>profile</code> tip in this post by ZyX: <a href="http://stackoverflow.com/a/8347244">Profiling startup time</a>.</p>
+</article>
+        <script type="text/javascript">var disqus_developer = 0;</script><script type="text/javascript">var disqus_shortname = 'usevim';(function () {var s = document.createElement('script'); s.async = true;s.src = 'http://disqus.com/forums/usevim/count.js';(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);}());</script><div id="disqus_thread"></div><script type="text/javascript">    var disqus_url = 'http://usevim.com/2012/04/18/startuptime/';    (function() {        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);    })();</script><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript><a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+      </div>
+<div id="sidebar">
+  <ul>
+    <li>
+      <div id="carbonads-container">
+        <div class="carbonad">
+          <div id="carbon"></div>
+          <script>
+            var z = document.createElement("script");
+            z.type = "text/javascript";
+            z.async = true;
+            z.src = "http://engine.carbonads.com/z/15515/carbon_2_1_0_VERT";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(z, s);
+          </script>
+        </div>
+      </div>
+    </li>
+    <li class="itemlist">
+      <h3>Search</h3>
+      <form action="http://www.google.com/search" method="get" class="navbar-search">
+        <input name="sitesearch" type="hidden" value="usevim.com"/>
+        <input type="text" name="q" placeholder="Search" class="search-query"/>
+      </form>
+    </li>
+    <li class="itemlist">
+      <h3>Subscribe</h3>
+      <ul class="subscribe">
+        <li class="links"><a href="http://twitter.com/vimnews" class="social-button"><img src="/images/icons/twitter.png" alt="Twitter"/></a><a href="https://google.com/+Usevim" class="social-button"><img src="/images/icons/google.png" alt="Google+"/></a><a href="https://www.facebook.com/vimnews" class="social-button"><img src="/images/icons/facebook.png" alt="Facebook"/></a><a href="http://feeds.feedburner.com/usevim" class="social-button"><img src="/images/icons/feed.png" alt="Feed"/></a><a href="http://feedburner.google.com/fb/a/mailverify?uri=usevim&amp;amp;loc=en_US" class="social-button"><img src="/images/icons/mail.png" alt="Email"/></a></li>
+      </ul>
+    </li>
+    <li class="itemlist staff">
+      <h3>Staff</h3>
+      <ul>
+        <li>
+          <h4>Editor-in-Chief</h4>
+          <div class="twitter"><a href="http://twitter.com/#!/alex_young"><img width="48" height="48" src="/images/twitter/alex_young.png" alt="Alex R. Young"/><span class="meta"><strong class="fullname">Alex R. Young</strong><br/><s>@</s>alex_young</span></a></div>
+          <h4>Proof-Reading</h4>
+          <div class="twitter"><a href="http://twitter.com/#!/YukaYoung"><img width="48" height="48" src="/images/twitter/YukaYoung.png" alt="Alex R. Young"/><span class="meta"><strong class="fullname">Yuka Young</strong><br/><s>@</s>YukaYoung</span></a></div>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </section>
+<footer>
+  <p class="copyright">Content &copy; <strong>usevim</strong> | By the creators of <a href="http://dailyjs.com/">DailyJS</a> | Site source: <a href="https://github.com/alexyoung/usevim">GitHub: alexyoung / usevim</a> | <a href="http://glyphicons.com/">Glyphicons</a> | <a href="/cookies.html">Cookies and Privacy</a></p>
+</footer>
+    <script type="text/javascript" src="/javascripts/pretty/run_prettify.js"></script>
+  </body>
+</html>

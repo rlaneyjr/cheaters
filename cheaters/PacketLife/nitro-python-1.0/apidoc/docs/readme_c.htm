@@ -1,0 +1,196 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+    <title>Citrix NetScaler XML API User's Guide - C samples</title>
+    <link rel="stylesheet" href="help_ns.css" type="text/css">
+</head>
+<body class="ns_body">
+    <div class="ns_content">
+    <table cellpadding="0" cellspacing="0">
+        <tr>
+            <td>
+                <a href="#Introduction">Introduction</a>&nbsp;|&nbsp;
+                <a href="#Requirement">Requirement</a>&nbsp;|&nbsp;
+                <a href="#Compiling samples">Compiling samples</a>&nbsp;|&nbsp;
+                <a href="#Usage">Usage</a>&nbsp;|&nbsp;
+                <a href="#download">Samples</a>&nbsp;|&nbsp;
+                <a href="#download1">Feature configuration samples</a>
+            </td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr class="ns_wp_header">
+            <td><a name="Introduction"></a>Introduction</td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr>
+            <td>
+                The example code that accompanies this file uses GSOAP to communicate with Netscaler, using XML/SOAP. Here, we describe how to get it up and running.<br><br>The full NSConfig.wsdl file is very large - WSDL to C interface generation utility can take time to parse it. You can avoid this by creating a custom subset of the WSDL, containing just the methods used in these examples:
+            </td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr>
+            <td>
+                <div class="syntax padding_left"><table><tr><td><pre>filterwsdl NSConfig.fullwsdl "add service" "set service*" "show service"<br>                             "bind lbmonitor*" "add lb vserver" "bind lb vserver*"<br>                             "show lb vserver" "rm service" "rm vserver"<br>                             "save nsconfig" > NSConfig.wsdl</pre></td></tr></table></div>
+            </td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr>
+            <td>
+                Note that you need to modify NSConfig.wsdl file at the bottom, where it says location="http://NetScaler/soap/" to location="http://10.100.50.25/soap/", where 10.100.50.25 is assumed to be your Netscaler's IP address.<br><br>The <a href="samples/ns-gsoap-sample/setConfig.c">setConfig.c</a> example uses the Netscaler API to:
+                <ul>
+		            <li>log in to Netscaler</li>
+                    <li>add a service</li>
+                    <li>bind a monitor</li>
+                    <li>add a vserver</li>
+                    <li>bind a service to a vserver</li>
+                    <li>save configuration</li>
+                    <li>remove added vservers and services</li>
+                    <li>log out</li>
+                </ul>
+                The <a href="samples/ns-gsoap-sample/getConfig.c">getConfig.c</a> example fetches information about all configured lb vservers,and prints selected information about each one.<br><br>The <a href="samples/ns-gsoap-sample/rmConfig.c">rmConfig.c</a> example removes all of the configuration that was created by setConfig.cs.<br><br>The <a href="samples/ns-gsoap-sample/getStat.c">getStat.c</a> example demonstrates usage of statistical api.<br><br>Additional documentation is available as inline comments in the C programs.
+            </td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr class="ns_wp_header">
+            <td><a name="Requirement"></a>Requirement</td>
+        </tr>
+        <tr>
+            <td>
+                <ul>
+                    <li>C compiler</li>
+                    <li>gsoap 2.7 and later</li>
+                    <li>gmake (optional on Windows)</li>
+                </ul>
+            </td>
+        </tr>
+        <tr class="ns_wp_header">
+            <td><a name="Compiling samples"></a>Compiling samples</td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr>
+            <td>
+                1. Extract files from the archive. It contains, among other files -
+                <ul>
+                    <li>gSOAP WSDL processor (wsdl2h)</li>
+                    <li>gSOAP SOAP compiler (soapcpp2) and run-time (stdsoap2.c)</li>
+                    <li>NetScaler WSDL generator (filterwsdl)</li>
+                </ul>
+                2. Customize the Makefile (or makesamp.bat on Windows), setting the variables at the top to match your environment.<br><br>
+                3. Obtain the NetScaler WSDL file. The wsdl file for the API is located on the Netscaler device,at http://Netscaler/api/NSConfig.wsdl. The full NSConfig.wsdl file is very large - it will take up to five minutes or more to compile the generated C stubs. You can avoid this by creating a custom subset of the WSDL, containing just the methods used in these examples:<br><br>
+                <div class="syntax padding_left"><table><tr><td><pre>filterwsdl NSConfig.fullwsdl "add service" "set service*" "show service"<br>                             "bind lbmonitor*" "add lb vserver" "bind lb vserver*"<br>                             "show lb vserver" "rm service" "rm vserver"<br>                             "save nsconfig" > NSConfig.wsdl</pre></td></tr></table></div><br>
+                NOTE: you must modify the NSConfig.wsdl file, in the &lt;service&gt; section at the bottom; change &quot;Netscaler&quot; to the IP address of your Netscaler in 'location=&quot;http://NetScaler/soap/&quot;'.<br><br>
+                4. Build the three samples. In the directory where you extracted these files, type "gmake [ENTER]" or on windows "makesamp [ENTER]". This will -
+                <ul>
+                    <li>Create two files - NSConfig.h and NSConfig.c.</li>
+                    <li>Create XML request/response files, and SOAP stubs.</li>
+                    <li>Compile the example C clients.</li>
+                </ul>
+            </td>
+        </tr>
+        <tr class="ns_wp_header">
+            <td><a name="Usage"></a>Usage</td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr>
+            <td>
+                The parameters to all of the examples are:<br><br>
+                <div class="syntax padding_left"><table><tr><td><pre><i>setConfig &lt;protocol>://&lt;NSIP> &lt;username> &lt;password><br>getConfig &lt;protocol>://&lt;NSIP> &lt;username> &lt;password><br>rmConfig &lt;protocol>://&lt;NSIP> &lt;username> &lt;password></i></pre></td></tr></table></div>
+            </td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr class="ns_wp_header">
+            <td><a name="download"></a>Samples</td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr>
+            <td>
+                <table class="ns_st_body" cellspacing="0">
+                    <tr>
+                        <td><a href="samples/ns-gsoap-sample/getConfig.c">getConfig.c</a></td>
+                        <td>The getConfig example fetches information about all configured entities, and prints selected information about each one.</td>
+                    </tr>
+                    <tr>
+                        <td class="ns_st_body_alternate_row"><a href="samples/ns-gsoap-sample/setConfig.c">setConfig.c</a></td>
+                        <td class="ns_st_body_alternate_row">The setConfig example uses the Netscaler API to set and bind certain entities in the System.</td>
+                    </tr>
+                    <tr>
+                        <td><a href="samples/ns-gsoap-sample/rmConfig.c">rmConfig.c</a></td>
+                        <td>The rmConfig example removes all of the configuration that was created by setConfig.</td>
+                    </tr>
+                    <tr>
+                        <td class="ns_st_body_alternate_row"><a href="samples/ns-gsoap-sample/getStat.c">getStat.c</a></td>
+                        <td class="ns_st_body_alternate_row">The getStat example demonstrates usage of statistical api.</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr class="ns_wp_header">
+            <td><a name="download1"></a>Feature configuration samples</td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr>
+            <td>
+                <table class="ns_st_body" cellspacing="0">
+                    <tr>
+                        <td><a href="samples/ns-gsoap-sample/acl.c">acl.c</a></td>
+                        <td>ACL configuration sample.</td>
+                    </tr>
+                    <tr>
+                        <td class="ns_st_body_alternate_row"><a href="samples/ns-gsoap-sample/cmp.c">cmp.c</a></td>
+                        <td class="ns_st_body_alternate_row">Compression configuration sample.</td>
+                    </tr>
+                    <tr>
+                        <td><a href="samples/ns-gsoap-sample/csw.c">csw.c</a></td>
+                        <td>Content Switching configuration sample.</td>
+                    </tr>
+                    <tr>
+                        <td class="ns_st_body_alternate_row"><a href="samples/ns-gsoap-sample/lb.c">lb.c</a></td>
+                        <td class="ns_st_body_alternate_row">Load Balancer configuration sample.</td>
+                    </tr>
+                    <tr>
+                        <td><a href="samples/ns-gsoap-sample/rba.c">rba.c</a></td>
+                        <td>RBA configuration sample.</td>
+                    </tr>
+                    <tr>
+                        <td class="ns_st_body_alternate_row"><a href="samples/ns-gsoap-sample/rewrite.c">rewrite.c</a></td>
+                        <td class="ns_st_body_alternate_row">Rewrite configuration sample.</td>
+                    </tr>
+                    <tr>
+                        <td><a href="samples/ns-gsoap-sample/ssl.c">ssl.c</a></td>
+                        <td>SSL Base configuration sample.</td>
+                    </tr>
+                    <tr>
+                        <td class="ns_st_body_alternate_row"><a href="samples/ns-gsoap-sample/ssl_crl.c">ssl_crl.c</a></td>
+                        <td class="ns_st_body_alternate_row">SSL Client-Auth with CRL configuration sample.</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,292 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>Citrix NetScaler XML API User&#39;s Guide - Structure Definition</title>
+<link rel="stylesheet" type="text/css" href="help_ns.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body onload="initial()" class="ns_body">
+<div class="ns_content"><table cellpadding="0" cellspacing="0"><script type="text/javascript">
+function changeContext(id,lang,flag){
+	parent.banner.document.language.select.value = lang;
+	if( lang == "C" ){
+		if(flag == "1"){
+			showContent(cfirstcontent,id,lang);
+		}
+		else{
+			showContent(csecondcontent,id,lang);
+		}
+	}
+	if( lang == "Perl" ){
+		if(flag == "1"){
+			showContent(perlfirstcontent,id,lang);
+		}
+		else{
+			showContent(perlsecondcontent,id,lang);
+		}
+	}
+	if( lang == "Java" ){
+		if(flag == "1"){
+			showContent(javafirstcontent,id,lang);	
+		}
+		else{
+			showContent(javasecondcontent,id,lang);
+		}
+	}
+	if( lang == "C#" ){
+		if(flag == "1"){
+			showContent(csharpfirstcontent,id,lang);
+		}
+		else{
+			showContent(csharpsecondcontent,id,lang);
+		}
+	}
+	if( lang == "VB" ){
+		if(flag == "1"){
+			showContent(vbfirstcontent,id,lang);
+		}
+		else{
+			showContent(vbsecondcontent,id,lang);
+		}
+	}
+	if(flag == "1"){
+		showInside(lang,"0");
+	}
+	else{
+		showOutside(lang);
+	}
+}
+function showContent(content,id,lang){
+	if(ie4){
+	   showContentObj=document.all.id;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById(id);
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+  showLangSelect(lang);
+}
+function showInside(str,cond){
+	if(str == "C"){
+ 		var inside_content = csecondcontent;
+ 	}
+ 	if(str == "Perl"){
+ 		var inside_content = perlsecondcontent;
+ 	}
+ 	if(str == "Java"){
+ 		var inside_content = javasecondcontent;
+ 	}
+ 	if(str == "C#"){
+		var inside_content = csharpsecondcontent;
+ 	}
+ 	if(str == "VB"){
+		var inside_content = vbsecondcontent;
+ 	}
+	showContent(inside_content,'qiksearch_div1',str);
+ 	if ( cond == "1" ){
+ 		var page = 'apidoc/docs/statinterfaceResult.html#interfaceList';
+ 		document.location.href = page;
+ 	}
+}
+function showOutside(str){
+	if(str == "C" ){
+ 		var inside_content = cfirstcontent;
+ 	}
+ 	if(str == "Perl" ){
+ 		var inside_content = perlfirstcontent;
+ 	}
+ 	if(str == "Java" ){
+ 		var inside_content = javafirstcontent;
+ 	}
+ 	if(str == "C#" ){
+ 		var inside_content = csharpfirstcontent;
+ 	}
+ 	if(str == "VB" ){
+ 		var inside_content = vbfirstcontent;
+ 	}
+ 	showContent(inside_content,'qiksearch_div',str);
+}
+function initial(){
+	ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+	ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+	ns4=document.layers;
+	langSelected = parent.banner.document.language.select.value
+	var plink = parent.banner.document.language.plink.value
+	var my_array=plink.split("&");
+	var temp = my_array[0];
+ 	var grp = temp.split("@");
+	var cmd = my_array[1];
+	var regex = /^stat/i;
+	if( cmd.match(regex) != null ){
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex_stat.html\">Statistics</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > statinterfaceResult");
+	}
+	else{
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex.htm\">Configuration</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > statinterfaceResult");
+	}
+	if( langSelected == "C" ){
+ 		var content = cfirstcontent;
+	}
+	else if( langSelected == "Perl" ){
+		var content = perlfirstcontent;
+	}
+	else if( langSelected == "Java" ){
+		var content = javafirstcontent;
+	}
+	else if( langSelected == "C#" ){
+		var content = csharpfirstcontent;
+	}
+	else if( langSelected == "VB" ){
+		var content = vbfirstcontent;
+	}
+	else{
+		var content = cfirstcontent;
+		langSelected="C";
+	}
+	showContent(content,'qiksearch_div',langSelected);
+	showInside(langSelected,"0");
+}
+function showPLink(content){
+	if(ie4){
+	   showContentObj=document.all.progressive_link;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById("progressive_link");
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+}
+function showLangSelect(id){
+	   if(ie4)
+       {
+       	showObj=document.all.first_url;
+       	showObj1=document.all.second_url;
+       }
+       if(ns6)
+       {
+       	showObj=document.getElementById("first_url");
+       	showObj1=document.getElementById("second_url");
+       }
+       if( id == "C" ){
+       	newlink = "<b>C</b>";
+       	newlink1 = "<b>C</b>";
+       }
+       else{
+       	newlink = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C','1');\"><b>C</b></a>";
+       	newlink1 = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C','0');\"><b>C</b></a>";
+       }
+       if( id == "Perl" ){
+       	newlink = newlink + " | <b>Perl</b>";
+       	newlink1 = newlink1 + " | <b>Perl</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Perl','1');\"><b>Perl</b></a>";
+      	       newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Perl','0');\"><b>Perl</b></a>";
+       }
+       if( id == "Java" ){
+       	newlink = newlink + " | <b>Java</b>";
+       	newlink1 = newlink1 + " | <b>Java</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Java','1');\"><b>Java</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Java','0');\"><b>Java</b></a>";
+       }
+       if( id == "C#" ){
+       	newlink = newlink + " | <b>C#</b>";
+       	newlink1 = newlink1 + " | <b>C#</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C#','1');\"><b>C#</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C#','0');\"><b>C#</b></a>";
+       }
+       showObj.innerHTML = newlink;
+       showObj1.innerHTML = newlink1;
+}
+</script>
+<tr><td><div><div id="progressive_link"></div></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>statinterfaceResult Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>statinterfaceResult</b> structure defines the return type for statinterface API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="first_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+cfirstcontent = "<pre>struct statinterfaceResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; struct <a href=\'statinterfaceResult.html\#interfacestats\'>interfacestats</a> interfacestatsList[];<br> };<br></pre></td></tr></table></div>"
+perlfirstcontent = "<pre>$statinterfaceResult = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rc => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; message => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'statinterfaceResult.html\#interfacestats\'>interfacestats</a> => \'@\',<br> };<br></pre></td></tr></table></div>"
+javafirstcontent = "<pre>class statinterfaceResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; class <a href=\'statinterfaceResult.html\#interfacestats\'>interfacestats</a> interfacestatsList[];<br> };<br></pre></td></tr></table></div>"
+csharpfirstcontent = "<pre>class statinterfaceResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; class <a href=\'statinterfaceResult.html\#interfacestats\'>interfacestats</a> interfacestatsList[];<br> };<br></pre></td></tr></table></div>"
+vbfirstcontent = "<pre>Public <b>Structure</b> statinterfaceResult <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rc As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public message As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public  endinterfaceList() As  <a href=\'statinterfaceResult.html\#interfacestats\'>interfacestatsList</a><br> <b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rc</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, rc is 0 else rc > 0. Values above 0x8000 indicate Warnings.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>message</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, message is NULL else message contains <a href="errorlisting.html">Error/Warning</a> message.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>interfaceList</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Pointer to the interface List.</div></td></tr><tr><td><br></td></tr><tr><td><div><a name="interfacestats"></a></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>interfacestats  Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>interfacestats</b> structure defines the actual return type values for statinterface API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="second_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div1" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+csecondcontent = "<pre>struct interfacestats {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char *   id;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char *   clearstats;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * curintfstate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * curlinkuptime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * curlinkdowntime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int totrxbytes;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int rxbytesrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int tottxbytes;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int txbytesrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int totrxpkts;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int rxpktsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int tottxpkts;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int txpktsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int jumbopktsreceived;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int jumbopktsreceivedrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int jumbopktstransmitted;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int jumbopktstransmittedrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int nictotmulticastpkts;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int nicmulticastpktsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int totnetscalerpkts;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int netscalerpktsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int rxlacpdu;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int rxlacpdurate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int txlacpdu;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int txlacpdurate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int errpktrx;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int errpktrxrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int errpkttx;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int errpkttxrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int errifindiscards;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int errifindiscardsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int nicerrifoutdiscards;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int nicerrifoutdiscardsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int errdroppedrxpkts;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int errdroppedrxpktsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int errdroppedtxpkts;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int errdroppedtxpktsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int errlinkhangs;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int nicstsstalls;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int nictxstalls;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int nicrxstalls;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int nicerrdisables;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int errduplexmismatch;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int linkreinits;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int totmacmoved;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int macmovedrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int errnicmuted;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * interfacealias;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * curlinkstate;<br> };<br></pre></td></tr></table></div>"
+perlsecondcontent = "<pre>$interfacestats = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; id => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; clearstats => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; curintfstate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; curlinkuptime => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; curlinkdowntime => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; totrxbytes => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rxbytesrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; tottxbytes => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; txbytesrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; totrxpkts => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rxpktsrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; tottxpkts => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; txpktsrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; jumbopktsreceived => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; jumbopktsreceivedrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; jumbopktstransmitted => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; jumbopktstransmittedrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; nictotmulticastpkts => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; nicmulticastpktsrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; totnetscalerpkts => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; netscalerpktsrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rxlacpdu => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rxlacpdurate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; txlacpdu => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; txlacpdurate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; errpktrx => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; errpktrxrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; errpkttx => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; errpkttxrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; errifindiscards => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; errifindiscardsrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; nicerrifoutdiscards => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; nicerrifoutdiscardsrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; errdroppedrxpkts => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; errdroppedrxpktsrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; errdroppedtxpkts => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; errdroppedtxpktsrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; errlinkhangs => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; nicstsstalls => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; nictxstalls => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; nicrxstalls => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; nicerrdisables => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; errduplexmismatch => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; linkreinits => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; totmacmoved => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; macmovedrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; errnicmuted => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; interfacealias => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; curlinkstate => \'$\',<br> };<br></pre></td></tr></table></div>"
+javasecondcontent = "<pre>class interfacestats {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String  id;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String  clearstats;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String curintfstate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String curlinkuptime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String curlinkdowntime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt totrxbytes;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt rxbytesrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt tottxbytes;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt txbytesrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt totrxpkts;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt rxpktsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt tottxpkts;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt txpktsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt jumbopktsreceived;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt jumbopktsreceivedrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt jumbopktstransmitted;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt jumbopktstransmittedrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt nictotmulticastpkts;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt nicmulticastpktsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt totnetscalerpkts;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt netscalerpktsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt rxlacpdu;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt rxlacpdurate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt txlacpdu;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt txlacpdurate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt errpktrx;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt errpktrxrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt errpkttx;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt errpkttxrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt errifindiscards;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt errifindiscardsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt nicerrifoutdiscards;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt nicerrifoutdiscardsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt errdroppedrxpkts;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt errdroppedrxpktsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt errdroppedtxpkts;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt errdroppedtxpktsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt errlinkhangs;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt nicstsstalls;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt nictxstalls;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt nicrxstalls;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt nicerrdisables;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt errduplexmismatch;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt linkreinits;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt totmacmoved;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt macmovedrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt errnicmuted;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String interfacealias;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String curlinkstate;<br> };<br></pre></td></tr></table></div>"
+csharpsecondcontent = "<pre>class interfacestats {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string  id;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string  clearstats;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string curintfstate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string curlinkuptime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string curlinkdowntime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 totrxbytes;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 rxbytesrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 tottxbytes;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 txbytesrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 totrxpkts;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 rxpktsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 tottxpkts;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 txpktsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 jumbopktsreceived;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 jumbopktsreceivedrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 jumbopktstransmitted;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 jumbopktstransmittedrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 nictotmulticastpkts;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 nicmulticastpktsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 totnetscalerpkts;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 netscalerpktsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 rxlacpdu;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 rxlacpdurate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 txlacpdu;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 txlacpdurate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 errpktrx;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 errpktrxrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 errpkttx;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 errpkttxrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 errifindiscards;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 errifindiscardsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 nicerrifoutdiscards;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 nicerrifoutdiscardsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 errdroppedrxpkts;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 errdroppedrxpktsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 errdroppedtxpkts;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 errdroppedtxpktsrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 errlinkhangs;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 nicstsstalls;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 nictxstalls;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 nicrxstalls;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 nicerrdisables;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 errduplexmismatch;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 linkreinits;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 totmacmoved;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 macmovedrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 errnicmuted;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string interfacealias;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string curlinkstate;<br> };<br></pre></td></tr></table></div>"
+vbsecondcontent = "<pre>Public <b>Structure</b> interfacestats <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public id As String  <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public clearstats As String  <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public curintfstate As String <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public curlinkuptime As String <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public curlinkdowntime As String <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public totrxbytes As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rxbytesrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public tottxbytes As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public txbytesrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public totrxpkts As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rxpktsrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public tottxpkts As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public txpktsrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public jumbopktsreceived As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public jumbopktsreceivedrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public jumbopktstransmitted As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public jumbopktstransmittedrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public nictotmulticastpkts As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public nicmulticastpktsrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public totnetscalerpkts As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public netscalerpktsrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rxlacpdu As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rxlacpdurate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public txlacpdu As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public txlacpdurate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public errpktrx As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public errpktrxrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public errpkttx As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public errpkttxrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public errifindiscards As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public errifindiscardsrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public nicerrifoutdiscards As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public nicerrifoutdiscardsrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public errdroppedrxpkts As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public errdroppedrxpktsrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public errdroppedtxpkts As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public errdroppedtxpktsrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public errlinkhangs As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public nicstsstalls As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public nictxstalls As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public nicrxstalls As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public nicerrdisables As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public errduplexmismatch As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public linkreinits As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public totmacmoved As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public macmovedrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public errnicmuted As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public interfacealias As String <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public curlinkstate As String <br><b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>id</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Interface number, in C/U format, where C can take one of the following values:
+* 0 - Indicates a management interface.
+* 1 - Indicates a 1 Gbps port.
+* 10 - Indicates a 10 Gbps port.
+* LA - Indicates a link aggregation port.
+* LO - Indicates a loop back port.
+U is a unique integer for representing an interface in a particular port group.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>clearstats</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Clear the statsistics / counters</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>curintfstate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Current state of the specified interface.  The interface state set to UP only if the link state is UP and administrative state is ENABLED .<br>Possible Values : DOWN, UP, PARTIAL-UP, UNKNOWN.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>curlinkuptime</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Duration for which the link is UP. This statistic is reset when the state changes to DOWN.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>curlinkdowntime</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Duration for which the link is DOWN. This statistic is reset when the state changes to UP.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>totrxbytes</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of bytes received by an interface since the NetScaler appliance was started or the interface statistics were cleared.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rxbytesrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of bytes received by an interface since the NetScaler appliance was started or the interface statistics were cleared.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>tottxbytes</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of bytes transmitted by an interface since the NetScaler appliance was started or the interface statistics were cleared.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>txbytesrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of bytes transmitted by an interface since the NetScaler appliance was started or the interface statistics were cleared.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>totrxpkts</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of packets received by an interface since the NetScaler appliance was started or the interface statistics were cleared.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rxpktsrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of packets received by an interface since the NetScaler appliance was started or the interface statistics were cleared.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>tottxpkts</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of packets transmitted by an interface since the NetScaler appliance was started or the interface statistics were cleared.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>txpktsrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of packets transmitted by an interface since the NetScaler appliance was started or the interface statistics were cleared.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>jumbopktsreceived</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of Jumbo Packets received on this interface.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>jumbopktsreceivedrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of Jumbo Packets received on this interface.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>jumbopktstransmitted</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of Jumbo packets transmitted on this interface by upper layer, with TSO enabled actual trasmission size could be non Jumbo.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>jumbopktstransmittedrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of Jumbo packets transmitted on this interface by upper layer, with TSO enabled actual trasmission size could be non Jumbo.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>nictotmulticastpkts</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of multicast packets received by the specified interface since the NetScaler appliance was started or the interface statistics were cleared.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>nicmulticastpktsrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of multicast packets received by the specified interface since the NetScaler appliance was started or the interface statistics were cleared.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>totnetscalerpkts</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of packets, destined to the NetScaler, received by an interface since the NetScaler appliance was started or the interface statistics were cleared. The packets destined to NetScaler are those that have the same MAC address as that of an interface or a VMAC address owned by the NetScaler.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>netscalerpktsrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of packets, destined to the NetScaler, received by an interface since the NetScaler appliance was started or the interface statistics were cleared. The packets destined to NetScaler are those that have the same MAC address as that of an interface or a VMAC address owned by the NetScaler.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rxlacpdu</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of Link Aggregation Control Protocol Data Units(LACPDUs) received by the specified interface since the NetScaler appliance was started or the interface statistics were cleared.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rxlacpdurate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of Link Aggregation Control Protocol Data Units(LACPDUs) received by the specified interface since the NetScaler appliance was started or the interface statistics were cleared.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>txlacpdu</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of Link Aggregation Control Protocol Data Units(LACPDUs) transmitted by the specified interface since the NetScaler appliance was started or the interface statistics were cleared.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>txlacpdurate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of Link Aggregation Control Protocol Data Units(LACPDUs) transmitted by the specified interface since the NetScaler appliance was started or the interface statistics were cleared.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>errpktrx</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of inbound packets dropped by the hardware on a specified interface once the NetScaler appliance starts or the interface statistics are cleared. This happens due to following reasons:
+			1)	The hardware receives packets at a rate higher rate than that at which the software is processing packets. In this case, the hardware FIFO overruns and starts dropping the packets .
+			2)	The specified interface fails to receive inbound packets from the appliance because of insufficient memory.
+			3)	The specified interface receives packets with CRC errors (Alignment or Frame Check Sequence).
+			4)	The specified interface receives overly long packets.
+			5)	The specified interface receives packets with alignment errors.
+			6)	The software does less buffering because it is running out of available memory. When hardware detects that there is no space into which to push newly arrived packets, it starts dropping them.
+			7)	The specified interface receives packets with Frame Check Sequence (FCS) errors.
+			8)	The specified interface receives packets smaller than 64 bytes.
+			9)	The specified interface discards error-free inbound packets because of insufficient resources. For example: NIC buffers.
+			10)	Packets are missed because of collision detection, link lost, physical decoding error, or MAC abort.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>errpktrxrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of inbound packets dropped by the hardware on a specified interface once the NetScaler appliance starts or the interface statistics are cleared. This happens due to following reasons:
+			1)	The hardware receives packets at a rate higher rate than that at which the software is processing packets. In this case, the hardware FIFO overruns and starts dropping the packets .
+			2)	The specified interface fails to receive inbound packets from the appliance because of insufficient memory.
+			3)	The specified interface receives packets with CRC errors (Alignment or Frame Check Sequence).
+			4)	The specified interface receives overly long packets.
+			5)	The specified interface receives packets with alignment errors.
+			6)	The software does less buffering because it is running out of available memory. When hardware detects that there is no space into which to push newly arrived packets, it starts dropping them.
+			7)	The specified interface receives packets with Frame Check Sequence (FCS) errors.
+			8)	The specified interface receives packets smaller than 64 bytes.
+			9)	The specified interface discards error-free inbound packets because of insufficient resources. For example: NIC buffers.
+			10)	Packets are missed because of collision detection, link lost, physical decoding error, or MAC abort.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>errpkttx</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of outbound packets dropped by the hardware on a specified interface since the NetScaler appliance was started or the interface statistics were cleared. This could happen due to length (undersize or oversize) errors and lack of resources. This statistic is available only for: 
+			(1) Loop back interface (LO) of all platforms.
+			(2) All data ports on the NetScaler 12000 platform.
+			(3) Management ports on the MPX 15000 and 17000 platforms.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>errpkttxrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of outbound packets dropped by the hardware on a specified interface since the NetScaler appliance was started or the interface statistics were cleared. This could happen due to length (undersize or oversize) errors and lack of resources. This statistic is available only for: 
+			(1) Loop back interface (LO) of all platforms.
+			(2) All data ports on the NetScaler 12000 platform.
+			(3) Management ports on the MPX 15000 and 17000 platforms.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>errifindiscards</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of error-free inbound packets discarded by the specified interface due to a lack of resources, for example, insufficient receive buffers.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>errifindiscardsrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of error-free inbound packets discarded by the specified interface due to a lack of resources, for example, insufficient receive buffers.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>nicerrifoutdiscards</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of error-free outbound packets discarded by the specified interface due to a lack of resources. This statistic is not available on:
+			(1) 10G ports of NetScaler MPX 12500/12500/15500-10G  platforms. 
+			(2) 10G data ports on NetScaler MPX 17500/19500/21500 platforms.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>nicerrifoutdiscardsrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of error-free outbound packets discarded by the specified interface due to a lack of resources. This statistic is not available on:
+			(1) 10G ports of NetScaler MPX 12500/12500/15500-10G  platforms. 
+			(2) 10G data ports on NetScaler MPX 17500/19500/21500 platforms.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>errdroppedrxpkts</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of inbound packets dropped by the specified interface. Commonly dropped packets are multicast frames, spanning tree BPDUs, packets destined to a MAC not owned by the NetScaler when L2 mode is disabled, or packets tagged for a VLAN that is not bound to the interface.  This statistic will increment in most healthy networks at a steady rate regardless of traffic load.  If a sharp spike in dropped packets occurs, it generally indicates an issue with connected L2 switches, such as a forwarding database overflow resulting in packets being broadcast on all ports.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>errdroppedrxpktsrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of inbound packets dropped by the specified interface. Commonly dropped packets are multicast frames, spanning tree BPDUs, packets destined to a MAC not owned by the NetScaler when L2 mode is disabled, or packets tagged for a VLAN that is not bound to the interface.  This statistic will increment in most healthy networks at a steady rate regardless of traffic load.  If a sharp spike in dropped packets occurs, it generally indicates an issue with connected L2 switches, such as a forwarding database overflow resulting in packets being broadcast on all ports.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>errdroppedtxpkts</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of packets dropped in transmission by the specified interface due to one of the following reasons.
+			(1) VLAN mismatch.
+			(2) Oversized packets.
+			(3) Interface congestion.  
+			(4) Loopback packets sent on non loop back interface.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>errdroppedtxpktsrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of packets dropped in transmission by the specified interface due to one of the following reasons.
+			(1) VLAN mismatch.
+			(2) Oversized packets.
+			(3) Interface congestion.  
+			(4) Loopback packets sent on non loop back interface.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>errlinkhangs</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of times the specified interface detected hangs in the transmit and receive paths since the NetScaler appliance was started or the interface statistics were cleared.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>nicstsstalls</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of times the status updates for a specified interface were stalled since the NetScaler appliance was started or the interface statistics were cleared. A status stall is detected when the status of the interface is not updated by the NIC hardware within 0.8 seconds of the last update.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>nictxstalls</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of times the interface stalled, when transmitting packets, since the NetScaler appliance was started or the interface statistics were cleared. Transmit (Tx) stalls are detected when a packet posted for transmission is not transmitted in 4 seconds.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>nicrxstalls</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of times the interface stalled, when receiving packets, since the NetScaler appliance was started or the interface statistics were cleared. Receive (Rx) stalls are detected when the following conditions are met:
+			(1)The link is up for more than 10 minutes. 
+			(2)Packets are transmitted, but no packets is received for 16 seconds.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>nicerrdisables</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of times the specified interface is disabled by the NetScaler, due to continuous Receive (Rx) or Transmit (Tx) stalls, since the NetScaler appliance was started or the interface statistics were cleared. The NetScaler disables an interface when one of the following conditions is met:
+			(1) Three consecutive transmit stalls occurs with at most gap of 10 seconds between any two stalls.
+			(2) Three consecutive receive stalls occurs with at most gap of 120 seconds between any two stalls.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>errduplexmismatch</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of times duplex mismatches were detected on the specified interface since the NetScaler appliance was started or the interface statistics were cleared. A mismatch will occur if the duplex mode is not identically set on both ends of the link. This statistic is only available on the NetScaler Classic edition.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>linkreinits</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of times the link has been re-initialized. A re-initialization occurs due to link state change, configuration parameter change, or administrative reset operation.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>totmacmoved</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of MAC moves between ports. If a high rate of MAC moves is observed, it is likely that there is a bridge loop between two interfaces.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>macmovedrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of MAC moves between ports. If a high rate of MAC moves is observed, it is likely that there is a bridge loop between two interfaces.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>errnicmuted</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of times the specified interface stopped transmitting and receiving packets due to MAC moves between ports.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>interfacealias</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Alias Name for the Interface</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>curlinkstate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The current state of the link associated with the interface. For logical interfaces (LA), the state of the link is dependent on the state of the slave interfaces. For the link to be UP at least one of the slave interfaces needs to be UP.<br>Possible Values : DOWN, UP, PARTIAL-UP, UNKNOWN.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>See Also</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="statinterface.html">statinterface</a></div></td></tr><tr><td><br></td></tr></table></div>
+</body>
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>Citrix NetScaler XML API User&#39;s Guide - Structure Definition</title>
+<link rel="stylesheet" type="text/css" href="help_ns.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body onload="initial()" class="ns_body">
+<div class="ns_content"><table cellpadding="0" cellspacing="0"><script type="text/javascript">
+function changeContext(id,lang,flag){
+	parent.banner.document.language.select.value = lang;
+	if( lang == "C" ){
+		if(flag == "1"){
+			showContent(cfirstcontent,id,lang);
+		}
+		else{
+			showContent(csecondcontent,id,lang);
+		}
+	}
+	if( lang == "Perl" ){
+		if(flag == "1"){
+			showContent(perlfirstcontent,id,lang);
+		}
+		else{
+			showContent(perlsecondcontent,id,lang);
+		}
+	}
+	if( lang == "Java" ){
+		if(flag == "1"){
+			showContent(javafirstcontent,id,lang);	
+		}
+		else{
+			showContent(javasecondcontent,id,lang);
+		}
+	}
+	if( lang == "C#" ){
+		if(flag == "1"){
+			showContent(csharpfirstcontent,id,lang);
+		}
+		else{
+			showContent(csharpsecondcontent,id,lang);
+		}
+	}
+	if( lang == "VB" ){
+		if(flag == "1"){
+			showContent(vbfirstcontent,id,lang);
+		}
+		else{
+			showContent(vbsecondcontent,id,lang);
+		}
+	}
+	if(flag == "1"){
+		showInside(lang,"0");
+	}
+	else{
+		showOutside(lang);
+	}
+}
+function showContent(content,id,lang){
+	if(ie4){
+	   showContentObj=document.all.id;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById(id);
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+  showLangSelect(lang);
+}
+function showInside(str,cond){
+	if(str == "C"){
+ 		var inside_content = csecondcontent;
+ 	}
+ 	if(str == "Perl"){
+ 		var inside_content = perlsecondcontent;
+ 	}
+ 	if(str == "Java"){
+ 		var inside_content = javasecondcontent;
+ 	}
+ 	if(str == "C#"){
+		var inside_content = csharpsecondcontent;
+ 	}
+ 	if(str == "VB"){
+		var inside_content = vbsecondcontent;
+ 	}
+	showContent(inside_content,'qiksearch_div1',str);
+ 	if ( cond == "1" ){
+ 		var page = 'apidoc/docs/statsystembwResult.html#bw_systemList';
+ 		document.location.href = page;
+ 	}
+}
+function showOutside(str){
+	if(str == "C" ){
+ 		var inside_content = cfirstcontent;
+ 	}
+ 	if(str == "Perl" ){
+ 		var inside_content = perlfirstcontent;
+ 	}
+ 	if(str == "Java" ){
+ 		var inside_content = javafirstcontent;
+ 	}
+ 	if(str == "C#" ){
+ 		var inside_content = csharpfirstcontent;
+ 	}
+ 	if(str == "VB" ){
+ 		var inside_content = vbfirstcontent;
+ 	}
+ 	showContent(inside_content,'qiksearch_div',str);
+}
+function initial(){
+	ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+	ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+	ns4=document.layers;
+	langSelected = parent.banner.document.language.select.value
+	var plink = parent.banner.document.language.plink.value
+	var my_array=plink.split("&");
+	var temp = my_array[0];
+ 	var grp = temp.split("@");
+	var cmd = my_array[1];
+	var regex = /^stat/i;
+	if( cmd.match(regex) != null ){
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex_stat.html\">Statistics</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > statsystembwResult");
+	}
+	else{
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex.htm\">Configuration</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > statsystembwResult");
+	}
+	if( langSelected == "C" ){
+ 		var content = cfirstcontent;
+	}
+	else if( langSelected == "Perl" ){
+		var content = perlfirstcontent;
+	}
+	else if( langSelected == "Java" ){
+		var content = javafirstcontent;
+	}
+	else if( langSelected == "C#" ){
+		var content = csharpfirstcontent;
+	}
+	else if( langSelected == "VB" ){
+		var content = vbfirstcontent;
+	}
+	else{
+		var content = cfirstcontent;
+		langSelected="C";
+	}
+	showContent(content,'qiksearch_div',langSelected);
+	showInside(langSelected,"0");
+}
+function showPLink(content){
+	if(ie4){
+	   showContentObj=document.all.progressive_link;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById("progressive_link");
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+}
+function showLangSelect(id){
+	   if(ie4)
+       {
+       	showObj=document.all.first_url;
+       	showObj1=document.all.second_url;
+       }
+       if(ns6)
+       {
+       	showObj=document.getElementById("first_url");
+       	showObj1=document.getElementById("second_url");
+       }
+       if( id == "C" ){
+       	newlink = "<b>C</b>";
+       	newlink1 = "<b>C</b>";
+       }
+       else{
+       	newlink = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C','1');\"><b>C</b></a>";
+       	newlink1 = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C','0');\"><b>C</b></a>";
+       }
+       if( id == "Perl" ){
+       	newlink = newlink + " | <b>Perl</b>";
+       	newlink1 = newlink1 + " | <b>Perl</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Perl','1');\"><b>Perl</b></a>";
+      	       newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Perl','0');\"><b>Perl</b></a>";
+       }
+       if( id == "Java" ){
+       	newlink = newlink + " | <b>Java</b>";
+       	newlink1 = newlink1 + " | <b>Java</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Java','1');\"><b>Java</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Java','0');\"><b>Java</b></a>";
+       }
+       if( id == "C#" ){
+       	newlink = newlink + " | <b>C#</b>";
+       	newlink1 = newlink1 + " | <b>C#</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C#','1');\"><b>C#</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C#','0');\"><b>C#</b></a>";
+       }
+       showObj.innerHTML = newlink;
+       showObj1.innerHTML = newlink1;
+}
+</script>
+<tr><td><div><div id="progressive_link"></div></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>statsystembwResult Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>statsystembwResult</b> structure defines the return type for statsystembw API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="first_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+cfirstcontent = "<pre>struct statsystembwResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; struct <a href=\'statsystembwResult.html\#systembwstats\'>systembwstats</a> systembwstatsList[];<br> };<br></pre></td></tr></table></div>"
+perlfirstcontent = "<pre>$statsystembwResult = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rc => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; message => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'statsystembwResult.html\#systembwstats\'>systembwstats</a> => \'@\',<br> };<br></pre></td></tr></table></div>"
+javafirstcontent = "<pre>class statsystembwResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; class <a href=\'statsystembwResult.html\#systembwstats\'>systembwstats</a> systembwstatsList[];<br> };<br></pre></td></tr></table></div>"
+csharpfirstcontent = "<pre>class statsystembwResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; class <a href=\'statsystembwResult.html\#systembwstats\'>systembwstats</a> systembwstatsList[];<br> };<br></pre></td></tr></table></div>"
+vbfirstcontent = "<pre>Public <b>Structure</b> statsystembwResult <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rc As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public message As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public  endsystembwList() As  <a href=\'statsystembwResult.html\#systembwstats\'>systembwstatsList</a><br> <b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rc</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, rc is 0 else rc > 0. Values above 0x8000 indicate Warnings.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>message</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, message is NULL else message contains <a href="errorlisting.html">Error/Warning</a> message.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>systembwList</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Pointer to the systembw List.</div></td></tr><tr><td><br></td></tr><tr><td><div><a name="systembwstats"></a></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>systembwstats  Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>systembwstats</b> structure defines the actual return type values for statsystembw API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="second_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div1" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+csecondcontent = "<pre>struct systembwstats {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char *   clearstats;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int httpcltpoolinactive;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int httpcltpooloutactive;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int httpsvr200okresp;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int httpsvr200okresprate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int httpsvr404notfound;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int httpsvr404notfoundrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int httpclterrstray;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int httpclterrstrayrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int httpcltttfplwm;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int httpcltttfplwmrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int httpcltttfp_0;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int httpcltttfp_0rate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int httpcltttfp_1;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int httpcltttfp_1rate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int httpcltttfp_2;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int httpcltttfp_2rate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int httpcltttfp_3;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int httpcltttfp_3rate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int httpcltttfp_4;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int httpcltttfp_4rate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int httpcltttfp_5;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int httpcltttfp_5rate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int httpcltttfp_6;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int httpcltttfp_6rate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int httpcltttfp_7;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int httpcltttfp_7rate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int httpcltttfphwm;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int httpcltttfphwmrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int httpcltttfpmax;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int httpcltttlplwm;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int httpcltttlplwmrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int httpcltttlp_0;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int httpcltttlp_0rate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int httpcltttlp_1;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int httpcltttlp_1rate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int httpcltttlp_2;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int httpcltttlp_2rate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int httpcltttlp_3;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int httpcltttlp_3rate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int httpcltttlp_4;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int httpcltttlp_4rate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int httpcltttlp_5;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int httpcltttlp_5rate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int httpcltttlp_6;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int httpcltttlp_6rate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int httpcltttlp_7;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int httpcltttlp_7rate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int httpcltttlphwm;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int httpcltttlphwmrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int httpcltttlpmax;<br> };<br></pre></td></tr></table></div>"
+perlsecondcontent = "<pre>$systembwstats = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; clearstats => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpcltpoolinactive => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpcltpooloutactive => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpsvr200okresp => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpsvr200okresprate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpsvr404notfound => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpsvr404notfoundrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpclterrstray => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpclterrstrayrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpcltttfplwm => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpcltttfplwmrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpcltttfp_0 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpcltttfp_0rate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpcltttfp_1 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpcltttfp_1rate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpcltttfp_2 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpcltttfp_2rate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpcltttfp_3 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpcltttfp_3rate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpcltttfp_4 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpcltttfp_4rate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpcltttfp_5 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpcltttfp_5rate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpcltttfp_6 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpcltttfp_6rate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpcltttfp_7 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpcltttfp_7rate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpcltttfphwm => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpcltttfphwmrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpcltttfpmax => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpcltttlplwm => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpcltttlplwmrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpcltttlp_0 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpcltttlp_0rate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpcltttlp_1 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpcltttlp_1rate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpcltttlp_2 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpcltttlp_2rate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpcltttlp_3 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpcltttlp_3rate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpcltttlp_4 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpcltttlp_4rate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpcltttlp_5 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpcltttlp_5rate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpcltttlp_6 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpcltttlp_6rate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpcltttlp_7 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpcltttlp_7rate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpcltttlphwm => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpcltttlphwmrate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpcltttlpmax => \'$\',<br> };<br></pre></td></tr></table></div>"
+javasecondcontent = "<pre>class systembwstats {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String  clearstats;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt httpcltpoolinactive;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt httpcltpooloutactive;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt httpsvr200okresp;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt httpsvr200okresprate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt httpsvr404notfound;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt httpsvr404notfoundrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt httpclterrstray;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt httpclterrstrayrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt httpcltttfplwm;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt httpcltttfplwmrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt httpcltttfp_0;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt httpcltttfp_0rate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt httpcltttfp_1;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt httpcltttfp_1rate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt httpcltttfp_2;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt httpcltttfp_2rate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt httpcltttfp_3;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt httpcltttfp_3rate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt httpcltttfp_4;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt httpcltttfp_4rate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt httpcltttfp_5;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt httpcltttfp_5rate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt httpcltttfp_6;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt httpcltttfp_6rate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt httpcltttfp_7;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt httpcltttfp_7rate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt httpcltttfphwm;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt httpcltttfphwmrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt httpcltttfpmax;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt httpcltttlplwm;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt httpcltttlplwmrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt httpcltttlp_0;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt httpcltttlp_0rate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt httpcltttlp_1;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt httpcltttlp_1rate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt httpcltttlp_2;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt httpcltttlp_2rate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt httpcltttlp_3;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt httpcltttlp_3rate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt httpcltttlp_4;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt httpcltttlp_4rate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt httpcltttlp_5;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt httpcltttlp_5rate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt httpcltttlp_6;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt httpcltttlp_6rate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt httpcltttlp_7;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt httpcltttlp_7rate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt httpcltttlphwm;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt httpcltttlphwmrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt httpcltttlpmax;<br> };<br></pre></td></tr></table></div>"
+csharpsecondcontent = "<pre>class systembwstats {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string  clearstats;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 httpcltpoolinactive;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 httpcltpooloutactive;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 httpsvr200okresp;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 httpsvr200okresprate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 httpsvr404notfound;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 httpsvr404notfoundrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 httpclterrstray;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 httpclterrstrayrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 httpcltttfplwm;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 httpcltttfplwmrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 httpcltttfp_0;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 httpcltttfp_0rate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 httpcltttfp_1;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 httpcltttfp_1rate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 httpcltttfp_2;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 httpcltttfp_2rate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 httpcltttfp_3;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 httpcltttfp_3rate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 httpcltttfp_4;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 httpcltttfp_4rate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 httpcltttfp_5;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 httpcltttfp_5rate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 httpcltttfp_6;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 httpcltttfp_6rate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 httpcltttfp_7;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 httpcltttfp_7rate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 httpcltttfphwm;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 httpcltttfphwmrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 httpcltttfpmax;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 httpcltttlplwm;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 httpcltttlplwmrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 httpcltttlp_0;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 httpcltttlp_0rate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 httpcltttlp_1;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 httpcltttlp_1rate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 httpcltttlp_2;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 httpcltttlp_2rate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 httpcltttlp_3;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 httpcltttlp_3rate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 httpcltttlp_4;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 httpcltttlp_4rate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 httpcltttlp_5;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 httpcltttlp_5rate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 httpcltttlp_6;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 httpcltttlp_6rate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 httpcltttlp_7;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 httpcltttlp_7rate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 httpcltttlphwm;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt64 httpcltttlphwmrate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 httpcltttlpmax;<br> };<br></pre></td></tr></table></div>"
+vbsecondcontent = "<pre>Public <b>Structure</b> systembwstats <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public clearstats As String  <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpcltpoolinactive As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpcltpooloutactive As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpsvr200okresp As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpsvr200okresprate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpsvr404notfound As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpsvr404notfoundrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpclterrstray As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpclterrstrayrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpcltttfplwm As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpcltttfplwmrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpcltttfp_0 As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpcltttfp_0rate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpcltttfp_1 As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpcltttfp_1rate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpcltttfp_2 As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpcltttfp_2rate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpcltttfp_3 As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpcltttfp_3rate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpcltttfp_4 As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpcltttfp_4rate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpcltttfp_5 As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpcltttfp_5rate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpcltttfp_6 As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpcltttfp_6rate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpcltttfp_7 As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpcltttfp_7rate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpcltttfphwm As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpcltttfphwmrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpcltttfpmax As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpcltttlplwm As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpcltttlplwmrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpcltttlp_0 As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpcltttlp_0rate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpcltttlp_1 As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpcltttlp_1rate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpcltttlp_2 As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpcltttlp_2rate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpcltttlp_3 As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpcltttlp_3rate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpcltttlp_4 As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpcltttlp_4rate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpcltttlp_5 As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpcltttlp_5rate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpcltttlp_6 As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpcltttlp_6rate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpcltttlp_7 As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpcltttlp_7rate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpcltttlphwm As UInteger <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpcltttlphwmrate As ULong<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpcltttlpmax As UInteger <br><b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>clearstats</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Clear the statsistics / counters</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpcltpoolinactive</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">No of requests sent from BW client.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpcltpooloutactive</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">No of responses Received.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpsvr200okresp</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of 200 Ok response sent from the BW appliance.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpsvr200okresprate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of 200 Ok response sent from the BW appliance.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpsvr404notfound</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of 404 Not Found responses sent</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpsvr404notfoundrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of 404 Not Found responses sent</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpclterrstray</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of stray packets received from server without HTTP request</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpclterrstrayrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of stray packets received from server without HTTP request</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpcltttfplwm</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of Responses Falling on LWM for TTFP.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpcltttfplwmrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of Responses Falling on LWM for TTFP.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpcltttfp_0</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of Responses Falling on Band-0 for TTFP.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpcltttfp_0rate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of Responses Falling on Band-0 for TTFP.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpcltttfp_1</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of Responses Falling on Band-1 for TTFP.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpcltttfp_1rate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of Responses Falling on Band-1 for TTFP.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpcltttfp_2</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of Responses Falling on Band-2 for TTFP.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpcltttfp_2rate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of Responses Falling on Band-2 for TTFP.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpcltttfp_3</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of Responses Falling on Band-3 for TTFP.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpcltttfp_3rate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of Responses Falling on Band-3 for TTFP.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpcltttfp_4</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of Responses Falling on Band-4 for TTFP.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpcltttfp_4rate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of Responses Falling on Band-4 for TTFP.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpcltttfp_5</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of Responses Falling on Band-5 for TTFP.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpcltttfp_5rate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of Responses Falling on Band-5 for TTFP.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpcltttfp_6</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of Responses Falling on Band-6 for TTFP.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpcltttfp_6rate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of Responses Falling on Band-6 for TTFP.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpcltttfp_7</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of Responses Falling on Band-7 for TTFP.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpcltttfp_7rate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of Responses Falling on Band-7 for TTFP.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpcltttfphwm</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of Responses Falling on HWM for TTFP.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpcltttfphwmrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of Responses Falling on HWM for TTFP.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpcltttfpmax</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Peak RTT observed for Time to First response packet.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpcltttlplwm</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of Responses Falling on LWM for TTLP.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpcltttlplwmrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of Responses Falling on LWM for TTLP.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpcltttlp_0</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of Responses Falling on Band-0 for TTLP.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpcltttlp_0rate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of Responses Falling on Band-0 for TTLP.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpcltttlp_1</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of Responses Falling on Band-1 for TTLP.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpcltttlp_1rate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of Responses Falling on Band-1 for TTLP.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpcltttlp_2</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of Responses Falling on Band-2 for TTLP.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpcltttlp_2rate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of Responses Falling on Band-2 for TTLP.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpcltttlp_3</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of Responses Falling on Band-3 for TTLP.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpcltttlp_3rate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of Responses Falling on Band-3 for TTLP.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpcltttlp_4</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of Responses Falling on Band-4 for TTLP.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpcltttlp_4rate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of Responses Falling on Band-4 for TTLP.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpcltttlp_5</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of Responses Falling on Band-5 for TTLP.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpcltttlp_5rate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of Responses Falling on Band-5 for TTLP.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpcltttlp_6</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of Responses Falling on Band-6 for TTLP.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpcltttlp_6rate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of Responses Falling on Band-6 for TTLP.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpcltttlp_7</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of Responses Falling on Band-7 for TTLP.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpcltttlp_7rate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of Responses Falling on Band-7 for TTLP.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpcltttlphwm</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of Responses Falling on HWM for TTLP.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpcltttlphwmrate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Rate of Responses Falling on HWM for TTLP.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpcltttlpmax</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Peak RTT observed for Time to Last response packet.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>See Also</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="statsystembw.html">statsystembw</a></div></td></tr><tr><td><br></td></tr></table></div>
+</body>
+</html>

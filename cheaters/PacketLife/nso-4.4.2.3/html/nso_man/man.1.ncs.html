@@ -1,0 +1,692 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      
+      <title>ncs -  - NSO 4.4.2.3 Manual Pages</title>
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+      <link rel="home" href="index.html" title="NSO 4.4.2.3 Manual Pages" />
+      <link rel="up" href="ncs.man.volume.1.html" title="NCS man-pages, Volume 1" />
+      <link rel="prev" href="man.1.ncs-uninstall.html" title="ncs-uninstall" />
+      <link rel="next" href="man.1.confd_cli.html" title="confdncs_cli" />
+      <meta xmlns="" name="Section-title" content="ncs" /><script xmlns="" type="text/javascript">
+      //The id for tree cookie
+      var treeCookieId = "treeview-73142";
+      var language = "en";
+      var w = new Object();
+      //Localization
+      txt_filesfound = 'Results';
+      txt_enter_at_least_1_char = "You must enter at least one character.";
+      txt_browser_not_supported = "JavaScript is disabled on your browser. Please enable JavaScript to enjoy all the features of this site.";
+      txt_please_wait = "Please wait. Search in progress...";
+      txt_results_for = "Results for: ";
+    </script><link xmlns="" rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/css/positioning.css" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/jquery/theme-redmond/jquery-ui-1.8.2.custom.css" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/jquery/treeview/jquery.treeview.css" /><style xmlns="" type="text/css">
+      
+      #noscript{
+      font-weight:bold;
+      background-color: #55AA55;
+      font-weight: bold;
+      height: 25spx;
+      z-index: 3000;
+      top:0px;
+      width:100%;
+      position: relative;
+      border-bottom: solid 5px black;
+      text-align:center;
+      color: white;
+      }
+      
+      input {
+      margin-bottom: 5px;
+      margin-top: 2px;
+      }
+      .folder {
+      display: block;
+      height: 22px;
+      padding-left: 20px;
+      background: transparent url(common/jquery/treeview/images/folder.gif) 0 0px no-repeat;
+      }
+      span.contentsTab {
+      padding-left: 20px;
+      background: url(common/images/toc-icon.png) no-repeat 0 center;
+      }
+      span.searchTab {
+      padding-left: 20px;
+      background: url(common/images/search-icon.png) no-repeat 0 center;
+      }
+      
+      /* Overide jquery treeview's defaults for ul. */
+      .treeview ul {
+      background-color: transparent;
+      margin-top: 4px;
+      }		
+      #webhelp-currentid {
+      /* background-color: #D8D8D8 !important; */
+      background-color: #D8D8D8;
+      }
+      .treeview .hover { color: black; }
+      .filetree li span a { text-decoration: none; font-size: 12px; color: #517291; }
+      
+      /* Override jquery-ui's default css customizations. These are supposed to take precedence over those.*/
+      .ui-widget-content {
+      border: 0px; 
+      background: none; 
+      color: none;     
+      }
+      .ui-widget-header {
+      color: #e9e8e9;
+      border-left: 1px solid #e5e5e5;
+      border-right: 1px solid #e5e5e5;
+      border-bottom: 1px solid #bbc4c5;
+      border-top: 4px solid #e5e5e5;
+      border: medium none;
+      background: #F4F4F4; /* old browsers */
+      background: -moz-linear-gradient(top, #F4F4F4 0%, #E6E4E5 100%); /* firefox */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F4F4F4), color-stop(100%,#E6E4E5)); /* webkit */    
+      font-weight: none;
+      }
+      .ui-widget-header a { color: none; }
+      .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { 
+      border: none; background: none; font-weight: none; color: none; }
+      .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited { color: black; text-decoration: none; }
+      .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus { border: none; background: none; font-weight: none; color: none; }
+      
+      .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { border: none; background: none; font-weight: none; color: none; }
+      .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited { 
+      color: black; text-decoration: none; 	
+      background: #C6C6C6; /* old browsers */
+      background: -moz-linear-gradient(top, #C6C6C6 0%, #D8D8D8 100%); /* firefox */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#C6C6C6), color-stop(100%,#D8D8D8)); /* webkit */
+      -webkit-border-radius:15px; -moz-border-radius:10px;
+      border: 1px solid #f1f1f1;
+      }    
+      .ui-corner-all { border-radius: 0 0 0 0; }
+      
+      .ui-tabs { padding: .2em;}
+      .ui-tabs .ui-tabs-nav li { top: 0px; margin: -2px 0 1px; text-transform: uppercase; font-size: 10.5px;}
+      .ui-tabs .ui-tabs-nav li a { padding: .25em 2em .25em 1em; margin: .5em; text-shadow: 0 1px 0 rgba(255,255,255,.5); }
+      /**
+      *	Basic Layout Theme
+      * 
+      *	This theme uses the default layout class-names for all classes
+      *	Add any 'custom class-names', from options: paneClass, resizerClass, togglerClass
+      */
+      
+      .ui-layout-pane { /* all 'panes' */ 
+      background: #FFF; 
+      border: 1px solid #BBB; 
+      padding: 05x; 
+      overflow: auto;
+      } 
+      
+      .ui-layout-resizer { /* all 'resizer-bars' */ 
+      background: #DDD; 
+      top:100px
+      } 
+      
+      .ui-layout-toggler { /* all 'toggler-buttons' */ 
+      background: #AAA; 
+      } 
+      
+    </style>
+      <!--[if IE]>
+	<link rel="stylesheet" type="text/css" href="../common/css/ie.css"/>
+	<![endif]--><script xmlns="" type="text/javascript" src="common/browserDetect.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery-1.7.2.min.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery.ui.all.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery.cookie.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/treeview/jquery.treeview.min.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/layout/jquery.layout.js">
+         <!----></script><style type="text/css">
+      
+      #header {
+      /* background: url("../images/header-bg.png") scroll top left repeat-x #4d8c83; */
+      background: transparent;
+      }
+      #leftnavigation {
+      /* background-color: #ededed!important; */
+      background-color: transparent;
+      }
+      #navheader {
+      visibility: hidden;
+      }
+      #webhelp-currentid {
+      /* background-color: #D8D8D8 !important; */
+      background-color: #FFFFFF; /*but must be changed in main.js as well*/
+      }
+      .filetree span.file {
+      /* background: url(images/file.gif) 0 0 no-repeat; */
+      background: initial;
+      }
+      .filetree span.folder, .filetree span.file {
+      padding: 1px 0 1px 7px;
+      display: block;
+      }
+
+      /* borrowed from cisco: clientlib.css */
+      .footer {
+      margin: 28px 30px 0 15px;
+      font-size: 80%;
+      line-height: 120%;
+      border-top: 1px solid #ccc;
+      padding-top: 7px;
+      color: #999;
+      }
+      .footer #footer-legal{display:inline;padding-bottom:18px}
+      #framework-footer{margin:0;padding:0 0 15px 0;min-width:900px;width:100%}
+      .footer a,.footer a:visited{color:#999}
+
+      /* from ccimr.css */
+      a:active  { color: #3366CC}
+      a:hover   { color: #3366CC}
+      a:link    { color: #3366CC}
+      a:visited { color: #3366CC}
+
+      #header img {
+      float: left;
+      margin-left: 20px;
+      margin-top: 0px;
+      }
+
+      #header h1 {
+      color: #336666;
+      margin-top: 4px;
+      }
+      #content h1, #content h2 {
+      color: #336666;
+      }
+      .title {
+      color: #336666;
+      }
+      p, pre {
+      margin-left: 0.1in;
+      }
+      p, ul, ol, li {
+        font-size: 95%;
+        font-family: Arial, Helvetica, sans-serif;
+        margin-top: 1px;
+      }
+      body {
+        font: 80.5% Arial, Helvetica, sans-serif;
+      }
+      ol {
+      display: block;
+      list-style-type: decimal;
+      -webkit-margin-before: 1em;
+      -webkit-margin-after: 1em;
+      -webkit-margin-start: 0px;
+      -webkit-margin-end: 0px;
+      -webkit-padding-start: 40px;
+      border: 1;
+      }
+    </style></head>
+   <body>
+      <noscript>
+         <div id="noscript">JavaScript is disabled on your browser. Please enable JavaScript to enjoy all the features of this site.</div>
+      </noscript>
+      <div id="header"><a href="index.html"><img style="margin-right: 2px; width: 110; height: 73; padding-right: 25px; padding-top: 8px" align="right" src="common/images/logo.gif" alt="Cisco Systems, Inc." /></a><h1>NSO 4.4.2.3 Manual Pages
+                <br />NCS man-pages, Volume 1
+         </h1>
+         <div id="navheader">
+            <!---->
+            <table class="navLinks">
+               <tr>
+                  <td><a id="showHideButton" href="#" onclick="myLayout.toggle('west')" class="pointLeft" tabindex="5" title="Hide TOC tree">Sidebar
+                                                    </a></td>
+                  <td><a accesskey="p" class="navLinkPrevious" tabindex="5" href="man.1.ncs-uninstall.html">Prev</a>
+                                                             |
+                                                             <a accesskey="u" class="navLinkUp" tabindex="5" href="ncs.man.volume.1.html">Up</a>
+                                                         |
+                                                         <a accesskey="n" class="navLinkNext" tabindex="5" href="man.1.confd_cli.html">Next</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div id="content">
+         <div class="refentry"><a id="man.1.ncs"></a><div xmlns="" class="titlepage"></div>
+            <div class="refnamediv"><a id="man.1.ncs.name"></a><h2>Name</h2>
+               <p>ncs — command to start and control the NCS daemon</p>
+            </div>
+            <div class="refsynopsisdiv"><a id="man.1.ncs.synopsis"></a><h2>Synopsis</h2>
+               <div class="cmdsynopsis">
+                  <p><code class="command">ncs</code>  [--conf <em class="replaceable"><code>ConfFile</code></em>] [--cd <em class="replaceable"><code>Dir</code></em>] [--addloadpath <em class="replaceable"><code>Dir</code></em>] [--nolog ] [--smp <em class="replaceable"><code>Nr</code></em>] [
+                              --foreground  
+                              [ -v  |   --verbose ]
+                              [--stop-on-eof]
+                           ] [--with-package-reload ] [--ignore-initial-validation ] [--full-upgrade-validation ] [--start-phase0 ] [
+                              --epoll  
+                              { true  |   false }
+                           ]
+                  </p>
+               </div>
+               <div class="cmdsynopsis">
+                  <p><code class="command">ncs</code>  { --wait-phase0[
+                             <em class="replaceable"><code>TryTime</code></em>]  |   --start-phase1   |   --start-phase2   |   --wait-started[
+                             <em class="replaceable"><code>TryTime</code></em>]  |   --reload   |   --areload   |   --status   |   --check-callbacks
+                               [ <em class="replaceable"><code>Namespace</code></em>  |   <em class="replaceable"><code>Path</code></em> ]
+                               |   --loadfile <em class="replaceable"><code>File</code></em>  |   --rollback <em class="replaceable"><code>Nr</code></em>  |   --debug-dump <em class="replaceable"><code>File</code></em>  |   --cli-j-dump <em class="replaceable"><code>File</code></em>  |   --loadxmlfiles
+                             <em class="replaceable"><code>File</code></em>...  |   --mergexmlfiles
+                             <em class="replaceable"><code>File</code></em>...  |   --stop  } [--timeout <em class="replaceable"><code>MaxTime</code></em>]
+                  </p>
+               </div>
+               <div class="cmdsynopsis">
+                  <p><code class="command">ncs</code>  { --version   |   --cdb-debug-dump
+                              <em class="replaceable"><code>Directory</code></em> }
+                  </p>
+               </div>
+            </div>
+            <div class="refsect1"><a id="man.1.ncs.description"></a><h2>DESCRIPTION</h2>
+               <p>Use this command to start and control the NCS daemon.</p>
+            </div>
+            <div class="refsect1"><a id="man.1.ncs.options"></a><h2>STARTING NCS</h2>
+               <p>These options are relevant when starting the NCS daemon.</p>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt><span class="term"><code class="option">-c</code>, <code class="option">--conf</code> ConfFile</span></dt>
+                     <dd>
+                        <p>ConfFile is the path to a ncs.conf file. If the
+                                   <code class="code">-c File</code> argument is not given to <code class="code">ncs</code>,
+                                   first <code class="code">$PWD</code> is searched for a file called
+                                   <code class="code">ncs.conf</code>, if not found
+                                   <code class="code">$NCS_DIR/etc/ncs/ncs.conf</code> is chosen.
+                                   
+                        </p>
+                     </dd>
+                     <dt><span class="term"><code class="option">--cd</code> Dir</span></dt>
+                     <dd>
+                        <p>Change working directory</p>
+                     </dd>
+                     <dt><span class="term">
+                                   <code class="option">--addloadpath</code> Dir
+                                 </span></dt>
+                     <dd>
+                        <p>
+                                     Add Dir to the set of directories NCS uses to load fxs, clispec,
+                                     NCS packages and SNMP bin files.
+                                   
+                        </p>
+                     </dd>
+                     <dt><span class="term"><code class="option">--nolog</code></span></dt>
+                     <dd>
+                        <p>Do not log initial startup messages to syslog.</p>
+                     </dd>
+                     <dt><span class="term">
+                                   <code class="option">--smp</code> Nr
+                                 </span></dt>
+                     <dd>
+                        <p>Number of threads to run for Symmetric Multiprocessing
+                                   (SMP). The default is to enable SMP support, with as many
+                                   threads as the system has logical processors, if more than one
+                                   logical processor is detected. Giving a value of 1 will disable
+                                   SMP support, while a value bigger
+                                   than 1 will enable SMP support, where NCS will at any given
+                                   time use at most as many logical processors as the number of
+                                   threads.
+                        </p>
+                     </dd>
+                     <dt><span class="term"><code class="option">--foreground [ -v | --verbose ] [ --stop-on-eof ]
+                                    </code></span></dt>
+                     <dd>
+                        <p>Do not start as a daemon.  Can be used to start NCS from a
+                                   process manager.
+                                   In combination with -v or --verbose, all log messages are printed
+                                   to stdout.  Useful during development.
+                                   In combination with --stop-on-eof, NCS will stop if it receives EOF
+                                   (ctrl-d) on standard input.
+                                   Note that to stop NCS when run in
+                                   foreground, send EOF (if --stop-on-eof was used) or use ncs --stop.
+                                   Do not terminate with ctrl-c, since NCS in that case won't
+                                   have the chance to close the database files.
+                        </p>
+                     </dd>
+                     <dt><span class="term"><code class="option">--with-package-reload</code></span></dt>
+                     <dd>
+                        <p>When NCS starts, if the private package directory tree
+                                   already exists, NCS will load the packages from this directory
+                                   tree and not search the load-path for packages. If the
+                                   --with-package-reload option is given when starting NCS, the
+                                   load-path will be searched and the packages found there copied
+                                   to the private package directory tree, replacing the previous
+                                   contents, before loading. This should always be used when
+                                   upgrading to a new version of NCS in an existing directory
+                                   structure, to make sure that new packages are loaded together
+                                   with the other parts of the new system.
+                        </p>
+                        <p>
+                                     When NCS is started from the /etc/init.d scripts, that get generated
+                                     by the --system-install option to the NCS installer, the environment
+                                     variable NCS_RELOAD_PACKAGES can be set to 'true' to attempt a
+                                     package reload.
+                                   
+                        </p>
+                     </dd>
+                     <dt><span class="term"><code class="option">--ignore-initial-validation</code></span></dt>
+                     <dd>
+                        <p>
+                                     When CDB starts on an empty database, or when upgrading, it starts a
+                                     transaction to load the initial configuration or perform the
+                                     upgrade. This option makes NCS skip any validation callpoints when
+                                     committing these initial transaction. (The preferred alternative is to
+                                     use start-phases and register the validation callpoints in phase 0,
+                                   see the user guide).
+                        </p>
+                     </dd>
+                     <dt><span class="term"><code class="option">--full-upgrade-validation</code></span></dt>
+                     <dd>
+                        <p>Perform a full validation of the entire database if the
+                                   data models have been upgraded.  This is useful in order to
+                                   trigger external validation to run even if the database
+                                   content has not been modified.
+                        </p>
+                     </dd>
+                     <dt><span class="term"><code class="option">--start-phase0</code></span></dt>
+                     <dd>
+                        <p>
+                                     Start the daemon, but only start internal subsystems and CDB. Phase 0
+                                     is used when a controlled upgrade is done.
+                                   
+                        </p>
+                     </dd>
+                     <dt><span class="term"><code class="option">--epoll { true | false }</code></span></dt>
+                     <dd>
+                        <p>Determines whether NCS should use an enhanced poll()
+                                     function (e.g. Linux epoll(7)). This can improve performance
+                                     when NCS has a high number of connections, but there may be
+                                     issues with the implementation in some OS/kernel versions.
+                                     The default is true.
+                        </p>
+                     </dd>
+                  </dl>
+               </div>
+            </div>
+            <div class="refsect1"><a id="d0e3602"></a><h2>COMMUNICATING WITH NCS</h2>
+               <p>When the NCS daemon has been started, these options are used
+                      to communicate with the running daemon.
+               </p>
+               <p>By default these options will perform their function by
+                      connecting to a running NCS daemon over the loopback interface on the
+                      standard port. If the environment variable
+                      <code class="envar">NCS_IPC_PORT</code> and/or <code class="envar">NCS_IPC_ADDR</code>
+                      are set then the address/port in those variables will be used to
+                      communicate with the NCS daemon. (Must be used if the daemon is
+                      not listening on its standard port on localhost, see the
+                      <code class="sgmltag-element">/ncs-config/ncs-ipc-address/ip</code> setting in the <a class="link" href="man.5.ncs.conf.html" title="ncs.conf">ncs.conf(5)</a> man-page, and
+                      the section on NCS
+                      IPC in the NCS Users Guide).
+               </p>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt><span class="term"><code class="option">--wait-phase0 [ TryTime ]</code></span></dt>
+                     <dd>
+                        <p>
+                                     This call hangs until NCS has initialized start phase0.  After this
+                                   call has returned, it is safe to register validation callbacks,
+                                   upgrade CDB etc.
+                                   This function is useful when NCS has been started with
+                                   --foreground and --start-phase0.
+                                   It will keep trying the initial connection to NCS
+                                   for at most TryTime seconds (default 5).
+                        </p>
+                     </dd>
+                     <dt><span class="term"><code class="option">--start-phase1</code></span></dt>
+                     <dd>
+                        <p>Do not start the subsystems that listen to the management IP
+                                   address. Must be called after the daemon was started with
+                                   --start-phase0.
+                        </p>
+                     </dd>
+                     <dt><span class="term"><code class="option">--start-phase2</code></span></dt>
+                     <dd>
+                        <p>
+                                     Must be called after the management interface has been brought up, if
+                                   --start-phase1 has been used. Starts the subsystems that listens to
+                                   the management IP address.
+                        </p>
+                     </dd>
+                     <dt><span class="term"><code class="option">--wait-started [ TryTime ]</code></span></dt>
+                     <dd>
+                        <p>This call hangs until NCS is completely started.
+                                   This function is useful when NCS has been started with --foreground.
+                                   It will keep trying the initial connection to NCS
+                                   for at most TryTime seconds (default 5).
+                        </p>
+                     </dd>
+                     <dt><span class="term"><code class="option">--reload</code></span></dt>
+                     <dd>
+                        <p>Reload the NCS daemon configuration. All log files are closed and
+                                   reopened, which means that <span class="command"><strong>ncs --reload</strong></span> can
+                                   be used from e.g. logrotate(8), but it is more efficient to use
+                                   <span class="command"><strong>ncs_cmd -c reopen_logs</strong></span> for this purpose.
+                                   Note: If we update a .fxs file it is not enough
+                                   to do a reload; the "packages reload" action must be invoked,
+                                   or the daemon must be restarted with the
+                                   <code class="option">--with-package-reload</code> option.
+                                   
+                        </p>
+                     </dd>
+                     <dt><span class="term"><code class="option">--areload</code></span></dt>
+                     <dd>
+                        <p>Asynchronously reload the NCS daemon configuration. This can be
+                                   used in scripts executed by the NCS daemon.
+                        </p>
+                     </dd>
+                     <dt><span class="term"><code class="option">--stop</code></span></dt>
+                     <dd>
+                        <p>Stop the NCS daemon.</p>
+                     </dd>
+                     <dt><span class="term"><code class="option">--status</code></span></dt>
+                     <dd>
+                        <p>
+                                     Prints status information about the NCS daemon on stdout. Among the
+                                     things listed are: loaded namespaces, current user sessions,
+                                     callpoints (and whether they are registered or not), CDB status, and
+                                     the current start-phase. Start phases are reported as "status:" and
+                                     can be one of starting (which is pre-phase0), phase0, phase1, started
+                                     (i.e. phase2), or stopping (which means that NCS is about to
+                                     shutdown).
+                                   
+                        </p>
+                     </dd>
+                     <dt><span class="term"><code class="option">--debug-dump File</code></span></dt>
+                     <dd>
+                        <p>
+                                     Dump debug information from an already running NCS daemon into a file.
+                                     The file only makes sense to NCS developers. It is often a good
+                                     idea to include a debug dump in NCS trouble reports.
+                                   
+                        </p>
+                     </dd>
+                     <dt><span class="term"><code class="option">--cli-j-dump File</code></span></dt>
+                     <dd>
+                        <p>
+                                   Dump cli structure information from the NCS daemon into a file.
+                        </p>
+                     </dd>
+                     <dt><span class="term"><code class="option">--check-callbacks [Namespace | Path]</code></span></dt>
+                     <dd>
+                        <p>
+                                     Walks through the entire data tree (config and stat), or only the
+                                     Namespace or Path, and verifies that all read-callbacks are
+                                     implemented for all elements, and verifies their return values.
+                                   
+                        </p>
+                     </dd>
+                     <dt><span class="term"><code class="option">--loadfile File</code></span></dt>
+                     <dd>
+                        <p>Load configuration in curly bracket format from File.</p>
+                     </dd>
+                     <dt><span class="term"><code class="option">--rollback Nr</code></span></dt>
+                     <dd>
+                        <p>Rollback configuration to saved configuration number Nr.</p>
+                     </dd>
+                     <dt><span class="term"><code class="option">--loadxmlfiles File ...</code></span></dt>
+                     <dd>
+                        <p>Load configuration in XML format from Files.  The configuration is
+                                   completely replaced by the contents in Files.
+                        </p>
+                     </dd>
+                     <dt><span class="term"><code class="option">--mergexmlfiles File ...</code></span></dt>
+                     <dd>
+                        <p>Load configuration in XML format from Files.  The configuration is
+                                   merged with the contents in Files.  The XML may use the 'operation'
+                                   attribute, in the same way as it is used in a
+                                   NETCONF &lt;edit-config&gt;
+                                   operation.
+                        </p>
+                     </dd>
+                     <dt><span class="term"><code class="option">--timeout MaxTime</code></span></dt>
+                     <dd>
+                        <p>Specify the maximum time to wait for the NCS daemon to
+                                   complete the command, in seconds. If this option is not given,
+                                   no timeout is used..
+                        </p>
+                     </dd>
+                  </dl>
+               </div>
+            </div>
+            <div class="refsect1"><a id="d0e3746"></a><h2>STANDALONE OPTIONS</h2>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt><span class="term"><code class="option">--cdb-debug-dump Directory</code></span></dt>
+                     <dd>
+                        <p>Print a lot of information about the CDB files in
+                                   <em class="replaceable"><code>Directory</code></em> to stdout. This is a
+                                   completely stand-alone feature and the only thing needed is
+                                   the .cdb files (no running NCS daemon or .fxs files etc).
+                        </p>
+                     </dd>
+                     <dt><span class="term"><code class="option">--version</code></span></dt>
+                     <dd>
+                        <p>
+                                   Reports the ncs version without interacting with the daemon.
+                        </p>
+                     </dd>
+                     <dt><span class="term"><code class="option">--timeout MaxTime</code></span></dt>
+                     <dd>
+                        <p>See above</p>
+                     </dd>
+                  </dl>
+               </div>
+            </div>
+            <div class="refsect1"><a id="man.1.ncs.environment"></a><h2>ENVIRONMENT</h2>
+               <p>
+                      When NCS is started from the /etc/init.d scripts, that get generated
+                      by the --system-install option to the NCS installer, the environment
+                      variable NCS_RELOAD_PACKAGES can be set to 'true' to attempt a
+                      package reload.
+                    
+               </p>
+            </div>
+            <div class="refsect1"><a id="man.1.ncs.diagnostics"></a><h2>DIAGNOSTICS</h2>
+               <p>
+                      If NCS starts, the exit status is 0. If not it is a positive integer.
+                      The different meanings of the different exit codes are documented in the
+                      "NCS System Management" chapter in the user guide.
+                      When failing to start, the reason is stated in the NCS daemon log. The
+                      location of the daemon log is specified in the ConfFile as described
+                    in <a class="link" href="man.5.ncs.conf.html" title="ncs.conf">ncs.conf(5)</a>.
+               </p>
+            </div>
+            <div class="refsect1"><a id="man.1.ncs.see_also"></a><h2>SEE ALSO</h2>
+               <p>
+                    <span class="citerefentry"><span class="refentrytitle">ncs.conf</span>(5)</span>
+                    - NCS daemon configuration file format
+                    
+               </p>
+            </div>
+         </div><script type="text/javascript" src="common/main.js">
+            <!----></script><script type="text/javascript" src="common/splitterInit.js">
+            <!----></script><div class="footer" id="footer-legal">
+            <div class="footer-legal framework-footer-cq">
+               <div id="framework-footer">
+                  <div id="footer-legal"><a href="http://www.cisco.com/web/siteassets/legal/terms_condition.html">Terms &amp; Conditions</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/privacy.html">Privacy Statement</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/privacy.html#cookies">Cookie Policy</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/trademark.html">Trademarks</a></div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div id="sidebar">
+         <div id="leftnavigation" style="padding-top:3px;">
+            <div id="tabs">
+               <ul style="visibility: hidden;"></ul>
+               <div id="treeDiv"><img src="common/images/loading.gif" alt="loading table of contents..." id="tocLoading" style="display:block;" /><div id="ulTreeDiv" style="display:none">
+                     <ul id="tree" class="filetree">
+                        <li><span class="file"><a href="ncs.man.volume.1.html" tabindex="1">NCS man-pages, Volume 1</a></span><ul>
+                              <li><span class="file"><a href="man.1.ncs-backup.html" tabindex="1">ncs-backup</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-collect-tech-report.html" tabindex="1">ncs-collect-tech-report</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-installer.html" tabindex="1">ncs-installer</a></span></li>
+                              <li><span class="file"><a href="man.1.maapi.html" tabindex="1">ncs-maapi</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-make-package.html" tabindex="1">ncs-make-package</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-netsim.html" tabindex="1">ncs-netsim</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-project-create.html" tabindex="1">ncs-project-create</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-project-make-bundle.html" tabindex="1">ncs-project-export</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-project-git.html" tabindex="1">ncs-project-git</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-project-setup.html" tabindex="1">ncs-project-setup</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-project-update.html" tabindex="1">ncs-project-update</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-project.html" tabindex="1">ncs-project</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-setup.html" tabindex="1">ncs-setup</a></span></li>
+                              <li><span class="file"><a href="man.1.ncs-uninstall.html" tabindex="1">ncs-uninstall</a></span></li>
+                              <li id="webhelp-currentid"><span class="file"><a href="man.1.ncs.html" tabindex="1">ncs</a></span></li>
+                              <li><span class="file"><a href="man.1.confd_cli.html" tabindex="1">confdncs_cli</a></span></li>
+                              <li><span class="file"><a href="man.1.confd_cmd.html" tabindex="1">
+                                             confdncs_cmd</a></span></li>
+                              <li><span class="file"><a href="man.1.confd_load.html" tabindex="1">confdncs_load</a></span></li>
+                              <li><span class="file"><a href="man.1.confdc.html" tabindex="1">confdc
+                                           ncsc</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-backup.html" tabindex="1">nct-backup</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-check.html" tabindex="1">nct-check</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-cli-cmd.html" tabindex="1">nct-cli-cmd</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-copy.html" tabindex="1">nct-copy</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-get-logs.html" tabindex="1">nct-get-logs</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-ha.html" tabindex="1">nct-ha</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-hostsfile.html" tabindex="1">nct-hostsfile</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-install.html" tabindex="1">nct-install</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-load-config.html" tabindex="1">nct-load-config</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-move-device.html" tabindex="1">nct-move-device</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-packages.html" tabindex="1">nct-packages</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-patch.html" tabindex="1">nct-patch</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-ssh-cmd.html" tabindex="1">nct-ssh-cmd</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-start.html" tabindex="1">nct-start</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-stop.html" tabindex="1">nct-stop</a></span></li>
+                              <li><span class="file"><a href="man.1.nct-upgrade.html" tabindex="1">nct-upgrade</a></span></li>
+                              <li><span class="file"><a href="man.1.nct.html" tabindex="1">nct</a></span></li>
+                              <li><span class="file"><a href="man.1.pyang.html" tabindex="1">pyang</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ncs.man.volume.3.html" tabindex="1">NCS man-pages, Volume 3</a></span><ul>
+                              <li><span class="file"><a href="man.3.confd_lib.html" tabindex="1">confd_lib</a></span></li>
+                              <li><span class="file"><a href="man.3.confd_lib_cdb.html" tabindex="1">confd_lib_cdb</a></span></li>
+                              <li><span class="file"><a href="man.3.confd_lib_dp.html" tabindex="1">confd_lib_dp</a></span></li>
+                              <li><span class="file"><a href="man.3.confd_lib_events.html" tabindex="1">confd_lib_events</a></span></li>
+                              <li><span class="file"><a href="man.3.confd_lib_ha.html" tabindex="1">confd_lib_ha</a></span></li>
+                              <li><span class="file"><a href="man.3.confd_lib_lib.html" tabindex="1">confd_lib_lib</a></span></li>
+                              <li><span class="file"><a href="man.3.confd_lib_maapi.html" tabindex="1">confd_lib_maapi</a></span></li>
+                              <li><span class="file"><a href="man.3.confd_types.html" tabindex="1">confd_types</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ncs.man.volume.5.html" tabindex="1">NCS man-pages, Volume 5</a></span><ul>
+                              <li><span class="file"><a href="man.5.clispec.html" tabindex="1">clispec</a></span></li>
+                              <li><span class="file"><a href="man.5.mib_annotations.html" tabindex="1">mib_annotations</a></span></li>
+                              <li><span class="file"><a href="man.5.ncs.conf.html" tabindex="1">ncs.conf</a></span></li>
+                              <li><span class="file"><a href="man.5.tailf_yang_cli_extensions.html" tabindex="1">tailf_yang_cli_extensions</a></span></li>
+                              <li><span class="file"><a href="man.5.tailf_yang_extensions.html" tabindex="1">tailf_yang_extensions</a></span></li>
+                           </ul>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

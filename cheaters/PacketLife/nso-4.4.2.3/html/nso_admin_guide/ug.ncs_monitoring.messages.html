@@ -1,0 +1,2127 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      
+      <title>Log messages and formats -  - NSO 4.4.2.3 Administration Guide</title>
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+      <link rel="home" href="index.html" title="NSO 4.4.2.3 Administration Guide" />
+      <link rel="up" href="ug.ncs_sys_mgmt.monitor.html" title="Monitoring NSO" />
+      <link rel="prev" href="ch02s05s04.html" title="syslog" />
+      <link rel="next" href="ug.ncs_sys_mgmt.backup.html" title="Backup and restore" />
+      <meta xmlns="" name="Section-title" content="Log messages and formats" /><script xmlns="" type="text/javascript">
+      //The id for tree cookie
+      var treeCookieId = "treeview-8356";
+      var language = "en";
+      var w = new Object();
+      //Localization
+      txt_filesfound = 'Results';
+      txt_enter_at_least_1_char = "You must enter at least one character.";
+      txt_browser_not_supported = "JavaScript is disabled on your browser. Please enable JavaScript to enjoy all the features of this site.";
+      txt_please_wait = "Please wait. Search in progress...";
+      txt_results_for = "Results for: ";
+    </script><link xmlns="" rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/css/positioning.css" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/jquery/theme-redmond/jquery-ui-1.8.2.custom.css" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/jquery/treeview/jquery.treeview.css" /><style xmlns="" type="text/css">
+      
+      #noscript{
+      font-weight:bold;
+      background-color: #55AA55;
+      font-weight: bold;
+      height: 25spx;
+      z-index: 3000;
+      top:0px;
+      width:100%;
+      position: relative;
+      border-bottom: solid 5px black;
+      text-align:center;
+      color: white;
+      }
+      
+      input {
+      margin-bottom: 5px;
+      margin-top: 2px;
+      }
+      .folder {
+      display: block;
+      height: 22px;
+      padding-left: 20px;
+      background: transparent url(common/jquery/treeview/images/folder.gif) 0 0px no-repeat;
+      }
+      span.contentsTab {
+      padding-left: 20px;
+      background: url(common/images/toc-icon.png) no-repeat 0 center;
+      }
+      span.searchTab {
+      padding-left: 20px;
+      background: url(common/images/search-icon.png) no-repeat 0 center;
+      }
+      
+      /* Overide jquery treeview's defaults for ul. */
+      .treeview ul {
+      background-color: transparent;
+      margin-top: 4px;
+      }		
+      #webhelp-currentid {
+      /* background-color: #D8D8D8 !important; */
+      background-color: #D8D8D8;
+      }
+      .treeview .hover { color: black; }
+      .filetree li span a { text-decoration: none; font-size: 12px; color: #517291; }
+      
+      /* Override jquery-ui's default css customizations. These are supposed to take precedence over those.*/
+      .ui-widget-content {
+      border: 0px; 
+      background: none; 
+      color: none;     
+      }
+      .ui-widget-header {
+      color: #e9e8e9;
+      border-left: 1px solid #e5e5e5;
+      border-right: 1px solid #e5e5e5;
+      border-bottom: 1px solid #bbc4c5;
+      border-top: 4px solid #e5e5e5;
+      border: medium none;
+      background: #F4F4F4; /* old browsers */
+      background: -moz-linear-gradient(top, #F4F4F4 0%, #E6E4E5 100%); /* firefox */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F4F4F4), color-stop(100%,#E6E4E5)); /* webkit */    
+      font-weight: none;
+      }
+      .ui-widget-header a { color: none; }
+      .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { 
+      border: none; background: none; font-weight: none; color: none; }
+      .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited { color: black; text-decoration: none; }
+      .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus { border: none; background: none; font-weight: none; color: none; }
+      
+      .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { border: none; background: none; font-weight: none; color: none; }
+      .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited { 
+      color: black; text-decoration: none; 	
+      background: #C6C6C6; /* old browsers */
+      background: -moz-linear-gradient(top, #C6C6C6 0%, #D8D8D8 100%); /* firefox */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#C6C6C6), color-stop(100%,#D8D8D8)); /* webkit */
+      -webkit-border-radius:15px; -moz-border-radius:10px;
+      border: 1px solid #f1f1f1;
+      }    
+      .ui-corner-all { border-radius: 0 0 0 0; }
+      
+      .ui-tabs { padding: .2em;}
+      .ui-tabs .ui-tabs-nav li { top: 0px; margin: -2px 0 1px; text-transform: uppercase; font-size: 10.5px;}
+      .ui-tabs .ui-tabs-nav li a { padding: .25em 2em .25em 1em; margin: .5em; text-shadow: 0 1px 0 rgba(255,255,255,.5); }
+      /**
+      *	Basic Layout Theme
+      * 
+      *	This theme uses the default layout class-names for all classes
+      *	Add any 'custom class-names', from options: paneClass, resizerClass, togglerClass
+      */
+      
+      .ui-layout-pane { /* all 'panes' */ 
+      background: #FFF; 
+      border: 1px solid #BBB; 
+      padding: 05x; 
+      overflow: auto;
+      } 
+      
+      .ui-layout-resizer { /* all 'resizer-bars' */ 
+      background: #DDD; 
+      top:100px
+      } 
+      
+      .ui-layout-toggler { /* all 'toggler-buttons' */ 
+      background: #AAA; 
+      } 
+      
+    </style>
+      <!--[if IE]>
+	<link rel="stylesheet" type="text/css" href="../common/css/ie.css"/>
+	<![endif]--><script xmlns="" type="text/javascript" src="common/browserDetect.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery-1.7.2.min.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery.ui.all.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery.cookie.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/treeview/jquery.treeview.min.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/layout/jquery.layout.js">
+         <!----></script><style type="text/css">
+      
+      #header {
+      /* background: url("../images/header-bg.png") scroll top left repeat-x #4d8c83; */
+      background: transparent;
+      }
+      #leftnavigation {
+      /* background-color: #ededed!important; */
+      background-color: transparent;
+      }
+      #navheader {
+      visibility: hidden;
+      }
+      #webhelp-currentid {
+      /* background-color: #D8D8D8 !important; */
+      background-color: #FFFFFF; /*but must be changed in main.js as well*/
+      }
+      .filetree span.file {
+      /* background: url(images/file.gif) 0 0 no-repeat; */
+      background: initial;
+      }
+      .filetree span.folder, .filetree span.file {
+      padding: 1px 0 1px 7px;
+      display: block;
+      }
+
+      /* borrowed from cisco: clientlib.css */
+      .footer {
+      margin: 28px 30px 0 15px;
+      font-size: 80%;
+      line-height: 120%;
+      border-top: 1px solid #ccc;
+      padding-top: 7px;
+      color: #999;
+      }
+      .footer #footer-legal{display:inline;padding-bottom:18px}
+      #framework-footer{margin:0;padding:0 0 15px 0;min-width:900px;width:100%}
+      .footer a,.footer a:visited{color:#999}
+
+      /* from ccimr.css */
+      a:active  { color: #3366CC}
+      a:hover   { color: #3366CC}
+      a:link    { color: #3366CC}
+      a:visited { color: #3366CC}
+
+      #header img {
+      float: left;
+      margin-left: 20px;
+      margin-top: 0px;
+      }
+
+      #header h1 {
+      color: #336666;
+      margin-top: 4px;
+      }
+      #content h1, #content h2 {
+      color: #336666;
+      }
+      .title {
+      color: #336666;
+      }
+      p, pre {
+      margin-left: 0.1in;
+      }
+      p, ul, ol, li {
+        font-size: 95%;
+        font-family: Arial, Helvetica, sans-serif;
+        margin-top: 1px;
+      }
+      body {
+        font: 80.5% Arial, Helvetica, sans-serif;
+      }
+      ol {
+      display: block;
+      list-style-type: decimal;
+      -webkit-margin-before: 1em;
+      -webkit-margin-after: 1em;
+      -webkit-margin-start: 0px;
+      -webkit-margin-end: 0px;
+      -webkit-padding-start: 40px;
+      border: 1;
+      }
+    </style></head>
+   <body>
+      <noscript>
+         <div id="noscript">JavaScript is disabled on your browser. Please enable JavaScript to enjoy all the features of this site.</div>
+      </noscript>
+      <div id="header"><a href="index.html"><img style="margin-right: 2px; width: 110; height: 73; padding-right: 25px; padding-top: 8px" align="right" src="common/images/logo.gif" alt="Cisco Systems, Inc." /></a><h1>
+                  NSO 4.4.2.3 Administration Guide
+                <br />Monitoring NSO
+         </h1>
+         <div id="navheader">
+            <!---->
+            <table class="navLinks">
+               <tr>
+                  <td><a id="showHideButton" href="#" onclick="myLayout.toggle('west')" class="pointLeft" tabindex="5" title="Hide TOC tree">Sidebar
+                                                    </a></td>
+                  <td><a accesskey="p" class="navLinkPrevious" tabindex="5" href="ch02s05s04.html">Prev</a>
+                                                             |
+                                                             <a accesskey="u" class="navLinkUp" tabindex="5" href="ug.ncs_sys_mgmt.monitor.html">Up</a>
+                                                         |
+                                                         <a accesskey="n" class="navLinkNext" tabindex="5" href="ug.ncs_sys_mgmt.backup.html">Next</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div id="content">
+         <div class="sect2">
+            <div xmlns="" class="titlepage">
+               <div>
+                  <div>
+                     <h3 xmlns="http://www.w3.org/1999/xhtml" class="title"><a id="ug.ncs_monitoring.messages"></a>Log messages and formats
+                     </h3>
+                  </div>
+               </div>
+            </div>
+            <div class="table"><a id="d0e510"></a><p class="title"><strong>Table 1. Syslog Messages</strong></p>
+               <div class="table-contents">
+                  <table>
+                     <thead>
+                        <tr>
+                                 
+                           <th>Symbol</th>
+                                 
+                           <th>Format String</th>
+                                 
+                           <th>Comment</th>
+                               
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">DAEMON_DIED</code></td>
+                               
+                           <td><code class="code">"Daemon ~s died"</code></td>
+                               
+                           <td>
+                              <p>An external database daemon closed its control socket.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">DAEMON_TIMEOUT</code></td>
+                               
+                           <td><code class="code">"Daemon ~s timed out"</code></td>
+                               
+                           <td>
+                              <p>An external database daemon did not respond to a query.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">NO_CALLPOINT</code></td>
+                               
+                           <td><code class="code">"no registration found for callpoint ~s of type=~s"</code></td>
+                               
+                           <td>
+                              <p>ConfD tried to populate an XML tree but no code had registered under the relevant callpoint.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">CDB_DB_LOST</code></td>
+                               
+                           <td><code class="code">"CDB: lost DB, deleting old config"</code></td>
+                               
+                           <td>
+                              <p>CDB found it's data schema file but not it's data file. CDB recovers by starting from an empty database.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">CDB_CONFIG_LOST</code></td>
+                               
+                           <td><code class="code">"CDB: lost config, deleting DB"</code></td>
+                               
+                           <td>
+                              <p>CDB found it's data files but no schema file. CDB recovers by starting from an empty database.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">CDB_UPGRADE_FAILED</code></td>
+                               
+                           <td><code class="code">"CDB: Upgrade failed: ~s"</code></td>
+                               
+                           <td>
+                              <p>Automatic CDB upgrade failed. This means that the data model has been changed in a non-supported way.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">CDB_INIT_LOAD</code></td>
+                               
+                           <td><code class="code">"CDB load: processing file: ~s"</code></td>
+                               
+                           <td>
+                              <p>CDB is processing an initialization file.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">CDB_OP_INIT</code></td>
+                               
+                           <td><code class="code">"CDB: Operational DB re-initialized"</code></td>
+                               
+                           <td>
+                              <p>The operational DB was deleted and re-initialized (because of upgrade or corrupt file)</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">CDB_CLIENT_TIMEOUT</code></td>
+                               
+                           <td><code class="code">"CDB client (~s) timed out, waiting for ~s"</code></td>
+                               
+                           <td>
+                              <p>A CDB client failed to answer within the timeout period. The client will be disconnected.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">INTERNAL_ERROR</code></td>
+                               
+                           <td><code class="code">"Internal error: ~s"</code></td>
+                               
+                           <td>
+                              <p>A ConfD internal error - should be reported to support@tail-f.com.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">AAA_LOAD_FAIL</code></td>
+                               
+                           <td><code class="code">"Failed to load AAA: ~s"</code></td>
+                               
+                           <td>
+                              <p>Failed to load the AAA data, it could be that an external db is misbehaving or AAA is mounted/populated badly</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">EXTAUTH_BAD_RET</code></td>
+                               
+                           <td><code class="code">"External auth program (user=~s) ret bad output: ~s"</code></td>
+                               
+                           <td>
+                              <p>Authentication is external and the external program returned badly formatted data.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">BRIDGE_DIED</code></td>
+                               
+                           <td><code class="code">"confd_aaa_bridge died - ~s"</code></td>
+                               
+                           <td>
+                              <p>ConfD is configured to start the confd_aaa_bridge and the C program died.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">PHASE0_STARTED</code></td>
+                               
+                           <td><code class="code">"ConfD phase0 started"</code></td>
+                               
+                           <td>
+                              <p>ConfD has just started its start phase 0.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">PHASE1_STARTED</code></td>
+                               
+                           <td><code class="code">"ConfD phase1 started"</code></td>
+                               
+                           <td>
+                              <p>ConfD has just started its start phase 1.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">STARTED</code></td>
+                               
+                           <td><code class="code">"ConfD started vsn: ~s"</code></td>
+                               
+                           <td>
+                              <p>ConfD has started.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">UPGRADE_INIT_STARTED</code></td>
+                               
+                           <td><code class="code">"Upgrade init started"</code></td>
+                               
+                           <td>
+                              <p>In-service upgrade initialization has started.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">UPGRADE_INIT_SUCCEEDED</code></td>
+                               
+                           <td><code class="code">"Upgrade init succeeded"</code></td>
+                               
+                           <td>
+                              <p>In-service upgrade initialization succeeded.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">UPGRADE_PERFORMED</code></td>
+                               
+                           <td><code class="code">"Upgrade performed"</code></td>
+                               
+                           <td>
+                              <p>In-service upgrade has been performed (not committed yet).</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">UPGRADE_COMMITTED</code></td>
+                               
+                           <td><code class="code">"Upgrade committed"</code></td>
+                               
+                           <td>
+                              <p>In-service upgrade was committed.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">UPGRADE_ABORTED</code></td>
+                               
+                           <td><code class="code">"Upgrade aborted"</code></td>
+                               
+                           <td>
+                              <p>In-service upgrade was aborted.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">CONSULT_FILE</code></td>
+                               
+                           <td><code class="code">"Consulting daemon configuration file ~s"</code></td>
+                               
+                           <td>
+                              <p>ConfD is reading its configuration file.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">STOPPING</code></td>
+                               
+                           <td><code class="code">"ConfD stopping (~s)"</code></td>
+                               
+                           <td>
+                              <p>ConfD is stopping (due to e.g. confd --stop).</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">RELOAD</code></td>
+                               
+                           <td><code class="code">"Reloading daemon configuration."</code></td>
+                               
+                           <td>
+                              <p>Reload of daemon configuration has been initiated.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">BADCONFIG</code></td>
+                               
+                           <td><code class="code">"Bad configuration: ~s:~s: ~s"</code></td>
+                               
+                           <td>
+                              <p>confd.conf contained bad data.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">WRITE_STATE_FILE_FAILED</code></td>
+                               
+                           <td><code class="code">"Writing state file failed: ~s: ~s (~s)"</code></td>
+                               
+                           <td>
+                              <p>Writing of a state file failed</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">READ_STATE_FILE_FAILED</code></td>
+                               
+                           <td><code class="code">"Reading state file failed: ~s: ~s (~s)"</code></td>
+                               
+                           <td>
+                              <p>Reading of a state file failed</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">SSH_SUBSYS_ERR</code></td>
+                               
+                           <td><code class="code">"ssh protocol subsys - ~s"</code></td>
+                               
+                           <td>
+                              <p>Typically errors where the client doesn't properly send the \"subsystem\" command.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">SESSION_LIMIT</code></td>
+                               
+                           <td><code class="code">"Session limit of type '~s' reached, rejected new session request"</code></td>
+                               
+                           <td>
+                              <p>Session limit reached, rejected new session request.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">CONFIG_TRANSACTION_LIMIT</code></td>
+                               
+                           <td><code class="code">"Configuration transaction limit of type '~s' reached, rejected new transaction request"</code></td>
+                               
+                           <td>
+                              <p>Configuration transaction limit reached, rejected new transaction request.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">ABORT_CAND_COMMIT</code></td>
+                               
+                           <td><code class="code">"Aborting candidate commit, request from user, reverting configuration."</code></td>
+                               
+                           <td>
+                              <p>Aborting candidate commit, request from user, reverting configuration.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">ABORT_CAND_COMMIT_TIMER</code></td>
+                               
+                           <td><code class="code">"Candidate commit timer expired, reverting configuration."</code></td>
+                               
+                           <td>
+                              <p>Candidate commit timer expired, reverting configuration.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">ABORT_CAND_COMMIT_TERM</code></td>
+                               
+                           <td><code class="code">"Candidate commit session terminated, reverting configuration."</code></td>
+                               
+                           <td>
+                              <p>Candidate commit session terminated, reverting configuration.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">ROLLBACK_REMOVE</code></td>
+                               
+                           <td><code class="code">"Found half created rollback0 file - removing and creating new"</code></td>
+                               
+                           <td>
+                              <p>Found half created rollback0 file - removing and creating new.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">ROLLBACK_REPAIR</code></td>
+                               
+                           <td><code class="code">"Found half created rollback0 file - repairing"</code></td>
+                               
+                           <td>
+                              <p>Found half created rollback0 file - repairing.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">ROLLBACK_FAIL_REPAIR</code></td>
+                               
+                           <td><code class="code">"Failed to repair rollback files."</code></td>
+                               
+                           <td>
+                              <p>Failed to repair rollback files.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">ROLLBACK_FAIL_CREATE</code></td>
+                               
+                           <td><code class="code">"Error while creating rollback file: ~s: ~s"</code></td>
+                               
+                           <td>
+                              <p>Error while creating rollback file.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">ROLLBACK_FAIL_RENAME</code></td>
+                               
+                           <td><code class="code">"Failed to rename rollback file ~s to ~s: ~s"</code></td>
+                               
+                           <td>
+                              <p>Failed to rename rollback file.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">NS_LOAD_ERR</code></td>
+                               
+                           <td><code class="code">"Failed to process namespace ~s: ~s"</code></td>
+                               
+                           <td>
+                              <p>System tried to process a loaded namespace and failed.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">NS_LOAD_ERR2</code></td>
+                               
+                           <td><code class="code">"Failed to process namespaces: ~s"</code></td>
+                               
+                           <td>
+                              <p>System tried to process a loaded namespace and failed.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">FILE_LOAD_ERR</code></td>
+                               
+                           <td><code class="code">"Failed to load file ~s: ~s"</code></td>
+                               
+                           <td>
+                              <p>System tried to load a file in its load path and failed.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">FILE_LOADING</code></td>
+                               
+                           <td><code class="code">"Loading file ~s"</code></td>
+                               
+                           <td>
+                              <p>System starts to load a file.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">SKIP_FILE_LOADING</code></td>
+                               
+                           <td><code class="code">"Skipping file ~s: ~s"</code></td>
+                               
+                           <td>
+                              <p>System skips a file.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">FILE_LOAD</code></td>
+                               
+                           <td><code class="code">"Loaded file ~s"</code></td>
+                               
+                           <td>
+                              <p>System loaded a file.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">LISTENER_INFO</code></td>
+                               
+                           <td><code class="code">"~s to listen for ~s on ~s:~s"</code></td>
+                               
+                           <td>
+                              <p>ConfD starts or stops to listen for incoming connections.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">NETCONF_HDR_ERR</code></td>
+                               
+                           <td><code class="code">"Got bad NETCONF TCP header"</code></td>
+                               
+                           <td>
+                              <p>The cleartext header indicating user and groups was badly formatted.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">LIB_BAD_VSN</code></td>
+                               
+                           <td><code class="code">"Got library connect from wrong version (~s, expected ~s)"</code></td>
+                               
+                           <td>
+                              <p>An application connecting to ConfD used a library version that doesn't match the ConfD version (e.g. old version of the client
+                                 library).
+                              </p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">LIB_BAD_SIZES</code></td>
+                               
+                           <td><code class="code">"Got connect from library with insufficient keypath depth/keys support (~s/~s, needs ~s/~s)"</code></td>
+                               
+                           <td>
+                              <p>An application connecting to ConfD used a library version that can't handle the depth and number of keys used by the data
+                                 model.
+                              </p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">LIB_NO_ACCESS</code></td>
+                               
+                           <td><code class="code">"Got library connect with failed access check: ~s"</code></td>
+                               
+                           <td>
+                              <p>Access check failure occurred when an application connected to ConfD.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">SNMP_NOT_A_TRAP</code></td>
+                               
+                           <td><code class="code">"SNMP gateway: Non-trap received from ~s"</code></td>
+                               
+                           <td>
+                              <p>An UDP package was received on the trap receiving port, but it's not an SNMP trap.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">SNMP_TRAP_V1</code></td>
+                               
+                           <td><code class="code">"SNMP gateway: V1 trap received from ~s"</code></td>
+                               
+                           <td>
+                              <p>An SNMP v1 trap was received on the trap receiving port, but forwarding v1 traps is not supported.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">SNMP_TRAP_NOT_FORWARDED</code></td>
+                               
+                           <td><code class="code">"SNMP gateway: Can't forward trap from ~s; ~s"</code></td>
+                               
+                           <td>
+                              <p>An SNMP trap was to be forwarded, but couldn't be.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">SNMP_TRAP_UNKNOWN_SENDER</code></td>
+                               
+                           <td><code class="code">"SNMP gateway: Not forwarding trap from ~s; the sender is not recognized"</code></td>
+                               
+                           <td>
+                              <p>An SNMP trap was to be forwarded, but the sender was not listed in confd.conf.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">SNMP_TRAP_OPEN_PORT</code></td>
+                               
+                           <td><code class="code">"SNMP gateway: Can't open trap listening port ~s: ~s"</code></td>
+                               
+                           <td>
+                              <p>The port for listening to SNMP traps could not be opened.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">SNMP_TRAP_NOT_RECOGNIZED</code></td>
+                               
+                           <td><code class="code">"SNMP gateway: Can't forward trap with OID ~s from ~s; There is no notification with this OID in the loaded models."</code></td>
+                               
+                           <td>
+                              <p>An SNMP trap was received on the trap receiving port, but its definition is not known</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">XPATH_EVAL_ERROR1</code></td>
+                               
+                           <td><code class="code">"XPath evaluation error: ~s for ~s"</code></td>
+                               
+                           <td>
+                              <p>An error occurred while evaluating an XPath expression.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">XPATH_EVAL_ERROR2</code></td>
+                               
+                           <td><code class="code">"XPath evaluation error: '~s' resulted in ~s for ~s"</code></td>
+                               
+                           <td>
+                              <p>An error occurred while evaluating an XPath expression.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">CANDIDATE_BAD_FILE_FORMAT</code></td>
+                               
+                           <td><code class="code">"Bad format found in candidate db file ~s; resetting candidate"</code></td>
+                               
+                           <td>
+                              <p>The candidate database file has a bad format. The candidate database is reset to the empty database.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">CANDIDATE_CORRUPT_FILE</code></td>
+                               
+                           <td><code class="code">"Corrupt candidate db file ~s; resetting candidate"</code></td>
+                               
+                           <td>
+                              <p>The candidate database file is corrupt and cannot be read. The candidate database is reset to the empty database.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">MISSING_DES3CBC_SETTINGS</code></td>
+                               
+                           <td><code class="code">"DES3CBC keys were not found in confd.conf"</code></td>
+                               
+                           <td>
+                              <p>DES3CBC keys were not found in confd.conf</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">MISSING_AESCFB128_SETTINGS</code></td>
+                               
+                           <td><code class="code">"AESCFB128 keys were not found in confd.conf"</code></td>
+                               
+                           <td>
+                              <p>AESCFB128 keys were not found in confd.conf</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">SNMP_MIB_LOADING</code></td>
+                               
+                           <td><code class="code">"Loading MIB: ~s"</code></td>
+                               
+                           <td>
+                              <p>SNMP Agent loading a MIB file</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">SNMP_CANT_LOAD_MIB</code></td>
+                               
+                           <td><code class="code">"Can't load MIB file: ~s"</code></td>
+                               
+                           <td>
+                              <p>The SNMP Agent failed to load a MIB file</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">SNMP_WRITE_STATE_FILE_FAILED</code></td>
+                               
+                           <td><code class="code">"Write state file failed: ~s: ~s"</code></td>
+                               
+                           <td>
+                              <p>Write SNMP agent state file failed</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">SNMP_READ_STATE_FILE_FAILED</code></td>
+                               
+                           <td><code class="code">"Read state file failed: ~s: ~s"</code></td>
+                               
+                           <td>
+                              <p>Read SNMP agent state file failed</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">SNMP_REQUIRES_CDB</code></td>
+                               
+                           <td><code class="code">"Can't start SNMP. CDB is not enabled"</code></td>
+                               
+                           <td>
+                              <p>The SNMP agent requires CDB to be enabled in order to be started.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">FXS_MISMATCH</code></td>
+                               
+                           <td><code class="code">"Fxs mismatch, slave is not allowed"</code></td>
+                               
+                           <td>
+                              <p>A slave connected to a master where the fxs files are different</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">TOKEN_MISMATCH</code></td>
+                               
+                           <td><code class="code">"Token mismatch, slave is not allowed"</code></td>
+                               
+                           <td>
+                              <p>A slave connected to a master with a bad auth token</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">HA_SLAVE_KILLED</code></td>
+                               
+                           <td><code class="code">"Slave ~s killed due to no ticks"</code></td>
+                               
+                           <td>
+                              <p>A slave node didn't produce its ticks</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">HA_DUPLICATE_NODEID</code></td>
+                               
+                           <td><code class="code">"Nodeid ~s already exists"</code></td>
+                               
+                           <td>
+                              <p>A slave arrived with a node id which already exists</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">HA_FAILED_CONNECT</code></td>
+                               
+                           <td><code class="code">"Failed to connect to master: ~s"</code></td>
+                               
+                           <td>
+                              <p>An attempted library become slave call failed because the slave couldn't connect to the master</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">HA_BAD_VSN</code></td>
+                               
+                           <td><code class="code">"Incompatible HA version (~s, expected ~s), slave is not allowed"</code></td>
+                               
+                           <td>
+                              <p>A slave connected to a master with an incompatible HA protocol version</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">NETCONF</code></td>
+                               
+                           <td><code class="code">"~s"</code></td>
+                               
+                           <td>
+                              <p>NETCONF traffic log message</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">DEVEL_WEBUI</code></td>
+                               
+                           <td><code class="code">"~s"</code></td>
+                               
+                           <td>
+                              <p>Developer webui log message</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">DEVEL_AAA</code></td>
+                               
+                           <td><code class="code">"~s"</code></td>
+                               
+                           <td>
+                              <p>Developer aaa log message</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">DEVEL_CAPI</code></td>
+                               
+                           <td><code class="code">"~s"</code></td>
+                               
+                           <td>
+                              <p>Developer C api log message</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">DEVEL_CDB</code></td>
+                               
+                           <td><code class="code">"~s"</code></td>
+                               
+                           <td>
+                              <p>Developer CDB log message</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">DEVEL_CONFD</code></td>
+                               
+                           <td><code class="code">"~s"</code></td>
+                               
+                           <td>
+                              <p>Developer ConfD log message</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">DEVEL_SNMPGW</code></td>
+                               
+                           <td><code class="code">"~s"</code></td>
+                               
+                           <td>
+                              <p>Developer snmp GW log message</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">DEVEL_SNMPA</code></td>
+                               
+                           <td><code class="code">"~s"</code></td>
+                               
+                           <td>
+                              <p>Developer snmp agent log message</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">NOTIFICATION_REPLAY_STORE_FAILURE</code></td>
+                               
+                           <td><code class="code">"~s"</code></td>
+                               
+                           <td>
+                              <p>A failure occurred in the builtin notification replay store</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">EVENT_SOCKET_TIMEOUT</code></td>
+                               
+                           <td><code class="code">"Event notification subscriber with bitmask ~s timed out, waiting for ~s"</code></td>
+                               
+                           <td>
+                              <p>An event notification subscriber did not reply within the configured timeout period</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">EVENT_SOCKET_WRITE_BLOCK</code></td>
+                               
+                           <td><code class="code">"~s"</code></td>
+                               
+                           <td>
+                              <p>Write on an event socket blocked for too long time</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">COMMIT_UN_SYNCED_DEV</code></td>
+                               
+                           <td><code class="code">"Committed data towards device ~s which is out of sync"</code></td>
+                               
+                           <td>
+                              <p>Data was committed toward a device with bad or unknown sync state</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">NCS_SNMP_INIT_ERR</code></td>
+                               
+                           <td><code class="code">"Failed to locate snmp_init.xml in loadpath ~s"</code></td>
+                               
+                           <td>
+                              <p>Failed to locate snmp_init.xml in loadpath</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">NCS_JAVA_VM_START</code></td>
+                               
+                           <td><code class="code">"Starting the NCS Java VM"</code></td>
+                               
+                           <td>
+                              <p>Starting the NCS Java VM</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">NCS_JAVA_VM_FAIL</code></td>
+                               
+                           <td><code class="code">"The NCS Java VM ~s"</code></td>
+                               
+                           <td>
+                              <p>The NCS Java VM failure/timeout</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">NCS_PACKAGE_SYNTAX_ERROR</code></td>
+                               
+                           <td><code class="code">"Failed to load NCS package: ~s; syntax error in package file"</code></td>
+                               
+                           <td>
+                              <p>Syntax error in package file</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">NCS_PACKAGE_DUPLICATE</code></td>
+                               
+                           <td><code class="code">"Failed to load duplicate NCS package ~s: (~s)"</code></td>
+                               
+                           <td>
+                              <p>Duplicate package found</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">NCS_PACKAGE_COPYING</code></td>
+                               
+                           <td><code class="code">"Copying NCS package from ~s to ~s"</code></td>
+                               
+                           <td>
+                              <p>A package is copied from the load path to private directory</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">NCS_PACKAGE_UPGRADE_ABORTED</code></td>
+                               
+                           <td><code class="code">"NCS package upgrade failed with reason '~s'"</code></td>
+                               
+                           <td>
+                              <p>The CDB upgrade was aborted implying that CDB is untouched. However the package state is changed</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">NCS_PACKAGE_BAD_NCS_VERSION</code></td>
+                               
+                           <td><code class="code">"Failed to load NCS package: ~s; requires NCS version ~s"</code></td>
+                               
+                           <td>
+                              <p>Bad NCS version for package</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">NCS_PACKAGE_BAD_DEPENDENCY</code></td>
+                               
+                           <td><code class="code">"Failed to load NCS package: ~s; required package ~s of version ~s is not present (found ~s)"</code></td>
+                               
+                           <td>
+                              <p>Bad NCS package dependency</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">NCS_PACKAGE_CIRCULAR_DEPENDENCY</code></td>
+                               
+                           <td><code class="code">"Failed to load NCS package: ~s; circular dependency found"</code></td>
+                               
+                           <td>
+                              <p>Circular NCS package dependency</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">CLI_CMD</code></td>
+                               
+                           <td><code class="code">"CLI '~s'"</code></td>
+                               
+                           <td>
+                              <p>User executed a CLI command.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">CLI_DENIED</code></td>
+                               
+                           <td><code class="code">"CLI denied '~s'"</code></td>
+                               
+                           <td>
+                              <p>User was denied to execute a CLI command due to permissions.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">BAD_LOCAL_PASS</code></td>
+                               
+                           <td><code class="code">"Provided bad password"</code></td>
+                               
+                           <td>
+                              <p>A locally configured user provided a bad password.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">NO_SUCH_LOCAL_USER</code></td>
+                               
+                           <td><code class="code">"no such local user"</code></td>
+                               
+                           <td>
+                              <p>A non existing local user tried to login.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">PAM_LOGIN_FAILED</code></td>
+                               
+                           <td><code class="code">"pam phase ~s failed to login through PAM: ~s"</code></td>
+                               
+                           <td>
+                              <p>A user failed to login through PAM.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">PAM_NO_LOGIN</code></td>
+                               
+                           <td><code class="code">"failed to login through PAM: ~s"</code></td>
+                               
+                           <td>
+                              <p>A user failed to login through PAM</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">EXT_LOGIN</code></td>
+                               
+                           <td><code class="code">"Logged in over ~s using externalauth, member of groups: ~s~s"</code></td>
+                               
+                           <td>
+                              <p>An externally authenticated user logged in.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">EXT_NO_LOGIN</code></td>
+                               
+                           <td><code class="code">"failed to login using externalauth: ~s"</code></td>
+                               
+                           <td>
+                              <p>External authentication failed for a user.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">GROUP_ASSIGN</code></td>
+                               
+                           <td><code class="code">"assigned to groups: ~s"</code></td>
+                               
+                           <td>
+                              <p>A user was assigned to a set of groups.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">GROUP_NO_ASSIGN</code></td>
+                               
+                           <td><code class="code">"Not assigned to any groups - all access is denied"</code></td>
+                               
+                           <td>
+                              <p>A user was logged in but wasn't assigned to any groups at all.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">MAAPI_LOGOUT</code></td>
+                               
+                           <td><code class="code">"Logged out from maapi ctx=~s (~s)"</code></td>
+                               
+                           <td>
+                              <p>A maapi user was logged out.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">SSH_LOGIN</code></td>
+                               
+                           <td><code class="code">"logged in over ssh from ~s with authmeth:~s"</code></td>
+                               
+                           <td>
+                              <p>A user logged into ConfD's builtin ssh server.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">SSH_LOGOUT</code></td>
+                               
+                           <td><code class="code">"Logged out ssh &lt;~s&gt; user"</code></td>
+                               
+                           <td>
+                              <p>A user was logged out from ConfD's builtin ssh server.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">SSH_NO_LOGIN</code></td>
+                               
+                           <td><code class="code">"Failed to login over ssh: ~s"</code></td>
+                               
+                           <td>
+                              <p>A user failed to login to ConfD's builtin SSH server.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">NOAAA_CLI_LOGIN</code></td>
+                               
+                           <td><code class="code">"logged in from the CLI with aaa disabled"</code></td>
+                               
+                           <td>
+                              <p>A user used the --noaaa flag to confd_cli</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">WEB_LOGIN </code></td>
+                               
+                           <td><code class="code">"logged in through Web UI from ~s"</code></td>
+                               
+                           <td>
+                              <p>A user logged in through the WebUI.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">WEB_LOGOUT</code></td>
+                               
+                           <td><code class="code">"logged out from Web UI"</code></td>
+                               
+                           <td>
+                              <p>A Web UI user logged out.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">WEB_CMD</code></td>
+                               
+                           <td><code class="code">"WebUI cmd '~s'"</code></td>
+                               
+                           <td>
+                              <p>User executed a Web UI command.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">WEB_ACTION</code></td>
+                               
+                           <td><code class="code">"WebUI action '~s'"</code></td>
+                               
+                           <td>
+                              <p>User executed a Web UI action.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">WEB_COMMIT</code></td>
+                               
+                           <td><code class="code">"WebUI commit ~s"</code></td>
+                               
+                           <td>
+                              <p>User performed Web UI commit.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">SNMP_AUTHENTICATION_FAILED</code></td>
+                               
+                           <td><code class="code">"SNMP authentication failed: ~s"</code></td>
+                               
+                           <td>
+                              <p>An SNMP authentication failed.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">LOGIN_REJECTED</code></td>
+                               
+                           <td><code class="code">"~s"</code></td>
+                               
+                           <td>
+                              <p>Authentication for a user was rejected by application callback.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">COMMIT_INFO</code></td>
+                               
+                           <td><code class="code">"commit ~s"</code></td>
+                               
+                           <td>
+                              <p>Information about configuration changes committed to the running data store.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">CLI_CMD_DONE</code></td>
+                               
+                           <td><code class="code">"CLI done"</code></td>
+                               
+                           <td>
+                              <p>CLI command finished successfully.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">CLI_CMD_ABORTED</code></td>
+                               
+                           <td><code class="code">"CLI aborted"</code></td>
+                               
+                           <td>
+                              <p>CLI command aborted.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">NCS_DEVICE_OUT_OF_SYNC</code></td>
+                               
+                           <td><code class="code">"NCS device-out-of-sync Device '~s' Info '~s'"</code></td>
+                               
+                           <td>
+                              <p>A check-sync action reported out-of-sync for a device</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">NCS_SERVICE_OUT_OF_SYNC</code></td>
+                               
+                           <td><code class="code">"NCS service-out-of-sync Service '~s' Info '~s'"</code></td>
+                               
+                           <td>
+                              <p>A check-sync action reported out-of-sync for a service</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">NCS_PYTHON_VM_START</code></td>
+                               
+                           <td><code class="code">"Starting the NCS Python VM"</code></td>
+                               
+                           <td>
+                              <p>Starting the NCS Python VM</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">NCS_PYTHON_VM_FAIL</code></td>
+                               
+                           <td><code class="code">"The NCS Python VM ~s"</code></td>
+                               
+                           <td>
+                              <p>The NCS Python VM failure/timeout</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">NCS_SET_PLATFORM_DATA_ERROR</code></td>
+                               
+                           <td><code class="code">"NCS Device '~s' failed to set platform data Info '~s'"</code></td>
+                               
+                           <td>
+                              <p>The device failed to set the platform operational data at connect</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">NCS_SMART_LICENSING_START</code></td>
+                               
+                           <td><code class="code">"Starting the NCS Smart Licensing Java VM"</code></td>
+                               
+                           <td>
+                              <p>Starting the NCS Smart Licensing Java VM</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">NCS_SMART_LICENSING_FAIL</code></td>
+                               
+                           <td><code class="code">"The NCS Smart Licensing Java VM ~s"</code></td>
+                               
+                           <td>
+                              <p>The NCS Smart Licensing Java VM failure/timeout</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">NCS_SMART_LICENSING_GLOBAL_NOTIFICATION</code></td>
+                               
+                           <td><code class="code"> "Smart Licensing Global Notification: ~s"</code></td>
+                               
+                           <td>
+                              <p>Smart Licensing Global Notification</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">NCS_SMART_LICENSING_ENTITLEMENT_NOTIFICATION</code></td>
+                               
+                           <td><code class="code"> "Smart Licensing Entitlement Notification: ~s"</code></td>
+                               
+                           <td>
+                              <p>Smart Licensing Entitlement Notification</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">NCS_SMART_LICENSING_EVALUATION_COUNTDOWN</code></td>
+                               
+                           <td><code class="code"> "Smart Licensing evaluation time remaining: ~s"</code></td>
+                               
+                           <td>
+                              <p>Smart Licensing evaluation time remaining</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">DEVEL_SLS</code></td>
+                               
+                           <td><code class="code">"~s"</code></td>
+                               
+                           <td>
+                              <p>Developer smartlicensing api log message</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">JSONRPC_REQUEST</code></td>
+                               
+                           <td><code class="code">"JSON-RPC: '~s' with JSON params ~s"</code></td>
+                               
+                           <td>
+                              <p>JSON-RPC method requested.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">DEVEL_ECONFD</code></td>
+                               
+                           <td><code class="code">"~s"</code></td>
+                               
+                           <td>
+                              <p>Developer econfd api log message</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">CDB_FATAL_ERROR</code></td>
+                               
+                           <td><code class="code">"fatal error in CDB: ~s"</code></td>
+                               
+                           <td>
+                              <p>CDB encounterad an unrecoverable error</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">LOGGING_STARTED</code></td>
+                               
+                           <td><code class="code">"Daemon logging started"</code></td>
+                               
+                           <td>
+                              <p>Logging subsystem started</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">LOGGING_SHUTDOWN</code></td>
+                               
+                           <td><code class="code">"Daemon logging terminating, reason: ~s"</code></td>
+                               
+                           <td>
+                              <p>Logging subsystem terminating</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">REOPEN_LOGS</code></td>
+                               
+                           <td><code class="code">"Logging subsystem, reopening log files"</code></td>
+                               
+                           <td>
+                              <p>Logging subsystem, reopening log files</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">OPEN_LOGFILE</code></td>
+                               
+                           <td><code class="code">"Logging subsystem, opening log file '~s' for ~s"</code></td>
+                               
+                           <td>
+                              <p>Indicate target file for certain type of logging</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">LOGGING_STARTED_TO</code></td>
+                               
+                           <td><code class="code">"Writing ~s log to ~s"</code></td>
+                               
+                           <td>
+                              <p>Write logs for a subsystem to a specific file</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">LOGGING_DEST_CHANGED</code></td>
+                               
+                           <td><code class="code">"Changing destination of ~s log to ~s"</code></td>
+                               
+                           <td>
+                              <p>The target logfile will change to another file</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">LOGGING_STATUS_CHANGED</code></td>
+                               
+                           <td><code class="code">"~s ~s log"</code></td>
+                               
+                           <td>
+                              <p>Notify a change of logging status (enabled/disabled) for a subsystem</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">ERRLOG_SIZE_CHANGED</code></td>
+                               
+                           <td><code class="code">"Changing size of error log (~s) to ~s (was ~s)"</code></td>
+                               
+                           <td>
+                              <p>Notify change of log size for error log</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">CGI_REQUEST</code></td>
+                               
+                           <td><code class="code">"CGI: '~s' script with method ~s"</code></td>
+                               
+                           <td>
+                              <p>CGI script requested.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">MMAP_SCHEMA_FAIL</code></td>
+                               
+                           <td><code class="code">"Failed to setup the shared memory schema"</code></td>
+                               
+                           <td>
+                              <p>Failed to setup the shared memory schema</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">KICKER_MISSING_SCHEMA</code></td>
+                               
+                           <td><code class="code">"Failed to load kicker schema"</code></td>
+                               
+                           <td>
+                              <p>Failed to load kicker schema</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">JSONRPC_REQUEST_IDLE_TIMEOUT</code></td>
+                               
+                           <td><code class="code">"Stopping session due to idle timeout: ~s"</code></td>
+                               
+                           <td>
+                              <p>JSON-RPC idle timeout.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">JSONRPC_REQUEST_ABSOLUTE_TIMEOUT</code></td>
+                               
+                           <td><code class="code">"Stopping session due to absolute timeout: ~s"</code></td>
+                               
+                           <td>
+                              <p>JSON-RPC absolute timeout.</p>
+                           </td>
+                             
+                        </tr>
+                        <tr>
+                               
+                           <td><code class="sgmltag-element">BAD_DEPENDENCY</code></td>
+                               
+                           <td><code class="code">"The dependency node '~s' for node '~s' in module '~s' does not exist"</code></td>
+                               
+                           <td>
+                              <p>A dependency was not found</p>
+                           </td>
+                             
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break" /></div><script type="text/javascript" src="common/main.js">
+            <!----></script><script type="text/javascript" src="common/splitterInit.js">
+            <!----></script><div class="footer" id="footer-legal">
+            <div class="footer-legal framework-footer-cq">
+               <div id="framework-footer">
+                  <div id="footer-legal"><a href="http://www.cisco.com/web/siteassets/legal/terms_condition.html">Terms &amp; Conditions</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/privacy.html">Privacy Statement</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/privacy.html#cookies">Cookie Policy</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/trademark.html">Trademarks</a></div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div id="sidebar">
+         <div id="leftnavigation" style="padding-top:3px;">
+            <div id="tabs">
+               <ul style="visibility: hidden;"></ul>
+               <div id="treeDiv"><img src="common/images/loading.gif" alt="loading table of contents..." id="tocLoading" style="display:block;" /><div id="ulTreeDiv" style="display:none">
+                     <ul id="tree" class="filetree">
+                        <li><span class="file"><a href="ch01.html" tabindex="1">Introduction</a></span></li>
+                        <li><span class="file"><a href="ug.ncs_sysmgmt.html" tabindex="1">NSO System Management</a></span><ul>
+                              <li><span class="file"><a href="ch02s01.html" tabindex="1">Introduction</a></span></li>
+                              <li><span class="file"><a href="ch02s02.html" tabindex="1">Configuring NSO</a></span><ul>
+                                    <li><span class="file"><a href="ch02s02s01.html" tabindex="1">Overview</a></span></li>
+                                    <li><span class="file"><a href="ch02s02s02.html" tabindex="1">Configuration file</a></span></li>
+                                    <li><span class="file"><a href="ch02s02s03.html" tabindex="1">Dynamic configuration</a></span><ul>
+                                          <li><span class="file"><a href="ch02s02s03.html#d0e176" tabindex="1">tailf-ncs.yang</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ch02s02s04.html" tabindex="1">Built-in or external SSH server</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.sys_mgmt.starting_ncs.html" tabindex="1">Starting NSO</a></span></li>
+                              <li><span class="file"><a href="ug.ncs_sys_mgmt.licensing.html" tabindex="1">Licensing NSO</a></span></li>
+                              <li><span class="file"><a href="ug.ncs_sys_mgmt.monitor.html" tabindex="1">Monitoring NSO</a></span><ul>
+                                    <li><span class="file"><a href="ch02s05s01.html" tabindex="1">NSO status</a></span></li>
+                                    <li><span class="file"><a href="ch02s05s02.html" tabindex="1">Monitoring the NSO daemon</a></span></li>
+                                    <li><span class="file"><a href="ch02s05s03.html" tabindex="1">Logging</a></span></li>
+                                    <li><span class="file"><a href="ch02s05s04.html" tabindex="1">syslog</a></span></li>
+                                    <li id="webhelp-currentid"><span class="file"><a href="ug.ncs_monitoring.messages.html" tabindex="1">Log messages and formats</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.ncs_sys_mgmt.backup.html" tabindex="1">Backup and restore</a></span><ul>
+                                    <li><span class="file"><a href="ch02s06s01.html" tabindex="1">Backup</a></span></li>
+                                    <li><span class="file"><a href="ch02s06s02.html" tabindex="1">NSO Restore</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.ncs_sys_mgmt.disaster.html" tabindex="1">Disaster management</a></span><ul>
+                                    <li><span class="file"><a href="ch02s07s01.html" tabindex="1">NSO fails to start</a></span></li>
+                                    <li><span class="file"><a href="ch02s07s02.html" tabindex="1">NSO failure after startup</a></span></li>
+                                    <li><span class="file"><a href="ch02s07s03.html" tabindex="1">Transaction commit failure</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch02s08.html" tabindex="1">Troubleshooting</a></span><ul>
+                                    <li><span class="file"><a href="ch02s08s01.html" tabindex="1">Installation Problems</a></span><ul>
+                                          <li><span class="file"><a href="ch02s08s01.html#d0e2841" tabindex="1">Error messages during installation</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ch02s08s02.html" tabindex="1">Problems Starting NSO</a></span><ul>
+                                          <li><span class="file"><a href="ch02s08s02.html#d0e2856" tabindex="1">NSO terminating with GLIBC error</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ch02s08s03.html" tabindex="1">Problems Running Examples</a></span><ul>
+                                          <li><span class="file"><a href="ch02s08s03.html#d0e2871" tabindex="1">The 'netconf-console' program fails</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ch02s08s04.html" tabindex="1">General Troubleshooting Strategies</a></span></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ug.admin_guide.smart_licensing.html" tabindex="1">Cisco Smart Licensing</a></span><ul>
+                              <li><span class="file"><a href="ch03s01.html" tabindex="1">Introduction</a></span></li>
+                              <li><span class="file"><a href="ch03s02.html" tabindex="1">Smart Accounts and Virtual Accounts</a></span><ul>
+                                    <li><span class="file"><a href="ch03s02s01.html" tabindex="1">Request a Smart Account</a></span></li>
+                                    <li><span class="file"><a href="ch03s02s02.html" tabindex="1">Adding users to a Smart Account</a></span></li>
+                                    <li><span class="file"><a href="ch03s02s03.html" tabindex="1">Create a License Registration Token</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch03s03.html" tabindex="1">Validation and Troubleshooting</a></span><ul>
+                                    <li><span class="file"><a href="ch03s03s01.html" tabindex="1">Available Show Commands</a></span></li>
+                                    <li><span class="file"><a href="ch03s03s02.html" tabindex="1">Available Show Commands</a></span></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ncs_alarms.html" tabindex="1">NSO Alarms</a></span><ul>
+                              <li><span class="file"><a href="ug.ncs_sys_mgmt.alarm.html" tabindex="1">Overview</a></span></li>
+                              <li><span class="file"><a href="ch04s02.html" tabindex="1">Alarm type structure</a></span></li>
+                              <li><span class="file"><a href="ch04s03.html" tabindex="1">Alarm type descriptions</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ug.package_mgmt.html" tabindex="1">NSO Packages</a></span><ul>
+                              <li><span class="file"><a href="ug.package_mgmt.overview.html" tabindex="1">Package Overview</a></span></li>
+                              <li><span class="file"><a href="ug.package_mgmt.loading.html" tabindex="1">Loading Packages</a></span></li>
+                              <li><span class="file"><a href="ug.package_mgmt.managing.html" tabindex="1">Managing Packages</a></span><ul>
+                                    <li><span class="file"><a href="ch05s03s01.html" tabindex="1">Package repositories</a></span></li>
+                                    <li><span class="file"><a href="ch05s03s02.html" tabindex="1">Actions</a></span></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ug.ncs_advanced.html" tabindex="1">Advanced Topics</a></span><ul>
+                              <li><span class="file"><a href="ch06s01.html" tabindex="1">Locks</a></span><ul>
+                                    <li><span class="file"><a href="ch06s01s01.html" tabindex="1">Global locks</a></span></li>
+                                    <li><span class="file"><a href="ch06s01s02.html" tabindex="1">Transaction locks</a></span></li>
+                                    <li><span class="file"><a href="ch06s01s03.html" tabindex="1">Northbound agents and global locks</a></span></li>
+                                    <li><span class="file"><a href="ch06s01s04.html" tabindex="1">External data providers</a></span></li>
+                                    <li><span class="file"><a href="ch06s01s05.html" tabindex="1">CDB</a></span></li>
+                                    <li><span class="file"><a href="ch06s01s06.html" tabindex="1">Lock impact on user sessions</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.advanced.ncs_ipc.html" tabindex="1">IPC ports</a></span><ul>
+                                    <li><span class="file"><a href="ug.ncs_advanced.ipc.restricting.html" tabindex="1">Restricting access to the IPC port</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch06s03.html" tabindex="1">Restart strategies for service manager</a></span></li>
+                              <li><span class="file"><a href="ug.ncs_advanced.security_issues.html" tabindex="1">Security issues</a></span></li>
+                              <li><span class="file"><a href="ch06s05.html" tabindex="1">Running NSO as a non privileged user</a></span></li>
+                              <li><span class="file"><a href="ch06s06.html" tabindex="1">Using IPv6 on northbound interfaces</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ug.cluster.html" tabindex="1">NSO Clustering</a></span><ul>
+                              <li><span class="file"><a href="ch07s01.html" tabindex="1">NSO Clustering Introduction</a></span></li>
+                              <li><span class="file"><a href="ch07s02.html" tabindex="1">Configuring and Running NSO in Cluster Mode</a></span><ul>
+                                    <li><span class="file"><a href="ch07s02s01.html" tabindex="1">Initial Setup</a></span></li>
+                                    <li><span class="file"><a href="ch07s02s02.html" tabindex="1">Actions</a></span></li>
+                                    <li><span class="file"><a href="ch07s02s03.html" tabindex="1">Configuration Variations</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch07s03.html" tabindex="1">Caveats</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ug.ha.html" tabindex="1">High Availability</a></span><ul>
+                              <li><span class="file"><a href="ch08s01.html" tabindex="1">Introduction to NSO High Availability</a></span></li>
+                              <li><span class="file"><a href="ch08s02.html" tabindex="1">HA framework requirements</a></span></li>
+                              <li><span class="file"><a href="ch08s03.html" tabindex="1">Mode of operation</a></span></li>
+                              <li><span class="file"><a href="ch08s04.html" tabindex="1">Security aspects</a></span></li>
+                              <li><span class="file"><a href="ch08s05.html" tabindex="1">API</a></span></li>
+                              <li><span class="file"><a href="ch08s06.html" tabindex="1">API</a></span></li>
+                              <li><span class="file"><a href="ch08s07.html" tabindex="1">Ticks</a></span></li>
+                              <li><span class="file"><a href="ch08s08.html" tabindex="1">Joining a cluster</a></span></li>
+                              <li><span class="file"><a href="ug.ha.relay_slaves.html" tabindex="1">Relay slaves</a></span></li>
+                              <li><span class="file"><a href="ch08s10.html" tabindex="1">CDB replication</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ug.aaa.html" tabindex="1">The AAA infrastructure</a></span><ul>
+                              <li><span class="file"><a href="ch09s01.html" tabindex="1">The problem</a></span></li>
+                              <li><span class="file"><a href="ch09s02.html" tabindex="1">Structure - data models</a></span><ul>
+                                    <li><span class="file"><a href="ch09s02s01.html" tabindex="1">Data model contents</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch09s03.html" tabindex="1">AAA related items in confd.confncs.conf</a></span></li>
+                              <li><span class="file"><a href="ug.aaa.authentication.html" tabindex="1">Authentication</a></span><ul>
+                                    <li><span class="file"><a href="ug.aaa.public_key_login.html" tabindex="1">Public Key Login</a></span><ul>
+                                          <li><span class="file"><a href="ug.aaa.public_key_login.html#d0e5588" tabindex="1">Setting up Public Key Login</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ch09s04s02.html" tabindex="1">Password Login</a></span></li>
+                                    <li><span class="file"><a href="ug.aaa.pam.html" tabindex="1">PAM</a></span></li>
+                                    <li><span class="file"><a href="ug.aaa.External_authentication.html" tabindex="1">External authentication</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch09s05.html" tabindex="1">Restricting the IPC port</a></span></li>
+                              <li><span class="file"><a href="ug.aaa.groups.html" tabindex="1">Group Membership</a></span></li>
+                              <li><span class="file"><a href="ug.aaa.authorization.html" tabindex="1">Authorization</a></span><ul>
+                                    <li><span class="file"><a href="ch09s07s01.html" tabindex="1">Command authorization</a></span></li>
+                                    <li><span class="file"><a href="ch09s07s02.html" tabindex="1">Rpc, notification, and data authorization</a></span></li>
+                                    <li><span class="file"><a href="ch09s07s03.html" tabindex="1">Authorization Examples</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch09s08.html" tabindex="1">The AAA cache</a></span></li>
+                              <li><span class="file"><a href="ch09s09.html" tabindex="1">Populating AAA using CDB</a></span></li>
+                              <li><span class="file"><a href="ug.aaa.External_database.html" tabindex="1">Populating AAA using external data</a></span></li>
+                              <li><span class="file"><a href="ch09s11.html" tabindex="1">Hiding the AAA tree</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ug.admin_guide.deployment.html" tabindex="1">NSO Deployment</a></span><ul>
+                              <li><span class="file"><a href="ch10s01.html" tabindex="1">Introduction</a></span></li>
+                              <li><span class="file"><a href="ch10s02.html" tabindex="1">Initial NSO installation</a></span></li>
+                              <li><span class="file"><a href="ch10s03.html" tabindex="1">Initial NSO configuration - ncs.conf</a></span></li>
+                              <li><span class="file"><a href="ch10s04.html" tabindex="1">Setting up AAA</a></span></li>
+                              <li><span class="file"><a href="ch10s05.html" tabindex="1">Cisco Smart Licensing</a></span></li>
+                              <li><span class="file"><a href="ch10s06.html" tabindex="1">Global settings and timeouts</a></span></li>
+                              <li><span class="file"><a href="ch10s07.html" tabindex="1">Enabling SNMP</a></span></li>
+                              <li><span class="file"><a href="ch10s08.html" tabindex="1">Loading the required NSO packages</a></span></li>
+                              <li><span class="file"><a href="ch10s09.html" tabindex="1">Preparing the HA of the NSO installation</a></span></li>
+                              <li><span class="file"><a href="ch10s10.html" tabindex="1">Handling tailf-hcc HA fallout</a></span><ul>
+                                    <li><span class="file"><a href="ch10s10s01.html" tabindex="1">NSO slave host failure</a></span></li>
+                                    <li><span class="file"><a href="ch10s10s02.html" tabindex="1">NSO master host failure</a></span></li>
+                                    <li><span class="file"><a href="ch10s10s03.html" tabindex="1">Setting up the VIP or L3 anycast BGP support</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch10s11.html" tabindex="1">Preparing the clustering of the NSO installation</a></span></li>
+                              <li><span class="file"><a href="ch10s12.html" tabindex="1">Testing the cluster configuration</a></span></li>
+                              <li><span class="file"><a href="ch10s13.html" tabindex="1">NSO system and packages upgrade</a></span><ul>
+                                    <li><span class="file"><a href="ch10s13s01.html" tabindex="1">NSO major upgrade</a></span></li>
+                                    <li><span class="file"><a href="ch10s13s02.html" tabindex="1">NSO minor upgrade</a></span></li>
+                                    <li><span class="file"><a href="ch10s13s03.html" tabindex="1">Package upgrade</a></span></li>
+                                    <li><span class="file"><a href="ch10s13s04.html" tabindex="1">Patch management</a></span></li>
+                                    <li><span class="file"><a href="ch10s13s05.html" tabindex="1">Manual upgrade</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch10s14.html" tabindex="1">Log management</a></span><ul>
+                                    <li><span class="file"><a href="ch10s14s01.html" tabindex="1">Log rotate</a></span></li>
+                                    <li><span class="file"><a href="ch10s14s02.html" tabindex="1">NED logs</a></span></li>
+                                    <li><span class="file"><a href="ch10s14s03.html" tabindex="1">Java logs</a></span></li>
+                                    <li><span class="file"><a href="ch10s14s04.html" tabindex="1">Internal NSO log</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch10s15.html" tabindex="1">Monitoring the installation</a></span><ul>
+                                    <li><span class="file"><a href="ch10s15s01.html" tabindex="1">Alarms</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch10s16.html" tabindex="1">Security considerations</a></span></li>
+                           </ul>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

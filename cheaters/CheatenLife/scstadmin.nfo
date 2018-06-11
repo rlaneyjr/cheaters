@@ -1,0 +1,227 @@
+SCST Configurator v3.3.0-pre1
+
+Usage:
+     -h, -help, --help       : Show this information.
+
+General Operations
+     -config <file>          : Configure SCST given the specified <file>.
+     -check_config <file>    : Checks the saved configuration <file>.
+     -write_config <file>    : Writes the current configuration to <file>.
+     -clear_config           : Clear all SCST configuration.
+
+Query Operations
+     -list_handler [<hndlr>] : List all available handlers or specific <hndlr>.
+     -list_device [<device>] : List all open devices or specific <device>.
+     -list_dgrp [<dgrp>]     : List all device groups or specific <dgrp>.
+     -list_tgrp [<tgrp>]     : List all target groups within a device group.
+         [-dev_group <dgrp>]
+     -list_driver [<driver>] : List all available drivers or specific <driver>.
+     -list_target [<target>] : List all available targets or specific <target>.
+         [-driver <driver>]
+     -list_group [<group>]   : List all configured groups, or specific <group>.  
+         [-driver <driver>]
+         [-target <target>]
+
+List Attribute Operations
+     -list_scst_attr         : List all attributes for SCST.
+     -list_hnd_attr <hndlr>  : List all attributes for a given handler.
+     -list_dev_attr <device> : List all attributes for a given device.
+     -list_drv_attr <driver> : List all attributes for a given driver.
+     -list_dgrp_attr <dgrp>  : List all attributes for a given device group.
+     -list_tgrp_attr <tgrp>  : List all attributes for a device group/target.
+          -dev_group <dgrp>
+     -list_ttgt_attr <tgt>   : List all attributes for a target group target.
+          -dev_group <dgrp>
+          -tgt_group <tgrp>
+     -list_tgt_attr <target> : List all attributes for a given driver/target.
+          -driver <driver>
+     -list_grp_attr <group>  : List all attributes for a given group.
+          -driver <driver>
+          -target <target>
+     -list_lun_attr <lun>    : List all attributes for a driver/target/lun.
+          -driver <driver>
+          -target <target>
+          [-group <group>]
+     -list_init_attr <init>  : List all attributes for a driver/target/initiator
+          -driver <driver>
+          -target <target>
+          -group <group>
+
+     -list_sessions          : List all current initiator sessions.
+
+Set Attribute Operations
+     -set_scst_attr          : Sets SCST attribute(s) <p> to value <v>.
+         -attributes <p=v,...>
+     -set_hnd_attr <hndlr>   : Sets handler attribute(s) <p> to value <v>.
+         -attributes <p=v,...>
+     -set_dev_attr <device>  : Sets device attributes(s) <p> to value <v>. 
+         -attributes <p=v,...>
+     -set_drv_attr <driver>  : Sets driver attribute(s) <p> to value <v>.
+         -attributes <p=v,...>
+     -set_dgrp_attr <dgrp>   : Sets device group attribute(s) <p> to value <v>.
+         -attributes <p=v,...>
+     -set_tgrp_attr <tgrp>   : Sets device group/target attribute(s)
+                               <p> to value <v>.
+         -dev_group <dgrp>
+         -attributes <p=v,...>
+     -set_ttgt_attr <tgt>    : Set target group target attribute(s)
+                               <p> to value <v>.
+         -dev_group <dgrp>
+         -tgt_group <tgrp>
+         -attributes <p=v,...>
+     -set_tgt_attr <target>  : Sets target attribute(s) <p> to value <v>.
+         -driver <driver>
+         -attributes <p=v,...>
+     -set_grp_attr <group>   : Sets group attribute(s) <p> to value <v>.
+         -driver <driver>
+         -target <target>
+         -attributes <p=v,...>
+     -set_lun_attr <lun>     : Sets LUN attribute(s) <p> to value <v>.
+         -driver <driver>
+         -target <target>
+         [-group <group>]
+         -attributes <p=v,...>
+     -set_init_attr <init>   : Sets initiator attribute(s) <p> to value <v>.
+         -driver <driver>
+         -target <target>
+         -group <group>
+         -attributes <p=v,...>
+
+Add Dynamic Attribute Operations
+     -add_drv_attr <driver>  : Adds driver attribute(s) <p> with value <v>.
+         -attributes <p=v,...>
+     -add_tgt_attr <target>  : Adds target attribute(s) <p> with value <v>.
+         -driver <driver>
+         -attributes <p=v,...>
+
+Remove Dynamic Attribute Operations
+     -rem_drv_attr <driver>  : Remove driver attribute(s) <p> with value <v>.
+         -attributes <p=v,...>
+     -rem_tgt_attr <target>  : Remove target attribute(s) <p> with value <v>.
+         -driver <driver>
+         -attributes <p=v,...>
+
+Device Operations
+     -open_dev <device>      : Adds a new device using handler <handler>.
+         -handler <handler>
+         -attributes <p=v,...>
+     -resync_dev <device>    : Resync the device size with the initiator(s).
+     -close_dev <device>     : Closes a device belonging to handler <handler>.
+         -handler <handler>
+
+Device Group Operations
+     -add_dgrp <dgrp>        : Add device group <dgrp>.
+     -rem_dgrp <dgrp>        : Remove device group <dgrp>.
+     -add_dgrp_dev <device>
+         -dev_group <dgroup> : Add device <device> to device group <dgrp>.
+     -rem_dgrp_dev <device>
+         -dev_group <dgroup> : Remove device <device> from device group <dgrp>.  
+     -add_tgrp <tgrp>
+         -tgt_group <tgrp>   : Add target group <tgrp> to device group <dgrp>.
+     -rem_tgrp <tgrp>
+         -dev_group <dgrp>   : Remove target group <tgrp> from device group.
+     -add_tgrp_tgt <tgt>     : Add target <tgt> to specified target group.
+         -dev_group <dgrp>
+         -tgt_group <tgrp>
+     -rem_tgrp_tgt <tgt>     : Remove target <tgt> from specified target group.
+         -dev_group <dgrp>
+         -tgt_group <tgrp>
+
+Target Operations
+     -add_target <target>    : Add a dynamic target to a capable driver.
+         -driver <driver>
+     -rem_target <target>    : Remove a dynamic target from a driver.
+         -driver <driver>
+
+Group Operations
+     -add_group <group>      : Add a group to a given driver & target.
+         -driver <driver>
+         -target <target>
+     -rem_group <group>      : Remove a group from a given driver & target.
+         -driver <driver>
+         -target <target>
+ 
+Initiator Operations
+     -add_init <init>        : Adds an initiator to a group.
+         -driver <driver>
+         -target <target>
+         -group <group>
+     -rem_init <user>        : Removes an initiator from a group.
+         -driver <driver>
+         -target <target>
+         -group <group>
+     -move_init <init>       : Moves an initiator from one group to another.
+         -driver <driver>
+         -target <target>
+         -group <group 1>
+         -to <group 2>
+     -clear_inits            : Clear all initiators from a given group.
+         -driver <driver>
+         -target <target>
+         -group <group>
+
+Target LUN Operations
+     -add_lun <lun>          : Adds a given device to a group.
+         -driver <driver>
+         -target <target>
+         [-group <group>]
+         -device <device>
+         -attributes <p=v,...>
+     -rem_lun <lun>          : Remove a LUN from a group.
+         -driver <driver>
+         -target <target>
+         [-group <group>]
+     -replace_lun <lun>      : Replaces a LUN's device with a different one.
+         -driver <driver>
+         -target <target>
+         [-group <group>]
+         -device <device>
+         -attributes <p=v,...>
+     -clear_luns             : Clear all LUNs within a group.
+         -driver <driver>
+         -target <target>
+         [-group <group>]
+
+Target Driver Operations
+     -enable_target <t>      : Enable target mode for a given driver & target.
+         -driver <driver>
+     -disable_target <t>     : Disable target mode for a given driver & target.
+         -driver <driver>
+     -issue_lip [<t>]
+        [-driver <driver>]   : Issue a LIP for a specific driver/target or for
+                               all drivers and targets.
+     -lip                    : Issue a LIP after having applied FC
+                               configuration changes.
+     -no_lip                 : Don't automatically issue a LIP after having
+                               applied FC configuration changes.
+
+Options
+     -nonkey                 : When writing a config file or listing attributes,
+                               store/print non-key attributes as well.
+     -force                  : Force all configuration changes,
+                               even deletions (DANGER!).
+     -noprompt               : Do not prompt or pause. Use with caution!
+     -cont_on_err            : Continue after an error occurred.
+
+Debugging (limited support)
+     -debug                  : Debug mode - don't do anything destructive.
+
+Examples:
+     Open a new device:
+       scstadmin -open_dev DISK01 -handler vdisk_fileio 
+         -attributes filename=/vdisks/disk01.dsk,read_only
+
+     Setting the T10 Device ID of a device
+       scstadmin -set_dev_attr DISK01 -attributes t10_dev_id=0x2345 
+
+     Create a new security group:
+       scstadmin -add_group HOST01 -driver qla2x00t 
+         -target 50:06:0B:00:00:39:71:78
+       
+     Add a LUN to a group:
+       scstadmin -add_lun 1 -driver qla2x00t -target 50:06:0B:00:00:39:71:78 
+         -group HOST01 -device DISK01 -attributes read_only=1
+
+     Enable target mode for fibre card specifying its WWN
+       scstadmin -enable_target 50:06:0B:00:00:39:71:78 -driver qla2x00t
+

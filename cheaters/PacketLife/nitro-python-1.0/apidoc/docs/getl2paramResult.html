@@ -1,0 +1,244 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>Citrix NetScaler XML API User&#39;s Guide - Structure Definition</title>
+<link rel="stylesheet" type="text/css" href="help_ns.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body onload="initial()" class="ns_body">
+<div class="ns_content"><table cellpadding="0" cellspacing="0"><script type="text/javascript">
+function changeContext(id,lang,flag){
+	parent.banner.document.language.select.value = lang;
+	if( lang == "C" ){
+		if(flag == "1"){
+			showContent(cfirstcontent,id,lang);
+		}
+		else{
+			showContent(csecondcontent,id,lang);
+		}
+	}
+	if( lang == "Perl" ){
+		if(flag == "1"){
+			showContent(perlfirstcontent,id,lang);
+		}
+		else{
+			showContent(perlsecondcontent,id,lang);
+		}
+	}
+	if( lang == "Java" ){
+		if(flag == "1"){
+			showContent(javafirstcontent,id,lang);	
+		}
+		else{
+			showContent(javasecondcontent,id,lang);
+		}
+	}
+	if( lang == "C#" ){
+		if(flag == "1"){
+			showContent(csharpfirstcontent,id,lang);
+		}
+		else{
+			showContent(csharpsecondcontent,id,lang);
+		}
+	}
+	if( lang == "VB" ){
+		if(flag == "1"){
+			showContent(vbfirstcontent,id,lang);
+		}
+		else{
+			showContent(vbsecondcontent,id,lang);
+		}
+	}
+	if(flag == "1"){
+		showInside(lang,"0");
+	}
+	else{
+		showOutside(lang);
+	}
+}
+function showContent(content,id,lang){
+	if(ie4){
+	   showContentObj=document.all.id;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById(id);
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+  showLangSelect(lang);
+}
+function showInside(str,cond){
+	if(str == "C"){
+ 		var inside_content = csecondcontent;
+ 	}
+ 	if(str == "Perl"){
+ 		var inside_content = perlsecondcontent;
+ 	}
+ 	if(str == "Java"){
+ 		var inside_content = javasecondcontent;
+ 	}
+ 	if(str == "C#"){
+		var inside_content = csharpsecondcontent;
+ 	}
+ 	if(str == "VB"){
+		var inside_content = vbsecondcontent;
+ 	}
+	showContent(inside_content,'qiksearch_div1',str);
+ 	if ( cond == "1" ){
+ 		var page = 'apidoc/docs/getl2paramResult.html#l2paramList';
+ 		document.location.href = page;
+ 	}
+}
+function showOutside(str){
+	if(str == "C" ){
+ 		var inside_content = cfirstcontent;
+ 	}
+ 	if(str == "Perl" ){
+ 		var inside_content = perlfirstcontent;
+ 	}
+ 	if(str == "Java" ){
+ 		var inside_content = javafirstcontent;
+ 	}
+ 	if(str == "C#" ){
+ 		var inside_content = csharpfirstcontent;
+ 	}
+ 	if(str == "VB" ){
+ 		var inside_content = vbfirstcontent;
+ 	}
+ 	showContent(inside_content,'qiksearch_div',str);
+}
+function initial(){
+	ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+	ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+	ns4=document.layers;
+	langSelected = parent.banner.document.language.select.value
+	var plink = parent.banner.document.language.plink.value
+	var my_array=plink.split("&");
+	var temp = my_array[0];
+ 	var grp = temp.split("@");
+	var cmd = my_array[1];
+	var regex = /^stat/i;
+	if( cmd.match(regex) != null ){
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex_stat.html\">Statistics</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getl2paramResult");
+	}
+	else{
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex.htm\">Configuration</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getl2paramResult");
+	}
+	if( langSelected == "C" ){
+ 		var content = cfirstcontent;
+	}
+	else if( langSelected == "Perl" ){
+		var content = perlfirstcontent;
+	}
+	else if( langSelected == "Java" ){
+		var content = javafirstcontent;
+	}
+	else if( langSelected == "C#" ){
+		var content = csharpfirstcontent;
+	}
+	else if( langSelected == "VB" ){
+		var content = vbfirstcontent;
+	}
+	else{
+		var content = cfirstcontent;
+		langSelected="C";
+	}
+	showContent(content,'qiksearch_div',langSelected);
+	showInside(langSelected,"0");
+}
+function showPLink(content){
+	if(ie4){
+	   showContentObj=document.all.progressive_link;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById("progressive_link");
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+}
+function showLangSelect(id){
+	   if(ie4)
+       {
+       	showObj=document.all.first_url;
+       	showObj1=document.all.second_url;
+       }
+       if(ns6)
+       {
+       	showObj=document.getElementById("first_url");
+       	showObj1=document.getElementById("second_url");
+       }
+       if( id == "C" ){
+       	newlink = "<b>C</b>";
+       	newlink1 = "<b>C</b>";
+       }
+       else{
+       	newlink = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C','1');\"><b>C</b></a>";
+       	newlink1 = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C','0');\"><b>C</b></a>";
+       }
+       if( id == "Perl" ){
+       	newlink = newlink + " | <b>Perl</b>";
+       	newlink1 = newlink1 + " | <b>Perl</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Perl','1');\"><b>Perl</b></a>";
+      	       newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Perl','0');\"><b>Perl</b></a>";
+       }
+       if( id == "Java" ){
+       	newlink = newlink + " | <b>Java</b>";
+       	newlink1 = newlink1 + " | <b>Java</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Java','1');\"><b>Java</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Java','0');\"><b>Java</b></a>";
+       }
+       if( id == "C#" ){
+       	newlink = newlink + " | <b>C#</b>";
+       	newlink1 = newlink1 + " | <b>C#</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C#','1');\"><b>C#</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C#','0');\"><b>C#</b></a>";
+       }
+       showObj.innerHTML = newlink;
+       showObj1.innerHTML = newlink1;
+}
+</script>
+<tr><td><div><div id="progressive_link"></div></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>getl2paramResult Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>getl2paramResult</b> structure defines the return type for getl2param API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="first_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+cfirstcontent = "<pre>struct getl2paramResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; struct <a href=\'getl2paramResult.html\#l2param\'>l2param</a> list[];<br> };<br></pre></td></tr></table></div>"
+perlfirstcontent = "<pre>$getl2paramResult = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rc => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; message => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; List => \'@<a href=\'getl2paramResult.html\#l2param\'>l2param</a>\',<br> };<br></pre></td></tr></table></div>"
+javafirstcontent = "<pre>class getl2paramResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getl2paramResult.html\#l2param\'>l2param</a>[] list;<br> };<br></pre></td></tr></table></div>"
+csharpfirstcontent = "<pre>class getl2paramResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getl2paramResult.html\#l2param\'>l2param</a>[] list;<br> };<br></pre></td></tr></table></div>"
+vbfirstcontent = "<pre>Public <b>Structure</b> getl2paramResult <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rc As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public message As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public  l2paramList() As  <a href=\'getl2paramResult.html\#l2param\'>l2param</a><br> <b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rc</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, rc is 0 else rc > 0. Values above 0x8000 indicate Warnings.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>message</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, message is NULL else message contains <a href="errorlisting.html">Error/Warning</a> message.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>l2paramList</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">List of l2params</div></td></tr><tr><td><br></td></tr><tr><td><div><a name="l2param"></a></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>l2param  Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>l2param</b> structure defines the actual return type values for getl2param API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="second_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div1" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+csecondcontent = "<pre>struct l2param {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int maxbridgecollision;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int mbfpeermacupdate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * bdggrpproxyarp;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * bdgsetting;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * garponvridintf;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * macmodefwdmypkt;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * usemymac;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * proxyarp;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * garpreply;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * mbfinstlearning;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * rstintfonhafo;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * skipproxyingbsdtraffic;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * returntoethernetsender;<br> };<br></pre></td></tr></table></div>"
+perlsecondcontent = "<pre>$l2param = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; maxbridgecollision => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; mbfpeermacupdate => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; bdggrpproxyarp => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; bdgsetting => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; garponvridintf => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; macmodefwdmypkt => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; usemymac => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; proxyarp => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; garpreply => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; mbfinstlearning => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rstintfonhafo => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; skipproxyingbsdtraffic => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; returntoethernetsender => \'$\',<br> };<br></pre></td></tr></table></div>"
+javasecondcontent = "<pre>class l2param {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt maxbridgecollision;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt mbfpeermacupdate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String bdggrpproxyarp;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String bdgsetting;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String garponvridintf;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String macmodefwdmypkt;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String usemymac;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String proxyarp;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String garpreply;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String mbfinstlearning;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String rstintfonhafo;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String skipproxyingbsdtraffic;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String returntoethernetsender;<br> };<br></pre></td></tr></table></div>"
+csharpsecondcontent = "<pre>class l2param {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 maxbridgecollision;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 mbfpeermacupdate;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string bdggrpproxyarp;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string bdgsetting;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string garponvridintf;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string macmodefwdmypkt;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string usemymac;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string proxyarp;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string garpreply;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string mbfinstlearning;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string rstintfonhafo;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string skipproxyingbsdtraffic;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string returntoethernetsender;<br> };<br></pre></td></tr></table></div>"
+vbsecondcontent = "<pre>Public <b>Structure</b> l2param <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public maxbridgecollision As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public mbfpeermacupdate As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public bdggrpproxyarp As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public bdgsetting As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public garponvridintf As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public macmodefwdmypkt As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public usemymac As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public proxyarp As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public garpreply As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public mbfinstlearning As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rstintfonhafo As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public skipproxyingbsdtraffic As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public returntoethernetsender As String<br><b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>maxbridgecollision</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Maximum bridge collision for loop detection </div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>mbfpeermacupdate</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">When mbf_instant_learning is enabled, learn any changes in peer's MAC after this time interval, which is in 10ms ticks.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>bdggrpproxyarp</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Set/reset proxy ARP in bridge group deployment</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>bdgsetting</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Bridging settings for C2C behavior</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>garponvridintf</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Send GARP messagess on VRID-configured interfaces upon failover </div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>macmodefwdmypkt</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"> MAC mode vserver forward packets destined to VIPs.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>usemymac</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Set/reset cfg_use_my_mac </div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>proxyarp</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Set/reset cfg_proxy_arp_dr </div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>garpreply</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Set/reset REPLY form of GARP </div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>mbfinstlearning</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Enable instant learning of MAC changes in MBF mode.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rstintfonhafo</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Enable the reset interface upon HA failover.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>skipproxyingbsdtraffic</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Enable the proxying of FreeBSD traffic.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>returntoethernetsender</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"> Return to ethernet sender.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>See Also</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="getl2param.html">getl2param</a></div></td></tr><tr><td><br></td></tr></table></div>
+</body>
+</html>

@@ -1,0 +1,552 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>hanode module &mdash; Nitro  documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Nitro  documentation" href="index.html" />
+    <link rel="up" title="ha package" href="nssrc.com.citrix.netscaler.nitro.resource.config.ha.html" />
+    <link rel="next" title="hanode_binding module" href="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode_binding.html" />
+    <link rel="prev" title="hafiles module" href="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hafiles.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode_binding.html" title="hanode_binding module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hafiles.html" title="hafiles module"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Nitro  documentation</a> &raquo;</li>
+          <li><a href="nssrc.com.citrix.netscaler.nitro.resource.config.html" >config package</a> &raquo;</li>
+          <li><a href="nssrc.com.citrix.netscaler.nitro.resource.config.ha.html" accesskey="U">ha package</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode">
+<span id="hanode-module"></span><h1>hanode module<a class="headerlink" href="#module-nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode">
+<em class="property">class </em><tt class="descname">hanode</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.html#nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource" title="nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource"><tt class="xref py py-class docutils literal"><span class="pre">nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource</span></tt></a></p>
+<p>Configuration for node resource.</p>
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.id">
+<tt class="descname">id</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number that uniquely identifies the node. For self node, it will always be 0. Peer node values can range from 1-64.&lt;br/&gt;Minimum length =  1&lt;br/&gt;Maximum length =  64.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.ipaddress">
+<tt class="descname">ipaddress</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.ipaddress" title="Permalink to this definition">¶</a></dt>
+<dd><p>The NSIP or NSIP6 address of the node to be added for an HA configuration. This setting is neither propagated nor synchronized.&lt;br/&gt;Minimum length =  1.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.inc">
+<tt class="descname">inc</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.inc" title="Permalink to this definition">¶</a></dt>
+<dd><p>This option is required if the HA nodes reside on different networks. When this mode is enabled, the following independent network entities and configurations are neither propagated nor synced to the other node: MIPs, SNIPs, VLANs, routes (except LLB routes), route monitors, RNAT rules (except any RNAT rule with a VIP as the NAT IP), and dynamic routing configurations. They are maintained independently on each node.&lt;br/&gt;Default value: DISABLED&lt;br/&gt;Possible values = ENABLED, DISABLED.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.hastatus">
+<tt class="descname">hastatus</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.hastatus" title="Permalink to this definition">¶</a></dt>
+<dd><p>The HA status of the node. The HA status STAYSECONDARY is used to force the secondary device stay as secondary independent of the state of the Primary device. For example, in an existing HA setup, the Primary node has to be upgraded and this process would take few seconds. During the upgradation, it is possible that the Primary node may suffer from a downtime for a few seconds. However, the Secondary should not take over as the Primary node. Thus, the Secondary node should remain as Secondary even if there is a failure in the Primary node.
+STAYPRIMARY configuration keeps the node in primary state in case if it is healthy, even if the peer node was the primary node initially. If the node with STAYPRIMARY setting (and no peer node) is added to a primary node (which has this node as the peer) then this node takes over as the new primary and the older node becomes secondary. ENABLED state means normal HA operation without any constraints/preferences. DISABLED state disables the normal HA operation of the node.&lt;br/&gt;Possible values = ENABLED, STAYSECONDARY, DISABLED, STAYPRIMARY.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.hasync">
+<tt class="descname">hasync</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.hasync" title="Permalink to this definition">¶</a></dt>
+<dd><p>Automatically maintain synchronization by duplicating the configuration of the primary node on the secondary node. This setting is not propagated. Automatic synchronization requires that this setting be enabled (the default) on the current secondary node. Synchronization uses TCP port 3010.&lt;br/&gt;Default value: ENABLED&lt;br/&gt;Possible values = ENABLED, DISABLED.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.haprop">
+<tt class="descname">haprop</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.haprop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Automatically propagate all commands from the primary to the secondary node, except the following:
+* All HA configuration related commands. For example, add ha node, set ha node, and bind ha node. 
+* All Interface related commands. For example, set interface and unset interface.
+* All channels related commands. For example, add channel, set channel, and bind channel.
+The propagated command is executed on the secondary node before it is executed on the primary. If command propagation fails, or if command execution fails on the secondary, the primary node executes the command and logs an error.  Command propagation uses port 3010.
+Note: After enabling propagation, run force synchronization on either node.&lt;br/&gt;Default value: ENABLED&lt;br/&gt;Possible values = ENABLED, DISABLED.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.hellointerval">
+<tt class="descname">hellointerval</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.hellointerval" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interval, in milliseconds, between heartbeat messages sent to the peer node. The heartbeat messages are UDP packets sent to port 3003 of the peer node.&lt;br/&gt;Default value: 200&lt;br/&gt;Minimum length =  200&lt;br/&gt;Maximum length =  1000.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.deadinterval">
+<tt class="descname">deadinterval</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.deadinterval" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of seconds after which a peer node is marked DOWN if heartbeat messages are not received from the peer node.&lt;br/&gt;Default value: 3&lt;br/&gt;Minimum length =  3&lt;br/&gt;Maximum length =  60.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.failsafe">
+<tt class="descname">failsafe</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.failsafe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Keep one node primary if both nodes fail the health check, so that a partially available node can back up data and handle traffic. This mode is set independently on each node.&lt;br/&gt;Default value: OFF&lt;br/&gt;Possible values = ON, OFF.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.maxflips">
+<tt class="descname">maxflips</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.maxflips" title="Permalink to this definition">¶</a></dt>
+<dd><p>Max number of flips allowed before becoming sticky primary.&lt;br/&gt;Default value: 0.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.maxfliptime">
+<tt class="descname">maxfliptime</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.maxfliptime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interval after which flipping of node states can again start.&lt;br/&gt;Default value: 0.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.syncvlan">
+<tt class="descname">syncvlan</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.syncvlan" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vlan on which HA related communication is sent. This include sync, propagation , connection mirroring , LB persistency config sync, persistent session sync and session state sync. However HA heartbeats can go all interfaces.&lt;br/&gt;Minimum length =  1&lt;br/&gt;Maximum length =  4094.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.name">
+<tt class="descname">name</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Node Name.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.flags">
+<tt class="descname">flags</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.flags" title="Permalink to this definition">¶</a></dt>
+<dd><p>The flags for this entry.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.state">
+<tt class="descname">state</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.state" title="Permalink to this definition">¶</a></dt>
+<dd><p>HA Master State.&lt;br/&gt;Possible values = Primary, Secondary, UNKNOWN.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.enaifaces">
+<tt class="descname">enaifaces</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.enaifaces" title="Permalink to this definition">¶</a></dt>
+<dd><p>Enabled interfaces.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.disifaces">
+<tt class="descname">disifaces</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.disifaces" title="Permalink to this definition">¶</a></dt>
+<dd><p>Disabled interfaces.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.hamonifaces">
+<tt class="descname">hamonifaces</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.hamonifaces" title="Permalink to this definition">¶</a></dt>
+<dd><p>HAMON ON interfaces.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.pfifaces">
+<tt class="descname">pfifaces</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.pfifaces" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interfaces causing Partial Failure.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.ifaces">
+<tt class="descname">ifaces</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.ifaces" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interfaces on which non-multicast is not seen.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.network">
+<tt class="descname">network</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.network" title="Permalink to this definition">¶</a></dt>
+<dd><p>The network.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.netmask">
+<tt class="descname">netmask</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.netmask" title="Permalink to this definition">¶</a></dt>
+<dd><p>The netmask.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.ssl2">
+<tt class="descname">ssl2</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.ssl2" title="Permalink to this definition">¶</a></dt>
+<dd><p>SSL card status.&lt;br/&gt;Possible values = DOWN, UP, NOT PRESENT, UNKNOWN.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.masterstatetime">
+<tt class="descname">masterstatetime</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.masterstatetime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Time elapsed in current master state.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.routemonitor">
+<tt class="descname">routemonitor</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.routemonitor" title="Permalink to this definition">¶</a></dt>
+<dd><p>The IP address (IPv4 or IPv6).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.curflips">
+<tt class="descname">curflips</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.curflips" title="Permalink to this definition">¶</a></dt>
+<dd><p>Keeps track of number of flips that have happened till now in current interval.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.completedfliptime">
+<tt class="descname">completedfliptime</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.completedfliptime" title="Permalink to this definition">¶</a></dt>
+<dd><p>To inform user whether flip time is elapsed or not.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.routemonitorstate">
+<tt class="descname">routemonitorstate</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.routemonitorstate" title="Permalink to this definition">¶</a></dt>
+<dd><p>State for route monitor.&lt;br/&gt;Possible values = UP, DOWN.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.add">
+<em class="property">classmethod </em><tt class="descname">add</tt><big>(</big><em>client</em>, <em>resource</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this API to add hanode.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.delete">
+<em class="property">classmethod </em><tt class="descname">delete</tt><big>(</big><em>client</em>, <em>resource</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this API to delete hanode.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.update">
+<em class="property">classmethod </em><tt class="descname">update</tt><big>(</big><em>client</em>, <em>resource</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this API to update hanode.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.unset">
+<em class="property">classmethod </em><tt class="descname">unset</tt><big>(</big><em>client</em>, <em>resource</em>, <em>args</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.unset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this API to unset the properties of hanode resource.
+Properties that need to be unset are specified in args array.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.get">
+<em class="property">classmethod </em><tt class="descname">get</tt><big>(</big><em>client</em>, <em>name=''</em>, <em>option_=''</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this API to fetch all the hanode resources that are configured on netscaler.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.get_filtered">
+<em class="property">classmethod </em><tt class="descname">get_filtered</tt><big>(</big><em>client</em>, <em>filter_</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.get_filtered" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this API to fetch filtered set of hanode resources.
+filter string should be in JSON format.eg: &#8220;port:80,servicetype:HTTP&#8221;.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.count">
+<em class="property">classmethod </em><tt class="descname">count</tt><big>(</big><em>client</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this API to count the hanode resources configured on NetScaler.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.count_filtered">
+<em class="property">classmethod </em><tt class="descname">count_filtered</tt><big>(</big><em>client</em>, <em>filter_</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.count_filtered" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this API to count filtered the set of hanode resources.
+Filter string should be in JSON format.eg: &#8220;port:80,servicetype:HTTP&#8221;.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.State">
+<em class="property">class </em><tt class="descname">State</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.State" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.State.Primary">
+<tt class="descname">Primary</tt><em class="property"> = 'Primary'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.State.Primary" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.State.Secondary">
+<tt class="descname">Secondary</tt><em class="property"> = 'Secondary'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.State.Secondary" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.State.UNKNOWN">
+<tt class="descname">UNKNOWN</tt><em class="property"> = 'UNKNOWN'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.State.UNKNOWN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.Haprop">
+<em class="property">class </em><tt class="descclassname">hanode.</tt><tt class="descname">Haprop</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.Haprop" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.Haprop.ENABLED">
+<tt class="descname">ENABLED</tt><em class="property"> = 'ENABLED'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.Haprop.ENABLED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.Haprop.DISABLED">
+<tt class="descname">DISABLED</tt><em class="property"> = 'DISABLED'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.Haprop.DISABLED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.Inc">
+<em class="property">class </em><tt class="descclassname">hanode.</tt><tt class="descname">Inc</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.Inc" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.Inc.ENABLED">
+<tt class="descname">ENABLED</tt><em class="property"> = 'ENABLED'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.Inc.ENABLED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.Inc.DISABLED">
+<tt class="descname">DISABLED</tt><em class="property"> = 'DISABLED'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.Inc.DISABLED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.Routemonitorstate">
+<em class="property">class </em><tt class="descclassname">hanode.</tt><tt class="descname">Routemonitorstate</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.Routemonitorstate" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.Routemonitorstate.UP">
+<tt class="descname">UP</tt><em class="property"> = 'UP'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.Routemonitorstate.UP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.Routemonitorstate.DOWN">
+<tt class="descname">DOWN</tt><em class="property"> = 'DOWN'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.Routemonitorstate.DOWN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.Hasync">
+<em class="property">class </em><tt class="descclassname">hanode.</tt><tt class="descname">Hasync</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.Hasync" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.Hasync.ENABLED">
+<tt class="descname">ENABLED</tt><em class="property"> = 'ENABLED'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.Hasync.ENABLED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.Hasync.DISABLED">
+<tt class="descname">DISABLED</tt><em class="property"> = 'DISABLED'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.Hasync.DISABLED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.Failsafe">
+<em class="property">class </em><tt class="descclassname">hanode.</tt><tt class="descname">Failsafe</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.Failsafe" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.Failsafe.ON">
+<tt class="descname">ON</tt><em class="property"> = 'ON'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.Failsafe.ON" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.Failsafe.OFF">
+<tt class="descname">OFF</tt><em class="property"> = 'OFF'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.Failsafe.OFF" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.Hastatus">
+<em class="property">class </em><tt class="descclassname">hanode.</tt><tt class="descname">Hastatus</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.Hastatus" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.Hastatus.ENABLED">
+<tt class="descname">ENABLED</tt><em class="property"> = 'ENABLED'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.Hastatus.ENABLED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.Hastatus.STAYSECONDARY">
+<tt class="descname">STAYSECONDARY</tt><em class="property"> = 'STAYSECONDARY'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.Hastatus.STAYSECONDARY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.Hastatus.DISABLED">
+<tt class="descname">DISABLED</tt><em class="property"> = 'DISABLED'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.Hastatus.DISABLED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.Hastatus.STAYPRIMARY">
+<tt class="descname">STAYPRIMARY</tt><em class="property"> = 'STAYPRIMARY'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.Hastatus.STAYPRIMARY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.Ssl2">
+<em class="property">class </em><tt class="descclassname">hanode.</tt><tt class="descname">Ssl2</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.Ssl2" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.Ssl2.DOWN">
+<tt class="descname">DOWN</tt><em class="property"> = 'DOWN'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.Ssl2.DOWN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.Ssl2.UP">
+<tt class="descname">UP</tt><em class="property"> = 'UP'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.Ssl2.UP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.Ssl2.NOT_PRESENT">
+<tt class="descname">NOT_PRESENT</tt><em class="property"> = 'NOT PRESENT'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.Ssl2.NOT_PRESENT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.Ssl2.UNKNOWN">
+<tt class="descname">UNKNOWN</tt><em class="property"> = 'UNKNOWN'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode.Ssl2.UNKNOWN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode_response">
+<em class="property">class </em><tt class="descname">hanode_response</tt><big>(</big><em>length=1</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.hanode_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.base.base_response.html#nssrc.com.citrix.netscaler.nitro.resource.base.base_response.base_response" title="nssrc.com.citrix.netscaler.nitro.resource.base.base_response.base_response"><tt class="xref py py-class docutils literal"><span class="pre">nssrc.com.citrix.netscaler.nitro.resource.base.base_response.base_response</span></tt></a></p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper"><ul class="globaltoc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.exception.html">Nitro exception Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.base.html">Base Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.service.html">Service Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.util.html">Util Package</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.html">Config Package</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.aaa.html">aaa</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.app.html">app</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.appflow.html">appflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.appfw.html">appfw</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.appqoe.html">appqoe</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.audit.html">audit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.authentication.html">authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.authorization.html">authorization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.autoscale.html">autoscale</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.basic.html">basic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.ca.html">ca</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.cache.html">cache</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.html">cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.cmp.html">cmp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.cr.html">cr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.cs.html">cs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.db.html">db</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.dns.html">dns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.dos.html">dos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.feo.html">feo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.filter.html">filter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.gslb.html">gslb</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.ha.html">ha</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hafailover.html">hafailover</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hafiles.html">hafiles</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">hanode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode_binding.html">hanode_binding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode_ci_binding.html">hanode_ci_binding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode_fis_binding.html">hanode_fis_binding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode_partialfailureinterfaces_binding.html">hanode_partialfailureinterfaces_binding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode_routemonitor6_binding.html">hanode_routemonitor6_binding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode_routemonitor_binding.html">hanode_routemonitor_binding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hasync.html">hasync</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.ipsec.html">ipsec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.lb.html">lb</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.lldp.html">lldp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.network.html">network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.ns.html">ns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.ntp.html">ntp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.policy.html">policy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.pq.html">pq</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.protocol.html">protocol</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.responder.html">responder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.html">rewrite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.rise.html">rise</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.router.html">router</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.sc.html">sc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.snmp.html">snmp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.spillover.html">spillover</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.ssl.html">ssl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.stream.html">stream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.system.html">system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.tm.html">tm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.transform.html">transform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.tunnel.html">tunnel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.utility.html">utility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.vpn.html">vpn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.wi.html">wi</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.stat.html">Stat Package</a></li>
+</ul>
+</ul>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hafiles.html"
+                        title="previous chapter">hafiles module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode_binding.html"
+                        title="next chapter">hanode_binding module</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/nssrc.com.citrix.netscaler.nitro.resource.config.ha.hanode.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div> 
+
+    <div class="footer">
+        &copy; Copyright © 1999-2014 Citrix Systems, Inc. All Rights Reserved.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.
+    </div>
+  </body>
+</html>

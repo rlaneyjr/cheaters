@@ -1,0 +1,155 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>Citrix NetScaler XML API User&#39;s Guide - mssqlversionsEnum</title>
+<link rel="stylesheet" type="text/css" href="help_ns.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body onload="initial()" class="ns_body">
+<div class="ns_content"><table cellpadding="0" cellspacing="0"><script type="text/javascript">
+function showContent(content,lang){
+			if(ie4){
+				showContentObj=document.all.qiksearch_div;
+			}
+			if(ns6){
+				showContentObj=document.getElementById("qiksearch_div");
+			}
+			if(ie4||ns6){
+				if(showContentObj.innerHTML!=content){
+					showContentObj.innerHTML=content;
+				}
+				else{
+					showContentObj.innerHTML="";
+				}
+			}
+			if(ns4){
+				document.nsdiv.document.write(content);
+				document.nsdiv.document.close();
+			}
+}
+function showLangSelect(id){
+		ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+		ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+		ns4=document.layers;
+		if(ie4){
+			showObj=document.all.first_url;
+		}
+		if(ns6){
+			showObj=document.getElementById("first_url");
+		}
+		if( id == "C" ){
+			newlink = "<b>C</b>";
+		}
+		else{
+			newlink = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('C');\"><b>C</b></a>";
+		}
+		if( id == "Perl" ){
+			newlink = newlink + " | <b>Perl</b>";
+		}
+		else{
+			newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('Perl');\"><b>Perl</b></a>";
+		}
+		if( id == "Java" ){
+			newlink = newlink + " | <b>Java</b>";
+		}
+		else{
+			newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('Java');\"><b>Java</b></a>";
+		}
+		if( id == "C#" ){
+			newlink = newlink + " | <b>C#</b>";
+		}
+		else{
+			newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('C#');\"><b>C#</b></a>";
+		}
+		showObj.innerHTML = newlink;
+}
+function initial(){
+		ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+		ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+		ns4=document.layers;
+		langSelected = parent.banner.document.language.select.value
+		var plink = parent.banner.document.language.plink.value
+		var my_array=plink.split("&");
+		var temp = my_array[0];
+ 		var grp = temp.split("@");
+		var cmd = my_array[1];
+		var regex = /^stat/i;
+		if( cmd.match(regex) != null ){
+			showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex_stat.html\">Statistics</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > mssqlversionsEnum");
+		}
+		else{
+			showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex.htm\">Configuration</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > mssqlversionsEnum");
+		}
+		if( langSelected == "C" ){
+ 			var content = cfirstcontent;
+		}
+		else if( langSelected == "Perl" ){
+			var content = perlfirstcontent;
+		}
+		else if( langSelected == "Java" ){
+			var content = javafirstcontent;
+		}
+		else if( langSelected == "C#" ){
+			var content = csharpfirstcontent;
+		}
+		else if( langSelected == "VB" ){
+			var content = vbfirstcontent;
+		}
+		else{
+			var content = cfirstcontent;
+			langSelected="C";
+		}
+		changeContext(langSelected);
+	}
+function showPLink(content){
+	if(ie4){
+	   showContentObj=document.all.progressive_link;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById("progressive_link");
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+}
+function changeContext(lang){
+parent.banner.document.language.select.value = lang;
+if( lang == "C" ){
+showContent('<pre>enum <b>mssqlversionsEnum</b>{<br>&nbsp;&nbsp;&nbsp;&nbsp;_70,<br>&nbsp;&nbsp;&nbsp;&nbsp;_2000,<br>&nbsp;&nbsp;&nbsp;&nbsp;2000SP1,<br>&nbsp;&nbsp;&nbsp;&nbsp;_2005,<br>&nbsp;&nbsp;&nbsp;&nbsp;_2008,<br>&nbsp;&nbsp;&nbsp;&nbsp;2008R2,<br>&nbsp;&nbsp;&nbsp;&nbsp;_2012,<br>&nbsp;&nbsp;&nbsp;&nbsp;VALNOTSET <br>};</pre></td></tr></table>','C');
+}
+if( lang == "Perl" ){
+showContent('<pre>Possible Values for <b>mssqlserverversion</b> are<br>&nbsp;&nbsp;&nbsp;&nbsp;\"_70\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"_2000\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"2000SP1\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"_2005\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"_2008\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"2008R2\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"_2012\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"VALNOTSET\"<br></pre></td></tr></table>','Perl')
+}
+if( lang == "Java" ){
+showContent('<pre>public class <b>mssqlversionsEnum</b>{<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String _70=\"_70\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String _2000=\"_2000\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String 2000SP1=\"2000SP1\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String _2005=\"_2005\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String _2008=\"_2008\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String 2008R2=\"2008R2\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String _2012=\"_2012\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String VALNOTSET=\"VALNOTSET\"; <br>};</pre></td></tr></table>','Java');
+}
+if( lang == "C#" ){
+showContent('<pre>public enum <b>mssqlversionsEnum</b>{<br>&nbsp;&nbsp;&nbsp;&nbsp;_70,<br>&nbsp;&nbsp;&nbsp;&nbsp;_2000,<br>&nbsp;&nbsp;&nbsp;&nbsp;2000SP1,<br>&nbsp;&nbsp;&nbsp;&nbsp;_2005,<br>&nbsp;&nbsp;&nbsp;&nbsp;_2008,<br>&nbsp;&nbsp;&nbsp;&nbsp;2008R2,<br>&nbsp;&nbsp;&nbsp;&nbsp;_2012,<br>&nbsp;&nbsp;&nbsp;&nbsp;VALNOTSET <br>};</pre></td></tr></table>','C#');
+}
+if( lang == "VB" ){
+showContent('<pre>Public Enum <b>mssqlversionsEnum</b><br>&nbsp;&nbsp;&nbsp;&nbsp;_70<br>&nbsp;&nbsp;&nbsp;&nbsp;_2000<br>&nbsp;&nbsp;&nbsp;&nbsp;2000SP1<br>&nbsp;&nbsp;&nbsp;&nbsp;_2005<br>&nbsp;&nbsp;&nbsp;&nbsp;_2008<br>&nbsp;&nbsp;&nbsp;&nbsp;2008R2<br>&nbsp;&nbsp;&nbsp;&nbsp;_2012<br>&nbsp;&nbsp;&nbsp;&nbsp;VALNOTSET <br>End Enum</pre></td></tr></table>','VB');
+}
+showLangSelect(lang);
+}
+</script>
+<tr><td><div><div id="progressive_link"></div></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>mssqlversionsEnum</td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="first_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+cfirstcontent = "<pre>enum <b>mssqlversionsEnum</b>{<br>&nbsp;&nbsp;&nbsp;&nbsp;_70,<br>&nbsp;&nbsp;&nbsp;&nbsp;_2000,<br>&nbsp;&nbsp;&nbsp;&nbsp;2000SP1,<br>&nbsp;&nbsp;&nbsp;&nbsp;_2005,<br>&nbsp;&nbsp;&nbsp;&nbsp;_2008,<br>&nbsp;&nbsp;&nbsp;&nbsp;2008R2,<br>&nbsp;&nbsp;&nbsp;&nbsp;_2012,<br>&nbsp;&nbsp;&nbsp;&nbsp;VALNOTSET <br>};</pre></td></tr></table>"
+perlfirstcontent = "<pre>Possible Values for <b>mssqlserverversion</b> are<br>&nbsp;&nbsp;&nbsp;&nbsp;\"_70\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"_2000\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"2000SP1\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"_2005\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"_2008\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"2008R2\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"_2012\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"VALNOTSET\"<br></pre></td></tr></table>"
+javafirstcontent = "<pre>public class <b>mssqlversionsEnum</b>{<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String _70=\"_70\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String _2000=\"_2000\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String 2000SP1=\"2000SP1\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String _2005=\"_2005\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String _2008=\"_2008\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String 2008R2=\"2008R2\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String _2012=\"_2012\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String VALNOTSET=\"VALNOTSET\"; <br>};</pre></td></tr></table>"
+csharpfirstcontent = "<pre>public enum <b>mssqlversionsEnum</b>{<br>&nbsp;&nbsp;&nbsp;&nbsp;_70,<br>&nbsp;&nbsp;&nbsp;&nbsp;_2000,<br>&nbsp;&nbsp;&nbsp;&nbsp;2000SP1,<br>&nbsp;&nbsp;&nbsp;&nbsp;_2005,<br>&nbsp;&nbsp;&nbsp;&nbsp;_2008,<br>&nbsp;&nbsp;&nbsp;&nbsp;2008R2,<br>&nbsp;&nbsp;&nbsp;&nbsp;_2012,<br>&nbsp;&nbsp;&nbsp;&nbsp;VALNOTSET <br>};</pre></td></tr></table>"
+vbfirstcontent = "<pre>Public Enum <b>mssqlversionsEnum</b><br>&nbsp;&nbsp;&nbsp;&nbsp;_70<br>&nbsp;&nbsp;&nbsp;&nbsp;_2000<br>&nbsp;&nbsp;&nbsp;&nbsp;2000SP1<br>&nbsp;&nbsp;&nbsp;&nbsp;_2005<br>&nbsp;&nbsp;&nbsp;&nbsp;_2008<br>&nbsp;&nbsp;&nbsp;&nbsp;2008R2<br>&nbsp;&nbsp;&nbsp;&nbsp;_2012<br>&nbsp;&nbsp;&nbsp;&nbsp;VALNOTSET <br>End Enum</pre></td></tr></table>"
+</script>
+<tr><td><div><div id="qiksearch_div" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr></table></div>
+</body>
+</html>

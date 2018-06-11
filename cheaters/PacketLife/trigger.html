@@ -1,0 +1,55 @@
+  Section Summary: Command Cheat Sheet
+#Initial settings and necessary structures:
+from trigger.netdevices import NetDevices
+lab = NetDevices()
+or:
+lab = NetDevices(production_only=False)
+---
+#Finding out the number of devices in the netdevices.xml file:
+len(lab)
+---
+#Finding a device in netdevices.xml and getting information about it:
+dev = lab.find('172.16.1.4')
+dev.dump()
+---
+#Checking the device type, as registered in netdevices.xml:
+dev.is_router()
+dev.is_switch()
+dev.is_firewall()
+dev.nodeName
+dev.vendor
+dev.deviceType
+---
+#Searching for devices (case sensitive search):
+lab.all()
+lab.search('172.16.1.2')
+lab.search('JUNIPER','manufacturer')
+lab.search('SRX100','model')
+---
+#Searching for devices (case INsensitive search):
+lab.match(vendor='netscreen')
+lab.match(vendor = 'cisco', model = '801')
+from trigger.netdevices import device_match
+device_match('172')
+---
+#Listing devices in the xml file by type:
+lab.get_devices_by_type('ROUTER')
+lab.get_devices_by_type('SWITCH')
+lab.get_devices_by_type('FIREWALL')
+lab.list_routers()
+lab.list_switches()
+lab.list_firewalls()
+---
+#Checking IP reachability and SSHv2 availability:
+dev.has_ssh()
+dev.is_reachable()
+---
+#Doing all the above from the Linux shell:
+netdev --version
+netdev -l '172.16.1.3'
+netdev -s -t switch
+netdev -s -v juniper
+netdev -s -M 801
+netdev -s -L LAB
+netdev -s -t router -v cisco
+netdev -h

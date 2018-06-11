@@ -1,0 +1,587 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      
+      <title>Create a License Registration Token -  - NSO 4.4.2.3 Administration Guide</title>
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+      <link rel="home" href="index.html" title="NSO 4.4.2.3 Administration Guide" />
+      <link rel="up" href="ch03s02.html" title="Smart Accounts and Virtual Accounts" />
+      <link rel="prev" href="ch03s02s02.html" title="Adding users to a Smart Account" />
+      <link rel="next" href="ch03s03.html" title="Validation and Troubleshooting" />
+      <meta xmlns="" name="Section-title" content="Create a License Registration Token" /><script xmlns="" type="text/javascript">
+      //The id for tree cookie
+      var treeCookieId = "treeview-8356";
+      var language = "en";
+      var w = new Object();
+      //Localization
+      txt_filesfound = 'Results';
+      txt_enter_at_least_1_char = "You must enter at least one character.";
+      txt_browser_not_supported = "JavaScript is disabled on your browser. Please enable JavaScript to enjoy all the features of this site.";
+      txt_please_wait = "Please wait. Search in progress...";
+      txt_results_for = "Results for: ";
+    </script><link xmlns="" rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/css/positioning.css" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/jquery/theme-redmond/jquery-ui-1.8.2.custom.css" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/jquery/treeview/jquery.treeview.css" /><style xmlns="" type="text/css">
+      
+      #noscript{
+      font-weight:bold;
+      background-color: #55AA55;
+      font-weight: bold;
+      height: 25spx;
+      z-index: 3000;
+      top:0px;
+      width:100%;
+      position: relative;
+      border-bottom: solid 5px black;
+      text-align:center;
+      color: white;
+      }
+      
+      input {
+      margin-bottom: 5px;
+      margin-top: 2px;
+      }
+      .folder {
+      display: block;
+      height: 22px;
+      padding-left: 20px;
+      background: transparent url(common/jquery/treeview/images/folder.gif) 0 0px no-repeat;
+      }
+      span.contentsTab {
+      padding-left: 20px;
+      background: url(common/images/toc-icon.png) no-repeat 0 center;
+      }
+      span.searchTab {
+      padding-left: 20px;
+      background: url(common/images/search-icon.png) no-repeat 0 center;
+      }
+      
+      /* Overide jquery treeview's defaults for ul. */
+      .treeview ul {
+      background-color: transparent;
+      margin-top: 4px;
+      }		
+      #webhelp-currentid {
+      /* background-color: #D8D8D8 !important; */
+      background-color: #D8D8D8;
+      }
+      .treeview .hover { color: black; }
+      .filetree li span a { text-decoration: none; font-size: 12px; color: #517291; }
+      
+      /* Override jquery-ui's default css customizations. These are supposed to take precedence over those.*/
+      .ui-widget-content {
+      border: 0px; 
+      background: none; 
+      color: none;     
+      }
+      .ui-widget-header {
+      color: #e9e8e9;
+      border-left: 1px solid #e5e5e5;
+      border-right: 1px solid #e5e5e5;
+      border-bottom: 1px solid #bbc4c5;
+      border-top: 4px solid #e5e5e5;
+      border: medium none;
+      background: #F4F4F4; /* old browsers */
+      background: -moz-linear-gradient(top, #F4F4F4 0%, #E6E4E5 100%); /* firefox */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F4F4F4), color-stop(100%,#E6E4E5)); /* webkit */    
+      font-weight: none;
+      }
+      .ui-widget-header a { color: none; }
+      .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { 
+      border: none; background: none; font-weight: none; color: none; }
+      .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited { color: black; text-decoration: none; }
+      .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus { border: none; background: none; font-weight: none; color: none; }
+      
+      .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { border: none; background: none; font-weight: none; color: none; }
+      .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited { 
+      color: black; text-decoration: none; 	
+      background: #C6C6C6; /* old browsers */
+      background: -moz-linear-gradient(top, #C6C6C6 0%, #D8D8D8 100%); /* firefox */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#C6C6C6), color-stop(100%,#D8D8D8)); /* webkit */
+      -webkit-border-radius:15px; -moz-border-radius:10px;
+      border: 1px solid #f1f1f1;
+      }    
+      .ui-corner-all { border-radius: 0 0 0 0; }
+      
+      .ui-tabs { padding: .2em;}
+      .ui-tabs .ui-tabs-nav li { top: 0px; margin: -2px 0 1px; text-transform: uppercase; font-size: 10.5px;}
+      .ui-tabs .ui-tabs-nav li a { padding: .25em 2em .25em 1em; margin: .5em; text-shadow: 0 1px 0 rgba(255,255,255,.5); }
+      /**
+      *	Basic Layout Theme
+      * 
+      *	This theme uses the default layout class-names for all classes
+      *	Add any 'custom class-names', from options: paneClass, resizerClass, togglerClass
+      */
+      
+      .ui-layout-pane { /* all 'panes' */ 
+      background: #FFF; 
+      border: 1px solid #BBB; 
+      padding: 05x; 
+      overflow: auto;
+      } 
+      
+      .ui-layout-resizer { /* all 'resizer-bars' */ 
+      background: #DDD; 
+      top:100px
+      } 
+      
+      .ui-layout-toggler { /* all 'toggler-buttons' */ 
+      background: #AAA; 
+      } 
+      
+    </style>
+      <!--[if IE]>
+	<link rel="stylesheet" type="text/css" href="../common/css/ie.css"/>
+	<![endif]--><script xmlns="" type="text/javascript" src="common/browserDetect.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery-1.7.2.min.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery.ui.all.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery.cookie.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/treeview/jquery.treeview.min.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/layout/jquery.layout.js">
+         <!----></script><style type="text/css">
+      
+      #header {
+      /* background: url("../images/header-bg.png") scroll top left repeat-x #4d8c83; */
+      background: transparent;
+      }
+      #leftnavigation {
+      /* background-color: #ededed!important; */
+      background-color: transparent;
+      }
+      #navheader {
+      visibility: hidden;
+      }
+      #webhelp-currentid {
+      /* background-color: #D8D8D8 !important; */
+      background-color: #FFFFFF; /*but must be changed in main.js as well*/
+      }
+      .filetree span.file {
+      /* background: url(images/file.gif) 0 0 no-repeat; */
+      background: initial;
+      }
+      .filetree span.folder, .filetree span.file {
+      padding: 1px 0 1px 7px;
+      display: block;
+      }
+
+      /* borrowed from cisco: clientlib.css */
+      .footer {
+      margin: 28px 30px 0 15px;
+      font-size: 80%;
+      line-height: 120%;
+      border-top: 1px solid #ccc;
+      padding-top: 7px;
+      color: #999;
+      }
+      .footer #footer-legal{display:inline;padding-bottom:18px}
+      #framework-footer{margin:0;padding:0 0 15px 0;min-width:900px;width:100%}
+      .footer a,.footer a:visited{color:#999}
+
+      /* from ccimr.css */
+      a:active  { color: #3366CC}
+      a:hover   { color: #3366CC}
+      a:link    { color: #3366CC}
+      a:visited { color: #3366CC}
+
+      #header img {
+      float: left;
+      margin-left: 20px;
+      margin-top: 0px;
+      }
+
+      #header h1 {
+      color: #336666;
+      margin-top: 4px;
+      }
+      #content h1, #content h2 {
+      color: #336666;
+      }
+      .title {
+      color: #336666;
+      }
+      p, pre {
+      margin-left: 0.1in;
+      }
+      p, ul, ol, li {
+        font-size: 95%;
+        font-family: Arial, Helvetica, sans-serif;
+        margin-top: 1px;
+      }
+      body {
+        font: 80.5% Arial, Helvetica, sans-serif;
+      }
+      ol {
+      display: block;
+      list-style-type: decimal;
+      -webkit-margin-before: 1em;
+      -webkit-margin-after: 1em;
+      -webkit-margin-start: 0px;
+      -webkit-margin-end: 0px;
+      -webkit-padding-start: 40px;
+      border: 1;
+      }
+    </style></head>
+   <body>
+      <noscript>
+         <div id="noscript">JavaScript is disabled on your browser. Please enable JavaScript to enjoy all the features of this site.</div>
+      </noscript>
+      <div id="header"><a href="index.html"><img style="margin-right: 2px; width: 110; height: 73; padding-right: 25px; padding-top: 8px" align="right" src="common/images/logo.gif" alt="Cisco Systems, Inc." /></a><h1>
+                  NSO 4.4.2.3 Administration Guide
+                <br />Smart Accounts and Virtual Accounts
+         </h1>
+         <div id="navheader">
+            <!---->
+            <table class="navLinks">
+               <tr>
+                  <td><a id="showHideButton" href="#" onclick="myLayout.toggle('west')" class="pointLeft" tabindex="5" title="Hide TOC tree">Sidebar
+                                                    </a></td>
+                  <td><a accesskey="p" class="navLinkPrevious" tabindex="5" href="ch03s02s02.html">Prev</a>
+                                                             |
+                                                             <a accesskey="u" class="navLinkUp" tabindex="5" href="ch03s02.html">Up</a>
+                                                         |
+                                                         <a accesskey="n" class="navLinkNext" tabindex="5" href="ch03s03.html">Next</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div id="content">
+         <div class="sect2">
+            <div xmlns="" class="titlepage">
+               <div>
+                  <div>
+                     <h3 xmlns="http://www.w3.org/1999/xhtml" class="title"><a id="d0e3120"></a>Create a License Registration Token
+                     </h3>
+                  </div>
+               </div>
+            </div>
+            <div class="procedure">
+               <ol class="procedure" type="1">
+                  <li class="step">
+                     <p>
+                                    To create a new token, log into CSSM and select the
+                                    appropriate Virtual Account:
+                                  
+                     </p>
+                     <div class="mediaobject" align="center">
+                        <table border="0" summary="manufactured viewport for HTML img" style="cellpadding: 0; cellspacing: 0;" width="425">
+                           <tr>
+                              <td align="center"><img src="device_register1a.png" align="middle" width="425" /></td>
+                           </tr>
+                        </table>
+                     </div>
+                  </li>
+                  <li class="step">
+                     <p>
+                                    Click on the "Smart Licenses" link to enter CSSM:
+                                  
+                     </p>
+                     <div class="mediaobject" align="center">
+                        <table border="0" summary="manufactured viewport for HTML img" style="cellpadding: 0; cellspacing: 0;" width="496">
+                           <tr>
+                              <td align="center"><img src="device_register1b.png" align="middle" width="496" /></td>
+                           </tr>
+                        </table>
+                     </div>
+                  </li>
+                  <li class="step">
+                     <p>
+                                    In CSSM click on "New Token...":
+                                  
+                     </p>
+                     <div class="mediaobject" align="center">
+                        <table border="0" summary="manufactured viewport for HTML img" style="cellpadding: 0; cellspacing: 0;" width="496">
+                           <tr>
+                              <td align="center"><img src="device_register1c.png" align="middle" width="496" /></td>
+                           </tr>
+                        </table>
+                     </div>
+                  </li>
+                  <li class="step">
+                     <p>
+                                    Follow the dialog to provide a description, expiration and
+                                    export compliance applicability before accepting the terms
+                                    and responsibilities. Click on "Create Token" to continue.
+                                  
+                     </p>
+                     <div class="mediaobject" align="center">
+                        <table border="0" summary="manufactured viewport for HTML img" style="cellpadding: 0; cellspacing: 0;" width="425">
+                           <tr>
+                              <td align="center"><img src="device_register1d.png" align="middle" width="425" /></td>
+                           </tr>
+                        </table>
+                     </div>
+                  </li>
+                  <li class="step">
+                     <p>
+                                    Click on the new token:
+                                  
+                     </p>
+                     <div class="mediaobject" align="center">
+                        <table border="0" summary="manufactured viewport for HTML img" style="cellpadding: 0; cellspacing: 0;" width="496">
+                           <tr>
+                              <td align="center"><img src="device_register1e.png" align="middle" width="496" /></td>
+                           </tr>
+                        </table>
+                     </div>
+                  </li>
+                  <li class="step">
+                     <p>
+                                    Copy the token from the dialogue window into your clipboard:
+                                  
+                     </p>
+                     <div class="mediaobject" align="center">
+                        <table border="0" summary="manufactured viewport for HTML img" style="cellpadding: 0; cellspacing: 0;" width="283">
+                           <tr>
+                              <td align="center"><img src="device_register1f.png" align="middle" width="283" /></td>
+                           </tr>
+                        </table>
+                     </div>
+                  </li>
+                  <li class="step">
+                     <p>
+                                    Go to the NSO CLI and provide the token to the
+                                    <span class="command"><strong>license smart register idtoken</strong></span> command:
+                                  
+                     </p>
+                     <p>
+                                    
+                     </p><pre class="screen">admin@ncs# <strong class="userinput"><code>license smart register idtoken YzY2YjFlOTYtOWYzZi00MDg1...</code></strong>
+Registration process in progress.
+Use the 'show license status' command to check the progress and result.</pre><p>
+                                  
+                     </p>
+                  </li>
+               </ol>
+            </div>
+         </div><script type="text/javascript" src="common/main.js">
+            <!----></script><script type="text/javascript" src="common/splitterInit.js">
+            <!----></script><div class="footer" id="footer-legal">
+            <div class="footer-legal framework-footer-cq">
+               <div id="framework-footer">
+                  <div id="footer-legal"><a href="http://www.cisco.com/web/siteassets/legal/terms_condition.html">Terms &amp; Conditions</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/privacy.html">Privacy Statement</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/privacy.html#cookies">Cookie Policy</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/trademark.html">Trademarks</a></div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div id="sidebar">
+         <div id="leftnavigation" style="padding-top:3px;">
+            <div id="tabs">
+               <ul style="visibility: hidden;"></ul>
+               <div id="treeDiv"><img src="common/images/loading.gif" alt="loading table of contents..." id="tocLoading" style="display:block;" /><div id="ulTreeDiv" style="display:none">
+                     <ul id="tree" class="filetree">
+                        <li><span class="file"><a href="ch01.html" tabindex="1">Introduction</a></span></li>
+                        <li><span class="file"><a href="ug.ncs_sysmgmt.html" tabindex="1">NSO System Management</a></span><ul>
+                              <li><span class="file"><a href="ch02s01.html" tabindex="1">Introduction</a></span></li>
+                              <li><span class="file"><a href="ch02s02.html" tabindex="1">Configuring NSO</a></span><ul>
+                                    <li><span class="file"><a href="ch02s02s01.html" tabindex="1">Overview</a></span></li>
+                                    <li><span class="file"><a href="ch02s02s02.html" tabindex="1">Configuration file</a></span></li>
+                                    <li><span class="file"><a href="ch02s02s03.html" tabindex="1">Dynamic configuration</a></span><ul>
+                                          <li><span class="file"><a href="ch02s02s03.html#d0e176" tabindex="1">tailf-ncs.yang</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ch02s02s04.html" tabindex="1">Built-in or external SSH server</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.sys_mgmt.starting_ncs.html" tabindex="1">Starting NSO</a></span></li>
+                              <li><span class="file"><a href="ug.ncs_sys_mgmt.licensing.html" tabindex="1">Licensing NSO</a></span></li>
+                              <li><span class="file"><a href="ug.ncs_sys_mgmt.monitor.html" tabindex="1">Monitoring NSO</a></span><ul>
+                                    <li><span class="file"><a href="ch02s05s01.html" tabindex="1">NSO status</a></span></li>
+                                    <li><span class="file"><a href="ch02s05s02.html" tabindex="1">Monitoring the NSO daemon</a></span></li>
+                                    <li><span class="file"><a href="ch02s05s03.html" tabindex="1">Logging</a></span></li>
+                                    <li><span class="file"><a href="ch02s05s04.html" tabindex="1">syslog</a></span></li>
+                                    <li><span class="file"><a href="ug.ncs_monitoring.messages.html" tabindex="1">Log messages and formats</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.ncs_sys_mgmt.backup.html" tabindex="1">Backup and restore</a></span><ul>
+                                    <li><span class="file"><a href="ch02s06s01.html" tabindex="1">Backup</a></span></li>
+                                    <li><span class="file"><a href="ch02s06s02.html" tabindex="1">NSO Restore</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.ncs_sys_mgmt.disaster.html" tabindex="1">Disaster management</a></span><ul>
+                                    <li><span class="file"><a href="ch02s07s01.html" tabindex="1">NSO fails to start</a></span></li>
+                                    <li><span class="file"><a href="ch02s07s02.html" tabindex="1">NSO failure after startup</a></span></li>
+                                    <li><span class="file"><a href="ch02s07s03.html" tabindex="1">Transaction commit failure</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch02s08.html" tabindex="1">Troubleshooting</a></span><ul>
+                                    <li><span class="file"><a href="ch02s08s01.html" tabindex="1">Installation Problems</a></span><ul>
+                                          <li><span class="file"><a href="ch02s08s01.html#d0e2841" tabindex="1">Error messages during installation</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ch02s08s02.html" tabindex="1">Problems Starting NSO</a></span><ul>
+                                          <li><span class="file"><a href="ch02s08s02.html#d0e2856" tabindex="1">NSO terminating with GLIBC error</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ch02s08s03.html" tabindex="1">Problems Running Examples</a></span><ul>
+                                          <li><span class="file"><a href="ch02s08s03.html#d0e2871" tabindex="1">The 'netconf-console' program fails</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ch02s08s04.html" tabindex="1">General Troubleshooting Strategies</a></span></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ug.admin_guide.smart_licensing.html" tabindex="1">Cisco Smart Licensing</a></span><ul>
+                              <li><span class="file"><a href="ch03s01.html" tabindex="1">Introduction</a></span></li>
+                              <li><span class="file"><a href="ch03s02.html" tabindex="1">Smart Accounts and Virtual Accounts</a></span><ul>
+                                    <li><span class="file"><a href="ch03s02s01.html" tabindex="1">Request a Smart Account</a></span></li>
+                                    <li><span class="file"><a href="ch03s02s02.html" tabindex="1">Adding users to a Smart Account</a></span></li>
+                                    <li id="webhelp-currentid"><span class="file"><a href="ch03s02s03.html" tabindex="1">Create a License Registration Token</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch03s03.html" tabindex="1">Validation and Troubleshooting</a></span><ul>
+                                    <li><span class="file"><a href="ch03s03s01.html" tabindex="1">Available Show Commands</a></span></li>
+                                    <li><span class="file"><a href="ch03s03s02.html" tabindex="1">Available Show Commands</a></span></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ncs_alarms.html" tabindex="1">NSO Alarms</a></span><ul>
+                              <li><span class="file"><a href="ug.ncs_sys_mgmt.alarm.html" tabindex="1">Overview</a></span></li>
+                              <li><span class="file"><a href="ch04s02.html" tabindex="1">Alarm type structure</a></span></li>
+                              <li><span class="file"><a href="ch04s03.html" tabindex="1">Alarm type descriptions</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ug.package_mgmt.html" tabindex="1">NSO Packages</a></span><ul>
+                              <li><span class="file"><a href="ug.package_mgmt.overview.html" tabindex="1">Package Overview</a></span></li>
+                              <li><span class="file"><a href="ug.package_mgmt.loading.html" tabindex="1">Loading Packages</a></span></li>
+                              <li><span class="file"><a href="ug.package_mgmt.managing.html" tabindex="1">Managing Packages</a></span><ul>
+                                    <li><span class="file"><a href="ch05s03s01.html" tabindex="1">Package repositories</a></span></li>
+                                    <li><span class="file"><a href="ch05s03s02.html" tabindex="1">Actions</a></span></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ug.ncs_advanced.html" tabindex="1">Advanced Topics</a></span><ul>
+                              <li><span class="file"><a href="ch06s01.html" tabindex="1">Locks</a></span><ul>
+                                    <li><span class="file"><a href="ch06s01s01.html" tabindex="1">Global locks</a></span></li>
+                                    <li><span class="file"><a href="ch06s01s02.html" tabindex="1">Transaction locks</a></span></li>
+                                    <li><span class="file"><a href="ch06s01s03.html" tabindex="1">Northbound agents and global locks</a></span></li>
+                                    <li><span class="file"><a href="ch06s01s04.html" tabindex="1">External data providers</a></span></li>
+                                    <li><span class="file"><a href="ch06s01s05.html" tabindex="1">CDB</a></span></li>
+                                    <li><span class="file"><a href="ch06s01s06.html" tabindex="1">Lock impact on user sessions</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.advanced.ncs_ipc.html" tabindex="1">IPC ports</a></span><ul>
+                                    <li><span class="file"><a href="ug.ncs_advanced.ipc.restricting.html" tabindex="1">Restricting access to the IPC port</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch06s03.html" tabindex="1">Restart strategies for service manager</a></span></li>
+                              <li><span class="file"><a href="ug.ncs_advanced.security_issues.html" tabindex="1">Security issues</a></span></li>
+                              <li><span class="file"><a href="ch06s05.html" tabindex="1">Running NSO as a non privileged user</a></span></li>
+                              <li><span class="file"><a href="ch06s06.html" tabindex="1">Using IPv6 on northbound interfaces</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ug.cluster.html" tabindex="1">NSO Clustering</a></span><ul>
+                              <li><span class="file"><a href="ch07s01.html" tabindex="1">NSO Clustering Introduction</a></span></li>
+                              <li><span class="file"><a href="ch07s02.html" tabindex="1">Configuring and Running NSO in Cluster Mode</a></span><ul>
+                                    <li><span class="file"><a href="ch07s02s01.html" tabindex="1">Initial Setup</a></span></li>
+                                    <li><span class="file"><a href="ch07s02s02.html" tabindex="1">Actions</a></span></li>
+                                    <li><span class="file"><a href="ch07s02s03.html" tabindex="1">Configuration Variations</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch07s03.html" tabindex="1">Caveats</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ug.ha.html" tabindex="1">High Availability</a></span><ul>
+                              <li><span class="file"><a href="ch08s01.html" tabindex="1">Introduction to NSO High Availability</a></span></li>
+                              <li><span class="file"><a href="ch08s02.html" tabindex="1">HA framework requirements</a></span></li>
+                              <li><span class="file"><a href="ch08s03.html" tabindex="1">Mode of operation</a></span></li>
+                              <li><span class="file"><a href="ch08s04.html" tabindex="1">Security aspects</a></span></li>
+                              <li><span class="file"><a href="ch08s05.html" tabindex="1">API</a></span></li>
+                              <li><span class="file"><a href="ch08s06.html" tabindex="1">API</a></span></li>
+                              <li><span class="file"><a href="ch08s07.html" tabindex="1">Ticks</a></span></li>
+                              <li><span class="file"><a href="ch08s08.html" tabindex="1">Joining a cluster</a></span></li>
+                              <li><span class="file"><a href="ug.ha.relay_slaves.html" tabindex="1">Relay slaves</a></span></li>
+                              <li><span class="file"><a href="ch08s10.html" tabindex="1">CDB replication</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ug.aaa.html" tabindex="1">The AAA infrastructure</a></span><ul>
+                              <li><span class="file"><a href="ch09s01.html" tabindex="1">The problem</a></span></li>
+                              <li><span class="file"><a href="ch09s02.html" tabindex="1">Structure - data models</a></span><ul>
+                                    <li><span class="file"><a href="ch09s02s01.html" tabindex="1">Data model contents</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch09s03.html" tabindex="1">AAA related items in confd.confncs.conf</a></span></li>
+                              <li><span class="file"><a href="ug.aaa.authentication.html" tabindex="1">Authentication</a></span><ul>
+                                    <li><span class="file"><a href="ug.aaa.public_key_login.html" tabindex="1">Public Key Login</a></span><ul>
+                                          <li><span class="file"><a href="ug.aaa.public_key_login.html#d0e5588" tabindex="1">Setting up Public Key Login</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ch09s04s02.html" tabindex="1">Password Login</a></span></li>
+                                    <li><span class="file"><a href="ug.aaa.pam.html" tabindex="1">PAM</a></span></li>
+                                    <li><span class="file"><a href="ug.aaa.External_authentication.html" tabindex="1">External authentication</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch09s05.html" tabindex="1">Restricting the IPC port</a></span></li>
+                              <li><span class="file"><a href="ug.aaa.groups.html" tabindex="1">Group Membership</a></span></li>
+                              <li><span class="file"><a href="ug.aaa.authorization.html" tabindex="1">Authorization</a></span><ul>
+                                    <li><span class="file"><a href="ch09s07s01.html" tabindex="1">Command authorization</a></span></li>
+                                    <li><span class="file"><a href="ch09s07s02.html" tabindex="1">Rpc, notification, and data authorization</a></span></li>
+                                    <li><span class="file"><a href="ch09s07s03.html" tabindex="1">Authorization Examples</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch09s08.html" tabindex="1">The AAA cache</a></span></li>
+                              <li><span class="file"><a href="ch09s09.html" tabindex="1">Populating AAA using CDB</a></span></li>
+                              <li><span class="file"><a href="ug.aaa.External_database.html" tabindex="1">Populating AAA using external data</a></span></li>
+                              <li><span class="file"><a href="ch09s11.html" tabindex="1">Hiding the AAA tree</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ug.admin_guide.deployment.html" tabindex="1">NSO Deployment</a></span><ul>
+                              <li><span class="file"><a href="ch10s01.html" tabindex="1">Introduction</a></span></li>
+                              <li><span class="file"><a href="ch10s02.html" tabindex="1">Initial NSO installation</a></span></li>
+                              <li><span class="file"><a href="ch10s03.html" tabindex="1">Initial NSO configuration - ncs.conf</a></span></li>
+                              <li><span class="file"><a href="ch10s04.html" tabindex="1">Setting up AAA</a></span></li>
+                              <li><span class="file"><a href="ch10s05.html" tabindex="1">Cisco Smart Licensing</a></span></li>
+                              <li><span class="file"><a href="ch10s06.html" tabindex="1">Global settings and timeouts</a></span></li>
+                              <li><span class="file"><a href="ch10s07.html" tabindex="1">Enabling SNMP</a></span></li>
+                              <li><span class="file"><a href="ch10s08.html" tabindex="1">Loading the required NSO packages</a></span></li>
+                              <li><span class="file"><a href="ch10s09.html" tabindex="1">Preparing the HA of the NSO installation</a></span></li>
+                              <li><span class="file"><a href="ch10s10.html" tabindex="1">Handling tailf-hcc HA fallout</a></span><ul>
+                                    <li><span class="file"><a href="ch10s10s01.html" tabindex="1">NSO slave host failure</a></span></li>
+                                    <li><span class="file"><a href="ch10s10s02.html" tabindex="1">NSO master host failure</a></span></li>
+                                    <li><span class="file"><a href="ch10s10s03.html" tabindex="1">Setting up the VIP or L3 anycast BGP support</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch10s11.html" tabindex="1">Preparing the clustering of the NSO installation</a></span></li>
+                              <li><span class="file"><a href="ch10s12.html" tabindex="1">Testing the cluster configuration</a></span></li>
+                              <li><span class="file"><a href="ch10s13.html" tabindex="1">NSO system and packages upgrade</a></span><ul>
+                                    <li><span class="file"><a href="ch10s13s01.html" tabindex="1">NSO major upgrade</a></span></li>
+                                    <li><span class="file"><a href="ch10s13s02.html" tabindex="1">NSO minor upgrade</a></span></li>
+                                    <li><span class="file"><a href="ch10s13s03.html" tabindex="1">Package upgrade</a></span></li>
+                                    <li><span class="file"><a href="ch10s13s04.html" tabindex="1">Patch management</a></span></li>
+                                    <li><span class="file"><a href="ch10s13s05.html" tabindex="1">Manual upgrade</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch10s14.html" tabindex="1">Log management</a></span><ul>
+                                    <li><span class="file"><a href="ch10s14s01.html" tabindex="1">Log rotate</a></span></li>
+                                    <li><span class="file"><a href="ch10s14s02.html" tabindex="1">NED logs</a></span></li>
+                                    <li><span class="file"><a href="ch10s14s03.html" tabindex="1">Java logs</a></span></li>
+                                    <li><span class="file"><a href="ch10s14s04.html" tabindex="1">Internal NSO log</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch10s15.html" tabindex="1">Monitoring the installation</a></span><ul>
+                                    <li><span class="file"><a href="ch10s15s01.html" tabindex="1">Alarms</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch10s16.html" tabindex="1">Security considerations</a></span></li>
+                           </ul>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

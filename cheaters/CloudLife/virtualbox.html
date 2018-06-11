@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>VirtualBox Commands Cheat Sheet</title>
+</head>
+<body>
+<h1 class="margin-top-zero">VirtualBox Commands Cheat Sheet</h1>
+<p>VirtualBox has always been the go-to piece of software to spin up virtual machines on your workstation.</p>
+
+<p>More often than not, you will work with VirtualBox using its GUI. However, for those occasions where you are SSH’ing into a remote workstation running VirtualBox, it is often easier to work with it using the command line instead of forwarding X.</p>
+
+<h2 id="import-virtual-machine">Import Virtual Machine</h2>
+<p>Import a virtual machine file into VirtualBox:</p>
+<pre><code>vboxmanage import &lt;FILE&gt;</code></pre>
+
+<p>In certain scenarios, you may not want virtual machine file you are importing should to regenerate its virtual NIC MAC addresses. In that case, pass the <strong>keepallmacs</strong> flag:</p>
+<pre><code>vboxmanage import --options keepallmacs &lt;FILE&gt;</code></pre>
+
+<h2 id="start-virtual-machine">Start Virtual Machine</h2>
+<p>Start one virtual machine:</p>
+<pre><code>vboxmanage startvm &lt;NAME&gt;</code></pre>
+
+<p>Start many virtual machines:</p>
+<pre><code>for i in &lt;VM1&gt; &lt;VM2&gt; &lt;VM3&gt;; do vboxmanage startvm $i; done</code></pre>
+
+<h2 id="stop-virtual-machine">Stop Virtual Machine</h2>
+<p>Stop one virtual machine:</p>
+<pre><code>vboxmanage controlvm &lt;NAME&gt; poweroffip</code></pre>
+
+<p>Stop many virtual machines:</p>
+<pre><code>for i in &lt;VM1&gt; &lt;VM2&gt; &lt;VM3&gt;; do vboxmanage controlvm $i poweroff; done</code></pre>
+
+<h2 id="create-hostonlyif-network-adapter">Create hostonlyif Network Adapter</h2>
+<p>Create host only network interface adapter:</p>
+<pre><code>vboxmanage hostonlyif create</code></pre>
+
+<p>Create host only network interface adapter with specific subnet:</p>
+<pre><code>vboxmanage hostonlyif create ipconfig vboxnet0 --ip 192.168.122.0</code></pre>
+
+<h2 id="remove-hostonlyif-network-adapter">Remove hostonlyif Network Adapter</h2>
+<p>Remove host only network interface adapter:</p>
+<pre><code>vboxmanage hostonlyif remove vboxnet0</code></pre>
+
+<h2 id="nat-ssh-to-virtual-machine">NAT SSH to Virtual Machine</h2>
+<p>By default, a VirtualBox virtual machine will use an IP address you cannot route to. If you want to SSH to that virtual machine without adding another host only network interface, you will need to setup a NAT to port 22.</p>
+
+<p>NAT SSH to virtual machine:</p>
+<pre><code>vboxmanage modifyvm "vm1" --natpf1 "guestssh,tcp,,22111,,22"</code></pre>
+
+<p>Delete NAT SSH on virtual machine:</p>
+<pre><code>VBoxManage modifyvm "vm1" --natpf1 delete "guestssh"</code></pre>
+
+<h2 id="custom-video-settings">Custom video settings for a VM</h2>
+<p>Close your virtual machine before executing the command – otherwise the settings won't take effect.</p>
+
+<pre><code>VBoxManage.exe setextradata "VM-Name" CustomVideoMode1 1920x1200x32</code></pre>
+
+<p>You can check whether the custom video mode is added by the following command:</p>
+<pre><code>VBoxManage.exe getextradata "VM-Name" CustomVideoMode1</code></pre>
+
+<p>The command should return the specified resolution:</p>
+<pre><code>Value: 1920x1200x32</code></pre>
+
+<p>Or, alternatively, you can check the whole extra data list:</p>
+<pre><code>VBoxManage.exe getextradata "VM-Name" enumerate</code></pre>
+<br />
+<p class="subheader">projects</p>
+<p><a href="https://github.com/jameswthorne">GitHub Repositories</a></p>
+<p><a href="https://hub.docker.com/u/jameswthorne/">Docker Hub</a></p>
+</body>
+</html>

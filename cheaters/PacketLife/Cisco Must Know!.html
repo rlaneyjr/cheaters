@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><meta name="exporter-version" content="Evernote Mac 6.7.1 (453574)"/><meta name="author" content="rlaney@hearstsc.com"/><meta name="created" content="2015-08-06 16:16:38 +0000"/><meta name="source-url" content="https://www.reddit.com/r/networking/comments/2lleqv/what_cisco_ios_commandstricksshortcuts_should_all/"/><meta name="updated" content="2016-06-29 19:47:00 +0000"/><title>Cisco Must Know!</title></head><body>
+<div style="word-wrap: break-word; -webkit-nbsp-mode: space; -webkit-line-break: after-white-space;">
+<div><br/></div>
+<div>ipv6 mld snooping</div>
+<div><br/></div>
+<div>In or out interface discards.  Increase hold-queue to max value below.</div>
+<div>hold-queue 4096 out</div>
+<div><br/></div>
+<div><a href="http://www.cisco.com/c/en/us/support/docs/routers/10000-series-routers/6343-queue-drops.html">http://www.cisco.com/c/en/us/support/docs/routers/10000-series-routers/6343-queue-drops.html</a></div>
+<div><br/></div>
+<div>
+<hr/></div>
+<div><br/></div>
+<div>Commands:</div>
+<div><b>sh cdp nei det | i Dev|IP</b></div>
+<div><b>show archive config differences nvram:startup-config system:running-config | section exclude certificate</b></div>
+<div><b>config terminal revert timer x</b> (auto roll back without a reboot. [Requires config archive enabled])</div>
+<div><b>sh inter trunk</b></div>
+<div>(not sure how some people don't know about this but quick way to see what VLANs are allowed and forwarding on your trunks)</div>
+<div><br/></div>
+<div><b>sh control-plane host open-ports</b></div>
+<div>(shows what ports your device is listening on and what connections are open)</div>
+<div><br/></div>
+<div><b>sh platform pm if-numbers (or) sh platform pm platform-block</b></div>
+<div>(shows what ASIC your ports map to, helpful if you have a requirement for ASIC redundancy for ether-channels)</div>
+<div><br/></div>
+<div><b>sh buffers input-interface</b></div>
+<div>(shows what is on the input buffer for an interface, VERY useful for troubelshooting high CPU on L3 switches that have many interrupts, will show you what is being queued on the interface)</div>
+<div><br/></div>
+<div><b>sh platform tcam utilization asic all</b></div>
+<div>(shows the TCAM utilization per each allocation [IPv4 IGMP, IPv6 QoS ACEs, etc.], don't forget the "asic all" since it only shows asic 0 whithout it, alot of the times with TCAM exhasution due to "extensive" QoS configuration the issue is on only one ASIC)</div>
+<div><br/></div>
+<div><b>sh sdm prefer</b></div>
+<div>(shows SDM template being used, this controls TCAM allocations to specific functions [QoS, routing, etc])</div>
+<div><br/></div>
+<div><b>Embedded Packet Capture</b><b> (AKA the best thing since sliced bread), there are a number of commands and they're platform specific for the most part, but invaluable for pulling captures from remote routers (ISR,ASR,6500).</b></div>
+<div>ISR example to pull traffic from Gi0/0 and dump to pcap, then copy to FTP server, then use Wireshark or whatever other pcap utility you want.</div>
+<div><b>mon cap buffer BUFFER-NAME<br/>
+mon cap point ip cef POINT-NAME Gi0/0 both<br/>
+mon cap point associate POINT-NAME BUFFER-NAME<br/>
+mon cap point start POINT-NAME</b></div>
+<div>let run...</div>
+<div><b>mon cap point stop POINT-NAME</b></div>
+<div><br/></div>
+<div><b>mon cap buffer BUFFER-NAME export flash:/20141105_1340_routername.pcap</b></div>
+<div><br/></div>
+<div><b>copy flash:/20141105_1340_routername.pcap ftp://user:password@ftpserver/</b></div>
+<div>There are a plethora of options for this for filtering and packet size, I recommend anyone that I work with that is in an operational type role be familiar with this feature.<br/></div>
+<div><br/></div>
+<div>
+<hr/></div>
+<div><br/></div>
+<div><b>term mon</b></div>
+<div><b>term no mon - Stops outputting messages to the screen (took me way to long to figure this out originally)</b></div>
+<div><b>term len 0 - Has it print everything at once (instead of hitting Space/Enter to walk through the output. Useful if you're saving your session to a file</b></div>
+<div><b>term len XX - Any other value controls how many lines are printed before requiring Space/Enter</b></div>
+<div><b>term pag 0/XX - Same as above but on the ASA</b></div>
+<div><br/></div>
+<div><b>sh ip int br | e una</b> - Good on switches to see only interfaces with IPs</div>
+<div><b>sh int status | i not</b> - Good on switches to see only disconnected ports</div>
+<div><b>sh int trunk</b> - Good to verify all trunk ports and which VLANs are passing over each</div>
+<div><b>traffic-export interface XXXXX</b> - There's more to this feature, but it captures traffic on ports and you can pull it later for Wireshark</div>
+<div><b>csim start XXXXX</b> - Hidden command to generate calls</div>
+<div><b>sh ip proto</b> - Good summary of all routing protocols currently running</div>
+<div><b>who</b> - Hidden command, shows users connected to the router/switch, what vty line they're on, etc.</div>
+<div><b>sh line vty</b> - Shows currently active ty ports</div>
+<div><b>systat</b> - Same as who</div>
+<div><b>systat all</b> - Shows all vty lines but also the user and where they're connected from</div>
+<div><br/></div>
+<div>Voice stuff I use a lot:</div>
+<div><b>sh call act vo br</b> - Good summary of active calls</div>
+<div><b>sh voice port sum</b> - Shows FXO/FXS/PRI ports in use</div>
+<div><b>sh isdn status</b> - Check if your PRI is up/established correctly</div>
+<div><b>sh controllers t1</b> - Good for PRI/T1 interface status/error checking</div>
+<div><b>sh voice dialpeer sum</b> - Summary of patterns/destinations</div>
+<div><b>sh ephone / sh ephone reg</b> - Good with CME and ephones, nice with using | filters</div>
+<div><br/></div>
+<div>
+<hr/></div>
+<div>Sh controller t1 X/X/X Gives you a breakdown of 15 minute intervals of errors over the last 24 hours (or last clearing of counters) if using multiple T1s. (Can also be used for T3)</div>
+<div>Sh controller t1 x/x/x brief Gives you just that specific interface's abbreviated version. (Can also be used for T3)</div>
+<div>Sh service-module Similar to controller.</div>
+<div>Sh service-module &lt;interface&gt; performance Gives you interval breakdown.</div>
+<div>Sh service-module &lt;interface&gt; performance | i [1-9] Interval breakdown without all the intervals with no errors.</div>
+<div><br/></div>
+<div>show ip ospf int [brief]</div>
+<div>For troubleshooting broadcast storms:</div>
+<div>for IOS</div>
+<div>show int | i line|txload</div>
+<div><br/></div>
+<div>for NX-OS</div>
+<div>show int | I up|txload</div>
+<div><br/></div>
+<div>On standalone WAPS, "sh dot11 ass". Always think of show dat ass.</div>
+<div>Or ISR's, "sh cry" is incredibly poignant.</div>
+<div>Also sh ntp ass</div>
+<div>show interfaces gigabitEthernet 0/1 capabilities</div>
+<div>show users (gives me my IP address as seen on remote side of VPN tunnels)</div>
+<div>show crypto isakmp sa | incl &lt;remote peer IP address&gt;</div>
+<div>show crypto ipsec sa | incl &lt;host ip or subnet in crypto ACL&gt;</div>
+<div>show ip nat translations | incl &lt;source or destination&gt;</div>
+<div>show access-lists (gives me the ACL counters, to make sure I am hitting the right ACL line)</div>
+<div>If all you are trying to do is see the name of the device and the IP address, then use show cdp entry * protocol. This is what you are doing, but avoids some extra clutter.</div>
+<div>My personal favorites are show vlan br | i act, show ip cef &lt;IP&gt;, and show int status | i &lt;vlan_id&gt;.</div>
+<div>Also for a recent job, we added a bunch of PoE class 3 devices in an environment with no other class 3 devices. show power inline | i _3_ came in handy. You can't just include 3 since all ports have a 30 in the output. The _ matches the whitespace in front and behind the number 3.</div>
+<div>|REDACTED-3850#show power inline | i _3_</div>
+<div>|Gi1/0/32 auto on 15.4 Ieee PD 3 30.0</div>
+<div>|Gi1/0/35 auto on 15.4 Ieee PD 3 30.0</div>
+<div>View all current remote access SAs (using IPSec connections)</div>
+<div>show crypto isakmp sa</div>
+<div><br/></div>
+<div>Show details on IPSec SAs</div>
+<div>show crypto ipsec sa</div>
+<div><br/></div>
+<div>Also, just learned this today after setting up AnyConnect for the first time and needing to troubleshoot it. Works for both client and clientless SSL connections</div>
+<div>show vpn-sessiondb anyconnect</div>
+<div>show history - List of all commands entered during the session.</div>
+<div>sh ver | i upt</div>
+<div>Shows uptime.</div>
+<div>Sh processes cpu</div>
+<div>You can pipe that too to narrow it down. Gives a cute graph of cpu utilization.</div>
+<div>I have a few... Not sure if these were mentioned... Ctrl + U : Erase and entire line Ctrl + A : Move to start of input line Ctrl + E : Move to end of input line</div>
+<div>While displaying configs: sh run | section ospf sh run | section bgp You could use section like include in the newer ios versions.</div>
+<div>sh int status</div>
+<div>Gives you a wealth of information along with the description.</div>
+<div>sh proc cpu history sh proc cpu sorted</div>
+<div><br/></div>
+<div>Shun</div>
+<div>Usage Guidelines</div>
+<div>The shun command lets you block connections from an attacking host. All future connections from the source IP address are dropped and logged until the blocking function is removed manually or by the Cisco IPS sensor. The blocking function of the shun command is applied whether or not a connection with the specified host address is currently active.</div>
+<div>If you specify the destination address, source and destination ports, and the protocol, then you drop the matching connection as well as placing a shun on all future connections from the source IP address; all future connections are shunned, not just those that match these specific connection parameters.</div>
+<div><br/></div>
+<div>terminal exec prompt timestamp</div>
+<div><br/></div>
+<div><br/></div>
+<div>Timestamps all your show commands and puts a load average in there as well. It's really useful if you're troubleshooting something over time and want to quickly see when a particular set of outputs came from.</div>
+<div>You can configure this under console and vty lines with 'exec prompt timestamp' so you don't have to remember to turn it on for every session.</div>
+<div>Example (lab box, ignore the lack of NTP)</div>
+<div><br/></div>
+<div>ASR#sh ip int brief</div>
+<div>Interface IP-Address OK? Method Status Protocol</div>
+<div>&lt;snip&gt;</div>
+<div>ASR#term exec prompt timestamp</div>
+<div>ASR#sh ip int brief</div>
+<div>Load for five secs: 0%/0%; one minute: 0%; five minutes: 0%</div>
+<div>No time source, *20:07:57.985 UTC Sat Nov 8 2014</div>
+<div><br/></div>
+<div>Interface IP-Address OK? Method Status Protocol</div>
+<div><br/></div>
+<div><br/></div>
+<div><br/></div>
+<div><br/></div>
+</div>
+</body></html>

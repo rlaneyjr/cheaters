@@ -1,0 +1,244 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>Citrix NetScaler XML API User&#39;s Guide - Structure Definition</title>
+<link rel="stylesheet" type="text/css" href="help_ns.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body onload="initial()" class="ns_body">
+<div class="ns_content"><table cellpadding="0" cellspacing="0"><script type="text/javascript">
+function changeContext(id,lang,flag){
+	parent.banner.document.language.select.value = lang;
+	if( lang == "C" ){
+		if(flag == "1"){
+			showContent(cfirstcontent,id,lang);
+		}
+		else{
+			showContent(csecondcontent,id,lang);
+		}
+	}
+	if( lang == "Perl" ){
+		if(flag == "1"){
+			showContent(perlfirstcontent,id,lang);
+		}
+		else{
+			showContent(perlsecondcontent,id,lang);
+		}
+	}
+	if( lang == "Java" ){
+		if(flag == "1"){
+			showContent(javafirstcontent,id,lang);	
+		}
+		else{
+			showContent(javasecondcontent,id,lang);
+		}
+	}
+	if( lang == "C#" ){
+		if(flag == "1"){
+			showContent(csharpfirstcontent,id,lang);
+		}
+		else{
+			showContent(csharpsecondcontent,id,lang);
+		}
+	}
+	if( lang == "VB" ){
+		if(flag == "1"){
+			showContent(vbfirstcontent,id,lang);
+		}
+		else{
+			showContent(vbsecondcontent,id,lang);
+		}
+	}
+	if(flag == "1"){
+		showInside(lang,"0");
+	}
+	else{
+		showOutside(lang);
+	}
+}
+function showContent(content,id,lang){
+	if(ie4){
+	   showContentObj=document.all.id;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById(id);
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+  showLangSelect(lang);
+}
+function showInside(str,cond){
+	if(str == "C"){
+ 		var inside_content = csecondcontent;
+ 	}
+ 	if(str == "Perl"){
+ 		var inside_content = perlsecondcontent;
+ 	}
+ 	if(str == "Java"){
+ 		var inside_content = javasecondcontent;
+ 	}
+ 	if(str == "C#"){
+		var inside_content = csharpsecondcontent;
+ 	}
+ 	if(str == "VB"){
+		var inside_content = vbsecondcontent;
+ 	}
+	showContent(inside_content,'qiksearch_div1',str);
+ 	if ( cond == "1" ){
+ 		var page = 'apidoc/docs/getnd6ravariablesResult.html#raparamList';
+ 		document.location.href = page;
+ 	}
+}
+function showOutside(str){
+	if(str == "C" ){
+ 		var inside_content = cfirstcontent;
+ 	}
+ 	if(str == "Perl" ){
+ 		var inside_content = perlfirstcontent;
+ 	}
+ 	if(str == "Java" ){
+ 		var inside_content = javafirstcontent;
+ 	}
+ 	if(str == "C#" ){
+ 		var inside_content = csharpfirstcontent;
+ 	}
+ 	if(str == "VB" ){
+ 		var inside_content = vbfirstcontent;
+ 	}
+ 	showContent(inside_content,'qiksearch_div',str);
+}
+function initial(){
+	ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+	ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+	ns4=document.layers;
+	langSelected = parent.banner.document.language.select.value
+	var plink = parent.banner.document.language.plink.value
+	var my_array=plink.split("&");
+	var temp = my_array[0];
+ 	var grp = temp.split("@");
+	var cmd = my_array[1];
+	var regex = /^stat/i;
+	if( cmd.match(regex) != null ){
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex_stat.html\">Statistics</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getnd6ravariablesResult");
+	}
+	else{
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex.htm\">Configuration</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getnd6ravariablesResult");
+	}
+	if( langSelected == "C" ){
+ 		var content = cfirstcontent;
+	}
+	else if( langSelected == "Perl" ){
+		var content = perlfirstcontent;
+	}
+	else if( langSelected == "Java" ){
+		var content = javafirstcontent;
+	}
+	else if( langSelected == "C#" ){
+		var content = csharpfirstcontent;
+	}
+	else if( langSelected == "VB" ){
+		var content = vbfirstcontent;
+	}
+	else{
+		var content = cfirstcontent;
+		langSelected="C";
+	}
+	showContent(content,'qiksearch_div',langSelected);
+	showInside(langSelected,"0");
+}
+function showPLink(content){
+	if(ie4){
+	   showContentObj=document.all.progressive_link;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById("progressive_link");
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+}
+function showLangSelect(id){
+	   if(ie4)
+       {
+       	showObj=document.all.first_url;
+       	showObj1=document.all.second_url;
+       }
+       if(ns6)
+       {
+       	showObj=document.getElementById("first_url");
+       	showObj1=document.getElementById("second_url");
+       }
+       if( id == "C" ){
+       	newlink = "<b>C</b>";
+       	newlink1 = "<b>C</b>";
+       }
+       else{
+       	newlink = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C','1');\"><b>C</b></a>";
+       	newlink1 = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C','0');\"><b>C</b></a>";
+       }
+       if( id == "Perl" ){
+       	newlink = newlink + " | <b>Perl</b>";
+       	newlink1 = newlink1 + " | <b>Perl</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Perl','1');\"><b>Perl</b></a>";
+      	       newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Perl','0');\"><b>Perl</b></a>";
+       }
+       if( id == "Java" ){
+       	newlink = newlink + " | <b>Java</b>";
+       	newlink1 = newlink1 + " | <b>Java</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Java','1');\"><b>Java</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Java','0');\"><b>Java</b></a>";
+       }
+       if( id == "C#" ){
+       	newlink = newlink + " | <b>C#</b>";
+       	newlink1 = newlink1 + " | <b>C#</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C#','1');\"><b>C#</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C#','0');\"><b>C#</b></a>";
+       }
+       showObj.innerHTML = newlink;
+       showObj1.innerHTML = newlink1;
+}
+</script>
+<tr><td><div><div id="progressive_link"></div></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>getnd6ravariablesResult Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>getnd6ravariablesResult</b> structure defines the return type for getnd6ravariables API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="first_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+cfirstcontent = "<pre>struct getnd6ravariablesResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; struct <a href=\'getnd6ravariablesResult.html\#nd6ravariables\'>nd6ravariables</a> list[];<br> };<br></pre></td></tr></table></div>"
+perlfirstcontent = "<pre>$getnd6ravariablesResult = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rc => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; message => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; List => \'@<a href=\'getnd6ravariablesResult.html\#nd6ravariables\'>nd6ravariables</a>\',<br> };<br></pre></td></tr></table></div>"
+javafirstcontent = "<pre>class getnd6ravariablesResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getnd6ravariablesResult.html\#nd6ravariables\'>nd6ravariables</a>[] list;<br> };<br></pre></td></tr></table></div>"
+csharpfirstcontent = "<pre>class getnd6ravariablesResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getnd6ravariablesResult.html\#nd6ravariables\'>nd6ravariables</a>[] list;<br> };<br></pre></td></tr></table></div>"
+vbfirstcontent = "<pre>Public <b>Structure</b> getnd6ravariablesResult <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rc As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public message As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public  nd6ravariablesList() As  <a href=\'getnd6ravariablesResult.html\#nd6ravariables\'>nd6ravariables</a><br> <b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rc</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, rc is 0 else rc > 0. Values above 0x8000 indicate Warnings.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>message</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, message is NULL else message contains <a href="errorlisting.html">Error/Warning</a> message.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>nd6ravariablesList</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">List of nd6ravariabless</div></td></tr><tr><td><br></td></tr><tr><td><div><a name="nd6ravariables"></a></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>nd6ravariables  Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>nd6ravariables</b> structure defines the actual return type values for getnd6ravariables API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="second_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div1" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+csecondcontent = "<pre>struct nd6ravariables {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int vlan;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * ceaserouteradv;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * sendrouteradv;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * srclinklayeraddroption;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * onlyunicastrtadvresponse;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * managedaddrconfig;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * otheraddrconfig;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int currhoplimit;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int maxrtadvinterval;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int minrtadvinterval;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int linkmtu;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int reachabletime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int retranstime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int defaultlifetime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int lastrtadvtime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int nextrtadvdelay;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * ipv6prefix [];<br> };<br></pre></td></tr></table></div>"
+perlsecondcontent = "<pre>$nd6ravariables = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; vlan => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ceaserouteradv => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; sendrouteradv => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; srclinklayeraddroption => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; onlyunicastrtadvresponse => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; managedaddrconfig => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; otheraddrconfig => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; currhoplimit => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; maxrtadvinterval => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; minrtadvinterval => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; linkmtu => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; reachabletime => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; retranstime => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; defaultlifetime => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; lastrtadvtime => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; nextrtadvdelay => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipv6prefix => \'@\',<br> };<br></pre></td></tr></table></div>"
+javasecondcontent = "<pre>class nd6ravariables {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt vlan;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String ceaserouteradv;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String sendrouteradv;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String srclinklayeraddroption;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String onlyunicastrtadvresponse;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String managedaddrconfig;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String otheraddrconfig;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt currhoplimit;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt maxrtadvinterval;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt minrtadvinterval;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt linkmtu;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt reachabletime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt retranstime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int defaultlifetime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt lastrtadvtime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt nextrtadvdelay;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String ipv6prefix [];<br> };<br></pre></td></tr></table></div>"
+csharpsecondcontent = "<pre>class nd6ravariables {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 vlan;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string ceaserouteradv;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string sendrouteradv;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string srclinklayeraddroption;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string onlyunicastrtadvresponse;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string managedaddrconfig;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string otheraddrconfig;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 currhoplimit;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 maxrtadvinterval;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 minrtadvinterval;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 linkmtu;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 reachabletime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 retranstime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 defaultlifetime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 lastrtadvtime;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 nextrtadvdelay;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string ipv6prefix [];<br> };<br></pre></td></tr></table></div>"
+vbsecondcontent = "<pre>Public <b>Structure</b> nd6ravariables <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public vlan As UInteger  <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ceaserouteradv As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public sendrouteradv As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public srclinklayeraddroption As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public onlyunicastrtadvresponse As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public managedaddrconfig As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public otheraddrconfig As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public currhoplimit As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public maxrtadvinterval As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public minrtadvinterval As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public linkmtu As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public reachabletime As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public retranstime As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public defaultlifetime As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public lastrtadvtime As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public nextrtadvdelay As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipv6prefix As String<br><b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>vlan</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The VLAN number.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ceaserouteradv</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Cease router advertisements on this vlan.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sendrouteradv</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">whether the router sends periodic RAs and responds to Router Solicitations.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>srclinklayeraddroption</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Include source link layer address option in RA messages.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>onlyunicastrtadvresponse</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Send only Unicast Router Advertisements in respond to Router Solicitations.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>managedaddrconfig</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Value to be placed in the Managed address configuration flag field.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>otheraddrconfig</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Value to be placed in the Other configuration flag field.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>currhoplimit</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Current Hop limit.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>maxrtadvinterval</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Maximum time allowed between unsolicited multicast RAs, in seconds.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>minrtadvinterval</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Minimum time interval between RA messages, in seconds.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>linkmtu</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The Link MTU.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>reachabletime</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Reachable time, in milliseconds.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>retranstime</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Retransmission time, in milliseconds.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>defaultlifetime</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Default life time, in seconds.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>lastrtadvtime</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Last RA sent timestamp.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>nextrtadvdelay</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Next RA delay.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipv6prefix</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Onlink prefixes for RA messages.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>See Also</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="getnd6ravariables.html">getnd6ravariables</a></div></td></tr><tr><td><br></td></tr></table></div>
+</body>
+</html>

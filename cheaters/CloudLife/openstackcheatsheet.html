@@ -1,0 +1,227 @@
+<h3>Monitor OpenStack Service Logs</h3>
+<p>Here are some quick and dirty ways to watch the necessary logs on the controller and compute nodes.</p>
+<p>
+Controller logs:<br />
+<code>tail -f /var/log/{ceilometer,cinder,glance,keystone,mysql,neutron,nova,openvswitch,rabbitmq}/*.log /var/log/syslog</code><br />
+</p>
+<p>
+Compute logs:<br />
+<code>tail -f /var/log/{ceilometer,neutron,nova,openvswitch}/*.log /var/log/syslog</code><br />
+</p>
+<h3>OpenStack Command CheatSheet</h3>
+<table border="1" width="100%">
+	<caption>Keystone(ImageServices)</caption>
+	<tr>
+		<td>List all users</td>
+		<td>keystone user-list</td>
+	</tr>
+    <tr>
+        <td>List Identity Service catalog</td>
+        <td>keystone endpoint-list</td>
+    </tr>
+    <tr>
+        <td>Discover keystone endpoints</td>
+        <td>keystone discover</td>
+    </tr>
+    <tr>
+        <td>List all services in Service Catalog</td>
+        <td>keystone service-list</td>
+    </tr>
+    <tr>
+        <td>Create new user:</td>
+        <td>keystone user-create --name 'username' --tenant-id 'tenant' --pass 'password' --email 'email' --enabled 'true'</td>
+    </tr>
+    <tr>
+        <td>Create new tenant:</td>
+        <td>keystone tenant-create --name 'tenant-name' --description 'tenant-description' --enabled 'true'</td>
+    </tr>
+</table>
+
+<table border="1" width="100%">
+    <caption>Nova (All things Compute)</caption>
+    <tr>
+        <td>List instances status of instance</td>
+        <td>nova list</td>
+    </tr>
+    <tr>
+        <td>List images</td>
+        <td>nova image-list</td>
+    </tr>
+    <tr>
+        <td>List flavors</td>
+        <td>nova flavor-list</td>
+    </tr>
+    <tr>
+        <td>Boot using flavor and image (if names are unique)</td>
+        <td>nova boot --image 'image name or id' --flavor 'flavor name or id' 'instance name'</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>nova boot --image cirros-0.3.1-x86_64-uec-ramdisk --flavor m1.tiny MyFirstInstance</td>
+    </tr>
+    <tr>
+        <td>Show details of instance</td>
+        <td>nova show 'server name or id' nova show MyFirstInstance</td>
+    </tr>
+    <tr>
+        <td>View console log of instance</td>
+        <td>nova console-log MyFirstInstance</td>
+    </tr>
+    <tr>
+        <td>pause:</td>
+        <td>nova pause 'name'</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>nova pause volumeTwoImage</td>
+    </tr>
+    <tr>
+        <td>unpause:</td>
+        <td>nova unpause 'name'</td>
+    </tr>
+    <tr>
+        <td>suspend:</td>
+        <td>nova suspend 'name'</td>
+    </tr>
+    <tr>
+        <td>unsuspend:</td>
+        <td>nova resume 'name'</td>
+    </tr>
+    <tr>
+        <td>stop:</td>
+        <td>nova stop 'name'</td>
+    </tr>
+    <tr>
+        <td>start:</td>
+        <td>nova start 'name'</td>
+    </tr>
+    <tr>
+        <td>rescue:</td>
+        <td>nova rescue 'name'</td>
+    </tr>
+    <tr>
+        <td>resize:</td>
+        <td>nova resize 'name' 'flavor'</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>nova resize my-pem-server m1.small</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>nova resize-confirm server1</td>
+    </tr>
+    <tr>
+        <td>rebuild:</td>
+        <td>nova rebuild 'name' 'image'</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>nova rebuild newtinny cirros-qcow2</td>
+    </tr>
+    <tr>
+        <td>reboot:</td>
+        <td>nova reboot 'name'</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>nova reboot newtinny</td>
+    </tr>
+    <tr>
+        <td>Inject user data and files into an instance:</td>
+        <td>nova boot --user-data ./userdata.txt MyUserdataInstance</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>nova boot --user-data userdata.txt --image cirros-qcow2 --flavor m1.tiny MyUserdataInstance2</td>
+    </tr>
+</table>
+
+
+#-­--­-tovalidatefileis	  there,sshintoinstance,goto/var/lib/cloudlookforfile...
+Injectkeypairintoaninstanceand	  accesstheinstancewith	  thatkeypair
+createkeypair:
+nova keypair-add test > test.pem chmod 600 test.pem 
+#boot:
+nova boot --image cirros-0.3.1-x86_64 --flavor m1.small --key_name test my-first-server 
+#-­--­-ssh:
+sudo ip netns exec qdhcp-98f09f1e-64c4-4301-a897-5067ee6d544f ssh -i test.pem cirros@10.0.0.4 
+Setmetadataonaninstance
+nova meta volumeTwoImage set newmeta=’super duper data’ 
+Createaninstancesnapshot
+nova image-create volumeTwoImage snapshotOfVolumeImage nova image-show snapshotOfVolumeImage 
+
+Managesecuritygroups
+Addrulestodefaultsecuritygroupallowingpingandsshbetween#instancesinthedefaultsecuritygroup
+nova secgroup-add-group-rule default default icmp -1 -1 nova secgroup-add-group-rule default default tcp 22 22 
+
+
+2
+anystacker.com
+
+Glance(ImageService)
+Listimagesyoucanaccess
+glance image-list 
+Deletespecifiedimage
+glance image-delete 'image' 
+#Describeaspecificimage
+glance image-show 'image' 
+#updateimage
+glance image-update 'image' 
+#Manageimages
+Kernel	  image:
+glance image-create --name “cirros-threepart-kernel” --disk-format aki --container-format aki --is-public True ­-file ~/images/cirros-0.3.1~pre4-x86_64-vmlinuz 
+Ramimage:
+glance image-create --name “cirros-threepart-ramdisk” --disk-format ari --container-format ari --is-public True--file ~/images/cirros-0.3.1~pre4-x86_64-initrd 
+3-­-partimage:
+glance image-create --name “cirros-threepart” --disk-format ami --container-format ami --is-public True -­property kernel_id=$KID—property ramdisk_id=$RID—file ~/images/cirros-0.3.1~pre4-x86_64-blank.img 
+Registerrawimage:
+glance image-create --name “cirros-qcow2” --disk-format qcow2 --container-format bare --is-public True --file ~/images/cirros-0.3.1~pre4-x86_64-disk.img 
+Neutron(Networking)
+#create	  networkneutron net-create 'name' neutron net-create my-network 
+#create	  asubnetneutron subnet-create <network name> <cidr> neutron subnet-create my-network 10.0.0.0/29 
+Listnetworkandsubnetneutron net-list neutron subnet-list 
+Examinedetailsofnetworkandsubnetneutron net-show <id or name of network> neutron subnet-show <id or name of subnet> 
+Cinder(BlockStorage) 
+
+#Managevolumesandvolumesnapshots
+Createanewvolumecinder create <size in GB> --display-name <volume name> cinder create 1 --display-name MyFirstVolume 
+bootaninstanceand	  attachto	  volume
+nova boot --image cirros-qcow2 --flavor m1.tiny MyVolumeInstance 
+Listvolumes,noticestatusofvolume
+cinder list 
+3
+anystacker.com
+
+Attachvolumetoinstanceafterinstanceisactive,andvolumeisavailable
+nova volume-attach <instance-id> <volume-id> auto nova volume-attach MyVolumeInstance /dev/vdb auto 
+loginintoinstance,liststoragedevices
+sudo fdisk -l 
+ontheinstance,	  makefilesystemonvolume
+sudo mkfs.ext3 /dev/vdb 
+Createamountpoint
+sudo mkdir /myspace 
+Mountthevolumeatthemountpoint
+sudo mount /dev/vdb /myspace 
+Create	  afile	  onthe	  volumesudo touch /myspace/helloworld.txt sudo ls /myspace 
+Unmountthevolume
+sudo umount /myspace 
+Swift(Object	  Store)
+Displaysinformationfortheaccount,container,orobjectswift stat swift stat <account> swift stat <container> swift stat <object> 
+#listcontainers:
+swift list 
+#create	  acontainer
+swift post mycontainer 
+#uploadfiletoacontainerswift upload <containder name> <file name> swift upload mycontainer myfile.txt 
+listobjectsincontainer
+swift list container 
+downloadobjectfromcontainer
+swift download <container name> <file name> 
+uploadwithchunks,forlargefile:swift upload -S <size> <containder name> <file name> swift upload -S 64 container largeFile 
+
+
+
+4
+anystacker.com
+
+

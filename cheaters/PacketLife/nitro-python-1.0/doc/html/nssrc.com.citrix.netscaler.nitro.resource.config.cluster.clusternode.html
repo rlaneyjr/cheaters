@@ -1,0 +1,599 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>clusternode module &mdash; Nitro  documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Nitro  documentation" href="index.html" />
+    <link rel="up" title="cluster package" href="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.html" />
+    <link rel="next" title="clusternodegroup module" href="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternodegroup.html" />
+    <link rel="prev" title="clusterinstance_clusternode_binding module" href="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusterinstance_clusternode_binding.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternodegroup.html" title="clusternodegroup module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusterinstance_clusternode_binding.html" title="clusterinstance_clusternode_binding module"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Nitro  documentation</a> &raquo;</li>
+          <li><a href="nssrc.com.citrix.netscaler.nitro.resource.config.html" >config package</a> &raquo;</li>
+          <li><a href="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.html" accesskey="U">cluster package</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode">
+<span id="clusternode-module"></span><h1>clusternode module<a class="headerlink" href="#module-nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode">
+<em class="property">class </em><tt class="descname">clusternode</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.html#nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource" title="nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource"><tt class="xref py py-class docutils literal"><span class="pre">nssrc.com.citrix.netscaler.nitro.resource.base.base_resource.base_resource</span></tt></a></p>
+<p>Configuration for cluster node resource.</p>
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.nodeid">
+<tt class="descname">nodeid</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.nodeid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unique number that identifies the cluster node.&lt;br/&gt;Maximum length =  31.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.ipaddress">
+<tt class="descname">ipaddress</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.ipaddress" title="Permalink to this definition">¶</a></dt>
+<dd><p>NetScaler IP (NSIP) address of the appliance to add to the cluster. Must be an IPv4 address.&lt;br/&gt;Minimum length =  1.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.state">
+<tt class="descname">state</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.state" title="Permalink to this definition">¶</a></dt>
+<dd><p>Admin state of the cluster node. The available settings function as follows:
+ACTIVE - The node serves traffic.
+SPARE - The node does not serve traffic unless an ACTIVE node goes down.
+PASSIVE - The node does not serve traffic, unless you change its state. PASSIVE state is useful during temporary maintenance activities in which you want the node to take part in the consensus protocol but not to serve traffic.&lt;br/&gt;Default value: PASSIVE&lt;br/&gt;Possible values = ACTIVE, SPARE, PASSIVE.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.backplane">
+<tt class="descname">backplane</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.backplane" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interface through which the node communicates with the other nodes in the cluster. Must be specified in the three-tuple form n/c/u, where n represents the node ID and c/u refers to the interface on the appliance.&lt;br/&gt;Minimum length =  1.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.priority">
+<tt class="descname">priority</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.priority" title="Permalink to this definition">¶</a></dt>
+<dd><p>Preference for selecting a node as the configuration coordinator. The node with the lowest priority value is selected as the configuration coordinator.
+When the current configuration coordinator goes down, the node with the next lowest priority is made the new configuration coordinator. When the original node comes back up, it will preempt the new configuration coordinator and take over as the configuration coordinator.
+Note: When priority is not configured for any of the nodes or if multiple nodes have the same priority, the cluster elects one of the nodes as the configuration coordinator.&lt;br/&gt;Default value: 31&lt;br/&gt;Maximum length =  31.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.clusterhealth">
+<tt class="descname">clusterhealth</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.clusterhealth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Node clusterd state.&lt;br/&gt;Possible values = UP, Configurations of the node are lagging behind the cluster by more than 256 commands, The config sync operation has exceeded the time limit of 60 seconds, The config sync operation (full sync) is in progress, The node is not in sync with the cluster configurations as sync is disabled on this node, The execution of a configuration command has failed on this node, UNKNOWN.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.effectivestate">
+<tt class="descname">effectivestate</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.effectivestate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Node effective health state.&lt;br/&gt;Possible values = UP, NOT UP, UNKNOWN, INIT.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.operationalsyncstate">
+<tt class="descname">operationalsyncstate</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.operationalsyncstate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Node Operational Reconciliation state.&lt;br/&gt;Default value: ENABLED&lt;br/&gt;Possible values = ENABLED, SUCCESS, IN PROGRESS, FAILED, INCREMENTAL SYNC DISABLED, DISABLED, UNKNOWN.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.masterstate">
+<tt class="descname">masterstate</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.masterstate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Node Master state.&lt;br/&gt;Possible values = INACTIVE, ACTIVE, UNKNOWN.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.health">
+<tt class="descname">health</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.health" title="Permalink to this definition">¶</a></dt>
+<dd><p>Node Health state.&lt;br/&gt;Possible values = UNKNOWN, INIT, DOWN, UP, Some enabled and HAMON interfaces of the node are down, All interfaces of the node are down or disabled, SSL card(s) of the node have failed, Route Monitor(s) of the node have failed, Service state is being synchronized with the cluster, The backplane interface is not set,  is down,  or is disabled, The CLAG member(s) of the node are down, Persistence sessions are being synchronized with the cluster, The Syn Cookie is being synchronized with the cluster, Unknown Health, AAA keys are being sychronized with the cluster.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.isconfigurationcoordinator">
+<tt class="descname">isconfigurationcoordinator</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.isconfigurationcoordinator" title="Permalink to this definition">¶</a></dt>
+<dd><p>This argument is used to determine whether the node is configuration coordinator (CCO).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.islocalnode">
+<tt class="descname">islocalnode</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.islocalnode" title="Permalink to this definition">¶</a></dt>
+<dd><p>This argument is used to determine whether it is local node.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.nodersskeymismatch">
+<tt class="descname">nodersskeymismatch</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.nodersskeymismatch" title="Permalink to this definition">¶</a></dt>
+<dd><p>This argument is used to determine if there is a RSS key mismatch at cluster node level.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.nodelicensemismatch">
+<tt class="descname">nodelicensemismatch</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.nodelicensemismatch" title="Permalink to this definition">¶</a></dt>
+<dd><p>This argument is used to determine if there is a License mismatch at cluster node level.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.nodejumbonotsupported">
+<tt class="descname">nodejumbonotsupported</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.nodejumbonotsupported" title="Permalink to this definition">¶</a></dt>
+<dd><p>This argument is used to determine if Jumbo framework not supported at cluster node level.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.nodelist">
+<tt class="descname">nodelist</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.nodelist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Nodelist for displaying Heartbeat not seen interfaces on a cluster node.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.ifaceslist">
+<tt class="descname">ifaceslist</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.ifaceslist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interface list corresponding to nodelist for Heartbeat not seen interfaces on a cluster node.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.enabledifaces">
+<tt class="descname">enabledifaces</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.enabledifaces" title="Permalink to this definition">¶</a></dt>
+<dd><p>Enabled Interfaces on a cluster node.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.disabledifaces">
+<tt class="descname">disabledifaces</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.disabledifaces" title="Permalink to this definition">¶</a></dt>
+<dd><p>Disabled Interfaces on a cluster node.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.partialfailifaces">
+<tt class="descname">partialfailifaces</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.partialfailifaces" title="Permalink to this definition">¶</a></dt>
+<dd><p>Partial Failure Interfaces on a cluster node.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.hamonifaces">
+<tt class="descname">hamonifaces</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.hamonifaces" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hamon Interfaces on a cluster node.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.add">
+<em class="property">classmethod </em><tt class="descname">add</tt><big>(</big><em>client</em>, <em>resource</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this API to add clusternode.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.update">
+<em class="property">classmethod </em><tt class="descname">update</tt><big>(</big><em>client</em>, <em>resource</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this API to update clusternode.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.unset">
+<em class="property">classmethod </em><tt class="descname">unset</tt><big>(</big><em>client</em>, <em>resource</em>, <em>args</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.unset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this API to unset the properties of clusternode resource.
+Properties that need to be unset are specified in args array.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.delete">
+<em class="property">classmethod </em><tt class="descname">delete</tt><big>(</big><em>client</em>, <em>resource</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this API to delete clusternode.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.get">
+<em class="property">classmethod </em><tt class="descname">get</tt><big>(</big><em>client</em>, <em>name=''</em>, <em>option_=''</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this API to fetch all the clusternode resources that are configured on netscaler.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.get_filtered">
+<em class="property">classmethod </em><tt class="descname">get_filtered</tt><big>(</big><em>client</em>, <em>filter_</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.get_filtered" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this API to fetch filtered set of clusternode resources.
+filter string should be in JSON format.eg: &#8220;port:80,servicetype:HTTP&#8221;.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.count">
+<em class="property">classmethod </em><tt class="descname">count</tt><big>(</big><em>client</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this API to count the clusternode resources configured on NetScaler.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.count_filtered">
+<em class="property">classmethod </em><tt class="descname">count_filtered</tt><big>(</big><em>client</em>, <em>filter_</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.count_filtered" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this API to count filtered the set of clusternode resources.
+Filter string should be in JSON format.eg: &#8220;port:80,servicetype:HTTP&#8221;.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.State">
+<em class="property">class </em><tt class="descname">State</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.State" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.State.ACTIVE">
+<tt class="descname">ACTIVE</tt><em class="property"> = 'ACTIVE'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.State.ACTIVE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.State.SPARE">
+<tt class="descname">SPARE</tt><em class="property"> = 'SPARE'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.State.SPARE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.State.PASSIVE">
+<tt class="descname">PASSIVE</tt><em class="property"> = 'PASSIVE'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.State.PASSIVE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Operationalsyncstate">
+<em class="property">class </em><tt class="descclassname">clusternode.</tt><tt class="descname">Operationalsyncstate</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Operationalsyncstate" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Operationalsyncstate.ENABLED">
+<tt class="descname">ENABLED</tt><em class="property"> = 'ENABLED'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Operationalsyncstate.ENABLED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Operationalsyncstate.SUCCESS">
+<tt class="descname">SUCCESS</tt><em class="property"> = 'SUCCESS'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Operationalsyncstate.SUCCESS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Operationalsyncstate.IN_PROGRESS">
+<tt class="descname">IN_PROGRESS</tt><em class="property"> = 'IN PROGRESS'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Operationalsyncstate.IN_PROGRESS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Operationalsyncstate.FAILED">
+<tt class="descname">FAILED</tt><em class="property"> = 'FAILED'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Operationalsyncstate.FAILED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Operationalsyncstate.INCREMENTAL_SYNC_DISABLED">
+<tt class="descname">INCREMENTAL_SYNC_DISABLED</tt><em class="property"> = 'INCREMENTAL SYNC DISABLED'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Operationalsyncstate.INCREMENTAL_SYNC_DISABLED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Operationalsyncstate.DISABLED">
+<tt class="descname">DISABLED</tt><em class="property"> = 'DISABLED'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Operationalsyncstate.DISABLED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Operationalsyncstate.UNKNOWN">
+<tt class="descname">UNKNOWN</tt><em class="property"> = 'UNKNOWN'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Operationalsyncstate.UNKNOWN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Effectivestate">
+<em class="property">class </em><tt class="descclassname">clusternode.</tt><tt class="descname">Effectivestate</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Effectivestate" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Effectivestate.UP">
+<tt class="descname">UP</tt><em class="property"> = 'UP'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Effectivestate.UP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Effectivestate.NOT_UP">
+<tt class="descname">NOT_UP</tt><em class="property"> = 'NOT UP'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Effectivestate.NOT_UP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Effectivestate.UNKNOWN">
+<tt class="descname">UNKNOWN</tt><em class="property"> = 'UNKNOWN'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Effectivestate.UNKNOWN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Effectivestate.INIT">
+<tt class="descname">INIT</tt><em class="property"> = 'INIT'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Effectivestate.INIT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Health">
+<em class="property">class </em><tt class="descclassname">clusternode.</tt><tt class="descname">Health</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Health" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Health.UNKNOWN">
+<tt class="descname">UNKNOWN</tt><em class="property"> = 'UNKNOWN'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Health.UNKNOWN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Health.INIT">
+<tt class="descname">INIT</tt><em class="property"> = 'INIT'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Health.INIT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Health.DOWN">
+<tt class="descname">DOWN</tt><em class="property"> = 'DOWN'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Health.DOWN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Health.UP">
+<tt class="descname">UP</tt><em class="property"> = 'UP'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Health.UP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Health.Some_enabled_and_HAMON_interfaces_of_the_node_are_down">
+<tt class="descname">Some_enabled_and_HAMON_interfaces_of_the_node_are_down</tt><em class="property"> = 'Some enabled and HAMON interfaces of the node are down'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Health.Some_enabled_and_HAMON_interfaces_of_the_node_are_down" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Health.All_interfaces_of_the_node_are_down_or_disabled">
+<tt class="descname">All_interfaces_of_the_node_are_down_or_disabled</tt><em class="property"> = 'All interfaces of the node are down or disabled'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Health.All_interfaces_of_the_node_are_down_or_disabled" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Health.SSL_card_s__of_the_node_have_failed">
+<tt class="descname">SSL_card_s__of_the_node_have_failed</tt><em class="property"> = 'SSL card(s) of the node have failed'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Health.SSL_card_s__of_the_node_have_failed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Health.Route_Monitor_s__of_the_node_have_failed">
+<tt class="descname">Route_Monitor_s__of_the_node_have_failed</tt><em class="property"> = 'Route Monitor(s) of the node have failed'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Health.Route_Monitor_s__of_the_node_have_failed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Health.Service_state_is_being_synchronized_with_the_cluster">
+<tt class="descname">Service_state_is_being_synchronized_with_the_cluster</tt><em class="property"> = 'Service state is being synchronized with the cluster'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Health.Service_state_is_being_synchronized_with_the_cluster" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Health.The_backplane_interface_is_not_set">
+<tt class="descname">The_backplane_interface_is_not_set</tt><em class="property"> = 'The backplane interface is not set'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Health.The_backplane_interface_is_not_set" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Health.The_CLAG_member_s__of_the_node_are_down">
+<tt class="descname">The_CLAG_member_s__of_the_node_are_down</tt><em class="property"> = 'The CLAG member(s) of the node are down'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Health.The_CLAG_member_s__of_the_node_are_down" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Health.Persistence_sessions_are_being_synchronized_with_the_cluster">
+<tt class="descname">Persistence_sessions_are_being_synchronized_with_the_cluster</tt><em class="property"> = 'Persistence sessions are being synchronized with the cluster'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Health.Persistence_sessions_are_being_synchronized_with_the_cluster" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Health.The_Syn_Cookie_is_being_synchronized_with_the_cluster">
+<tt class="descname">The_Syn_Cookie_is_being_synchronized_with_the_cluster</tt><em class="property"> = 'The Syn Cookie is being synchronized with the cluster'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Health.The_Syn_Cookie_is_being_synchronized_with_the_cluster" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Health.Unknown_Health">
+<tt class="descname">Unknown_Health</tt><em class="property"> = 'Unknown Health'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Health.Unknown_Health" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Health.AAA_keys_are_being_sychronized_with_the_cluster">
+<tt class="descname">AAA_keys_are_being_sychronized_with_the_cluster</tt><em class="property"> = 'AAA keys are being sychronized with the cluster'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Health.AAA_keys_are_being_sychronized_with_the_cluster" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Clusterhealth">
+<em class="property">class </em><tt class="descclassname">clusternode.</tt><tt class="descname">Clusterhealth</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Clusterhealth" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Clusterhealth.UP">
+<tt class="descname">UP</tt><em class="property"> = 'UP'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Clusterhealth.UP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Clusterhealth.Configurations_of_the_node_are_lagging_behind_the_cluster_by_more_than_256_commands">
+<tt class="descname">Configurations_of_the_node_are_lagging_behind_the_cluster_by_more_than_256_commands</tt><em class="property"> = 'Configurations of the node are lagging behind the cluster by more than 256 commands'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Clusterhealth.Configurations_of_the_node_are_lagging_behind_the_cluster_by_more_than_256_commands" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Clusterhealth.The_config_sync_operation_has_exceeded_the_time_limit_of_60_seconds">
+<tt class="descname">The_config_sync_operation_has_exceeded_the_time_limit_of_60_seconds</tt><em class="property"> = 'The config sync operation has exceeded the time limit of 60 seconds'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Clusterhealth.The_config_sync_operation_has_exceeded_the_time_limit_of_60_seconds" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Clusterhealth.The_config_sync_operation__full_sync__is_in_progress">
+<tt class="descname">The_config_sync_operation__full_sync__is_in_progress</tt><em class="property"> = 'The config sync operation (full sync) is in progress'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Clusterhealth.The_config_sync_operation__full_sync__is_in_progress" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Clusterhealth.The_node_is_not_in_sync_with_the_cluster_configurations_as_sync_is_disabled_on_this_node">
+<tt class="descname">The_node_is_not_in_sync_with_the_cluster_configurations_as_sync_is_disabled_on_this_node</tt><em class="property"> = 'The node is not in sync with the cluster configurations as sync is disabled on this node'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Clusterhealth.The_node_is_not_in_sync_with_the_cluster_configurations_as_sync_is_disabled_on_this_node" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Clusterhealth.The_execution_of_a_configuration_command_has_failed_on_this_node">
+<tt class="descname">The_execution_of_a_configuration_command_has_failed_on_this_node</tt><em class="property"> = 'The execution of a configuration command has failed on this node'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Clusterhealth.The_execution_of_a_configuration_command_has_failed_on_this_node" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Clusterhealth.UNKNOWN">
+<tt class="descname">UNKNOWN</tt><em class="property"> = 'UNKNOWN'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Clusterhealth.UNKNOWN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Masterstate">
+<em class="property">class </em><tt class="descclassname">clusternode.</tt><tt class="descname">Masterstate</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Masterstate" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Masterstate.INACTIVE">
+<tt class="descname">INACTIVE</tt><em class="property"> = 'INACTIVE'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Masterstate.INACTIVE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Masterstate.ACTIVE">
+<tt class="descname">ACTIVE</tt><em class="property"> = 'ACTIVE'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Masterstate.ACTIVE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Masterstate.UNKNOWN">
+<tt class="descname">UNKNOWN</tt><em class="property"> = 'UNKNOWN'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode.Masterstate.UNKNOWN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode_response">
+<em class="property">class </em><tt class="descname">clusternode_response</tt><big>(</big><em>length=1</em><big>)</big><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.clusternode_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.base.base_response.html#nssrc.com.citrix.netscaler.nitro.resource.base.base_response.base_response" title="nssrc.com.citrix.netscaler.nitro.resource.base.base_response.base_response"><tt class="xref py py-class docutils literal"><span class="pre">nssrc.com.citrix.netscaler.nitro.resource.base.base_response.base_response</span></tt></a></p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper"><ul class="globaltoc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.exception.html">Nitro exception Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.base.html">Base Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.service.html">Service Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.util.html">Util Package</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.html">Config Package</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.aaa.html">aaa</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.app.html">app</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.appflow.html">appflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.appfw.html">appfw</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.appqoe.html">appqoe</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.audit.html">audit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.authentication.html">authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.authorization.html">authorization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.autoscale.html">autoscale</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.basic.html">basic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.ca.html">ca</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.cache.html">cache</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.html">cluster</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.cluster.html">cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusterfiles.html">clusterfiles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusterinstance.html">clusterinstance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusterinstance_binding.html">clusterinstance_binding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusterinstance_clusternode_binding.html">clusterinstance_clusternode_binding</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">clusternode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternodegroup.html">clusternodegroup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternodegroup_authenticationvserver_binding.html">clusternodegroup_authenticationvserver_binding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternodegroup_binding.html">clusternodegroup_binding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternodegroup_clusternode_binding.html">clusternodegroup_clusternode_binding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternodegroup_crvserver_binding.html">clusternodegroup_crvserver_binding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternodegroup_csvserver_binding.html">clusternodegroup_csvserver_binding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternodegroup_gslbsite_binding.html">clusternodegroup_gslbsite_binding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternodegroup_gslbvserver_binding.html">clusternodegroup_gslbvserver_binding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternodegroup_lbvserver_binding.html">clusternodegroup_lbvserver_binding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternodegroup_nslimitidentifier_binding.html">clusternodegroup_nslimitidentifier_binding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternodegroup_service_binding.html">clusternodegroup_service_binding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternodegroup_streamidentifier_binding.html">clusternodegroup_streamidentifier_binding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternodegroup_vpnvserver_binding.html">clusternodegroup_vpnvserver_binding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clustersync.html">clustersync</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.cmp.html">cmp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.cr.html">cr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.cs.html">cs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.db.html">db</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.dns.html">dns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.dos.html">dos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.feo.html">feo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.filter.html">filter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.gslb.html">gslb</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.ha.html">ha</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.ipsec.html">ipsec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.lb.html">lb</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.lldp.html">lldp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.network.html">network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.ns.html">ns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.ntp.html">ntp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.policy.html">policy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.pq.html">pq</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.protocol.html">protocol</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.responder.html">responder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.rewrite.html">rewrite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.rise.html">rise</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.router.html">router</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.sc.html">sc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.snmp.html">snmp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.spillover.html">spillover</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.ssl.html">ssl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.stream.html">stream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.system.html">system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.tm.html">tm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.transform.html">transform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.tunnel.html">tunnel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.utility.html">utility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.vpn.html">vpn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.wi.html">wi</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.stat.html">Stat Package</a></li>
+</ul>
+</ul>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusterinstance_clusternode_binding.html"
+                        title="previous chapter">clusterinstance_clusternode_binding module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternodegroup.html"
+                        title="next chapter">clusternodegroup module</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/nssrc.com.citrix.netscaler.nitro.resource.config.cluster.clusternode.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div> 
+
+    <div class="footer">
+        &copy; Copyright © 1999-2014 Citrix Systems, Inc. All Rights Reserved.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.
+    </div>
+  </body>
+</html>

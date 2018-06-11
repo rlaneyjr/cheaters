@@ -1,0 +1,539 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      
+      <title>Viewing service configurations -  - NSO 4.4.2.3 Getting Started Guide</title>
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+      <link rel="home" href="index.html" title="NSO 4.4.2.3 Getting Started Guide" />
+      <link rel="up" href="ch05s04.html" title="Service-Life Cycle Management" />
+      <link rel="prev" href="ch05s04s03.html" title="Service Deletion" />
+      <link rel="next" href="ch05s05.html" title="Defining your own services" />
+      <meta xmlns="" name="Section-title" content="Viewing service configurations" /><script xmlns="" type="text/javascript">
+      //The id for tree cookie
+      var treeCookieId = "treeview-3286";
+      var language = "en";
+      var w = new Object();
+      //Localization
+      txt_filesfound = 'Results';
+      txt_enter_at_least_1_char = "You must enter at least one character.";
+      txt_browser_not_supported = "JavaScript is disabled on your browser. Please enable JavaScript to enjoy all the features of this site.";
+      txt_please_wait = "Please wait. Search in progress...";
+      txt_results_for = "Results for: ";
+    </script><link xmlns="" rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/css/positioning.css" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/jquery/theme-redmond/jquery-ui-1.8.2.custom.css" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/jquery/treeview/jquery.treeview.css" /><style xmlns="" type="text/css">
+      
+      #noscript{
+      font-weight:bold;
+      background-color: #55AA55;
+      font-weight: bold;
+      height: 25spx;
+      z-index: 3000;
+      top:0px;
+      width:100%;
+      position: relative;
+      border-bottom: solid 5px black;
+      text-align:center;
+      color: white;
+      }
+      
+      input {
+      margin-bottom: 5px;
+      margin-top: 2px;
+      }
+      .folder {
+      display: block;
+      height: 22px;
+      padding-left: 20px;
+      background: transparent url(common/jquery/treeview/images/folder.gif) 0 0px no-repeat;
+      }
+      span.contentsTab {
+      padding-left: 20px;
+      background: url(common/images/toc-icon.png) no-repeat 0 center;
+      }
+      span.searchTab {
+      padding-left: 20px;
+      background: url(common/images/search-icon.png) no-repeat 0 center;
+      }
+      
+      /* Overide jquery treeview's defaults for ul. */
+      .treeview ul {
+      background-color: transparent;
+      margin-top: 4px;
+      }		
+      #webhelp-currentid {
+      /* background-color: #D8D8D8 !important; */
+      background-color: #D8D8D8;
+      }
+      .treeview .hover { color: black; }
+      .filetree li span a { text-decoration: none; font-size: 12px; color: #517291; }
+      
+      /* Override jquery-ui's default css customizations. These are supposed to take precedence over those.*/
+      .ui-widget-content {
+      border: 0px; 
+      background: none; 
+      color: none;     
+      }
+      .ui-widget-header {
+      color: #e9e8e9;
+      border-left: 1px solid #e5e5e5;
+      border-right: 1px solid #e5e5e5;
+      border-bottom: 1px solid #bbc4c5;
+      border-top: 4px solid #e5e5e5;
+      border: medium none;
+      background: #F4F4F4; /* old browsers */
+      background: -moz-linear-gradient(top, #F4F4F4 0%, #E6E4E5 100%); /* firefox */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F4F4F4), color-stop(100%,#E6E4E5)); /* webkit */    
+      font-weight: none;
+      }
+      .ui-widget-header a { color: none; }
+      .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { 
+      border: none; background: none; font-weight: none; color: none; }
+      .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited { color: black; text-decoration: none; }
+      .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus { border: none; background: none; font-weight: none; color: none; }
+      
+      .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { border: none; background: none; font-weight: none; color: none; }
+      .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited { 
+      color: black; text-decoration: none; 	
+      background: #C6C6C6; /* old browsers */
+      background: -moz-linear-gradient(top, #C6C6C6 0%, #D8D8D8 100%); /* firefox */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#C6C6C6), color-stop(100%,#D8D8D8)); /* webkit */
+      -webkit-border-radius:15px; -moz-border-radius:10px;
+      border: 1px solid #f1f1f1;
+      }    
+      .ui-corner-all { border-radius: 0 0 0 0; }
+      
+      .ui-tabs { padding: .2em;}
+      .ui-tabs .ui-tabs-nav li { top: 0px; margin: -2px 0 1px; text-transform: uppercase; font-size: 10.5px;}
+      .ui-tabs .ui-tabs-nav li a { padding: .25em 2em .25em 1em; margin: .5em; text-shadow: 0 1px 0 rgba(255,255,255,.5); }
+      /**
+      *	Basic Layout Theme
+      * 
+      *	This theme uses the default layout class-names for all classes
+      *	Add any 'custom class-names', from options: paneClass, resizerClass, togglerClass
+      */
+      
+      .ui-layout-pane { /* all 'panes' */ 
+      background: #FFF; 
+      border: 1px solid #BBB; 
+      padding: 05x; 
+      overflow: auto;
+      } 
+      
+      .ui-layout-resizer { /* all 'resizer-bars' */ 
+      background: #DDD; 
+      top:100px
+      } 
+      
+      .ui-layout-toggler { /* all 'toggler-buttons' */ 
+      background: #AAA; 
+      } 
+      
+    </style>
+      <!--[if IE]>
+	<link rel="stylesheet" type="text/css" href="../common/css/ie.css"/>
+	<![endif]--><script xmlns="" type="text/javascript" src="common/browserDetect.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery-1.7.2.min.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery.ui.all.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery.cookie.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/treeview/jquery.treeview.min.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/layout/jquery.layout.js">
+         <!----></script><style type="text/css">
+      
+      #header {
+      /* background: url("../images/header-bg.png") scroll top left repeat-x #4d8c83; */
+      background: transparent;
+      }
+      #leftnavigation {
+      /* background-color: #ededed!important; */
+      background-color: transparent;
+      }
+      #navheader {
+      visibility: hidden;
+      }
+      #webhelp-currentid {
+      /* background-color: #D8D8D8 !important; */
+      background-color: #FFFFFF; /*but must be changed in main.js as well*/
+      }
+      .filetree span.file {
+      /* background: url(images/file.gif) 0 0 no-repeat; */
+      background: initial;
+      }
+      .filetree span.folder, .filetree span.file {
+      padding: 1px 0 1px 7px;
+      display: block;
+      }
+
+      /* borrowed from cisco: clientlib.css */
+      .footer {
+      margin: 28px 30px 0 15px;
+      font-size: 80%;
+      line-height: 120%;
+      border-top: 1px solid #ccc;
+      padding-top: 7px;
+      color: #999;
+      }
+      .footer #footer-legal{display:inline;padding-bottom:18px}
+      #framework-footer{margin:0;padding:0 0 15px 0;min-width:900px;width:100%}
+      .footer a,.footer a:visited{color:#999}
+
+      /* from ccimr.css */
+      a:active  { color: #3366CC}
+      a:hover   { color: #3366CC}
+      a:link    { color: #3366CC}
+      a:visited { color: #3366CC}
+
+      #header img {
+      float: left;
+      margin-left: 20px;
+      margin-top: 0px;
+      }
+
+      #header h1 {
+      color: #336666;
+      margin-top: 4px;
+      }
+      #content h1, #content h2 {
+      color: #336666;
+      }
+      .title {
+      color: #336666;
+      }
+      p, pre {
+      margin-left: 0.1in;
+      }
+      p, ul, ol, li {
+        font-size: 95%;
+        font-family: Arial, Helvetica, sans-serif;
+        margin-top: 1px;
+      }
+      body {
+        font: 80.5% Arial, Helvetica, sans-serif;
+      }
+      ol {
+      display: block;
+      list-style-type: decimal;
+      -webkit-margin-before: 1em;
+      -webkit-margin-after: 1em;
+      -webkit-margin-start: 0px;
+      -webkit-margin-end: 0px;
+      -webkit-padding-start: 40px;
+      border: 1;
+      }
+    </style></head>
+   <body>
+      <noscript>
+         <div id="noscript">JavaScript is disabled on your browser. Please enable JavaScript to enjoy all the features of this site.</div>
+      </noscript>
+      <div id="header"><a href="index.html"><img style="margin-right: 2px; width: 110; height: 73; padding-right: 25px; padding-top: 8px" align="right" src="common/images/logo.gif" alt="Cisco Systems, Inc." /></a><h1>NSO 4.4.2.3 Getting Started Guide<br />Service-Life Cycle Management
+         </h1>
+         <div id="navheader">
+            <!---->
+            <table class="navLinks">
+               <tr>
+                  <td><a id="showHideButton" href="#" onclick="myLayout.toggle('west')" class="pointLeft" tabindex="5" title="Hide TOC tree">Sidebar
+                                                    </a></td>
+                  <td><a accesskey="p" class="navLinkPrevious" tabindex="5" href="ch05s04s03.html">Prev</a>
+                                                             |
+                                                             <a accesskey="u" class="navLinkUp" tabindex="5" href="ch05s04.html">Up</a>
+                                                         |
+                                                         <a accesskey="n" class="navLinkNext" tabindex="5" href="ch05s05.html">Next</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div id="content">
+         <div class="sect2">
+            <div xmlns="" class="titlepage">
+               <div>
+                  <div>
+                     <h3 xmlns="http://www.w3.org/1999/xhtml" class="title"><a id="d0e2229"></a>Viewing service configurations
+                     </h3>
+                  </div>
+               </div>
+            </div>
+            <p>
+                   Service instances live in the NSO data-store
+                   as well as a copy of the device configurations. NSO will maintain
+                   relationships between these two.
+                 
+            </p>
+            <p>
+                   Show the configuration for a service
+               
+            </p>
+            <div class="informalexample"><pre class="screen">ncs(config)# <strong class="userinput"><code>show full-configuration vpn l3vpn</code></strong>
+vpn l3vpn volvo
+ as-number 65102
+ endpoint branch-office1
+  ce-device    ce1
+  ce-interface GigabitEthernet0/11
+  ip-network   10.7.7.0/24
+  bandwidth    6000000
+ !
+...</pre></div>
+            <p>
+                 
+            </p>
+            <p>
+                   You can ask NSO to list all devices that are touched by a service
+                   and vice versa:
+                   
+            </p>
+            <div class="informalexample"><pre class="screen">ncs# <strong class="userinput"><code>show vpn l3vpn device-list</code></strong>
+NAME   DEVICE LIST
+----------------------------------------
+volvo  [ ce0 ce1 ce4 ce8 pe0 pe2 pe3 ]
+
+
+ncs# <strong class="userinput"><code>show devices device service-list</code></strong>
+NAME  SERVICE LIST
+-------------------------------------
+ce0   [ "/l3vpn:vpn/l3vpn{volvo}" ]
+ce1   [ "/l3vpn:vpn/l3vpn{volvo}" ]
+ce2   [  ]
+ce3   [  ]
+ce4   [ "/l3vpn:vpn/l3vpn{volvo}" ]
+ce5   [  ]
+ce6   [  ]
+ce7   [  ]
+ce8   [ "/l3vpn:vpn/l3vpn{volvo}" ]
+p0    [  ]
+p1    [  ]
+p2    [  ]
+p3    [  ]
+pe0   [ "/l3vpn:vpn/l3vpn{volvo}" ]
+pe1   [  ]
+pe2   [ "/l3vpn:vpn/l3vpn{volvo}" ]
+pe3   [ "/l3vpn:vpn/l3vpn{volvo}" ]</pre></div>
+            <p>
+               
+                   Note that operational mode in the CLI was used above. Every service instance
+                   has an operational attribute that is maintained by the transaction manager and
+                   shows which device configuration it created.
+               
+                   Furthermore every device configuration has backwards pointers to
+                   the corresponding service instances:
+                   
+            </p>
+            <div class="informalexample"><pre class="screen">ncs(config)# <strong class="userinput"><code>show full-configuration devices device ce3 \
+                    config | display service-meta-data</code></strong>
+devices device ce3
+ config
+  ...
+  /* Refcount: 1 */
+  /* Backpointer: [ /l3vpn:vpn/l3vpn:l3vpn[l3vpn:name='ford'] ] */
+  ios:interface GigabitEthernet0/2.100
+   /* Refcount: 1 */
+   description Link to PE / pe1 - GigabitEthernet0/0/0/5
+   /* Refcount: 1 */
+   encapsulation dot1Q 100
+   /* Refcount: 1 */
+   ip address 192.168.1.13 255.255.255.252
+   /* Refcount: 1 */
+   service-policy output ford
+  exit
+
+ncs(config)# <strong class="userinput"><code>show full-configuration devices device ce3 config \
+                     | display curly-braces | display service-meta-data</code></strong>
+...
+ios:interface {
+    GigabitEthernet 0/1;
+    GigabitEthernet 0/10;
+    GigabitEthernet 0/11;
+    GigabitEthernet 0/12;
+    GigabitEthernet 0/13;
+    GigabitEthernet 0/14;
+    GigabitEthernet 0/15;
+    GigabitEthernet 0/16;
+    GigabitEthernet 0/17;
+    GigabitEthernet 0/18;
+    GigabitEthernet 0/19;
+    GigabitEthernet 0/2;
+    /* Refcount: 1 */
+    /* Backpointer: [ /l3vpn:vpn/l3vpn:l3vpn[l3vpn:name='ford'] ] */
+    GigabitEthernet 0/2.100 {
+        /* Refcount: 1 */
+        description "Link to PE / pe1 - GigabitEthernet0/0/0/5";
+        encapsulation {
+            dot1Q {
+                /* Refcount: 1 */
+                vlan-id 100;
+            }
+        }
+        ip {
+            address {
+                primary {
+                    /* Refcount: 1 */
+                    address 192.168.1.13;
+                    /* Refcount: 1 */
+                    mask    255.255.255.252;
+                }
+            }
+        }
+        service-policy {
+            /* Refcount: 1 */
+            output ford;
+        }
+    }
+
+ncs(config)# <strong class="userinput"><code>show full-configuration devices device ce3 config \
+                   | display service-meta-data | context-match Backpointer</code></strong>
+devices device ce3
+  /* Refcount: 1 */
+  /* Backpointer: [ /l3vpn:vpn/l3vpn:l3vpn[l3vpn:name='ford'] ] */
+  ios:interface GigabitEthernet0/2.100
+devices device ce3
+  /* Refcount: 2 */
+  /* Backpointer: [ /l3vpn:vpn/l3vpn:l3vpn[l3vpn:name='ford'] ] */
+  ios:interface GigabitEthernet0/5</pre></div>
+            <p>
+                   The reference counter above makes sure that NSO will not delete shared resources
+                   until the last service instance is deleted. The context-match
+                   search is helpful, it displays the path to all matching
+                   configuration items.
+                 
+            </p>
+         </div><script type="text/javascript" src="common/main.js">
+            <!----></script><script type="text/javascript" src="common/splitterInit.js">
+            <!----></script><div class="footer" id="footer-legal">
+            <div class="footer-legal framework-footer-cq">
+               <div id="framework-footer">
+                  <div id="footer-legal"><a href="http://www.cisco.com/web/siteassets/legal/terms_condition.html">Terms &amp; Conditions</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/privacy.html">Privacy Statement</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/privacy.html#cookies">Cookie Policy</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/trademark.html">Trademarks</a></div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div id="sidebar">
+         <div id="leftnavigation" style="padding-top:3px;">
+            <div id="tabs">
+               <ul style="visibility: hidden;"></ul>
+               <div id="treeDiv"><img src="common/images/loading.gif" alt="loading table of contents..." id="tocLoading" style="display:block;" /><div id="ulTreeDiv" style="display:none">
+                     <ul id="tree" class="filetree">
+                        <li><span class="file"><a href="ncsnwe.intro.html" tabindex="1">NSO Introduction</a></span><ul>
+                              <li><span class="file"><a href="ch01s01.html" tabindex="1">Purpose of the Document</a></span></li>
+                              <li><span class="file"><a href="ch01s02.html" tabindex="1">NSO Overview</a></span><ul>
+                                    <li><span class="file"><a href="ch01s02s01.html" tabindex="1">Main Features</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch01s03.html" tabindex="1">Architecture Overview</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ncsnwe.examples.html" tabindex="1">Running The NSO  Examples</a></span><ul>
+                              <li><span class="file"><a href="ch02s01.html" tabindex="1">Overview</a></span></li>
+                              <li><span class="file"><a href="ch02s02.html" tabindex="1">Instructions</a></span></li>
+                              <li><span class="file"><a href="ch02s03.html" tabindex="1">Common mistakes</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ncsnwe.basics.html" tabindex="1">NSO Basics</a></span><ul>
+                              <li><span class="file"><a href="ch03s01.html" tabindex="1">Getting started</a></span><ul>
+                                    <li><span class="file"><a href="ch03s01s01.html" tabindex="1">Starting the simulator </a></span></li>
+                                    <li><span class="file"><a href="ch03s01s02.html" tabindex="1">Starting NSO and reading device configuration</a></span></li>
+                                    <li><span class="file"><a href="ch03s01s03.html" tabindex="1">Writing device configuration</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch03s02.html" tabindex="1">More on Device Management</a></span><ul>
+                                    <li><span class="file"><a href="ch03s02s01.html" tabindex="1">Device Groups</a></span></li>
+                                    <li><span class="file"><a href="ch03s02s02.html" tabindex="1">Device Templates</a></span></li>
+                                    <li><span class="file"><a href="ch03s02s03.html" tabindex="1">Policies</a></span></li>
+                                    <li><span class="file"><a href="ch03s02s04.html" tabindex="1">Out-of-band changes, transactions, pre-provisioning</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch03s03.html" tabindex="1">Conflict Resolution</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ncsnwe.neds.html" tabindex="1">Network Element Drivers and Adding Devices</a></span><ul>
+                              <li><span class="file"><a href="ch04s01.html" tabindex="1">Overview</a></span></li>
+                              <li><span class="file"><a href="ch04s02.html" tabindex="1">Device Authentication</a></span></li>
+                              <li><span class="file"><a href="ch04s03.html" tabindex="1">Connecting devices for different NED Types</a></span><ul>
+                                    <li><span class="file"><a href="ch04s03s01.html" tabindex="1">CLI NEDs</a></span></li>
+                                    <li><span class="file"><a href="ch04s03s02.html" tabindex="1">NETCONF NEDs, JunOS</a></span></li>
+                                    <li><span class="file"><a href="ch04s03s03.html" tabindex="1">SNMP NEDs</a></span></li>
+                                    <li><span class="file"><a href="ch04s03s04.html" tabindex="1">Generic NEDs</a></span></li>
+                                    <li><span class="file"><a href="ch04s03s05.html" tabindex="1">Multi-NED Devices</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch04s04.html" tabindex="1">Administrative State for Devices</a></span></li>
+                              <li><span class="file"><a href="ch04s05.html" tabindex="1">Trouble-shooting NEDs</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ch05.html" tabindex="1">Managing Network Services</a></span><ul>
+                              <li><span class="file"><a href="ch05s01.html" tabindex="1">Overview</a></span></li>
+                              <li><span class="file"><a href="ch05s02.html" tabindex="1">A Service Example</a></span></li>
+                              <li><span class="file"><a href="ch05s03.html" tabindex="1">Running the example</a></span></li>
+                              <li><span class="file"><a href="ch05s04.html" tabindex="1">Service-Life Cycle Management</a></span><ul>
+                                    <li><span class="file"><a href="ch05s04s01.html" tabindex="1">Service Changes</a></span></li>
+                                    <li><span class="file"><a href="ch05s04s02.html" tabindex="1">Service Impacting out-of-band changes</a></span></li>
+                                    <li><span class="file"><a href="ch05s04s03.html" tabindex="1">Service Deletion</a></span></li>
+                                    <li id="webhelp-currentid"><span class="file"><a href="ch05s04s04.html" tabindex="1">Viewing service configurations</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch05s05.html" tabindex="1">Defining your own services</a></span><ul>
+                                    <li><span class="file"><a href="ch05s05s01.html" tabindex="1">Overview</a></span></li>
+                                    <li><span class="file"><a href="ch05s05s02.html" tabindex="1">Defining the service model</a></span></li>
+                                    <li><span class="file"><a href="ch05s05s03.html" tabindex="1">Defining the mapping</a></span></li>
+                                    <li><span class="file"><a href="ch05s05s04.html" tabindex="1">Reactive FASTMAP</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch05s06.html" tabindex="1">Reconciling existing services</a></span></li>
+                              <li><span class="file"><a href="ch05s07.html" tabindex="1">Brown-field networks
+                                             </a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ncsnwe.compliance.html" tabindex="1">Compliance Reporting</a></span><ul>
+                              <li><span class="file"><a href="ch06s01.html" tabindex="1">Overview</a></span></li>
+                              <li><span class="file"><a href="ch06s02.html" tabindex="1">Creating compliance report definitions</a></span></li>
+                              <li><span class="file"><a href="ch06s03.html" tabindex="1">Running reports</a></span></li>
+                              <li><span class="file"><a href="ch06s04.html" tabindex="1">The report</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ncsnwe.admin.html" tabindex="1">Administration</a></span><ul>
+                              <li><span class="file"><a href="ch07s01.html" tabindex="1">Administration Overview</a></span></li>
+                              <li><span class="file"><a href="ncsnwe.admin.installing.html" tabindex="1">Installing NSO</a></span><ul>
+                                    <li><span class="file"><a href="ch07s02s01.html" tabindex="1">Pre-Installation</a></span></li>
+                                    <li><span class="file"><a href="ch07s02s02.html" tabindex="1">Installation</a></span></li>
+                                    <li><span class="file"><a href="ch07s02s03.html" tabindex="1">NSO UnInstallation</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch07s03.html" tabindex="1">Running NSO</a></span></li>
+                              <li><span class="file"><a href="ch07s04.html" tabindex="1">Starting and stopping</a></span></li>
+                              <li><span class="file"><a href="ch07s05.html" tabindex="1">User Management</a></span></li>
+                              <li><span class="file"><a href="ncsnwe.admin.packages.html" tabindex="1">Packages</a></span><ul>
+                                    <li><span class="file"><a href="ch07s06s01.html" tabindex="1">Adding and upgrading a package</a></span></li>
+                                    <li><span class="file"><a href="ch07s06s02.html" tabindex="1">Simulating the new device</a></span></li>
+                                    <li><span class="file"><a href="ch07s06s03.html" tabindex="1">
+                                                 Adding the new devices to NCS
+                                               </a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch07s07.html" tabindex="1">Configuring NSO</a></span><ul>
+                                    <li><span class="file"><a href="ch07s07s01.html" tabindex="1">ncs.conf</a></span></li>
+                                    <li><span class="file"><a href="ncsnwe.admin.runtime.cfg.html" tabindex="1">Run-time configuration</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch07s08.html" tabindex="1">Monitoring NSO</a></span></li>
+                              <li><span class="file"><a href="ch07s09.html" tabindex="1">Backup and Restore</a></span><ul>
+                                    <li><span class="file"><a href="ch07s09s01.html" tabindex="1">Backup</a></span></li>
+                                    <li><span class="file"><a href="ch07s09s02.html" tabindex="1">NSO Restore</a></span></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

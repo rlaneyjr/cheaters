@@ -1,0 +1,208 @@
+
+/**
+*
+* @project:     Less-Trapp
+* @author:      Mayccoll
+* @copyright:   2012 by the author
+* @license:     This work is licensed under a Creative Commons Attribution 3.0 Unported License.
+* @file:        links.trapp.less
+* @version:     1.0
+* @see:         https://github.com/Mayccoll/Less-Trapp
+* @date:        30-Nov-2012
+*
+*
+* Parameters:
+* @color:        any color
+* @hover:        any color
+* @visited:      any color
+* @active:       any color
+* @text-deco:    true or false
+*/
+
+/**
+* ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+*       How To
+* ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+*
+* @import "trapp/links.trapp.less";
+*
+* .links ( @color, @hover, @visited, @active, @text-deco );
+*
+*
+* ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+*       Example Use
+* ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+*
+* a {
+*   .links ( #0080C0, #121212, #0080C0, #0080C0, false );
+* }
+*/
+
+
+
+/* :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: *\
+      CODE
+\* :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: */
+
+/* 1 */
+.links ( @color ) when ( iscolor( @color )) {
+    color: @color;
+    &:link {
+      color: @color;
+    }
+}
+.links ( @text-deco  ) when ( @text-deco = false ) {
+    text-decoration: none;
+    &:link {
+      text-decoration: none;
+    }
+}
+.links ( @text-deco  ) when ( @text-deco = true ) {
+    text-decoration: underline;
+    &:link {
+      text-decoration: underline;
+    }
+}
+/* 2 */
+.links ( @color, @hover ) when ( iscolor( @hover )) {
+    color: @color;
+    &:link {
+      color: @color;
+    }
+    &:hover {
+      color: @hover !important;
+    }
+}
+.links ( @color, @text-deco  ) when ( @text-deco = false ) {
+    color: @color;
+    text-decoration: none;
+    &:link {
+      color: @color;
+      text-decoration: none;
+    }
+}
+.links ( @color, @text-deco  ) when ( @text-deco = true ) {
+    color: @color;
+    text-decoration: underline;
+    &:link {
+      color: @color;
+      text-decoration: underline;
+    }
+}
+/* 3 */
+.links ( @color, @hover, @visited ) when ( iscolor( @visited )) {
+    color: @color;
+    &:link {
+      color: @color;
+    }
+    &:hover {
+      color: @hover !important;
+    }
+    &:visited {
+      color: @visited;
+    }
+}
+.links ( @color, @hover, @text-deco  ) when ( @text-deco = false ) {
+    color: @color;
+    text-decoration: none;
+    &:link {
+      color: @color;
+      text-decoration: none;
+    }
+    &:hover {
+      color: @hover !important;
+    }
+}
+.links ( @color, @hover, @text-deco  ) when ( @text-deco = true ) {
+    color: @color;
+    text-decoration: underline;
+    &:link {
+      color: @color;
+      text-decoration: underline;
+    }
+    &:hover {
+      color: @hover !important;
+    }
+}
+/* 4 */
+.links ( @color, @hover, @visited, @active ) when ( iscolor( @active )) {
+    color: @color;
+    text-decoration: underline;
+    &:link {
+      color: @color;
+      text-decoration: underline;
+    }
+    &:hover {
+      color: @hover !important;
+    }
+    &:visited {
+      color: @visited;
+    }
+    &:active {
+      color: @active;
+    }
+}
+.links ( @color, @hover, @visited, @text-deco  ) when ( @text-deco = false ) {
+    color: @color;
+    text-decoration: none;
+    &:link {
+      color: @color;
+      text-decoration: none;
+    }
+    &:hover {
+      color: @hover !important;
+    }
+    &:visited {
+      color: @visited;
+    }
+}
+.links ( @color, @hover, @visited, @text-deco  ) when ( @text-deco = true ) {
+    color: @color;
+    text-decoration: underline;
+    &:link {
+      color: @color;
+      text-decoration: underline;
+    }
+    &:hover {
+      color: @hover !important;
+    }
+    &:visited {
+      color: @visited;
+    }
+}
+/* 5 */
+.links ( @color, @hover, @visited, @active, @text-deco  ) when ( @text-deco = false ) {
+    color: @color;
+    text-decoration: none;
+    &:link {
+      color: @color;
+      text-decoration: none;
+    }
+    &:hover {
+      color: @hover !important;
+    }
+    &:visited {
+      color: @visited;
+    }
+    &:active {
+      color: @active;
+    }
+}
+.links ( @color, @hover, @visited, @active, @text-deco  ) when ( @text-deco = true ) {
+    color: @color;
+    text-decoration: underline;
+    &:link {
+      color: @color;
+      text-decoration: underline;
+    }
+    &:hover {
+      color: @hover !important;
+    }
+    &:visited {
+      color: @visited;
+    }
+    &:active {
+      color: @active;
+    }
+}
+/* 7:11 Buena es la ciencia con herencia, y provechosa para los que ven el sol.  */

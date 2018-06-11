@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+    <title>Citrix NetScaler XML API User's Guide - Architecture</title>
+    <link rel="stylesheet" href="help_ns.css" type="text/css">
+</head>
+<body class="ns_body">
+    <div class="ns_content">
+    <table cellpadding="0" cellspacing="0">
+        <tr class="ns_wp_header">
+            <td>Architecture</td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr>
+            <td>
+                The NetScaler API architecture is designed to allow NSConfig client requests to be routed through HTTP daemon, running on the target NetScaler system, to a SOAP handler that translates the SOAP request into a call to the (internal) NetScaler kernel configuration API. Figure below illustrates the NetScaler API Architecture.
+            </td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr>
+            <td width="100%" style="text-align: center">
+                <img border="0" src="wpe1.gif" width="680" height="300">
+            </td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr>
+            <td>
+                The following steps explain the NetScaler API Architecture:
+                <ul>
+                    <li>The client formats a request containing XML conforming to the SOAP protocol and sends it to NetScaler system.</li>
+                    <li>The HTTPD server instance on the NetScaler system routes this request to a SOAP handler.</li>
+                    <li>The SOAP handler interprets the SOAP headers, and maps the enclosed request to an internal NetScaler configuration function.</li>
+                    <li>The NetScaler kernel acts on the request and returns one or more responses.</li>
+                    <li>The SOAP handler then translates the response(s) to a SOAP response message.</li>
+                    <li>The XML response is then sent back to the client in a HTTP response.</li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+    </div>
+</body>
+</html>

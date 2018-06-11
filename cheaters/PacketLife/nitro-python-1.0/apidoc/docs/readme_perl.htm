@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+    <title>Citrix NetScaler XML API User's Guide - Perl samples</title>
+    <link rel="stylesheet" href="help_ns.css" type="text/css">
+</head>
+<body class="ns_body">
+    <div class="ns_content">
+    <table cellpadding="0" cellspacing="0">
+        <tr>
+            <td>
+                <a href="#Introduction">Introduction</a>&nbsp;|&nbsp;
+                <a href="#Requirement">Requirement</a>&nbsp;|&nbsp;
+                <a href="#Usage">Usage</a>&nbsp;|&nbsp;
+                <a href="#Cookie">Cookie handling</a>&nbsp;|&nbsp;
+                <a href="#HTTPS">HTTPS support</a>&nbsp;|&nbsp;
+                <a href="#download">Samples</a>&nbsp;|&nbsp;
+                <a href="#download1">Feature configuration samples</a>
+            </td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr class="ns_wp_header">
+            <td><a name="Introduction"></a>Introduction</td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr>
+            <td>
+                The example code that accompanies this file uses Perl to communicate with Netscaler, using XML/SOAP. Here, we describe how to get it up and running.<br><br>The <a href="samples/ns-perl-sample/setConfig.pl">setConfig.pl</a> example uses the Netscaler API to:
+                <ul>
+                    <li>log in to Netscaler</li>
+                    <li>add a service</li>
+                    <li>bind a monitor</li>
+                    <li>add a vserver</li>
+                    <li>bind a service to a vserver</li>
+                    <li>save configuration</li>
+                    <li>remove added vservers and services</li>
+                    <li>log out</li>
+                </ul>
+                The <a href="samples/ns-perl-sample/getConfig.pl">getConfig.pl</a> example fetches information about all configured lb vservers, and prints selected information about each one.<br><br>The <a href="samples/ns-perl-sample/rmConfig.pl">rmConfig.pl</a> example removes all of the configuration that was created by  setConfig.pl.<br><br>The <a href="samples/ns-perl-sample/getStat.pl">getStat.pl</a> example demonstrates usage of statistical api.<br><br>Additional documentation is available as inline comments in the Perl scripts.<br>
+            </td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr class="ns_wp_header">
+            <td><a name="Requirement"></a>Requirement</td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr>
+            <td>
+            For the examples to work, you need the SOAP::Lite Perl module, available at <a href="http://www.soaplite.com">http://www.soaplite.com/</a>. HTTP::Cookie is used for client authentication purposes, as SOAP::Lite does not support cookies on its own. The following command should install all of the required modules:<br><br>
+            <div class="syntax padding_left"><table><tr><td><pre>perl -MCPAN -c &quot;install 'SOAP::Lite'&quot;</pre></td></tr></table></div>
+            </td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr class="ns_wp_header">
+            <td><a name="Usage"></a>Usage</td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr>
+            <td>
+                The parameters to all of the examples are :<br><br>
+                <div class="syntax padding_left"><table><tr><td><pre><i>run &lt;protocol>://&lt;NSIP> &lt;username> &lt;password></i></pre></td></tr></table></div>
+            </td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr class="ns_wp_header">
+            <td><a name="Cookie"></a>Cookie handling</td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr>
+            <td>
+                HTTP::Cookie is used for client authentication purposes, as SOAP::Lite does not support cookies on its own. Developers need to handle the cookies as follows:<br><br>
+                <div class="syntax padding_left"><table><tr><td><pre># create cookie object. Server sends cookie for client authentication.<br>my $cookies = HTTP::Cookies->new(ignore_discard => 1, hide_cookie2 => 1);<br># create the soap object and pass the cookies object<br>my $soap = SOAP::Lite->proxy(&quot;http://${NS}/soap&quot;, cookie_jar=>$cookies);</pre></td></tr></table></div>
+            </td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr class="ns_wp_header">
+            <td><a name="HTTPS"></a>HTTPS support</td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr>
+            <td>
+                Developers need to use the HTTPS protocol&nbsp; to send the secured API request to NetScaler. Additional package (Crypt-SSLeay) needs to be installed to use the HTTPS protocol in API request.<br><br>
+                <div class="syntax padding_left"><table><tr><td><pre><i>perl &lt;scriptname> https://&lt;NSIP> &lt;username> &lt;password></i></pre></td></tr></table></div>
+            </td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr class="ns_wp_header">
+            <td><a name="download"></a>Samples</td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr>
+            <td>
+                <table class="ns_st_body" cellspacing="0">
+                    <tr>
+                        <td><a href="samples/ns-perl-sample/getConfig.pl">getConfig.pl</a></td>
+                        <td>The getConfig example fetches information about all configured entities, and prints selected information about each one.</td>
+                    </tr>
+                    <tr>
+                        <td class="ns_st_body_alternate_row"><a href="samples/ns-perl-sample/setConfig.pl">setConfig.pl</a></td>
+                        <td class="ns_st_body_alternate_row">The setConfig example uses the Netscaler API to set and bind certain entities in the System.</td>
+                    </tr>
+                    <tr>
+                        <td><a href="samples/ns-perl-sample/rmConfig.pl">rmConfig.pl</a></td>
+                        <td>The rmConfig example removes all of the configuration that was created by setConfig.</td>
+                    </tr>
+                    <tr>
+                        <td class="ns_st_body_alternate_row"><a href="samples/ns-perl-sample/getStat.pl">getStat.pl</a></td>
+                        <td class="ns_st_body_alternate_row">The getStat example demonstrates usage of statistical api.</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr class="ns_wp_header">
+            <td><a name="download1"></a>Feature configuration samples</td>
+        </tr>
+        <tr>
+            <td nowrap height=10><img src="spacer.gif" alt=""></td>
+        </tr>
+        <tr>
+            <td>
+                <table class="ns_st_body" cellspacing="0">
+                    <tr>
+                        <td><a href="samples/ns-perl-sample/acl.pl">acl.pl</a></td>
+                        <td>ACL configuration sample.</td>
+                    </tr>
+                    <tr>
+                        <td class="ns_st_body_alternate_row"><a href="samples/ns-perl-sample/cmp.pl">cmp.pl</a></td>
+                        <td class="ns_st_body_alternate_row">Compression configuration sample.</td>
+                    </tr>
+                    <tr>
+                        <td><a href="samples/ns-perl-sample/csw.pl">csw.pl</a></td>
+                        <td>Content Switching configuration sample.</td>
+                    </tr>
+                    <tr>
+                        <td class="ns_st_body_alternate_row"><a href="samples/ns-perl-sample/lb.pl">lb.pl</a></td>
+                        <td class="ns_st_body_alternate_row">Load Balancer configuration sample.</td>
+                    </tr>
+                    <tr>
+                        <td><a href="samples/ns-perl-sample/rba.pl">rba.pl</a></td>
+                        <td>RBA configuration sample.</td>
+                    </tr>
+                    <tr>
+                        <td class="ns_st_body_alternate_row"><a href="samples/ns-perl-sample/rewrite.pl">rewrite.pl</a></td>
+                        <td class="ns_st_body_alternate_row">Rewrite configuration sample.</td>
+                    </tr>
+                    <tr>
+                        <td><a href="samples/ns-perl-sample/ssl.pl">ssl.pl</a></td>
+                        <td>SSL Base configuration sample.</td>
+                    </tr>
+                    <tr>
+                        <td class="ns_st_body_alternate_row"><a href="samples/ns-perl-sample/ssl_crl.pl">ssl_crl.pl</a></td>
+                        <td class="ns_st_body_alternate_row">SSL Client-Auth with CRL configuration sample.</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    </div>
+</body>
+</html>

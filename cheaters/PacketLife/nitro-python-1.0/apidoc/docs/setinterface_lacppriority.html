@@ -1,0 +1,107 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>Citrix NetScaler XML API User&#39;s Guide - setinterface_lacppriority</title>
+<link rel="stylesheet" type="text/css" href="help_ns.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body onload="initial()" class="ns_body">
+<div class="ns_content"><table cellpadding="0" cellspacing="0"><script type="text/javascript">
+function showContent(content,lang){
+			if(ie4){
+				showContentObj=document.all.qiksearch_div;
+			}
+			if(ns6){
+				showContentObj=document.getElementById("qiksearch_div");
+			}
+			if(ie4||ns6){
+				if(showContentObj.innerHTML!=content){
+					showContentObj.innerHTML=content;
+				}
+				else{
+					showContentObj.innerHTML="";
+				}
+			}
+			if(ns4){
+				document.nsdiv.document.write(content);
+				document.nsdiv.document.close();
+			}
+}
+function showLangSelect(id){
+		ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+		ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+		ns4=document.layers;
+		if(ie4){
+			showObj=document.all.first_url;
+		}
+		if(ns6){
+			showObj=document.getElementById("first_url");
+		}
+		if( id == "C" ){
+			newlink = "<b>C</b>";
+		}
+		else{
+			newlink = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('C');\"><b>C</b></a>";
+		}
+		if( id == "Perl" ){
+			newlink = newlink + " | <b>Perl</b>";
+		}
+		else{
+			newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('Perl');\"><b>Perl</b></a>";
+		}
+		if( id == "Java" ){
+			newlink = newlink + " | <b>Java</b>";
+		}
+		else{
+			newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('Java');\"><b>Java</b></a>";
+		}
+		if( id == "C#" ){
+			newlink = newlink + " | <b>C#</b>";
+		}
+		else{
+			newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('C#');\"><b>C#</b></a>";
+		}
+		showObj.innerHTML = newlink;
+}
+function initial(){
+		ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+		ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+		ns4=document.layers;
+		langSelected = parent.banner.document.language.select.value
+		parent.banner.document.language.plink.value = "Network@network.html&setinterface_lacppriority";
+		changeContext(langSelected);
+}
+function changeContext(lang){
+parent.banner.document.language.select.value = lang;
+if( lang == "C" ){
+showContent('<pre><a href=\'simpleResult_struct.html\'>simpleResult</a><b> setinterface_lacppriority</b>(<br> &nbsp;&nbsp;&nbsp;&nbsp;char * <i>id</i>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unsigned int <i>lacppriority</i> <br>);</pre></td></tr></table>','C');
+}
+if( lang == "Perl" ){
+showContent('<pre><a href=\'simpleResult_struct.html\'>simpleResult</a><b> setinterface_lacppriority</b>(<br>&nbsp;&nbsp;&nbsp;&nbsp;name(\'id\' => value),<br>&nbsp;&nbsp;&nbsp;&nbsp;name(\'lacppriority\' => value)<br>);</pre></td></tr></table>','Perl')
+}
+if( lang == "Java" ){
+showContent('<pre>public <a href=\'simpleResult_struct.html\'>simpleResult</a><b> setinterface_lacppriority</b>(<br> &nbsp;&nbsp;&nbsp;&nbsp;String <i>id</i>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unsigned int <i>lacppriority</i> <br>);</pre></td></tr></table>','Java');
+}
+if( lang == "C#" ){
+showContent('<pre>public <a href=\'simpleResult_struct.html\'>simpleResult</a><b> setinterface_lacppriority</b>(<br> &nbsp;&nbsp;&nbsp;&nbsp;string <i>id</i>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.UInt64 <i>lacppriority</i> <br>);</pre></td></tr></table>','C#');
+}
+if( lang == "VB" ){
+showContent('<pre>Public Function<b> setinterface_lacppriority</b>(<br> &nbsp;&nbsp;&nbsp;&nbsp;ByVal <i>id</i> As String ,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ByVal <i>lacppriority</i> As UInteger  <br>) As <a href=\'simpleResult_struct.html\'>simpleResult</a> </pre></td></tr></table>','VB');
+}
+showLangSelect(lang);
+}
+</script>
+<tr><td><div><a href='introduction.html'>Home</a> > <a href="APIIndex.htm">Configuration</a> > <a href="network.html">Network</a> > setinterface_lacppriority</div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>setinterface_lacppriority</td></tr><tr><td><br></td></tr><tr><td><div>Use this method to set lACP port priority, expressed as an integer. The lower the number, the higher the priority. The NetScaler appliance limits the number of interfaces in an LA channel to sixteen.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="first_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><b>Parameters</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><i>id</i></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">ID of the Interface whose parameters you want to modify.
+For a NetScaler appliance, specify the interface in C/U notation (for example, 1/3). 
+For a cluster configuration, specify the interface in N/C/U notation (for example, 2/1/3).
+where C can take one of the following values:
+* 0 - Indicates a management interface.
+* 1 - Indicates a 1 Gbps port.
+* 10 - Indicates a 10 Gbps port.
+U is a unique integer for representing an interface in a particular port group.
+N is the ID of the node to which an interface belongs in a cluster configuration.
+Use spaces to separate multiple entries.<br>This is mandatory parameter.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><i>lacppriority</i></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">LACP port priority, expressed as an integer. The lower the number, the higher the priority. The NetScaler appliance limits the number of interfaces in an LA channel to sixteen.<br> Default value =  32768.<br> Minimum value =  1.<br> Maximum value =  65535.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Return Value</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left">Returns <a href="simpleResult_struct.html">simpleResult</a></div></td></tr><tr><td><br></td></tr><tr><td><div><b>See Also</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="clearinterface.html">clearinterface</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="disableinterface.html">disableinterface</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="enableinterface.html">enableinterface</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="getinterface.html">getinterface</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="resetinterface.html">resetinterface</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="setinterface_autoneg.html">setinterface_autoneg</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="setinterface_bandwidthhigh.html">setinterface_bandwidthhigh</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="setinterface_duplex.html">setinterface_duplex</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="setinterface_flowcontrol.html">setinterface_flowcontrol</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="setinterface_hamonitor.html">setinterface_hamonitor</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="setinterface_ifalias.html">setinterface_ifalias</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="setinterface_lacpkey.html">setinterface_lacpkey</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="setinterface_lacpmode.html">setinterface_lacpmode</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="setinterface_lacptimeout.html">setinterface_lacptimeout</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="setinterface_lagtype.html">setinterface_lagtype</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="setinterface_linkredundancy.html">setinterface_linkredundancy</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="setinterface_lldpmode.html">setinterface_lldpmode</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="setinterface_mtu.html">setinterface_mtu</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="setinterface_speed.html">setinterface_speed</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="setinterface_tagall.html">setinterface_tagall</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="setinterface_throughput.html">setinterface_throughput</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="statinterface.html">statinterface</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="unsetinterface_autoneg.html">unsetinterface_autoneg</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="unsetinterface_bandwidthhigh.html">unsetinterface_bandwidthhigh</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="unsetinterface_bandwidthnormal.html">unsetinterface_bandwidthnormal</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="unsetinterface_duplex.html">unsetinterface_duplex</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="unsetinterface_flowcontrol.html">unsetinterface_flowcontrol</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="unsetinterface_hamonitor.html">unsetinterface_hamonitor</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="unsetinterface_ifalias.html">unsetinterface_ifalias</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="unsetinterface_lacpkey.html">unsetinterface_lacpkey</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="unsetinterface_lacpmode.html">unsetinterface_lacpmode</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="unsetinterface_lacppriority.html">unsetinterface_lacppriority</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="unsetinterface_lacptimeout.html">unsetinterface_lacptimeout</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="unsetinterface_linkredundancy.html">unsetinterface_linkredundancy</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="unsetinterface_lldpmode.html">unsetinterface_lldpmode</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="unsetinterface_mtu.html">unsetinterface_mtu</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="unsetinterface_speed.html">unsetinterface_speed</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="unsetinterface_tagall.html">unsetinterface_tagall</a></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="unsetinterface_throughput.html">unsetinterface_throughput</a></div></td></tr><tr><td><br></td></tr></table></div>
+</body>
+</html>

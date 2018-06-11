@@ -1,0 +1,562 @@
+<!DOCTYPE  html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>shell-quicksheet3</title>
+</head>
+<body>
+<h1>Shell QuickSheet</h1>
+<h3>Version: <span>1.0.0</span></h3>
+<h3>Date: <span>10/30/11</span></h3>
+<p><b>Note: </b>This QuickSheet is relevant to Bourne derived (Bourne, Korn, Bash) <i>lan- guage </i>issues only. Unix command line utilities are <i>not </i>covered here. Compatibility varies by implementation and version - many Bourne implementations are simply links to Korn or Bash. The <i>generic </i>identifier “Korn” assumes Korn88 unless otherwise specified.</p>
+<h2>Variables<u>                                                                                                    </u></h2>
+<ul>
+<li><p>Explicit declaration and typing is done with 
+<span>typeset </span>in Korn and 
+<span>declare </span>(or</p>
+<p>typeset<span>) in Bash. Explicit declaration is not required, and is not used in Bourne.</span></p></li>
+<li><p>Bash and Korn support function local variables, but have different scoping rules.</p>
+<table>
+<tr>
+<td><p>typeset</p></td>
+<td><p>declare</p></td>
+<td><p>Description</p></td></tr>
+<tr>
+<td><p>-a</p></td>
+<td><p>-a</p></td>
+<td><p>(Normal / indexed) array</p></td></tr>
+<tr>
+<td><p>-A</p></td>
+<td><p>-A</p></td>
+<td><p>Associative array 
+<span>[Bash,Korn93]</span></p></td></tr>
+<tr>
+<td><p>-F <i>n</i></p></td>
+<td/>
+<td><p>Floating point with optional <i>n </i>percision 
+<span>[Korn93]</span></p></td></tr>
+<tr>
+<td><p>-i <i>b</i></p></td>
+<td><p>-i</p></td>
+<td><p>Integer (w/optional base argument <i>b </i>
+<span>[Korn] </span>)</p></td></tr>
+<tr>
+<td><p>-r</p></td>
+<td><p>-r</p></td>
+<td><p>Make variable read only</p></td></tr>
+<tr>
+<td><p>-n</p></td>
+<td/>
+<td><p>Reference variable (“pointer” to another var.) 
+<span>[Korn93]</span></p></td></tr>
+<tr>
+<td><p>-u</p></td>
+<td><p>-u</p></td>
+<td><p>Convert on assignment to uppercase</p></td>
+</tr>
+<tr>
+<td><p>-l</p></td>
+<td><p>-l</p></td>
+<td><p>Convert on assignment to lowercase</p></td>
+</tr>
+<tr>
+<td><p>-T</p></td>
+<td/>
+<td><p>Declare a (compound variable) type 
+<span>[Korn93]</span></p></td>
+</tr>
+</table>
+<p/>
+<h3>Typed  variables</h3>
+<p><br/></p>
+<h3>Integer base conversion</h3><p>HEX=ff 
+<span>⇐ </span>$HEX 
+<span>is a string containing </span>ff</p><p>typeset -i 8 OCT=16#$HEX 
+<span>⇐ </span>$OCT 
+<span>now holds “</span>8#377
+<span>”</span></p><p>
+<span>typeset -i 10 DEC=$OCT </span>
+<span>⇐ </span>Leading “
+<span>8#</span>” is <i>within </i>
+<span>$OCT</span>, 
+<span>∴ </span>not required</p><p>printf &quot;%x
+<span>\</span>n&quot; $DEC 
+<span>⇐ </span>$DEC 
+<span>holds </span>255
+<span>, printf prints “</span>ff
+<span>”</span></p>
+<h3>Typed variable example</h3><p>typeset -r MY CONST VAR=100</p><p>
+<span>Find length of </span>$myvar length=$
+<span>{</span>#myvar
+<span>}</span></p>
+<h3>Arrays  
+<span>[Bash,Korn]</span></h3><p>Declare &amp; fill array</p><p>set -A pepboys manny moe jack 
+<span>[Korn]</span></p><p>pepboys=(manny moe jack) 
+<span>[Bash,Korn]</span></p><p>Declaring an array</p><p>
+<span>typeset -a myarray </span>
+<span>[Bash,Korn] </span>⇐
+<span>or</span>⇒ 
+<span>declare -a myarray </span>
+<span>[Bash] </span>
+<span>Access  4th  member  of  array</span></p><p>GETVAL=$
+<span>{</span>myarray[3]
+<span>} </span>
+<span>⇐ </span>
+<span>Indexes are 0 based Print  out  all  members  of  the  array</span></p><p>echo $
+<span>{</span>pepboys[*]
+<span>}</span></p><p>my cmd &quot;$
+<span>{</span>pepboys[@]
+<span>}</span>&quot; 
+<span>⇐ </span>
+<span>Preserves whitespace Count  the  number  of  members  in  an  array</span></p><p>count=$
+<span>{</span>#myarray[*]
+<span>}</span></p><p>Append 
+<span>newvalue </span>to an array</p><p>myarray=( $
+<span>{</span>myarray[*]
+<span>} </span>newvalue ) 
+<span>⇐ </span>
+<span>Specialized indexing will be lost</span></p><p>
+<span>&lt;</span>
+<span>→ </span>
+<span>Use </span>&quot;$
+<span>{</span>myarray[@]
+<span>}</span>&quot; 
+<span>to preserve whitespace in array members.</span></p><p>myarray+=( newvalue ) 
+<span>[Korn93]</span></p>
+<h3>Associative Arrays 
+<span>[Bash,Korn93]</span></h3><p>Declare associative array</p><p>typeset -A famous people</p><p>Fill associative array</p><p>aarray=( [one]=uno [two]=dos [three]=tres )</p><p>Add item to array</p><p>famous people[Socrates]=Philosopher</p><p>Access item from array</p><p>famous skill=$
+<span>{</span>famous people[Hannibal]
+<span>}</span></p><p>Print out all keys of the array</p><p>echo $
+<span>{</span>!famous people[*]
+<span>} </span>
+<span>⇐</span>
+<span>or</span>
+<span>⇒ </span>echo &quot;$
+<span>{</span>!famous people[@]
+<span>}</span>&quot;</p>
+<h3>Compound Variables 
+<span>[Korn93]</span></h3><p>Declare compound variable with three <i>members</i>:  
+<span>a</span>, 
+<span>b</span>, &amp; 
+<span>c</span>.  Explicitly type 
+<span>c</span>. 
+<span>myvar=( a= b= typeset -i c= )</span></p><p>myvar.c=4 
+<span>⇐ </span>
+<span>Set member </span>c 
+<span>from previous example to 4</span></p><p>B=$
+<span>{</span>myvar.b
+<span>} </span>
+<span>⇐ </span>
+<span>Access member </span>b 
+<span>from previous example</span></p>
+<h2>if / test<u>                                                                                                      </u></h2><p>
+<span>&lt;</span>
+<span>→ </span>Note: The 
+<span>then </span>and 
+<span>fi </span>clauses in the following examples are omitted for space.</p><p>
+<span>Numeric compare </span>
+<span>⇐ </span>
+<span>(  </span>-lt &lt; 
+<span>| </span>-gt &gt; 
+<span>| </span>-ne != 
+<span>| </span>-eq == 
+<span>)</span></p><p>
+<span>if (( $N &gt; 1 )) </span>⇐
+<span>or</span>⇒ 
+<span>if (( $N == 1 )) </span>
+<span>[Bash,Korn]</span></p><p>
+<span>if [ $N -gt 1 ] </span>⇐
+<span>or</span>⇒ 
+<span>if [ $N -eq 1 ] </span>
+<span>[Bourne]</span></p><p>
+<span>String compare </span>
+<span>⇐ </span>
+<span>( </span>!= 
+<span>| </span>= 
+<span>| </span>&lt; 
+<span>| </span>&gt; 
+<span>) </span>
+<span>⇐ </span>&lt; 
+<span>and </span>&gt; 
+<span>are for sort order compare</span></p><p>if [[ $X = $Y ]] 
+<span>[Bash,Korn] </span>
+<span>⇐ </span>
+<span>Use single </span>=
+<span>, but many shells allow </span>== if [[ $X == $Y ]] 
+<span>[Korn93] </span>
+<span>⇐ </span>
+<span>Preferred method for Korn 93, </span>= 
+<span>is allowed</span></p><p>if [ $X = $Y ] 
+<span>[Bourne] </span>
+<span>⇐ </span>[ 
+<span>is a builtin or binary, </span>[[ 
+<span>is a language construct</span></p><p>
+<span>Ands / Ors </span>
+<span>⇐ </span>
+<span>( </span>-a &amp;&amp; 
+<span>| </span>-o || 
+<span>)</span></p><p>if [[ $A = $B || $C = $D ]] 
+<span>[Bash,Korn]</span></p><p>if [ $A = $B -o $C = $D ] 
+<span>[Bourne]</span></p>
+<h3>Test for first parameter 
+<span>(test for potentially empty string)</span></h3><p>if [[ -z $1 ]] 
+<span>[Bash,Korn]</span></p><p>
+<span>if [ -z &quot;$1&quot; ] </span>⇐
+<span>or</span>⇒ 
+<span>if [ &quot;$1&quot; = &quot;&quot; ] </span>
+<span>[Bourne]</span></p>
+<h3>Check return value from 
+<span>mycmd</span></h3><p>if mycmd &gt; /dev/null 2&gt;&amp;1 
+<span>[Bash,Korn] </span>
+<span>⇐ </span>
+<span>Use </span>$? 
+<span>for Bourne.</span></p>
+<h2>Extracting Substrings<u>                                                                             </u></h2><p>$
+<span>{</span>astrvar:<i>offset </i>:<i>length </i>
+<span>} </span>
+<span>⇐ </span>
+<span>length </span>
+<span>chars of $astrvar starting at </span>
+<span>offset</span></p><p>$
+<span>{</span>astrvar:<i>offset </i>
+<span>} </span>
+<span>⇐ </span>
+<span>Remainder of the chars of $astrvar starting at </span>
+<span>offset</span></p>
+<h2>Shell / set options<u>                                                                                   </u></h2><p>
+<br/></p>
+<table cellspacing="0">
+<tr>
+<td><p>-a</p></td>
+<td><p>allexport</p></td>
+<td><p>Export variables on creation or modification</p></td></tr>
+<tr>
+<td><p>-e</p></td>
+<td><p>errexit</p></td>
+<td><p>Exit script on non-zero return value, throw ERR</p></td></tr></table><p>-x      xtrace          Print commands as run with variable expansion</p><p>-v      verbose       Print lines as read from file without variable expansion</p><p>-u      nounset       Check for unset variables</p><p>-n      noexec         Do not execute read commands (Can be used for trigger-lock)</p>
+<h2>Shell math</h2><p>Add 1 to variable 
+<span>$VAL</span>, place result in 
+<span>$VAL</span></p><p>VAL=$((VAL + 1)) 
+<span>[Bash,Korn] </span>
+<span>⇐ </span>
+<span>Leading </span>$ 
+<span>not required inside </span>$(( 
+<span>... </span>)) VAL=‘expr $VAL + 1‘ 
+<span>[Bourne] </span>
+<span>⇐ </span>$(( 
+<span>... </span>)) 
+<span>works in most implementations </span>(( VAL++ ))
+<span>⇐</span>
+<span>or</span>
+<span>⇒ </span>(( VAL += 1 ))
+<span>⇐</span>
+<span>or</span>
+<span>⇒ </span>(( VAL = VAL + 1 )) 
+<span>[Bash,Korn]</span></p>
+<h2>Test conditions</h2><p>-d <i>file    </i>
+<span>file </span>
+<span>exists as a directory</span></p><p>-e <i>file    </i>
+<span>file </span>
+<span>exists</span></p><p>-f <i>file    </i>
+<span>file </span>
+<span>exists as a file</span></p><p>-s <i>file    </i>
+<span>file </span>
+<span>exists and is larger than 0</span></p><p>-r <i>file    </i>
+<span>file </span>
+<span>exists and is readable</span></p><p>-w <i>file    </i>
+<span>file </span>
+<span>exists and is writeable</span></p><p>-x <i>file    </i>
+<span>file </span>
+<span>exists and is executable</span></p><p>-z <i>string  </i>
+<span>string </span>
+<span>is empty</span></p><p>
+<span>&lt;</span>
+<span>→ </span>Additional examples are available from the 
+<span>man </span>page for 
+<span>test</span>.</p><p>if [[ -e /path/to/myfile ]] ; then echo &quot;myfile exists.&quot; ; fi if [[ -z $1 ]] ; then echo &quot;Parameter missing.&quot; ; fi</p><p>
+<span>&lt;</span>
+<span>→ </span>These examples are 
+<span>[Bash,Korn] </span>, while “
+<span>[</span>” and “
+<span>test</span>” are 
+<span>[Bourne] </span>.</p><p>
+<span>Command  Substitution</span>
+<span>                                                                          </span>
+<span> </span>
+<span>VAL=$(mycmd 2&gt; /dev/null) </span>
+<span>⇐ </span>Newer version, <i>tends </i>to work in Bourne 
+<span>VAL=‘mycmd 2&gt; /dev/null‘ </span>
+<span>⇐ </span>Older version, works in all</p><p>VAL=$
+<span>{ </span>mycmd 2&gt; /dev/null 
+<span>} </span>
+<span>[Korn93] </span>
+<span>⇐ </span>
+<span>No sub-shell, allows for side effects</span></p>
+<h2>Special Variables<u>                                                                                      </u></h2><p>$$       
+<span>-     PID of shell (frequently used in temp file naming)</span></p><p>$?       
+<span>-     Last return value</span></p><p>
+<span>$0        </span>-      The current shell 
+<span>⇐ </span>Don’t use 
+<span>$SHELL</span></p><p>$SECONDS  
+<span>-    Seconds since shell was started</span></p><p>
+<span>$RANDOM   </span>-      A random number 
+<span>⇐ </span>Use modulus (
+<span>%</span>) to limit to a range</p><p>$@       
+<span>-     All arguments (Also </span>$* 
+<span>- different in seperator)</span></p><p>$LINENO  
+<span>-     Current line number of script</span></p>
+<h2>Functions<u>                                                                                                   </u></h2><p>function bash korn func 
+<span>[Bash,Korn]</span></p><p>{ 
+<span>echo &quot;First parameter is $1.&quot; ; </span>}</p><p>bourne func () 
+<span>[Bourne] </span>
+<span>⇐ </span>
+<span>Supported in all later shells</span></p><p>{ 
+<span>echo &quot;First parameter is $1.&quot; ; </span>}</p>
+<h2>Conditional commands<u>                                                                           </u></h2><p>true &amp;&amp; echo &quot;Always print&quot; true || echo &quot;Never print&quot;</p><p>false &amp;&amp; echo &quot;Never print&quot; false || echo &quot;Always print&quot; [ -e afile ] &amp;&amp; echo &quot;afile exists.&quot;</p>
+<h2>Pattern matching<u>                                                                                    </u></h2><p>?(<i>pattern </i>)   
+<span>-      Zero or one instances of </span>
+<span>pattern</span></p><p>*(<i>pattern </i>)   
+<span>-      Zero or more instances of </span>
+<span>pattern</span></p><p>+(<i>pattern </i>)   
+<span>-      One or more instances of </span>
+<span>pattern</span></p><p>@(<i>pattern </i>)   
+<span>-      Exactly one instance of </span>
+<span>pattern</span></p><p>!(<i>pattern </i>)   
+<span>-      Anything not matching </span>
+<span>pattern</span></p><p>
+<span>~(E)</span>
+<span>pattern  </span>-    <i>pattern </i>is an extended regular expression (egrep)</p><p>
+<span>~(G)</span>
+<span>pattern  </span>-    <i>pattern </i>is an basic regular expression (grep)</p><p>if [[ $
+<span>{</span>STRING
+<span>} </span>= A@(da|to)m ]] 
+<span>⇐ </span>
+<span>Match Adam or Atom</span></p>
+<h2>Substring pattern extraction / substitution<u>                                      </u></h2><p>$
+<span>{</span>var#<i>pattern </i>
+<span>}         </span>
+<span>-      Delete </span>
+<span>first </span>
+<span>match from left, return rest</span></p><p>$
+<span>{</span>var##<i>pattern </i>
+<span>}        </span>
+<span>-     Delete </span>
+<span>all </span>
+<span>matches from left, return rest</span></p><p>$
+<span>{</span>var%<i>pattern </i>
+<span>}          </span>
+<span>-      Delete </span>
+<span>last </span>
+<span>match from right, return rest</span></p><p>$
+<span>{</span>var%%<i>pattern </i>
+<span>}        </span>
+<span>-      Delete </span>
+<span>all </span>
+<span>matches from right, return rest</span></p><p>$
+<span>{</span>var/<i>pattern </i>/<i>string </i>
+<span>}   </span>
+<span>-     Replace longest match of first occurrence</span></p><p>$
+<span>{</span>var//<i>pattern </i>/<i>string </i>
+<span>}  </span>
+<span>-     Replace longest match of all occurrences</span></p><p>$
+<span>{</span>var/#<i>pattern </i>/<i>string </i>
+<span>}  </span>
+<span>-     Replace longest match from beginning</span></p><p>$
+<span>{</span>var/%<i>pattern </i>/<i>string </i>
+<span>}  </span>
+<span>-     Replace longest match from end </span>theaddr=192.168.1.25 
+<span>⇐ </span>
+<span>Assign an address (example </span>
+<span>assumes </span>
+<span>class C) </span>network=$
+<span>{</span>theaddr%.*
+<span>} </span>
+<span>⇐ </span>
+<span>Delete dot and last octet </span>thehost=$
+<span>{</span>theaddr##*.
+<span>} </span>
+<span>⇐ </span>
+<span>Delete all octets followed by dots</span></p><p>echo $
+<span>{</span>password//~(E<u>)</u>./X
+<span>} </span>
+<span>⇐ </span>
+<span>Substitute X for every character in </span><u>$password</u></p>
+<table cellspacing="0">
+<tr>
+<td><p>VAR defined</p><p>return</p></td>
+<td><p>VAR  undefined</p><p>return</p></td>
+<td><p>VAR  undefined</p><p>set VAR to</p></td></tr>
+<tr>
+<td><p>$VAR</p><p>$VAR</p><p>$VAR</p><p>string</p></td>
+<td><p>string</p><p>string</p><p>string  
+<span>to stderr, exit NULL</span></p></td>
+<td><p>string</p></td></tr></table><p/>
+<h2>Variable  substitution</h2><p>Expression</p><p>$
+<span>{</span>VAR:-<i>string </i>
+<span>}</span></p><p>$
+<span>{</span>VAR:=<i>string </i>
+<span>}</span></p><p>$
+<span>{</span>VAR:?<i>string </i>
+<span>}</span></p><p>$
+<span>{</span>VAR:+<i>string </i>
+<span>}</span></p>
+<h2>Other<u>                                                                                                          </u></h2><p>my cmd &lt;&lt;EOF</p><p>This is text that my cmd will read from stdin as a &quot;here document&quot; EOF</p><p>
+<span>Call </span>cmd failed 
+<span>function when command fails (by trapping </span>ERR 
+<span>signal) </span>
+<span>[Bash,Korn] </span>trap cmd failed ERR 
+<span>⇐ </span>errexit 
+<span>option is not required, but may be appropriate Pass a variable (compound, array, or other) by reference </span>
+<span>[Korn93]</span></p><p>my function my var 
+<span>⇐ </span>
+<span>Note that </span>my var 
+<span>does not have leading </span>$</p><p>Recieve a variable by reference (inside of previously named function) 
+<span>[Korn93]</span></p><p>typeset -n local var=$1 
+<span>⇐ </span>
+<span>Now access </span>$my var 
+<span>as </span>$local var</p>
+<h2>Output redirection<u>                                                                                  </u></h2><p>echo &quot;ERROR: Message.&quot; &gt;&amp;2 
+<span>⇐ </span>
+<span>Send output to stderr</span></p><p>acmd 2&gt; /dev/null 1| newcmd 
+<span>⇐ </span>
+<span>Capture stdout, ignore stderr</span></p>
+<h2>Universal EOL suppression<u>                                                                    </u></h2></li>
+<li><p>Use the more expensive printf until EOL suppression method is determined.</p></li>
+<li><p>Can use 
+<span>if</span>-
+<span>then </span>block instead of 
+<span>|| </span>and anonymous function.</p><p>printf &quot;Determining method of EOL suppression...&quot; N=</p><p>C=</p><p>if ‘echo &quot;X
+<span>\</span>c&quot; | grep c &gt; /dev/null 2&gt;&amp;1‘ 
+<span>⇐ </span>
+<span>Bourne compatible</span></p><p>then   
+<span>&lt;</span>
+<span>→ </span>
+<span>Using </span>$(...) 
+<span>instead of </span>‘...‘ 
+<span>may break in Bourne</span></p><p>N=-n C=</p><p>else</p><p>N=</p><p>C=’
+<span>\</span>c’</p><p>fi</p><p>printf &quot;Done.
+<span>\</span>n&quot;</p><p>echo $N &quot;Running my cmd...$C&quot; 
+<span>⇐ </span>
+<span>EOL suppressed</span></p><p>true || 
+<span>{ </span>echo &quot;Failed.&quot; ; exit ; 
+<span>}</span></p><p>echo &quot;Done.&quot; 
+<span>⇐ </span>
+<span>Normal EOL</span></p>
+<h2>Trap ERR<u>                                                                                                  </u></h2></li>
+<li><p>If/when 
+<span>my cmd </span>returns an non-zero exit value, the script will execute the</p><p>error handler 
+<span>function and exit.</span></p><p>
+<br/></p><p>function error handler</p><p>{</p><p>printf &quot;Failed.
+<span>\</span>n&quot;</p><p>echo &quot;ERROR: Command failed. Exiting now.&quot; &gt;&amp;2</p><p>}</p><p>
+<br/></p><p>trap error handler ERR 
+<span>⇐ </span>
+<span>register error handling function for ERR signal</span></p><p>set -e 
+<span>⇐ </span>
+<span>Tell shell to exit on failure</span></p><p>printf &quot;Running my cmd...&quot; my cmd</p><p>printf &quot;Done.
+<span>\</span>n&quot;</p>
+<h2>Timer with visual<u>                                                                                     </u></h2></li>
+<li><p>This example runs a command multiple times, while displaying a visual indicator, and then calculates the average time for each run.</p></li>
+<li><p>When running a single lengthy process, an alternative is to background the spinner and have it stop on a flag file.</p><p>
+<br/></p><p>typeset -i start time=$SECONDS typeset -i end time=0</p><p>typeset -i total time=0 typeset -i count=0</p><p>typeset -ir ITERATIONS=25 
+<span>⇐ </span>
+<span>This will be a read-only integer </span>typeset -F 3 average time 
+<span>⇐ </span>
+<span>Will print to 3 decimal places </span>typeset -F ftemp</p><p>
+<br/></p><p>printf &quot;.&quot; 
+<span>⇐ </span>printf 
+<span>may not be a builtin! (Use “</span>type
+<span>” to find out.)</span></p><p>while (( count &lt; ITERATIONS )) do</p><p>case $(( count % 4 )) in</p>
+<ol>
+<li><p>printf &quot;
+<span>\</span>b|&quot; ;;</p></li>
+<li><p>printf &quot;
+<span>\</span>b/&quot; ;;</p></li>
+<li><p>printf &quot;
+<span>\</span>b-&quot; ;;</p></li>
+<li><p>printf &quot;
+<span>\</span>b
+<span>\\</span>&quot; ;; esac</p><p>
+<br/></p><p>my timed cmd &gt; /dev/null 2&gt;&amp;1 
+<span>⇐ </span>
+<span>The timed command</span></p><p>(( count++ )) done</p><p>
+<br/></p><p>printf &quot;
+<span>\</span>b&quot; 
+<span>⇐ </span>
+<span>Clean up the spinner</span></p><p>total time=$(( SECONDS - start time ))</p><p>ftemp=$total time 
+<span>⇐ </span>$ftemp 
+<span>is used as a float “cast” here</span></p><p>average time=$(( ftemp / ITERATIONS ))</p><p>
+<br/></p><p>echo Iterations: $ITERATIONS</p><p>echo Total time: $total time seconds echo Average time: $average time seconds</p><p>
+<br/></p>
+<h2>Capture more than one variable of output<u>                                        </u></h2></li></ol></li>
+<li><p>A
+<span>, </span>B
+<span>, &amp; </span>C 
+<span>will capture first three space separated items, </span>REST 
+<span>will capture all that remains. stderr will be ignored.</span></p><p>
+<br/></p><p>my cmd 2&gt; /dev/null | read A B C REST echo &quot;Third item is $C&quot;</p>
+<h2>Capture more than one variable in loop<u>                                             </u></h2>
+<h3>From a file</h3><p>while read A B C REST do</p><p>echo $C done &lt; afile</p>
+<h3>From a command</h3><p>my cmd | while read A B C REST do</p><p>echo $C done</p><p>
+<br/></p>
+<h2>Compound variable passed by reference<u>                                            </u></h2></li>
+<li><p>The compound variable allows us to pass a complex set of parameters as a single option. This code is Korn 93 only.</p></li></ul><p>
+<br/></p><p>function file op</p><p>{                
+<span>⇐ </span>
+<span>Parameter checking would be appropriate</span></p><p>echo Running $1 on $2 
+<span>⇐ </span>$1 
+<span>is a string / name of a variable</span></p><p>typeset -n operation=$1 
+<span>⇐ </span>operation 
+<span>is a reference to compound var</span></p><p>$
+<span>{</span>operation.command
+<span>} </span>$
+<span>{</span>operation.args
+<span>} </span>$2 
+<span>⇐ </span>
+<span>Run the command</span></p><p>operation.last result=$? 
+<span>⇐ </span>
+<span>Save the result</span></p><p>return $
+<span>{</span>operation.last result
+<span>} </span>
+<span>⇐ </span>
+<span>Return the result</span></p><p>}</p><p>
+<br/></p><p>ALLREAD=( command=chmod</p><p>args=664</p><p>last result= )</p><p>
+<br/></p><p>ALL RUN=( command=chmod</p><p>args=775</p><p>last result= )</p><p>
+<br/></p><p>WFAVOWN=( command=chown</p><p>args=wfavorit:wfavorit last result= )</p><p>
+<br/></p><p>file op ALLREAD myfile        
+<span>⇐ </span>
+<span>Return value can be used here</span></p><p>echo Result: $
+<span>{</span>ALLREAD.last result
+<span>} </span>
+<span>⇐ </span>
+<span>or here</span></p><p>file op WFAVOWN myfile</p><p>
+<br/></p>
+<h2>Flow Control<u>                                                                                             </u></h2>
+<h3>if-then-else block</h3><p>if true 
+<span>⇐ </span>
+<span>See the if / test section for condition examples.</span></p><p>then</p><p>echo &quot;Always&quot;</p><p>else 
+<span>⇐</span>
+<span>or</span>
+<span>⇒ </span>elif <i>condition </i>; then echo &quot;Never&quot;</p><p>fi</p>
+<h3>Switch statement</h3><p>case $GRADE in</p><p>A|B) echo &quot;Good grade&quot; ;&amp; 
+<span>⇐ </span>
+<span>“Fall through” to next item </span>
+<span>[Korn]</span></p><p>C|D) echo &quot;Pass&quot; ;;</p><p>&quot;F&quot;) echo &quot;Fail&quot; ;;</p><p>*) echo &quot;Not Recgonized&quot; ;; esac</p>
+<h3>select loop</h3><p>select CHOICE in Work Sleep Eat Exit do</p><p>echo &quot;$
+<span>{</span>CHOICE
+<span>}</span>ing.&quot;</p><p>if [ &quot;$CHOICE&quot; = &quot;Exit&quot; ] ; then break ; fi 
+<span>⇐ </span>
+<span>Leave select loop</span></p><p>done</p>
+<h3>while loop</h3><p>
+<span>while true </span>⇐
+<span>or</span>⇒ 
+<span>until false do</span></p><p>echo &quot;Infinite loop.&quot;</p><p>if true ; then continue ; fi 
+<span>⇐ </span>
+<span>Goto the top of the loop</span></p><p>echo &quot;Never reachable.&quot; done</p>
+<h3>Iterate over list</h3><p>for X in 1 2 3 do</p><p>echo $X done</p>
+<h2>About this QuickSheet<u>                                                                           </u></h2>
+<h3>Created by: 
+<span>William Favorite (wfavorite@tablespace.net)</span></h3><p><a href="http://www.tablespace.net/quicksheet/" target="_blank">Updates  at:  </a><a href="http://www.tablespace.net/quicksheet/" target="_blank">http://www.tablespace.net/quicksheet/</a></p>
+<h3>Disclaimer: 
+<span>This document is a guide and it includes no express warranties to the suitability, relevance, or compatibility of its contents with any specific system. Research any and all commands that you inflict upon your command line.</span></h3><p><b>Distribution: </b>The PDF version is free to redistribute as long as credit to the author and tablespace.net is retained in the printed and viewable versions. L
+<span>A</span>T
+<span>E</span>Xsource not distributed at this time.</p></body></html>

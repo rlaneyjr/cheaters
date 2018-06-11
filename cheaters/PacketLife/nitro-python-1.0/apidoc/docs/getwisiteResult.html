@@ -1,0 +1,266 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>Citrix NetScaler XML API User&#39;s Guide - Structure Definition</title>
+<link rel="stylesheet" type="text/css" href="help_ns.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body onload="initial()" class="ns_body">
+<div class="ns_content"><table cellpadding="0" cellspacing="0"><script type="text/javascript">
+function changeContext(id,lang,flag){
+	parent.banner.document.language.select.value = lang;
+	if( lang == "C" ){
+		if(flag == "1"){
+			showContent(cfirstcontent,id,lang);
+		}
+		else{
+			showContent(csecondcontent,id,lang);
+		}
+	}
+	if( lang == "Perl" ){
+		if(flag == "1"){
+			showContent(perlfirstcontent,id,lang);
+		}
+		else{
+			showContent(perlsecondcontent,id,lang);
+		}
+	}
+	if( lang == "Java" ){
+		if(flag == "1"){
+			showContent(javafirstcontent,id,lang);	
+		}
+		else{
+			showContent(javasecondcontent,id,lang);
+		}
+	}
+	if( lang == "C#" ){
+		if(flag == "1"){
+			showContent(csharpfirstcontent,id,lang);
+		}
+		else{
+			showContent(csharpsecondcontent,id,lang);
+		}
+	}
+	if( lang == "VB" ){
+		if(flag == "1"){
+			showContent(vbfirstcontent,id,lang);
+		}
+		else{
+			showContent(vbsecondcontent,id,lang);
+		}
+	}
+	if(flag == "1"){
+		showInside(lang,"0");
+	}
+	else{
+		showOutside(lang);
+	}
+}
+function showContent(content,id,lang){
+	if(ie4){
+	   showContentObj=document.all.id;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById(id);
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+  showLangSelect(lang);
+}
+function showInside(str,cond){
+	if(str == "C"){
+ 		var inside_content = csecondcontent;
+ 	}
+ 	if(str == "Perl"){
+ 		var inside_content = perlsecondcontent;
+ 	}
+ 	if(str == "Java"){
+ 		var inside_content = javasecondcontent;
+ 	}
+ 	if(str == "C#"){
+		var inside_content = csharpsecondcontent;
+ 	}
+ 	if(str == "VB"){
+		var inside_content = vbsecondcontent;
+ 	}
+	showContent(inside_content,'qiksearch_div1',str);
+ 	if ( cond == "1" ){
+ 		var page = 'apidoc/docs/getwisiteResult.html#wi_siteList';
+ 		document.location.href = page;
+ 	}
+}
+function showOutside(str){
+	if(str == "C" ){
+ 		var inside_content = cfirstcontent;
+ 	}
+ 	if(str == "Perl" ){
+ 		var inside_content = perlfirstcontent;
+ 	}
+ 	if(str == "Java" ){
+ 		var inside_content = javafirstcontent;
+ 	}
+ 	if(str == "C#" ){
+ 		var inside_content = csharpfirstcontent;
+ 	}
+ 	if(str == "VB" ){
+ 		var inside_content = vbfirstcontent;
+ 	}
+ 	showContent(inside_content,'qiksearch_div',str);
+}
+function initial(){
+	ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+	ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+	ns4=document.layers;
+	langSelected = parent.banner.document.language.select.value
+	var plink = parent.banner.document.language.plink.value
+	var my_array=plink.split("&");
+	var temp = my_array[0];
+ 	var grp = temp.split("@");
+	var cmd = my_array[1];
+	var regex = /^stat/i;
+	if( cmd.match(regex) != null ){
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex_stat.html\">Statistics</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getwisiteResult");
+	}
+	else{
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex.htm\">Configuration</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getwisiteResult");
+	}
+	if( langSelected == "C" ){
+ 		var content = cfirstcontent;
+	}
+	else if( langSelected == "Perl" ){
+		var content = perlfirstcontent;
+	}
+	else if( langSelected == "Java" ){
+		var content = javafirstcontent;
+	}
+	else if( langSelected == "C#" ){
+		var content = csharpfirstcontent;
+	}
+	else if( langSelected == "VB" ){
+		var content = vbfirstcontent;
+	}
+	else{
+		var content = cfirstcontent;
+		langSelected="C";
+	}
+	showContent(content,'qiksearch_div',langSelected);
+	showInside(langSelected,"0");
+}
+function showPLink(content){
+	if(ie4){
+	   showContentObj=document.all.progressive_link;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById("progressive_link");
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+}
+function showLangSelect(id){
+	   if(ie4)
+       {
+       	showObj=document.all.first_url;
+       	showObj1=document.all.second_url;
+       }
+       if(ns6)
+       {
+       	showObj=document.getElementById("first_url");
+       	showObj1=document.getElementById("second_url");
+       }
+       if( id == "C" ){
+       	newlink = "<b>C</b>";
+       	newlink1 = "<b>C</b>";
+       }
+       else{
+       	newlink = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C','1');\"><b>C</b></a>";
+       	newlink1 = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C','0');\"><b>C</b></a>";
+       }
+       if( id == "Perl" ){
+       	newlink = newlink + " | <b>Perl</b>";
+       	newlink1 = newlink1 + " | <b>Perl</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Perl','1');\"><b>Perl</b></a>";
+      	       newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Perl','0');\"><b>Perl</b></a>";
+       }
+       if( id == "Java" ){
+       	newlink = newlink + " | <b>Java</b>";
+       	newlink1 = newlink1 + " | <b>Java</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Java','1');\"><b>Java</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Java','0');\"><b>Java</b></a>";
+       }
+       if( id == "C#" ){
+       	newlink = newlink + " | <b>C#</b>";
+       	newlink1 = newlink1 + " | <b>C#</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C#','1');\"><b>C#</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C#','0');\"><b>C#</b></a>";
+       }
+       showObj.innerHTML = newlink;
+       showObj1.innerHTML = newlink1;
+}
+</script>
+<tr><td><div><div id="progressive_link"></div></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>getwisiteResult Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>getwisiteResult</b> structure defines the return type for getwisite API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="first_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+cfirstcontent = "<pre>struct getwisiteResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; struct <a href=\'getwisiteResult.html\#wisite\'>wisite</a> list[];<br> };<br></pre></td></tr></table></div>"
+perlfirstcontent = "<pre>$getwisiteResult = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rc => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; message => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; List => \'@<a href=\'getwisiteResult.html\#wisite\'>wisite</a>\',<br> };<br></pre></td></tr></table></div>"
+javafirstcontent = "<pre>class getwisiteResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getwisiteResult.html\#wisite\'>wisite</a>[] list;<br> };<br></pre></td></tr></table></div>"
+csharpfirstcontent = "<pre>class getwisiteResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getwisiteResult.html\#wisite\'>wisite</a>[] list;<br> };<br></pre></td></tr></table></div>"
+vbfirstcontent = "<pre>Public <b>Structure</b> getwisiteResult <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rc As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public message As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public  wisiteList() As  <a href=\'getwisiteResult.html\#wisite\'>wisite</a><br> <b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rc</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, rc is 0 else rc > 0. Values above 0x8000 indicate Warnings.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>message</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, message is NULL else message contains <a href="errorlisting.html">Error/Warning</a> message.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>wisiteList</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">List of wisites</div></td></tr><tr><td><br></td></tr><tr><td><div><a name="wisite"></a></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>wisite  Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>wisite</b> structure defines the actual return type values for getwisite API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="second_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div1" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+csecondcontent = "<pre>struct wisite {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * sitepath;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * agurl;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * staurl;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * wiauthenticationmethods[];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * logintitle;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * appwelcomemessage;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * welcomemessage;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * footertext;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * loginsysmessage;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * preloginbutton;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * preloginmessage;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * prelogintitle;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * domainselection;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * defaultcustomtextlocale;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int websessiontimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * sitetype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * userinterfacebranding;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * showsearch;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * showrefresh;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * wiuserinterfacemodes;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * userinterfacelayouts;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * publishedresourcetype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * defaultaccessmethod;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * farmname [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * accessmethod [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * clientipaddress [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * clientnetmask [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * translationinternalip [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int translationinternalport [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * translationexternalip [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int translationexternalport [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * accesstype [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * xmlserveraddresses [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int xmlport [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * transport [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int sslrelayport [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * agauthenticationmethod;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * groups [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * recoveryfarm [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * sessionreliability;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * usetwotickets;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * secondstaurl;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * loadbalance [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * authenticationpoint;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * kioskmode;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * restrictdomains;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * logindomains;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * hidedomainfield;<br> };<br></pre></td></tr></table></div>"
+perlsecondcontent = "<pre>$wisite = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; sitepath => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; agurl => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; staurl => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; wiauthenticationmethods => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; logintitle => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; appwelcomemessage => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; welcomemessage => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; footertext => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; loginsysmessage => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; preloginbutton => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; preloginmessage => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; prelogintitle => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; domainselection => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; defaultcustomtextlocale => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; websessiontimeout => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; sitetype => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; userinterfacebranding => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; showsearch => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; showrefresh => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; wiuserinterfacemodes => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; userinterfacelayouts => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; publishedresourcetype => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; defaultaccessmethod => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; farmname => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; accessmethod => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; clientipaddress => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; clientnetmask => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; translationinternalip => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; translationinternalport => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; translationexternalip => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; translationexternalport => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; accesstype => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; xmlserveraddresses => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; xmlport => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; transport => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; sslrelayport => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; agauthenticationmethod => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; groups => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; recoveryfarm => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; sessionreliability => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; usetwotickets => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; secondstaurl => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; loadbalance => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; authenticationpoint => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; kioskmode => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; restrictdomains => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; logindomains => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; hidedomainfield => \'$\',<br> };<br></pre></td></tr></table></div>"
+javasecondcontent = "<pre>class wisite {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String sitepath;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String agurl;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String staurl;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String wiauthenticationmethods[];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String logintitle;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String appwelcomemessage;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String welcomemessage;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String footertext;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String loginsysmessage;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String preloginbutton;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String preloginmessage;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String prelogintitle;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String domainselection;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String defaultcustomtextlocale;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt websessiontimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String sitetype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String userinterfacebranding;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String showsearch;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String showrefresh;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String wiuserinterfacemodes;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String userinterfacelayouts;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String publishedresourcetype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String defaultaccessmethod;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String farmname [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String accessmethod [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String clientipaddress [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String clientnetmask [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String translationinternalip [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt translationinternalport [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String translationexternalip [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt translationexternalport [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String accesstype [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String xmlserveraddresses [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt xmlport [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String transport [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt sslrelayport [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String agauthenticationmethod;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String groups [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String recoveryfarm [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String sessionreliability;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String usetwotickets;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String secondstaurl;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String loadbalance [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String authenticationpoint;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String kioskmode;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String restrictdomains;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String logindomains;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String hidedomainfield;<br> };<br></pre></td></tr></table></div>"
+csharpsecondcontent = "<pre>class wisite {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string sitepath;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string agurl;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string staurl;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string wiauthenticationmethods[];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string logintitle;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string appwelcomemessage;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string welcomemessage;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string footertext;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string loginsysmessage;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string preloginbutton;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string preloginmessage;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string prelogintitle;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string domainselection;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string defaultcustomtextlocale;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 websessiontimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string sitetype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string userinterfacebranding;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string showsearch;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string showrefresh;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string wiuserinterfacemodes;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string userinterfacelayouts;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string publishedresourcetype;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string defaultaccessmethod;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string farmname [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string accessmethod [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string clientipaddress [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string clientnetmask [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string translationinternalip [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 translationinternalport [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string translationexternalip [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 translationexternalport [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string accesstype [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string xmlserveraddresses [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 xmlport [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string transport [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 sslrelayport [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string agauthenticationmethod;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string groups [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string recoveryfarm [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string sessionreliability;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string usetwotickets;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string secondstaurl;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string loadbalance [];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string authenticationpoint;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string kioskmode;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string restrictdomains;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string logindomains;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string hidedomainfield;<br> };<br></pre></td></tr></table></div>"
+vbsecondcontent = "<pre>Public <b>Structure</b> wisite <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public sitepath As String  <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public agurl As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public staurl As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public wiauthenticationmethods() As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public logintitle As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public appwelcomemessage As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public welcomemessage As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public footertext As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public loginsysmessage As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public preloginbutton As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public preloginmessage As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public prelogintitle As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public domainselection As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public defaultcustomtextlocale As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public websessiontimeout As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public sitetype As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public userinterfacebranding As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public showsearch As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public showrefresh As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public wiuserinterfacemodes As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public userinterfacelayouts As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public publishedresourcetype As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public defaultaccessmethod As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public farmname As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public accessmethod As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public clientipaddress As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public clientnetmask As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public translationinternalip As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public translationinternalport As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public translationexternalip As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public translationexternalport As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public accesstype As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public xmlserveraddresses As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public xmlport As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public transport As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public sslrelayport As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public agauthenticationmethod As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public groups As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public recoveryfarm As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public sessionreliability As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public usetwotickets As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public secondstaurl As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public loadbalance As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public authenticationpoint As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public kioskmode As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public restrictdomains As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public logindomains As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public hidedomainfield As String<br><b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sitepath</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Path of a Web Interface site whose details you want the NetScaler appliance to display.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>agurl</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">URL of the Access Gateway.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>staurl</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The URL of Secure Ticketing Authortity server</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>wiauthenticationmethods</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The method of authentication to be used at Web Interface</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>logintitle</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">A custom login page title for the Web Interface site.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>appwelcomemessage</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Specifies localized text to appear at the top of the main content area of the Applications screen. LanguageCode is en, de, es, fr, ja, or any other supported language identifier.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>welcomemessage</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Localized welcome message that appears on the welcome area of the login screen.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>footertext</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Localized text that appears in the footer area of all pages.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>loginsysmessage</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Localized text that appears at the bottom of the main content area of the login screen.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>preloginbutton</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Localized text that appears as the name of the pre-login message confirmation button.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>preloginmessage</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Localized text that appears on the pre-login message page.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>prelogintitle</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Localized text that appears as the title of the pre-login message page.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>domainselection</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Domain names listed on the login screen for explicit authentication.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>defaultcustomtextlocale</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Default language for the Web Interface site.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>websessiontimeout</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Time-out, in minutes, for idle Web Interface browser sessions. If a client's session is idle for a time that exceeds the time-out value, the NetScaler appliance terminates the connection.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sitetype</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Type of access to the Web Interface site. Available settings function as follows:
+* XenApp/XenDesktop web site - Configures the Web Interface site for access by a web browser.
+* XenApp/XenDesktop services site - Configures the Web Interface site for access by the XenApp plug-in.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>userinterfacebranding</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Specifies whether the site is focused towards users accessing applications or desktops. Setting the parameter to Desktops changes the functionality of the site to improve the experience for XenDesktop users. Citrix recommends using this setting for any deployment that includes XenDesktop.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>showsearch</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Enables search option on XenApp websites</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>showrefresh</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Provides the Refresh button on the applications screen.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>wiuserinterfacemodes</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Appearance of the login screen.
+	    * Simple - Only the login fields for the selected authentication method are displayed.
+	    * Advanced - Displays the navigation bar, which provides access to the pre-login messages and preferences screens.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>userinterfacelayouts</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Specifies whether or not to use the compact user interface.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>publishedresourcetype</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Method for accessing the published XenApp and XenDesktop resources. 
+            Available settings function as follows:
+            * Online - Allows applications to be launched on the XenApp and XenDesktop servers. 
+            * Offline - Allows streaming of applications to the client. 
+            * DualMode - Allows both online and offline modes.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>defaultaccessmethod</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Default access method for clients accessing the Web Interface site.
+            
+            Note: Before you configure an access method based on the client IP address, you must enable USIP mode on the Web Interface service to make the client’s IP address available with the Web Interface.
+            Depending on whether the Web Interface site is configured to use an HTTP or HTTPS virtual server or to use access gateway, you can send clients or access gateway the IP address, or the alternate address, of a XenApp or XenDesktop server. Or, you can send the IP address translated from a mapping entry, which defines mapping of an internal address and port to an external address and port.
+            Note: In the NetScaler method line, mapping entries can be created by using the bind wi site method.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>farmname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name for the logical representation of a XenApp or XenDesktop farm to be bound to the Web Interface site. Must begin with an ASCII alphabetic or underscore (_) character, and must contain only ASCII alphanumeric, underscore, hash (#), period (.), space, colon (:), at (@), equals (=), and hyphen (-) characters.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>accessmethod</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Secure access method to be applied to the IPv4 or network address of the client specified by the Client IP Address parameter.
+            Depending on whether the Web Interface site is configured to use an HTTP or HTTPS virtual server or to use access gateway, you can send clients or access gateway the IP address, or the alternate address, of a XenApp or XenDesktop server. Or, you can send the IP address translated from a mapping entry, which defines mapping of an internal address and port to an external address and port.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>clientipaddress</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">IPv4 or network address of the client for which you want to associate an access method.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>clientnetmask</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Subnet mask associated with the IPv4 or network address specified by the Client IP Address parameter.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>translationinternalip</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">IP address of the server for which you want to associate an external IP address. (Clients access the server through the associated external address and port.)</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>translationinternalport</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Port number of the server for which you want to associate an external port.  (Clients access the server through the associated external address and port.)</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>translationexternalip</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">External IP address associated with server's IP address.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>translationexternalport</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">External port number associated with the server's port number.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>accesstype</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Type of access to the XenApp or XenDesktop server. 
+                            Available settings function as follows:
+                            * User Device - Clients can use the translated address of the mapping entry to connect to the XenApp or XenDesktop server.
+                            * Gateway - Access Gateway can use the translated address of the mapping entry to connect to the XenApp or XenDesktop server.
+                            * User Device and Gateway - Both clients and Access Gateway can use the translated address of the mapping entry to connect to the XenApp or XenDesktop server.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>xmlserveraddresses</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Comma-separated IP addresses or host names of XenApp or XenDesktop servers providing XML services.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>xmlport</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Port number at which to contact the XML service.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>transport</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Transport protocol to use for transferring data, related to the Web Interface site, between the NetScaler appliance and the XML service.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sslrelayport</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">TCP port at which the XenApp or XenDesktop servers listenfor SSL Relay traffic from the NetScaler appliance. This parameter is required if you have set SSL Relay as the transport protocol. 
+            Web Interface uses root certificates when authenticating a server running SSL Relay. Make sure that all the servers running SSL Relay are configured to listen on the same port.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>agauthenticationmethod</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Method for authenticating a Web Interface site if you have specified Web Interface as the authentication point.
+                            Available settings function as follows:
+                            * Explicit - Users must provide a user name and password to log on to the Web Interface.
+                            * Anonymous - Users can log on to the Web Interface without providing a user name and password. They have access to resources published for anonymous users.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>groups</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Active Directory groups that are permitted to enumerate resources from server farms. Including a setting for this parameter activates the user roaming feature. A maximum of 512 user groups can be specified for each farm defined with the Farm<n> parameter.  The groups must be comma separated.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>recoveryfarm</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Binded farm is set as a recovery farm.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sessionreliability</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Enable session reliability through Access Gateway.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>usetwotickets</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Request tickets issued by two separate Secure Ticket Authorities (STA) when a resource is accessed.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>secondstaurl</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">URL of the second Secure Ticket Authority (STA) server.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>loadbalance</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Use all the XML servers (load balancing mode) or only one server (failover mode).</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>authenticationpoint</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Authentication point for the Web Interface site.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>kioskmode</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">User settings do not persist from one session to another.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>restrictdomains</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The RestrictDomains setting is used to enable/disable domain restrictions. If domain restriction is enabled, the LoginDomains list is used for validating the login domain. It is applied to all the authentication methods except Anonymous for XenApp Web and XenApp Services sites</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>logindomains</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">[List of NetBIOS domain names], Domain names to use for access restriction.
+	    Only takes effect when used in conjunction with the RestrictDomains setting.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>hidedomainfield</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The HideDomainField setting is used to control whether the domain field is displayed on the logon screen.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>See Also</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="getwisite.html">getwisite</a></div></td></tr><tr><td><br></td></tr></table></div>
+</body>
+</html>

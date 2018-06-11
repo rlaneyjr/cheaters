@@ -1,0 +1,244 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>Citrix NetScaler XML API User&#39;s Guide - Structure Definition</title>
+<link rel="stylesheet" type="text/css" href="help_ns.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body onload="initial()" class="ns_body">
+<div class="ns_content"><table cellpadding="0" cellspacing="0"><script type="text/javascript">
+function changeContext(id,lang,flag){
+	parent.banner.document.language.select.value = lang;
+	if( lang == "C" ){
+		if(flag == "1"){
+			showContent(cfirstcontent,id,lang);
+		}
+		else{
+			showContent(csecondcontent,id,lang);
+		}
+	}
+	if( lang == "Perl" ){
+		if(flag == "1"){
+			showContent(perlfirstcontent,id,lang);
+		}
+		else{
+			showContent(perlsecondcontent,id,lang);
+		}
+	}
+	if( lang == "Java" ){
+		if(flag == "1"){
+			showContent(javafirstcontent,id,lang);	
+		}
+		else{
+			showContent(javasecondcontent,id,lang);
+		}
+	}
+	if( lang == "C#" ){
+		if(flag == "1"){
+			showContent(csharpfirstcontent,id,lang);
+		}
+		else{
+			showContent(csharpsecondcontent,id,lang);
+		}
+	}
+	if( lang == "VB" ){
+		if(flag == "1"){
+			showContent(vbfirstcontent,id,lang);
+		}
+		else{
+			showContent(vbsecondcontent,id,lang);
+		}
+	}
+	if(flag == "1"){
+		showInside(lang,"0");
+	}
+	else{
+		showOutside(lang);
+	}
+}
+function showContent(content,id,lang){
+	if(ie4){
+	   showContentObj=document.all.id;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById(id);
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+  showLangSelect(lang);
+}
+function showInside(str,cond){
+	if(str == "C"){
+ 		var inside_content = csecondcontent;
+ 	}
+ 	if(str == "Perl"){
+ 		var inside_content = perlsecondcontent;
+ 	}
+ 	if(str == "Java"){
+ 		var inside_content = javasecondcontent;
+ 	}
+ 	if(str == "C#"){
+		var inside_content = csharpsecondcontent;
+ 	}
+ 	if(str == "VB"){
+		var inside_content = vbsecondcontent;
+ 	}
+	showContent(inside_content,'qiksearch_div1',str);
+ 	if ( cond == "1" ){
+ 		var page = 'apidoc/docs/getnshttpparamResult.html#httpparamList';
+ 		document.location.href = page;
+ 	}
+}
+function showOutside(str){
+	if(str == "C" ){
+ 		var inside_content = cfirstcontent;
+ 	}
+ 	if(str == "Perl" ){
+ 		var inside_content = perlfirstcontent;
+ 	}
+ 	if(str == "Java" ){
+ 		var inside_content = javafirstcontent;
+ 	}
+ 	if(str == "C#" ){
+ 		var inside_content = csharpfirstcontent;
+ 	}
+ 	if(str == "VB" ){
+ 		var inside_content = vbfirstcontent;
+ 	}
+ 	showContent(inside_content,'qiksearch_div',str);
+}
+function initial(){
+	ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+	ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+	ns4=document.layers;
+	langSelected = parent.banner.document.language.select.value
+	var plink = parent.banner.document.language.plink.value
+	var my_array=plink.split("&");
+	var temp = my_array[0];
+ 	var grp = temp.split("@");
+	var cmd = my_array[1];
+	var regex = /^stat/i;
+	if( cmd.match(regex) != null ){
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex_stat.html\">Statistics</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getnshttpparamResult");
+	}
+	else{
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex.htm\">Configuration</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getnshttpparamResult");
+	}
+	if( langSelected == "C" ){
+ 		var content = cfirstcontent;
+	}
+	else if( langSelected == "Perl" ){
+		var content = perlfirstcontent;
+	}
+	else if( langSelected == "Java" ){
+		var content = javafirstcontent;
+	}
+	else if( langSelected == "C#" ){
+		var content = csharpfirstcontent;
+	}
+	else if( langSelected == "VB" ){
+		var content = vbfirstcontent;
+	}
+	else{
+		var content = cfirstcontent;
+		langSelected="C";
+	}
+	showContent(content,'qiksearch_div',langSelected);
+	showInside(langSelected,"0");
+}
+function showPLink(content){
+	if(ie4){
+	   showContentObj=document.all.progressive_link;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById("progressive_link");
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+}
+function showLangSelect(id){
+	   if(ie4)
+       {
+       	showObj=document.all.first_url;
+       	showObj1=document.all.second_url;
+       }
+       if(ns6)
+       {
+       	showObj=document.getElementById("first_url");
+       	showObj1=document.getElementById("second_url");
+       }
+       if( id == "C" ){
+       	newlink = "<b>C</b>";
+       	newlink1 = "<b>C</b>";
+       }
+       else{
+       	newlink = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C','1');\"><b>C</b></a>";
+       	newlink1 = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C','0');\"><b>C</b></a>";
+       }
+       if( id == "Perl" ){
+       	newlink = newlink + " | <b>Perl</b>";
+       	newlink1 = newlink1 + " | <b>Perl</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Perl','1');\"><b>Perl</b></a>";
+      	       newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Perl','0');\"><b>Perl</b></a>";
+       }
+       if( id == "Java" ){
+       	newlink = newlink + " | <b>Java</b>";
+       	newlink1 = newlink1 + " | <b>Java</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Java','1');\"><b>Java</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Java','0');\"><b>Java</b></a>";
+       }
+       if( id == "C#" ){
+       	newlink = newlink + " | <b>C#</b>";
+       	newlink1 = newlink1 + " | <b>C#</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C#','1');\"><b>C#</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C#','0');\"><b>C#</b></a>";
+       }
+       showObj.innerHTML = newlink;
+       showObj1.innerHTML = newlink1;
+}
+</script>
+<tr><td><div><div id="progressive_link"></div></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>getnshttpparamResult Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>getnshttpparamResult</b> structure defines the return type for getnshttpparam API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="first_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+cfirstcontent = "<pre>struct getnshttpparamResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; struct <a href=\'getnshttpparamResult.html\#nshttpparam\'>nshttpparam</a> list[];<br> };<br></pre></td></tr></table></div>"
+perlfirstcontent = "<pre>$getnshttpparamResult = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rc => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; message => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; List => \'@<a href=\'getnshttpparamResult.html\#nshttpparam\'>nshttpparam</a>\',<br> };<br></pre></td></tr></table></div>"
+javafirstcontent = "<pre>class getnshttpparamResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getnshttpparamResult.html\#nshttpparam\'>nshttpparam</a>[] list;<br> };<br></pre></td></tr></table></div>"
+csharpfirstcontent = "<pre>class getnshttpparamResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getnshttpparamResult.html\#nshttpparam\'>nshttpparam</a>[] list;<br> };<br></pre></td></tr></table></div>"
+vbfirstcontent = "<pre>Public <b>Structure</b> getnshttpparamResult <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rc As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public message As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public  nshttpparamList() As  <a href=\'getnshttpparamResult.html\#nshttpparam\'>nshttpparam</a><br> <b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rc</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, rc is 0 else rc > 0. Values above 0x8000 indicate Warnings.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>message</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, message is NULL else message contains <a href="errorlisting.html">Error/Warning</a> message.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>nshttpparamList</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">List of nshttpparams</div></td></tr><tr><td><br></td></tr><tr><td><div><a name="nshttpparam"></a></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>nshttpparam  Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>nshttpparam</b> structure defines the actual return type values for getnshttpparam API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="second_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div1" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+csecondcontent = "<pre>struct nshttpparam {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * dropinvalreqs;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * markhttp09inval;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * markconnreqinval;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * insnssrvrhdr;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * nssrvrhdr;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * logerrresp;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * conmultiplex;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int maxreusepool;<br> };<br></pre></td></tr></table></div>"
+perlsecondcontent = "<pre>$nshttpparam = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; dropinvalreqs => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; markhttp09inval => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; markconnreqinval => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; insnssrvrhdr => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; nssrvrhdr => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; logerrresp => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; conmultiplex => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; maxreusepool => \'$\',<br> };<br></pre></td></tr></table></div>"
+javasecondcontent = "<pre>class nshttpparam {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String dropinvalreqs;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String markhttp09inval;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String markconnreqinval;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String insnssrvrhdr;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String nssrvrhdr;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String logerrresp;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String conmultiplex;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt maxreusepool;<br> };<br></pre></td></tr></table></div>"
+csharpsecondcontent = "<pre>class nshttpparam {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string dropinvalreqs;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string markhttp09inval;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string markconnreqinval;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string insnssrvrhdr;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string nssrvrhdr;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string logerrresp;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string conmultiplex;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 maxreusepool;<br> };<br></pre></td></tr></table></div>"
+vbsecondcontent = "<pre>Public <b>Structure</b> nshttpparam <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public dropinvalreqs As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public markhttp09inval As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public markconnreqinval As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public insnssrvrhdr As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public nssrvrhdr As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public logerrresp As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public conmultiplex As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public maxreusepool As UInteger<br><b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>dropinvalreqs</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Drop invalid HTTP requests or responses.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>markhttp09inval</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Mark HTTP/0.9 requests as invalid.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>markconnreqinval</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Mark CONNECT requests as invalid.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>insnssrvrhdr</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Enable or disable NetScaler server header insertion for NetScaler generated HTTP responses.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>nssrvrhdr</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The server header value to be inserted. If no explicit header is specified then NSBUILD.RELEASE is used as default server header.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>logerrresp</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Whether to log HTTP error responses</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>conmultiplex</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Reuse server connections for requests from more than one client connections.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>maxreusepool</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Maximum limit on the number of connections, from the NetScaler to a particular server that are kept in the reuse pool. This setting is helpful for optimal memory utilization and for reducing the idle connections to the server just after the peak time.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>See Also</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="getnshttpparam.html">getnshttpparam</a></div></td></tr><tr><td><br></td></tr></table></div>
+</body>
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>Citrix NetScaler XML API User&#39;s Guide - Structure Definition</title>
+<link rel="stylesheet" type="text/css" href="help_ns.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body onload="initial()" class="ns_body">
+<div class="ns_content"><table cellpadding="0" cellspacing="0"><script type="text/javascript">
+function changeContext(id,lang,flag){
+	parent.banner.document.language.select.value = lang;
+	if( lang == "C" ){
+		if(flag == "1"){
+			showContent(cfirstcontent,id,lang);
+		}
+		else{
+			showContent(csecondcontent,id,lang);
+		}
+	}
+	if( lang == "Perl" ){
+		if(flag == "1"){
+			showContent(perlfirstcontent,id,lang);
+		}
+		else{
+			showContent(perlsecondcontent,id,lang);
+		}
+	}
+	if( lang == "Java" ){
+		if(flag == "1"){
+			showContent(javafirstcontent,id,lang);	
+		}
+		else{
+			showContent(javasecondcontent,id,lang);
+		}
+	}
+	if( lang == "C#" ){
+		if(flag == "1"){
+			showContent(csharpfirstcontent,id,lang);
+		}
+		else{
+			showContent(csharpsecondcontent,id,lang);
+		}
+	}
+	if( lang == "VB" ){
+		if(flag == "1"){
+			showContent(vbfirstcontent,id,lang);
+		}
+		else{
+			showContent(vbsecondcontent,id,lang);
+		}
+	}
+	if(flag == "1"){
+		showInside(lang,"0");
+	}
+	else{
+		showOutside(lang);
+	}
+}
+function showContent(content,id,lang){
+	if(ie4){
+	   showContentObj=document.all.id;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById(id);
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+  showLangSelect(lang);
+}
+function showInside(str,cond){
+	if(str == "C"){
+ 		var inside_content = csecondcontent;
+ 	}
+ 	if(str == "Perl"){
+ 		var inside_content = perlsecondcontent;
+ 	}
+ 	if(str == "Java"){
+ 		var inside_content = javasecondcontent;
+ 	}
+ 	if(str == "C#"){
+		var inside_content = csharpsecondcontent;
+ 	}
+ 	if(str == "VB"){
+		var inside_content = vbsecondcontent;
+ 	}
+	showContent(inside_content,'qiksearch_div1',str);
+ 	if ( cond == "1" ){
+ 		var page = 'apidoc/docs/getsslocspresponderResult.html#ocspList';
+ 		document.location.href = page;
+ 	}
+}
+function showOutside(str){
+	if(str == "C" ){
+ 		var inside_content = cfirstcontent;
+ 	}
+ 	if(str == "Perl" ){
+ 		var inside_content = perlfirstcontent;
+ 	}
+ 	if(str == "Java" ){
+ 		var inside_content = javafirstcontent;
+ 	}
+ 	if(str == "C#" ){
+ 		var inside_content = csharpfirstcontent;
+ 	}
+ 	if(str == "VB" ){
+ 		var inside_content = vbfirstcontent;
+ 	}
+ 	showContent(inside_content,'qiksearch_div',str);
+}
+function initial(){
+	ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+	ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+	ns4=document.layers;
+	langSelected = parent.banner.document.language.select.value
+	var plink = parent.banner.document.language.plink.value
+	var my_array=plink.split("&");
+	var temp = my_array[0];
+ 	var grp = temp.split("@");
+	var cmd = my_array[1];
+	var regex = /^stat/i;
+	if( cmd.match(regex) != null ){
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex_stat.html\">Statistics</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getsslocspresponderResult");
+	}
+	else{
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex.htm\">Configuration</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getsslocspresponderResult");
+	}
+	if( langSelected == "C" ){
+ 		var content = cfirstcontent;
+	}
+	else if( langSelected == "Perl" ){
+		var content = perlfirstcontent;
+	}
+	else if( langSelected == "Java" ){
+		var content = javafirstcontent;
+	}
+	else if( langSelected == "C#" ){
+		var content = csharpfirstcontent;
+	}
+	else if( langSelected == "VB" ){
+		var content = vbfirstcontent;
+	}
+	else{
+		var content = cfirstcontent;
+		langSelected="C";
+	}
+	showContent(content,'qiksearch_div',langSelected);
+	showInside(langSelected,"0");
+}
+function showPLink(content){
+	if(ie4){
+	   showContentObj=document.all.progressive_link;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById("progressive_link");
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+}
+function showLangSelect(id){
+	   if(ie4)
+       {
+       	showObj=document.all.first_url;
+       	showObj1=document.all.second_url;
+       }
+       if(ns6)
+       {
+       	showObj=document.getElementById("first_url");
+       	showObj1=document.getElementById("second_url");
+       }
+       if( id == "C" ){
+       	newlink = "<b>C</b>";
+       	newlink1 = "<b>C</b>";
+       }
+       else{
+       	newlink = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C','1');\"><b>C</b></a>";
+       	newlink1 = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C','0');\"><b>C</b></a>";
+       }
+       if( id == "Perl" ){
+       	newlink = newlink + " | <b>Perl</b>";
+       	newlink1 = newlink1 + " | <b>Perl</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Perl','1');\"><b>Perl</b></a>";
+      	       newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Perl','0');\"><b>Perl</b></a>";
+       }
+       if( id == "Java" ){
+       	newlink = newlink + " | <b>Java</b>";
+       	newlink1 = newlink1 + " | <b>Java</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Java','1');\"><b>Java</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Java','0');\"><b>Java</b></a>";
+       }
+       if( id == "C#" ){
+       	newlink = newlink + " | <b>C#</b>";
+       	newlink1 = newlink1 + " | <b>C#</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C#','1');\"><b>C#</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C#','0');\"><b>C#</b></a>";
+       }
+       showObj.innerHTML = newlink;
+       showObj1.innerHTML = newlink1;
+}
+</script>
+<tr><td><div><div id="progressive_link"></div></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>getsslocspresponderResult Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>getsslocspresponderResult</b> structure defines the return type for getsslocspresponder API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="first_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+cfirstcontent = "<pre>struct getsslocspresponderResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; struct <a href=\'getsslocspresponderResult.html\#sslocspresponder\'>sslocspresponder</a> list[];<br> };<br></pre></td></tr></table></div>"
+perlfirstcontent = "<pre>$getsslocspresponderResult = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rc => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; message => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; List => \'@<a href=\'getsslocspresponderResult.html\#sslocspresponder\'>sslocspresponder</a>\',<br> };<br></pre></td></tr></table></div>"
+javafirstcontent = "<pre>class getsslocspresponderResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getsslocspresponderResult.html\#sslocspresponder\'>sslocspresponder</a>[] list;<br> };<br></pre></td></tr></table></div>"
+csharpfirstcontent = "<pre>class getsslocspresponderResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getsslocspresponderResult.html\#sslocspresponder\'>sslocspresponder</a>[] list;<br> };<br></pre></td></tr></table></div>"
+vbfirstcontent = "<pre>Public <b>Structure</b> getsslocspresponderResult <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rc As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public message As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public  sslocspresponderList() As  <a href=\'getsslocspresponderResult.html\#sslocspresponder\'>sslocspresponder</a><br> <b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rc</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, rc is 0 else rc > 0. Values above 0x8000 indicate Warnings.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>message</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, message is NULL else message contains <a href="errorlisting.html">Error/Warning</a> message.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sslocspresponderList</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">List of sslocspresponders</div></td></tr><tr><td><br></td></tr><tr><td><div><a name="sslocspresponder"></a></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>sslocspresponder  Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>sslocspresponder</b> structure defines the actual return type values for getsslocspresponder API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="second_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div1" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+csecondcontent = "<pre>struct sslocspresponder {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * name;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * url;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * useaia;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * cache;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int cachetimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int batchingdepth;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int batchingdelay;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int resptimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int producedattimeskew;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * respondercert;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * trustresponder;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * signingcert;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * usenonce;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * dns;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * insertclientcert;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * ipaddress;<br> };<br></pre></td></tr></table></div>"
+perlsecondcontent = "<pre>$sslocspresponder = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; name => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; url => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; useaia => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; cache => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; cachetimeout => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; batchingdepth => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; batchingdelay => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; resptimeout => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; producedattimeskew => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; respondercert => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; trustresponder => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; signingcert => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; usenonce => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; dns => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; insertclientcert => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ipaddress => \'$\',<br> };<br></pre></td></tr></table></div>"
+javasecondcontent = "<pre>class sslocspresponder {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String name;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String url;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String useaia;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String cache;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt cachetimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt batchingdepth;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt batchingdelay;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt resptimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt producedattimeskew;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String respondercert;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String trustresponder;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String signingcert;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String usenonce;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String dns;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String insertclientcert;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String ipaddress;<br> };<br></pre></td></tr></table></div>"
+csharpsecondcontent = "<pre>class sslocspresponder {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string name;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string url;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string useaia;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string cache;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 cachetimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 batchingdepth;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 batchingdelay;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 resptimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 producedattimeskew;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string respondercert;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string trustresponder;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string signingcert;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string usenonce;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string dns;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string insertclientcert;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string ipaddress;<br> };<br></pre></td></tr></table></div>"
+vbsecondcontent = "<pre>Public <b>Structure</b> sslocspresponder <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public name As String  <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public url As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public useaia As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public cache As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public cachetimeout As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public batchingdepth As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public batchingdelay As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public resptimeout As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public producedattimeskew As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public respondercert As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public trustresponder As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public signingcert As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public usenonce As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public dns As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public insertclientcert As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ipaddress As String<br><b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>name</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the OCSP responder for which to show detailed information.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>url</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">URL of the OCSP responder.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>useaia</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Only use the URL present in the certificate.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>cache</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Enable caching of responses. Caching of responses received from the OCSP responder enables faster responses to the clients and reduces the load on the OCSP responder.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>cachetimeout</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Timeout for caching the OCSP response. After the timeout, the NetScaler sends a fresh request to the OCSP responder for the certificate status. If a timeout is not specified, the timeout provided in the OCSP response applies.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>batchingdepth</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Number of client certificates to batch together into one OCSP request. Batching avoids overloading the OCSP responder. A value of 1 signifies that each request is queried independently. For a value greater than 1, specify a timeout (batching delay) to avoid inordinately delaying the processing of a single certificate.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>batchingdelay</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Maximum time, in milliseconds, to wait to accumulate OCSP requests to batch.  Does not apply if the Batching Depth is 1.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>resptimeout</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Maximum time, in mS, to wait for an OCSP response before giving up.  Defaults to 2000 mS.  If this is set to 0, NetScaler will wait for an indefinite amount of time.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>producedattimeskew</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Time, in seconds, for which the NetScaler waits before considering the response as invalid. The response is considered invalid if the Produced At time stamp in the OCSP response exceeds or precedes the current NetScaler clock time by the amount of time specified.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>respondercert</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level"></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>trustresponder</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">A certificate to use to validate OCSP responses.  Alternatively, if -trustResponder is specified, no verification will be done on the reponse.  If both are omitted, only the response times (producedAt, lastUpdate, nextUpdate) will be verified.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>signingcert</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Certificate-key pair that is used to sign OCSP requests. If this parameter is not set, the requests are not signed.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>usenonce</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Add a nonce to the OCSP request.  Protects against replay attacks.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>dns</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Was DNS resolution successful for a domain-based OCSP responder</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>insertclientcert</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Include the complete client certificate in the OCSP request.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ipaddress</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The IPv6 address of the ocsp responder.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>See Also</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="getsslocspresponder.html">getsslocspresponder</a></div></td></tr><tr><td><br></td></tr></table></div>
+</body>
+</html>

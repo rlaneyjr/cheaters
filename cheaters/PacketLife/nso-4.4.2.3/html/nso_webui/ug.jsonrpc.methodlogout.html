@@ -1,0 +1,860 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      
+      <title>Method logout -  - NSO 4.4.2.3 Web UI</title>
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+      <link rel="home" href="index.html" title="NSO 4.4.2.3 Web UI" />
+      <link rel="up" href="ug.jsonrpc.methodssession.html" title="Methods - session" />
+      <link rel="prev" href="ug.jsonrpc.methodlogin.html" title="Method login" />
+      <link rel="next" href="ug.jsonrpc.methodkickuser.html" title="Method kick_user" />
+      <meta xmlns="" name="Section-title" content="Method logout" /><script xmlns="" type="text/javascript">
+      //The id for tree cookie
+      var treeCookieId = "treeview-3755";
+      var language = "en";
+      var w = new Object();
+      //Localization
+      txt_filesfound = 'Results';
+      txt_enter_at_least_1_char = "You must enter at least one character.";
+      txt_browser_not_supported = "JavaScript is disabled on your browser. Please enable JavaScript to enjoy all the features of this site.";
+      txt_please_wait = "Please wait. Search in progress...";
+      txt_results_for = "Results for: ";
+    </script><link xmlns="" rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/css/positioning.css" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/jquery/theme-redmond/jquery-ui-1.8.2.custom.css" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/jquery/treeview/jquery.treeview.css" /><style xmlns="" type="text/css">
+      
+      #noscript{
+      font-weight:bold;
+      background-color: #55AA55;
+      font-weight: bold;
+      height: 25spx;
+      z-index: 3000;
+      top:0px;
+      width:100%;
+      position: relative;
+      border-bottom: solid 5px black;
+      text-align:center;
+      color: white;
+      }
+      
+      input {
+      margin-bottom: 5px;
+      margin-top: 2px;
+      }
+      .folder {
+      display: block;
+      height: 22px;
+      padding-left: 20px;
+      background: transparent url(common/jquery/treeview/images/folder.gif) 0 0px no-repeat;
+      }
+      span.contentsTab {
+      padding-left: 20px;
+      background: url(common/images/toc-icon.png) no-repeat 0 center;
+      }
+      span.searchTab {
+      padding-left: 20px;
+      background: url(common/images/search-icon.png) no-repeat 0 center;
+      }
+      
+      /* Overide jquery treeview's defaults for ul. */
+      .treeview ul {
+      background-color: transparent;
+      margin-top: 4px;
+      }		
+      #webhelp-currentid {
+      /* background-color: #D8D8D8 !important; */
+      background-color: #D8D8D8;
+      }
+      .treeview .hover { color: black; }
+      .filetree li span a { text-decoration: none; font-size: 12px; color: #517291; }
+      
+      /* Override jquery-ui's default css customizations. These are supposed to take precedence over those.*/
+      .ui-widget-content {
+      border: 0px; 
+      background: none; 
+      color: none;     
+      }
+      .ui-widget-header {
+      color: #e9e8e9;
+      border-left: 1px solid #e5e5e5;
+      border-right: 1px solid #e5e5e5;
+      border-bottom: 1px solid #bbc4c5;
+      border-top: 4px solid #e5e5e5;
+      border: medium none;
+      background: #F4F4F4; /* old browsers */
+      background: -moz-linear-gradient(top, #F4F4F4 0%, #E6E4E5 100%); /* firefox */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F4F4F4), color-stop(100%,#E6E4E5)); /* webkit */    
+      font-weight: none;
+      }
+      .ui-widget-header a { color: none; }
+      .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { 
+      border: none; background: none; font-weight: none; color: none; }
+      .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited { color: black; text-decoration: none; }
+      .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus { border: none; background: none; font-weight: none; color: none; }
+      
+      .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { border: none; background: none; font-weight: none; color: none; }
+      .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited { 
+      color: black; text-decoration: none; 	
+      background: #C6C6C6; /* old browsers */
+      background: -moz-linear-gradient(top, #C6C6C6 0%, #D8D8D8 100%); /* firefox */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#C6C6C6), color-stop(100%,#D8D8D8)); /* webkit */
+      -webkit-border-radius:15px; -moz-border-radius:10px;
+      border: 1px solid #f1f1f1;
+      }    
+      .ui-corner-all { border-radius: 0 0 0 0; }
+      
+      .ui-tabs { padding: .2em;}
+      .ui-tabs .ui-tabs-nav li { top: 0px; margin: -2px 0 1px; text-transform: uppercase; font-size: 10.5px;}
+      .ui-tabs .ui-tabs-nav li a { padding: .25em 2em .25em 1em; margin: .5em; text-shadow: 0 1px 0 rgba(255,255,255,.5); }
+      /**
+      *	Basic Layout Theme
+      * 
+      *	This theme uses the default layout class-names for all classes
+      *	Add any 'custom class-names', from options: paneClass, resizerClass, togglerClass
+      */
+      
+      .ui-layout-pane { /* all 'panes' */ 
+      background: #FFF; 
+      border: 1px solid #BBB; 
+      padding: 05x; 
+      overflow: auto;
+      } 
+      
+      .ui-layout-resizer { /* all 'resizer-bars' */ 
+      background: #DDD; 
+      top:100px
+      } 
+      
+      .ui-layout-toggler { /* all 'toggler-buttons' */ 
+      background: #AAA; 
+      } 
+      
+    </style>
+      <!--[if IE]>
+	<link rel="stylesheet" type="text/css" href="../common/css/ie.css"/>
+	<![endif]--><script xmlns="" type="text/javascript" src="common/browserDetect.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery-1.7.2.min.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery.ui.all.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery.cookie.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/treeview/jquery.treeview.min.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/layout/jquery.layout.js">
+         <!----></script><style type="text/css">
+      
+      #header {
+      /* background: url("../images/header-bg.png") scroll top left repeat-x #4d8c83; */
+      background: transparent;
+      }
+      #leftnavigation {
+      /* background-color: #ededed!important; */
+      background-color: transparent;
+      }
+      #navheader {
+      visibility: hidden;
+      }
+      #webhelp-currentid {
+      /* background-color: #D8D8D8 !important; */
+      background-color: #FFFFFF; /*but must be changed in main.js as well*/
+      }
+      .filetree span.file {
+      /* background: url(images/file.gif) 0 0 no-repeat; */
+      background: initial;
+      }
+      .filetree span.folder, .filetree span.file {
+      padding: 1px 0 1px 7px;
+      display: block;
+      }
+
+      /* borrowed from cisco: clientlib.css */
+      .footer {
+      margin: 28px 30px 0 15px;
+      font-size: 80%;
+      line-height: 120%;
+      border-top: 1px solid #ccc;
+      padding-top: 7px;
+      color: #999;
+      }
+      .footer #footer-legal{display:inline;padding-bottom:18px}
+      #framework-footer{margin:0;padding:0 0 15px 0;min-width:900px;width:100%}
+      .footer a,.footer a:visited{color:#999}
+
+      /* from ccimr.css */
+      a:active  { color: #3366CC}
+      a:hover   { color: #3366CC}
+      a:link    { color: #3366CC}
+      a:visited { color: #3366CC}
+
+      #header img {
+      float: left;
+      margin-left: 20px;
+      margin-top: 0px;
+      }
+
+      #header h1 {
+      color: #336666;
+      margin-top: 4px;
+      }
+      #content h1, #content h2 {
+      color: #336666;
+      }
+      .title {
+      color: #336666;
+      }
+      p, pre {
+      margin-left: 0.1in;
+      }
+      p, ul, ol, li {
+        font-size: 95%;
+        font-family: Arial, Helvetica, sans-serif;
+        margin-top: 1px;
+      }
+      body {
+        font: 80.5% Arial, Helvetica, sans-serif;
+      }
+      ol {
+      display: block;
+      list-style-type: decimal;
+      -webkit-margin-before: 1em;
+      -webkit-margin-after: 1em;
+      -webkit-margin-start: 0px;
+      -webkit-margin-end: 0px;
+      -webkit-padding-start: 40px;
+      border: 1;
+      }
+    </style></head>
+   <body>
+      <noscript>
+         <div id="noscript">JavaScript is disabled on your browser. Please enable JavaScript to enjoy all the features of this site.</div>
+      </noscript>
+      <div id="header"><a href="index.html"><img style="margin-right: 2px; width: 110; height: 73; padding-right: 25px; padding-top: 8px" align="right" src="common/images/logo.gif" alt="Cisco Systems, Inc." /></a><h1>NSO 4.4.2.3 Web UI<br />Methods - session
+         </h1>
+         <div id="navheader">
+            <!---->
+            <table class="navLinks">
+               <tr>
+                  <td><a id="showHideButton" href="#" onclick="myLayout.toggle('west')" class="pointLeft" tabindex="5" title="Hide TOC tree">Sidebar
+                                                    </a></td>
+                  <td><a accesskey="p" class="navLinkPrevious" tabindex="5" href="ug.jsonrpc.methodlogin.html">Prev</a>
+                                                             |
+                                                             <a accesskey="u" class="navLinkUp" tabindex="5" href="ug.jsonrpc.methodssession.html">Up</a>
+                                                         |
+                                                         <a accesskey="n" class="navLinkNext" tabindex="5" href="ug.jsonrpc.methodkickuser.html">Next</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div id="content">
+         <div class="sect2">
+            <div xmlns="" class="titlepage">
+               <div>
+                  <div>
+                     <h3 xmlns="http://www.w3.org/1999/xhtml" class="title"><a id="ug.jsonrpc.methodlogout"></a>Method logout
+                     </h3>
+                  </div>
+               </div>
+            </div>
+            <div class="toc">
+               <dl class="toc">
+                  <dt><span class="sect3"><a href="ug.jsonrpc.methodlogout.html#ug.jsonrpc.methodlogout.params">Params</a></span></dt>
+                  <dt><span class="sect3"><a href="ug.jsonrpc.methodlogout.html#ug.jsonrpc.methodlogout.result">Result</a></span></dt>
+                  <dt><span class="sect3"><a href="ug.jsonrpc.methodlogout.html#ug.jsonrpc.methodlogout.example"></a></span></dt>
+               </dl>
+            </div>
+            <p>Removes a user session and invalidates the browser cookie</p>
+            <p>The HTTP cookie identifies the user session so no input parameters are needed.</p>
+            <div class="sect3">
+               <div xmlns="" class="titlepage">
+                  <div>
+                     <div>
+                        <h4 xmlns="http://www.w3.org/1999/xhtml" class="title"><a id="ug.jsonrpc.methodlogout.params"></a>Params
+                        </h4>
+                     </div>
+                  </div>
+               </div>
+               <p>None.</p>
+            </div>
+            <div class="sect3">
+               <div xmlns="" class="titlepage">
+                  <div>
+                     <div>
+                        <h4 xmlns="http://www.w3.org/1999/xhtml" class="title"><a id="ug.jsonrpc.methodlogout.result"></a>Result
+                        </h4>
+                     </div>
+                  </div>
+               </div><pre class="programlisting">{}</pre></div>
+            <div class="sect3">
+               <div xmlns="" class="titlepage"></div>
+               <div class="example"><a id="d0e2829"></a><p class="title"><strong>Example 12. Method logout</strong></p>
+                  <div class="example-contents"><pre class="programlisting">curl \
+    --cookie "sessionid=sess4245223558720207078;" \
+    -X POST \
+    -H 'Content-Type: application/json' \
+    -d '{"jsonrpc": "2.0", "id": 1, \
+         "method": "logout"}' \
+    http://127.0.0.1:8008/jsonrpc</pre><pre class="programlisting">{"jsonrpc": "2.0",
+ "id": 1,
+ "result": {}}</pre><pre class="programlisting">curl \
+    --cookie "sessionid=sess4245223558720207078;" \
+    -X POST \
+    -H 'Content-Type: application/json' \
+    -d '{"jsonrpc": "2.0", "id": 1, \
+         "method": "logout"}' \
+    http://127.0.0.1:8008/jsonrpc</pre><pre class="programlisting">{"jsonrpc": "2.0",
+ "id": 1,
+ "error":
+ {"code": -32000,
+  "type": "session.invalid_sessionid",
+  "message": "Invalid sessionid"}}</pre></div>
+               </div><br class="example-break" /></div>
+         </div><script type="text/javascript" src="common/main.js">
+            <!----></script><script type="text/javascript" src="common/splitterInit.js">
+            <!----></script><div class="footer" id="footer-legal">
+            <div class="footer-legal framework-footer-cq">
+               <div id="framework-footer">
+                  <div id="footer-legal"><a href="http://www.cisco.com/web/siteassets/legal/terms_condition.html">Terms &amp; Conditions</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/privacy.html">Privacy Statement</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/privacy.html#cookies">Cookie Policy</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/trademark.html">Trademarks</a></div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div id="sidebar">
+         <div id="leftnavigation" style="padding-top:3px;">
+            <div id="tabs">
+               <ul style="visibility: hidden;"></ul>
+               <div id="treeDiv"><img src="common/images/loading.gif" alt="loading table of contents..." id="tocLoading" style="display:block;" /><div id="ulTreeDiv" style="display:none">
+                     <ul id="tree" class="filetree">
+                        <li><span class="file"><a href="ug.webui_intro.html" tabindex="1">Web UI Development</a></span><ul>
+                              <li><span class="file"><a href="ch01s01.html" tabindex="1">Introduction</a></span></li>
+                              <li><span class="file"><a href="ch01s02.html" tabindex="1">Example of a common flow</a></span></li>
+                              <li><span class="file"><a href="ch01s03.html" tabindex="1">Example of a JSON-RPC client</a></span></li>
+                              <li><span class="file"><a href="ch01s04.html" tabindex="1">Example of a Comet client</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ug.jsonrpc.html" tabindex="1">The JSON-RPC API</a></span><ul>
+                              <li><span class="file"><a href="ug.jsonrpc.jsonrpc.html" tabindex="1">JSON-RPC</a></span><ul>
+                                    <li><span class="file"><a href="ug.jsonrpc.protocoloverview.html" tabindex="1">Protocol overview</a></span></li>
+                                    <li><span class="file"><a href="ug.jsonrpc.commonconcepts.html" tabindex="1">Common concepts</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.commonconcepts.html#ug.jsonrpc.commonconcepts.commonerrors" tabindex="1">Common errors</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.commonconcepts.html#ug.jsonrpc.commonconcepts.applicationdefinederrors" tabindex="1">Application defined errors</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.faq.html" tabindex="1">FAQ</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.faq.html#ug.jsonrpc.faq.whatarethesecuritycharacteristicsofthejsonrpcapi" tabindex="1">What are the security characteristics of the JSON-RPC api?</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.faq.html#ug.jsonrpc.faq.whatistheproperwaytousethejsonrpcapiinacorssetup" tabindex="1">What is the proper way to use the JSON-RPC api in a cors setup?</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.faq.html#ug.jsonrpc.faq.whatisatagkeypath" tabindex="1">What is a tag/keypath?</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.faq.html#ug.jsonrpc.faq.restrictingaccesstomethods" tabindex="1">Restricting access to methods</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.faq.html#ug.jsonrpc.faq.whatissession.overloaderror" tabindex="1">What is session.overload error?</a></span></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.jsonrpc.methodscommands.html" tabindex="1">Methods - commands</a></span><ul>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodgetcmds.html" tabindex="1">Method get_cmds</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodgetcmds.html#ug.jsonrpc.methodgetcmds.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodgetcmds.html#ug.jsonrpc.methodgetcmds.result" tabindex="1">Result</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodinitcmd.html" tabindex="1">Method init_cmd</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodinitcmd.html#ug.jsonrpc.methodinitcmd.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodinitcmd.html#ug.jsonrpc.methodinitcmd.result" tabindex="1">Result</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodsendcmddata.html" tabindex="1">Method send_cmd_data</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodsendcmddata.html#ug.jsonrpc.methodsendcmddata.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodsendcmddata.html#ug.jsonrpc.methodsendcmddata.result" tabindex="1">Result</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodsendcmddata.html#ug.jsonrpc.methodsendcmddata.errorsspecific" tabindex="1">Errors (specific)</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodstartcmd.html" tabindex="1">Method start_cmd</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodstartcmd.html#ug.jsonrpc.methodstartcmd.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodstartcmd.html#ug.jsonrpc.methodstartcmd.result" tabindex="1">Result</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodsuspendcmd.html" tabindex="1">Method suspend_cmd</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodsuspendcmd.html#ug.jsonrpc.methodsuspendcmd.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodsuspendcmd.html#ug.jsonrpc.methodsuspendcmd.result" tabindex="1">Result</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodresumecmd.html" tabindex="1">Method resume_cmd</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodresumecmd.html#ug.jsonrpc.methodresumecmd.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodresumecmd.html#ug.jsonrpc.methodresumecmd.result" tabindex="1">Result</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodstopcmd.html" tabindex="1">Method stop_cmd</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodstopcmd.html#ug.jsonrpc.methodstopcmd.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodstopcmd.html#ug.jsonrpc.methodstopcmd.result" tabindex="1">Result</a></span></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.jsonrpc.methodscommandssubscribe.html" tabindex="1">Methods - commands - subscribe</a></span><ul>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodgetsubscriptions.html" tabindex="1">Method get_subscriptions</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodgetsubscriptions.html#ug.jsonrpc.methodgetsubscriptions.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodgetsubscriptions.html#ug.jsonrpc.methodgetsubscriptions.result" tabindex="1">Result</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodsubscribecdboper.html" tabindex="1">Method subscribe_cdboper</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodsubscribecdboper.html#ug.jsonrpc.methodsubscribecdboper.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodsubscribecdboper.html#ug.jsonrpc.methodsubscribecdboper.result" tabindex="1">Result</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodsubscribecdboper.html#ug.jsonrpc.methodsubscribecdboper.errorsspecific" tabindex="1">Errors (specific)</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodsubscribechanges.html" tabindex="1">Method subscribe_changes</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodsubscribechanges.html#ug.jsonrpc.methodsubscribechanges.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodsubscribechanges.html#ug.jsonrpc.methodsubscribechanges.result" tabindex="1">Result</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodsubscribepollleaf.html" tabindex="1">Method subscribe_poll_leaf</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodsubscribepollleaf.html#ug.jsonrpc.methodsubscribepollleaf.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodsubscribepollleaf.html#ug.jsonrpc.methodsubscribepollleaf.result" tabindex="1">Result</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodsubscribeupgrade.html" tabindex="1">Method subscribe_upgrade</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodsubscribeupgrade.html#ug.jsonrpc.methodsubscribeupgrade.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodsubscribeupgrade.html#ug.jsonrpc.methodsubscribeupgrade.result" tabindex="1">Result</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodsubscribejsonrpcbatch.html" tabindex="1">Method subscribe_jsonrpc_batch</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodsubscribejsonrpcbatch.html#ug.jsonrpc.methodsubscribejsonrpcbatch.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodsubscribejsonrpcbatch.html#ug.jsonrpc.methodsubscribejsonrpcbatch.result" tabindex="1">Result</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodstartsubscription.html" tabindex="1">Method start_subscription</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodstartsubscription.html#ug.jsonrpc.methodstartsubscription.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodstartsubscription.html#ug.jsonrpc.methodstartsubscription.result" tabindex="1">Result</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodunsubscribe.html" tabindex="1">Method unsubscribe</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodunsubscribe.html#ug.jsonrpc.methodunsubscribe.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodunsubscribe.html#ug.jsonrpc.methodunsubscribe.result" tabindex="1">Result</a></span></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.jsonrpc.methodsdata.html" tabindex="1">Methods - data</a></span><ul>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodcreate.html" tabindex="1">Method create</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodcreate.html#ug.jsonrpc.methodcreate.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodcreate.html#ug.jsonrpc.methodcreate.result" tabindex="1">Result</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodcreate.html#ug.jsonrpc.methodcreate.errorsspecific" tabindex="1">Errors (specific)</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methoddelete.html" tabindex="1">Method delete</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methoddelete.html#ug.jsonrpc.methoddelete.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methoddelete.html#ug.jsonrpc.methoddelete.result" tabindex="1">Result</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methoddelete.html#ug.jsonrpc.methoddelete.errorsspecific" tabindex="1">Errors (specific)</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodexists.html" tabindex="1">Method exists</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodexists.html#ug.jsonrpc.methodexists.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodexists.html#ug.jsonrpc.methodexists.result" tabindex="1">Result</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodgetcase.html" tabindex="1">Method get_case</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodgetcase.html#ug.jsonrpc.methodgetcase.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodgetcase.html#ug.jsonrpc.methodgetcase.result" tabindex="1">Result</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodshowconfig.html" tabindex="1">Method show_config</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodshowconfig.html#ug.jsonrpc.methodshowconfig.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodshowconfig.html#ug.jsonrpc.methodshowconfig.result" tabindex="1">Result</a></span></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.jsonrpc.methodsdataattrs.html" tabindex="1">Methods - data - attrs</a></span><ul>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodgetattrs.html" tabindex="1">Method get_attrs</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodgetattrs.html#ug.jsonrpc.methodgetattrs.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodgetattrs.html#ug.jsonrpc.methodgetattrs.result" tabindex="1">Result</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodsetattrs.html" tabindex="1">Method set_attrs</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodsetattrs.html#ug.jsonrpc.methodsetattrs.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodsetattrs.html#ug.jsonrpc.methodsetattrs.result" tabindex="1">Result</a></span></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.jsonrpc.methodsdataleafs.html" tabindex="1">Methods - data - leafs</a></span><ul>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodgetvalue.html" tabindex="1">Method get_value</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodgetvalue.html#ug.jsonrpc.methodgetvalue.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodgetvalue.html#ug.jsonrpc.methodgetvalue.result" tabindex="1">Result</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodgetvalue.html#ug.jsonrpc.methodgetvalue.example" tabindex="1"></a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodgetvalues.html" tabindex="1">Method get_values</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodgetvalues.html#ug.jsonrpc.methodgetvalues.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodgetvalues.html#ug.jsonrpc.methodgetvalues.result" tabindex="1">Result</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodsetvalue.html" tabindex="1">Method set_value</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodsetvalue.html#ug.jsonrpc.methodsetvalue.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodsetvalue.html#ug.jsonrpc.methodsetvalue.result" tabindex="1">Result</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodsetvalue.html#ug.jsonrpc.methodsetvalue.errorsspecific" tabindex="1">Errors (specific)</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodsetvalue.html#ug.jsonrpc.methodsetvalue.example" tabindex="1"></a></span></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.jsonrpc.methodsdataleafref.html" tabindex="1">Methods - data - leafref</a></span><ul>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodderef.html" tabindex="1">Method deref</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodderef.html#ug.jsonrpc.methodderef.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodderef.html#ug.jsonrpc.methodderef.result" tabindex="1">Result</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodgetleafrefvalues.html" tabindex="1">Method get_leafref_values</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodgetleafrefvalues.html#ug.jsonrpc.methodgetleafrefvalues.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodgetleafrefvalues.html#ug.jsonrpc.methodgetleafrefvalues.result" tabindex="1">Result</a></span></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.jsonrpc.methodsdatalists.html" tabindex="1">Methods - data - lists</a></span><ul>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodrenamelistentry.html" tabindex="1">Method rename_list_entry</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodrenamelistentry.html#ug.jsonrpc.methodrenamelistentry.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodrenamelistentry.html#ug.jsonrpc.methodrenamelistentry.result" tabindex="1">Result</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodrenamelistentry.html#ug.jsonrpc.methodrenamelistentry.errorsspecific" tabindex="1">Errors (specific)</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodcopylistentry.html" tabindex="1">Method copy_list_entry</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodcopylistentry.html#ug.jsonrpc.methodcopylistentry.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodcopylistentry.html#ug.jsonrpc.methodcopylistentry.result" tabindex="1">Result</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodcopylistentry.html#ug.jsonrpc.methodcopylistentry.errorsspecific" tabindex="1">Errors (specific)</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodmovelistentry.html" tabindex="1">Method move_list_entry</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodmovelistentry.html#ug.jsonrpc.methodmovelistentry.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodmovelistentry.html#ug.jsonrpc.methodmovelistentry.result" tabindex="1">Result</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodmovelistentry.html#ug.jsonrpc.methodmovelistentry.errorsspecific" tabindex="1">Errors (specific)</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodappendlistentry.html" tabindex="1">Method append_list_entry</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodappendlistentry.html#ug.jsonrpc.methodappendlistentry.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodappendlistentry.html#ug.jsonrpc.methodappendlistentry.result" tabindex="1">Result</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodcountlistkeys.html" tabindex="1">Method count_list_keys</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodcountlistkeys.html#ug.jsonrpc.methodcountlistkeys.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodcountlistkeys.html#ug.jsonrpc.methodcountlistkeys.result" tabindex="1">Result</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodgetlistkeys.html" tabindex="1">Method get_list_keys</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodgetlistkeys.html#ug.jsonrpc.methodgetlistkeys.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodgetlistkeys.html#ug.jsonrpc.methodgetlistkeys.result" tabindex="1">Result</a></span></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.jsonrpc.methodsdataquery.html" tabindex="1">Methods - data - query</a></span><ul>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodquery.html" tabindex="1">Method query</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodquery.html#ug.jsonrpc.methodquery.example" tabindex="1"></a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodstartquery.html" tabindex="1">Method start_query</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodstartquery.html#ug.jsonrpc.methodstartquery.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodstartquery.html#ug.jsonrpc.methodstartquery.result" tabindex="1">Result</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodstartquery.html#ug.jsonrpc.methodstartquery.example" tabindex="1"></a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodrunquery.html" tabindex="1">Method run_query</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodrunquery.html#ug.jsonrpc.methodrunquery.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodrunquery.html#ug.jsonrpc.methodrunquery.result" tabindex="1">Result</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodrunquery.html#ug.jsonrpc.methodrunquery.example" tabindex="1"></a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodresetquery.html" tabindex="1">Method reset_query</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodresetquery.html#ug.jsonrpc.methodresetquery.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodresetquery.html#ug.jsonrpc.methodresetquery.result" tabindex="1">Result</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodresetquery.html#ug.jsonrpc.methodresetquery.example" tabindex="1"></a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodstopquery.html" tabindex="1">Method stop_query</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodstopquery.html#ug.jsonrpc.methodstopquery.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodstopquery.html#ug.jsonrpc.methodstopquery.result" tabindex="1">Result</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodstopquery.html#ug.jsonrpc.methodstopquery.example" tabindex="1"></a></span></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.jsonrpc.methodsdatabase.html" tabindex="1">Methods - database</a></span><ul>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodresetcandidatedb.html" tabindex="1">Method reset_candidate_db</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodresetcandidatedb.html#ug.jsonrpc.methodresetcandidatedb.result" tabindex="1">Result</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodlockdb.html" tabindex="1">Method lock_db</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodlockdb.html#ug.jsonrpc.methodlockdb.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodlockdb.html#ug.jsonrpc.methodlockdb.result" tabindex="1">Result</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodlockdb.html#ug.jsonrpc.methodlockdb.errorsspecific" tabindex="1">Errors (specific)</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodunlockdb.html" tabindex="1">Method unlock_db</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodunlockdb.html#ug.jsonrpc.methodunlockdb.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodunlockdb.html#ug.jsonrpc.methodunlockdb.result" tabindex="1">Result</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodcopyrunningtostartupdb.html" tabindex="1">Method copy_running_to_startup_db</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodcopyrunningtostartupdb.html#ug.jsonrpc.methodcopyrunningtostartupdb.result" tabindex="1">Result</a></span></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.jsonrpc.methodsgeneral.html" tabindex="1">Methods - general</a></span><ul>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodcomet.html" tabindex="1">Method comet</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodcomet.html#ug.jsonrpc.methodcomet.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodcomet.html#ug.jsonrpc.methodcomet.result" tabindex="1">Result</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodcomet.html#ug.jsonrpc.methodcomet.errorsspecific" tabindex="1">Errors (specific)</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodcomet.html#ug.jsonrpc.methodcomet.example" tabindex="1"></a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodgetsystemsetting.html" tabindex="1">Method get_system_setting</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodgetsystemsetting.html#ug.jsonrpc.methodgetsystemsetting.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodgetsystemsetting.html#ug.jsonrpc.methodgetsystemsetting.result" tabindex="1">Result</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodabort.html" tabindex="1">Method abort</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodabort.html#ug.jsonrpc.methodabort.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodabort.html#ug.jsonrpc.methodabort.result" tabindex="1">Result</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodevalxpath.html" tabindex="1">Method eval_XPath</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodevalxpath.html#ug.jsonrpc.methodevalxpath.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodevalxpath.html#ug.jsonrpc.methodevalxpath.result" tabindex="1">Result</a></span></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.jsonrpc.methodsmessages.html" tabindex="1">Methods - messages</a></span><ul>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodsendmessage.html" tabindex="1">Method send_message</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodsendmessage.html#ug.jsonrpc.methodsendmessage.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodsendmessage.html#ug.jsonrpc.methodsendmessage.result" tabindex="1">Result</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodsubscribemessages.html" tabindex="1">Method subscribe_messages</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodsubscribemessages.html#ug.jsonrpc.methodsubscribemessages.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodsubscribemessages.html#ug.jsonrpc.methodsubscribemessages.result" tabindex="1">Result</a></span></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.jsonrpc.methodsrollbacks.html" tabindex="1">Methods - rollbacks</a></span><ul>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodgetrollbacks.html" tabindex="1">Method get_rollbacks</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodgetrollbacks.html#ug.jsonrpc.methodgetrollbacks.result" tabindex="1">Result</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodgetrollback.html" tabindex="1">Method get_rollback</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodgetrollback.html#ug.jsonrpc.methodgetrollback.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodgetrollback.html#ug.jsonrpc.methodgetrollback.result" tabindex="1">Result</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodinstallrollback.html" tabindex="1">Method install_rollback</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodinstallrollback.html#ug.jsonrpc.methodinstallrollback.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodinstallrollback.html#ug.jsonrpc.methodinstallrollback.result" tabindex="1">Result</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodloadrollback.html" tabindex="1">Method load_rollback</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodloadrollback.html#ug.jsonrpc.methodloadrollback.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodloadrollback.html#ug.jsonrpc.methodloadrollback.result" tabindex="1">Result</a></span></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.jsonrpc.methodsschema.html" tabindex="1">Methods - schema</a></span><ul>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodgetschema.html" tabindex="1">Method get_schema</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodgetschema.html#ug.jsonrpc.methodgetschema.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodgetschema.html#ug.jsonrpc.methodgetschema.result" tabindex="1">Result</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodgetschema.html#ug.jsonrpc.methodgetschema.example" tabindex="1"></a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodhideschema.html" tabindex="1">Method hide_schema</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodhideschema.html#ug.jsonrpc.methodhideschema.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodhideschema.html#ug.jsonrpc.methodhideschema.result" tabindex="1">Result</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodunhideschema.html" tabindex="1">Method unhide_schema</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodunhideschema.html#ug.jsonrpc.methodunhideschema.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodunhideschema.html#ug.jsonrpc.methodunhideschema.result" tabindex="1">Result</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodrunaction.html" tabindex="1">Method run_action</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodrunaction.html#ug.jsonrpc.methodrunaction.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodrunaction.html#ug.jsonrpc.methodrunaction.result" tabindex="1">Result</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodrunaction.html#ug.jsonrpc.methodrunaction.errorsspecific" tabindex="1">Errors (specific)</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodrunaction.html#ug.jsonrpc.methodrunaction.example" tabindex="1"></a></span></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.jsonrpc.methodssession.html" tabindex="1">Methods - session</a></span><ul>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodlogin.html" tabindex="1">Method login</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodlogin.html#ug.jsonrpc.methodlogin.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodlogin.html#ug.jsonrpc.methodlogin.result" tabindex="1">Result</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodlogin.html#ug.jsonrpc.methodlogin.example" tabindex="1"></a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li id="webhelp-currentid"><span class="file"><a href="ug.jsonrpc.methodlogout.html" tabindex="1">Method logout</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodlogout.html#ug.jsonrpc.methodlogout.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodlogout.html#ug.jsonrpc.methodlogout.result" tabindex="1">Result</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodlogout.html#ug.jsonrpc.methodlogout.example" tabindex="1"></a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodkickuser.html" tabindex="1">Method kick_user</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodkickuser.html#ug.jsonrpc.methodkickuser.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodkickuser.html#ug.jsonrpc.methodkickuser.result" tabindex="1">Result</a></span></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.jsonrpc.methodssessiondata.html" tabindex="1">Methods - session data</a></span><ul>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodgetsessiondata.html" tabindex="1">Method get_session_data</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodgetsessiondata.html#ug.jsonrpc.methodgetsessiondata.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodgetsessiondata.html#ug.jsonrpc.methodgetsessiondata.result" tabindex="1">Result</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodputsessiondata.html" tabindex="1">Method put_session_data</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodputsessiondata.html#ug.jsonrpc.methodputsessiondata.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodputsessiondata.html#ug.jsonrpc.methodputsessiondata.result" tabindex="1">Result</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methoderasesessiondata.html" tabindex="1">Method erase_session_data</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methoderasesessiondata.html#ug.jsonrpc.methoderasesessiondata.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methoderasesessiondata.html#ug.jsonrpc.methoderasesessiondata.result" tabindex="1">Result</a></span></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.jsonrpc.methodstransaction.html" tabindex="1">Methods - transaction</a></span><ul>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodgettrans.html" tabindex="1">Method get_trans</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodgettrans.html#ug.jsonrpc.methodgettrans.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodgettrans.html#ug.jsonrpc.methodgettrans.result" tabindex="1">Result</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodgettrans.html#ug.jsonrpc.methodgettrans.example" tabindex="1"></a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodnewtrans.html" tabindex="1">Method new_trans</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodnewtrans.html#ug.jsonrpc.methodnewtrans.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodnewtrans.html#ug.jsonrpc.methodnewtrans.result" tabindex="1">Result</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodnewtrans.html#ug.jsonrpc.methodnewtrans.errorsspecific" tabindex="1">Errors (specific)</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodnewtrans.html#ug.jsonrpc.methodnewtrans.example" tabindex="1"></a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methoddeletetrans.html" tabindex="1">Method delete_trans</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methoddeletetrans.html#ug.jsonrpc.methoddeletetrans.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methoddeletetrans.html#ug.jsonrpc.methoddeletetrans.result" tabindex="1">Result</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodsettranscomment.html" tabindex="1">Method set_trans_comment</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodsettranscomment.html#ug.jsonrpc.methodsettranscomment.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodsettranscomment.html#ug.jsonrpc.methodsettranscomment.result" tabindex="1">Result</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodsettranslabel.html" tabindex="1">Method set_trans_label</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodsettranslabel.html#ug.jsonrpc.methodsettranslabel.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodsettranslabel.html#ug.jsonrpc.methodsettranslabel.result" tabindex="1">Result</a></span></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.jsonrpc.methodstransactionchanges.html" tabindex="1">Methods - transaction - changes</a></span><ul>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodistransmodified.html" tabindex="1">Method is_trans_modified</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodistransmodified.html#ug.jsonrpc.methodistransmodified.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodistransmodified.html#ug.jsonrpc.methodistransmodified.result" tabindex="1">Result</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodgettranschanges.html" tabindex="1">Method get_trans_changes</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodgettranschanges.html#ug.jsonrpc.methodgettranschanges.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodgettranschanges.html#ug.jsonrpc.methodgettranschanges.result" tabindex="1">Result</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodgettranschanges.html#ug.jsonrpc.methodgettranschanges.example" tabindex="1"></a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodvalidatetrans.html" tabindex="1">Method validate_trans</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodvalidatetrans.html#ug.jsonrpc.methodvalidatetrans.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodvalidatetrans.html#ug.jsonrpc.methodvalidatetrans.result" tabindex="1">Result</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodvalidatetrans.html#ug.jsonrpc.methodvalidatetrans.errorsspecific" tabindex="1">Errors (specific)</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodgettransconflicts.html" tabindex="1">Method get_trans_conflicts</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodgettransconflicts.html#ug.jsonrpc.methodgettransconflicts.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodgettransconflicts.html#ug.jsonrpc.methodgettransconflicts.result" tabindex="1">Result</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodresolvetrans.html" tabindex="1">Method resolve_trans</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodresolvetrans.html#ug.jsonrpc.methodresolvetrans.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodresolvetrans.html#ug.jsonrpc.methodresolvetrans.result" tabindex="1">Result</a></span></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.jsonrpc.methodstransactioncommitchanges.html" tabindex="1">Methods - transaction - commit changes</a></span><ul>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodvalidatecommit.html" tabindex="1">Method validate_commit</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodvalidatecommit.html#ug.jsonrpc.methodvalidatecommit.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodvalidatecommit.html#ug.jsonrpc.methodvalidatecommit.result" tabindex="1">Result</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodvalidatecommit.html#ug.jsonrpc.methodvalidatecommit.errorsspecific" tabindex="1">Errors (specific)</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodclearvalidatelock.html" tabindex="1">Method clear_validate_lock</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodclearvalidatelock.html#ug.jsonrpc.methodclearvalidatelock.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodclearvalidatelock.html#ug.jsonrpc.methodclearvalidatelock.result" tabindex="1">Result</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodcommit.html" tabindex="1">Method commit</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodcommit.html#ug.jsonrpc.methodcommit.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodcommit.html#ug.jsonrpc.methodcommit.result" tabindex="1">Result</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodcommit.html#ug.jsonrpc.methodcommit.errorsspecific" tabindex="1">Errors (specific)</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodabortcommit.html" tabindex="1">Method abort_commit</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodabortcommit.html#ug.jsonrpc.methodabortcommit.result" tabindex="1">Result</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodconfirmcommit.html" tabindex="1">Method confirm_commit</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodconfirmcommit.html#ug.jsonrpc.methodconfirmcommit.result" tabindex="1">Result</a></span></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.jsonrpc.methodstransactionwebui.html" tabindex="1">Methods - transaction - webui</a></span><ul>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodgetwebuitrans.html" tabindex="1">Method get_webui_trans</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodgetwebuitrans.html#ug.jsonrpc.methodgetwebuitrans.result" tabindex="1">Result</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodnewwebuitrans.html" tabindex="1">Method new_webui_trans</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodnewwebuitrans.html#ug.jsonrpc.methodnewwebuitrans.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodnewwebuitrans.html#ug.jsonrpc.methodnewwebuitrans.result" tabindex="1">Result</a></span></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.jsonrpc.methodsproductspecific.html" tabindex="1">Methods - NSO specific</a></span><ul>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodgetservicepoints.html" tabindex="1">Method get_service_points</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodgetservicepoints.html#ug.jsonrpc.methodgetservicepoints.result" tabindex="1">Result</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.jsonrpc.methodgettemplatevariables.html" tabindex="1">Method get_template_variables</a></span><ul>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodgettemplatevariables.html#ug.jsonrpc.methodgettemplatevariables.params" tabindex="1">Params</a></span></li>
+                                          <li><span class="file"><a href="ug.jsonrpc.methodgettemplatevariables.html#ug.jsonrpc.methodgettemplatevariables.result" tabindex="1">Result</a></span></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ch03.html" tabindex="1">The web server</a></span><ul>
+                              <li><span class="file"><a href="ch03s01.html" tabindex="1">Introduction</a></span></li>
+                              <li><span class="file"><a href="ch03s02.html" tabindex="1">Web server capabilities</a></span></li>
+                              <li><span class="file"><a href="ch03s03.html" tabindex="1">CGI support</a></span></li>
+                           </ul>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

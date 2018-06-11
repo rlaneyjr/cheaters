@@ -1,0 +1,245 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>Citrix NetScaler XML API User&#39;s Guide - Structure Definition</title>
+<link rel="stylesheet" type="text/css" href="help_ns.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body onload="initial()" class="ns_body">
+<div class="ns_content"><table cellpadding="0" cellspacing="0"><script type="text/javascript">
+function changeContext(id,lang,flag){
+	parent.banner.document.language.select.value = lang;
+	if( lang == "C" ){
+		if(flag == "1"){
+			showContent(cfirstcontent,id,lang);
+		}
+		else{
+			showContent(csecondcontent,id,lang);
+		}
+	}
+	if( lang == "Perl" ){
+		if(flag == "1"){
+			showContent(perlfirstcontent,id,lang);
+		}
+		else{
+			showContent(perlsecondcontent,id,lang);
+		}
+	}
+	if( lang == "Java" ){
+		if(flag == "1"){
+			showContent(javafirstcontent,id,lang);	
+		}
+		else{
+			showContent(javasecondcontent,id,lang);
+		}
+	}
+	if( lang == "C#" ){
+		if(flag == "1"){
+			showContent(csharpfirstcontent,id,lang);
+		}
+		else{
+			showContent(csharpsecondcontent,id,lang);
+		}
+	}
+	if( lang == "VB" ){
+		if(flag == "1"){
+			showContent(vbfirstcontent,id,lang);
+		}
+		else{
+			showContent(vbsecondcontent,id,lang);
+		}
+	}
+	if(flag == "1"){
+		showInside(lang,"0");
+	}
+	else{
+		showOutside(lang);
+	}
+}
+function showContent(content,id,lang){
+	if(ie4){
+	   showContentObj=document.all.id;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById(id);
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+  showLangSelect(lang);
+}
+function showInside(str,cond){
+	if(str == "C"){
+ 		var inside_content = csecondcontent;
+ 	}
+ 	if(str == "Perl"){
+ 		var inside_content = perlsecondcontent;
+ 	}
+ 	if(str == "Java"){
+ 		var inside_content = javasecondcontent;
+ 	}
+ 	if(str == "C#"){
+		var inside_content = csharpsecondcontent;
+ 	}
+ 	if(str == "VB"){
+		var inside_content = vbsecondcontent;
+ 	}
+	showContent(inside_content,'qiksearch_div1',str);
+ 	if ( cond == "1" ){
+ 		var page = 'apidoc/docs/getnsparamResult.html#paramList';
+ 		document.location.href = page;
+ 	}
+}
+function showOutside(str){
+	if(str == "C" ){
+ 		var inside_content = cfirstcontent;
+ 	}
+ 	if(str == "Perl" ){
+ 		var inside_content = perlfirstcontent;
+ 	}
+ 	if(str == "Java" ){
+ 		var inside_content = javafirstcontent;
+ 	}
+ 	if(str == "C#" ){
+ 		var inside_content = csharpfirstcontent;
+ 	}
+ 	if(str == "VB" ){
+ 		var inside_content = vbfirstcontent;
+ 	}
+ 	showContent(inside_content,'qiksearch_div',str);
+}
+function initial(){
+	ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+	ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+	ns4=document.layers;
+	langSelected = parent.banner.document.language.select.value
+	var plink = parent.banner.document.language.plink.value
+	var my_array=plink.split("&");
+	var temp = my_array[0];
+ 	var grp = temp.split("@");
+	var cmd = my_array[1];
+	var regex = /^stat/i;
+	if( cmd.match(regex) != null ){
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex_stat.html\">Statistics</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getnsparamResult");
+	}
+	else{
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex.htm\">Configuration</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getnsparamResult");
+	}
+	if( langSelected == "C" ){
+ 		var content = cfirstcontent;
+	}
+	else if( langSelected == "Perl" ){
+		var content = perlfirstcontent;
+	}
+	else if( langSelected == "Java" ){
+		var content = javafirstcontent;
+	}
+	else if( langSelected == "C#" ){
+		var content = csharpfirstcontent;
+	}
+	else if( langSelected == "VB" ){
+		var content = vbfirstcontent;
+	}
+	else{
+		var content = cfirstcontent;
+		langSelected="C";
+	}
+	showContent(content,'qiksearch_div',langSelected);
+	showInside(langSelected,"0");
+}
+function showPLink(content){
+	if(ie4){
+	   showContentObj=document.all.progressive_link;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById("progressive_link");
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+}
+function showLangSelect(id){
+	   if(ie4)
+       {
+       	showObj=document.all.first_url;
+       	showObj1=document.all.second_url;
+       }
+       if(ns6)
+       {
+       	showObj=document.getElementById("first_url");
+       	showObj1=document.getElementById("second_url");
+       }
+       if( id == "C" ){
+       	newlink = "<b>C</b>";
+       	newlink1 = "<b>C</b>";
+       }
+       else{
+       	newlink = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C','1');\"><b>C</b></a>";
+       	newlink1 = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C','0');\"><b>C</b></a>";
+       }
+       if( id == "Perl" ){
+       	newlink = newlink + " | <b>Perl</b>";
+       	newlink1 = newlink1 + " | <b>Perl</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Perl','1');\"><b>Perl</b></a>";
+      	       newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Perl','0');\"><b>Perl</b></a>";
+       }
+       if( id == "Java" ){
+       	newlink = newlink + " | <b>Java</b>";
+       	newlink1 = newlink1 + " | <b>Java</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Java','1');\"><b>Java</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Java','0');\"><b>Java</b></a>";
+       }
+       if( id == "C#" ){
+       	newlink = newlink + " | <b>C#</b>";
+       	newlink1 = newlink1 + " | <b>C#</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C#','1');\"><b>C#</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C#','0');\"><b>C#</b></a>";
+       }
+       showObj.innerHTML = newlink;
+       showObj1.innerHTML = newlink1;
+}
+</script>
+<tr><td><div><div id="progressive_link"></div></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>getnsparamResult Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>getnsparamResult</b> structure defines the return type for getnsparam API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="first_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+cfirstcontent = "<pre>struct getnsparamResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; struct <a href=\'getnsparamResult.html\#nsparam\'>nsparam</a> list[];<br> };<br></pre></td></tr></table></div>"
+perlfirstcontent = "<pre>$getnsparamResult = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rc => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; message => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; List => \'@<a href=\'getnsparamResult.html\#nsparam\'>nsparam</a>\',<br> };<br></pre></td></tr></table></div>"
+javafirstcontent = "<pre>class getnsparamResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getnsparamResult.html\#nsparam\'>nsparam</a>[] list;<br> };<br></pre></td></tr></table></div>"
+csharpfirstcontent = "<pre>class getnsparamResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getnsparamResult.html\#nsparam\'>nsparam</a>[] list;<br> };<br></pre></td></tr></table></div>"
+vbfirstcontent = "<pre>Public <b>Structure</b> getnsparamResult <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rc As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public message As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public  nsparamList() As  <a href=\'getnsparamResult.html\#nsparam\'>nsparam</a><br> <b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rc</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, rc is 0 else rc > 0. Values above 0x8000 indicate Warnings.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>message</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, message is NULL else message contains <a href="errorlisting.html">Error/Warning</a> message.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>nsparamList</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">List of nsparams</div></td></tr><tr><td><br></td></tr><tr><td><div><a name="nsparam"></a></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>nsparam  Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>nsparam</b> structure defines the actual return type values for getnsparam API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="second_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div1" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+csecondcontent = "<pre>struct nsparam {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int httpport[];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int maxconn;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int maxreq;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * cip;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * cipheader;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * cookieversion;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * securecookie;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int pmtumin;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int pmtutimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * ftpportrange;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * crportrange;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * timezone;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int grantquotamaxclient;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int exclusivequotamaxclient;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int grantquotaspillover;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int exclusivequotaspillover;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * useproxyport;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * internaluserlogin;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * aftpallowrandomsourceport;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int icaports[];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * tcpcip;<br> };<br></pre></td></tr></table></div>"
+perlsecondcontent = "<pre>$nsparam = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; httpport => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; maxconn => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; maxreq => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; cip => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; cipheader => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; cookieversion => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; securecookie => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; pmtumin => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; pmtutimeout => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ftpportrange => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; crportrange => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; timezone => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; grantquotamaxclient => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; exclusivequotamaxclient => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; grantquotaspillover => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; exclusivequotaspillover => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; useproxyport => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; internaluserlogin => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; aftpallowrandomsourceport => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; icaports => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; tcpcip => \'$\',<br> };<br></pre></td></tr></table></div>"
+javasecondcontent = "<pre>class nsparam {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt httpport[];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt maxconn;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt maxreq;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String cip;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String cipheader;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String cookieversion;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String securecookie;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt pmtumin;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int pmtutimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String ftpportrange;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String crportrange;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String timezone;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt grantquotamaxclient;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt exclusivequotamaxclient;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt grantquotaspillover;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt exclusivequotaspillover;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String useproxyport;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String internaluserlogin;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String aftpallowrandomsourceport;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt icaports[];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String tcpcip;<br> };<br></pre></td></tr></table></div>"
+csharpsecondcontent = "<pre>class nsparam {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 httpport[];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 maxconn;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 maxreq;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string cip;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string cipheader;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string cookieversion;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string securecookie;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 pmtumin;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 pmtutimeout;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string ftpportrange;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string crportrange;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string timezone;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 grantquotamaxclient;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 exclusivequotamaxclient;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 grantquotaspillover;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 exclusivequotaspillover;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string useproxyport;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string internaluserlogin;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string aftpallowrandomsourceport;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 icaports[];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string tcpcip;<br> };<br></pre></td></tr></table></div>"
+vbsecondcontent = "<pre>Public <b>Structure</b> nsparam <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public httpport() As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public maxconn As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public maxreq As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public cip As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public cipheader As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public cookieversion As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public securecookie As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public pmtumin As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public pmtutimeout As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public ftpportrange As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public crportrange As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public timezone As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public grantquotamaxclient As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public exclusivequotamaxclient As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public grantquotaspillover As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public exclusivequotaspillover As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public useproxyport As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public internaluserlogin As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public aftpallowrandomsourceport As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public icaports() As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public tcpcip As String<br><b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>httpport</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The HTTP ports on the Web server.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>maxconn</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Maximum Number of Connections.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>maxreq</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Maxmimum Number of requests that can be handled.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>cip</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Insertion of client IP address into the HTTP header.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>cipheader</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The text that will be used as the client IP header.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>cookieversion</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Version of the cookie inserted by the system.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>securecookie</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Enable or disable secure flag for persistence cookie.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>pmtumin</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Minimum path MTU value that NetScaler will process in the ICMP fragmentation needed message. If the ICMP message contains a value less than this value, then this value is used instead.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>pmtutimeout</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Interval, in minutes, for flushing the PMTU entries.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>ftpportrange</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Minimum and maximum port (port range) that FTP services are allowed to use.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>crportrange</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Port range for cache redirection services.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>timezone</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Time zone for the NetScaler appliance. Name of the time zone should be specified as argument.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>grantquotamaxclient</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Percentage of shared quota to be granted at a time for maxClient.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>exclusivequotamaxclient</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Percentage of maxClient to be given to PEs.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>grantquotaspillover</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Percentage of shared quota to be granted at a time for spillover.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>exclusivequotaspillover</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Percentage of maximum limit to be given to PEs.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>useproxyport</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Enable/Disable use_proxy_port setting</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>internaluserlogin</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Enables/disables the internal user from logging in to the appliance. Before disabling internal user login, you must have key-based authentication set up on the appliance. The file name for the key pair must be "ns_comm_key".</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>aftpallowrandomsourceport</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Allow the FTP server to come from a random source port for active FTP data connections</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>icaports</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The ICA ports on the Web server. This allows the system to perform connection off-load for any
+                      client request that has a destination port matching one of these configured ports.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>tcpcip</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Enable or disable the insertion of the client TCP/IP header in TCP payload passed from the client to one, some, or all servers attached to the system. The passed address can then be accessed through a minor modification to the server.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>See Also</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="getnsparam.html">getnsparam</a></div></td></tr><tr><td><br></td></tr></table></div>
+</body>
+</html>

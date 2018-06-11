@@ -1,0 +1,95 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: package wcwidth</title>
+<meta charset="utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>wcwidth</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/lib/python2.7/site-packages/wcwidth/__init__.py">/usr/local/lib/python2.7/site-packages/wcwidth/__init__.py</a></font></td></tr></table>
+    <p><tt>wcwidth&nbsp;module,&nbsp;https://github.com/jquast/wcwidth.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Package Contents</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="wcwidth.table_wide.html">table_wide</a><br>
+</td><td width="25%" valign=top><a href="wcwidth.table_zero.html">table_zero</a><br>
+</td><td width="25%" valign=top><a href="wcwidth.tests.html"><strong>tests</strong>&nbsp;(package)</a><br>
+</td><td width="25%" valign=top><a href="wcwidth.wcwidth.html">wcwidth</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-wcswidth"><strong>wcswidth</strong></a>(pwcs, n<font color="#909090">=None</font>)</dt><dd><tt>Given&nbsp;a&nbsp;unicode&nbsp;string,&nbsp;return&nbsp;its&nbsp;printable&nbsp;length&nbsp;on&nbsp;a&nbsp;terminal.<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;width,&nbsp;in&nbsp;cells,&nbsp;necessary&nbsp;to&nbsp;display&nbsp;the&nbsp;first&nbsp;``n``<br>
+characters&nbsp;of&nbsp;the&nbsp;unicode&nbsp;string&nbsp;``pwcs``.&nbsp;&nbsp;When&nbsp;``n``&nbsp;is&nbsp;None&nbsp;(default),<br>
+return&nbsp;the&nbsp;length&nbsp;of&nbsp;the&nbsp;entire&nbsp;string.<br>
+&nbsp;<br>
+Returns&nbsp;``-1``&nbsp;if&nbsp;a&nbsp;non-printable&nbsp;character&nbsp;is&nbsp;encountered.</tt></dd></dl>
+ <dl><dt><a name="-wcwidth"><strong>wcwidth</strong></a>(wc)</dt><dd><tt>Given&nbsp;one&nbsp;unicode&nbsp;character,&nbsp;return&nbsp;its&nbsp;printable&nbsp;length&nbsp;on&nbsp;a&nbsp;terminal.<br>
+&nbsp;<br>
+The&nbsp;<a href="#-wcwidth">wcwidth</a>()&nbsp;function&nbsp;returns&nbsp;0&nbsp;if&nbsp;the&nbsp;wc&nbsp;argument&nbsp;has&nbsp;no&nbsp;printable&nbsp;effect<br>
+on&nbsp;a&nbsp;terminal&nbsp;(such&nbsp;as&nbsp;NUL&nbsp;'\0'),&nbsp;-1&nbsp;if&nbsp;wc&nbsp;is&nbsp;not&nbsp;printable,&nbsp;or&nbsp;has&nbsp;an<br>
+indeterminate&nbsp;effect&nbsp;on&nbsp;the&nbsp;terminal,&nbsp;such&nbsp;as&nbsp;a&nbsp;control&nbsp;character.<br>
+Otherwise,&nbsp;the&nbsp;number&nbsp;of&nbsp;column&nbsp;positions&nbsp;the&nbsp;character&nbsp;occupies&nbsp;on&nbsp;a<br>
+graphic&nbsp;terminal&nbsp;(1&nbsp;or&nbsp;2)&nbsp;is&nbsp;returned.<br>
+&nbsp;<br>
+The&nbsp;following&nbsp;have&nbsp;a&nbsp;column&nbsp;width&nbsp;of&nbsp;-1:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;C0&nbsp;control&nbsp;characters&nbsp;(U+001&nbsp;through&nbsp;U+01F).<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;C1&nbsp;control&nbsp;characters&nbsp;and&nbsp;DEL&nbsp;(U+07F&nbsp;through&nbsp;U+0A0).<br>
+&nbsp;<br>
+The&nbsp;following&nbsp;have&nbsp;a&nbsp;column&nbsp;width&nbsp;of&nbsp;0:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Non-spacing&nbsp;and&nbsp;enclosing&nbsp;combining&nbsp;characters&nbsp;(general<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;category&nbsp;code&nbsp;Mn&nbsp;or&nbsp;Me&nbsp;in&nbsp;the&nbsp;Unicode&nbsp;database).<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;NULL&nbsp;(U+0000,&nbsp;0).<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;COMBINING&nbsp;GRAPHEME&nbsp;JOINER&nbsp;(U+034F).<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;ZERO&nbsp;WIDTH&nbsp;SPACE&nbsp;(U+200B)&nbsp;through<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RIGHT-TO-LEFT&nbsp;MARK&nbsp;(U+200F).<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;LINE&nbsp;SEPERATOR&nbsp;(U+2028)&nbsp;and<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PARAGRAPH&nbsp;SEPERATOR&nbsp;(U+2029).<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;LEFT-TO-RIGHT&nbsp;EMBEDDING&nbsp;(U+202A)&nbsp;through<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RIGHT-TO-LEFT&nbsp;OVERRIDE&nbsp;(U+202E).<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;WORD&nbsp;JOINER&nbsp;(U+2060)&nbsp;through<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INVISIBLE&nbsp;SEPARATOR&nbsp;(U+2063).<br>
+&nbsp;<br>
+The&nbsp;following&nbsp;have&nbsp;a&nbsp;column&nbsp;width&nbsp;of&nbsp;1:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;SOFT&nbsp;HYPHEN&nbsp;(U+00AD)&nbsp;has&nbsp;a&nbsp;column&nbsp;width&nbsp;of&nbsp;1.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;All&nbsp;remaining&nbsp;characters&nbsp;(including&nbsp;all&nbsp;printable<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ISO&nbsp;8859-1&nbsp;and&nbsp;WGL4&nbsp;characters,&nbsp;Unicode&nbsp;control&nbsp;characters,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;etc.)&nbsp;have&nbsp;a&nbsp;column&nbsp;width&nbsp;of&nbsp;1.<br>
+&nbsp;<br>
+The&nbsp;following&nbsp;have&nbsp;a&nbsp;column&nbsp;width&nbsp;of&nbsp;2:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Spacing&nbsp;characters&nbsp;in&nbsp;the&nbsp;East&nbsp;Asian&nbsp;Wide&nbsp;(W)&nbsp;or&nbsp;East&nbsp;Asian<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Full-width&nbsp;(F)&nbsp;category&nbsp;as&nbsp;defined&nbsp;in&nbsp;Unicode&nbsp;Technical<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Report&nbsp;#11&nbsp;have&nbsp;a&nbsp;column&nbsp;width&nbsp;of&nbsp;2.</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>__all__</strong> = ('wcwidth', 'wcswidth')</td></tr></table>
+</body></html>

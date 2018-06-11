@@ -1,0 +1,155 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>Citrix NetScaler XML API User&#39;s Guide - monitortypeEnum</title>
+<link rel="stylesheet" type="text/css" href="help_ns.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body onload="initial()" class="ns_body">
+<div class="ns_content"><table cellpadding="0" cellspacing="0"><script type="text/javascript">
+function showContent(content,lang){
+			if(ie4){
+				showContentObj=document.all.qiksearch_div;
+			}
+			if(ns6){
+				showContentObj=document.getElementById("qiksearch_div");
+			}
+			if(ie4||ns6){
+				if(showContentObj.innerHTML!=content){
+					showContentObj.innerHTML=content;
+				}
+				else{
+					showContentObj.innerHTML="";
+				}
+			}
+			if(ns4){
+				document.nsdiv.document.write(content);
+				document.nsdiv.document.close();
+			}
+}
+function showLangSelect(id){
+		ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+		ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+		ns4=document.layers;
+		if(ie4){
+			showObj=document.all.first_url;
+		}
+		if(ns6){
+			showObj=document.getElementById("first_url");
+		}
+		if( id == "C" ){
+			newlink = "<b>C</b>";
+		}
+		else{
+			newlink = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('C');\"><b>C</b></a>";
+		}
+		if( id == "Perl" ){
+			newlink = newlink + " | <b>Perl</b>";
+		}
+		else{
+			newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('Perl');\"><b>Perl</b></a>";
+		}
+		if( id == "Java" ){
+			newlink = newlink + " | <b>Java</b>";
+		}
+		else{
+			newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('Java');\"><b>Java</b></a>";
+		}
+		if( id == "C#" ){
+			newlink = newlink + " | <b>C#</b>";
+		}
+		else{
+			newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('C#');\"><b>C#</b></a>";
+		}
+		showObj.innerHTML = newlink;
+}
+function initial(){
+		ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+		ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+		ns4=document.layers;
+		langSelected = parent.banner.document.language.select.value
+		var plink = parent.banner.document.language.plink.value
+		var my_array=plink.split("&");
+		var temp = my_array[0];
+ 		var grp = temp.split("@");
+		var cmd = my_array[1];
+		var regex = /^stat/i;
+		if( cmd.match(regex) != null ){
+			showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex_stat.html\">Statistics</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > monitortypeEnum");
+		}
+		else{
+			showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex.htm\">Configuration</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > monitortypeEnum");
+		}
+		if( langSelected == "C" ){
+ 			var content = cfirstcontent;
+		}
+		else if( langSelected == "Perl" ){
+			var content = perlfirstcontent;
+		}
+		else if( langSelected == "Java" ){
+			var content = javafirstcontent;
+		}
+		else if( langSelected == "C#" ){
+			var content = csharpfirstcontent;
+		}
+		else if( langSelected == "VB" ){
+			var content = vbfirstcontent;
+		}
+		else{
+			var content = cfirstcontent;
+			langSelected="C";
+		}
+		changeContext(langSelected);
+	}
+function showPLink(content){
+	if(ie4){
+	   showContentObj=document.all.progressive_link;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById("progressive_link");
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+}
+function changeContext(lang){
+parent.banner.document.language.select.value = lang;
+if( lang == "C" ){
+showContent('<pre>enum <b>monitortypeEnum</b>{<br>&nbsp;&nbsp;&nbsp;&nbsp;PING,<br>&nbsp;&nbsp;&nbsp;&nbsp;TCP,<br>&nbsp;&nbsp;&nbsp;&nbsp;HTTP,<br>&nbsp;&nbsp;&nbsp;&nbsp;TCPECV,<br>&nbsp;&nbsp;&nbsp;&nbsp;HTTPECV,<br>&nbsp;&nbsp;&nbsp;&nbsp;UDPECV,<br>&nbsp;&nbsp;&nbsp;&nbsp;DNS,<br>&nbsp;&nbsp;&nbsp;&nbsp;FTP,<br>&nbsp;&nbsp;&nbsp;&nbsp;LDNSPING,<br>&nbsp;&nbsp;&nbsp;&nbsp;LDNSTCP,<br>&nbsp;&nbsp;&nbsp;&nbsp;LDNSDNS,<br>&nbsp;&nbsp;&nbsp;&nbsp;RADIUS,<br>&nbsp;&nbsp;&nbsp;&nbsp;USER,<br>&nbsp;&nbsp;&nbsp;&nbsp;HTTPINLINE,<br>&nbsp;&nbsp;&nbsp;&nbsp;SIPUDP,<br>&nbsp;&nbsp;&nbsp;&nbsp;LOAD,<br>&nbsp;&nbsp;&nbsp;&nbsp;FTPEXTENDED,<br>&nbsp;&nbsp;&nbsp;&nbsp;SMTP,<br>&nbsp;&nbsp;&nbsp;&nbsp;SNMP,<br>&nbsp;&nbsp;&nbsp;&nbsp;NNTP,<br>&nbsp;&nbsp;&nbsp;&nbsp;MYSQL,<br>&nbsp;&nbsp;&nbsp;&nbsp;MYSQLECV,<br>&nbsp;&nbsp;&nbsp;&nbsp;MSSQLECV,<br>&nbsp;&nbsp;&nbsp;&nbsp;ORACLEECV,<br>&nbsp;&nbsp;&nbsp;&nbsp;LDAP,<br>&nbsp;&nbsp;&nbsp;&nbsp;POP3,<br>&nbsp;&nbsp;&nbsp;&nbsp;CITRIXXMLSERVICE,<br>&nbsp;&nbsp;&nbsp;&nbsp;CITRIXWEBINTERFACE,<br>&nbsp;&nbsp;&nbsp;&nbsp;DNSTCP,<br>&nbsp;&nbsp;&nbsp;&nbsp;RTSP,<br>&nbsp;&nbsp;&nbsp;&nbsp;ARP,<br>&nbsp;&nbsp;&nbsp;&nbsp;CITRIXAG,<br>&nbsp;&nbsp;&nbsp;&nbsp;CITRIXAACLOGINPAGE,<br>&nbsp;&nbsp;&nbsp;&nbsp;CITRIXAACLAS,<br>&nbsp;&nbsp;&nbsp;&nbsp;CITRIXXDDDC,<br>&nbsp;&nbsp;&nbsp;&nbsp;ND6,<br>&nbsp;&nbsp;&nbsp;&nbsp;CITRIXWIEXTENDED,<br>&nbsp;&nbsp;&nbsp;&nbsp;DIAMETER,<br>&nbsp;&nbsp;&nbsp;&nbsp;RADIUSACCOUNTING,<br>&nbsp;&nbsp;&nbsp;&nbsp;STOREFRONT,<br>&nbsp;&nbsp;&nbsp;&nbsp;APPC,<br>&nbsp;&nbsp;&nbsp;&nbsp;CITRIXXNCECV,<br>&nbsp;&nbsp;&nbsp;&nbsp;CITRIXXDM,<br>&nbsp;&nbsp;&nbsp;&nbsp;VALNOTSET <br>};</pre></td></tr></table>','C');
+}
+if( lang == "Perl" ){
+showContent('<pre>Possible Values for <b>type</b> are<br>&nbsp;&nbsp;&nbsp;&nbsp;\"PING\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"TCP\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"HTTP\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"TCPECV\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"HTTPECV\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"UDPECV\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"DNS\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"FTP\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"LDNSPING\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"LDNSTCP\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"LDNSDNS\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"RADIUS\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"USER\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"HTTPINLINE\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"SIPUDP\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"LOAD\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"FTPEXTENDED\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"SMTP\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"SNMP\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"NNTP\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"MYSQL\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"MYSQLECV\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"MSSQLECV\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"ORACLEECV\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"LDAP\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"POP3\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"CITRIXXMLSERVICE\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"CITRIXWEBINTERFACE\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"DNSTCP\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"RTSP\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"ARP\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"CITRIXAG\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"CITRIXAACLOGINPAGE\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"CITRIXAACLAS\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"CITRIXXDDDC\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"ND6\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"CITRIXWIEXTENDED\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"DIAMETER\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"RADIUSACCOUNTING\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"STOREFRONT\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"APPC\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"CITRIXXNCECV\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"CITRIXXDM\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"VALNOTSET\"<br></pre></td></tr></table>','Perl')
+}
+if( lang == "Java" ){
+showContent('<pre>public class <b>monitortypeEnum</b>{<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String PING=\"PING\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String TCP=\"TCP\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String HTTP=\"HTTP\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String TCPECV=\"TCPECV\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String HTTPECV=\"HTTPECV\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String UDPECV=\"UDPECV\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String DNS=\"DNS\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String FTP=\"FTP\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String LDNSPING=\"LDNSPING\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String LDNSTCP=\"LDNSTCP\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String LDNSDNS=\"LDNSDNS\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String RADIUS=\"RADIUS\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String USER=\"USER\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String HTTPINLINE=\"HTTPINLINE\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String SIPUDP=\"SIPUDP\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String LOAD=\"LOAD\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String FTPEXTENDED=\"FTPEXTENDED\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String SMTP=\"SMTP\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String SNMP=\"SNMP\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String NNTP=\"NNTP\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String MYSQL=\"MYSQL\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String MYSQLECV=\"MYSQLECV\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String MSSQLECV=\"MSSQLECV\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String ORACLEECV=\"ORACLEECV\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String LDAP=\"LDAP\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String POP3=\"POP3\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String CITRIXXMLSERVICE=\"CITRIXXMLSERVICE\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String CITRIXWEBINTERFACE=\"CITRIXWEBINTERFACE\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String DNSTCP=\"DNSTCP\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String RTSP=\"RTSP\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String ARP=\"ARP\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String CITRIXAG=\"CITRIXAG\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String CITRIXAACLOGINPAGE=\"CITRIXAACLOGINPAGE\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String CITRIXAACLAS=\"CITRIXAACLAS\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String CITRIXXDDDC=\"CITRIXXDDDC\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String ND6=\"ND6\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String CITRIXWIEXTENDED=\"CITRIXWIEXTENDED\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String DIAMETER=\"DIAMETER\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String RADIUSACCOUNTING=\"RADIUSACCOUNTING\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String STOREFRONT=\"STOREFRONT\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String APPC=\"APPC\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String CITRIXXNCECV=\"CITRIXXNCECV\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String CITRIXXDM=\"CITRIXXDM\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String VALNOTSET=\"VALNOTSET\"; <br>};</pre></td></tr></table>','Java');
+}
+if( lang == "C#" ){
+showContent('<pre>public enum <b>monitortypeEnum</b>{<br>&nbsp;&nbsp;&nbsp;&nbsp;PING,<br>&nbsp;&nbsp;&nbsp;&nbsp;TCP,<br>&nbsp;&nbsp;&nbsp;&nbsp;HTTP,<br>&nbsp;&nbsp;&nbsp;&nbsp;TCPECV,<br>&nbsp;&nbsp;&nbsp;&nbsp;HTTPECV,<br>&nbsp;&nbsp;&nbsp;&nbsp;UDPECV,<br>&nbsp;&nbsp;&nbsp;&nbsp;DNS,<br>&nbsp;&nbsp;&nbsp;&nbsp;FTP,<br>&nbsp;&nbsp;&nbsp;&nbsp;LDNSPING,<br>&nbsp;&nbsp;&nbsp;&nbsp;LDNSTCP,<br>&nbsp;&nbsp;&nbsp;&nbsp;LDNSDNS,<br>&nbsp;&nbsp;&nbsp;&nbsp;RADIUS,<br>&nbsp;&nbsp;&nbsp;&nbsp;USER,<br>&nbsp;&nbsp;&nbsp;&nbsp;HTTPINLINE,<br>&nbsp;&nbsp;&nbsp;&nbsp;SIPUDP,<br>&nbsp;&nbsp;&nbsp;&nbsp;LOAD,<br>&nbsp;&nbsp;&nbsp;&nbsp;FTPEXTENDED,<br>&nbsp;&nbsp;&nbsp;&nbsp;SMTP,<br>&nbsp;&nbsp;&nbsp;&nbsp;SNMP,<br>&nbsp;&nbsp;&nbsp;&nbsp;NNTP,<br>&nbsp;&nbsp;&nbsp;&nbsp;MYSQL,<br>&nbsp;&nbsp;&nbsp;&nbsp;MYSQLECV,<br>&nbsp;&nbsp;&nbsp;&nbsp;MSSQLECV,<br>&nbsp;&nbsp;&nbsp;&nbsp;ORACLEECV,<br>&nbsp;&nbsp;&nbsp;&nbsp;LDAP,<br>&nbsp;&nbsp;&nbsp;&nbsp;POP3,<br>&nbsp;&nbsp;&nbsp;&nbsp;CITRIXXMLSERVICE,<br>&nbsp;&nbsp;&nbsp;&nbsp;CITRIXWEBINTERFACE,<br>&nbsp;&nbsp;&nbsp;&nbsp;DNSTCP,<br>&nbsp;&nbsp;&nbsp;&nbsp;RTSP,<br>&nbsp;&nbsp;&nbsp;&nbsp;ARP,<br>&nbsp;&nbsp;&nbsp;&nbsp;CITRIXAG,<br>&nbsp;&nbsp;&nbsp;&nbsp;CITRIXAACLOGINPAGE,<br>&nbsp;&nbsp;&nbsp;&nbsp;CITRIXAACLAS,<br>&nbsp;&nbsp;&nbsp;&nbsp;CITRIXXDDDC,<br>&nbsp;&nbsp;&nbsp;&nbsp;ND6,<br>&nbsp;&nbsp;&nbsp;&nbsp;CITRIXWIEXTENDED,<br>&nbsp;&nbsp;&nbsp;&nbsp;DIAMETER,<br>&nbsp;&nbsp;&nbsp;&nbsp;RADIUSACCOUNTING,<br>&nbsp;&nbsp;&nbsp;&nbsp;STOREFRONT,<br>&nbsp;&nbsp;&nbsp;&nbsp;APPC,<br>&nbsp;&nbsp;&nbsp;&nbsp;CITRIXXNCECV,<br>&nbsp;&nbsp;&nbsp;&nbsp;CITRIXXDM,<br>&nbsp;&nbsp;&nbsp;&nbsp;VALNOTSET <br>};</pre></td></tr></table>','C#');
+}
+if( lang == "VB" ){
+showContent('<pre>Public Enum <b>monitortypeEnum</b><br>&nbsp;&nbsp;&nbsp;&nbsp;PING<br>&nbsp;&nbsp;&nbsp;&nbsp;TCP<br>&nbsp;&nbsp;&nbsp;&nbsp;HTTP<br>&nbsp;&nbsp;&nbsp;&nbsp;TCPECV<br>&nbsp;&nbsp;&nbsp;&nbsp;HTTPECV<br>&nbsp;&nbsp;&nbsp;&nbsp;UDPECV<br>&nbsp;&nbsp;&nbsp;&nbsp;DNS<br>&nbsp;&nbsp;&nbsp;&nbsp;FTP<br>&nbsp;&nbsp;&nbsp;&nbsp;LDNSPING<br>&nbsp;&nbsp;&nbsp;&nbsp;LDNSTCP<br>&nbsp;&nbsp;&nbsp;&nbsp;LDNSDNS<br>&nbsp;&nbsp;&nbsp;&nbsp;RADIUS<br>&nbsp;&nbsp;&nbsp;&nbsp;USER<br>&nbsp;&nbsp;&nbsp;&nbsp;HTTPINLINE<br>&nbsp;&nbsp;&nbsp;&nbsp;SIPUDP<br>&nbsp;&nbsp;&nbsp;&nbsp;LOAD<br>&nbsp;&nbsp;&nbsp;&nbsp;FTPEXTENDED<br>&nbsp;&nbsp;&nbsp;&nbsp;SMTP<br>&nbsp;&nbsp;&nbsp;&nbsp;SNMP<br>&nbsp;&nbsp;&nbsp;&nbsp;NNTP<br>&nbsp;&nbsp;&nbsp;&nbsp;MYSQL<br>&nbsp;&nbsp;&nbsp;&nbsp;MYSQLECV<br>&nbsp;&nbsp;&nbsp;&nbsp;MSSQLECV<br>&nbsp;&nbsp;&nbsp;&nbsp;ORACLEECV<br>&nbsp;&nbsp;&nbsp;&nbsp;LDAP<br>&nbsp;&nbsp;&nbsp;&nbsp;POP3<br>&nbsp;&nbsp;&nbsp;&nbsp;CITRIXXMLSERVICE<br>&nbsp;&nbsp;&nbsp;&nbsp;CITRIXWEBINTERFACE<br>&nbsp;&nbsp;&nbsp;&nbsp;DNSTCP<br>&nbsp;&nbsp;&nbsp;&nbsp;RTSP<br>&nbsp;&nbsp;&nbsp;&nbsp;ARP<br>&nbsp;&nbsp;&nbsp;&nbsp;CITRIXAG<br>&nbsp;&nbsp;&nbsp;&nbsp;CITRIXAACLOGINPAGE<br>&nbsp;&nbsp;&nbsp;&nbsp;CITRIXAACLAS<br>&nbsp;&nbsp;&nbsp;&nbsp;CITRIXXDDDC<br>&nbsp;&nbsp;&nbsp;&nbsp;ND6<br>&nbsp;&nbsp;&nbsp;&nbsp;CITRIXWIEXTENDED<br>&nbsp;&nbsp;&nbsp;&nbsp;DIAMETER<br>&nbsp;&nbsp;&nbsp;&nbsp;RADIUSACCOUNTING<br>&nbsp;&nbsp;&nbsp;&nbsp;STOREFRONT<br>&nbsp;&nbsp;&nbsp;&nbsp;APPC<br>&nbsp;&nbsp;&nbsp;&nbsp;CITRIXXNCECV<br>&nbsp;&nbsp;&nbsp;&nbsp;CITRIXXDM<br>&nbsp;&nbsp;&nbsp;&nbsp;VALNOTSET <br>End Enum</pre></td></tr></table>','VB');
+}
+showLangSelect(lang);
+}
+</script>
+<tr><td><div><div id="progressive_link"></div></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>monitortypeEnum</td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="first_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+cfirstcontent = "<pre>enum <b>monitortypeEnum</b>{<br>&nbsp;&nbsp;&nbsp;&nbsp;PING,<br>&nbsp;&nbsp;&nbsp;&nbsp;TCP,<br>&nbsp;&nbsp;&nbsp;&nbsp;HTTP,<br>&nbsp;&nbsp;&nbsp;&nbsp;TCPECV,<br>&nbsp;&nbsp;&nbsp;&nbsp;HTTPECV,<br>&nbsp;&nbsp;&nbsp;&nbsp;UDPECV,<br>&nbsp;&nbsp;&nbsp;&nbsp;DNS,<br>&nbsp;&nbsp;&nbsp;&nbsp;FTP,<br>&nbsp;&nbsp;&nbsp;&nbsp;LDNSPING,<br>&nbsp;&nbsp;&nbsp;&nbsp;LDNSTCP,<br>&nbsp;&nbsp;&nbsp;&nbsp;LDNSDNS,<br>&nbsp;&nbsp;&nbsp;&nbsp;RADIUS,<br>&nbsp;&nbsp;&nbsp;&nbsp;USER,<br>&nbsp;&nbsp;&nbsp;&nbsp;HTTPINLINE,<br>&nbsp;&nbsp;&nbsp;&nbsp;SIPUDP,<br>&nbsp;&nbsp;&nbsp;&nbsp;LOAD,<br>&nbsp;&nbsp;&nbsp;&nbsp;FTPEXTENDED,<br>&nbsp;&nbsp;&nbsp;&nbsp;SMTP,<br>&nbsp;&nbsp;&nbsp;&nbsp;SNMP,<br>&nbsp;&nbsp;&nbsp;&nbsp;NNTP,<br>&nbsp;&nbsp;&nbsp;&nbsp;MYSQL,<br>&nbsp;&nbsp;&nbsp;&nbsp;MYSQLECV,<br>&nbsp;&nbsp;&nbsp;&nbsp;MSSQLECV,<br>&nbsp;&nbsp;&nbsp;&nbsp;ORACLEECV,<br>&nbsp;&nbsp;&nbsp;&nbsp;LDAP,<br>&nbsp;&nbsp;&nbsp;&nbsp;POP3,<br>&nbsp;&nbsp;&nbsp;&nbsp;CITRIXXMLSERVICE,<br>&nbsp;&nbsp;&nbsp;&nbsp;CITRIXWEBINTERFACE,<br>&nbsp;&nbsp;&nbsp;&nbsp;DNSTCP,<br>&nbsp;&nbsp;&nbsp;&nbsp;RTSP,<br>&nbsp;&nbsp;&nbsp;&nbsp;ARP,<br>&nbsp;&nbsp;&nbsp;&nbsp;CITRIXAG,<br>&nbsp;&nbsp;&nbsp;&nbsp;CITRIXAACLOGINPAGE,<br>&nbsp;&nbsp;&nbsp;&nbsp;CITRIXAACLAS,<br>&nbsp;&nbsp;&nbsp;&nbsp;CITRIXXDDDC,<br>&nbsp;&nbsp;&nbsp;&nbsp;ND6,<br>&nbsp;&nbsp;&nbsp;&nbsp;CITRIXWIEXTENDED,<br>&nbsp;&nbsp;&nbsp;&nbsp;DIAMETER,<br>&nbsp;&nbsp;&nbsp;&nbsp;RADIUSACCOUNTING,<br>&nbsp;&nbsp;&nbsp;&nbsp;STOREFRONT,<br>&nbsp;&nbsp;&nbsp;&nbsp;APPC,<br>&nbsp;&nbsp;&nbsp;&nbsp;CITRIXXNCECV,<br>&nbsp;&nbsp;&nbsp;&nbsp;CITRIXXDM,<br>&nbsp;&nbsp;&nbsp;&nbsp;VALNOTSET <br>};</pre></td></tr></table>"
+perlfirstcontent = "<pre>Possible Values for <b>type</b> are<br>&nbsp;&nbsp;&nbsp;&nbsp;\"PING\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"TCP\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"HTTP\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"TCPECV\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"HTTPECV\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"UDPECV\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"DNS\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"FTP\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"LDNSPING\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"LDNSTCP\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"LDNSDNS\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"RADIUS\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"USER\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"HTTPINLINE\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"SIPUDP\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"LOAD\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"FTPEXTENDED\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"SMTP\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"SNMP\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"NNTP\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"MYSQL\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"MYSQLECV\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"MSSQLECV\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"ORACLEECV\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"LDAP\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"POP3\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"CITRIXXMLSERVICE\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"CITRIXWEBINTERFACE\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"DNSTCP\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"RTSP\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"ARP\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"CITRIXAG\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"CITRIXAACLOGINPAGE\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"CITRIXAACLAS\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"CITRIXXDDDC\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"ND6\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"CITRIXWIEXTENDED\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"DIAMETER\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"RADIUSACCOUNTING\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"STOREFRONT\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"APPC\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"CITRIXXNCECV\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"CITRIXXDM\"<br>&nbsp;&nbsp;&nbsp;&nbsp;\"VALNOTSET\"<br></pre></td></tr></table>"
+javafirstcontent = "<pre>public class <b>monitortypeEnum</b>{<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String PING=\"PING\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String TCP=\"TCP\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String HTTP=\"HTTP\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String TCPECV=\"TCPECV\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String HTTPECV=\"HTTPECV\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String UDPECV=\"UDPECV\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String DNS=\"DNS\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String FTP=\"FTP\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String LDNSPING=\"LDNSPING\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String LDNSTCP=\"LDNSTCP\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String LDNSDNS=\"LDNSDNS\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String RADIUS=\"RADIUS\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String USER=\"USER\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String HTTPINLINE=\"HTTPINLINE\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String SIPUDP=\"SIPUDP\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String LOAD=\"LOAD\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String FTPEXTENDED=\"FTPEXTENDED\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String SMTP=\"SMTP\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String SNMP=\"SNMP\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String NNTP=\"NNTP\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String MYSQL=\"MYSQL\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String MYSQLECV=\"MYSQLECV\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String MSSQLECV=\"MSSQLECV\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String ORACLEECV=\"ORACLEECV\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String LDAP=\"LDAP\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String POP3=\"POP3\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String CITRIXXMLSERVICE=\"CITRIXXMLSERVICE\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String CITRIXWEBINTERFACE=\"CITRIXWEBINTERFACE\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String DNSTCP=\"DNSTCP\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String RTSP=\"RTSP\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String ARP=\"ARP\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String CITRIXAG=\"CITRIXAG\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String CITRIXAACLOGINPAGE=\"CITRIXAACLOGINPAGE\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String CITRIXAACLAS=\"CITRIXAACLAS\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String CITRIXXDDDC=\"CITRIXXDDDC\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String ND6=\"ND6\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String CITRIXWIEXTENDED=\"CITRIXWIEXTENDED\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String DIAMETER=\"DIAMETER\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String RADIUSACCOUNTING=\"RADIUSACCOUNTING\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String STOREFRONT=\"STOREFRONT\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String APPC=\"APPC\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String CITRIXXNCECV=\"CITRIXXNCECV\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String CITRIXXDM=\"CITRIXXDM\";<br>&nbsp;&nbsp;&nbsp;&nbsp;public static final String VALNOTSET=\"VALNOTSET\"; <br>};</pre></td></tr></table>"
+csharpfirstcontent = "<pre>public enum <b>monitortypeEnum</b>{<br>&nbsp;&nbsp;&nbsp;&nbsp;PING,<br>&nbsp;&nbsp;&nbsp;&nbsp;TCP,<br>&nbsp;&nbsp;&nbsp;&nbsp;HTTP,<br>&nbsp;&nbsp;&nbsp;&nbsp;TCPECV,<br>&nbsp;&nbsp;&nbsp;&nbsp;HTTPECV,<br>&nbsp;&nbsp;&nbsp;&nbsp;UDPECV,<br>&nbsp;&nbsp;&nbsp;&nbsp;DNS,<br>&nbsp;&nbsp;&nbsp;&nbsp;FTP,<br>&nbsp;&nbsp;&nbsp;&nbsp;LDNSPING,<br>&nbsp;&nbsp;&nbsp;&nbsp;LDNSTCP,<br>&nbsp;&nbsp;&nbsp;&nbsp;LDNSDNS,<br>&nbsp;&nbsp;&nbsp;&nbsp;RADIUS,<br>&nbsp;&nbsp;&nbsp;&nbsp;USER,<br>&nbsp;&nbsp;&nbsp;&nbsp;HTTPINLINE,<br>&nbsp;&nbsp;&nbsp;&nbsp;SIPUDP,<br>&nbsp;&nbsp;&nbsp;&nbsp;LOAD,<br>&nbsp;&nbsp;&nbsp;&nbsp;FTPEXTENDED,<br>&nbsp;&nbsp;&nbsp;&nbsp;SMTP,<br>&nbsp;&nbsp;&nbsp;&nbsp;SNMP,<br>&nbsp;&nbsp;&nbsp;&nbsp;NNTP,<br>&nbsp;&nbsp;&nbsp;&nbsp;MYSQL,<br>&nbsp;&nbsp;&nbsp;&nbsp;MYSQLECV,<br>&nbsp;&nbsp;&nbsp;&nbsp;MSSQLECV,<br>&nbsp;&nbsp;&nbsp;&nbsp;ORACLEECV,<br>&nbsp;&nbsp;&nbsp;&nbsp;LDAP,<br>&nbsp;&nbsp;&nbsp;&nbsp;POP3,<br>&nbsp;&nbsp;&nbsp;&nbsp;CITRIXXMLSERVICE,<br>&nbsp;&nbsp;&nbsp;&nbsp;CITRIXWEBINTERFACE,<br>&nbsp;&nbsp;&nbsp;&nbsp;DNSTCP,<br>&nbsp;&nbsp;&nbsp;&nbsp;RTSP,<br>&nbsp;&nbsp;&nbsp;&nbsp;ARP,<br>&nbsp;&nbsp;&nbsp;&nbsp;CITRIXAG,<br>&nbsp;&nbsp;&nbsp;&nbsp;CITRIXAACLOGINPAGE,<br>&nbsp;&nbsp;&nbsp;&nbsp;CITRIXAACLAS,<br>&nbsp;&nbsp;&nbsp;&nbsp;CITRIXXDDDC,<br>&nbsp;&nbsp;&nbsp;&nbsp;ND6,<br>&nbsp;&nbsp;&nbsp;&nbsp;CITRIXWIEXTENDED,<br>&nbsp;&nbsp;&nbsp;&nbsp;DIAMETER,<br>&nbsp;&nbsp;&nbsp;&nbsp;RADIUSACCOUNTING,<br>&nbsp;&nbsp;&nbsp;&nbsp;STOREFRONT,<br>&nbsp;&nbsp;&nbsp;&nbsp;APPC,<br>&nbsp;&nbsp;&nbsp;&nbsp;CITRIXXNCECV,<br>&nbsp;&nbsp;&nbsp;&nbsp;CITRIXXDM,<br>&nbsp;&nbsp;&nbsp;&nbsp;VALNOTSET <br>};</pre></td></tr></table>"
+vbfirstcontent = "<pre>Public Enum <b>monitortypeEnum</b><br>&nbsp;&nbsp;&nbsp;&nbsp;PING<br>&nbsp;&nbsp;&nbsp;&nbsp;TCP<br>&nbsp;&nbsp;&nbsp;&nbsp;HTTP<br>&nbsp;&nbsp;&nbsp;&nbsp;TCPECV<br>&nbsp;&nbsp;&nbsp;&nbsp;HTTPECV<br>&nbsp;&nbsp;&nbsp;&nbsp;UDPECV<br>&nbsp;&nbsp;&nbsp;&nbsp;DNS<br>&nbsp;&nbsp;&nbsp;&nbsp;FTP<br>&nbsp;&nbsp;&nbsp;&nbsp;LDNSPING<br>&nbsp;&nbsp;&nbsp;&nbsp;LDNSTCP<br>&nbsp;&nbsp;&nbsp;&nbsp;LDNSDNS<br>&nbsp;&nbsp;&nbsp;&nbsp;RADIUS<br>&nbsp;&nbsp;&nbsp;&nbsp;USER<br>&nbsp;&nbsp;&nbsp;&nbsp;HTTPINLINE<br>&nbsp;&nbsp;&nbsp;&nbsp;SIPUDP<br>&nbsp;&nbsp;&nbsp;&nbsp;LOAD<br>&nbsp;&nbsp;&nbsp;&nbsp;FTPEXTENDED<br>&nbsp;&nbsp;&nbsp;&nbsp;SMTP<br>&nbsp;&nbsp;&nbsp;&nbsp;SNMP<br>&nbsp;&nbsp;&nbsp;&nbsp;NNTP<br>&nbsp;&nbsp;&nbsp;&nbsp;MYSQL<br>&nbsp;&nbsp;&nbsp;&nbsp;MYSQLECV<br>&nbsp;&nbsp;&nbsp;&nbsp;MSSQLECV<br>&nbsp;&nbsp;&nbsp;&nbsp;ORACLEECV<br>&nbsp;&nbsp;&nbsp;&nbsp;LDAP<br>&nbsp;&nbsp;&nbsp;&nbsp;POP3<br>&nbsp;&nbsp;&nbsp;&nbsp;CITRIXXMLSERVICE<br>&nbsp;&nbsp;&nbsp;&nbsp;CITRIXWEBINTERFACE<br>&nbsp;&nbsp;&nbsp;&nbsp;DNSTCP<br>&nbsp;&nbsp;&nbsp;&nbsp;RTSP<br>&nbsp;&nbsp;&nbsp;&nbsp;ARP<br>&nbsp;&nbsp;&nbsp;&nbsp;CITRIXAG<br>&nbsp;&nbsp;&nbsp;&nbsp;CITRIXAACLOGINPAGE<br>&nbsp;&nbsp;&nbsp;&nbsp;CITRIXAACLAS<br>&nbsp;&nbsp;&nbsp;&nbsp;CITRIXXDDDC<br>&nbsp;&nbsp;&nbsp;&nbsp;ND6<br>&nbsp;&nbsp;&nbsp;&nbsp;CITRIXWIEXTENDED<br>&nbsp;&nbsp;&nbsp;&nbsp;DIAMETER<br>&nbsp;&nbsp;&nbsp;&nbsp;RADIUSACCOUNTING<br>&nbsp;&nbsp;&nbsp;&nbsp;STOREFRONT<br>&nbsp;&nbsp;&nbsp;&nbsp;APPC<br>&nbsp;&nbsp;&nbsp;&nbsp;CITRIXXNCECV<br>&nbsp;&nbsp;&nbsp;&nbsp;CITRIXXDM<br>&nbsp;&nbsp;&nbsp;&nbsp;VALNOTSET <br>End Enum</pre></td></tr></table>"
+</script>
+<tr><td><div><div id="qiksearch_div" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr></table></div>
+</body>
+</html>

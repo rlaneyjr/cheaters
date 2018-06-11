@@ -1,0 +1,320 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>nssrc.com.citrix.netscaler.nitro.resource.config.ns.nsconnectiontable_args module &mdash; Nitro  documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Nitro  documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="index.html">Nitro  documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-nssrc.com.citrix.netscaler.nitro.resource.config.ns.nsconnectiontable_args">
+<span id="nssrc-com-citrix-netscaler-nitro-resource-config-ns-nsconnectiontable-args-module"></span><h1>nssrc.com.citrix.netscaler.nitro.resource.config.ns.nsconnectiontable_args module<a class="headerlink" href="#module-nssrc.com.citrix.netscaler.nitro.resource.config.ns.nsconnectiontable_args" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ns.nsconnectiontable_args.nsconnectiontable_args">
+<em class="property">class </em><tt class="descname">nsconnectiontable_args</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ns.nsconnectiontable_args.nsconnectiontable_args" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides additional arguments required for fetching the nsconnectiontable resource.</p>
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ns.nsconnectiontable_args.nsconnectiontable_args.filterexpression">
+<tt class="descname">filterexpression</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ns.nsconnectiontable_args.nsconnectiontable_args.filterexpression" title="Permalink to this definition">¶</a></dt>
+<dd><p>The maximum length of filter expression is 255 and it can be of following format:
+&lt;expression&gt; [&lt;relop&gt; &lt;expression&gt;]
+&lt;relop&gt; = ( &amp;&amp; | || )
+connectiontable supports two types of filter expressions:
+Classic Expressions:
+&lt;expression&gt; = the expression string in the format:
+&lt;qualifier&gt; &lt;operator&gt; &lt;qualifier-value&gt;
+&lt;qualifier&gt; = SOURCEIP.
+&lt;qualifier-value&gt; = A valid IP address.
+&lt;qualifier&gt; = SOURCEPORT.
+&lt;qualifier-value&gt; = A valid port number.
+&lt;qualifier&gt; = DESTIP.
+&lt;qualifier-value&gt; = A valid IP address.
+&lt;qualifier&gt; = DESTPORT.
+&lt;qualifier-value&gt; = A valid port number.
+&lt;qualifier&gt; = IP.
+&lt;qualifier-value&gt; = A valid IP address.
+&lt;qualifier&gt; = PORT.
+&lt;qualifier-value&gt; = A valid port number.
+&lt;qualifier&gt; = IDLETIME.
+&lt;qualifier-value&gt; = A positive integer indicating the idle time.
+&lt;qualifier&gt; = SVCNAME.
+&lt;qualifier-value&gt; = The name of a service.
+&lt;qualifier&gt; = VSVRNAME.
+&lt;qualifier-value&gt; = The name of a vserver.
+&lt;qualifier&gt; = CONNID
+&lt;qualifier-value&gt; = A valid PCB dev number.
+&lt;qualifier&gt; = INTF
+&lt;qualifier-value&gt; = A valid interface id in the form of x/y
+(n/x/y in case of cluster interface).
+&lt;qualifier&gt; = VLAN
+&lt;qualifier-value&gt; = A valid VLAN ID.
+&lt;qualifier&gt; = STATE.
+&lt;qualifier-value&gt; = ( CLOSE_WAIT | CLOSED | CLOSING | ESTABLISHED |
+FIN_WAIT_1 | FIN_WAIT_2 | LAST_ACK | LISTEN |
+SYN_RECEIVED | SYN_SENT | TIME_WAIT )
+&lt;qualifier&gt; = SVCTYPE.
+&lt;qualifier-value&gt; = ( HTTP | FTP | TCP | UDP | SSL |
+SSL_BRIDGE | SSL_TCP | NNTP | RPCSVR | RPCSVRS |
+RPCCLNT | DNS | ADNS | SNMP | RTSP | DHCPRA | ANY |
+MONITOR | MONITOR_UDP | MONITOR_PING | SIP_UDP | MYSQL | MSSQL | UNKNOWN )
+&lt;operator&gt; = ( == | eq | != | neq | &gt; | gt | &lt; | lt | &gt;= |
+ge | &lt;= | le | BETWEEN )
+Default Expressions:
+&lt;expression&gt; =:
+CONNECTION.&lt;qualifier&gt;.&lt;qualifier-method&gt;.(&lt;qualifier-value&gt;)
+&lt;qualifier&gt; = SRCIP
+&lt;qualifier-method&gt; = [ EQ | NE ]
+&lt;qualifier-value&gt;  = A valid IPv4 address
+example = CONNECTION.SRCIP.EQ(127.0.0.1)
+&lt;qualifier&gt; = DSTIP
+&lt;qualifier-method&gt; = [ EQ | NE ]
+&lt;qualifier-value&gt;  = A valid IPv4 address.
+example = CONNECTION.DSTIP.EQ(127.0.0.1)
+&lt;qualifier&gt; = IP
+&lt;qualifier-method&gt; = [ EQ | NE ]
+&lt;qualifier-value&gt;  = A valid IPv4 address.
+example = CONNECTION.IP.EQ(127.0.0.1)
+&lt;qualifier&gt; = SRCIPv6
+&lt;qualifier-method&gt; = [ EQ | NE ]
+&lt;qualifier-value&gt;  = A valid IPv6 address.
+example = CONNECTION.SRCIPv6.EQ(2001:db8:0:0:1::1)
+&lt;qualifier&gt; = DSTIPv6
+&lt;qualifier-method&gt; = [ EQ | NE ]
+&lt;qualifier-value&gt;  = A valid IPv6 address.
+example = CONNECTION.DSTIPv6.EQ(2001:db8:0:0:1::1)
+&lt;qualifier&gt; = IPv6
+&lt;qualifier-method&gt; = [ EQ | NE ]
+&lt;qualifier-value&gt;  = A valid IPv6 address.
+example = CONNECTION.IPv6.EQ(2001:db8:0:0:1::1)
+&lt;qualifier&gt; = SRCPORT
+&lt;qualifier-method&gt; = [ EQ | NE | GT | GE | LT | LE
+| BETWEEN ]
+&lt;qualifier-value&gt;  = A valid port number.
+example = CONNECTION.SRCPORT.EQ(80)
+&lt;qualifier&gt; = DSTPORT
+&lt;qualifier-method&gt; = [ EQ | NE | GT | GE | LT | LE
+| BETWEEN ]
+&lt;qualifier-value&gt;  = A valid port number.
+example = CONNECTION.DSTPORT.EQ(80)
+&lt;qualifier&gt; = PORT
+&lt;qualifier-method&gt; = [ EQ | NE | GT | GE | LT | LE
+| BETWEEN ]
+&lt;qualifier-value&gt;  = A valid port number.
+example = CONNECTION.PORT.EQ(80)
+&lt;qualifier&gt; = SVCNAME
+&lt;qualifier-method&gt; = [ EQ | NE | CONTAINS | STARTSWITH
+| ENDSWITH ]
+&lt;qualifier-value&gt;  = service name.
+example = CONNECTION.SVCNAME.EQ(&#8220;name&#8221;)
+&lt;qualifier&gt; = LB_VSERVER.NAME
+&lt;qualifier-method&gt; = [ EQ | NE | CONTAINS | STARTSWITH
+| ENDSWITH ]
+&lt;qualifier-value&gt;  = LB vserver name.
+example = CONNECTION.LB_VSERVER.NAME.EQ(&#8220;name&#8221;)
+&lt;qualifier&gt; = CS_VSERVER.NAME
+&lt;qualifier-method&gt; = [ EQ | NE | CONTAINS | STARTSWITH
+| ENDSWITH ]
+&lt;qualifier-value&gt;  = CS vserver name.
+example = CONNECTION.CS_VSERVER.NAME.EQ(&#8220;name&#8221;)
+&lt;qualifier&gt; = INTF
+&lt;qualifier-method&gt; = [ EQ | NE ]
+&lt;qualifier-value&gt;  = A valid interface id in the form of
+x/y (n/x/y in case of cluster interface).
+examle = CONNECTION.INTF.EQ(&#8220;0/1/1&#8221;)
+&lt;qualifier&gt; = VLANID
+&lt;qualifier-method&gt; = [ EQ | NE | GT | GE | LT | LE
+| BETWEEN ]
+&lt;qualifier-value&gt;  = A valid VLAN ID.
+example = CONNECTION.VLANID.EQ(0)
+&lt;qualifier&gt; = CONNID
+&lt;qualifier-method&gt; = [ EQ | NE | GT | GE | LT | LE
+| BETWEEN ]
+&lt;qualifier-value&gt;  = A valid PCB dev number.
+example = CONNECTION.CONNID.EQ(0)
+&lt;qualifier&gt; = PPEID
+&lt;qualifier-method&gt; = [ EQ | NE | GT | GE | LT | LE
+| BETWEEN ]
+&lt;qualifier-value&gt;  = A valid core ID.
+example = CONNECTION.PPEID.EQ(0)
+&lt;qualifier&gt; = IDLETIME
+&lt;qualifier-method&gt; = [ EQ | NE | GT | GE | LT | LE
+| BETWEEN ]
+&lt;qualifier-value&gt;  = A positive integer indicating the
+idletime.
+example = CONNECTION.IDLETIME.LT(100)
+&lt;qualifier&gt; = TCPSTATE
+&lt;qualifier-method&gt; = [ EQ | NE ]
+&lt;qualifier-value&gt;  = ( CLOSE_WAIT | CLOSED | CLOSING |
+ESTABLISHED | FIN_WAIT_1 | FIN_WAIT_2 | LAST_ACK |
+LISTEN | SYN_RECEIVED | SYN_SENT | TIME_WAIT |
+NOT_APPLICABLE)
+example = CONNECTION.TCPSTATE.EQ(LISTEN)
+&lt;qualifier&gt; = SERVICE_TYPE
+&lt;qualifier-method&gt; = [ EQ | NE ]
+&lt;qualifier-value&gt;  = ( SVC_HTTP | FTP | TCP | UDP | SSL |
+SSL_BRIDGE | SSL_TCP | NNTP | RPCSVR | RPCSVRS |
+RPCCLNT | SVC_DNS | ADNS | SNMP | RTSP | DHCPRA | ANY|
+MONITOR | MONITOR_UDP | MONITOR_PING | SIP_UDP |
+SVC_MYSQL | SVC_MSSQL | SERVICE_UNKNOWN )
+example = CONNECTION.SERVICE_TYPE.EQ(ANY)
+&lt;qualifier&gt; = TRAFFIC_DOMAIN_ID
+&lt;qualifier-method&gt; = [ EQ | NE | GT | GE | LT | LE
+| BETWEEN ]
+&lt;qualifier-value&gt;  = A valid traffic domain ID.
+example = CONNECTION.TRAFFIC_DOMAIN_ID.EQ(0)
+common usecases:
+Filtering out loopback connections and view present
+connections through netsclaer
+show connectiontable &#8220;CONNECTION.IP.NEQ(127.0.0.1) &amp;&amp;
+CONNECTION.TCPSTATE.EQ(ESTABLISHED)&#8221; -detail full
+show connections from a particular sourceip and targeted
+to port 80
+show connectiontable &#8220;CONNECTION.SRCIP.EQ(10.102.1.91) &amp;&amp;
+CONNECTION.DSTPORT.EQ(80)&#8221;
+show connection particular to a service and its linked
+client connections
+show connectiontable &#8220;CONNECTION.SVCNAME.EQ(&#8220;S1&#8221;)&#8221;
+-detail link
+show connections for a particular servicetype(e.g.http)
+show connectiontable &#8220;CONNECTION.SERVICE_TYPE.EQ(TCP)&#8221;
+viewing connections that have been idle for a long time
+show connectiontable &#8220;CONNECTION.IDLETIME.GT(100)&#8221;
+show connections for a particular interface and vlan
+show connectiontable &#8220;CONNECTION.INTF.EQ(&#8220;1/1&#8221;) &amp;&amp;
+CONNECTION.VLANID.EQ(1)&#8221;
+.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ns.nsconnectiontable_args.nsconnectiontable_args.link">
+<tt class="descname">link</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ns.nsconnectiontable_args.nsconnectiontable_args.link" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display link information if available.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ns.nsconnectiontable_args.nsconnectiontable_args.name">
+<tt class="descname">name</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ns.nsconnectiontable_args.nsconnectiontable_args.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display name instead of IP for local entities.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ns.nsconnectiontable_args.nsconnectiontable_args.detail">
+<tt class="descname">detail</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ns.nsconnectiontable_args.nsconnectiontable_args.detail" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specify display options for the connection table.
+* LINK - Displays the linked PCB (Protocol Control Block).
+* NAME - Displays along with the service name.
+* CONNFAILOVER - Displays PCB with connection failover.
+* FULL - Displays all available details.&lt;br/&gt;Possible values = LINK, NAME, CONNFAILOVER, FULL, NNM.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ns.nsconnectiontable_args.nsconnectiontable_args.Detail">
+<em class="property">class </em><tt class="descname">Detail</tt><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ns.nsconnectiontable_args.nsconnectiontable_args.Detail" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ns.nsconnectiontable_args.nsconnectiontable_args.Detail.LINK">
+<tt class="descname">LINK</tt><em class="property"> = 'LINK'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ns.nsconnectiontable_args.nsconnectiontable_args.Detail.LINK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ns.nsconnectiontable_args.nsconnectiontable_args.Detail.NAME">
+<tt class="descname">NAME</tt><em class="property"> = 'NAME'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ns.nsconnectiontable_args.nsconnectiontable_args.Detail.NAME" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ns.nsconnectiontable_args.nsconnectiontable_args.Detail.CONNFAILOVER">
+<tt class="descname">CONNFAILOVER</tt><em class="property"> = 'CONNFAILOVER'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ns.nsconnectiontable_args.nsconnectiontable_args.Detail.CONNFAILOVER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ns.nsconnectiontable_args.nsconnectiontable_args.Detail.FULL">
+<tt class="descname">FULL</tt><em class="property"> = 'FULL'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ns.nsconnectiontable_args.nsconnectiontable_args.Detail.FULL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nssrc.com.citrix.netscaler.nitro.resource.config.ns.nsconnectiontable_args.nsconnectiontable_args.Detail.NNM">
+<tt class="descname">NNM</tt><em class="property"> = 'NNM'</em><a class="headerlink" href="#nssrc.com.citrix.netscaler.nitro.resource.config.ns.nsconnectiontable_args.nsconnectiontable_args.Detail.NNM" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper"><ul class="globaltoc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.exception.html">Nitro exception Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.base.html">Base Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.service.html">Service Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.util.html">Util Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.config.html">Config Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nssrc.com.citrix.netscaler.nitro.resource.stat.html">Stat Package</a></li>
+</ul>
+</ul>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/nssrc.com.citrix.netscaler.nitro.resource.config.ns.nsconnectiontable_args.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div> 
+
+    <div class="footer">
+        &copy; Copyright © 1999-2014 Citrix Systems, Inc. All Rights Reserved.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.
+    </div>
+  </body>
+</html>

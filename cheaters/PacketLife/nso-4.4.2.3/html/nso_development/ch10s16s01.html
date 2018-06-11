@@ -1,0 +1,1071 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      
+      <title>Discovery basics -  - NSO 4.4.2.3 Development</title>
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+      <link rel="home" href="index.html" title="NSO 4.4.2.3 Development" />
+      <link rel="up" href="ch10s16.html" title="Service Discovery" />
+      <link rel="prev" href="ch10s16.html" title="Service Discovery" />
+      <link rel="next" href="ch10s16s02.html" title="Reconciliation caveats" />
+      <meta xmlns="" name="Section-title" content="Discovery basics" /><script xmlns="" type="text/javascript">
+      //The id for tree cookie
+      var treeCookieId = "treeview-14938";
+      var language = "en";
+      var w = new Object();
+      //Localization
+      txt_filesfound = 'Results';
+      txt_enter_at_least_1_char = "You must enter at least one character.";
+      txt_browser_not_supported = "JavaScript is disabled on your browser. Please enable JavaScript to enjoy all the features of this site.";
+      txt_please_wait = "Please wait. Search in progress...";
+      txt_results_for = "Results for: ";
+    </script><link xmlns="" rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/css/positioning.css" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/jquery/theme-redmond/jquery-ui-1.8.2.custom.css" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/jquery/treeview/jquery.treeview.css" /><style xmlns="" type="text/css">
+      
+      #noscript{
+      font-weight:bold;
+      background-color: #55AA55;
+      font-weight: bold;
+      height: 25spx;
+      z-index: 3000;
+      top:0px;
+      width:100%;
+      position: relative;
+      border-bottom: solid 5px black;
+      text-align:center;
+      color: white;
+      }
+      
+      input {
+      margin-bottom: 5px;
+      margin-top: 2px;
+      }
+      .folder {
+      display: block;
+      height: 22px;
+      padding-left: 20px;
+      background: transparent url(common/jquery/treeview/images/folder.gif) 0 0px no-repeat;
+      }
+      span.contentsTab {
+      padding-left: 20px;
+      background: url(common/images/toc-icon.png) no-repeat 0 center;
+      }
+      span.searchTab {
+      padding-left: 20px;
+      background: url(common/images/search-icon.png) no-repeat 0 center;
+      }
+      
+      /* Overide jquery treeview's defaults for ul. */
+      .treeview ul {
+      background-color: transparent;
+      margin-top: 4px;
+      }		
+      #webhelp-currentid {
+      /* background-color: #D8D8D8 !important; */
+      background-color: #D8D8D8;
+      }
+      .treeview .hover { color: black; }
+      .filetree li span a { text-decoration: none; font-size: 12px; color: #517291; }
+      
+      /* Override jquery-ui's default css customizations. These are supposed to take precedence over those.*/
+      .ui-widget-content {
+      border: 0px; 
+      background: none; 
+      color: none;     
+      }
+      .ui-widget-header {
+      color: #e9e8e9;
+      border-left: 1px solid #e5e5e5;
+      border-right: 1px solid #e5e5e5;
+      border-bottom: 1px solid #bbc4c5;
+      border-top: 4px solid #e5e5e5;
+      border: medium none;
+      background: #F4F4F4; /* old browsers */
+      background: -moz-linear-gradient(top, #F4F4F4 0%, #E6E4E5 100%); /* firefox */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F4F4F4), color-stop(100%,#E6E4E5)); /* webkit */    
+      font-weight: none;
+      }
+      .ui-widget-header a { color: none; }
+      .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { 
+      border: none; background: none; font-weight: none; color: none; }
+      .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited { color: black; text-decoration: none; }
+      .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus { border: none; background: none; font-weight: none; color: none; }
+      
+      .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { border: none; background: none; font-weight: none; color: none; }
+      .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited { 
+      color: black; text-decoration: none; 	
+      background: #C6C6C6; /* old browsers */
+      background: -moz-linear-gradient(top, #C6C6C6 0%, #D8D8D8 100%); /* firefox */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#C6C6C6), color-stop(100%,#D8D8D8)); /* webkit */
+      -webkit-border-radius:15px; -moz-border-radius:10px;
+      border: 1px solid #f1f1f1;
+      }    
+      .ui-corner-all { border-radius: 0 0 0 0; }
+      
+      .ui-tabs { padding: .2em;}
+      .ui-tabs .ui-tabs-nav li { top: 0px; margin: -2px 0 1px; text-transform: uppercase; font-size: 10.5px;}
+      .ui-tabs .ui-tabs-nav li a { padding: .25em 2em .25em 1em; margin: .5em; text-shadow: 0 1px 0 rgba(255,255,255,.5); }
+      /**
+      *	Basic Layout Theme
+      * 
+      *	This theme uses the default layout class-names for all classes
+      *	Add any 'custom class-names', from options: paneClass, resizerClass, togglerClass
+      */
+      
+      .ui-layout-pane { /* all 'panes' */ 
+      background: #FFF; 
+      border: 1px solid #BBB; 
+      padding: 05x; 
+      overflow: auto;
+      } 
+      
+      .ui-layout-resizer { /* all 'resizer-bars' */ 
+      background: #DDD; 
+      top:100px
+      } 
+      
+      .ui-layout-toggler { /* all 'toggler-buttons' */ 
+      background: #AAA; 
+      } 
+      
+    </style>
+      <!--[if IE]>
+	<link rel="stylesheet" type="text/css" href="../common/css/ie.css"/>
+	<![endif]--><script xmlns="" type="text/javascript" src="common/browserDetect.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery-1.7.2.min.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery.ui.all.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery.cookie.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/treeview/jquery.treeview.min.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/layout/jquery.layout.js">
+         <!----></script><style type="text/css">
+      
+      #header {
+      /* background: url("../images/header-bg.png") scroll top left repeat-x #4d8c83; */
+      background: transparent;
+      }
+      #leftnavigation {
+      /* background-color: #ededed!important; */
+      background-color: transparent;
+      }
+      #navheader {
+      visibility: hidden;
+      }
+      #webhelp-currentid {
+      /* background-color: #D8D8D8 !important; */
+      background-color: #FFFFFF; /*but must be changed in main.js as well*/
+      }
+      .filetree span.file {
+      /* background: url(images/file.gif) 0 0 no-repeat; */
+      background: initial;
+      }
+      .filetree span.folder, .filetree span.file {
+      padding: 1px 0 1px 7px;
+      display: block;
+      }
+
+      /* borrowed from cisco: clientlib.css */
+      .footer {
+      margin: 28px 30px 0 15px;
+      font-size: 80%;
+      line-height: 120%;
+      border-top: 1px solid #ccc;
+      padding-top: 7px;
+      color: #999;
+      }
+      .footer #footer-legal{display:inline;padding-bottom:18px}
+      #framework-footer{margin:0;padding:0 0 15px 0;min-width:900px;width:100%}
+      .footer a,.footer a:visited{color:#999}
+
+      /* from ccimr.css */
+      a:active  { color: #3366CC}
+      a:hover   { color: #3366CC}
+      a:link    { color: #3366CC}
+      a:visited { color: #3366CC}
+
+      #header img {
+      float: left;
+      margin-left: 20px;
+      margin-top: 0px;
+      }
+
+      #header h1 {
+      color: #336666;
+      margin-top: 4px;
+      }
+      #content h1, #content h2 {
+      color: #336666;
+      }
+      .title {
+      color: #336666;
+      }
+      p, pre {
+      margin-left: 0.1in;
+      }
+      p, ul, ol, li {
+        font-size: 95%;
+        font-family: Arial, Helvetica, sans-serif;
+        margin-top: 1px;
+      }
+      body {
+        font: 80.5% Arial, Helvetica, sans-serif;
+      }
+      ol {
+      display: block;
+      list-style-type: decimal;
+      -webkit-margin-before: 1em;
+      -webkit-margin-after: 1em;
+      -webkit-margin-start: 0px;
+      -webkit-margin-end: 0px;
+      -webkit-padding-start: 40px;
+      border: 1;
+      }
+    </style></head>
+   <body>
+      <noscript>
+         <div id="noscript">JavaScript is disabled on your browser. Please enable JavaScript to enjoy all the features of this site.</div>
+      </noscript>
+      <div id="header"><a href="index.html"><img style="margin-right: 2px; width: 110; height: 73; padding-right: 25px; padding-top: 8px" align="right" src="common/images/logo.gif" alt="Cisco Systems, Inc." /></a><h1>NSO 4.4.2.3 Development<br />Service Discovery
+         </h1>
+         <div id="navheader">
+            <!---->
+            <table class="navLinks">
+               <tr>
+                  <td><a id="showHideButton" href="#" onclick="myLayout.toggle('west')" class="pointLeft" tabindex="5" title="Hide TOC tree">Sidebar
+                                                    </a></td>
+                  <td><a accesskey="p" class="navLinkPrevious" tabindex="5" href="ch10s16.html">Prev</a>
+                                                             |
+                                                             <a accesskey="u" class="navLinkUp" tabindex="5" href="ch10s16.html">Up</a>
+                                                         |
+                                                         <a accesskey="n" class="navLinkNext" tabindex="5" href="ch10s16s02.html">Next</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div id="content">
+         <div class="sect2">
+            <div xmlns="" class="titlepage">
+               <div>
+                  <div>
+                     <h3 xmlns="http://www.w3.org/1999/xhtml" class="title"><a id="d0e11044"></a>Discovery basics
+                     </h3>
+                  </div>
+               </div>
+            </div>
+            <p>
+                       A very common situation when NSO is deployed in an existing
+                       network is that the network already has services implemented.
+                       These services may have been deployed manually or through an
+                       older provisioning system. The task is to introduce NSO and
+                       import the existing services into NSO. The goal is to use
+                       NSO to manage existing services, and to add additional
+                       instances of the same service type using NSO.
+                     
+            </p>
+            <p>
+                       The whole process of identifying services and importing them
+                       into NSO is called <span class="emphasis"><em>Service Discovery</em></span>.
+                       Some steps in the process can be automated others are highly manual.
+                       The amount of work differs a lot depending on how structured and
+                       consistent the original deployment is.
+                     
+            </p>
+            <p>
+                       The process can be broken down in a number of steps:
+                     
+            </p>
+            <div class="figure"><a id="ncs.development.services.discovery.fig1"></a><p class="title"><strong>Figure 40. Service Discovery</strong></p>
+               <div class="figure-contents">
+                  <div class="mediaobject" align="left"><img src="reconcile/service_discovery-fig1.svg" align="left" alt="Service Discovery" /></div>
+               </div>
+            </div><br class="figure-break" /><p>
+                       One of the prerequisites for this to work is that it is possible to
+                       construct a list of the already existing services. Maybe such a
+                       list exists in an inventory system, an external database, or maybe
+                       just an Excel spreadsheet.
+                       It must also be possible to:
+                       
+            </p>
+            <div class="orderedlist">
+               <ol class="orderedlist" type="1">
+                  <li class="listitem">
+                     <p>
+                                      Import all managed devices into NSO;
+                                    
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                                      Write the YANG data model for the service and the the
+                                      the mapping logic.
+                                    
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                                      Write a program, using Python/Maapi or Java/Maapi which
+                                      traverses the entire network configuration and computes the
+                                      services list.
+                                    
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                                      Verify the mapping logic is correct.
+                                    
+                     </p>
+                  </li>
+               </ol>
+            </div>
+            <p>
+                     
+            </p>
+            <p>
+                       The last step, verifying the mapping logic is an iterative process.
+                       The goal is to ensure all relevant device configuration is
+                       covered by the mapping logic.
+                     
+            </p>
+            <p>
+                       Verifying the mapping logic is achieved by using the action
+                       <span class="command"><strong>re-deploy reconcile { } dry-run</strong></span>
+                       of NSO. When the output is empty the data is covered.
+                     
+            </p>
+            <p>
+                     NSO uses special attributes on instance data to indicate
+                     the data used by a service. Two attributes are used for this
+                     <span class="emphasis"><em>Refcount</em></span> and <span class="emphasis"><em>Backpointer</em></span>.
+                   
+            </p>
+            <p>
+                     By using the flag <span class="command"><strong>display service-meta-data</strong></span>
+                     to <span class="command"><strong>show full-configuration</strong></span> these attributes
+                     can be inspected.
+                   
+            </p>
+            <p>
+                     Even if all data is covered in the mapping there might still be
+                     manual configured data below service data. If this is not
+                     desired use the action
+                     <span class="command"><strong>re-deploy reconcile { discard-non-service-config } dry-run</strong></span>
+                     to find such configuration.
+                   
+            </p>
+            <p>
+                     Below the steps to reconcile a service are shown, first in a
+                     visual form and later as commands in one of the examples.
+                   
+            </p>
+            <div class="figure"><a id="ncs.development.services.reconciliation.fig16"></a><p class="title"><strong>Figure 41. Service v1 and v2 has been created with original data O</strong></p>
+               <div class="figure-contents">
+                  <div class="mediaobject" align="left"><img src="reconcile/ServiceReconciliation-fig16.svg" align="left" alt="Service v1 and v2 has been created with original data O" /></div>
+               </div>
+            </div><br class="figure-break" /><p>
+                     The service <span class="emphasis"><em>v1</em></span> and <span class="emphasis"><em>v2</em></span>
+                     has been created on top the existing original data.
+                   
+            </p>
+            <p>
+                     The service <span class="emphasis"><em>v1</em></span> has sole control of the instance
+                     data in α, which is not part of  δ, and
+                     service <span class="emphasis"><em>v2</em></span> has sole control
+                     of the instance data β, which is not part of ε.
+                   
+            </p>
+            <p>
+                     The data solely owned by service <span class="emphasis"><em>v1</em></span> and
+                     <span class="emphasis"><em>v1</em></span> has a reference count of one.
+                   
+            </p>
+            <p>
+                     The data in δ and in ε is both part of the original data
+                     and part of service data. The reference counter in these areas is two.
+                   
+            </p>
+            <p>
+                     If the service <span class="emphasis"><em>v1</em></span>  was to be deleted the data
+                     with reference count of one would be removed. The data in
+                     δ would be kept but the reference count would be removed.
+                   
+            </p>
+            <p>
+                     After throughly inspection of the service and the affected data
+                     the service can become the sole owner of the data which is part
+                     of the original data.
+                   
+            </p>
+            <p>
+                     Check the effect of the reconciliation by use of the
+                     <span class="command"><strong>dry-run</strong></span> option to <span class="command"><strong>re-deploy</strong></span>:
+                   
+            </p>
+            <div class="informalexample"><pre class="screen">admin@ncs(config)# <strong class="userinput"><code>services vlan v1 re-deploy reconcile { } dry-run</code></strong></pre></div>
+            <p>
+                     The output of the <span class="command"><strong>dry-run</strong></span> will only display
+                     configuration changes, not changes in service-meta-data like
+                     reference count and back-pointers.
+                   
+            </p>
+            <div class="figure"><a id="ncs.development.services.reconciliation.fig17"></a><p class="title"><strong>Figure 42. Reconcile Service v1</strong></p>
+               <div class="figure-contents">
+                  <div class="mediaobject" align="left"><img src="reconcile/ServiceReconciliation-fig17.svg" align="left" alt="Reconcile Service v1" /></div>
+               </div>
+            </div><br class="figure-break" /><p>
+                     After reconciliation of <span class="emphasis"><em>v1</em></span> the service is the sole
+                     owner of the data α. All the data in α now has the reference
+                     count set to one after the operation.
+                   
+            </p>
+            <p>
+                     Complete the process by reconciling service <span class="emphasis"><em>v2</em></span> as
+                     well.
+                   
+            </p>
+            <div class="figure"><a id="ncs.development.services.reconciliation.fig18"></a><p class="title"><strong>Figure 43. Reconcile Service v2</strong></p>
+               <div class="figure-contents">
+                  <div class="mediaobject" align="left"><img src="reconcile/ServiceReconciliation-fig18.svg" align="left" alt="Reconcile Service v2" /></div>
+               </div>
+            </div><br class="figure-break" /><p>
+                     All data in α and β now has a reference count of one and
+                     will thus be removed when services <span class="emphasis"><em>v1</em></span> and
+                     <span class="emphasis"><em>v2</em></span> are removed or un-deployed.
+                   
+            </p>
+            <p>
+                     If at later stage it shows parts of ψ should belong to
+                     a service just change the mapping logic of the service and
+                     execute the action again:
+                   
+            </p>
+            <div class="informalexample"><pre class="screen">admin@ncs(config)# <strong class="userinput"><code>services vlan v1 re-deploy reconcile</code></strong>
+admin@ncs(config)# <strong class="userinput"><code>services vlan v2 re-deploy reconcile</code></strong></pre></div>
+            <p>
+                   
+            </p>
+            <p>
+                     If the service mapping logic is changes so services starts to overlap
+                     each other and start to control more of the original data like in
+                     the following figure:
+                   
+            </p>
+            <div class="figure"><a id="ncs.development.services.reconciliation.fig12"></a><p class="title"><strong>Figure 44. Overlapping services</strong></p>
+               <div class="figure-contents">
+                  <div class="mediaobject" align="left"><img src="reconcile/ServiceReconciliation-fig12.svg" align="left" alt="Overlapping services" /></div>
+               </div>
+            </div><br class="figure-break" /><p>
+                     just reconcile the services again.
+                     After reconciliation α and β has a reference count of
+                     one and the reference count of ζ is two.
+                   
+            </p>
+            <p>
+                     The command <span class="command"><strong>re-deploy reconcile</strong></span> can be
+                     executed over and over again, if the service is already
+                     reconciled nothing will happen.
+                   
+            </p>
+            <div class="figure"><a id="ncs.development.services.reconciliation.fig19"></a><p class="title"><strong>Figure 45. Un-deploy Service v1 and v2</strong></p>
+               <div class="figure-contents">
+                  <div class="mediaobject" align="left"><img src="reconcile/ServiceReconciliation-fig19.svg" align="left" alt="Un-deploy Service v1 and v2" /></div>
+               </div>
+            </div><br class="figure-break" /><p>
+                     The data ψ is outside any service and is kept after the services
+                     are gone. If the services <span class="emphasis"><em>v1</em></span> and
+                     <span class="emphasis"><em>v2</em></span> had been deleted  ψ would still look the
+                     same.
+                   
+            </p>
+            <p>
+                     Now after the visualization try this by hand in one of the examples:
+                     <code class="filename">examples.ncs/getting-started/developing-with-ncs/4-rfs-service
+                        </code>
+                   
+            </p>
+            <p>
+                     First we create two service instances:
+                   
+            </p>
+            <div class="informalexample"><pre class="screen">$ cd <strong class="userinput"><code>$NCS_DIR/examples.ncs/getting-started/developing-with-ncs/4-rfs-service</code></strong>
+$ <strong class="userinput"><code>make clean all</code></strong>
+$ <strong class="userinput"><code>ncs-netsim start</code></strong>
+$ <strong class="userinput"><code>ncs</code></strong>
+$ <strong class="userinput"><code>ncs_cli -C -u admin</code></strong>
+admin@ncs# <strong class="userinput"><code>config</code></strong>
+admin@ncs(config)# <strong class="userinput"><code>devices sync-from</code></strong>
+admin@ncs(config)# <strong class="userinput"><code>services vlan v1 description v1-vlan iface eth1 unit 1 vid 111</code></strong>
+admin@ncs(config-vlan-v1)# <strong class="userinput"><code>top</code></strong>
+admin@ncs(config)# <strong class="userinput"><code>services vlan v2 description v2-vlan iface eth2 unit 2 vid 222</code></strong>
+admin@ncs(config-vlan-v2)# <strong class="userinput"><code>top</code></strong>
+admin@ncs(config)# <strong class="userinput"><code>commit</code></strong></pre></div>
+            <p>
+                     That created two services in the network. Now let's destroy that.
+                   
+            </p>
+            <div class="informalexample"><pre class="screen">admin@ncs(config)# <strong class="userinput"><code>devices device * delete-config</code></strong>
+admin@ncs(config)# <strong class="userinput"><code>no services</code></strong>
+admin@ncs(config)# <strong class="userinput"><code>commit no-networking</code></strong></pre></div>
+            <p>
+                     We now have a situation with two services deployed in the
+                     network, but no services, nor any device configuration in
+                     NSO.
+                   
+            </p>
+            <p>
+                     This is the case when NSO first is set up in a network.
+                     Now start by getting all the device data into the data base.
+                   
+            </p>
+            <div class="informalexample"><pre class="screen">admin@ncs(config)# <strong class="userinput"><code>devices sync-from</code></strong></pre></div>
+            <p>
+                     This resembles the point were brown field deployment starts.
+                     Lets introduce the two service instances in NSO.
+                   
+            </p>
+            <div class="informalexample"><pre class="screen">admin@ncs(config)# <strong class="userinput"><code>services vlan v1 description v1-vlan iface eth1 unit 1 vid 111</code></strong>
+admin@ncs(config-vlan-v1)# <strong class="userinput"><code>top</code></strong>
+admin@ncs(config)# <strong class="userinput"><code>services vlan v2 description v2-vlan iface eth2 unit 2 vid 222</code></strong>
+admin@ncs(config-vlan-v2)# <strong class="userinput"><code>top</code></strong>
+admin@ncs(config)# <strong class="userinput"><code>commit no-networking</code></strong></pre></div>
+            <p>
+                     We're almost there now. If we take a look at the deployed
+                     configuration in NSO, we see for example:
+                   
+            </p>
+            <div class="informalexample"><pre class="screen">admin@ncs(config)# <strong class="userinput"><code>show full-configuration devices device ex0 \
+    config r:sys interfaces | display service-meta-data</code></strong>
+...
+  ! Refcount: 2
+  ! Backpointer: [ /ncs:services/vl:vlan[vl:name='v1'] ]
+  r:sys interfaces interface eth1
+   ! Refcount: 2
+   ! Backpointer: [ /ncs:services/vl:vlan[vl:name='v1'] ]
+   enabled
+   ! Refcount: 2
+   ! Backpointer: [ /ncs:services/vl:vlan[vl:name='v1'] ]
+   unit 1
+    ! Refcount: 2
+    ! Originalvalue: true
+    enabled
+    ! Refcount: 2
+    ! Originalvalue: v1-vlan
+    description v1-vlan
+    ! Refcount: 2
+    ! Originalvalue: 111
+    vlan-id     111
+   !
+  !
+  ! Refcount: 2
+  ! Backpointer: [ /ncs:services/vl:vlan[vl:name='v2'] ]
+  r:sys interfaces interface eth2
+   ! Refcount: 2
+   ! Backpointer: [ /ncs:services/vl:vlan[vl:name='v2'] ]
+   enabled
+   ! Refcount: 2
+   ! Backpointer: [ /ncs:services/vl:vlan[vl:name='v2'] ]
+   unit 2
+    ! Refcount: 2
+    ! Originalvalue: true
+    enabled
+    ! Refcount: 2
+    ! Originalvalue: v2-vlan
+    description v2-vlan
+    ! Refcount: 2
+    ! Originalvalue: 222
+    vlan-id     222
+   !</pre></div>
+            <p>
+                     When we commit a service to the network, the FASTMAP code will
+                     create the <span class="emphasis"><em>Refcount</em></span> and the
+                     <span class="emphasis"><em>Backpointer</em></span> attributes. These attributes
+                     are used to connect the device config to services. They are also
+                     used by FASTMAP when service instances are changed or deleted.
+                     In the configuration snippet above you can see the interface "eth1"
+                     and "eth2" has a refcount of 2 but
+                     only one back-pointer, pointing back to the services. This is
+                     the state when the data is not owned by the service but still is
+                     part of the original data..
+                   
+            </p>
+            <div class="informalexample"><pre class="screen">admin@ncs(config)# <strong class="userinput"><code>services vlan v1 re-deploy reconcile</code></strong>
+admin@ncs(config)# <strong class="userinput"><code>services vlan v2 re-deploy reconcile</code></strong></pre></div>
+            <p>
+                     Now the services <span class="emphasis"><em>v1</em></span> and <span class="emphasis"><em>v2</em></span> are
+                     in the same state as in the figure:
+                     <a class="xref" href="ch10s16s01.html#ncs.development.services.reconciliation.fig18" title="Figure 43. Reconcile Service v2">Figure 43, “Reconcile Service v2”</a> above.
+                   
+            </p>
+            <div class="informalexample"><pre class="screen">admin@ncs(config)# <strong class="userinput"><code>show full-configuration devices device ex0 \
+    config r:sys interfaces | display service-meta-data</code></strong>
+...
+ ! Refcount: 1
+  ! Backpointer: [ /ncs:services/vl:vlan[vl:name='v1'] ]
+  r:sys interfaces interface eth1
+   ! Refcount: 1
+   ! Backpointer: [ /ncs:services/vl:vlan[vl:name='v1'] ]
+   enabled
+   ! Refcount: 1
+   ! Backpointer: [ /ncs:services/vl:vlan[vl:name='v1'] ]
+   unit 1
+    ! Refcount: 1
+    enabled
+    ! Refcount: 1
+    description v1-vlan
+    ! Refcount: 1
+    vlan-id     111
+   !
+  !
+  ! Refcount: 1
+  ! Backpointer: [ /ncs:services/vl:vlan[vl:name='v2'] ]
+  r:sys interfaces interface eth2
+   ! Refcount: 1
+   ! Backpointer: [ /ncs:services/vl:vlan[vl:name='v2'] ]
+   enabled
+   ! Refcount: 1
+   ! Backpointer: [ /ncs:services/vl:vlan[vl:name='v2'] ]
+   unit 2
+    ! Refcount: 1
+    enabled
+    ! Refcount: 1
+    description v2-vlan
+    ! Refcount: 1
+    vlan-id     222
+   !
+  !</pre></div>
+            <p>
+                     The two services <span class="emphasis"><em>v1</em></span> and <span class="emphasis"><em>v2</em></span>
+                     have been reconciled. The reference counter as well as the
+                     back pointers are correct and indicates the data is owned by the services.
+                   
+            </p>
+         </div><script type="text/javascript" src="common/main.js">
+            <!----></script><script type="text/javascript" src="common/splitterInit.js">
+            <!----></script><div class="footer" id="footer-legal">
+            <div class="footer-legal framework-footer-cq">
+               <div id="framework-footer">
+                  <div id="footer-legal"><a href="http://www.cisco.com/web/siteassets/legal/terms_condition.html">Terms &amp; Conditions</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/privacy.html">Privacy Statement</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/privacy.html#cookies">Cookie Policy</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/trademark.html">Trademarks</a></div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div id="sidebar">
+         <div id="leftnavigation" style="padding-top:3px;">
+            <div id="tabs">
+               <ul style="visibility: hidden;"></ul>
+               <div id="treeDiv"><img src="common/images/loading.gif" alt="loading table of contents..." id="tocLoading" style="display:block;" /><div id="ulTreeDiv" style="display:none">
+                     <ul id="tree" class="filetree">
+                        <li><span class="file"><a href="ncs.ug.architecture.html" tabindex="1">NSO Architecture</a></span><ul>
+                              <li><span class="file"><a href="ch01s01.html" tabindex="1">Introduction</a></span></li>
+                              <li><span class="file"><a href="ch01s02.html" tabindex="1">Architecture Overview</a></span></li>
+                              <li><span class="file"><a href="ch01s03.html" tabindex="1">The NSO Data Model</a></span></li>
+                              <li><span class="file"><a href="ch01s04.html" tabindex="1">Process Architecture</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ug.javavm.html" tabindex="1">The NSO Java VM</a></span><ul>
+                              <li><span class="file"><a href="ch02s01.html" tabindex="1">Introduction</a></span></li>
+                              <li><span class="file"><a href="ch02s02.html" tabindex="1">The NED component type</a></span></li>
+                              <li><span class="file"><a href="ch02s03.html" tabindex="1">The callback component type</a></span></li>
+                              <li><span class="file"><a href="ch02s04.html" tabindex="1">The application component type</a></span></li>
+                              <li><span class="file"><a href="ncs.ug.javavm.resman.html" tabindex="1">The Resource Manager</a></span></li>
+                              <li><span class="file"><a href="ch02s06.html" tabindex="1">The Alarm centrals</a></span></li>
+                              <li><span class="file"><a href="ch02s07.html" tabindex="1">Embedding the NSO Java VM</a></span></li>
+                              <li><span class="file"><a href="ch02s08.html" tabindex="1">JMX interface</a></span></li>
+                              <li><span class="file"><a href="ch02s09.html" tabindex="1">Logging</a></span><ul>
+                                    <li><span class="file"><a href="ch02s09s01.html" tabindex="1">The NSO Java VM timeouts</a></span></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ncs.development.pythonvm.html" tabindex="1">The NSO Python VM</a></span><ul>
+                              <li><span class="file"><a href="ch03s01.html" tabindex="1">Introduction</a></span></li>
+                              <li><span class="file"><a href="ch03s02.html" tabindex="1">YANG model</a></span></li>
+                              <li><span class="file"><a href="ncs.development.pythonvm.ucode.html" tabindex="1">Structure of the User provided code</a></span><ul>
+                                    <li><span class="file"><a href="ncs.development.pythonvm.cthread.html" tabindex="1">The application component</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ncs.development.pythonvm.debug.html" tabindex="1">Debugging of Python packages</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ncs.development.embedded_erlang.html" tabindex="1">Embedded Erlang applications</a></span><ul>
+                              <li><span class="file"><a href="ch04s01.html" tabindex="1">Introduction</a></span></li>
+                              <li><span class="file"><a href="ch04s02.html" tabindex="1">Erlang API</a></span></li>
+                              <li><span class="file"><a href="ch04s03.html" tabindex="1">Application configuration</a></span></li>
+                              <li><span class="file"><a href="ch04s04.html" tabindex="1">Example</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ug.cdb.html" tabindex="1">CDB - The NSO Configuration Database</a></span><ul>
+                              <li><span class="file"><a href="ch05s01.html" tabindex="1">Introduction</a></span><ul>
+                                    <li><span class="file"><a href="ch05s01s01.html" tabindex="1">Key Features of CDB</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch05s02.html" tabindex="1">Addressing Data Using Keypaths</a></span></li>
+                              <li><span class="file"><a href="ug.cdb.subscriptions.html" tabindex="1">Subscriptions</a></span></li>
+                              <li><span class="file"><a href="ch05s04.html" tabindex="1">Sessions</a></span></li>
+                              <li><span class="file"><a href="ug.cdb.init.html" tabindex="1">Loading Initial Data Into CDB</a></span></li>
+                              <li><span class="file"><a href="ug.cdb.opdata.html" tabindex="1">Operational Data in CDB</a></span><ul>
+                                    <li><span class="file"><a href="ch05s06s01.html" tabindex="1">Subscriptions</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch05s07.html" tabindex="1">Example</a></span><ul>
+                                    <li><span class="file"><a href="ch05s07s01.html" tabindex="1">Operational Data</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.cdb.upgrade.html" tabindex="1">Automatic Schema Upgrades and Downgrades</a></span></li>
+                              <li><span class="file"><a href="ch05s09.html" tabindex="1">Using Initialization Files for Upgrade</a></span></li>
+                              <li><span class="file"><a href="ncs.cdb.upgrade.comp.html" tabindex="1">Writing an Upgrade Package Component</a></span></li>
+                              <li><span class="file"><a href="ch05s11.html" tabindex="1">Automatic Service Upgrade from NCS 2.x to NCS 3.0</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ug.java_api_overview.html" tabindex="1">Java API Overview</a></span><ul>
+                              <li><span class="file"><a href="ch06s01.html" tabindex="1">Introduction</a></span></li>
+                              <li><span class="file"><a href="ug.ncs.api.maapi.html" tabindex="1">MAAPI</a></span></li>
+                              <li><span class="file"><a href="ch06s03.html" tabindex="1">CDB API</a></span></li>
+                              <li><span class="file"><a href="ug.java_api_overview.dp.html" tabindex="1">DP API</a></span><ul>
+                                    <li><span class="file"><a href="ch06s04s01.html" tabindex="1">Transaction and Data Callbacks</a></span></li>
+                                    <li><span class="file"><a href="ch06s04s02.html" tabindex="1">Service and Action Callbacks</a></span></li>
+                                    <li><span class="file"><a href="ch06s04s03.html" tabindex="1">Validation Callbacks</a></span></li>
+                                    <li><span class="file"><a href="ch06s04s04.html" tabindex="1">Transforms</a></span></li>
+                                    <li><span class="file"><a href="ch06s04s05.html" tabindex="1">Hooks</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch06s05.html" tabindex="1">NED API</a></span></li>
+                              <li><span class="file"><a href="ug.java_api_overview.navu.html" tabindex="1">NAVU API</a></span></li>
+                              <li><span class="file"><a href="ch06s07.html" tabindex="1">ALARM API</a></span></li>
+                              <li><span class="file"><a href="ug.java_api_overview.notif.html" tabindex="1">NOTIF API</a></span></li>
+                              <li><span class="file"><a href="ch06s09.html" tabindex="1">HA API</a></span></li>
+                              <li><span class="file"><a href="ch06s10.html" tabindex="1">Java API Conf Package</a></span></li>
+                              <li><span class="file"><a href="ch06s11.html" tabindex="1">Namespace classes and the loaded schema</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ug.python_api_overview.html" tabindex="1">Python API Overview</a></span><ul>
+                              <li><span class="file"><a href="ch07s01.html" tabindex="1">Introduction</a></span></li>
+                              <li><span class="file"><a href="ch07s02.html" tabindex="1">Python API overview</a></span></li>
+                              <li><span class="file"><a href="ch07s03.html" tabindex="1">Python scripting</a></span></li>
+                              <li><span class="file"><a href="ch07s04.html" tabindex="1">High-level MAAPI API</a></span></li>
+                              <li><span class="file"><a href="ch07s05.html" tabindex="1">Maagic API</a></span><ul>
+                                    <li><span class="file"><a href="ch07s05s01.html" tabindex="1">Namespaces</a></span></li>
+                                    <li><span class="file"><a href="ch07s05s02.html" tabindex="1">Reading data</a></span></li>
+                                    <li><span class="file"><a href="ch07s05s03.html" tabindex="1">Writing data</a></span></li>
+                                    <li><span class="file"><a href="ch07s05s04.html" tabindex="1">Deleting data</a></span></li>
+                                    <li><span class="file"><a href="ch07s05s05.html" tabindex="1">Containers</a></span></li>
+                                    <li><span class="file"><a href="ch07s05s06.html" tabindex="1">Presence containers</a></span></li>
+                                    <li><span class="file"><a href="ch07s05s07.html" tabindex="1">Choices</a></span></li>
+                                    <li><span class="file"><a href="ch07s05s08.html" tabindex="1">Lists and List elements</a></span></li>
+                                    <li><span class="file"><a href="ch07s05s09.html" tabindex="1">Unions</a></span></li>
+                                    <li><span class="file"><a href="ch07s05s10.html" tabindex="1">Enumeration</a></span></li>
+                                    <li><span class="file"><a href="ch07s05s11.html" tabindex="1">Leafref</a></span></li>
+                                    <li><span class="file"><a href="ch07s05s12.html" tabindex="1">Identityref</a></span></li>
+                                    <li><span class="file"><a href="ch07s05s13.html" tabindex="1">Instance-identifier</a></span></li>
+                                    <li><span class="file"><a href="ch07s05s14.html" tabindex="1">Leaf-list</a></span></li>
+                                    <li><span class="file"><a href="ch07s05s15.html" tabindex="1">Binary</a></span></li>
+                                    <li><span class="file"><a href="ch07s05s16.html" tabindex="1">Bits</a></span></li>
+                                    <li><span class="file"><a href="ch07s05s17.html" tabindex="1">Empty leaf</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch07s06.html" tabindex="1">Maagic examples</a></span><ul>
+                                    <li><span class="file"><a href="ch07s06s01.html" tabindex="1">Action requests</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch07s07.html" tabindex="1">PlanComponent</a></span></li>
+                              <li><span class="file"><a href="ch07s08.html" tabindex="1">Python packages</a></span><ul>
+                                    <li><span class="file"><a href="ch07s08s01.html" tabindex="1">Action handler</a></span></li>
+                                    <li><span class="file"><a href="ch07s08s02.html" tabindex="1">Service handler</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch07s09.html" tabindex="1">Low-level APIs</a></span><ul>
+                                    <li><span class="file"><a href="ch07s09s01.html" tabindex="1">Low-level MAAPI API</a></span></li>
+                                    <li><span class="file"><a href="ch07s09s02.html" tabindex="1">Low-level CDB API</a></span></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ug.packages.html" tabindex="1">NSO Packages</a></span><ul>
+                              <li><span class="file"><a href="ug.packages.overview.html" tabindex="1">Package Overview</a></span></li>
+                              <li><span class="file"><a href="ch08s02.html" tabindex="1">An Example Package</a></span></li>
+                              <li><span class="file"><a href="ch08s03.html" tabindex="1">Components</a></span></li>
+                              <li><span class="file"><a href="ug.packages.creating.html" tabindex="1">Creating Packages </a></span><ul>
+                                    <li><span class="file"><a href="ch08s04s01.html" tabindex="1">Creating a NETCONF NED Package</a></span></li>
+                                    <li><span class="file"><a href="ch08s04s02.html" tabindex="1">Creating an SNMP NED Package</a></span></li>
+                                    <li><span class="file"><a href="ch08s04s03.html" tabindex="1">Creating a CLI NED Package or a Generic NED Package</a></span></li>
+                                    <li><span class="file"><a href="ch08s04s04.html" tabindex="1">Creating a Service Package or a Data Provider Package</a></span></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ug.package_dev.html" tabindex="1">Package Development</a></span><ul>
+                              <li><span class="file"><a href="ch09s01.html" tabindex="1">Developing a Service Package</a></span></li>
+                              <li><span class="file"><a href="ch09s02.html" tabindex="1">ncs-setup</a></span></li>
+                              <li><span class="file"><a href="ch09s03.html" tabindex="1">The netsim Part of a NED Package</a></span></li>
+                              <li><span class="file"><a href="ug.scripting_devel.html" tabindex="1">Plug-and-play scripting</a></span></li>
+                              <li><span class="file"><a href="ch09s05.html" tabindex="1">Creating a Service Package</a></span></li>
+                              <li><span class="file"><a href="ch09s06.html" tabindex="1">Java Service Implementation</a></span></li>
+                              <li><span class="file"><a href="ch09s07.html" tabindex="1">Developing our First Service Application</a></span></li>
+                              <li><span class="file"><a href="ch09s08.html" tabindex="1">Tracing Within the NSO Service Manager</a></span></li>
+                              <li><span class="file"><a href="ch09s09.html" tabindex="1">Controlling error messages info level from Java</a></span></li>
+                              <li><span class="file"><a href="ug.package_dev.loading.html" tabindex="1">Loading Packages</a></span></li>
+                              <li><span class="file"><a href="ch09s11.html" tabindex="1">Debugging the Service and Using Eclipse IDE</a></span><ul>
+                                    <li><span class="file"><a href="ch09s11s01.html" tabindex="1">Running the NSO Java VM Standalone</a></span></li>
+                                    <li><span class="file"><a href="ch09s11s02.html" tabindex="1">Using Eclipse to Debug the Package Java Code</a></span></li>
+                                    <li><span class="file"><a href="ch09s11s03.html" tabindex="1">Remote Connecting with Eclipse to the NSO Java VM</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch09s12.html" tabindex="1">Working with ncs-project</a></span><ul>
+                                    <li><span class="file"><a href="ch09s12s01.html" tabindex="1">Create a new project</a></span></li>
+                                    <li><span class="file"><a href="ch09s12s02.html" tabindex="1">Project setup</a></span></li>
+                                    <li><span class="file"><a href="ch09s12s03.html" tabindex="1">Export</a></span></li>
+                                    <li><span class="file"><a href="ch09s12s04.html" tabindex="1">NCS Project man pages</a></span></li>
+                                    <li><span class="file"><a href="ch09s12s05.html" tabindex="1">NCS Project YANG model</a></span></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ncs.development.services.html" tabindex="1">Developing NSO Services</a></span><ul>
+                              <li><span class="file"><a href="ch10s01.html" tabindex="1">Introduction</a></span></li>
+                              <li><span class="file"><a href="ch10s02.html" tabindex="1">Definitions</a></span></li>
+                              <li><span class="file"><a href="ch10s03.html" tabindex="1">The Fundamentals</a></span><ul>
+                                    <li><span class="file"><a href="ch10s03s01.html" tabindex="1">Mapping</a></span></li>
+                                    <li><span class="file"><a href="ch10s03s02.html" tabindex="1">
+                                                     FASTMAP and Transactions
+                                                   </a></span></li>
+                                    <li><span class="file"><a href="ch10s03s03.html" tabindex="1">Auto-rendering from the Service Model</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch10s04.html" tabindex="1">Writing the Service Model</a></span></li>
+                              <li><span class="file"><a href="ch10s05.html" tabindex="1">Finding the Mapping</a></span><ul>
+                                    <li><span class="file"><a href="ch10s05s01.html" tabindex="1">
+                                                     Mapping Iterations
+                                                   </a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch10s06.html" tabindex="1">Strategies to Implement the Mapping</a></span></li>
+                              <li><span class="file"><a href="ch10s07.html" tabindex="1">Creating an NSO Service Application</a></span></li>
+                              <li><span class="file"><a href="ncs.development.services.mapping_template.html" tabindex="1">
+                                           Mapping using Service Templates</a></span><ul>
+                                    <li><span class="file"><a href="ch10s08s01.html" tabindex="1">Preparation</a></span></li>
+                                    <li><span class="file"><a href="ch10s08s02.html" tabindex="1">Defining the Service Model</a></span></li>
+                                    <li><span class="file"><a href="ch10s08s03.html" tabindex="1">Defining the Template</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ncs.development.services.mapping_java.html" tabindex="1">Mapping using Java</a></span><ul>
+                                    <li><span class="file"><a href="ch10s09s01.html" tabindex="1">Overview</a></span></li>
+                                    <li><span class="file"><a href="ch10s09s02.html" tabindex="1">Setting up the environment</a></span></li>
+                                    <li><span class="file"><a href="ch10s09s03.html" tabindex="1">Creating a service package</a></span></li>
+                                    <li><span class="file"><a href="ch10s09s04.html" tabindex="1">The Service Model</a></span></li>
+                                    <li><span class="file"><a href="ch10s09s05.html" tabindex="1">Managing the NSO Java VM</a></span></li>
+                                    <li><span class="file"><a href="ch10s09s06.html" tabindex="1">A first look at Java Development</a></span></li>
+                                    <li><span class="file"><a href="ch10s09s07.html" tabindex="1">Using Eclipse</a></span></li>
+                                    <li><span class="file"><a href="ch10s09s08.html" tabindex="1">Writing the service code</a></span><ul>
+                                          <li><span class="file"><a href="ch10s09s08.html#d0e9155" tabindex="1">Fetching the service attributes</a></span></li>
+                                          <li><span class="file"><a href="ch10s09s08.html#d0e9243" tabindex="1">Mapping service attributes to device configuration</a></span></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch10s10.html" tabindex="1">Mapping using Java combined with Templates</a></span><ul>
+                                    <li><span class="file"><a href="ch10s10s01.html" tabindex="1">Overview</a></span></li>
+                                    <li><span class="file"><a href="ch10s10s02.html" tabindex="1">The VLAN Feature Template</a></span></li>
+                                    <li><span class="file"><a href="ch10s10s03.html" tabindex="1">The VLAN Java Logic</a></span></li>
+                                    <li><span class="file"><a href="ch10s10s04.html" tabindex="1">Steps to Build a Java and Template Solution</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch10s11.html" tabindex="1">Service Mapping: Putting Things Together</a></span><ul>
+                                    <li><span class="file"><a href="ch10s11s01.html" tabindex="1">Auxiliary Service Data</a></span></li>
+                                    <li><span class="file"><a href="ch10s11s02.html" tabindex="1">Topology</a></span></li>
+                                    <li><span class="file"><a href="ch10s11s03.html" tabindex="1">Creating a Multi-Vendor Service</a></span><ul>
+                                          <li><span class="file"><a href="ch10s11s03.html#d0e9646" tabindex="1">YANG Service Model Design</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ch10s11s04.html" tabindex="1">Defining the Mapping</a></span><ul>
+                                          <li><span class="file"><a href="ch10s11s04.html#d0e9831" tabindex="1">The Java Code</a></span></li>
+                                          <li><span class="file"><a href="ch10s11s04.html#d0e9861" tabindex="1">Configuration Templates</a></span></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch10s12.html" tabindex="1">FASTMAP Description</a></span></li>
+                              <li><span class="file"><a href="ncs.development.reactive_fastmap.html" tabindex="1">
+                                           Reactive FASTMAP
+                                         </a></span><ul>
+                                    <li><span class="file"><a href="ncs.development.reactive_fastmap.plan.html" tabindex="1">Progress reporting using plan-data</a></span><ul>
+                                          <li><span class="file"><a href="ncs.development.reactive_fastmap.plan.html#d0e10284" tabindex="1">Example: use of plan-data in the virtual-mpls-vpn</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ch10s13s02.html" tabindex="1">Performance Considerations</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch10s14.html" tabindex="1">Services that involve virtual devices, NFV</a></span><ul>
+                                    <li><span class="file"><a href="ch10s14s01.html" tabindex="1">
+                                                   Starting a virtual machine
+                                                 </a></span></li>
+                                    <li><span class="file"><a href="ch10s14s02.html" tabindex="1">
+                                                   Stopping a virtual machine
+                                                 </a></span></li>
+                                    <li><span class="file"><a href="ch10s14s03.html" tabindex="1">
+                                                   How to handle Licenses
+                                                 </a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch10s15.html" tabindex="1">
+                                           Advanced Mapping Techniques
+                                         </a></span><ul>
+                                    <li><span class="file"><a href="ch10s15s01.html" tabindex="1">
+                                                   Create Methods
+                                                 </a></span></li>
+                                    <li><span class="file"><a href="ncs.development.services.opaque.html" tabindex="1">
+                                                   Persistent FASTMAP Properties
+                                                 </a></span></li>
+                                    <li><span class="file"><a href="ncs.development.services.prepost.html" tabindex="1">
+                                                   Pre and post hooks
+                                                 </a></span></li>
+                                    <li><span class="file"><a href="ncs.development.services.stacked_services.html" tabindex="1">Stacked Services and Shared Structures</a></span></li>
+                                    <li><span class="file"><a href="ch10s15s05.html" tabindex="1">FASTMAP pre-lock create option</a></span></li>
+                                    <li><span class="file"><a href="ch10s15s06.html" tabindex="1">
+                                                   Service Caveats
+                                                 </a></span><ul>
+                                          <li><span class="file"><a href="ch10s15s06.html#d0e10914" tabindex="1">
+                                                           Finding Caveats
+                                                         </a></span></li>
+                                          <li><span class="file"><a href="ch10s15s06.html#d0e10942" tabindex="1">delete</a></span></li>
+                                          <li><span class="file"><a href="ch10s15s06.html#d0e10993" tabindex="1">leaf-list</a></span></li>
+                                          <li><span class="file"><a href="ch10s15s06.html#d0e11008" tabindex="1">set</a></span></li>
+                                          <li><span class="file"><a href="ch10s15s06.html#d0e11019" tabindex="1">create</a></span></li>
+                                          <li><span class="file"><a href="ch10s15s06.html#d0e11030" tabindex="1">move</a></span></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch10s16.html" tabindex="1">Service Discovery</a></span><ul>
+                                    <li id="webhelp-currentid"><span class="file"><a href="ch10s16s01.html" tabindex="1">Discovery basics</a></span></li>
+                                    <li><span class="file"><a href="ch10s16s02.html" tabindex="1">Reconciliation caveats</a></span></li>
+                                    <li><span class="file"><a href="ch10s16s03.html" tabindex="1">Reconciling in bulk</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ncs.development.services.partialsync.html" tabindex="1">Partial sync-from</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ncs.development.templates.html" tabindex="1">Templates</a></span><ul>
+                              <li><span class="file"><a href="ncs.development.templates.intro.html" tabindex="1">Introduction</a></span></li>
+                              <li><span class="file"><a href="ug.templates.dev.config.templates.html" tabindex="1">Config templates</a></span><ul>
+                                    <li><span class="file"><a href="ncs.development.templates.dev.tmpl.html" tabindex="1">Create a Config-template from a Device-template</a></span></li>
+                                    <li><span class="file"><a href="ch11s02s02.html" tabindex="1">Create a Config-template from a device configuration</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ncs.development.templates.basicPrinciples.html" tabindex="1">Basic principles</a></span><ul>
+                                    <li><span class="file"><a href="ch11s03s01.html" tabindex="1">Values in a template</a></span></li>
+                                    <li><span class="file"><a href="ncs.development.templates.contexts.html" tabindex="1">XPath Context in config-templates</a></span></li>
+                                    <li><span class="file"><a href="ch11s03s03.html" tabindex="1">Conditional Statements</a></span></li>
+                                    <li><span class="file"><a href="ch11s03s04.html" tabindex="1">Loop Statements</a></span></li>
+                                    <li><span class="file"><a href="ch11s03s05.html" tabindex="1">Capabilities and Namespaces</a></span></li>
+                                    <li><span class="file"><a href="ch11s03s06.html" tabindex="1">Template tag operations</a></span></li>
+                                    <li><span class="file"><a href="ch11s03s07.html" tabindex="1">Operations on ordered-by user lists and leaf-lists</a></span></li>
+                                    <li><span class="file"><a href="ch11s03s08.html" tabindex="1">Debugging templates</a></span><ul>
+                                          <li><span class="file"><a href="ch11s03s08.html#d0e12199" tabindex="1">debug template output examples</a></span></li>
+                                          <li><span class="file"><a href="ch11s03s08.html#d0e12288" tabindex="1">XPath help</a></span></li>
+                                          <li><span class="file"><a href="ch11s03s08.html#d0e12315" tabindex="1">XPath trace log</a></span></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ncs.development.templates.service.templates.html" tabindex="1">Service Templates</a></span></li>
+                              <li><span class="file"><a href="ncs.development.templates.api.templates.html" tabindex="1">Templates applied from an API</a></span><ul>
+                                    <li><span class="file"><a href="ch11s05s01.html" tabindex="1">Feature Template</a></span></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ug.ncs.alarmmgr_dev.html" tabindex="1">Developing Alarm Applications</a></span><ul>
+                              <li><span class="file"><a href="ch12s01.html" tabindex="1">Introduction</a></span></li>
+                              <li><span class="file"><a href="ch12s02.html" tabindex="1">Using the Alarms Sink</a></span></li>
+                              <li><span class="file"><a href="ch12s03.html" tabindex="1">Using the Alarms Source</a></span></li>
+                              <li><span class="file"><a href="ch12s04.html" tabindex="1">Extending the alarm manager,
+                                                  adding user defined alarm types and fields</a></span></li>
+                              <li><span class="file"><a href="ch12s05.html" tabindex="1">Mapping alarms to objects</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ncs.development.snmp_notif_recv.html" tabindex="1">SNMP Notification Receiver</a></span><ul>
+                              <li><span class="file"><a href="ncs.development.snmp_notf_recv.introduction.html" tabindex="1">Introduction</a></span></li>
+                              <li><span class="file"><a href="ch13s02.html" tabindex="1">Configuring NSO to Receive SNMP Notifications</a></span></li>
+                              <li><span class="file"><a href="ch13s03.html" tabindex="1">Built-in Filters</a></span></li>
+                              <li><span class="file"><a href="ch13s04.html" tabindex="1">Notification Handlers</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ch14.html" tabindex="1">The web server</a></span><ul>
+                              <li><span class="file"><a href="ch14s01.html" tabindex="1">Introduction</a></span></li>
+                              <li><span class="file"><a href="ch14s02.html" tabindex="1">Web server capabilities</a></span></li>
+                              <li><span class="file"><a href="ch14s03.html" tabindex="1">CGI support</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ug.kicker.html" tabindex="1">Kicker </a></span><ul>
+                              <li><span class="file"><a href="ch15s01.html" tabindex="1">Introduction</a></span></li>
+                              <li><span class="file"><a href="ug.kicker.actions.html" tabindex="1">Kicker action invocation</a></span></li>
+                              <li><span class="file"><a href="ug.kicker.data-concepts.html" tabindex="1">Data Kicker Concepts</a></span><ul>
+                                    <li><span class="file"><a href="ch15s03s01.html" tabindex="1">Generalized Monitors</a></span></li>
+                                    <li><span class="file"><a href="ch15s03s02.html" tabindex="1">Kicker Constraints/Filters</a></span></li>
+                                    <li><span class="file"><a href="ug.data.kicker.named_xpath.html" tabindex="1">Variable Bindings</a></span></li>
+                                    <li><span class="file"><a href="ug.kicker.simple_data_example.html" tabindex="1">A Simple Data Kicker Example</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.kicker.notif-concepts.html" tabindex="1">Notification Kicker Concepts</a></span><ul>
+                                    <li><span class="file"><a href="ch15s04s01.html" tabindex="1">Notification selector expression</a></span></li>
+                                    <li><span class="file"><a href="ug.notif.kicker.named_xpath.html" tabindex="1">Variable Bindings</a></span></li>
+                                    <li><span class="file"><a href="ug.kicker.simple_notif_example.html" tabindex="1">A Simple Notification Kicker Example</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.kicker.rfm.html" tabindex="1">Reactive FastMap with Kicker</a></span><ul>
+                                    <li><span class="file"><a href="ug.kicker.rfm.use_cases.html" tabindex="1">Use Cases</a></span></li>
+                                    <li><span class="file"><a href="ug.kicker.rfm.example.html" tabindex="1">RFM Example</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.kicker.debugging.html" tabindex="1">Debugging kickers</a></span><ul>
+                                    <li><span class="file"><a href="ug.kicker.debugging.pipe.html" tabindex="1">Kicker CLI Debug target</a></span></li>
+                                    <li><span class="file"><a href="ug.kicker.debugging.unhide.html" tabindex="1">Unhide Kickers</a></span></li>
+                                    <li><span class="file"><a href="ch15s06s03.html" tabindex="1">XPath log</a></span></li>
+                                    <li><span class="file"><a href="ch15s06s04.html" tabindex="1">Devel Log</a></span></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ch16.html" tabindex="1">Experimental Feature - Nano services</a></span><ul>
+                              <li><span class="file"><a href="ch16s01.html" tabindex="1">Introduction</a></span></li>
+                              <li><span class="file"><a href="ch16s02.html" tabindex="1">Principles</a></span><ul>
+                                    <li><span class="file"><a href="ch16s02s01.html" tabindex="1">Normal service</a></span></li>
+                                    <li><span class="file"><a href="ch16s02s02.html" tabindex="1">Nano service</a></span></li>
+                                    <li><span class="file"><a href="ch16s02s03.html" tabindex="1">Back-tracking</a></span><ul>
+                                          <li><span class="file"><a href="ch16s02s03.html#d0e14085" tabindex="1">State pre-condition not satisfied</a></span></li>
+                                          <li><span class="file"><a href="ch16s02s03.html#d0e14115" tabindex="1">Plan component is removed</a></span></li>
+                                          <li><span class="file"><a href="ch16s02s03.html#d0e14142" tabindex="1">Service is deleted</a></span></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch16s03.html" tabindex="1">Zombie services</a></span></li>
+                              <li><span class="file"><a href="ch16s04.html" tabindex="1">Behaviour tree</a></span></li>
+                              <li><span class="file"><a href="ch16s05.html" tabindex="1">Nano services</a></span><ul>
+                                    <li><span class="file"><a href="ch16s05s01.html" tabindex="1">Nano service opaque</a></span></li>
+                                    <li><span class="file"><a href="ch16s05s02.html" tabindex="1">Nano service callbacks</a></span></li>
+                                    <li><span class="file"><a href="ch16s05s03.html" tabindex="1">Generic service callbacks</a></span></li>
+                                    <li><span class="file"><a href="ch16s05s04.html" tabindex="1">Nano service pre/post modifications</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch16s06.html" tabindex="1">Side effects</a></span></li>
+                              <li><span class="file"><a href="ch16s07.html" tabindex="1">How it all comes together</a></span></li>
+                           </ul>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

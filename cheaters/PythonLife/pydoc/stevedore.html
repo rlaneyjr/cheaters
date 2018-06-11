@@ -1,0 +1,778 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: package stevedore</title>
+<meta charset="utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>stevedore</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/lib/python2.7/site-packages/stevedore/__init__.py">/usr/local/lib/python2.7/site-packages/stevedore/__init__.py</a></font></td></tr></table>
+    <p><tt>#&nbsp;flake8:&nbsp;noqa</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Package Contents</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="stevedore.dispatch.html">dispatch</a><br>
+<a href="stevedore.driver.html">driver</a><br>
+<a href="stevedore.enabled.html">enabled</a><br>
+</td><td width="25%" valign=top><a href="stevedore.example.html"><strong>example</strong>&nbsp;(package)</a><br>
+<a href="stevedore.example2.html"><strong>example2</strong>&nbsp;(package)</a><br>
+<a href="stevedore.extension.html">extension</a><br>
+</td><td width="25%" valign=top><a href="stevedore.hook.html">hook</a><br>
+<a href="stevedore.named.html">named</a><br>
+<a href="stevedore.sphinxext.html">sphinxext</a><br>
+</td><td width="25%" valign=top><a href="stevedore.tests.html"><strong>tests</strong>&nbsp;(package)</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="__builtin__.html#object">__builtin__.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="stevedore.extension.html#ExtensionManager">stevedore.extension.ExtensionManager</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="stevedore.enabled.html#EnabledExtensionManager">stevedore.enabled.EnabledExtensionManager</a>
+</font></dt><dt><font face="helvetica, arial"><a href="stevedore.named.html#NamedExtensionManager">stevedore.named.NamedExtensionManager</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="stevedore.driver.html#DriverManager">stevedore.driver.DriverManager</a>
+</font></dt><dt><font face="helvetica, arial"><a href="stevedore.hook.html#HookManager">stevedore.hook.HookManager</a>
+</font></dt></dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="DriverManager">class <strong>DriverManager</strong></a>(<a href="stevedore.named.html#NamedExtensionManager">stevedore.named.NamedExtensionManager</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Load&nbsp;a&nbsp;single&nbsp;plugin&nbsp;with&nbsp;a&nbsp;given&nbsp;name&nbsp;from&nbsp;the&nbsp;namespace.<br>
+&nbsp;<br>
+:param&nbsp;namespace:&nbsp;The&nbsp;namespace&nbsp;for&nbsp;the&nbsp;entry&nbsp;points.<br>
+:type&nbsp;namespace:&nbsp;str<br>
+:param&nbsp;name:&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;driver&nbsp;to&nbsp;load.<br>
+:type&nbsp;name:&nbsp;str<br>
+:param&nbsp;invoke_on_load:&nbsp;Boolean&nbsp;controlling&nbsp;whether&nbsp;to&nbsp;invoke&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;returned&nbsp;by&nbsp;the&nbsp;entry&nbsp;point&nbsp;after&nbsp;the&nbsp;driver&nbsp;is&nbsp;loaded.<br>
+:type&nbsp;invoke_on_load:&nbsp;bool<br>
+:param&nbsp;invoke_args:&nbsp;Positional&nbsp;arguments&nbsp;to&nbsp;pass&nbsp;when&nbsp;invoking<br>
+&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;returned&nbsp;by&nbsp;the&nbsp;entry&nbsp;point.&nbsp;Only&nbsp;used&nbsp;if&nbsp;invoke_on_load<br>
+&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;True.<br>
+:type&nbsp;invoke_args:&nbsp;tuple<br>
+:param&nbsp;invoke_kwds:&nbsp;Named&nbsp;arguments&nbsp;to&nbsp;pass&nbsp;when&nbsp;invoking<br>
+&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;returned&nbsp;by&nbsp;the&nbsp;entry&nbsp;point.&nbsp;Only&nbsp;used&nbsp;if&nbsp;invoke_on_load<br>
+&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;True.<br>
+:type&nbsp;invoke_kwds:&nbsp;dict<br>
+:param&nbsp;on_load_failure_callback:&nbsp;Callback&nbsp;function&nbsp;that&nbsp;will&nbsp;be&nbsp;called&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;entrypoint&nbsp;can&nbsp;not&nbsp;be&nbsp;loaded.&nbsp;The&nbsp;arguments&nbsp;that&nbsp;will&nbsp;be&nbsp;provided<br>
+&nbsp;&nbsp;&nbsp;&nbsp;when&nbsp;this&nbsp;is&nbsp;called&nbsp;(when&nbsp;an&nbsp;entrypoint&nbsp;fails&nbsp;to&nbsp;load)&nbsp;are<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(manager,&nbsp;entrypoint,&nbsp;exception)<br>
+:type&nbsp;on_load_failure_callback:&nbsp;function<br>
+:param&nbsp;verify_requirements:&nbsp;Use&nbsp;setuptools&nbsp;to&nbsp;enforce&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dependencies&nbsp;of&nbsp;the&nbsp;plugin(s)&nbsp;being&nbsp;loaded.&nbsp;Defaults&nbsp;to&nbsp;False.<br>
+:type&nbsp;verify_requirements:&nbsp;bool<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="stevedore.driver.html#DriverManager">DriverManager</a></dd>
+<dd><a href="stevedore.named.html#NamedExtensionManager">stevedore.named.NamedExtensionManager</a></dd>
+<dd><a href="stevedore.extension.html#ExtensionManager">stevedore.extension.ExtensionManager</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="DriverManager-__call__"><strong>__call__</strong></a>(self, func, *args, **kwds)</dt><dd><tt>Invokes&nbsp;func()&nbsp;for&nbsp;the&nbsp;single&nbsp;loaded&nbsp;extension.<br>
+&nbsp;<br>
+The&nbsp;signature&nbsp;for&nbsp;func()&nbsp;should&nbsp;be::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;def&nbsp;func(ext,&nbsp;*args,&nbsp;**kwds):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pass<br>
+&nbsp;<br>
+The&nbsp;first&nbsp;argument&nbsp;to&nbsp;func(),&nbsp;'ext',&nbsp;is&nbsp;the<br>
+:class:`~stevedore.extension.Extension`&nbsp;instance.<br>
+&nbsp;<br>
+Exceptions&nbsp;raised&nbsp;from&nbsp;within&nbsp;func()&nbsp;are&nbsp;logged&nbsp;and&nbsp;ignored.<br>
+&nbsp;<br>
+:param&nbsp;func:&nbsp;Callable&nbsp;to&nbsp;invoke&nbsp;for&nbsp;each&nbsp;extension.<br>
+:param&nbsp;args:&nbsp;Variable&nbsp;arguments&nbsp;to&nbsp;pass&nbsp;to&nbsp;func()<br>
+:param&nbsp;kwds:&nbsp;Keyword&nbsp;arguments&nbsp;to&nbsp;pass&nbsp;to&nbsp;func()<br>
+:returns:&nbsp;List&nbsp;of&nbsp;values&nbsp;returned&nbsp;from&nbsp;func()</tt></dd></dl>
+
+<dl><dt><a name="DriverManager-__init__"><strong>__init__</strong></a>(self, namespace, name, invoke_on_load<font color="#909090">=False</font>, invoke_args<font color="#909090">=()</font>, invoke_kwds<font color="#909090">={}</font>, on_load_failure_callback<font color="#909090">=None</font>, verify_requirements<font color="#909090">=False</font>)</dt></dl>
+
+<hr>
+Class methods defined here:<br>
+<dl><dt><a name="DriverManager-make_test_instance"><strong>make_test_instance</strong></a>(cls, extension, namespace<font color="#909090">='TESTING'</font>, propagate_map_exceptions<font color="#909090">=False</font>, on_load_failure_callback<font color="#909090">=None</font>, verify_requirements<font color="#909090">=False</font>)<font color="#909090"><font face="helvetica, arial"> from <a href="__builtin__.html#type">__builtin__.type</a></font></font></dt><dd><tt>Construct&nbsp;a&nbsp;test&nbsp;<a href="#DriverManager">DriverManager</a><br>
+&nbsp;<br>
+Test&nbsp;instances&nbsp;are&nbsp;passed&nbsp;a&nbsp;list&nbsp;of&nbsp;extensions&nbsp;to&nbsp;work&nbsp;from&nbsp;rather<br>
+than&nbsp;loading&nbsp;them&nbsp;from&nbsp;entry&nbsp;points.<br>
+&nbsp;<br>
+:param&nbsp;extension:&nbsp;Pre-configured&nbsp;Extension&nbsp;instance<br>
+:type&nbsp;extension:&nbsp;:class:`~stevedore.extension.Extension`<br>
+:param&nbsp;namespace:&nbsp;The&nbsp;namespace&nbsp;for&nbsp;the&nbsp;manager;&nbsp;used&nbsp;only&nbsp;for<br>
+&nbsp;&nbsp;&nbsp;&nbsp;identification&nbsp;since&nbsp;the&nbsp;extensions&nbsp;are&nbsp;passed&nbsp;in.<br>
+:type&nbsp;namespace:&nbsp;str<br>
+:param&nbsp;propagate_map_exceptions:&nbsp;Boolean&nbsp;controlling&nbsp;whether&nbsp;exceptions<br>
+&nbsp;&nbsp;&nbsp;&nbsp;are&nbsp;propagated&nbsp;up&nbsp;through&nbsp;the&nbsp;map&nbsp;call&nbsp;or&nbsp;whether&nbsp;they&nbsp;are&nbsp;logged<br>
+&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;then&nbsp;ignored<br>
+:type&nbsp;propagate_map_exceptions:&nbsp;bool<br>
+:param&nbsp;on_load_failure_callback:&nbsp;Callback&nbsp;function&nbsp;that&nbsp;will<br>
+&nbsp;&nbsp;&nbsp;&nbsp;be&nbsp;called&nbsp;when&nbsp;a&nbsp;entrypoint&nbsp;can&nbsp;not&nbsp;be&nbsp;loaded.&nbsp;The<br>
+&nbsp;&nbsp;&nbsp;&nbsp;arguments&nbsp;that&nbsp;will&nbsp;be&nbsp;provided&nbsp;when&nbsp;this&nbsp;is&nbsp;called&nbsp;(when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;an&nbsp;entrypoint&nbsp;fails&nbsp;to&nbsp;load)&nbsp;are&nbsp;(manager,&nbsp;entrypoint,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;exception)<br>
+:type&nbsp;on_load_failure_callback:&nbsp;function<br>
+:param&nbsp;verify_requirements:&nbsp;Use&nbsp;setuptools&nbsp;to&nbsp;enforce&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dependencies&nbsp;of&nbsp;the&nbsp;plugin(s)&nbsp;being&nbsp;loaded.&nbsp;Defaults&nbsp;to&nbsp;False.<br>
+:type&nbsp;verify_requirements:&nbsp;bool<br>
+:return:&nbsp;The&nbsp;manager&nbsp;instance,&nbsp;initialized&nbsp;for&nbsp;testing</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>driver</strong></dt>
+<dd><tt>Returns&nbsp;the&nbsp;driver&nbsp;being&nbsp;used&nbsp;by&nbsp;this&nbsp;manager.</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="stevedore.extension.html#ExtensionManager">stevedore.extension.ExtensionManager</a>:<br>
+<dl><dt><a name="DriverManager-__contains__"><strong>__contains__</strong></a>(self, name)</dt><dd><tt>Return&nbsp;true&nbsp;if&nbsp;name&nbsp;is&nbsp;in&nbsp;list&nbsp;of&nbsp;enabled&nbsp;extensions.</tt></dd></dl>
+
+<dl><dt><a name="DriverManager-__getitem__"><strong>__getitem__</strong></a>(self, name)</dt><dd><tt>Return&nbsp;the&nbsp;named&nbsp;extension.<br>
+&nbsp;<br>
+Accessing&nbsp;an&nbsp;<a href="#ExtensionManager">ExtensionManager</a>&nbsp;as&nbsp;a&nbsp;dictionary&nbsp;(``em['name']``)<br>
+produces&nbsp;the&nbsp;:class:`Extension`&nbsp;instance&nbsp;with&nbsp;the<br>
+specified&nbsp;name.</tt></dd></dl>
+
+<dl><dt><a name="DriverManager-__iter__"><strong>__iter__</strong></a>(self)</dt><dd><tt>Produce&nbsp;iterator&nbsp;for&nbsp;the&nbsp;manager.<br>
+&nbsp;<br>
+Iterating&nbsp;over&nbsp;an&nbsp;<a href="#ExtensionManager">ExtensionManager</a>&nbsp;produces&nbsp;the&nbsp;:class:`Extension`<br>
+instances&nbsp;in&nbsp;the&nbsp;order&nbsp;they&nbsp;would&nbsp;be&nbsp;invoked.</tt></dd></dl>
+
+<dl><dt><a name="DriverManager-map"><strong>map</strong></a>(self, func, *args, **kwds)</dt><dd><tt>Iterate&nbsp;over&nbsp;the&nbsp;extensions&nbsp;invoking&nbsp;func()&nbsp;for&nbsp;each.<br>
+&nbsp;<br>
+The&nbsp;signature&nbsp;for&nbsp;func()&nbsp;should&nbsp;be::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;def&nbsp;func(ext,&nbsp;*args,&nbsp;**kwds):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pass<br>
+&nbsp;<br>
+The&nbsp;first&nbsp;argument&nbsp;to&nbsp;func(),&nbsp;'ext',&nbsp;is&nbsp;the<br>
+:class:`~stevedore.extension.Extension`&nbsp;instance.<br>
+&nbsp;<br>
+Exceptions&nbsp;raised&nbsp;from&nbsp;within&nbsp;func()&nbsp;are&nbsp;propagated&nbsp;up&nbsp;and<br>
+processing&nbsp;stopped&nbsp;if&nbsp;self.<strong>propagate_map_exceptions</strong>&nbsp;is&nbsp;True,<br>
+otherwise&nbsp;they&nbsp;are&nbsp;logged&nbsp;and&nbsp;ignored.<br>
+&nbsp;<br>
+:param&nbsp;func:&nbsp;Callable&nbsp;to&nbsp;invoke&nbsp;for&nbsp;each&nbsp;extension.<br>
+:param&nbsp;args:&nbsp;Variable&nbsp;arguments&nbsp;to&nbsp;pass&nbsp;to&nbsp;func()<br>
+:param&nbsp;kwds:&nbsp;Keyword&nbsp;arguments&nbsp;to&nbsp;pass&nbsp;to&nbsp;func()<br>
+:returns:&nbsp;List&nbsp;of&nbsp;values&nbsp;returned&nbsp;from&nbsp;func()</tt></dd></dl>
+
+<dl><dt><a name="DriverManager-map_method"><strong>map_method</strong></a>(self, method_name, *args, **kwds)</dt><dd><tt>Iterate&nbsp;over&nbsp;the&nbsp;extensions&nbsp;invoking&nbsp;a&nbsp;method&nbsp;by&nbsp;name.<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;equivalent&nbsp;of&nbsp;using&nbsp;:meth:`map`&nbsp;with&nbsp;func&nbsp;set&nbsp;to<br>
+`lambda&nbsp;x:&nbsp;x.obj.method_name()`<br>
+while&nbsp;being&nbsp;more&nbsp;convenient.<br>
+&nbsp;<br>
+Exceptions&nbsp;raised&nbsp;from&nbsp;within&nbsp;the&nbsp;called&nbsp;method&nbsp;are&nbsp;propagated&nbsp;up<br>
+and&nbsp;processing&nbsp;stopped&nbsp;if&nbsp;self.<strong>propagate_map_exceptions</strong>&nbsp;is&nbsp;True,<br>
+otherwise&nbsp;they&nbsp;are&nbsp;logged&nbsp;and&nbsp;ignored.<br>
+&nbsp;<br>
+..&nbsp;versionadded::&nbsp;0.12<br>
+&nbsp;<br>
+:param&nbsp;method_name:&nbsp;The&nbsp;extension&nbsp;method&nbsp;name<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;call&nbsp;for&nbsp;each&nbsp;extension.<br>
+:param&nbsp;args:&nbsp;Variable&nbsp;arguments&nbsp;to&nbsp;pass&nbsp;to&nbsp;method<br>
+:param&nbsp;kwds:&nbsp;Keyword&nbsp;arguments&nbsp;to&nbsp;pass&nbsp;to&nbsp;method<br>
+:returns:&nbsp;List&nbsp;of&nbsp;values&nbsp;returned&nbsp;from&nbsp;methods</tt></dd></dl>
+
+<dl><dt><a name="DriverManager-names"><strong>names</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;names&nbsp;of&nbsp;the&nbsp;discovered&nbsp;extensions</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="stevedore.extension.html#ExtensionManager">stevedore.extension.ExtensionManager</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="stevedore.extension.html#ExtensionManager">stevedore.extension.ExtensionManager</a>:<br>
+<dl><dt><strong>ENTRY_POINT_CACHE</strong> = {}</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="EnabledExtensionManager">class <strong>EnabledExtensionManager</strong></a>(<a href="stevedore.extension.html#ExtensionManager">stevedore.extension.ExtensionManager</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Loads&nbsp;only&nbsp;plugins&nbsp;that&nbsp;pass&nbsp;a&nbsp;check&nbsp;function.<br>
+&nbsp;<br>
+The&nbsp;check_func&nbsp;argument&nbsp;should&nbsp;return&nbsp;a&nbsp;boolean,&nbsp;with&nbsp;``True``<br>
+indicating&nbsp;that&nbsp;the&nbsp;extension&nbsp;should&nbsp;be&nbsp;loaded&nbsp;and&nbsp;made&nbsp;available<br>
+and&nbsp;``False``&nbsp;indicating&nbsp;that&nbsp;the&nbsp;extension&nbsp;should&nbsp;be&nbsp;ignored.<br>
+&nbsp;<br>
+:param&nbsp;namespace:&nbsp;The&nbsp;namespace&nbsp;for&nbsp;the&nbsp;entry&nbsp;points.<br>
+:type&nbsp;namespace:&nbsp;str<br>
+:param&nbsp;check_func:&nbsp;Function&nbsp;to&nbsp;determine&nbsp;which&nbsp;extensions&nbsp;to&nbsp;load.<br>
+:type&nbsp;check_func:&nbsp;callable,&nbsp;taking&nbsp;an&nbsp;:class:`Extension`<br>
+&nbsp;&nbsp;&nbsp;&nbsp;instance&nbsp;as&nbsp;argument<br>
+:param&nbsp;invoke_on_load:&nbsp;Boolean&nbsp;controlling&nbsp;whether&nbsp;to&nbsp;invoke&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;returned&nbsp;by&nbsp;the&nbsp;entry&nbsp;point&nbsp;after&nbsp;the&nbsp;driver&nbsp;is&nbsp;loaded.<br>
+:type&nbsp;invoke_on_load:&nbsp;bool<br>
+:param&nbsp;invoke_args:&nbsp;Positional&nbsp;arguments&nbsp;to&nbsp;pass&nbsp;when&nbsp;invoking<br>
+&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;returned&nbsp;by&nbsp;the&nbsp;entry&nbsp;point.&nbsp;Only&nbsp;used&nbsp;if&nbsp;invoke_on_load<br>
+&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;True.<br>
+:type&nbsp;invoke_args:&nbsp;tuple<br>
+:param&nbsp;invoke_kwds:&nbsp;Named&nbsp;arguments&nbsp;to&nbsp;pass&nbsp;when&nbsp;invoking<br>
+&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;returned&nbsp;by&nbsp;the&nbsp;entry&nbsp;point.&nbsp;Only&nbsp;used&nbsp;if&nbsp;invoke_on_load<br>
+&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;True.<br>
+:type&nbsp;invoke_kwds:&nbsp;dict<br>
+:param&nbsp;propagate_map_exceptions:&nbsp;Boolean&nbsp;controlling&nbsp;whether&nbsp;exceptions<br>
+&nbsp;&nbsp;&nbsp;&nbsp;are&nbsp;propagated&nbsp;up&nbsp;through&nbsp;the&nbsp;map&nbsp;call&nbsp;or&nbsp;whether&nbsp;they&nbsp;are&nbsp;logged&nbsp;and<br>
+&nbsp;&nbsp;&nbsp;&nbsp;then&nbsp;ignored<br>
+:type&nbsp;propagate_map_exceptions:&nbsp;bool<br>
+:param&nbsp;on_load_failure_callback:&nbsp;Callback&nbsp;function&nbsp;that&nbsp;will&nbsp;be&nbsp;called&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;entrypoint&nbsp;can&nbsp;not&nbsp;be&nbsp;loaded.&nbsp;The&nbsp;arguments&nbsp;that&nbsp;will&nbsp;be&nbsp;provided<br>
+&nbsp;&nbsp;&nbsp;&nbsp;when&nbsp;this&nbsp;is&nbsp;called&nbsp;(when&nbsp;an&nbsp;entrypoint&nbsp;fails&nbsp;to&nbsp;load)&nbsp;are<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(manager,&nbsp;entrypoint,&nbsp;exception)<br>
+:type&nbsp;on_load_failure_callback:&nbsp;function<br>
+:param&nbsp;verify_requirements:&nbsp;Use&nbsp;setuptools&nbsp;to&nbsp;enforce&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dependencies&nbsp;of&nbsp;the&nbsp;plugin(s)&nbsp;being&nbsp;loaded.&nbsp;Defaults&nbsp;to&nbsp;False.<br>
+:type&nbsp;verify_requirements:&nbsp;bool<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="stevedore.enabled.html#EnabledExtensionManager">EnabledExtensionManager</a></dd>
+<dd><a href="stevedore.extension.html#ExtensionManager">stevedore.extension.ExtensionManager</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="EnabledExtensionManager-__init__"><strong>__init__</strong></a>(self, namespace, check_func, invoke_on_load<font color="#909090">=False</font>, invoke_args<font color="#909090">=()</font>, invoke_kwds<font color="#909090">={}</font>, propagate_map_exceptions<font color="#909090">=False</font>, on_load_failure_callback<font color="#909090">=None</font>, verify_requirements<font color="#909090">=False</font>)</dt></dl>
+
+<hr>
+Methods inherited from <a href="stevedore.extension.html#ExtensionManager">stevedore.extension.ExtensionManager</a>:<br>
+<dl><dt><a name="EnabledExtensionManager-__contains__"><strong>__contains__</strong></a>(self, name)</dt><dd><tt>Return&nbsp;true&nbsp;if&nbsp;name&nbsp;is&nbsp;in&nbsp;list&nbsp;of&nbsp;enabled&nbsp;extensions.</tt></dd></dl>
+
+<dl><dt><a name="EnabledExtensionManager-__getitem__"><strong>__getitem__</strong></a>(self, name)</dt><dd><tt>Return&nbsp;the&nbsp;named&nbsp;extension.<br>
+&nbsp;<br>
+Accessing&nbsp;an&nbsp;<a href="#ExtensionManager">ExtensionManager</a>&nbsp;as&nbsp;a&nbsp;dictionary&nbsp;(``em['name']``)<br>
+produces&nbsp;the&nbsp;:class:`Extension`&nbsp;instance&nbsp;with&nbsp;the<br>
+specified&nbsp;name.</tt></dd></dl>
+
+<dl><dt><a name="EnabledExtensionManager-__iter__"><strong>__iter__</strong></a>(self)</dt><dd><tt>Produce&nbsp;iterator&nbsp;for&nbsp;the&nbsp;manager.<br>
+&nbsp;<br>
+Iterating&nbsp;over&nbsp;an&nbsp;<a href="#ExtensionManager">ExtensionManager</a>&nbsp;produces&nbsp;the&nbsp;:class:`Extension`<br>
+instances&nbsp;in&nbsp;the&nbsp;order&nbsp;they&nbsp;would&nbsp;be&nbsp;invoked.</tt></dd></dl>
+
+<dl><dt><a name="EnabledExtensionManager-map"><strong>map</strong></a>(self, func, *args, **kwds)</dt><dd><tt>Iterate&nbsp;over&nbsp;the&nbsp;extensions&nbsp;invoking&nbsp;func()&nbsp;for&nbsp;each.<br>
+&nbsp;<br>
+The&nbsp;signature&nbsp;for&nbsp;func()&nbsp;should&nbsp;be::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;def&nbsp;func(ext,&nbsp;*args,&nbsp;**kwds):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pass<br>
+&nbsp;<br>
+The&nbsp;first&nbsp;argument&nbsp;to&nbsp;func(),&nbsp;'ext',&nbsp;is&nbsp;the<br>
+:class:`~stevedore.extension.Extension`&nbsp;instance.<br>
+&nbsp;<br>
+Exceptions&nbsp;raised&nbsp;from&nbsp;within&nbsp;func()&nbsp;are&nbsp;propagated&nbsp;up&nbsp;and<br>
+processing&nbsp;stopped&nbsp;if&nbsp;self.<strong>propagate_map_exceptions</strong>&nbsp;is&nbsp;True,<br>
+otherwise&nbsp;they&nbsp;are&nbsp;logged&nbsp;and&nbsp;ignored.<br>
+&nbsp;<br>
+:param&nbsp;func:&nbsp;Callable&nbsp;to&nbsp;invoke&nbsp;for&nbsp;each&nbsp;extension.<br>
+:param&nbsp;args:&nbsp;Variable&nbsp;arguments&nbsp;to&nbsp;pass&nbsp;to&nbsp;func()<br>
+:param&nbsp;kwds:&nbsp;Keyword&nbsp;arguments&nbsp;to&nbsp;pass&nbsp;to&nbsp;func()<br>
+:returns:&nbsp;List&nbsp;of&nbsp;values&nbsp;returned&nbsp;from&nbsp;func()</tt></dd></dl>
+
+<dl><dt><a name="EnabledExtensionManager-map_method"><strong>map_method</strong></a>(self, method_name, *args, **kwds)</dt><dd><tt>Iterate&nbsp;over&nbsp;the&nbsp;extensions&nbsp;invoking&nbsp;a&nbsp;method&nbsp;by&nbsp;name.<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;equivalent&nbsp;of&nbsp;using&nbsp;:meth:`map`&nbsp;with&nbsp;func&nbsp;set&nbsp;to<br>
+`lambda&nbsp;x:&nbsp;x.obj.method_name()`<br>
+while&nbsp;being&nbsp;more&nbsp;convenient.<br>
+&nbsp;<br>
+Exceptions&nbsp;raised&nbsp;from&nbsp;within&nbsp;the&nbsp;called&nbsp;method&nbsp;are&nbsp;propagated&nbsp;up<br>
+and&nbsp;processing&nbsp;stopped&nbsp;if&nbsp;self.<strong>propagate_map_exceptions</strong>&nbsp;is&nbsp;True,<br>
+otherwise&nbsp;they&nbsp;are&nbsp;logged&nbsp;and&nbsp;ignored.<br>
+&nbsp;<br>
+..&nbsp;versionadded::&nbsp;0.12<br>
+&nbsp;<br>
+:param&nbsp;method_name:&nbsp;The&nbsp;extension&nbsp;method&nbsp;name<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;call&nbsp;for&nbsp;each&nbsp;extension.<br>
+:param&nbsp;args:&nbsp;Variable&nbsp;arguments&nbsp;to&nbsp;pass&nbsp;to&nbsp;method<br>
+:param&nbsp;kwds:&nbsp;Keyword&nbsp;arguments&nbsp;to&nbsp;pass&nbsp;to&nbsp;method<br>
+:returns:&nbsp;List&nbsp;of&nbsp;values&nbsp;returned&nbsp;from&nbsp;methods</tt></dd></dl>
+
+<dl><dt><a name="EnabledExtensionManager-names"><strong>names</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;names&nbsp;of&nbsp;the&nbsp;discovered&nbsp;extensions</tt></dd></dl>
+
+<hr>
+Class methods inherited from <a href="stevedore.extension.html#ExtensionManager">stevedore.extension.ExtensionManager</a>:<br>
+<dl><dt><a name="EnabledExtensionManager-make_test_instance"><strong>make_test_instance</strong></a>(cls, extensions, namespace<font color="#909090">='TESTING'</font>, propagate_map_exceptions<font color="#909090">=False</font>, on_load_failure_callback<font color="#909090">=None</font>, verify_requirements<font color="#909090">=False</font>)<font color="#909090"><font face="helvetica, arial"> from <a href="__builtin__.html#type">__builtin__.type</a></font></font></dt><dd><tt>Construct&nbsp;a&nbsp;test&nbsp;<a href="#ExtensionManager">ExtensionManager</a><br>
+&nbsp;<br>
+Test&nbsp;instances&nbsp;are&nbsp;passed&nbsp;a&nbsp;list&nbsp;of&nbsp;extensions&nbsp;to&nbsp;work&nbsp;from&nbsp;rather<br>
+than&nbsp;loading&nbsp;them&nbsp;from&nbsp;entry&nbsp;points.<br>
+&nbsp;<br>
+:param&nbsp;extensions:&nbsp;Pre-configured&nbsp;Extension&nbsp;instances&nbsp;to&nbsp;use<br>
+:type&nbsp;extensions:&nbsp;list&nbsp;of&nbsp;:class:`~stevedore.extension.Extension`<br>
+:param&nbsp;namespace:&nbsp;The&nbsp;namespace&nbsp;for&nbsp;the&nbsp;manager;&nbsp;used&nbsp;only&nbsp;for<br>
+&nbsp;&nbsp;&nbsp;&nbsp;identification&nbsp;since&nbsp;the&nbsp;extensions&nbsp;are&nbsp;passed&nbsp;in.<br>
+:type&nbsp;namespace:&nbsp;str<br>
+:param&nbsp;propagate_map_exceptions:&nbsp;When&nbsp;calling&nbsp;map,&nbsp;controls&nbsp;whether<br>
+&nbsp;&nbsp;&nbsp;&nbsp;exceptions&nbsp;are&nbsp;propagated&nbsp;up&nbsp;through&nbsp;the&nbsp;map&nbsp;call&nbsp;or&nbsp;whether&nbsp;they<br>
+&nbsp;&nbsp;&nbsp;&nbsp;are&nbsp;logged&nbsp;and&nbsp;then&nbsp;ignored<br>
+:type&nbsp;propagate_map_exceptions:&nbsp;bool<br>
+:param&nbsp;on_load_failure_callback:&nbsp;Callback&nbsp;function&nbsp;that&nbsp;will<br>
+&nbsp;&nbsp;&nbsp;&nbsp;be&nbsp;called&nbsp;when&nbsp;a&nbsp;entrypoint&nbsp;can&nbsp;not&nbsp;be&nbsp;loaded.&nbsp;The<br>
+&nbsp;&nbsp;&nbsp;&nbsp;arguments&nbsp;that&nbsp;will&nbsp;be&nbsp;provided&nbsp;when&nbsp;this&nbsp;is&nbsp;called&nbsp;(when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;an&nbsp;entrypoint&nbsp;fails&nbsp;to&nbsp;load)&nbsp;are&nbsp;(manager,&nbsp;entrypoint,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;exception)<br>
+:type&nbsp;on_load_failure_callback:&nbsp;function<br>
+:param&nbsp;verify_requirements:&nbsp;Use&nbsp;setuptools&nbsp;to&nbsp;enforce&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dependencies&nbsp;of&nbsp;the&nbsp;plugin(s)&nbsp;being&nbsp;loaded.&nbsp;Defaults&nbsp;to&nbsp;False.<br>
+:type&nbsp;verify_requirements:&nbsp;bool<br>
+:return:&nbsp;The&nbsp;manager&nbsp;instance,&nbsp;initialized&nbsp;for&nbsp;testing</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="stevedore.extension.html#ExtensionManager">stevedore.extension.ExtensionManager</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="stevedore.extension.html#ExtensionManager">stevedore.extension.ExtensionManager</a>:<br>
+<dl><dt><strong>ENTRY_POINT_CACHE</strong> = {}</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ExtensionManager">class <strong>ExtensionManager</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Base&nbsp;class&nbsp;for&nbsp;all&nbsp;of&nbsp;the&nbsp;other&nbsp;managers.<br>
+&nbsp;<br>
+:param&nbsp;namespace:&nbsp;The&nbsp;namespace&nbsp;for&nbsp;the&nbsp;entry&nbsp;points.<br>
+:type&nbsp;namespace:&nbsp;str<br>
+:param&nbsp;invoke_on_load:&nbsp;Boolean&nbsp;controlling&nbsp;whether&nbsp;to&nbsp;invoke&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;returned&nbsp;by&nbsp;the&nbsp;entry&nbsp;point&nbsp;after&nbsp;the&nbsp;driver&nbsp;is&nbsp;loaded.<br>
+:type&nbsp;invoke_on_load:&nbsp;bool<br>
+:param&nbsp;invoke_args:&nbsp;Positional&nbsp;arguments&nbsp;to&nbsp;pass&nbsp;when&nbsp;invoking<br>
+&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;returned&nbsp;by&nbsp;the&nbsp;entry&nbsp;point.&nbsp;Only&nbsp;used&nbsp;if&nbsp;invoke_on_load<br>
+&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;True.<br>
+:type&nbsp;invoke_args:&nbsp;tuple<br>
+:param&nbsp;invoke_kwds:&nbsp;Named&nbsp;arguments&nbsp;to&nbsp;pass&nbsp;when&nbsp;invoking<br>
+&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;returned&nbsp;by&nbsp;the&nbsp;entry&nbsp;point.&nbsp;Only&nbsp;used&nbsp;if&nbsp;invoke_on_load<br>
+&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;True.<br>
+:type&nbsp;invoke_kwds:&nbsp;dict<br>
+:param&nbsp;propagate_map_exceptions:&nbsp;Boolean&nbsp;controlling&nbsp;whether&nbsp;exceptions<br>
+&nbsp;&nbsp;&nbsp;&nbsp;are&nbsp;propagated&nbsp;up&nbsp;through&nbsp;the&nbsp;map&nbsp;call&nbsp;or&nbsp;whether&nbsp;they&nbsp;are&nbsp;logged&nbsp;and<br>
+&nbsp;&nbsp;&nbsp;&nbsp;then&nbsp;ignored<br>
+:type&nbsp;propagate_map_exceptions:&nbsp;bool<br>
+:param&nbsp;on_load_failure_callback:&nbsp;Callback&nbsp;function&nbsp;that&nbsp;will&nbsp;be&nbsp;called&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;entrypoint&nbsp;can&nbsp;not&nbsp;be&nbsp;loaded.&nbsp;The&nbsp;arguments&nbsp;that&nbsp;will&nbsp;be&nbsp;provided<br>
+&nbsp;&nbsp;&nbsp;&nbsp;when&nbsp;this&nbsp;is&nbsp;called&nbsp;(when&nbsp;an&nbsp;entrypoint&nbsp;fails&nbsp;to&nbsp;load)&nbsp;are<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(manager,&nbsp;entrypoint,&nbsp;exception)<br>
+:type&nbsp;on_load_failure_callback:&nbsp;function<br>
+:param&nbsp;verify_requirements:&nbsp;Use&nbsp;setuptools&nbsp;to&nbsp;enforce&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dependencies&nbsp;of&nbsp;the&nbsp;plugin(s)&nbsp;being&nbsp;loaded.&nbsp;Defaults&nbsp;to&nbsp;False.<br>
+:type&nbsp;verify_requirements:&nbsp;bool<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="ExtensionManager-__contains__"><strong>__contains__</strong></a>(self, name)</dt><dd><tt>Return&nbsp;true&nbsp;if&nbsp;name&nbsp;is&nbsp;in&nbsp;list&nbsp;of&nbsp;enabled&nbsp;extensions.</tt></dd></dl>
+
+<dl><dt><a name="ExtensionManager-__getitem__"><strong>__getitem__</strong></a>(self, name)</dt><dd><tt>Return&nbsp;the&nbsp;named&nbsp;extension.<br>
+&nbsp;<br>
+Accessing&nbsp;an&nbsp;<a href="#ExtensionManager">ExtensionManager</a>&nbsp;as&nbsp;a&nbsp;dictionary&nbsp;(``em['name']``)<br>
+produces&nbsp;the&nbsp;:class:`Extension`&nbsp;instance&nbsp;with&nbsp;the<br>
+specified&nbsp;name.</tt></dd></dl>
+
+<dl><dt><a name="ExtensionManager-__init__"><strong>__init__</strong></a>(self, namespace, invoke_on_load<font color="#909090">=False</font>, invoke_args<font color="#909090">=()</font>, invoke_kwds<font color="#909090">={}</font>, propagate_map_exceptions<font color="#909090">=False</font>, on_load_failure_callback<font color="#909090">=None</font>, verify_requirements<font color="#909090">=False</font>)</dt></dl>
+
+<dl><dt><a name="ExtensionManager-__iter__"><strong>__iter__</strong></a>(self)</dt><dd><tt>Produce&nbsp;iterator&nbsp;for&nbsp;the&nbsp;manager.<br>
+&nbsp;<br>
+Iterating&nbsp;over&nbsp;an&nbsp;<a href="#ExtensionManager">ExtensionManager</a>&nbsp;produces&nbsp;the&nbsp;:class:`Extension`<br>
+instances&nbsp;in&nbsp;the&nbsp;order&nbsp;they&nbsp;would&nbsp;be&nbsp;invoked.</tt></dd></dl>
+
+<dl><dt><a name="ExtensionManager-map"><strong>map</strong></a>(self, func, *args, **kwds)</dt><dd><tt>Iterate&nbsp;over&nbsp;the&nbsp;extensions&nbsp;invoking&nbsp;func()&nbsp;for&nbsp;each.<br>
+&nbsp;<br>
+The&nbsp;signature&nbsp;for&nbsp;func()&nbsp;should&nbsp;be::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;def&nbsp;func(ext,&nbsp;*args,&nbsp;**kwds):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pass<br>
+&nbsp;<br>
+The&nbsp;first&nbsp;argument&nbsp;to&nbsp;func(),&nbsp;'ext',&nbsp;is&nbsp;the<br>
+:class:`~stevedore.extension.Extension`&nbsp;instance.<br>
+&nbsp;<br>
+Exceptions&nbsp;raised&nbsp;from&nbsp;within&nbsp;func()&nbsp;are&nbsp;propagated&nbsp;up&nbsp;and<br>
+processing&nbsp;stopped&nbsp;if&nbsp;self.<strong>propagate_map_exceptions</strong>&nbsp;is&nbsp;True,<br>
+otherwise&nbsp;they&nbsp;are&nbsp;logged&nbsp;and&nbsp;ignored.<br>
+&nbsp;<br>
+:param&nbsp;func:&nbsp;Callable&nbsp;to&nbsp;invoke&nbsp;for&nbsp;each&nbsp;extension.<br>
+:param&nbsp;args:&nbsp;Variable&nbsp;arguments&nbsp;to&nbsp;pass&nbsp;to&nbsp;func()<br>
+:param&nbsp;kwds:&nbsp;Keyword&nbsp;arguments&nbsp;to&nbsp;pass&nbsp;to&nbsp;func()<br>
+:returns:&nbsp;List&nbsp;of&nbsp;values&nbsp;returned&nbsp;from&nbsp;func()</tt></dd></dl>
+
+<dl><dt><a name="ExtensionManager-map_method"><strong>map_method</strong></a>(self, method_name, *args, **kwds)</dt><dd><tt>Iterate&nbsp;over&nbsp;the&nbsp;extensions&nbsp;invoking&nbsp;a&nbsp;method&nbsp;by&nbsp;name.<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;equivalent&nbsp;of&nbsp;using&nbsp;:meth:`map`&nbsp;with&nbsp;func&nbsp;set&nbsp;to<br>
+`lambda&nbsp;x:&nbsp;x.obj.method_name()`<br>
+while&nbsp;being&nbsp;more&nbsp;convenient.<br>
+&nbsp;<br>
+Exceptions&nbsp;raised&nbsp;from&nbsp;within&nbsp;the&nbsp;called&nbsp;method&nbsp;are&nbsp;propagated&nbsp;up<br>
+and&nbsp;processing&nbsp;stopped&nbsp;if&nbsp;self.<strong>propagate_map_exceptions</strong>&nbsp;is&nbsp;True,<br>
+otherwise&nbsp;they&nbsp;are&nbsp;logged&nbsp;and&nbsp;ignored.<br>
+&nbsp;<br>
+..&nbsp;versionadded::&nbsp;0.12<br>
+&nbsp;<br>
+:param&nbsp;method_name:&nbsp;The&nbsp;extension&nbsp;method&nbsp;name<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;call&nbsp;for&nbsp;each&nbsp;extension.<br>
+:param&nbsp;args:&nbsp;Variable&nbsp;arguments&nbsp;to&nbsp;pass&nbsp;to&nbsp;method<br>
+:param&nbsp;kwds:&nbsp;Keyword&nbsp;arguments&nbsp;to&nbsp;pass&nbsp;to&nbsp;method<br>
+:returns:&nbsp;List&nbsp;of&nbsp;values&nbsp;returned&nbsp;from&nbsp;methods</tt></dd></dl>
+
+<dl><dt><a name="ExtensionManager-names"><strong>names</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;names&nbsp;of&nbsp;the&nbsp;discovered&nbsp;extensions</tt></dd></dl>
+
+<hr>
+Class methods defined here:<br>
+<dl><dt><a name="ExtensionManager-make_test_instance"><strong>make_test_instance</strong></a>(cls, extensions, namespace<font color="#909090">='TESTING'</font>, propagate_map_exceptions<font color="#909090">=False</font>, on_load_failure_callback<font color="#909090">=None</font>, verify_requirements<font color="#909090">=False</font>)<font color="#909090"><font face="helvetica, arial"> from <a href="__builtin__.html#type">__builtin__.type</a></font></font></dt><dd><tt>Construct&nbsp;a&nbsp;test&nbsp;<a href="#ExtensionManager">ExtensionManager</a><br>
+&nbsp;<br>
+Test&nbsp;instances&nbsp;are&nbsp;passed&nbsp;a&nbsp;list&nbsp;of&nbsp;extensions&nbsp;to&nbsp;work&nbsp;from&nbsp;rather<br>
+than&nbsp;loading&nbsp;them&nbsp;from&nbsp;entry&nbsp;points.<br>
+&nbsp;<br>
+:param&nbsp;extensions:&nbsp;Pre-configured&nbsp;Extension&nbsp;instances&nbsp;to&nbsp;use<br>
+:type&nbsp;extensions:&nbsp;list&nbsp;of&nbsp;:class:`~stevedore.extension.Extension`<br>
+:param&nbsp;namespace:&nbsp;The&nbsp;namespace&nbsp;for&nbsp;the&nbsp;manager;&nbsp;used&nbsp;only&nbsp;for<br>
+&nbsp;&nbsp;&nbsp;&nbsp;identification&nbsp;since&nbsp;the&nbsp;extensions&nbsp;are&nbsp;passed&nbsp;in.<br>
+:type&nbsp;namespace:&nbsp;str<br>
+:param&nbsp;propagate_map_exceptions:&nbsp;When&nbsp;calling&nbsp;map,&nbsp;controls&nbsp;whether<br>
+&nbsp;&nbsp;&nbsp;&nbsp;exceptions&nbsp;are&nbsp;propagated&nbsp;up&nbsp;through&nbsp;the&nbsp;map&nbsp;call&nbsp;or&nbsp;whether&nbsp;they<br>
+&nbsp;&nbsp;&nbsp;&nbsp;are&nbsp;logged&nbsp;and&nbsp;then&nbsp;ignored<br>
+:type&nbsp;propagate_map_exceptions:&nbsp;bool<br>
+:param&nbsp;on_load_failure_callback:&nbsp;Callback&nbsp;function&nbsp;that&nbsp;will<br>
+&nbsp;&nbsp;&nbsp;&nbsp;be&nbsp;called&nbsp;when&nbsp;a&nbsp;entrypoint&nbsp;can&nbsp;not&nbsp;be&nbsp;loaded.&nbsp;The<br>
+&nbsp;&nbsp;&nbsp;&nbsp;arguments&nbsp;that&nbsp;will&nbsp;be&nbsp;provided&nbsp;when&nbsp;this&nbsp;is&nbsp;called&nbsp;(when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;an&nbsp;entrypoint&nbsp;fails&nbsp;to&nbsp;load)&nbsp;are&nbsp;(manager,&nbsp;entrypoint,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;exception)<br>
+:type&nbsp;on_load_failure_callback:&nbsp;function<br>
+:param&nbsp;verify_requirements:&nbsp;Use&nbsp;setuptools&nbsp;to&nbsp;enforce&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dependencies&nbsp;of&nbsp;the&nbsp;plugin(s)&nbsp;being&nbsp;loaded.&nbsp;Defaults&nbsp;to&nbsp;False.<br>
+:type&nbsp;verify_requirements:&nbsp;bool<br>
+:return:&nbsp;The&nbsp;manager&nbsp;instance,&nbsp;initialized&nbsp;for&nbsp;testing</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>ENTRY_POINT_CACHE</strong> = {}</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="HookManager">class <strong>HookManager</strong></a>(<a href="stevedore.named.html#NamedExtensionManager">stevedore.named.NamedExtensionManager</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Coordinate&nbsp;execution&nbsp;of&nbsp;multiple&nbsp;extensions&nbsp;using&nbsp;a&nbsp;common&nbsp;name.<br>
+&nbsp;<br>
+:param&nbsp;namespace:&nbsp;The&nbsp;namespace&nbsp;for&nbsp;the&nbsp;entry&nbsp;points.<br>
+:type&nbsp;namespace:&nbsp;str<br>
+:param&nbsp;name:&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;hooks&nbsp;to&nbsp;load.<br>
+:type&nbsp;name:&nbsp;str<br>
+:param&nbsp;invoke_on_load:&nbsp;Boolean&nbsp;controlling&nbsp;whether&nbsp;to&nbsp;invoke&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;returned&nbsp;by&nbsp;the&nbsp;entry&nbsp;point&nbsp;after&nbsp;the&nbsp;driver&nbsp;is&nbsp;loaded.<br>
+:type&nbsp;invoke_on_load:&nbsp;bool<br>
+:param&nbsp;invoke_args:&nbsp;Positional&nbsp;arguments&nbsp;to&nbsp;pass&nbsp;when&nbsp;invoking<br>
+&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;returned&nbsp;by&nbsp;the&nbsp;entry&nbsp;point.&nbsp;Only&nbsp;used&nbsp;if&nbsp;invoke_on_load<br>
+&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;True.<br>
+:type&nbsp;invoke_args:&nbsp;tuple<br>
+:param&nbsp;invoke_kwds:&nbsp;Named&nbsp;arguments&nbsp;to&nbsp;pass&nbsp;when&nbsp;invoking<br>
+&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;returned&nbsp;by&nbsp;the&nbsp;entry&nbsp;point.&nbsp;Only&nbsp;used&nbsp;if&nbsp;invoke_on_load<br>
+&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;True.<br>
+:type&nbsp;invoke_kwds:&nbsp;dict<br>
+:param&nbsp;on_load_failure_callback:&nbsp;Callback&nbsp;function&nbsp;that&nbsp;will&nbsp;be&nbsp;called&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;entrypoint&nbsp;can&nbsp;not&nbsp;be&nbsp;loaded.&nbsp;The&nbsp;arguments&nbsp;that&nbsp;will&nbsp;be&nbsp;provided<br>
+&nbsp;&nbsp;&nbsp;&nbsp;when&nbsp;this&nbsp;is&nbsp;called&nbsp;(when&nbsp;an&nbsp;entrypoint&nbsp;fails&nbsp;to&nbsp;load)&nbsp;are<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(manager,&nbsp;entrypoint,&nbsp;exception)<br>
+:type&nbsp;on_load_failure_callback:&nbsp;function<br>
+:param&nbsp;verify_requirements:&nbsp;Use&nbsp;setuptools&nbsp;to&nbsp;enforce&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dependencies&nbsp;of&nbsp;the&nbsp;plugin(s)&nbsp;being&nbsp;loaded.&nbsp;Defaults&nbsp;to&nbsp;False.<br>
+:type&nbsp;verify_requirements:&nbsp;bool<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="stevedore.hook.html#HookManager">HookManager</a></dd>
+<dd><a href="stevedore.named.html#NamedExtensionManager">stevedore.named.NamedExtensionManager</a></dd>
+<dd><a href="stevedore.extension.html#ExtensionManager">stevedore.extension.ExtensionManager</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="HookManager-__getitem__"><strong>__getitem__</strong></a>(self, name)</dt><dd><tt>Return&nbsp;the&nbsp;named&nbsp;extensions.<br>
+&nbsp;<br>
+Accessing&nbsp;a&nbsp;<a href="#HookManager">HookManager</a>&nbsp;as&nbsp;a&nbsp;dictionary&nbsp;(``em['name']``)<br>
+produces&nbsp;a&nbsp;list&nbsp;of&nbsp;the&nbsp;:class:`Extension`&nbsp;instance(s)&nbsp;with&nbsp;the<br>
+specified&nbsp;name,&nbsp;in&nbsp;the&nbsp;order&nbsp;they&nbsp;would&nbsp;be&nbsp;invoked&nbsp;by&nbsp;<a href="#HookManager-map">map</a>().</tt></dd></dl>
+
+<dl><dt><a name="HookManager-__init__"><strong>__init__</strong></a>(self, namespace, name, invoke_on_load<font color="#909090">=False</font>, invoke_args<font color="#909090">=()</font>, invoke_kwds<font color="#909090">={}</font>, on_load_failure_callback<font color="#909090">=None</font>, verify_requirements<font color="#909090">=False</font>)</dt></dl>
+
+<hr>
+Class methods inherited from <a href="stevedore.named.html#NamedExtensionManager">stevedore.named.NamedExtensionManager</a>:<br>
+<dl><dt><a name="HookManager-make_test_instance"><strong>make_test_instance</strong></a>(cls, extensions, namespace<font color="#909090">='TESTING'</font>, propagate_map_exceptions<font color="#909090">=False</font>, on_load_failure_callback<font color="#909090">=None</font>, verify_requirements<font color="#909090">=False</font>)<font color="#909090"><font face="helvetica, arial"> from <a href="__builtin__.html#type">__builtin__.type</a></font></font></dt><dd><tt>Construct&nbsp;a&nbsp;test&nbsp;<a href="#NamedExtensionManager">NamedExtensionManager</a><br>
+&nbsp;<br>
+Test&nbsp;instances&nbsp;are&nbsp;passed&nbsp;a&nbsp;list&nbsp;of&nbsp;extensions&nbsp;to&nbsp;use&nbsp;rather&nbsp;than<br>
+loading&nbsp;them&nbsp;from&nbsp;entry&nbsp;points.<br>
+&nbsp;<br>
+:param&nbsp;extensions:&nbsp;Pre-configured&nbsp;Extension&nbsp;instances<br>
+:type&nbsp;extensions:&nbsp;list&nbsp;of&nbsp;:class:`~stevedore.extension.Extension`<br>
+:param&nbsp;namespace:&nbsp;The&nbsp;namespace&nbsp;for&nbsp;the&nbsp;manager;&nbsp;used&nbsp;only&nbsp;for<br>
+&nbsp;&nbsp;&nbsp;&nbsp;identification&nbsp;since&nbsp;the&nbsp;extensions&nbsp;are&nbsp;passed&nbsp;in.<br>
+:type&nbsp;namespace:&nbsp;str<br>
+:param&nbsp;propagate_map_exceptions:&nbsp;Boolean&nbsp;controlling&nbsp;whether&nbsp;exceptions<br>
+&nbsp;&nbsp;&nbsp;&nbsp;are&nbsp;propagated&nbsp;up&nbsp;through&nbsp;the&nbsp;map&nbsp;call&nbsp;or&nbsp;whether&nbsp;they&nbsp;are&nbsp;logged<br>
+&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;then&nbsp;ignored<br>
+:type&nbsp;propagate_map_exceptions:&nbsp;bool<br>
+:param&nbsp;on_load_failure_callback:&nbsp;Callback&nbsp;function&nbsp;that&nbsp;will<br>
+&nbsp;&nbsp;&nbsp;&nbsp;be&nbsp;called&nbsp;when&nbsp;a&nbsp;entrypoint&nbsp;can&nbsp;not&nbsp;be&nbsp;loaded.&nbsp;The<br>
+&nbsp;&nbsp;&nbsp;&nbsp;arguments&nbsp;that&nbsp;will&nbsp;be&nbsp;provided&nbsp;when&nbsp;this&nbsp;is&nbsp;called&nbsp;(when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;an&nbsp;entrypoint&nbsp;fails&nbsp;to&nbsp;load)&nbsp;are&nbsp;(manager,&nbsp;entrypoint,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;exception)<br>
+:type&nbsp;on_load_failure_callback:&nbsp;function<br>
+:param&nbsp;verify_requirements:&nbsp;Use&nbsp;setuptools&nbsp;to&nbsp;enforce&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dependencies&nbsp;of&nbsp;the&nbsp;plugin(s)&nbsp;being&nbsp;loaded.&nbsp;Defaults&nbsp;to&nbsp;False.<br>
+:type&nbsp;verify_requirements:&nbsp;bool<br>
+:return:&nbsp;The&nbsp;manager&nbsp;instance,&nbsp;initialized&nbsp;for&nbsp;testing</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="stevedore.extension.html#ExtensionManager">stevedore.extension.ExtensionManager</a>:<br>
+<dl><dt><a name="HookManager-__contains__"><strong>__contains__</strong></a>(self, name)</dt><dd><tt>Return&nbsp;true&nbsp;if&nbsp;name&nbsp;is&nbsp;in&nbsp;list&nbsp;of&nbsp;enabled&nbsp;extensions.</tt></dd></dl>
+
+<dl><dt><a name="HookManager-__iter__"><strong>__iter__</strong></a>(self)</dt><dd><tt>Produce&nbsp;iterator&nbsp;for&nbsp;the&nbsp;manager.<br>
+&nbsp;<br>
+Iterating&nbsp;over&nbsp;an&nbsp;<a href="#ExtensionManager">ExtensionManager</a>&nbsp;produces&nbsp;the&nbsp;:class:`Extension`<br>
+instances&nbsp;in&nbsp;the&nbsp;order&nbsp;they&nbsp;would&nbsp;be&nbsp;invoked.</tt></dd></dl>
+
+<dl><dt><a name="HookManager-map"><strong>map</strong></a>(self, func, *args, **kwds)</dt><dd><tt>Iterate&nbsp;over&nbsp;the&nbsp;extensions&nbsp;invoking&nbsp;func()&nbsp;for&nbsp;each.<br>
+&nbsp;<br>
+The&nbsp;signature&nbsp;for&nbsp;func()&nbsp;should&nbsp;be::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;def&nbsp;func(ext,&nbsp;*args,&nbsp;**kwds):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pass<br>
+&nbsp;<br>
+The&nbsp;first&nbsp;argument&nbsp;to&nbsp;func(),&nbsp;'ext',&nbsp;is&nbsp;the<br>
+:class:`~stevedore.extension.Extension`&nbsp;instance.<br>
+&nbsp;<br>
+Exceptions&nbsp;raised&nbsp;from&nbsp;within&nbsp;func()&nbsp;are&nbsp;propagated&nbsp;up&nbsp;and<br>
+processing&nbsp;stopped&nbsp;if&nbsp;self.<strong>propagate_map_exceptions</strong>&nbsp;is&nbsp;True,<br>
+otherwise&nbsp;they&nbsp;are&nbsp;logged&nbsp;and&nbsp;ignored.<br>
+&nbsp;<br>
+:param&nbsp;func:&nbsp;Callable&nbsp;to&nbsp;invoke&nbsp;for&nbsp;each&nbsp;extension.<br>
+:param&nbsp;args:&nbsp;Variable&nbsp;arguments&nbsp;to&nbsp;pass&nbsp;to&nbsp;func()<br>
+:param&nbsp;kwds:&nbsp;Keyword&nbsp;arguments&nbsp;to&nbsp;pass&nbsp;to&nbsp;func()<br>
+:returns:&nbsp;List&nbsp;of&nbsp;values&nbsp;returned&nbsp;from&nbsp;func()</tt></dd></dl>
+
+<dl><dt><a name="HookManager-map_method"><strong>map_method</strong></a>(self, method_name, *args, **kwds)</dt><dd><tt>Iterate&nbsp;over&nbsp;the&nbsp;extensions&nbsp;invoking&nbsp;a&nbsp;method&nbsp;by&nbsp;name.<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;equivalent&nbsp;of&nbsp;using&nbsp;:meth:`map`&nbsp;with&nbsp;func&nbsp;set&nbsp;to<br>
+`lambda&nbsp;x:&nbsp;x.obj.method_name()`<br>
+while&nbsp;being&nbsp;more&nbsp;convenient.<br>
+&nbsp;<br>
+Exceptions&nbsp;raised&nbsp;from&nbsp;within&nbsp;the&nbsp;called&nbsp;method&nbsp;are&nbsp;propagated&nbsp;up<br>
+and&nbsp;processing&nbsp;stopped&nbsp;if&nbsp;self.<strong>propagate_map_exceptions</strong>&nbsp;is&nbsp;True,<br>
+otherwise&nbsp;they&nbsp;are&nbsp;logged&nbsp;and&nbsp;ignored.<br>
+&nbsp;<br>
+..&nbsp;versionadded::&nbsp;0.12<br>
+&nbsp;<br>
+:param&nbsp;method_name:&nbsp;The&nbsp;extension&nbsp;method&nbsp;name<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;call&nbsp;for&nbsp;each&nbsp;extension.<br>
+:param&nbsp;args:&nbsp;Variable&nbsp;arguments&nbsp;to&nbsp;pass&nbsp;to&nbsp;method<br>
+:param&nbsp;kwds:&nbsp;Keyword&nbsp;arguments&nbsp;to&nbsp;pass&nbsp;to&nbsp;method<br>
+:returns:&nbsp;List&nbsp;of&nbsp;values&nbsp;returned&nbsp;from&nbsp;methods</tt></dd></dl>
+
+<dl><dt><a name="HookManager-names"><strong>names</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;names&nbsp;of&nbsp;the&nbsp;discovered&nbsp;extensions</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="stevedore.extension.html#ExtensionManager">stevedore.extension.ExtensionManager</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="stevedore.extension.html#ExtensionManager">stevedore.extension.ExtensionManager</a>:<br>
+<dl><dt><strong>ENTRY_POINT_CACHE</strong> = {}</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="NamedExtensionManager">class <strong>NamedExtensionManager</strong></a>(<a href="stevedore.extension.html#ExtensionManager">stevedore.extension.ExtensionManager</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Loads&nbsp;only&nbsp;the&nbsp;named&nbsp;extensions.<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;useful&nbsp;for&nbsp;explicitly&nbsp;enabling&nbsp;extensions&nbsp;in&nbsp;a<br>
+configuration&nbsp;file,&nbsp;for&nbsp;example.<br>
+&nbsp;<br>
+:param&nbsp;namespace:&nbsp;The&nbsp;namespace&nbsp;for&nbsp;the&nbsp;entry&nbsp;points.<br>
+:type&nbsp;namespace:&nbsp;str<br>
+:param&nbsp;names:&nbsp;The&nbsp;names&nbsp;of&nbsp;the&nbsp;extensions&nbsp;to&nbsp;load.<br>
+:type&nbsp;names:&nbsp;list(str)<br>
+:param&nbsp;invoke_on_load:&nbsp;Boolean&nbsp;controlling&nbsp;whether&nbsp;to&nbsp;invoke&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;returned&nbsp;by&nbsp;the&nbsp;entry&nbsp;point&nbsp;after&nbsp;the&nbsp;driver&nbsp;is&nbsp;loaded.<br>
+:type&nbsp;invoke_on_load:&nbsp;bool<br>
+:param&nbsp;invoke_args:&nbsp;Positional&nbsp;arguments&nbsp;to&nbsp;pass&nbsp;when&nbsp;invoking<br>
+&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;returned&nbsp;by&nbsp;the&nbsp;entry&nbsp;point.&nbsp;Only&nbsp;used&nbsp;if&nbsp;invoke_on_load<br>
+&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;True.<br>
+:type&nbsp;invoke_args:&nbsp;tuple<br>
+:param&nbsp;invoke_kwds:&nbsp;Named&nbsp;arguments&nbsp;to&nbsp;pass&nbsp;when&nbsp;invoking<br>
+&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;returned&nbsp;by&nbsp;the&nbsp;entry&nbsp;point.&nbsp;Only&nbsp;used&nbsp;if&nbsp;invoke_on_load<br>
+&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;True.<br>
+:type&nbsp;invoke_kwds:&nbsp;dict<br>
+:param&nbsp;name_order:&nbsp;If&nbsp;true,&nbsp;sort&nbsp;the&nbsp;loaded&nbsp;extensions&nbsp;to&nbsp;match&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;order&nbsp;used&nbsp;in&nbsp;``names``.<br>
+:type&nbsp;name_order:&nbsp;bool<br>
+:param&nbsp;propagate_map_exceptions:&nbsp;Boolean&nbsp;controlling&nbsp;whether&nbsp;exceptions<br>
+&nbsp;&nbsp;&nbsp;&nbsp;are&nbsp;propagated&nbsp;up&nbsp;through&nbsp;the&nbsp;map&nbsp;call&nbsp;or&nbsp;whether&nbsp;they&nbsp;are&nbsp;logged&nbsp;and<br>
+&nbsp;&nbsp;&nbsp;&nbsp;then&nbsp;ignored<br>
+:type&nbsp;propagate_map_exceptions:&nbsp;bool<br>
+:param&nbsp;on_load_failure_callback:&nbsp;Callback&nbsp;function&nbsp;that&nbsp;will&nbsp;be&nbsp;called&nbsp;when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;entrypoint&nbsp;can&nbsp;not&nbsp;be&nbsp;loaded.&nbsp;The&nbsp;arguments&nbsp;that&nbsp;will&nbsp;be&nbsp;provided<br>
+&nbsp;&nbsp;&nbsp;&nbsp;when&nbsp;this&nbsp;is&nbsp;called&nbsp;(when&nbsp;an&nbsp;entrypoint&nbsp;fails&nbsp;to&nbsp;load)&nbsp;are<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(manager,&nbsp;entrypoint,&nbsp;exception)<br>
+:type&nbsp;on_load_failure_callback:&nbsp;function<br>
+:param&nbsp;verify_requirements:&nbsp;Use&nbsp;setuptools&nbsp;to&nbsp;enforce&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dependencies&nbsp;of&nbsp;the&nbsp;plugin(s)&nbsp;being&nbsp;loaded.&nbsp;Defaults&nbsp;to&nbsp;False.<br>
+:type&nbsp;verify_requirements:&nbsp;bool<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="stevedore.named.html#NamedExtensionManager">NamedExtensionManager</a></dd>
+<dd><a href="stevedore.extension.html#ExtensionManager">stevedore.extension.ExtensionManager</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="NamedExtensionManager-__init__"><strong>__init__</strong></a>(self, namespace, names, invoke_on_load<font color="#909090">=False</font>, invoke_args<font color="#909090">=()</font>, invoke_kwds<font color="#909090">={}</font>, name_order<font color="#909090">=False</font>, propagate_map_exceptions<font color="#909090">=False</font>, on_load_failure_callback<font color="#909090">=None</font>, verify_requirements<font color="#909090">=False</font>)</dt></dl>
+
+<hr>
+Class methods defined here:<br>
+<dl><dt><a name="NamedExtensionManager-make_test_instance"><strong>make_test_instance</strong></a>(cls, extensions, namespace<font color="#909090">='TESTING'</font>, propagate_map_exceptions<font color="#909090">=False</font>, on_load_failure_callback<font color="#909090">=None</font>, verify_requirements<font color="#909090">=False</font>)<font color="#909090"><font face="helvetica, arial"> from <a href="__builtin__.html#type">__builtin__.type</a></font></font></dt><dd><tt>Construct&nbsp;a&nbsp;test&nbsp;<a href="#NamedExtensionManager">NamedExtensionManager</a><br>
+&nbsp;<br>
+Test&nbsp;instances&nbsp;are&nbsp;passed&nbsp;a&nbsp;list&nbsp;of&nbsp;extensions&nbsp;to&nbsp;use&nbsp;rather&nbsp;than<br>
+loading&nbsp;them&nbsp;from&nbsp;entry&nbsp;points.<br>
+&nbsp;<br>
+:param&nbsp;extensions:&nbsp;Pre-configured&nbsp;Extension&nbsp;instances<br>
+:type&nbsp;extensions:&nbsp;list&nbsp;of&nbsp;:class:`~stevedore.extension.Extension`<br>
+:param&nbsp;namespace:&nbsp;The&nbsp;namespace&nbsp;for&nbsp;the&nbsp;manager;&nbsp;used&nbsp;only&nbsp;for<br>
+&nbsp;&nbsp;&nbsp;&nbsp;identification&nbsp;since&nbsp;the&nbsp;extensions&nbsp;are&nbsp;passed&nbsp;in.<br>
+:type&nbsp;namespace:&nbsp;str<br>
+:param&nbsp;propagate_map_exceptions:&nbsp;Boolean&nbsp;controlling&nbsp;whether&nbsp;exceptions<br>
+&nbsp;&nbsp;&nbsp;&nbsp;are&nbsp;propagated&nbsp;up&nbsp;through&nbsp;the&nbsp;map&nbsp;call&nbsp;or&nbsp;whether&nbsp;they&nbsp;are&nbsp;logged<br>
+&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;then&nbsp;ignored<br>
+:type&nbsp;propagate_map_exceptions:&nbsp;bool<br>
+:param&nbsp;on_load_failure_callback:&nbsp;Callback&nbsp;function&nbsp;that&nbsp;will<br>
+&nbsp;&nbsp;&nbsp;&nbsp;be&nbsp;called&nbsp;when&nbsp;a&nbsp;entrypoint&nbsp;can&nbsp;not&nbsp;be&nbsp;loaded.&nbsp;The<br>
+&nbsp;&nbsp;&nbsp;&nbsp;arguments&nbsp;that&nbsp;will&nbsp;be&nbsp;provided&nbsp;when&nbsp;this&nbsp;is&nbsp;called&nbsp;(when<br>
+&nbsp;&nbsp;&nbsp;&nbsp;an&nbsp;entrypoint&nbsp;fails&nbsp;to&nbsp;load)&nbsp;are&nbsp;(manager,&nbsp;entrypoint,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;exception)<br>
+:type&nbsp;on_load_failure_callback:&nbsp;function<br>
+:param&nbsp;verify_requirements:&nbsp;Use&nbsp;setuptools&nbsp;to&nbsp;enforce&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dependencies&nbsp;of&nbsp;the&nbsp;plugin(s)&nbsp;being&nbsp;loaded.&nbsp;Defaults&nbsp;to&nbsp;False.<br>
+:type&nbsp;verify_requirements:&nbsp;bool<br>
+:return:&nbsp;The&nbsp;manager&nbsp;instance,&nbsp;initialized&nbsp;for&nbsp;testing</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="stevedore.extension.html#ExtensionManager">stevedore.extension.ExtensionManager</a>:<br>
+<dl><dt><a name="NamedExtensionManager-__contains__"><strong>__contains__</strong></a>(self, name)</dt><dd><tt>Return&nbsp;true&nbsp;if&nbsp;name&nbsp;is&nbsp;in&nbsp;list&nbsp;of&nbsp;enabled&nbsp;extensions.</tt></dd></dl>
+
+<dl><dt><a name="NamedExtensionManager-__getitem__"><strong>__getitem__</strong></a>(self, name)</dt><dd><tt>Return&nbsp;the&nbsp;named&nbsp;extension.<br>
+&nbsp;<br>
+Accessing&nbsp;an&nbsp;<a href="#ExtensionManager">ExtensionManager</a>&nbsp;as&nbsp;a&nbsp;dictionary&nbsp;(``em['name']``)<br>
+produces&nbsp;the&nbsp;:class:`Extension`&nbsp;instance&nbsp;with&nbsp;the<br>
+specified&nbsp;name.</tt></dd></dl>
+
+<dl><dt><a name="NamedExtensionManager-__iter__"><strong>__iter__</strong></a>(self)</dt><dd><tt>Produce&nbsp;iterator&nbsp;for&nbsp;the&nbsp;manager.<br>
+&nbsp;<br>
+Iterating&nbsp;over&nbsp;an&nbsp;<a href="#ExtensionManager">ExtensionManager</a>&nbsp;produces&nbsp;the&nbsp;:class:`Extension`<br>
+instances&nbsp;in&nbsp;the&nbsp;order&nbsp;they&nbsp;would&nbsp;be&nbsp;invoked.</tt></dd></dl>
+
+<dl><dt><a name="NamedExtensionManager-map"><strong>map</strong></a>(self, func, *args, **kwds)</dt><dd><tt>Iterate&nbsp;over&nbsp;the&nbsp;extensions&nbsp;invoking&nbsp;func()&nbsp;for&nbsp;each.<br>
+&nbsp;<br>
+The&nbsp;signature&nbsp;for&nbsp;func()&nbsp;should&nbsp;be::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;def&nbsp;func(ext,&nbsp;*args,&nbsp;**kwds):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pass<br>
+&nbsp;<br>
+The&nbsp;first&nbsp;argument&nbsp;to&nbsp;func(),&nbsp;'ext',&nbsp;is&nbsp;the<br>
+:class:`~stevedore.extension.Extension`&nbsp;instance.<br>
+&nbsp;<br>
+Exceptions&nbsp;raised&nbsp;from&nbsp;within&nbsp;func()&nbsp;are&nbsp;propagated&nbsp;up&nbsp;and<br>
+processing&nbsp;stopped&nbsp;if&nbsp;self.<strong>propagate_map_exceptions</strong>&nbsp;is&nbsp;True,<br>
+otherwise&nbsp;they&nbsp;are&nbsp;logged&nbsp;and&nbsp;ignored.<br>
+&nbsp;<br>
+:param&nbsp;func:&nbsp;Callable&nbsp;to&nbsp;invoke&nbsp;for&nbsp;each&nbsp;extension.<br>
+:param&nbsp;args:&nbsp;Variable&nbsp;arguments&nbsp;to&nbsp;pass&nbsp;to&nbsp;func()<br>
+:param&nbsp;kwds:&nbsp;Keyword&nbsp;arguments&nbsp;to&nbsp;pass&nbsp;to&nbsp;func()<br>
+:returns:&nbsp;List&nbsp;of&nbsp;values&nbsp;returned&nbsp;from&nbsp;func()</tt></dd></dl>
+
+<dl><dt><a name="NamedExtensionManager-map_method"><strong>map_method</strong></a>(self, method_name, *args, **kwds)</dt><dd><tt>Iterate&nbsp;over&nbsp;the&nbsp;extensions&nbsp;invoking&nbsp;a&nbsp;method&nbsp;by&nbsp;name.<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;equivalent&nbsp;of&nbsp;using&nbsp;:meth:`map`&nbsp;with&nbsp;func&nbsp;set&nbsp;to<br>
+`lambda&nbsp;x:&nbsp;x.obj.method_name()`<br>
+while&nbsp;being&nbsp;more&nbsp;convenient.<br>
+&nbsp;<br>
+Exceptions&nbsp;raised&nbsp;from&nbsp;within&nbsp;the&nbsp;called&nbsp;method&nbsp;are&nbsp;propagated&nbsp;up<br>
+and&nbsp;processing&nbsp;stopped&nbsp;if&nbsp;self.<strong>propagate_map_exceptions</strong>&nbsp;is&nbsp;True,<br>
+otherwise&nbsp;they&nbsp;are&nbsp;logged&nbsp;and&nbsp;ignored.<br>
+&nbsp;<br>
+..&nbsp;versionadded::&nbsp;0.12<br>
+&nbsp;<br>
+:param&nbsp;method_name:&nbsp;The&nbsp;extension&nbsp;method&nbsp;name<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;call&nbsp;for&nbsp;each&nbsp;extension.<br>
+:param&nbsp;args:&nbsp;Variable&nbsp;arguments&nbsp;to&nbsp;pass&nbsp;to&nbsp;method<br>
+:param&nbsp;kwds:&nbsp;Keyword&nbsp;arguments&nbsp;to&nbsp;pass&nbsp;to&nbsp;method<br>
+:returns:&nbsp;List&nbsp;of&nbsp;values&nbsp;returned&nbsp;from&nbsp;methods</tt></dd></dl>
+
+<dl><dt><a name="NamedExtensionManager-names"><strong>names</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;names&nbsp;of&nbsp;the&nbsp;discovered&nbsp;extensions</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="stevedore.extension.html#ExtensionManager">stevedore.extension.ExtensionManager</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="stevedore.extension.html#ExtensionManager">stevedore.extension.ExtensionManager</a>:<br>
+<dl><dt><strong>ENTRY_POINT_CACHE</strong> = {}</dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>__all__</strong> = ['ExtensionManager', 'EnabledExtensionManager', 'NamedExtensionManager', 'HookManager', 'DriverManager']</td></tr></table>
+</body></html>

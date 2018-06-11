@@ -1,0 +1,51 @@
+root@virl:/# modinfo bonding
+filename:       /lib/modules/3.19.0-74-generic/kernel/drivers/net/bonding/bonding.ko
+author:         Thomas Davis, tadavis@lbl.gov and many others
+description:    Ethernet Channel Bonding Driver, v3.7.1
+version:        3.7.1
+license:        GPL
+alias:          rtnl-link-bond
+srcversion:     896687391FE936F2F3E8C44
+depends:
+intree:         Y
+vermagic:       3.19.0-74-generic SMP mod_unload modversions
+signer:         Magrathea: Glacier signing key
+sig_key:        41:48:4A:E1:21:29:89:2A:F6:65:33:D6:8F:3D:BC:9A:6A:52:66:16
+sig_hashalgo:   sha512
+parm:           max_bonds:Max number of bonded devices (int)
+parm:           tx_queues:Max number of transmit queues (default = 16) (int)
+parm:           num_grat_arp:Number of peer notifications to send on failover event (alias of num_unsol_na) (int)
+parm:           num_unsol_na:Number of peer notifications to send on failover event (alias of num_grat_arp) (int)
+parm:           miimon:Link check interval in milliseconds (int)
+parm:           updelay:Delay before considering link up, in milliseconds (int)
+parm:           downdelay:Delay before considering link down, in milliseconds (int)
+parm:           use_carrier:Use netif_carrier_ok (vs MII ioctls) in miimon; 0 for off, 1 for on (default) (int)
+parm:           mode:Mode of operation; 0 for balance-rr, 1 for active-backup, 2 for balance-xor, 3 for broadcast, 4 for 802.3ad, 5 for balance-tlb, 6 for balance-alb (charp)
+parm:           primary:Primary network device to use (charp)
+parm:           primary_reselect:Reselect primary slave once it comes up; 0 for always (default), 1 for only if speed of primary is better, 2 for only on active slave failure (charp)
+parm:           lacp_rate:LACPDU tx rate to request from 802.3ad partner; 0 for slow, 1 for fast (charp)
+parm:           ad_select:803.ad aggregation selection logic; 0 for stable (default), 1 for bandwidth, 2 for count (charp)
+parm:           min_links:Minimum number of available links before turning on carrier (int)
+parm:           xmit_hash_policy:balance-xor and 802.3ad hashing method; 0 for layer 2 (default), 1 for layer 3+4, 2 for layer 2+3, 3 for encap layer 2+3, 4 for encap layer 3+4 (charp)
+parm:           arp_interval:arp interval in milliseconds (int)
+parm:           arp_ip_target:arp targets in n.n.n.n form (array of charp)
+parm:           arp_validate:validate src/dst of ARP probes; 0 for none (default), 1 for active, 2 for backup, 3 for all (charp)
+parm:           arp_all_targets:fail on any/all arp targets timeout; 0 for any (default), 1 for all (charp)
+parm:           fail_over_mac:For active-backup, do not set all slaves to the same MAC; 0 for none (default), 1 for active, 2 for follow (charp)
+parm:           all_slaves_active:Keep all frames received on an interface by setting active flag for all slaves; 0 for never (default), 1 for always. (int)
+parm:           resend_igmp:Number of IGMP membership reports to send on link failure (int)
+parm:           packets_per_slave:Packets to send per slave in balance-rr mode; 0 for a random slave, 1 packet per slave (default), >1 packets per slave. (int)
+parm:           lp_interval:The number of seconds between instances where the bonding driver sends learning packets to each slaves peer switch. The default is 1. (uint)
+root@virl:/# modinfo 8021q
+filename:       /lib/modules/3.19.0-74-generic/kernel/net/8021q/8021q.ko
+version:        1.8
+license:        GPL
+alias:          rtnl-link-vlan
+srcversion:     0F8184937D4B5A96F579F34
+depends:        mrp,garp
+intree:         Y
+vermagic:       3.19.0-74-generic SMP mod_unload modversions
+signer:         Magrathea: Glacier signing key
+sig_key:        41:48:4A:E1:21:29:89:2A:F6:65:33:D6:8F:3D:BC:9A:6A:52:66:16
+sig_hashalgo:   sha512
+root@virl:/#

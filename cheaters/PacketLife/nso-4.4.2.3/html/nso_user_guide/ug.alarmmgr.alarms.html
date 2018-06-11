@@ -1,0 +1,770 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      
+      <title>Overview of the alarm concepts -  - NSO 4.4.2.3 User Guide</title>
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+      <link rel="home" href="index.html" title="NSO 4.4.2.3 User Guide" />
+      <link rel="up" href="ug.alarmmgr.html" title="The Alarm Manager" />
+      <link rel="prev" href="ug.alarmmgr.intro.html" title="Alarm Manager Introduction" />
+      <link rel="next" href="ug.alarmmgr.model.html" title="The Alarm Model" />
+      <meta xmlns="" name="Section-title" content="Overview of the alarm concepts" /><script xmlns="" type="text/javascript">
+      //The id for tree cookie
+      var treeCookieId = "treeview-8936";
+      var language = "en";
+      var w = new Object();
+      //Localization
+      txt_filesfound = 'Results';
+      txt_enter_at_least_1_char = "You must enter at least one character.";
+      txt_browser_not_supported = "JavaScript is disabled on your browser. Please enable JavaScript to enjoy all the features of this site.";
+      txt_please_wait = "Please wait. Search in progress...";
+      txt_results_for = "Results for: ";
+    </script><link xmlns="" rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/css/positioning.css" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/jquery/theme-redmond/jquery-ui-1.8.2.custom.css" />
+      <link xmlns="" rel="stylesheet" type="text/css" href="common/jquery/treeview/jquery.treeview.css" /><style xmlns="" type="text/css">
+      
+      #noscript{
+      font-weight:bold;
+      background-color: #55AA55;
+      font-weight: bold;
+      height: 25spx;
+      z-index: 3000;
+      top:0px;
+      width:100%;
+      position: relative;
+      border-bottom: solid 5px black;
+      text-align:center;
+      color: white;
+      }
+      
+      input {
+      margin-bottom: 5px;
+      margin-top: 2px;
+      }
+      .folder {
+      display: block;
+      height: 22px;
+      padding-left: 20px;
+      background: transparent url(common/jquery/treeview/images/folder.gif) 0 0px no-repeat;
+      }
+      span.contentsTab {
+      padding-left: 20px;
+      background: url(common/images/toc-icon.png) no-repeat 0 center;
+      }
+      span.searchTab {
+      padding-left: 20px;
+      background: url(common/images/search-icon.png) no-repeat 0 center;
+      }
+      
+      /* Overide jquery treeview's defaults for ul. */
+      .treeview ul {
+      background-color: transparent;
+      margin-top: 4px;
+      }		
+      #webhelp-currentid {
+      /* background-color: #D8D8D8 !important; */
+      background-color: #D8D8D8;
+      }
+      .treeview .hover { color: black; }
+      .filetree li span a { text-decoration: none; font-size: 12px; color: #517291; }
+      
+      /* Override jquery-ui's default css customizations. These are supposed to take precedence over those.*/
+      .ui-widget-content {
+      border: 0px; 
+      background: none; 
+      color: none;     
+      }
+      .ui-widget-header {
+      color: #e9e8e9;
+      border-left: 1px solid #e5e5e5;
+      border-right: 1px solid #e5e5e5;
+      border-bottom: 1px solid #bbc4c5;
+      border-top: 4px solid #e5e5e5;
+      border: medium none;
+      background: #F4F4F4; /* old browsers */
+      background: -moz-linear-gradient(top, #F4F4F4 0%, #E6E4E5 100%); /* firefox */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F4F4F4), color-stop(100%,#E6E4E5)); /* webkit */    
+      font-weight: none;
+      }
+      .ui-widget-header a { color: none; }
+      .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { 
+      border: none; background: none; font-weight: none; color: none; }
+      .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited { color: black; text-decoration: none; }
+      .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus { border: none; background: none; font-weight: none; color: none; }
+      
+      .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { border: none; background: none; font-weight: none; color: none; }
+      .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited { 
+      color: black; text-decoration: none; 	
+      background: #C6C6C6; /* old browsers */
+      background: -moz-linear-gradient(top, #C6C6C6 0%, #D8D8D8 100%); /* firefox */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#C6C6C6), color-stop(100%,#D8D8D8)); /* webkit */
+      -webkit-border-radius:15px; -moz-border-radius:10px;
+      border: 1px solid #f1f1f1;
+      }    
+      .ui-corner-all { border-radius: 0 0 0 0; }
+      
+      .ui-tabs { padding: .2em;}
+      .ui-tabs .ui-tabs-nav li { top: 0px; margin: -2px 0 1px; text-transform: uppercase; font-size: 10.5px;}
+      .ui-tabs .ui-tabs-nav li a { padding: .25em 2em .25em 1em; margin: .5em; text-shadow: 0 1px 0 rgba(255,255,255,.5); }
+      /**
+      *	Basic Layout Theme
+      * 
+      *	This theme uses the default layout class-names for all classes
+      *	Add any 'custom class-names', from options: paneClass, resizerClass, togglerClass
+      */
+      
+      .ui-layout-pane { /* all 'panes' */ 
+      background: #FFF; 
+      border: 1px solid #BBB; 
+      padding: 05x; 
+      overflow: auto;
+      } 
+      
+      .ui-layout-resizer { /* all 'resizer-bars' */ 
+      background: #DDD; 
+      top:100px
+      } 
+      
+      .ui-layout-toggler { /* all 'toggler-buttons' */ 
+      background: #AAA; 
+      } 
+      
+    </style>
+      <!--[if IE]>
+	<link rel="stylesheet" type="text/css" href="../common/css/ie.css"/>
+	<![endif]--><script xmlns="" type="text/javascript" src="common/browserDetect.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery-1.7.2.min.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery.ui.all.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/jquery.cookie.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/treeview/jquery.treeview.min.js">
+         <!----></script><script xmlns="" type="text/javascript" src="common/jquery/layout/jquery.layout.js">
+         <!----></script><style type="text/css">
+      
+      #header {
+      /* background: url("../images/header-bg.png") scroll top left repeat-x #4d8c83; */
+      background: transparent;
+      }
+      #leftnavigation {
+      /* background-color: #ededed!important; */
+      background-color: transparent;
+      }
+      #navheader {
+      visibility: hidden;
+      }
+      #webhelp-currentid {
+      /* background-color: #D8D8D8 !important; */
+      background-color: #FFFFFF; /*but must be changed in main.js as well*/
+      }
+      .filetree span.file {
+      /* background: url(images/file.gif) 0 0 no-repeat; */
+      background: initial;
+      }
+      .filetree span.folder, .filetree span.file {
+      padding: 1px 0 1px 7px;
+      display: block;
+      }
+
+      /* borrowed from cisco: clientlib.css */
+      .footer {
+      margin: 28px 30px 0 15px;
+      font-size: 80%;
+      line-height: 120%;
+      border-top: 1px solid #ccc;
+      padding-top: 7px;
+      color: #999;
+      }
+      .footer #footer-legal{display:inline;padding-bottom:18px}
+      #framework-footer{margin:0;padding:0 0 15px 0;min-width:900px;width:100%}
+      .footer a,.footer a:visited{color:#999}
+
+      /* from ccimr.css */
+      a:active  { color: #3366CC}
+      a:hover   { color: #3366CC}
+      a:link    { color: #3366CC}
+      a:visited { color: #3366CC}
+
+      #header img {
+      float: left;
+      margin-left: 20px;
+      margin-top: 0px;
+      }
+
+      #header h1 {
+      color: #336666;
+      margin-top: 4px;
+      }
+      #content h1, #content h2 {
+      color: #336666;
+      }
+      .title {
+      color: #336666;
+      }
+      p, pre {
+      margin-left: 0.1in;
+      }
+      p, ul, ol, li {
+        font-size: 95%;
+        font-family: Arial, Helvetica, sans-serif;
+        margin-top: 1px;
+      }
+      body {
+        font: 80.5% Arial, Helvetica, sans-serif;
+      }
+      ol {
+      display: block;
+      list-style-type: decimal;
+      -webkit-margin-before: 1em;
+      -webkit-margin-after: 1em;
+      -webkit-margin-start: 0px;
+      -webkit-margin-end: 0px;
+      -webkit-padding-start: 40px;
+      border: 1;
+      }
+    </style></head>
+   <body>
+      <noscript>
+         <div id="noscript">JavaScript is disabled on your browser. Please enable JavaScript to enjoy all the features of this site.</div>
+      </noscript>
+      <div id="header"><a href="index.html"><img style="margin-right: 2px; width: 110; height: 73; padding-right: 25px; padding-top: 8px" align="right" src="common/images/logo.gif" alt="Cisco Systems, Inc." /></a><h1>NSO 4.4.2.3 User Guide<br />The Alarm Manager
+         </h1>
+         <div id="navheader">
+            <!---->
+            <table class="navLinks">
+               <tr>
+                  <td><a id="showHideButton" href="#" onclick="myLayout.toggle('west')" class="pointLeft" tabindex="5" title="Hide TOC tree">Sidebar
+                                                    </a></td>
+                  <td><a accesskey="p" class="navLinkPrevious" tabindex="5" href="ug.alarmmgr.intro.html">Prev</a>
+                                                             |
+                                                             <a accesskey="u" class="navLinkUp" tabindex="5" href="ug.alarmmgr.html">Up</a>
+                                                         |
+                                                         <a accesskey="n" class="navLinkNext" tabindex="5" href="ug.alarmmgr.model.html">Next</a></td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      <div id="content">
+         <div class="sect1">
+            <div xmlns="" class="titlepage">
+               <div>
+                  <div>
+                     <h2 xmlns="http://www.w3.org/1999/xhtml" class="title" style="clear: both"><a id="ug.alarmmgr.alarms"></a>Overview of the alarm concepts
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>
+                     First of all it is important to clearly define what an alarm
+                     means. <span class="quote">“<span class="quote">An alarm denotes an undesirable state in a
+                           resource for which an operator action is required. </span>”</span>
+                     Alarms are often confused with general logging and event
+                     mechanisms, thereby overflooding the operator with alarms.  In
+                     NSO, the alarm manager shows undesired resource states that an
+                     operator should investigate.  NSO contains other mechanisms for
+                     logging in general. Therefore, NSO does not naively populate
+                     the alarm list with traps received in the SNMP notification
+                     receiver.
+                   
+            </p>
+            <p>
+                     Before looking into how NSO handles alarms it is important to
+                     define the fundamental concepts.  We make a clear distinction
+                     between alarms and events in general.  Alarms should be taken
+                     seriously and be investigated.  Alarms have states, they go
+                     active with a specific severity, they change severity and they
+                     are cleared by the resource.  The same alarm may become active
+                     again.  A common mistake is to confuse the operator view with
+                     the resource view.  The model described so far is the resource
+                     view.  The resource itself may consider the alarm cleared.
+                     The alarm manager does not automatically delete cleared alarms.
+                     An alarm that has existed in the network may still need
+                     investigation.  There are dedicated actions an operator can use
+                     to manage the alarm list, for example delete alarms based on
+                     criterias such as cleared and date.  These actions can be
+                     performed over all north-bound interfaces.
+                   
+            </p>
+            <p>
+                     Rather than viewing alarms as a list of alarm notifications NSO
+                     defines alarms as states on objects.  The NSO alarm list uses
+                     four keys for alarms: the alarming <span class="emphasis"><em>object</em></span>
+                     within a <span class="emphasis"><em>device</em></span> and the <span class="emphasis"><em>alarm
+                           type</em></span> and an optional <span class="emphasis"><em>specific problem</em></span>.
+                     <span class="emphasis"><em>Alarm types</em></span> are normally unique
+                     identifiers for a specific alarm state and are defined statically.
+                     An alarm type corresponds to the well-known X.733 alarm standard tuple
+                     event type, and probable cause. Specific problem is an optional key that
+                     is string based and can further redefine an alarm type at run-time.
+                     This is needed for alarms that are not known before a system is deployed.
+                     Imagine a system with general digital inputs. A MIB might specify
+                     traps called input-high, input-low. When defining the SNMP notification
+                     reception, an integrator might define an alarm type called "External-Alarm".
+                     <code class="code">Input-high</code> might imply a major alarm and
+                     <code class="code">input-low</code> might imply clear.
+                     At installation some detectors report "fire-alarm" and some "door-open"
+                     alarms. This is configured at the device and sent as free text in the SNMP
+                     var-binds. This is then managed by using the specific problem field of the
+                     NSO alarm manager to separate this different alarm types.
+                   
+            </p>
+            <p>
+                     The data model for the alarm-manager is outlined in
+                     <a class="xref" href="ug.alarmmgr.alarms.html#ncs.ug.alarmmgr.fig.datamodel" title="Figure 4. Alarm Model">Figure 4, “Alarm Model”</a>
+                     
+            </p>
+            <div class="figure"><a id="ncs.ug.alarmmgr.fig.datamodel"></a><p class="title"><strong>Figure 4. Alarm Model</strong></p>
+               <div class="figure-contents">
+                  <div class="mediaobject" align="center">
+                     <table border="0" summary="manufactured viewport for HTML img" style="cellpadding: 0; cellspacing: 0;" width="549">
+                        <tr>
+                           <td align="center"><img src="pics/dm-alarms.png" align="middle" width="549" alt="Alarm Model" /></td>
+                        </tr>
+                     </table>
+                  </div>
+               </div>
+            </div>
+            <p><br class="figure-break" />
+                   
+            </p>
+            <p>
+                     This means that we have a list with key: (managed device,
+                     managed object, alarm type, specific problem).  In the example above
+                     we might have the following different alarms:
+                     
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>
+                                    Device : House1; Managed Object : Detector1; Alarm-Type : External Alarm;
+                                    Specific Problem = Smoke;
+                                  
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                                    Device : House1; Managed Object : Detector2; Alarm-Type : External Alarm;
+                                    Specific Problem = Door Open;
+                                  
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>
+                   
+            </p>
+            <p>
+                     Each alarm entry
+                     shows the last status change for the alarm and also a child list
+                     with all status changes sorted in chronological order.
+                     
+            </p>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt><span class="term">is-cleared</span></dt>
+                  <dd>
+                     <p>
+                                      was the last state change <span class="emphasis"><em>clear</em></span>?
+                                    
+                     </p>
+                  </dd>
+                  <dt><span class="term">last-status-change</span></dt>
+                  <dd>
+                     <p>
+                                      time stamp for last status change
+                                    
+                     </p>
+                  </dd>
+                  <dt><span class="term">last-perceived-severity</span></dt>
+                  <dd>
+                     <p>
+                                      last severity (not equal to clear)
+                                    
+                     </p>
+                  </dd>
+                  <dt><span class="term">last-alarm-text</span></dt>
+                  <dd>
+                     <p>
+                                      the last alarm text (not equal to clear)
+                                    
+                     </p>
+                  </dd>
+                  <dt><span class="term">status-change, event-time</span></dt>
+                  <dd>
+                     <p>
+                                      the time reported by the device
+                                    
+                     </p>
+                  </dd>
+                  <dt><span class="term">status-change, received-time</span></dt>
+                  <dd>
+                     <p>
+                                      the time the state change was received by NSO
+                                    
+                     </p>
+                  </dd>
+                  <dt><span class="term">status-change, perceived-severity</span></dt>
+                  <dd>
+                     <p>
+                                      the new perceived severity
+                                    
+                     </p>
+                  </dd>
+                  <dt><span class="term">status-change, alarm-text</span></dt>
+                  <dd>
+                     <p>
+                                      descriptive text associated with the new alarm status
+                                    
+                     </p>
+                  </dd>
+               </dl>
+            </div>
+            <p>
+               
+                     It is fundamental to define alarm types (specific problem) and
+                     managed objects
+                     with a fine-grained mechanism that still is extensible.  For
+                     objects we allow YANG instance-identifiers to refer to a YANG
+                     instance identifier, an SNMP OID, or a string.  Strings can be
+                     used when the underlying object is not modelled.  We use YANG
+                     identities to define alarm types.  This has the benefit that alarm
+                     types can be defined in a named hierarchy and thereby provide an
+                     extensible mechanism. In order to support "dynamic alarm types"
+                     so that alarms can be separated by information only available at
+                     run-time the string based field specific problem can also be used.
+                   
+            </p>
+            <p>
+                     So far we have described the model based on the resource
+                     view. It is common practice to let operators manipulate the
+                     alarms corresponding to the operators investigation.
+                     We clearly separate the resource and the operator view,
+                     for example, there is no such thing as an operator "clearing an
+                     alarm".  Rather the alarm entries can have a corresponding alarm
+                     handling state.  Operators may want to acknowledge an alarm, set
+                     the alarm state to closed or similar.
+                   
+            </p>
+            <p>
+                     We also support some alarm list administrative actions:
+                     
+            </p>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt><span class="term"><span class="emphasis"><em>Synchronize alarms</em></span></span></dt>
+                  <dd>
+                     <p>
+                                      try to read the alarm
+                                      states in the underlying resources and update the alarm list
+                                      accordingly (this action needs to be implemented by user code
+                                      for specific applications)
+                                    
+                     </p>
+                  </dd>
+                  <dt><span class="term"><span class="emphasis"><em>Purge alarms</em></span></span></dt>
+                  <dd>
+                     <p>
+                                      delete entries in the
+                                      alarm list based on several different filter criteria
+                                    
+                     </p>
+                  </dd>
+                  <dt><span class="term"><span class="emphasis"><em>Filter alarms</em></span></span></dt>
+                  <dd>
+                     <p>
+                                      with a XPATH as filter input,
+                                      this action returns all alarms fulfilling the filter
+                                    
+                     </p>
+                  </dd>
+                  <dt><span class="term"><span class="emphasis"><em>Compress alarms</em></span></span></dt>
+                  <dd>
+                     <p>
+                                      since every entry
+                                      may contain a large amount of state
+                                      change entries this action compresses the history to the latest
+                                      state change
+                                    
+                     </p>
+                  </dd>
+               </dl>
+            </div>
+            <p>
+                   
+            </p>
+            <p>
+                     Alarms can be forwarded over NSO northbound interfaces. In many
+                     telecom environments alarms need to be mapped to X.733
+                     parameters. We provide an <span class="emphasis"><em>alarm model</em></span> where
+                     every alarm type is mapped to the corresponding X.733 parameters
+                     such as event type and probable cause. In this way, it is easy
+                     to integrate the NSO alarms into whatever X.733 enumerated
+                     values the upper fault management system is requiring.
+                   
+            </p>
+         </div><script type="text/javascript" src="common/main.js">
+            <!----></script><script type="text/javascript" src="common/splitterInit.js">
+            <!----></script><div class="footer" id="footer-legal">
+            <div class="footer-legal framework-footer-cq">
+               <div id="framework-footer">
+                  <div id="footer-legal"><a href="http://www.cisco.com/web/siteassets/legal/terms_condition.html">Terms &amp; Conditions</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/privacy.html">Privacy Statement</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/privacy.html#cookies">Cookie Policy</a> |
+                                 <a href="http://www.cisco.com/web/siteassets/legal/trademark.html">Trademarks</a></div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div id="sidebar">
+         <div id="leftnavigation" style="padding-top:3px;">
+            <div id="tabs">
+               <ul style="visibility: hidden;"></ul>
+               <div id="treeDiv"><img src="common/images/loading.gif" alt="loading table of contents..." id="tocLoading" style="display:block;" /><div id="ulTreeDiv" style="display:none">
+                     <ul id="tree" class="filetree">
+                        <li><span class="file"><a href="ncs.ug.introduction.html" tabindex="1">NSO Introduction</a></span><ul>
+                              <li><span class="file"><a href="ch01s01.html" tabindex="1">
+                                           The Orchestration Challenge</a></span></li>
+                              <li><span class="file"><a href="ch01s02.html" tabindex="1">
+                                           How NSO Addresses the Orchestration Challenge</a></span></li>
+                              <li><span class="file"><a href="ch01s03.html" tabindex="1">High-Availability and Clustering</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ug.ncs.cli.html" tabindex="1">The NSO CLI </a></span><ul>
+                              <li><span class="file"><a href="ch02s01.html" tabindex="1">CLI Quick Start</a></span></li>
+                              <li><span class="file"><a href="ch02s02.html" tabindex="1">Overview</a></span><ul>
+                                    <li><span class="file"><a href="ch02s02s01.html" tabindex="1">Two CLI modes</a></span></li>
+                                    <li><span class="file"><a href="ch02s02s02.html" tabindex="1">Operational mode</a></span></li>
+                                    <li><span class="file"><a href="ch02s02s03.html" tabindex="1">Configure mode</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch02s03.html" tabindex="1">Starting the CLI</a></span><ul>
+                                    <li><span class="file"><a href="ch02s03s01.html" tabindex="1">Basics</a></span></li>
+                                    <li><span class="file"><a href="ch02s03s02.html" tabindex="1">Two CLI styles</a></span></li>
+                                    <li><span class="file"><a href="ch02s03s03.html" tabindex="1">Starting the CLI in an overloaded system</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch02s04.html" tabindex="1">Modifying the configuration</a></span></li>
+                              <li><span class="file"><a href="ch02s05.html" tabindex="1">Command output processing</a></span><ul>
+                                    <li><span class="file"><a href="ch02s05s01.html" tabindex="1">Count the Number of Lines in the Output</a></span></li>
+                                    <li><span class="file"><a href="ch02s05s02.html" tabindex="1">Search for a String in the Output</a></span></li>
+                                    <li><span class="file"><a href="ch02s05s03.html" tabindex="1">Saving the Output to a File</a></span></li>
+                                    <li><span class="file"><a href="ug.ncs.cli.regexp.html" tabindex="1">Regular expressions</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch02s06.html" tabindex="1">Displaying the configuration</a></span></li>
+                              <li><span class="file"><a href="ch02s07.html" tabindex="1">Range expressions</a></span></li>
+                              <li><span class="file"><a href="ch02s08.html" tabindex="1">Command history</a></span></li>
+                              <li><span class="file"><a href="ch02s09.html" tabindex="1">Command line editing</a></span><ul>
+                                    <li><span class="file"><a href="ch02s09s01.html" tabindex="1">Moving the cursor:</a></span></li>
+                                    <li><span class="file"><a href="ch02s09s02.html" tabindex="1">Delete characters:</a></span></li>
+                                    <li><span class="file"><a href="ch02s09s03.html" tabindex="1">Insert recently deleted text:</a></span></li>
+                                    <li><span class="file"><a href="ch02s09s04.html" tabindex="1">Display previous command lines:</a></span></li>
+                                    <li><span class="file"><a href="ch02s09s05.html" tabindex="1">Capitalization:</a></span></li>
+                                    <li><span class="file"><a href="ch02s09s06.html" tabindex="1">Special:</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch02s10.html" tabindex="1">Using CLI completion</a></span></li>
+                              <li><span class="file"><a href="ch02s11.html" tabindex="1">Comments, annotations and tags</a></span></li>
+                              <li><span class="file"><a href="ch02s12.html" tabindex="1">CLI messages</a></span></li>
+                              <li><span class="file"><a href="ch02s13.html" tabindex="1">ncs.conf settings</a></span></li>
+                              <li><span class="file"><a href="ch02s14.html" tabindex="1">CLI Environment</a></span></li>
+                              <li><span class="file"><a href="ch02s15.html" tabindex="1">Commands</a></span><ul>
+                                    <li><span class="file"><a href="ch02s15s01.html" tabindex="1">Operational mode commands</a></span><ul>
+                                          <li><span class="file"><a href="ch02s15s01.html#d0e1814" tabindex="1">Invoke an action</a></span></li>
+                                          <li><span class="file"><a href="ch02s15s01.html#d0e1852" tabindex="1">Builtin commands</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ch02s15s02.html" tabindex="1">Configure mode commands</a></span><ul>
+                                          <li><span class="file"><a href="ch02s15s02.html#d0e2374" tabindex="1">Configure a value</a></span></li>
+                                          <li><span class="file"><a href="ch02s15s02.html#d0e2419" tabindex="1">Builtin commands</a></span></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch02s16.html" tabindex="1">Customizing the CLI</a></span><ul>
+                                    <li><span class="file"><a href="ch02s16s01.html" tabindex="1">Adding new commands</a></span></li>
+                                    <li><span class="file"><a href="ch02s16s02.html" tabindex="1">File access</a></span></li>
+                                    <li><span class="file"><a href="ch02s16s03.html" tabindex="1">Help texts</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch02s17.html" tabindex="1">Quoting and escaping scheme</a></span><ul>
+                                    <li><span class="file"><a href="ch02s17s01.html" tabindex="1">Canonical quoting scheme</a></span></li>
+                                    <li><span class="file"><a href="ch02s17s02.html" tabindex="1">Escape backslash handling</a></span></li>
+                                    <li><span class="file"><a href="ch02s17s03.html" tabindex="1">Octal numbers handling</a></span></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="user_guide.devicemanager.html" tabindex="1">The NSO Device Manager</a></span><ul>
+                              <li><span class="file"><a href="user_guide.devicemanager.introduction.html" tabindex="1">Introduction</a></span></li>
+                              <li><span class="file"><a href="user_guide.devicemanager.device-tree.html" tabindex="1">The Managed Device Tree</a></span></li>
+                              <li><span class="file"><a href="user_guide.devicemanager.ned-packages.html" tabindex="1">The NED Packages</a></span></li>
+                              <li><span class="file"><a href="user_guide.devicemanager.starting-ncs.html" tabindex="1">Starting the NSO Daemon</a></span></li>
+                              <li><span class="file"><a href="user_guide.devicemanager.sync.html" tabindex="1">Synchronizing Devices</a></span><ul>
+                                    <li><span class="file"><a href="ch03s05s01.html" tabindex="1">TAB Completion</a></span></li>
+                                    <li><span class="file"><a href="ch03s05s02.html" tabindex="1">Partial sync-from</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="user_guide.devicemanager.configuring-devices.html" tabindex="1">Configuring Devices</a></span></li>
+                              <li><span class="file"><a href="user_guide.devicemanager.connection-mgmt.html" tabindex="1">Connection Management</a></span></li>
+                              <li><span class="file"><a href="user_guide.devicemanager.authgroups.html" tabindex="1">Authentication Groups</a></span></li>
+                              <li><span class="file"><a href="user_guide.devicemanager.pooling.html" tabindex="1">Device Session Pooling</a></span></li>
+                              <li><span class="file"><a href="user_guide.devicemanager.tracing.html" tabindex="1">Tracing Device Communication</a></span></li>
+                              <li><span class="file"><a href="user_guide.devicemanager.cheap-synch-check.html" tabindex="1">Checking Device Configuration</a></span></li>
+                              <li><span class="file"><a href="user_guide.devicemanager.comparing.html" tabindex="1">Comparing Device Configurations</a></span></li>
+                              <li><span class="file"><a href="user_guide.devicemanager.initialize-device.html" tabindex="1">Initialize Device</a></span><ul>
+                                    <li><span class="file"><a href="user_guide.devicemanager.initialize-from-other.html" tabindex="1">From other</a></span></li>
+                                    <li><span class="file"><a href="user_guide.devicemanager.initialize-with-template.html" tabindex="1">By Template</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ncs.user_guide.devicemanager.device.templates.html" tabindex="1">Device Templates</a></span><ul>
+                                    <li><span class="file"><a href="ch03s14s01.html" tabindex="1">Tags</a></span></li>
+                                    <li><span class="file"><a href="ch03s14s02.html" tabindex="1">Debug</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="user_guide.devicemanager.state.html" tabindex="1">Oper State and Admin State</a></span></li>
+                              <li><span class="file"><a href="user_guide.devicemanager.source.html" tabindex="1">Configuration Source</a></span></li>
+                              <li><span class="file"><a href="user_guide.devicemanager.capas.html" tabindex="1">Capabilities, Modules and Revision Management</a></span></li>
+                              <li><span class="file"><a href="user_guide.devicemanager.candidate.html" tabindex="1">Candidate Datastore Support</a></span></li>
+                              <li><span class="file"><a href="user_guide.devicemanager.action_proxy.html" tabindex="1">Action Proxy</a></span></li>
+                              <li><span class="file"><a href="user_guide.devicemanager.device_groups.html" tabindex="1">Device Groups</a></span></li>
+                              <li><span class="file"><a href="user_guide.devicemanager.policies.html" tabindex="1">Policies</a></span></li>
+                              <li><span class="file"><a href="user_guide.devicemanager.commit-queue.html" tabindex="1">Commit Queue</a></span><ul>
+                                    <li><span class="file"><a href="ch03s22s01.html" tabindex="1">Commit Queue Scheduling</a></span></li>
+                                    <li><span class="file"><a href="ch03s22s02.html" tabindex="1">Viewing and Manipulating the Commit Queue</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch03s23.html" tabindex="1">NETCONF Notifications</a></span><ul>
+                                    <li><span class="file"><a href="ch03s23s01.html" tabindex="1">An Example Session</a></span></li>
+                                    <li><span class="file"><a href="ch03s23s02.html" tabindex="1">Subscription Status</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch03s24.html" tabindex="1">SNMP Notifications</a></span></li>
+                              <li><span class="file"><a href="ch03s25.html" tabindex="1">Inactive configuration</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ug.ssh_keys.html" tabindex="1">SSH Key Management</a></span><ul>
+                              <li><span class="file"><a href="ug.ssh_keys.general.html" tabindex="1">General</a></span></li>
+                              <li><span class="file"><a href="ug.ssh_keys.server.html" tabindex="1">NSO as SSH Server</a></span><ul>
+                                    <li><span class="file"><a href="ch04s02s01.html" tabindex="1">Host Keys</a></span></li>
+                                    <li><span class="file"><a href="ch04s02s02.html" tabindex="1">Publickey Authentication</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ug.ssh_keys.client.html" tabindex="1">NSO as SSH Client</a></span><ul>
+                                    <li><span class="file"><a href="ug.ssh_keys.client.host_keys.html" tabindex="1">Host Key Verification</a></span><ul>
+                                          <li><span class="file"><a href="ug.ssh_keys.client.host_keys.html#d0e5863" tabindex="1">Verification level</a></span></li>
+                                          <li><span class="file"><a href="ug.ssh_keys.client.host_keys.html#d0e5915" tabindex="1">Connection to a Managed Device</a></span></li>
+                                          <li><span class="file"><a href="ug.ssh_keys.client.host_keys.html#d0e5995" tabindex="1">Connection to an NSO Cluster Node</a></span></li>
+                                       </ul>
+                                    </li>
+                                    <li><span class="file"><a href="ug.ssh_keys.client.publickey.html" tabindex="1">Publickey Authentication</a></span><ul>
+                                          <li><span class="file"><a href="ug.ssh_keys.client.publickey.html#d0e6035" tabindex="1">Private Key Selection</a></span></li>
+                                          <li><span class="file"><a href="ug.ssh_keys.client.publickey.html#d0e6054" tabindex="1">Connection to a Managed Device</a></span></li>
+                                          <li><span class="file"><a href="ug.ssh_keys.client.publickey.html#d0e6115" tabindex="1">Connection to an NSO Cluster Node</a></span></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ch05.html" tabindex="1">Managing Network Services</a></span><ul>
+                              <li><span class="file"><a href="ch05s01.html" tabindex="1">Overview</a></span></li>
+                              <li><span class="file"><a href="ch05s02.html" tabindex="1">A Service Example</a></span></li>
+                              <li><span class="file"><a href="ch05s03.html" tabindex="1">Running the example</a></span></li>
+                              <li><span class="file"><a href="ch05s04.html" tabindex="1">Service-Life Cycle Management</a></span><ul>
+                                    <li><span class="file"><a href="ch05s04s01.html" tabindex="1">Service Changes</a></span></li>
+                                    <li><span class="file"><a href="ch05s04s02.html" tabindex="1">Service Impacting out-of-band changes</a></span></li>
+                                    <li><span class="file"><a href="ch05s04s03.html" tabindex="1">Service Deletion</a></span></li>
+                                    <li><span class="file"><a href="ch05s04s04.html" tabindex="1">Viewing service configurations</a></span></li>
+                                    <li><span class="file"><a href="ch05s04s05.html" tabindex="1">Using Commit queues</a></span></li>
+                                    <li><span class="file"><a href="ch05s04s06.html" tabindex="1">Un-deploying Services</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch05s05.html" tabindex="1">Advanced Services Orchestration</a></span><ul>
+                                    <li><span class="file"><a href="ch05s05s01.html" tabindex="1">RFM service plans</a></span></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ug.alarmmgr.html" tabindex="1">The Alarm Manager</a></span><ul>
+                              <li><span class="file"><a href="ug.alarmmgr.intro.html" tabindex="1">Alarm Manager Introduction</a></span></li>
+                              <li id="webhelp-currentid"><span class="file"><a href="ug.alarmmgr.alarms.html" tabindex="1">Overview of the alarm concepts</a></span></li>
+                              <li><span class="file"><a href="ug.alarmmgr.model.html" tabindex="1">The Alarm Model</a></span></li>
+                              <li><span class="file"><a href="ch06s04.html" tabindex="1">Alarm handling</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ug.scripting_using.html" tabindex="1">Plug-and-play scripting</a></span><ul>
+                              <li><span class="file"><a href="ch07s01.html" tabindex="1">Introduction</a></span></li>
+                              <li><span class="file"><a href="ch07s02.html" tabindex="1">Script storage</a></span></li>
+                              <li><span class="file"><a href="ch07s03.html" tabindex="1">Script interface</a></span></li>
+                              <li><span class="file"><a href="ch07s04.html" tabindex="1">Loading of scripts</a></span></li>
+                              <li><span class="file"><a href="ch07s05.html" tabindex="1">Command scripts</a></span><ul>
+                                    <li><span class="file"><a href="ch07s05s01.html" tabindex="1">Command section</a></span></li>
+                                    <li><span class="file"><a href="ch07s05s02.html" tabindex="1">Param section</a></span></li>
+                                    <li><span class="file"><a href="ch07s05s03.html" tabindex="1">Full command example</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch07s06.html" tabindex="1">Policy scripts</a></span><ul>
+                                    <li><span class="file"><a href="ch07s06s01.html" tabindex="1">Policy section</a></span></li>
+                                    <li><span class="file"><a href="ch07s06s02.html" tabindex="1">Validation</a></span></li>
+                                    <li><span class="file"><a href="ch07s06s03.html" tabindex="1">Full policy example</a></span></li>
+                                 </ul>
+                              </li>
+                              <li><span class="file"><a href="ch07s07.html" tabindex="1">Post-commit scripts</a></span><ul>
+                                    <li><span class="file"><a href="ch07s07s01.html" tabindex="1">Post-commit section</a></span></li>
+                                    <li><span class="file"><a href="ch07s07s02.html" tabindex="1">Full post-commit example</a></span></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ug.ncs.complrep.html" tabindex="1">Compliance reporting</a></span><ul>
+                              <li><span class="file"><a href="ch08s01.html" tabindex="1">Introduction</a></span></li>
+                              <li><span class="file"><a href="ch08s02.html" tabindex="1">Creating compliance
+                                           report definitions</a></span></li>
+                              <li><span class="file"><a href="ch08s03.html" tabindex="1">Running compliance reports</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ncsnwe.packages.html" tabindex="1">NSO Packages</a></span><ul>
+                              <li><span class="file"><a href="ch09s01.html" tabindex="1">Overview</a></span></li>
+                              <li><span class="file"><a href="ch09s02.html" tabindex="1">Listing Packages</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ug.lifecycle.html" tabindex="1">
+                                     Life-cycle Operations - how to manipulate existing services and
+                                     devices
+                                   </a></span><ul>
+                              <li><span class="file"><a href="ch10s01.html" tabindex="1">
+                                             Commit flags and device &amp; service actions
+                                           </a></span></li>
+                              <li><span class="file"><a href="ch10s02.html" tabindex="1">Commit flags</a></span></li>
+                              <li><span class="file"><a href="ch10s03.html" tabindex="1">Device Actions</a></span></li>
+                              <li><span class="file"><a href="ch10s04.html" tabindex="1">Service Actions</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ncsnwe.webui.html" tabindex="1">The Web User Interface</a></span><ul>
+                              <li><span class="file"><a href="ch11s01.html" tabindex="1">Overview</a></span></li>
+                              <li><span class="file"><a href="ch11s02.html" tabindex="1">Using the Web UI</a></span></li>
+                              <li><span class="file"><a href="ch11s03.html" tabindex="1">Transactions and "Commit"</a></span></li>
+                              <li><span class="file"><a href="ch11s04.html" tabindex="1">Service Device Navigation</a></span></li>
+                           </ul>
+                        </li>
+                        <li><span class="file"><a href="ug.netsim.html" tabindex="1">The Network Simulator</a></span><ul>
+                              <li><span class="file"><a href="ug.netsim.overview.html" tabindex="1">Overview</a></span></li>
+                              <li><span class="file"><a href="ug.netsim.using.html" tabindex="1">Using Netsim</a></span></li>
+                              <li><span class="file"><a href="ug.netsim.learnmore.html" tabindex="1">Learn more</a></span></li>
+                           </ul>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

@@ -1,0 +1,165 @@
+
+  usevim <http://usevim.com/>
+
+
+Vim links, plugins, screenshots, tutorials, and themes
+
+  * Home
+
+    <http://usevim.com/>
+  * Contact
+
+    <http://usevim.com/contact.html>
+  * Subscribe
+
+    <http://feeds.feedburner.com/usevim>
+
+← Back
+
+<http://usevim.com/>
+
+
+  Improving Vim's Startup Time <http://usevim.com/2012/04/18/startuptime>
+
+18 April 2012
+
+by Alex Young startuptime <http://usevim.com/tags.html#startuptime>,
+performance <http://usevim.com/tags.html#performance>
+
+Once you've installed pathogen.vim
+<http://www.vim.org/scripts/script.php?script_id=2332> or Vundle
+<http://www.vim.org/scripts/script.php?script_id=3458>, installing Vim
+scripts becomes almost... addictive. Eventually Vim's startup time may
+start to suffer. Or perhaps you've installed a new OS and you can't work
+out why Vim is loading slowly.
+
+Fortunately, recent versions of Vim come with the |--startuptime|
+command-line option:
+
+$ vim --startuptime vim.log
+
+This file should contain a heading and a list of timing messages:
+
+times in msec
+ clock   self+sourced   self:  sourced script
+ clock   elapsed:              other lines
+
+000.006  000.006: --- VIM STARTING ---
+000.082  000.076: Allocated generic buffers
+000.299  000.217: locale set
+000.303  000.004: clipboard setup
+000.308  000.005: window checked
+000.787  000.479: inits 1
+000.793  000.006: parsing arguments
+000.793  000.000: expanding arguments
+003.495  002.702: shell init
+003.874  000.379: Termcap init
+003.890  000.016: inits 2
+003.996  000.106: init highlight
+052.048  000.250  000.250: sourcing /usr/local/Cellar/vim/7.3.333/share/vim/vim73/syntax/syncolor.vim
+
+The header is two lines and refers to each type of timing message. It's
+easier to understand if it's broken down like this:
+
+ clock   self+sourced   self:  sourced script
+052.048  000.250  000.250: sourcing /usr/local/Cellar/vim/7.3.333/share/vim/vim73/syntax/syncolor.vim
+
+ clock   elapsed:              other lines
+000.006  000.006: --- VIM STARTING ---
+
+What can we do with this? Well, let's try piping it through |sort -k 2|
+to easily find the slowest sourced scripts:
+
+$ cat vim.log | sort -k 2
+387.346  100.634: loading plugins
+169.582  145.276  005.804: sourcing /usr/local/Cellar/vim/7.3.333/share/vim/vim73/syntax/syntax.vim
+230.845  206.734  039.239: sourcing $HOME/.vimrc
+
+It's also worth launching Vim with different files so |--startuptime|
+measures what happens when a particular file type is read.
+
+
+      Slow Start
+
+Typing |:help slow-start| shows Vim's built-in guidance on startup
+performance -- it suggests checking if Vim was compiled with X11,
+because loading shared libraries might be taking a noticeable amount of
+time. Starting Vim with |-X| will prevent Vim from trying to connect to
+an X server.
+
+Loading the viminfo file can take a while too. Running Vim with |-i
+NONE| will stop it from loading viminfo files.
+
+It's also possible to load Vim without |~/.vimrc|. This can be useful
+for determining if the problem is caused by your settings or the way Vim
+was built on your system:
+
+vim -u NONE --startuptime vim-NONE.log
+
+
+      Profiling
+
+Vim includes profiling tools that can be essential when debugging
+scripts. This can be used from the command-line to measure how long each
+function takes when Vim is started:
+
+vim -c 'profile start vim.log' -c 'profile func *' -c 'q'
+
+The |profile start| command expects a file name argument, and this file
+will be truncated and written to with debugging information.
+
+
+      References
+
+I found the startup time measurement with |profile| tip in this post by
+ZyX: Profiling startup time <http://stackoverflow.com/a/8347244>.
+
+  *
+    <http://srv.carbonads.net/ads/click/x/GTND423UCKADV2QICWY4YKQWCA7ILK3WCTADTZ3JCESIC53JFT7D4K7KC6BD5K7YCESI6K3EHJNCLSIZ?segment=placement:usevimcom;>Analytics
+    for lazy developers. The last integration you'll ever need.
+    <http://srv.carbonads.net/ads/click/x/GTND423UCKADV2QICWY4YKQWCA7ILK3WCTADTZ3JCESIC53JFT7D4K7KC6BD5K7YCESI6K3EHJNCLSIZ?segment=placement:usevimcom;>ads
+    via Carbon <http://carbonads.com/>
+  *
+
+
+          Search
+
+  *
+
+
+          Subscribe
+
+      o Twitter <http://twitter.com/vimnews>Google+
+        <https://google.com/+Usevim>Facebook
+        <https://www.facebook.com/vimnews>Feed
+        <http://feeds.feedburner.com/usevim>Email
+        <http://feedburner.google.com/fb/a/mailverify?uri=usevim&amp;loc=en_US>
+  *
+
+
+          Staff
+
+      o
+
+
+                Editor-in-Chief
+
+        Alex R. Young*Alex R. Young*
+        @alex_young
+
+        <http://twitter.com/#!/alex_young>
+
+
+                Proof-Reading
+
+        Alex R. Young*Yuka Young*
+        @YukaYoung
+
+        <http://twitter.com/#!/YukaYoung>
+
+Content © *usevim* | By the creators of DailyJS <http://dailyjs.com/> |
+Site source: GitHub: alexyoung / usevim
+<https://github.com/alexyoung/usevim> | Glyphicons
+<http://glyphicons.com/> | Cookies and Privacy
+<http://usevim.com/cookies.html>
+

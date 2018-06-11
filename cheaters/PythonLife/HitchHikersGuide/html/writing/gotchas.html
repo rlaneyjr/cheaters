@@ -1,0 +1,364 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Common Gotchas &mdash; The Hitchhiker&#39;s Guide to Python</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="The Hitchhiker&#39;s Guide to Python" href="../index.html" />
+    <link rel="next" title="Choosing a License" href="license.html" />
+    <link rel="prev" title="Logging" href="logging.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="common-gotchas">
+<h1>Common Gotchas<a class="headerlink" href="#common-gotchas" title="Permalink to this headline">¶</a></h1>
+<p>For the most part, Python aims to be a clean and consistent language that
+avoids surprises. However, there are a few cases that can be confusing to
+newcomers.</p>
+<p>Some of these cases are intentional but can be potentially surprising. Some
+could arguably be considered language warts. In general, what follows
+is a collection of potentially tricky behavior that might seem strange at first
+glance, but is generally sensible once you&#8217;re aware of the underlying cause for
+the surprise.</p>
+<div class="section" id="mutable-default-arguments">
+<span id="default-args"></span><h2>Mutable Default Arguments<a class="headerlink" href="#mutable-default-arguments" title="Permalink to this headline">¶</a></h2>
+<p>Seemingly the <em>most</em> common surprise new Python programmers encounter is
+Python&#8217;s treatment of mutable default arguments in function definitions.</p>
+<div class="section" id="what-you-wrote">
+<h3>What You Wrote<a class="headerlink" href="#what-you-wrote" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">append_to</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">to</span><span class="o">=</span><span class="p">[]):</span>
+    <span class="n">to</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">to</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="what-you-might-have-expected-to-happen">
+<h3>What You Might Have Expected to Happen<a class="headerlink" href="#what-you-might-have-expected-to-happen" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">my_list</span> <span class="o">=</span> <span class="n">append_to</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">my_list</span>
+
+<span class="n">my_other_list</span> <span class="o">=</span> <span class="n">append_to</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">my_other_list</span>
+</pre></div>
+</div>
+<p>A new list is created each time the function is called if a second argument
+isn&#8217;t provided, so that the output is:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">12</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">42</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="what-does-happen">
+<h3>What Does Happen<a class="headerlink" href="#what-does-happen" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-none"><div class="highlight"><pre><span></span>[12]
+[12, 42]
+</pre></div>
+</div>
+<p>A new list is created <em>once</em> when the function is defined, and the same list is
+used in each successive call.</p>
+<p>Python&#8217;s default arguments are evaluated <em>once</em> when the function is defined,
+not each time the function is called (like it is in say, Ruby). This means that
+if you use a mutable default argument and mutate it, you <em>will</em> and have
+mutated that object for all future calls to the function as well.</p>
+</div>
+<div class="section" id="what-you-should-do-instead">
+<h3>What You Should Do Instead<a class="headerlink" href="#what-you-should-do-instead" title="Permalink to this headline">¶</a></h3>
+<p>Create a new object each time the function is called, by using a default arg to
+signal that no argument was provided (<a class="reference external" href="http://docs.python.org/library/constants.html#None" title="(in Python v2.7)"><code class="xref py py-data docutils literal"><span class="pre">None</span></code></a> is often a good choice).</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">append_to</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">to</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">to</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">to</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">to</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">to</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="when-the-gotcha-isn-t-a-gotcha">
+<h3>When the Gotcha Isn&#8217;t a Gotcha<a class="headerlink" href="#when-the-gotcha-isn-t-a-gotcha" title="Permalink to this headline">¶</a></h3>
+<p>Sometimes you can specifically &#8220;exploit&#8221; (read: use as intended) this behavior
+to maintain state between calls of a function. This is often done when writing
+a caching function.</p>
+</div>
+</div>
+<div class="section" id="late-binding-closures">
+<h2>Late Binding Closures<a class="headerlink" href="#late-binding-closures" title="Permalink to this headline">¶</a></h2>
+<p>Another common source of confusion is the way Python binds its variables in
+closures (or in the surrounding global scope).</p>
+<div class="section" id="id1">
+<h3>What You Wrote<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_multipliers</span><span class="p">():</span>
+    <span class="k">return</span> <span class="p">[</span><span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">i</span> <span class="o">*</span> <span class="n">x</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h3>What You Might Have Expected to Happen<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">multiplier</span> <span class="ow">in</span> <span class="n">create_multipliers</span><span class="p">():</span>
+    <span class="k">print</span> <span class="n">multiplier</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A list containing five functions that each have their own closed-over <code class="docutils literal"><span class="pre">i</span></code>
+variable that multiplies their argument, producing:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="mi">0</span>
+<span class="mi">2</span>
+<span class="mi">4</span>
+<span class="mi">6</span>
+<span class="mi">8</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h3>What Does Happen<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-none"><div class="highlight"><pre><span></span>8
+8
+8
+8
+8
+</pre></div>
+</div>
+<p>Five functions are created; instead all of them just multiply <code class="docutils literal"><span class="pre">x</span></code> by 4.</p>
+<p>Python&#8217;s closures are <em>late binding</em>.
+This means that the values of variables used in closures are looked
+up at the time the inner function is called.</p>
+<p>Here, whenever <em>any</em> of the returned functions are called, the value of <code class="docutils literal"><span class="pre">i</span></code>
+is looked up in the surrounding scope at call time. By then, the loop has
+completed and <code class="docutils literal"><span class="pre">i</span></code> is left with its final value of 4.</p>
+<p>What&#8217;s particularly nasty about this gotcha is the seemingly prevalent
+misinformation that this has something to do with <a class="reference external" href="http://docs.python.org/reference/expressions.html#lambda" title="(in Python v2.7)"><span class="xref std std-ref">lambdas</span></a>
+in Python. Functions created with a <code class="docutils literal"><span class="pre">lambda</span></code> expression are in no way special,
+and in fact the same exact behavior is exhibited by just using an ordinary
+<code class="docutils literal"><span class="pre">def</span></code>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_multipliers</span><span class="p">():</span>
+    <span class="n">multipliers</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">multiplier</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">i</span> <span class="o">*</span> <span class="n">x</span>
+        <span class="n">multipliers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">multiplier</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">multipliers</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h3>What You Should Do Instead<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<p>The most general solution is arguably a bit of a hack. Due to Python&#8217;s
+aforementioned behavior concerning evaluating default arguments to functions
+(see <a class="reference internal" href="#default-args"><span>Mutable Default Arguments</span></a>), you can create a closure that binds immediately to
+its arguments by using a default arg like so:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_multipliers</span><span class="p">():</span>
+    <span class="k">return</span> <span class="p">[</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="n">i</span> <span class="p">:</span> <span class="n">i</span> <span class="o">*</span> <span class="n">x</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)]</span>
+</pre></div>
+</div>
+<p>Alternatively, you can use the functools.partial function:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+<span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">mul</span>
+
+<span class="k">def</span> <span class="nf">create_multipliers</span><span class="p">():</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">partial</span><span class="p">(</span><span class="n">mul</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id5">
+<h3>When the Gotcha Isn&#8217;t a Gotcha<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<p>Sometimes you want your closures to behave this way. Late binding is good in
+lots of situations. Looping to create unique functions is unfortunately a case
+where they can cause hiccups.</p>
+</div>
+</div>
+<div class="section" id="bytecode-pyc-files-everywhere">
+<h2>Bytecode (.pyc) Files Everywhere!<a class="headerlink" href="#bytecode-pyc-files-everywhere" title="Permalink to this headline">¶</a></h2>
+<p>By default, when executing Python code from files, the Python interpreter
+will automatically write a bytecode version of that file to disk, e.g.
+<code class="docutils literal"><span class="pre">module.pyc</span></code>.</p>
+<p>These <code class="docutils literal"><span class="pre">.pyc</span></code> files should not be checked into your source code repositories.</p>
+<p>Theoretically, this behavior is on by default, for performance reasons.
+Without these bytecode files present, Python would re-generate the bytecode
+every time the file is loaded.</p>
+<div class="section" id="disabling-bytecode-pyc-files">
+<h3>Disabling Bytecode (.pyc) Files<a class="headerlink" href="#disabling-bytecode-pyc-files" title="Permalink to this headline">¶</a></h3>
+<p>Luckily, the process of generating the bytecode is extremely fast, and isn&#8217;t
+something you need to worry about while developing your code.</p>
+<p>Those files are annoying, so let&#8217;s get rid of them!</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>$ export PYTHONDONTWRITEBYTECODE=1
+</pre></div>
+</div>
+<p>With the <code class="docutils literal"><span class="pre">$PYTHONDONTWRITEBYTECODE</span></code> environment variable set, Python will
+no longer write these files to disk, and your development environment will
+remain nice and clean.</p>
+<p>I recommend setting this environment variable in your <code class="docutils literal"><span class="pre">~/.profile</span></code>.</p>
+</div>
+<div class="section" id="removing-bytecode-pyc-files">
+<h3>Removing Bytecode (.pyc) Files<a class="headerlink" href="#removing-bytecode-pyc-files" title="Permalink to this headline">¶</a></h3>
+<p>Here&#8217;s nice trick for removing all of these files, if they already exist:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>$ find . -name &quot;*.pyc&quot; -delete
+</pre></div>
+</div>
+<p>Run that from the root directory of your project, and all <code class="docutils literal"><span class="pre">.pyc</span></code> files
+will suddenly vanish. Much better.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><p class="logo">
+  <a href="../index.html">
+    <img class="logo" src="../_static/python-guide-logo.png" title="The Hitchhiker's Guide to Python"/>
+  </a>
+</p>
+
+<p>
+  This opinionated guide exists to provide both novice and expert Python developers a best practice handbook to the installation, configuration, and usage of Python on a daily basis.
+</p>
+
+
+<h3>Get Updates</h3>
+<p>Receive updates on new releases and upcoming projects.</p>
+
+<p><iframe src="http://ghbtns.com/github-btn.html?user=kennethreitz&type=follow&count=false"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200" height="20"></iframe></p>
+
+<p><a href="https://twitter.com/kennethreitz" class="twitter-follow-button" data-show-count="false">Follow @kennethreitz</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></p>
+
+<p><a href="http://tinyletter.com/kennethreitz">Join Mailing List</a>.</p>
+
+<h3>O'Reilly Book</h3>
+
+<p>This guide is now available in tangible book form!</p>
+
+<a href="https://www.amazon.com/Hitchhikers-Guide-Python-Practices-Development/dp/1491933178/ref=as_li_ss_il?ie=UTF8&linkCode=li2&tag=bookforkind-20&linkId=804806ebdacaf3b56567347f3afbdbca" target="_blank"><img border="0" src="https://ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=1491933178&Format=_SL160_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag=bookforkind-20" ></a><img src="//ir-na.amazon-adsystem.com/e/ir?t=bookforkind-20&l=li2&o=1&a=1491933178" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+
+<p>All proceeds are being directly donated to the <a href="https://djangogirls.org">DjangoGirls</a> organization.</p>
+
+<h3>Other Projects</h3>
+
+<p>More <a href="http://kennethreitz.org/">Kenneth Reitz</a> projects:</p>
+<ul>
+    <li><a href="http://pep8.org/">pep8.org</a></li>
+    <li><a href="http://python-requests.org">Requests: HTTP for Humans</a></li>
+    <li><a href="https://github.com/kennethreitz/records">Records: SQL for Humans</a></li>
+    <li><a href="http://www.git-legit.org">Legit: Git for Humans</a></li>
+    <li><a href="http://docs.python-tablib.org/en/latest/">Tablib: Tabular Datasets</a></li>
+    <li><a href="http://markdownplease.com">Markdown, Please!</a></li>
+</ul>
+
+<h3>Translations</h3>
+<ul>
+  <li><a href="http://docs.python-guide.org/en/latest/">English</a></li>
+  <li><a href="https://python-guide-fr.readthedocs.io/fr/latest/">French</a></li>
+  <li><a href="https://pythonguidecn.readthedocs.io/zh/latest/">Chinese</a></li>
+  <li><a href="https://python-guide-ja.readthedocs.io/en/latest/">Japanese</a></li>
+  <li><a href="https://python-guide-kr.readthedocs.io/ko/latest/">Korean</a></li>
+</ul>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Common Gotchas</a><ul>
+<li><a class="reference internal" href="#mutable-default-arguments">Mutable Default Arguments</a><ul>
+<li><a class="reference internal" href="#what-you-wrote">What You Wrote</a></li>
+<li><a class="reference internal" href="#what-you-might-have-expected-to-happen">What You Might Have Expected to Happen</a></li>
+<li><a class="reference internal" href="#what-does-happen">What Does Happen</a></li>
+<li><a class="reference internal" href="#what-you-should-do-instead">What You Should Do Instead</a></li>
+<li><a class="reference internal" href="#when-the-gotcha-isn-t-a-gotcha">When the Gotcha Isn&#8217;t a Gotcha</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#late-binding-closures">Late Binding Closures</a><ul>
+<li><a class="reference internal" href="#id1">What You Wrote</a></li>
+<li><a class="reference internal" href="#id2">What You Might Have Expected to Happen</a></li>
+<li><a class="reference internal" href="#id3">What Does Happen</a></li>
+<li><a class="reference internal" href="#id4">What You Should Do Instead</a></li>
+<li><a class="reference internal" href="#id5">When the Gotcha Isn&#8217;t a Gotcha</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#bytecode-pyc-files-everywhere">Bytecode (.pyc) Files Everywhere!</a><ul>
+<li><a class="reference internal" href="#disabling-bytecode-pyc-files">Disabling Bytecode (.pyc) Files</a></li>
+<li><a class="reference internal" href="#removing-bytecode-pyc-files">Removing Bytecode (.pyc) Files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="logging.html" title="previous chapter">Logging</a></li>
+      <li>Next: <a href="license.html" title="next chapter">Choosing a License</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script><script type="text/javascript">
+  var _gauges = _gauges || [];
+  (function() {
+    var t   = document.createElement('script');
+    t.type  = 'text/javascript';
+    t.async = true;
+    t.id    = 'gauges-tracker';
+    t.setAttribute('data-site-id', '56ca79a64b2ffa7a470027ea');
+    t.setAttribute('data-track-path', 'https://track.gaug.es/track.gif');
+    t.src = 'https://d36ee2fcip1434.cloudfront.net/track.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(t, s);
+  })();
+</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016. A <a href="http://kennethreitz.com/pages/open-projects.html">Kenneth Reitz</a> Project. <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">CC BY-NC-SA 3.0</a>.
+      
+    </div>
+
+    
+    <a href="https://github.com/kennethreitz/python-guide" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

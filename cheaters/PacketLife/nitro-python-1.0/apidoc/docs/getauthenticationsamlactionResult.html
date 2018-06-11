@@ -1,0 +1,270 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>Citrix NetScaler XML API User&#39;s Guide - Structure Definition</title>
+<link rel="stylesheet" type="text/css" href="help_ns.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body onload="initial()" class="ns_body">
+<div class="ns_content"><table cellpadding="0" cellspacing="0"><script type="text/javascript">
+function changeContext(id,lang,flag){
+	parent.banner.document.language.select.value = lang;
+	if( lang == "C" ){
+		if(flag == "1"){
+			showContent(cfirstcontent,id,lang);
+		}
+		else{
+			showContent(csecondcontent,id,lang);
+		}
+	}
+	if( lang == "Perl" ){
+		if(flag == "1"){
+			showContent(perlfirstcontent,id,lang);
+		}
+		else{
+			showContent(perlsecondcontent,id,lang);
+		}
+	}
+	if( lang == "Java" ){
+		if(flag == "1"){
+			showContent(javafirstcontent,id,lang);	
+		}
+		else{
+			showContent(javasecondcontent,id,lang);
+		}
+	}
+	if( lang == "C#" ){
+		if(flag == "1"){
+			showContent(csharpfirstcontent,id,lang);
+		}
+		else{
+			showContent(csharpsecondcontent,id,lang);
+		}
+	}
+	if( lang == "VB" ){
+		if(flag == "1"){
+			showContent(vbfirstcontent,id,lang);
+		}
+		else{
+			showContent(vbsecondcontent,id,lang);
+		}
+	}
+	if(flag == "1"){
+		showInside(lang,"0");
+	}
+	else{
+		showOutside(lang);
+	}
+}
+function showContent(content,id,lang){
+	if(ie4){
+	   showContentObj=document.all.id;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById(id);
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+  showLangSelect(lang);
+}
+function showInside(str,cond){
+	if(str == "C"){
+ 		var inside_content = csecondcontent;
+ 	}
+ 	if(str == "Perl"){
+ 		var inside_content = perlsecondcontent;
+ 	}
+ 	if(str == "Java"){
+ 		var inside_content = javasecondcontent;
+ 	}
+ 	if(str == "C#"){
+		var inside_content = csharpsecondcontent;
+ 	}
+ 	if(str == "VB"){
+		var inside_content = vbsecondcontent;
+ 	}
+	showContent(inside_content,'qiksearch_div1',str);
+ 	if ( cond == "1" ){
+ 		var page = 'apidoc/docs/getauthenticationsamlactionResult.html#samlactionList';
+ 		document.location.href = page;
+ 	}
+}
+function showOutside(str){
+	if(str == "C" ){
+ 		var inside_content = cfirstcontent;
+ 	}
+ 	if(str == "Perl" ){
+ 		var inside_content = perlfirstcontent;
+ 	}
+ 	if(str == "Java" ){
+ 		var inside_content = javafirstcontent;
+ 	}
+ 	if(str == "C#" ){
+ 		var inside_content = csharpfirstcontent;
+ 	}
+ 	if(str == "VB" ){
+ 		var inside_content = vbfirstcontent;
+ 	}
+ 	showContent(inside_content,'qiksearch_div',str);
+}
+function initial(){
+	ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1;
+	ns6=document.getElementById&&navigator.userAgent.indexOf("Opera")==-1;
+	ns4=document.layers;
+	langSelected = parent.banner.document.language.select.value
+	var plink = parent.banner.document.language.plink.value
+	var my_array=plink.split("&");
+	var temp = my_array[0];
+ 	var grp = temp.split("@");
+	var cmd = my_array[1];
+	var regex = /^stat/i;
+	if( cmd.match(regex) != null ){
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex_stat.html\">Statistics</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getauthenticationsamlactionResult");
+	}
+	else{
+		showPLink("<a href='introduction.html'>Home</a> > <a href=\"APIIndex.htm\">Configuration</a> > <a href=\""+grp[1]+"\">"+grp[0]+"</a> > <a href=\""+cmd+".html\">"+cmd+"</a> > getauthenticationsamlactionResult");
+	}
+	if( langSelected == "C" ){
+ 		var content = cfirstcontent;
+	}
+	else if( langSelected == "Perl" ){
+		var content = perlfirstcontent;
+	}
+	else if( langSelected == "Java" ){
+		var content = javafirstcontent;
+	}
+	else if( langSelected == "C#" ){
+		var content = csharpfirstcontent;
+	}
+	else if( langSelected == "VB" ){
+		var content = vbfirstcontent;
+	}
+	else{
+		var content = cfirstcontent;
+		langSelected="C";
+	}
+	showContent(content,'qiksearch_div',langSelected);
+	showInside(langSelected,"0");
+}
+function showPLink(content){
+	if(ie4){
+	   showContentObj=document.all.progressive_link;
+	}
+	if(ns6){
+	   showContentObj=document.getElementById("progressive_link");
+	}
+	if(ie4||ns6){
+	   if(showContentObj.innerHTML!=content){
+		    showContentObj.innerHTML=content;
+		}
+		else{
+		    showContentObj.innerHTML="";
+		}
+	}
+	if(ns4){
+	   document.nsdiv.document.write(content);
+	   document.nsdiv.document.close();
+	}
+}
+function showLangSelect(id){
+	   if(ie4)
+       {
+       	showObj=document.all.first_url;
+       	showObj1=document.all.second_url;
+       }
+       if(ns6)
+       {
+       	showObj=document.getElementById("first_url");
+       	showObj1=document.getElementById("second_url");
+       }
+       if( id == "C" ){
+       	newlink = "<b>C</b>";
+       	newlink1 = "<b>C</b>";
+       }
+       else{
+       	newlink = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C','1');\"><b>C</b></a>";
+       	newlink1 = "<a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C','0');\"><b>C</b></a>";
+       }
+       if( id == "Perl" ){
+       	newlink = newlink + " | <b>Perl</b>";
+       	newlink1 = newlink1 + " | <b>Perl</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Perl','1');\"><b>Perl</b></a>";
+      	       newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Perl','0');\"><b>Perl</b></a>";
+       }
+       if( id == "Java" ){
+       	newlink = newlink + " | <b>Java</b>";
+       	newlink1 = newlink1 + " | <b>Java</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','Java','1');\"><b>Java</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','Java','0');\"><b>Java</b></a>";
+       }
+       if( id == "C#" ){
+       	newlink = newlink + " | <b>C#</b>";
+       	newlink1 = newlink1 + " | <b>C#</b>";
+       }
+       else{
+       	newlink = newlink + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div','C#','1');\"><b>C#</b></a>";
+       	newlink1 = newlink1 + " | <a href=\"javascript:void(0);\" onclick=\"javascript:changeContext('qiksearch_div1','C#','0');\"><b>C#</b></a>";
+       }
+       showObj.innerHTML = newlink;
+       showObj1.innerHTML = newlink1;
+}
+</script>
+<tr><td><div><div id="progressive_link"></div></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>getauthenticationsamlactionResult Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>getauthenticationsamlactionResult</b> structure defines the return type for getauthenticationsamlaction API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="first_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+cfirstcontent = "<pre>struct getauthenticationsamlactionResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; struct <a href=\'getauthenticationsamlactionResult.html\#authenticationsamlaction\'>authenticationsamlaction</a> list[];<br> };<br></pre></td></tr></table></div>"
+perlfirstcontent = "<pre>$getauthenticationsamlactionResult = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; rc => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; message => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; List => \'@<a href=\'getauthenticationsamlactionResult.html\#authenticationsamlaction\'>authenticationsamlaction</a>\',<br> };<br></pre></td></tr></table></div>"
+javafirstcontent = "<pre>class getauthenticationsamlactionResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; int rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getauthenticationsamlactionResult.html\#authenticationsamlaction\'>authenticationsamlaction</a>[] list;<br> };<br></pre></td></tr></table></div>"
+csharpfirstcontent = "<pre>class getauthenticationsamlactionResult {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 rc;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string message;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href=\'getauthenticationsamlactionResult.html\#authenticationsamlaction\'>authenticationsamlaction</a>[] list;<br> };<br></pre></td></tr></table></div>"
+vbfirstcontent = "<pre>Public <b>Structure</b> getauthenticationsamlactionResult <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public rc As Integer<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public message As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public  authenticationsamlactionList() As  <a href=\'getauthenticationsamlactionResult.html\#authenticationsamlaction\'>authenticationsamlaction</a><br> <b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>rc</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, rc is 0 else rc > 0. Values above 0x8000 indicate Warnings.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>message</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">If the method succeeds, message is NULL else message contains <a href="errorlisting.html">Error/Warning</a> message.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>authenticationsamlactionList</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">List of authenticationsamlactions</div></td></tr><tr><td><br></td></tr><tr><td><div><a name="authenticationsamlaction"></a></div></td></tr><tr><td><br></td></tr><tr class="ns_wp_header"><td>authenticationsamlaction  Structure Definition</td></tr><tr><td><br></td></tr><tr><td><div>The <b>authenticationsamlaction</b> structure defines the actual return type values for getauthenticationsamlaction API.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>Syntax</b></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="second_url" class="padding_left"></div></div></td></tr><tr><td><br></td></tr><tr><td><div><div id="qiksearch_div1" class="syntax padding_left"></div></div></td></tr><tr><td><br></td></tr><script type="text/javascript">
+csecondcontent = "<pre>struct authenticationsamlaction {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * name;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * samlidpcertname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * samlsigningcertname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * samlredirecturl;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int samlacsindex;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * samluserfield;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * samlrejectunsignedassertion;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * samlissuername;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * samltwofactor;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * defaultauthenticationgroup;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * attribute1;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * attribute2;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * attribute3;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * attribute4;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * attribute5;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * attribute6;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * attribute7;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * attribute8;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * attribute9;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * attribute10;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * attribute11;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * attribute12;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * attribute13;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * attribute14;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * attribute15;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * attribute16;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * signaturealg;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * digestmethod;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * requestedauthncontext;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * authnctxclassref[];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * samlbinding;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; unsigned int attributeconsumingserviceindex;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * sendthumbprint;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; char * logouturl;<br> };<br></pre></td></tr></table></div>"
+perlsecondcontent = "<pre>$authenticationsamlaction = {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; name => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; samlidpcertname => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; samlsigningcertname => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; samlredirecturl => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; samlacsindex => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; samluserfield => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; samlrejectunsignedassertion => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; samlissuername => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; samltwofactor => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; defaultauthenticationgroup => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; attribute1 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; attribute2 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; attribute3 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; attribute4 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; attribute5 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; attribute6 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; attribute7 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; attribute8 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; attribute9 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; attribute10 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; attribute11 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; attribute12 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; attribute13 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; attribute14 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; attribute15 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; attribute16 => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; signaturealg => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; digestmethod => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; requestedauthncontext => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; authnctxclassref => \'@\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; samlbinding => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; attributeconsumingserviceindex => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; sendthumbprint => \'$\',<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; logouturl => \'$\',<br> };<br></pre></td></tr></table></div>"
+javasecondcontent = "<pre>class authenticationsamlaction {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String name;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String samlidpcertname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String samlsigningcertname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String samlredirecturl;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt samlacsindex;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String samluserfield;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String samlrejectunsignedassertion;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String samlissuername;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String samltwofactor;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String defaultauthenticationgroup;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String attribute1;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String attribute2;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String attribute3;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String attribute4;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String attribute5;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String attribute6;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String attribute7;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String attribute8;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String attribute9;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String attribute10;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String attribute11;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String attribute12;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String attribute13;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String attribute14;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String attribute15;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String attribute16;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String signaturealg;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String digestmethod;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String requestedauthncontext;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String authnctxclassref[];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String samlbinding;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; UnsignedInt attributeconsumingserviceindex;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String sendthumbprint;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; String logouturl;<br> };<br></pre></td></tr></table></div>"
+csharpsecondcontent = "<pre>class authenticationsamlaction {<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string name;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string samlidpcertname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string samlsigningcertname;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string samlredirecturl;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 samlacsindex;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string samluserfield;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string samlrejectunsignedassertion;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string samlissuername;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string samltwofactor;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string defaultauthenticationgroup;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string attribute1;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string attribute2;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string attribute3;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string attribute4;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string attribute5;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string attribute6;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string attribute7;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string attribute8;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string attribute9;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string attribute10;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string attribute11;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string attribute12;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string attribute13;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string attribute14;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string attribute15;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string attribute16;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string signaturealg;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string digestmethod;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string requestedauthncontext;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string authnctxclassref[];<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string samlbinding;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; System.UInt32 attributeconsumingserviceindex;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string sendthumbprint;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; string logouturl;<br> };<br></pre></td></tr></table></div>"
+vbsecondcontent = "<pre>Public <b>Structure</b> authenticationsamlaction <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public name As String  <br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public samlidpcertname As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public samlsigningcertname As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public samlredirecturl As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public samlacsindex As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public samluserfield As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public samlrejectunsignedassertion As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public samlissuername As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public samltwofactor As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public defaultauthenticationgroup As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public attribute1 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public attribute2 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public attribute3 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public attribute4 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public attribute5 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public attribute6 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public attribute7 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public attribute8 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public attribute9 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public attribute10 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public attribute11 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public attribute12 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public attribute13 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public attribute14 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public attribute15 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public attribute16 As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public signaturealg As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public digestmethod As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public requestedauthncontext As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public authnctxclassref() As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public samlbinding As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public attributeconsumingserviceindex As UInteger<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public sendthumbprint As String<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Public logouturl As String<br><b>End Structure</b><br></pre></td></tr></table></div>"
+</script>
+<tr><td><div><b>Members</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>name</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the SAML server profile.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>samlidpcertname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the SAML server as given in that server’s SSL certificate.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>samlsigningcertname</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the signing authority as given in the SAML server’s SSL certificate.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>samlredirecturl</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">URL to which users are redirected for authentication.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>samlacsindex</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Index/ID of the metadata entry corresponding to this configuration.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>samluserfield</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">SAML user ID, as given in the SAML assertion.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>samlrejectunsignedassertion</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Reject unsigned SAML assertions.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>samlissuername</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">The name to be used in requests sent from	Netscaler to IdP to uniquely identify Netscaler.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>samltwofactor</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Option to enable second factor after SAML</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>defaultauthenticationgroup</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">This is the default group that is chosen when the authentication succeeds in addition to extracted groups.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>attribute1</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the attribute in SAML Assertion whose value needs to be extracted and stored as attribute1</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>attribute2</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the attribute in SAML Assertion whose value needs to be extracted and stored as attribute2</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>attribute3</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the attribute in SAML Assertion whose value needs to be extracted and stored as attribute3</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>attribute4</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the attribute in SAML Assertion whose value needs to be extracted and stored as attribute4</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>attribute5</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the attribute in SAML Assertion whose value needs to be extracted and stored as attribute5</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>attribute6</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the attribute in SAML Assertion whose value needs to be extracted and stored as attribute6</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>attribute7</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the attribute in SAML Assertion whose value needs to be extracted and stored as attribute7</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>attribute8</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the attribute in SAML Assertion whose value needs to be extracted and stored as attribute8</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>attribute9</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the attribute in SAML Assertion whose value needs to be extracted and stored as attribute9</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>attribute10</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the attribute in SAML Assertion whose value needs to be extracted and stored as attribute10</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>attribute11</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the attribute in SAML Assertion whose value needs to be extracted and stored as attribute11</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>attribute12</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the attribute in SAML Assertion whose value needs to be extracted and stored as attribute12</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>attribute13</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the attribute in SAML Assertion whose value needs to be extracted and stored as attribute13</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>attribute14</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the attribute in SAML Assertion whose value needs to be extracted and stored as attribute14</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>attribute15</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the attribute in SAML Assertion whose value needs to be extracted and stored as attribute15</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>attribute16</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Name of the attribute in SAML Assertion whose value needs to be extracted and stored as attribute16</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>signaturealg</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Algorithm to be used to sign/verify SAML transactions</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>digestmethod</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Algorithm to be used to compute/verify digest for SAML transactions</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>requestedauthncontext</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">This element specifies the authentication context requirements of authentication statements returned in the response.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>authnctxclassref</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">This element specifies the authentication class types that are requested from IdP (IdentityProvider).
+InternetProtocol: This is applicable when a principal is authenticated through the use of a provided IP address.
+InternetProtocolPassword: This is applicable when a principal is authenticated through the use of a provided IP address, in addition to a username/password.
+Kerberos: This is applicable when the principal has authenticated using a password to a local authentication authority, in order to acquire a Kerberos ticket.
+MobileOneFactorUnregistered: This indicates authentication of the mobile device without requiring explicit end-user interaction.
+MobileTwoFactorUnregistered: This indicates two-factor based authentication during mobile customer registration process, such as secure device and user PIN.
+MobileOneFactorContract: Reflects mobile contract customer registration procedures and a single factor authentication.
+MobileTwoFactorContract: Reflects mobile contract customer registration procedures and a two-factor based authentication.
+Password: This class is applicable when a principal authenticates using password over unprotected http session.
+PasswordProtectedTransport: This class is applicable when a principal authenticates to an authentication authority through the presentation of a password over a protected session.
+PreviousSession: This class is applicable when a principal had authenticated to an authentication authority at some point in the past using any authentication context.
+X509: This indicates that the principal authenticated by means of a digital signature where the key was validated as part of an X.509 Public Key Infrastructure.
+PGP: This indicates that the principal authenticated by means of a digital signature where the key was validated as part of a PGP Public Key Infrastructure.
+SPKI: This indicates that the principal authenticated by means of a digital signature where the key was validated via an SPKI Infrastructure.
+XMLDSig: This indicates that the principal authenticated by means of a digital signature according to the processing rules specified in the XML Digital Signature specification.
+Smartcard: This indicates that the principal has authenticated using smartcard.
+SmartcardPKI: This class is applicable when a principal authenticates to an authentication authority through a two-factor authentication mechanism using a smartcard with enclosed private key and a PIN.
+SoftwarePKI: This class is applicable when a principal uses an X.509 certificate stored in software to authenticate to the authentication authority.
+Telephony: This class is used to indicate that the principal authenticated via the provision of a fixed-line telephone number, transported via a telephony protocol such as ADSL.
+NomadTelephony: Indicates that the principal is "roaming" and authenticates via the means of the line number, a user suffix, and a password element.
+PersonalTelephony: This class is used to indicate that the principal authenticated via the provision of a fixed-line telephone.
+AuthenticatedTelephony: Indicates that the principal authenticated via the means of the line number, a user suffix, and a password element.
+SecureRemotePassword: This class is applicable when the authentication was performed by means of Secure Remote Password.
+TLSClient: This class indicates that the principal authenticated by means of a client certificate, secured with the SSL/TLS transport.
+TimeSyncToken: This is applicable when a principal authenticates through a time synchronization token.
+Unspecified: This indicates that the authentication was performed by unspecified means.
+Windows: This indicates that Windows integrated authentication is utilized for authentication.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>samlbinding</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">This element specifies the transport mechanism of saml messages.</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>attributeconsumingserviceindex</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Index/ID of the attribute specification at Identity Provider (IdP). IdP will locate attributes requested by SP using this index and send those attributes in Assertion</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>sendthumbprint</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">Option to send thumbprint instead of x509 certificate in SAML request</div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><b>logouturl</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left_second_level">SingleLogout URL on IdP to which logoutRequest will be sent on Netscaler session cleanup.</div></td></tr><tr><td><br></td></tr><tr><td><div><b>See Also</b></div></td></tr><tr><td><br></td></tr><tr><td><div class="padding_left"><a href="getauthenticationsamlaction.html">getauthenticationsamlaction</a></div></td></tr><tr><td><br></td></tr></table></div>
+</body>
+</html>
