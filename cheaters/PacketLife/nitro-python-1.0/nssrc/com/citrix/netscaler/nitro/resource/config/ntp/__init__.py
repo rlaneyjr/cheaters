@@ -1,1 +1,0 @@
-__all__ = ['ntpparam', 'ntpserver', 'ntpstatus', 'ntpsync']

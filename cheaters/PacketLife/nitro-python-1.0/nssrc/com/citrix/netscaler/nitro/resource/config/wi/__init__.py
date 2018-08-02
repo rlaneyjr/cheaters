@@ -1,1 +1,0 @@
-__all__ = ['wipackage', 'wisite', 'wisite_accessmethod_binding', 'wisite_binding', 'wisite_farmname_binding', 'wisite_translationinternalip_binding']
