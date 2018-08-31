@@ -1,0 +1,178 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>udpdump - The Wireshark Network Analyzer 2.6.2</title>
+<link rel="stylesheet" href="ws.css" type="text/css" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:_mdnsresponder@fifth.apple.com" />
+</head>
+
+<body>
+
+
+<!-- INDEX BEGIN -->
+<div name="index">
+<p><a name="__index__"></a></p>
+<!--
+
+<ul>
+
+	<li><a href="#name">NAME</a></li>
+	<li><a href="#synopsis">SYNOPSIS</a></li>
+	<li><a href="#description">DESCRIPTION</a></li>
+	<li><a href="#options">OPTIONS</a></li>
+	<li><a href="#examples">EXAMPLES</a></li>
+	<li><a href="#see_also">SEE ALSO</a></li>
+	<li><a href="#notes">NOTES</a></li>
+	<li><a href="#authors">AUTHORS</a></li>
+</ul>
+
+-->
+
+
+</div>
+<!-- INDEX END -->
+
+<p>
+</p>
+<h1><a name="name">NAME</a></h1>
+<p>udpdump - Provide an UDP receiver that gets packets from network devices (like Aruba routers) and exports them in PCAP format.</p>
+<p>
+</p>
+<hr />
+<h1><a name="synopsis">SYNOPSIS</a></h1>
+<p><strong>udpdump</strong>
+[&nbsp;<strong>--help</strong>&nbsp;]
+[&nbsp;<strong>--version</strong>&nbsp;]
+[&nbsp;<strong>--extcap-interfaces</strong>&nbsp;]
+[&nbsp;<strong>--extcap-dlts</strong>&nbsp;]
+[&nbsp;<strong>--extcap-interface</strong>=&lt;interface&gt;&nbsp;]
+[&nbsp;<strong>--extcap-config</strong>&nbsp;]
+[&nbsp;<strong>--capture</strong>&nbsp;]
+[&nbsp;<strong>--fifo</strong>=&lt;path&nbsp;to&nbsp;file&nbsp;or&nbsp;pipe&gt;&nbsp;]
+[&nbsp;<strong>--port</strong>=&lt;port&gt;&nbsp;]
+[&nbsp;<strong>--payload</strong>=&lt;type&gt;&nbsp;]</p>
+<p>
+</p>
+<hr />
+<h1><a name="description">DESCRIPTION</a></h1>
+<p><strong>udpdump</strong> is a extcap tool that provides an UDP receiver that listens for exported datagrams coming from
+any source (like Aruba routers) and exports them in PCAP format. This provides the user two basic
+functionalities: the first one is to have a listener that prevents the localhost to send back an ICMP
+port-unreachable packet. The second one is to strip out the lower layers (layer 2, IP, UDP) that are useless
+(are used just as export vector). The format of the exported datagrams are EXPORTED_PDU, as specified in
+<a href="https://code.wireshark.org/review/gitweb?p=wireshark.git;a=blob;f=epan/exported_pdu.h;hb=refs/heads/master">https://code.wireshark.org/review/gitweb?p=wireshark.git;a=blob;f=epan/exported_pdu.h;hb=refs/heads/master</a></p>
+<p>
+</p>
+<hr />
+<h1><a name="options">OPTIONS</a></h1>
+<dl>
+<dt><strong><a name="help" class="item">--help</a></strong></dt>
+
+<dd>
+<p>Print program arguments.</p>
+</dd>
+<dt><strong><a name="version" class="item">--version</a></strong></dt>
+
+<dd>
+<p>Print program version.</p>
+</dd>
+<dt><strong><a name="extcap_interfaces" class="item">--extcap-interfaces</a></strong></dt>
+
+<dd>
+<p>List available interfaces.</p>
+</dd>
+<dt><strong><a name="extcap_interface_interface" class="item">--extcap-interface=&lt;interface&gt;</a></strong></dt>
+
+<dd>
+<p>Use specified interfaces.</p>
+</dd>
+<dt><strong><a name="extcap_dlts" class="item">--extcap-dlts</a></strong></dt>
+
+<dd>
+<p>List DLTs of specified interface.</p>
+</dd>
+<dt><strong><a name="extcap_config" class="item">--extcap-config</a></strong></dt>
+
+<dd>
+<p>List configuration options of specified interface.</p>
+</dd>
+<dt><strong><a name="capture" class="item">--capture</a></strong></dt>
+
+<dd>
+<p>Start capturing from specified interface save saved it in place specified by --fifo.</p>
+</dd>
+<dt><strong><a name="fifo_path_to_file_or_pipe" class="item">--fifo=&lt;path to file or pipe&gt;</a></strong></dt>
+
+<dd>
+<p>Save captured packet to file or send it through pipe.</p>
+</dd>
+<dt><strong><a name="port_port" class="item">--port=&lt;port&gt;</a></strong></dt>
+
+<dd>
+<p>Set the listerner port. Port 5555 is the default.</p>
+</dd>
+<dt><strong><a name="payload_type" class="item">--payload=&lt;type&gt;</a></strong></dt>
+
+<dd>
+<p>Set the payload of the exported PDU. Default: data.</p>
+</dd>
+</dl>
+<p>
+</p>
+<hr />
+<h1><a name="examples">EXAMPLES</a></h1>
+<p>To see program arguments:</p>
+<pre>
+    udpdump --help</pre>
+<p>To see program version:</p>
+<pre>
+    udpdump --version</pre>
+<p>To see interfaces:</p>
+<pre>
+    udpdump --extcap-interfaces</pre>
+<pre>
+  Example output:
+    interface {value=udpdump}{display=UDP Listener remote capture}</pre>
+<p>To see interface DLTs:</p>
+<pre>
+    udpdump --extcap-interface=udpdump --extcap-dlts</pre>
+<pre>
+  Example output:
+    dlt {number=252}{name=udpdump}{display=Exported PDUs}</pre>
+<p>To see interface configuration options:</p>
+<pre>
+    udpdump --extcap-interface=udpdump --extcap-config</pre>
+<pre>
+  Example output:
+    arg {number=0}{call=--port}{display=Listen port}{type=unsigned}{range=1,65535}{default=5555}{tooltip=The port the receiver listens on}</pre>
+<p>To capture:</p>
+<pre>
+    udpdump --extcap-interface=randpkt --fifo=/tmp/randpkt.pcapng --capture</pre>
+<p>NOTE: To stop capturing CTRL+C/kill/terminate application.</p>
+<p>
+</p>
+<hr />
+<h1><a name="see_also">SEE ALSO</a></h1>
+<p><code>wireshark(1)</code>, <code>tshark(1)</code>, <code>dumpcap(1)</code>, <code>extcap(4)</code></p>
+<p>
+</p>
+<hr />
+<h1><a name="notes">NOTES</a></h1>
+<p><strong>udpdump</strong> is part of the <strong>Wireshark</strong> distribution.  The latest version
+of <strong>Wireshark</strong> can be found at <a href="https://www.wireshark.org">https://www.wireshark.org</a>.</p>
+<p>HTML versions of the Wireshark project man pages are available at:
+<a href="https://www.wireshark.org/docs/man-pages">https://www.wireshark.org/docs/man-pages</a>.</p>
+<p>
+</p>
+<hr />
+<h1><a name="authors">AUTHORS</a></h1>
+<pre>
+  Original Author
+  ---------------
+  Dario Lombardo             &lt;lomato[AT]gmail.com&gt;</pre>
+
+</body>
+
+</html>

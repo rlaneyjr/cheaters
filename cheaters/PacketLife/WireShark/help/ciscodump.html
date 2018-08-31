@@ -1,0 +1,278 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>ciscodump - The Wireshark Network Analyzer 2.6.2</title>
+<link rel="stylesheet" href="ws.css" type="text/css" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:_mdnsresponder@fifth.apple.com" />
+</head>
+
+<body>
+
+
+<!-- INDEX BEGIN -->
+<div name="index">
+<p><a name="__index__"></a></p>
+<!--
+
+<ul>
+
+	<li><a href="#name">NAME</a></li>
+	<li><a href="#synopsis">SYNOPSIS</a></li>
+	<li><a href="#description">DESCRIPTION</a></li>
+	<li><a href="#options">OPTIONS</a></li>
+	<li><a href="#examples">EXAMPLES</a></li>
+	<li><a href="#known_issues">KNOWN ISSUES</a></li>
+	<li><a href="#see_also">SEE ALSO</a></li>
+	<li><a href="#notes">NOTES</a></li>
+	<li><a href="#authors">AUTHORS</a></li>
+</ul>
+
+-->
+
+
+</div>
+<!-- INDEX END -->
+
+<p>
+</p>
+<h1><a name="name">NAME</a></h1>
+<p>ciscodump - Provide interfaces to capture from a remote Cisco router through SSH.</p>
+<p>
+</p>
+<hr />
+<h1><a name="synopsis">SYNOPSIS</a></h1>
+<p><strong>ciscodump</strong>
+[&nbsp;<strong>--help</strong>&nbsp;]
+[&nbsp;<strong>--version</strong>&nbsp;]
+[&nbsp;<strong>--extcap-interfaces</strong>&nbsp;]
+[&nbsp;<strong>--extcap-dlts</strong>&nbsp;]
+[&nbsp;<strong>--extcap-interface</strong>=&lt;interface&gt;&nbsp;]
+[&nbsp;<strong>--extcap-config</strong>&nbsp;]
+[&nbsp;<strong>--extcap-capture-filter</strong>=&lt;capture&nbsp;filter&gt;&nbsp;]
+[&nbsp;<strong>--capture</strong>&nbsp;]
+[&nbsp;<strong>--fifo</strong>=&lt;path&nbsp;to&nbsp;file&nbsp;or&nbsp;pipe&gt;&nbsp;]
+[&nbsp;<strong>--remote-host</strong>=&lt;IP&nbsp;address&gt;&nbsp;]
+[&nbsp;<strong>--remote-port</strong>=&lt;TCP&nbsp;port&gt;&nbsp;]
+[&nbsp;<strong>--remote-username</strong>=&lt;username&gt;&nbsp;]
+[&nbsp;<strong>--remote-password</strong>=&lt;password&gt;&nbsp;]
+[&nbsp;<strong>--remote-filter</strong>=&lt;filter&lt;gt ]&gt;
+[&nbsp;<strong>--sshkey</strong>=&lt;public&nbsp;key&nbsp;path&lt;gt ]&gt;
+[&nbsp;<strong>--remote-interface</strong>=&lt;interface&gt;&nbsp;]</p>
+<p><strong>ciscodump</strong>
+<strong>--extcap-interfaces</strong></p>
+<p><strong>ciscodump</strong>
+<strong>--extcap-interface</strong>=&lt;interface&gt;
+<strong>--extcap-dlts</strong></p>
+<p><strong>ciscodump</strong>
+<strong>--extcap-interface</strong>=&lt;interface&gt;
+<strong>--extcap-config</strong></p>
+<p><strong>ciscodump</strong>
+<strong>--extcap-interface</strong>=&lt;interface&gt;
+<strong>--fifo</strong>=&lt;path&nbsp;to&nbsp;file&nbsp;or&nbsp;pipe&gt;
+<strong>--capture</strong>
+<strong>--remote-host=remoterouter</strong>
+<strong>--remote-port=22</strong>
+<strong>--remote-username=user</strong>
+<strong>--remote-interface</strong>=&lt;the&nbsp;router&nbsp;interface&gt;</p>
+<p>
+</p>
+<hr />
+<h1><a name="description">DESCRIPTION</a></h1>
+<p><strong>ciscodump</strong> is an extcap tool that relys on Cisco EPC to allow a user to run a remote capture
+on a Cisco router in a SSH connection. The minimum IOS version supporting this feature is 12.4(20)T. More details can be
+found here:
+<a href="http://www.cisco.com/c/en/us/products/collateral/ios-nx-os-software/ios-embedded-packet-capture/datasheet_c78-502727.html">http://www.cisco.com/c/en/us/products/collateral/ios-nx-os-software/ios-embedded-packet-capture/datasheet_c78-502727.html</a></p>
+<p>Supported interfaces:</p>
+<ol>
+<li><strong><a name="cisco" class="item">cisco</a></strong>
+
+</li>
+</ol>
+<p>
+</p>
+<hr />
+<h1><a name="options">OPTIONS</a></h1>
+<dl>
+<dt><strong><a name="help" class="item">--help</a></strong></dt>
+
+<dd>
+<p>Print program arguments.</p>
+</dd>
+<dt><strong><a name="version" class="item">--version</a></strong></dt>
+
+<dd>
+<p>Print program version.</p>
+</dd>
+<dt><strong><a name="extcap_interfaces" class="item">--extcap-interfaces</a></strong></dt>
+
+<dd>
+<p>List available interfaces.</p>
+</dd>
+<dt><strong><a name="extcap_interface_interface" class="item">--extcap-interface=&lt;interface&gt;</a></strong></dt>
+
+<dd>
+<p>Use specified interfaces.</p>
+</dd>
+<dt><strong><a name="extcap_dlts" class="item">--extcap-dlts</a></strong></dt>
+
+<dd>
+<p>List DLTs of specified interface.</p>
+</dd>
+<dt><strong><a name="extcap_config" class="item">--extcap-config</a></strong></dt>
+
+<dd>
+<p>List configuration options of specified interface.</p>
+</dd>
+<dt><strong><a name="capture" class="item">--capture</a></strong></dt>
+
+<dd>
+<p>Start capturing from specified interface and save it in place specified by --fifo.</p>
+</dd>
+<dt><strong><a name="fifo_path_to_file_or_pipe" class="item">--fifo=&lt;path to file or pipe&gt;</a></strong></dt>
+
+<dd>
+<p>Save captured packet to file or send it through pipe.</p>
+</dd>
+<dt><strong><a name="remote_host_remote_host" class="item">--remote-host=&lt;remote host&gt;</a></strong></dt>
+
+<dd>
+<p>The address of the remote host for capture.</p>
+</dd>
+<dt><strong><a name="remote_port_remote_port" class="item">--remote-port=&lt;remote port&gt;</a></strong></dt>
+
+<dd>
+<p>The SSH port of the remote host.</p>
+</dd>
+<dt><strong><a name="remote_username_username" class="item">--remote-username=&lt;username&gt;</a></strong></dt>
+
+<dd>
+<p>The username for ssh authentication.</p>
+</dd>
+<dt><strong><a name="remote_password_password" class="item">--remote-password=&lt;password&gt;</a></strong></dt>
+
+<dd>
+<p>The password to use (if not ssh-agent and pubkey are used). WARNING: the
+passwords are stored in plaintext and visible to all users on this system. It is
+recommended to use keyfiles with a SSH agent.</p>
+</dd>
+<dt><strong><a name="remote_filter_filter" class="item">--remote-filter=&lt;filter&gt;</a></strong></dt>
+
+<dd>
+<p>The remote filter on the router. This is a capture filter that follows the Cisco IOS standards (http://www.cisco.com/c/en/us/support/docs/ip/access-lists/26448-ACLsamples.html). Multiple filters can be specified using a comma between them. BEWARE: when using a filter, the default behavior is to drop all the packets except the ones that fall into the filter.</p>
+<p>Examples:</p>
+<pre>
+    permit ip host MYHOST any, permit ip any host MYHOST (capture the traffic for MYHOST)</pre>
+<pre>
+    deny ip host MYHOST any, deny ip any host MYHOST, permit ip any any (capture all the traffic except MYHOST)</pre>
+</dd>
+<dt><strong><a name="sshkey_ssh_private_key_path" class="item">--sshkey=&lt;SSH private key path&gt;</a></strong></dt>
+
+<dd>
+<p>The path to a private key for authentication.</p>
+</dd>
+<dt><strong><a name="remote_interface_remote_interface" class="item">--remote-interface=&lt;remote interface&gt;</a></strong></dt>
+
+<dd>
+<p>The remote network interface to capture from.</p>
+</dd>
+<dt><strong><a name="extcap_capture_filter_capture_filter" class="item">--extcap-capture-filter=&lt;capture filter&gt;</a></strong></dt>
+
+<dd>
+<p>Unused (compatibility only).</p>
+</dd>
+</dl>
+<p>
+</p>
+<hr />
+<h1><a name="examples">EXAMPLES</a></h1>
+<p>To see program arguments:</p>
+<pre>
+    ciscodump --help</pre>
+<p>To see program version:</p>
+<pre>
+    ciscodump --version</pre>
+<p>To see interfaces:</p>
+<pre>
+    ciscodump --extcap-interfaces</pre>
+<p>Only one interface (cisco) is supported.</p>
+<pre>
+  Output:
+    interface {value=cisco}{display=SSH remote capture}</pre>
+<p>To see interface DLTs:</p>
+<pre>
+    ciscodump --extcap-interface=cisco --extcap-dlts</pre>
+<pre>
+  Output:
+    dlt {number=147}{name=cisco}{display=Remote capture dependent DLT}</pre>
+<p>To see interface configuration options:</p>
+<pre>
+    ciscodump --extcap-interface=cisco --extcap-config</pre>
+<pre>
+  Output:
+    ciscodump --extcap-interface=cisco --extcap-config
+    arg {number=0}{call=--remote-host}{display=Remote SSH server address}
+        {type=string}{tooltip=The remote SSH host. It can be both an IP address or a hostname}
+        {required=true}
+    arg {number=1}{call=--remote-port}{display=Remote SSH server port}{type=unsigned}
+        {default=22}{tooltip=The remote SSH host port (1-65535)}{range=1,65535}
+    arg {number=2}{call=--remote-username}{display=Remote SSH server username}{type=string}
+        {default=&lt;current user&gt;}{tooltip=The remote SSH username. If not provided, the current
+        user will be used}
+    arg {number=3}{call=--remote-password}{display=Remote SSH server password}{type=string}
+        {tooltip=The SSH password, used when other methods (SSH agent or key files) are unavailable.}
+    arg {number=4}{call=--sshkey}{display=Path to SSH private key}{type=fileselect}
+        {tooltip=The path on the local filesystem of the private ssh key}
+    arg {number=5}{call--sshkey-passphrase}{display=SSH key passphrase}
+        {type=string}{tooltip=Passphrase to unlock the SSH private key}
+    arg {number=6}{call=--remote-interface}{display=Remote interface}{type=string}
+        {required=true}{tooltip=The remote network interface used for capture}
+    arg {number=7}{call=--remote-filter}{display=Remote capture filter}{type=string}
+        {default=(null)}{tooltip=The remote capture filter}
+    arg {number=8}{call=--remote-count}{display=Packets to capture}{type=unsigned}{required=true}
+        {tooltip=The number of remote packets to capture.}</pre>
+<p>To capture:</p>
+<pre>
+    ciscodump --extcap-interface cisco --fifo=/tmp/cisco.pcap --capture --remote-host 192.168.1.10
+        --remote-username user --remote-interface gigabit0/0
+        --remote-filter &quot;permit ip host 192.168.1.1 any, permit ip any host 192.168.1.1&quot;</pre>
+<p>NOTE: Packet count is mandatory, hence the capture will start after this number.</p>
+<p>
+</p>
+<hr />
+<h1><a name="known_issues">KNOWN ISSUES</a></h1>
+<p>The configuration of the capture on the routers is a multi-step process. If the SSH connection is interrupted during
+it, the configuration can be in an inconsistent state. That can happen also if the capture is stopped and ciscodump
+can't clean the configuration up. In this case it is necessary to log into the router and manually clean the
+configuration, removing both the capture point (WIRESHARK_CAPTURE_POINT), the capture buffer (WIRESHARK_CAPTURE_BUFFER)
+and the capture filter (WIRESHARK_CAPTURE_FILTER).</p>
+<p>Another known issues is related to the number of captured packets (--remote-count). Due to the nature of the capture
+buffer, ciscodump waits for the capture to complete and then issues the command to show it. It means that if the user
+specifies a number of packets above the currently captured, the show command is never shown. Not only is the count of
+the maximum number of captured packets, but it is also the _exact_ number of expected packets.</p>
+<p>
+</p>
+<hr />
+<h1><a name="see_also">SEE ALSO</a></h1>
+<p><code>wireshark(1)</code>, <code>tshark(1)</code>, <code>dumpcap(1)</code>, <code>extcap(4)</code>, <code>sshdump(1)</code></p>
+<p>
+</p>
+<hr />
+<h1><a name="notes">NOTES</a></h1>
+<p><strong>ciscodump</strong> is part of the <strong>Wireshark</strong> distribution.  The latest version
+of <strong>Wireshark</strong> can be found at <a href="https://www.wireshark.org">https://www.wireshark.org</a>.</p>
+<p>HTML versions of the Wireshark project man pages are available at:
+<a href="https://www.wireshark.org/docs/man-pages">https://www.wireshark.org/docs/man-pages</a>.</p>
+<p>
+</p>
+<hr />
+<h1><a name="authors">AUTHORS</a></h1>
+<pre>
+  Original Author
+  -------- ------
+  Dario Lombardo             &lt;lomato[AT]gmail.com&gt;</pre>
+
+</body>
+
+</html>

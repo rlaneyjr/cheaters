@@ -1,0 +1,273 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>sshdump - The Wireshark Network Analyzer 2.6.2</title>
+<link rel="stylesheet" href="ws.css" type="text/css" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:_mdnsresponder@fifth.apple.com" />
+</head>
+
+<body>
+
+
+<!-- INDEX BEGIN -->
+<div name="index">
+<p><a name="__index__"></a></p>
+<!--
+
+<ul>
+
+	<li><a href="#name">NAME</a></li>
+	<li><a href="#synopsis">SYNOPSIS</a></li>
+	<li><a href="#description">DESCRIPTION</a></li>
+	<li><a href="#options">OPTIONS</a></li>
+	<li><a href="#examples">EXAMPLES</a></li>
+	<li><a href="#see_also">SEE ALSO</a></li>
+	<li><a href="#notes">NOTES</a></li>
+	<li><a href="#authors">AUTHORS</a></li>
+</ul>
+
+-->
+
+
+</div>
+<!-- INDEX END -->
+
+<p>
+</p>
+<h1><a name="name">NAME</a></h1>
+<p>sshdump - Provide interfaces to capture from a remote host through SSH using a remote capture binary.</p>
+<p>
+</p>
+<hr />
+<h1><a name="synopsis">SYNOPSIS</a></h1>
+<p><strong>sshdump</strong>
+[&nbsp;<strong>--help</strong>&nbsp;]
+[&nbsp;<strong>--version</strong>&nbsp;]
+[&nbsp;<strong>--extcap-interfaces</strong>&nbsp;]
+[&nbsp;<strong>--extcap-dlts</strong>&nbsp;]
+[&nbsp;<strong>--extcap-interface</strong>=&lt;interface&gt;&nbsp;]
+[&nbsp;<strong>--extcap-config</strong>&nbsp;]
+[&nbsp;<strong>--extcap-capture-filter</strong>=&lt;capture&nbsp;filter&gt;&nbsp;]
+[&nbsp;<strong>--capture</strong>&nbsp;]
+[&nbsp;<strong>--fifo</strong>=&lt;path&nbsp;to&nbsp;file&nbsp;or&nbsp;pipe&gt;&nbsp;]
+[&nbsp;<strong>--remote-host</strong>=&lt;IP&nbsp;address&gt;&nbsp;]
+[&nbsp;<strong>--remote-port</strong>=&lt;TCP&nbsp;port&gt;&nbsp;]
+[&nbsp;<strong>--remote-username</strong>=&lt;username&gt;&nbsp;]
+[&nbsp;<strong>--remote-password</strong>=&lt;password&gt;&nbsp;]
+[&nbsp;<strong>--sshkey</strong>=&lt;public&nbsp;key&nbsp;path&lt;gt ]&gt;
+[&nbsp;<strong>--remote-interface</strong>=&lt;interface&gt;&nbsp;]
+[&nbsp;<strong>--remote-capture-command</strong>=&lt;capture&nbsp;command&gt;&nbsp;]</p>
+<p><strong>sshdump</strong>
+<strong>--extcap-interfaces</strong></p>
+<p><strong>sshdump</strong>
+<strong>--extcap-interface</strong>=&lt;interface&gt;
+<strong>--extcap-dlts</strong></p>
+<p><strong>sshdump</strong>
+<strong>--extcap-interface</strong>=&lt;interface&gt;
+<strong>--extcap-config</strong></p>
+<p><strong>sshdump</strong>
+<strong>--extcap-interface</strong>=&lt;interface&gt;
+<strong>--fifo</strong>=&lt;path&nbsp;to&nbsp;file&nbsp;or&nbsp;pipe&gt;
+<strong>--capture</strong>
+<strong>--remote-host=myremotehost</strong>
+<strong>--remote-port=22</strong>
+<strong>--remote-username=user</strong>
+<strong>--remote-interface=eth2</strong>
+<strong>--remote-capture-command='tcpdump&nbsp;-U&nbsp;-i&nbsp;eth0&nbsp;-w-'</strong></p>
+<p>
+</p>
+<hr />
+<h1><a name="description">DESCRIPTION</a></h1>
+<p><strong>Sshdump</strong> is a extcap tool that allows one to run a remote capture
+tool in a SSH connection. The requirement is that the capture
+executable must have the capabilities to capture from the wanted
+interface.</p>
+<p>The feature is functionally equivalent to run commands like</p>
+<p>$ ssh remoteuser@remotehost -p 22222 'tcpdump -U -i IFACE -w -' &gt; FILE &amp;
+$ wireshark FILE</p>
+<p>$ ssh remoteuser@remotehost '/sbin/dumpcap -i IFACE -P -w - -f &quot;not port 22&quot;' &gt; FILE &amp;
+$ wireshark FILE</p>
+<p>Supported interfaces:</p>
+<ol>
+<li><strong><a name="ssh" class="item">ssh</a></strong>
+
+</li>
+</ol>
+<p>
+</p>
+<hr />
+<h1><a name="options">OPTIONS</a></h1>
+<dl>
+<dt><strong><a name="help" class="item">--help</a></strong></dt>
+
+<dd>
+<p>Print program arguments.</p>
+</dd>
+<dt><strong><a name="version" class="item">--version</a></strong></dt>
+
+<dd>
+<p>Print program version.</p>
+</dd>
+<dt><strong><a name="extcap_interfaces" class="item">--extcap-interfaces</a></strong></dt>
+
+<dd>
+<p>List available interfaces.</p>
+</dd>
+<dt><strong><a name="extcap_interface_interface" class="item">--extcap-interface=&lt;interface&gt;</a></strong></dt>
+
+<dd>
+<p>Use specified interfaces.</p>
+</dd>
+<dt><strong><a name="extcap_dlts" class="item">--extcap-dlts</a></strong></dt>
+
+<dd>
+<p>List DLTs of specified interface.</p>
+</dd>
+<dt><strong><a name="extcap_config" class="item">--extcap-config</a></strong></dt>
+
+<dd>
+<p>List configuration options of specified interface.</p>
+</dd>
+<dt><strong><a name="capture" class="item">--capture</a></strong></dt>
+
+<dd>
+<p>Start capturing from specified interface and write raw packet data to the location specified by --fifo.</p>
+</dd>
+<dt><strong><a name="fifo_path_to_file_or_pipe" class="item">--fifo=&lt;path to file or pipe&gt;</a></strong></dt>
+
+<dd>
+<p>Save captured packet to file or send it through pipe.</p>
+</dd>
+<dt><strong><a name="remote_host_remote_host" class="item">--remote-host=&lt;remote host&gt;</a></strong></dt>
+
+<dd>
+<p>The address of the remote host for capture.</p>
+</dd>
+<dt><strong><a name="remote_port_remote_port" class="item">--remote-port=&lt;remote port&gt;</a></strong></dt>
+
+<dd>
+<p>The SSH port of the remote host.</p>
+</dd>
+<dt><strong><a name="remote_username_username" class="item">--remote-username=&lt;username&gt;</a></strong></dt>
+
+<dd>
+<p>The username for ssh authentication.</p>
+</dd>
+<dt><strong><a name="remote_password_password" class="item">--remote-password=&lt;password&gt;</a></strong></dt>
+
+<dd>
+<p>The password to use (if not ssh-agent and pubkey are used). WARNING: the
+passwords are stored in plaintext and visible to all users on this system. It is
+recommended to use keyfiles with a SSH agent.</p>
+</dd>
+<dt><strong><a name="sshkey_ssh_private_key_path" class="item">--sshkey=&lt;SSH private key path&gt;</a></strong></dt>
+
+<dd>
+<p>The path to a private key for authentication.</p>
+</dd>
+<dt><strong><a name="remote_interface_remote_interface" class="item">--remote-interface=&lt;remote interface&gt;</a></strong></dt>
+
+<dd>
+<p>The remote network interface to capture from.</p>
+</dd>
+<dt><strong><a name="remote_capture_command_capture_command" class="item">--remote-capture-command=&lt;capture command&gt;</a></strong></dt>
+
+<dd>
+<p>A custom remote capture command that produces the remote stream that is shown in Wireshark.
+The command must be able to produce a PCAP stream written to STDOUT. See below for more
+examples.</p>
+</dd>
+<dt><strong><a name="extcap_capture_filter_capture_filter" class="item">--extcap-capture-filter=&lt;capture filter&gt;</a></strong></dt>
+
+<dd>
+<p>The capture filter</p>
+</dd>
+</dl>
+<p>
+</p>
+<hr />
+<h1><a name="examples">EXAMPLES</a></h1>
+<p>To see program arguments:</p>
+<pre>
+    sshdump --help</pre>
+<p>To see program version:</p>
+<pre>
+    sshdump --version</pre>
+<p>To see interfaces:</p>
+<pre>
+    sshdump --extcap-interfaces</pre>
+<p>Only one interface (ssh) is supported.</p>
+<pre>
+  Output:
+    interface {value=ssh}{display=SSH remote capture}</pre>
+<p>To see interface DLTs:</p>
+<pre>
+    sshdump --extcap-interface=ssh --extcap-dlts</pre>
+<pre>
+  Output:
+    dlt {number=147}{name=ssh}{display=Remote capture dependent DLT}</pre>
+<p>To see interface configuration options:</p>
+<pre>
+    sshdump --extcap-interface=ssh --extcap-config</pre>
+<pre>
+  Output:</pre>
+<pre>
+    arg {number=0}{call=--remote-host}{display=Remote SSH server address}{type=string}
+        {tooltip=The remote SSH host. It can be both an IP address or a hostname}{required=true}
+    arg {number=1}{call=--remote-port}{display=Remote SSH server port}{type=unsigned}
+        {default=22}{tooltip=The remote SSH host port (1-65535)}{range=1,65535}
+    arg {number=2}{call=--remote-username}{display=Remote SSH server username}{type=string}
+        {default=myusername}{tooltip=The remote SSH username. If not provided, the current user will be used}
+    arg {number=3}{call=--remote-password}{display=Remote SSH server password}{type=password}
+        {tooltip=The SSH password, used when other methods (SSH agent or key files) are unavailable.}
+    arg {number=4}{call=--sshkey}{display=Path to SSH private key}{type=fileselect}
+        {tooltip=The path on the local filesystem of the private ssh key}
+    arg {number=5}{call=--sshkey-passphrase}{display=SSH key passphrase}
+        {type=string}{tooltip=Passphrase to unlock the SSH private key}
+    arg {number=6}{call=--remote-interface}{display=Remote interface}{type=string}{default=eth0}
+        {tooltip=The remote network interface used for capture}
+    arg {number=7}{call=--remote-capture-command}{display=Remote capture command}{type=string}
+        {tooltip=The remote command used to capture.}
+    arg {number=8}{call=--remote-filter}{display=Remote capture filter}{type=string}
+        {default=not ((host myip) and port 22)}{tooltip=The remote capture filter}
+    arg {number=9}{call=--remote-count}{display=Packets to capture}{type=unsigned}{default=0}
+        {tooltip=The number of remote packets to capture. (Default: unlimited)}</pre>
+<p>To capture:</p>
+<pre>
+    sshdump --extcap-interface=ssh --fifo=/tmp/ssh.pcap --capture --remote-host 192.168.1.10
+    --remote-username user --remote-filter &quot;not port 22&quot;</pre>
+<p>To use different capture binaries:</p>
+<pre>
+    sshdump --extcap-interface=ssh --fifo=/tmp/ssh.pcap --capture --remote-host 192.168.1.10
+    --remote-capture-command='dumpcap -i eth0 -P -w -'</pre>
+<pre>
+    sshdump --extcap-interface=ssh --fifo=/tmp/ssh.pcap --capture --remote-host 192.168.1.10
+    --remote-capture-command='sudo tcpdump -i eth0 -U -w -'</pre>
+<p>NOTE: To stop capturing CTRL+C/kill/terminate application.</p>
+<p>
+</p>
+<hr />
+<h1><a name="see_also">SEE ALSO</a></h1>
+<p><code>wireshark(1)</code>, <code>tshark(1)</code>, <code>dumpcap(1)</code>, <code>extcap(4)</code>, <code>tcpdump(1)</code></p>
+<p>
+</p>
+<hr />
+<h1><a name="notes">NOTES</a></h1>
+<p><strong>Sshdump</strong> is part of the <strong>Wireshark</strong> distribution.  The latest version
+of <strong>Wireshark</strong> can be found at <a href="https://www.wireshark.org">https://www.wireshark.org</a>.</p>
+<p>HTML versions of the Wireshark project man pages are available at:
+<a href="https://www.wireshark.org/docs/man-pages">https://www.wireshark.org/docs/man-pages</a>.</p>
+<p>
+</p>
+<hr />
+<h1><a name="authors">AUTHORS</a></h1>
+<pre>
+  Original Author
+  -------- ------
+  Dario Lombardo             &lt;lomato[AT]gmail.com&gt;</pre>
+
+</body>
+
+</html>

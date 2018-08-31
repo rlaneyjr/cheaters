@@ -1,0 +1,115 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>mmdbresolve - The Wireshark Network Analyzer 2.6.2</title>
+<link rel="stylesheet" href="ws.css" type="text/css" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:_mdnsresponder@fifth.apple.com" />
+</head>
+
+<body>
+
+
+<!-- INDEX BEGIN -->
+<div name="index">
+<p><a name="__index__"></a></p>
+<!--
+
+<ul>
+
+	<li><a href="#name">NAME</a></li>
+	<li><a href="#synopsis">SYNOPSIS</a></li>
+	<li><a href="#description">DESCRIPTION</a></li>
+	<li><a href="#options">OPTIONS</a></li>
+	<li><a href="#examples">EXAMPLES</a></li>
+	<li><a href="#see_also">SEE ALSO</a></li>
+	<li><a href="#notes">NOTES</a></li>
+	<li><a href="#authors">AUTHORS</a></li>
+</ul>
+
+-->
+
+
+</div>
+<!-- INDEX END -->
+
+<p>
+</p>
+<h1><a name="name">NAME</a></h1>
+<p>mmdbresolve - Read IPv4 and IPv6 addresses and print their IP geolocation information.</p>
+<p>
+</p>
+<hr />
+<h1><a name="synopsis">SYNOPSIS</a></h1>
+<p><strong>mmdbresolve</strong>
+<strong>-f&nbsp;&lt;dbfile&gt;</strong>
+[&nbsp;<strong>-f&nbsp;&lt;dbfile&gt;</strong>&nbsp;]
+<em>...</em></p>
+<p>
+</p>
+<hr />
+<h1><a name="description">DESCRIPTION</a></h1>
+<p><strong>mmdbresolve</strong> reads IPv4 and IPv6 addresses on stdin and prints their IP geolocation information
+on stdout. Each input line must contain exactly one address. Output is in INI format, with a section
+delimiter named after the query address followed by a set of &quot;key: value&quot; pairs. A comment
+beginning with &quot;# End&quot; is appended to each section.</p>
+<p>At startup an &quot;[init]&quot; section is printed that shows the status of each datbase and of mmdbresolve
+itself.</p>
+<p>
+</p>
+<hr />
+<h1><a name="options">OPTIONS</a></h1>
+<dl>
+<dt><strong><a name="f" class="item">-f</a></strong></dt>
+
+<dd>
+<p>Path to a MaxMind Database file. Multiple databases may be specified.</p>
+</dd>
+</dl>
+<p>
+</p>
+<hr />
+<h1><a name="examples">EXAMPLES</a></h1>
+<p>To resolve a single address:</p>
+<pre>
+    echo 4.4.4.4 | mmdbresolve -f /usr/share/GeoIP/GeoLite2-City.mmdb</pre>
+<pre>
+  Example output:
+[init]
+db.0.path: /usr/share/GeoIP/GeoLite2-City.mmdb
+db.0.status: OK
+mmdbresolve.status: true
+# End init
+[4.4.4.4]
+# GeoLite2-City
+country.iso_code: US
+country.names.en: United States
+location.latitude: 37.751000
+location.longitude: -97.822000
+# End 4.4.4.4</pre>
+<p>
+</p>
+<hr />
+<h1><a name="see_also">SEE ALSO</a></h1>
+<p><code>wireshark(1)</code>, <code>tshark(1)</code></p>
+<p>
+</p>
+<hr />
+<h1><a name="notes">NOTES</a></h1>
+<p><strong>mmdbresolve</strong> is part of the <strong>Wireshark</strong> distribution. The latest version
+of <strong>Wireshark</strong> can be found at <a href="https://www.wireshark.org">https://www.wireshark.org</a>.</p>
+<p>HTML versions of the Wireshark project man pages are available at:
+<a href="https://www.wireshark.org/docs/man-pages">https://www.wireshark.org/docs/man-pages</a>.</p>
+<p>
+</p>
+<hr />
+<h1><a name="authors">AUTHORS</a></h1>
+<pre>
+  Original Author
+  ---------------
+  Gerald Combs            &lt;gerald[AT]wireshark.org&gt;</pre>
+
+</body>
+
+</html>
