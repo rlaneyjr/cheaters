@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<!--[if lt IE 10]><html class="no-js ie8 oldie" lang="en" prefix="og: http://ogp.me/ns/# og:book: http://ogp.me/ns/book# og:video: http://ogp.me/ns/video#"
+
+  
+    itemscope itemtype="http://schema.org/Book http://schema.org/ItemPage" data-offline-url="/"
+data-url="/library/view/mongodb-the-definitive/9781449344795/ch04.html"
+
+data-archive="9781449344795"
+data-publishers="O&#39;Reilly Media, Inc."
+
+
+  data-htmlfile-name="ch04.html"
+  data-epub-title="MongoDB: The Definitive Guide, 2nd Edition"
+  
+
+
+data-debug="0" ><![endif]-->
+<!--[if gt IE 9]><!--><html class="no-js" lang="en" prefix="og: http://ogp.me/ns/# og:book: http://ogp.me/ns/book# og:video: http://ogp.me/ns/video#"
+
+  
+    itemscope itemtype="http://schema.org/Book http://schema.org/ItemPage" data-offline-url="/"
+data-url="/library/view/mongodb-the-definitive/9781449344795/ch04.html"
+
+data-archive="9781449344795"
+data-publishers="O&#39;Reilly Media, Inc."
+
+
+  data-htmlfile-name="ch04.html"
+  data-epub-title="MongoDB: The Definitive Guide, 2nd Edition"
+  
+
+
+data-debug="0" ><!--<![endif]-->
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>4. Querying - MongoDB: The Definitive Guide, 2nd Edition [Book]</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/library/view/static/CACHE/css/d0b028ab6188.css" type="text/css" />
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css' />
+    
+
+    <meta property="og:title" content="MongoDB: The Definitive Guide, 2nd Edition" />
+    <meta itemprop="isPartOf" content="/library/view/mongodb-the-definitive/9781449344795/" />
+    <meta itemprop="name" content="4. Querying" />
+    
+    <meta property="og:url" itemprop="url" content="https://www.oreilly.com/library/view/mongodb-the-definitive/9781449344795/ch04.html" />
+    <meta property="og:site_name" content="O’Reilly | Safari" />
+    <meta property="og:image" itemprop="thumbnailUrl" content="https://www.oreilly.com/library/cover/9781449344795/" />
+    
+    <meta property="og:image:secure_url" itemprop="thumbnailUrl" content="https://www.safaribooksonline.com/library/cover/9781449344795/360h/">
+    <meta property="og:description" itemprop="description" name="description" content="Chapter 4. Querying This chapter looks at querying in detail. The main areas covered are as follows: You can perform ad hoc queries on the database using the find or ...  - Selection from MongoDB: The Definitive Guide, 2nd Edition [Book]">
+    
+    <meta itemprop="inLanguage" content="en" />
+    
+    <meta itemprop="publisher" content="O&#39;Reilly Media, Inc." />
+    
+    <meta property="og:type" content="article" />
+    <meta property="og:book:isbn" itemprop="isbn" content="9781449344689" />
+    
+    <meta property="og:book:author" itemprop="author" content="Kristina Chodorow" />
+    
+    <meta property="og:book:tag" itemprop="about" content="Databases" />
+    
+    
+    
+    <meta property="og:image:width" content="400">
+    <meta property="og:image:height" content="400">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@safari">
+
+
+
+
+<!-- Start Visual Website Optimizer Asynchronous Code -->
+<script type='text/javascript'>
+var _vwo_code=(function(){
+var account_id=291788,
+settings_tolerance=2000,
+library_tolerance=2500,
+use_existing_jquery=false,
+/* DO NOT EDIT BELOW THIS LINE */
+f=false,d=document;return{use_existing_jquery:function(){return use_existing_jquery;},library_tolerance:function(){return library_tolerance;},finish:function(){if(!f){f=true;var a=d.getElementById('_vis_opt_path_hides');if(a)a.parentNode.removeChild(a);}},finished:function(){return f;},load:function(a){var b=d.createElement('script');b.src=a;b.type='text/javascript';b.innerText;b.onerror=function(){_vwo_code.finish();};d.getElementsByTagName('head')[0].appendChild(b);},init:function(){settings_timer=setTimeout('_vwo_code.finish()',settings_tolerance);var a=d.createElement('style'),b='body{opacity:0 !important;filter:alpha(opacity=0) !important;background:none !important;}',h=d.getElementsByTagName('head')[0];a.setAttribute('id','_vis_opt_path_hides');a.setAttribute('type','text/css');if(a.styleSheet)a.styleSheet.cssText=b;else a.appendChild(d.createTextNode(b));h.appendChild(a);this.load('//dev.visualwebsiteoptimizer.com/j.php?a='+account_id+'&u='+encodeURIComponent(d.URL)+'&r='+Math.random());return settings_timer;}};}());_vwo_settings_timer=_vwo_code.init();
+</script>
+<!-- End Visual Website Optimizer Asynchronous Code -->
+
+
+
+
+    <link rel="shortcut icon" href="//www.safaribooksonline.com/favicon.ico" type="image/vnd.microsoft.icon" />
+    <link rel="apple-touch-icon" href="//www.safaribooksonline.com/static/corp/img/apple-touch-icon.png" />
+    
+
+  
+    <style type="text/css" title="ibis-book">
+    @charset "utf-8";#sbo-rt-content html,#sbo-rt-content div,#sbo-rt-content div,#sbo-rt-content span,#sbo-rt-content applet,#sbo-rt-content object,#sbo-rt-content iframe,#sbo-rt-content h1,#sbo-rt-content h2,#sbo-rt-content h3,#sbo-rt-content h4,#sbo-rt-content h5,#sbo-rt-content h6,#sbo-rt-content p,#sbo-rt-content blockquote,#sbo-rt-content pre,#sbo-rt-content a,#sbo-rt-content abbr,#sbo-rt-content acronym,#sbo-rt-content address,#sbo-rt-content big,#sbo-rt-content cite,#sbo-rt-content code,#sbo-rt-content del,#sbo-rt-content dfn,#sbo-rt-content em,#sbo-rt-content font,#sbo-rt-content img,#sbo-rt-content ins,#sbo-rt-content kbd,#sbo-rt-content q,#sbo-rt-content s,#sbo-rt-content samp,#sbo-rt-content small,#sbo-rt-content strike,#sbo-rt-content strong,#sbo-rt-content sub,#sbo-rt-content sup,#sbo-rt-content tt,#sbo-rt-content var,#sbo-rt-content b,#sbo-rt-content u,#sbo-rt-content i,#sbo-rt-content center,#sbo-rt-content dl,#sbo-rt-content dt,#sbo-rt-content dd,#sbo-rt-content ol,#sbo-rt-content ul,#sbo-rt-content li,#sbo-rt-content fieldset,#sbo-rt-content form,#sbo-rt-content label,#sbo-rt-content legend,#sbo-rt-content table,#sbo-rt-content caption,#sbo-rt-content tdiv,#sbo-rt-content tfoot,#sbo-rt-content thead,#sbo-rt-content tr,#sbo-rt-content th,#sbo-rt-content td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}@page{margin:5px !important}#sbo-rt-content p{margin:8px 0 0;line-height:125%;text-align:left}#sbo-rt-content em{font-style:italic;font-family:inherit}#sbo-rt-content em.replaceable{font-style:italic}#sbo-rt-content em strong,#sbo-rt-content strong em{font-weight:bold;font-style:italic;font-family:inherit}#sbo-rt-content strong.userinput{font-weight:bold;font-style:normal}#sbo-rt-content span.bolditalic{font-weight:bold;font-style:italic}#sbo-rt-content strong,#sbo-rt-content span.bold{font-weight:bold}#sbo-rt-content a.ulink,#sbo-rt-content a.xref,#sbo-rt-content a.email,#sbo-rt-content a.link{text-decoration:none;color:#8e0012}#sbo-rt-content sup{font-size:x-small;vertical-align:super}#sbo-rt-content sub{font-size:smaller;vertical-align:sub}#sbo-rt-content span.lineannotation{font-style:italic;color:#A62A2A;font-family:serif,"DejaVuSerif"}#sbo-rt-content span.underline{text-decoration:underline}#sbo-rt-content span.strikethrough{text-decoration:line-through}#sbo-rt-content span.smallcaps{font-variant:small-caps}#sbo-rt-content span.cursor{background:#000;color:#FFF}#sbo-rt-content span.smaller{font-size:75%}#sbo-rt-content .boxedtext,#sbo-rt-content .keycap{border-style:solid;border-width:1px;border-color:#000;padding:1px}#sbo-rt-content span.gray50{color:#7F7F7F;}#sbo-rt-content .gray-background,#sbo-rt-content .reverse-video{background:#2E2E2E;color:#FFF}#sbo-rt-content .light-gray-background{background:#A0A0A0}#sbo-rt-content .preserve-whitespace{white-space:pre-wrap}#sbo-rt-content h1,#sbo-rt-content div.toc-title,#sbo-rt-content h2,#sbo-rt-content h3,#sbo-rt-content h4,#sbo-rt-content h5{-webkit-hyphens:none;hyphens:none;adobe-hyphenate:none;font-weight:bold;text-align:left;page-break-after:avoid !important;font-family:sans-serif,"DejaVuSans"}#sbo-rt-content h1,#sbo-rt-content div.toc-title{font-size:1.5em;margin-top:20px !important}#sbo-rt-content h2{font-size:1.3em;color:#8e0012;margin:40px 0 8px 0}#sbo-rt-content h3{font-size:1.1em;margin:30px 0 8px 0 !important}#sbo-rt-content h4{font-size:1em;color:#555;margin:20px 0 8px 0 !important}#sbo-rt-content h5{font-size:1em;font-weight:normal;font-style:italic;margin:15px 0 6px 0 !important}#sbo-rt-content section.chapter div.titlepage,#sbo-rt-content section.appendix div.titlepage,#sbo-rt-content section.preface div.titlepage{page-break-inside:avoid;page-break-after:avoid}#sbo-rt-content section.chapter>div.titlepage,#sbo-rt-content section.preface>div.titlepage,#sbo-rt-content section.appendix>div.titlepage{margin-bottom:50px}#sbo-rt-content section.chapter>div.titlepage h2.title,#sbo-rt-content section.preface>div.titlepage h2.title,#sbo-rt-content section.appendix>div.titlepage h2.title{font-size:2em;line-height:1;margin-bottom:15px;color:#000;padding-bottom:10px;border-bottom:1px solid #000}#sbo-rt-content div.toc-title{margin-bottom:30px !important}#sbo-rt-content div.part h1{font-size:2em;text-align:center;margin-top:0 !important;padding:50px 0 20px 0;border-bottom:1px solid #000}#sbo-rt-content img{max-width:95%;margin:0 auto;padding:0}#sbo-rt-content div.figure{background-color:transparent;text-align:center;-webkit-border-radius:5px;border-radius:5px;border:1px solid #DCDCDC;padding:15px 5px 15px 5px !important;margin:30px 0 30px 0 !important;max-height:100%;page-break-inside:avoid}#sbo-rt-content div.figure-title,#sbo-rt-content div.informalfigure div.caption{font-size:90%;text-align:center;font-weight:normal;font-style:italic;font-family:serif,"DejaVuSerif";color:#000;padding:5px !important;page-break-before:avoid;page-break-after:avoid}#sbo-rt-content div.informalfigure{text-align:center;padding:5px 0 !important}#sbo-rt-content div.sidebar{margin:30px 0 20px 0 !important;-webkit-border-radius:5px;border-radius:5px;border:1px solid #DCDCDC;background-color:#F7F7F7;font-size:90%;padding:15px !important;page-break-inside:avoid}#sbo-rt-content div.sidebar-title{font-weight:bold;font-size:1em;font-family:sans-serif,"DejaVuSans";text-transform:uppercase;letter-spacing:1px;text-align:center;margin:4px 0 6px 0 !important;page-break-inside:avoid}#sbo-rt-content div.sidebar div.figure p.title,#sbo-rt-content div.sidebar div.informalfigure div.caption{font-size:90%;text-align:center;font-weight:normal;font-style:italic;font-family:serif,"DejaVuSerif";color:#000;padding:5px !important;page-break-before:avoid;page-break-after:avoid}#sbo-rt-content div.sidebar ol{margin-left:15px}#sbo-rt-content div.sidebar div.tip,#sbo-rt-content div.sidebar div.note,#sbo-rt-content div.sidebar div.warning,#sbo-rt-content div.sidebar div.caution,#sbo-rt-content div.sidebar div.important{margin:20px auto 20px auto !important;font-size:90%;width:85%}#sbo-rt-content div.sidebar div.figure{border:none}#sbo-rt-content pre{white-space:pre-wrap;font-family:"Ubuntu Mono",monospace;margin:25px 0 25px 20px;font-size:85%;display:block;-webkit-hyphens:none;hyphens:none;adobe-hyphenate:none}#sbo-rt-content div.note pre.programlisting,#sbo-rt-content div.tip pre.programlisting,#sbo-rt-content div.warning pre.programlisting,#sbo-rt-content div.caution pre.programlisting,#sbo-rt-content div.important pre.programlisting{margin-bottom:0}#sbo-rt-content code{font-family:"Ubuntu Mono",monospace}#sbo-rt-content code strong em,#sbo-rt-content code em strong,#sbo-rt-content pre em strong,#sbo-rt-content pre strong em,#sbo-rt-content strong code em code,#sbo-rt-content em code strong code,#sbo-rt-content span.bolditalic code{font-weight:bold;font-style:italic;font-family:"Ubuntu Mono BoldItal",monospace}#sbo-rt-content code em,#sbo-rt-content em code,#sbo-rt-content pre em,#sbo-rt-content em.replaceable{font-family:"Ubuntu Mono Ital",monospace;font-style:italic}#sbo-rt-content code strong,#sbo-rt-content strong code,#sbo-rt-content pre strong,#sbo-rt-content strong.userinput{font-family:"Ubuntu Mono Bold",monospace;font-weight:bold}#sbo-rt-content div.example{margin:10px 0 15px 0 !important}#sbo-rt-content div.example-title{font-style:italic;font-weight:normal;font-family:serif,"DejaVuSerif";margin:10px 0 5px 0 !important;border-bottom:1px solid #000}#sbo-rt-content li pre.example{padding:10px 0 !important}#sbo-rt-content div.example-contents pre.programlisting,#sbo-rt-content div.example-contents pre.screen{margin:0}#sbo-rt-content span.gray{color:#4C4C4C}#sbo-rt-content div.book div.titlepage h1.title{font-size:3em;font-family:sans-serif,"DejaVuSans";font-weight:bold;margin:50px 0 10px 0 !important;line-height:1;text-align:center}#sbo-rt-content div.book div.titlepage h2.subtitle{text-align:center;color:#000;margin:0 !important;font-style:italic;font-family:serif;font-size:1.5em}#sbo-rt-content div.book div.titlepage div.author h3{font-size:2em;font-family:sans-serif,"DejaVuSans";font-weight:bold;color:#8e0012;margin:50px 0 !important;text-align:center}#sbo-rt-content div.book div.titlepage div.publishername{margin-top:60%;margin-bottom:20px;text-align:center;font-size:1.25em}#sbo-rt-content div.book div.titlepage div.locations p{margin:0;text-align:center}#sbo-rt-content div.book div.titlepage div.locations p.cities{font-size:80%;text-align:center;margin-top:5px}#sbo-rt-content section.preface[title="Dedication"]>div.titlepage h2.title{text-align:center;text-transform:uppercase;font-size:1.5em;margin-top:50px;margin-bottom:50px}#sbo-rt-content section.preface[title="Dedication"] p{font-style:italic;text-align:center}#sbo-rt-content div.colophon h1.title{font-size:1.3em;margin:0 !important;font-family:serif,"DejaVuSerif";font-weight:normal}#sbo-rt-content div.colophon h2.subtitle{margin:0 !important;color:#000;font-family:serif,"DejaVuSerif";font-size:1em;font-weight:normal}#sbo-rt-content div.colophon div.author h3.author{font-size:1.1em;font-family:serif,"DejaVuSerif";margin:10px 0 0 !important;font-weight:normal}#sbo-rt-content div.colophon div.editor h4,#sbo-rt-content div.colophon div.editor h3.editor{color:#000;font-size:.8em;margin:15px 0 0 !important;font-family:serif,"DejaVuSerif";font-weight:normal}#sbo-rt-content div.colophon div.editor h3.editor{font-size:.8em;margin:0 !important;font-family:serif,"DejaVuSerif";font-weight:normal}#sbo-rt-content div.colophon div.publisher{margin-top:10px}#sbo-rt-content div.colophon div.publisher p,#sbo-rt-content div.colophon div.publisher span.publishername{margin:0;font-size:.8em}#sbo-rt-content div.legalnotice p,#sbo-rt-content div.timestamp p{font-size:.8em}#sbo-rt-content div.timestamp p{margin-top:10pt}#sbo-rt-content div.colophon[title="About the Author"] h1.title,#sbo-rt-content div.colophon[title="Colophon"] h1.title{font-size:1.5em;margin:0 !important;font-family:sans-serif,"DejaVuSans";font-weight:bold}#sbo-rt-content section.chapter div.titlepage div.author{margin:10px 0 10px 0}#sbo-rt-content section.chapter div.titlepage div.author div.affiliation{font-style:italic}#sbo-rt-content div.attribution{margin:5px 0 0 50px !important}#sbo-rt-content h3.author span.orgname{display:none}#sbo-rt-content div.epigraph{margin:10px 0 10px 20px !important;page-break-inside:avoid;font-size:90%}#sbo-rt-content div.epigraph p{font-style:italic}#sbo-rt-content blockquote,#sbo-rt-content div.blockquote{margin:10px !important;page-break-inside:avoid;font-size:95%}#sbo-rt-content blockquote p,#sbo-rt-content div.blockquote p{font-family:serif,"DejaVuSerif";font-style:italic}#sbo-rt-content blockquote div.attribution{margin:5px 0 0 30px !important;text-align:right;width:80%}#sbo-rt-content blockquote div.attribution p{font-style:normal}#sbo-rt-content p.right{text-align:right;margin:0}#sbo-rt-content div.footnote{font-size:90%}#sbo-rt-content div.refnamediv h2,#sbo-rt-content div.refnamediv h3,#sbo-rt-content div.refsynopsisdiv h2{font-size:1.1em;color:#000;margin-top:15px !important;margin-bottom:0 !important}#sbo-rt-content div.refentry div.refsect1 h2{font-size:1.1em;color:#000;margin-top:15px !important;margin-bottom:0 !important}#sbo-rt-content div.refsect2 h3{font-size:1em;color:#000;margin-top:10px !important;margin-bottom:0 !important}#sbo-rt-content div.refnamediv p{margin-left:15px !important}#sbo-rt-content dt{padding-top:10px !important;padding-bottom:0 !important}#sbo-rt-content dt span.term{font-weight:bold;font-style:italic}#sbo-rt-content dt span.term code.literal{font-style:normal;font-weight:normal}#sbo-rt-content dd{margin-left:1.5em !important}#sbo-rt-content dd,#sbo-rt-content li{text-align:left}#sbo-rt-content ol{list-style-type:decimal;margin-top:8px !important;margin-bottom:8px !important;margin-left:20px !important;padding-left:25px !important}#sbo-rt-content ol ol{list-style-type:lower-alpha}#sbo-rt-content ol ol ol{list-style-type:lower-roman}#sbo-rt-content ul{list-style-type:square;margin-top:8px !important;margin-bottom:8px !important;margin-left:5px !important;padding-left:20px !important}#sbo-rt-content ul ul{list-style-type:none;padding-left:0 !important;margin-left:0 !important}#sbo-rt-content ol li,#sbo-rt-content ul li,#sbo-rt-content dd{margin-bottom:1em}#sbo-rt-content ul ul li p:before{content:"— "}#sbo-rt-content ul ul ul li p:before{content:""}#sbo-rt-content ul ul ul{list-style-type:square;margin-left:20px !important;padding-left:30px !important}#sbo-rt-content div.orderedlistalpha{list-style-type:upper-alpha}#sbo-rt-content table.simplelist{margin-left:20px !important;margin-bottom:10px}#sbo-rt-content table.simplelist td{border:none;font-size:90%}#sbo-rt-content table.simplelist tr{border-bottom:none}#sbo-rt-content table.simplelist tr:nth-of-type(even){background-color:transparent}#sbo-rt-content div.calloutlist p:first-child{margin-top:-25px !important}#sbo-rt-content div.calloutlist dd{padding-left:0;margin-top:-25px}#sbo-rt-content div.calloutlist img{padding:0}#sbo-rt-content a.co img{padding:0}#sbo-rt-content div.calloutlist>dl>dd>div.orderedlist{margin-top:25pt}#sbo-rt-content div.calloutlist>dl>dd>div.orderedlist>ol.orderedlist>li{margin-bottom:25pt}#sbo-rt-content div.toc ol{margin-top:8px !important;margin-bottom:8px !important;margin-left:0 !important;padding-left:0 !important}#sbo-rt-content div.toc ol ol{margin-left:30px !important;padding-left:0 !important}#sbo-rt-content div.toc ol li{list-style-type:none}#sbo-rt-content div.toc a{color:#8e0012}#sbo-rt-content div.toc ol a{font-size:1em;font-weight:bold}#sbo-rt-content div.toc ol>li>ol a{font-weight:bold;font-size:1em}#sbo-rt-content div.toc ol>li>ol>li>ol a{text-decoration:none;font-weight:normal;font-size:1em}#sbo-rt-content div.tip,#sbo-rt-content div.note,#sbo-rt-content div.warning,#sbo-rt-content div.caution,#sbo-rt-content div.important{margin:30px !important;-webkit-border-radius:5px;border-radius:5px;font-size:90%;padding:10px 8px 20px 8px !important;page-break-inside:avoid}#sbo-rt-content div.tip,#sbo-rt-content div.note,#sbo-rt-content div.important{border:1px solid #BEBEBE;background-color:transparent}#sbo-rt-content div.warning,#sbo-rt-content div.caution{border:1px solid #BC8F8F}#sbo-rt-content div.tip h3,#sbo-rt-content div.note h3,#sbo-rt-content div.warning h3,#sbo-rt-content div.caution h3,#sbo-rt-content div.important h3{font:bold 90%;font-family:sans-serif,"DejaVuSans";text-transform:uppercase;letter-spacing:1px;text-align:center;margin:4px 0 6px !important}#sbo-rt-content div.tip h3,#sbo-rt-content div.note h3,#sbo-rt-content div.important h3{color:#737373}#sbo-rt-content div.warning h3,#sbo-rt-content div.caution h3{color:#C67171}#sbo-rt-content div.sect1[title="Safari® Books Online"] div.note{background-color:transparent;margin:8px 0 0 !important;border:0 solid #BEBEBE;-webkit-border-radius:0;border-radius:0;font-size:100%;padding:0 !important;page-break-inside:avoid}#sbo-rt-content div.sect1[title="Safari® Books Online"] div.note h3{display:none}#sbo-rt-content div.table,#sbo-rt-content table{margin:15px auto 30px auto !important;max-width:95%;border-collapse:collapse;border-spacing:0}#sbo-rt-content div.table,#sbo-rt-content div.informaltable{page-break-inside:avoid}#sbo-rt-content tr{border-bottom:1px solid #c3c3c3}#sbo-rt-content thead td{border-bottom:#9d9d9d 1px solid !important;border-top:#9d9d9d 1px solid !important}#sbo-rt-content tr:nth-of-type(even){background-color:#f1f6fc}#sbo-rt-content thead{font-family:sans-serif,"DejaVuSans";color:#000;font-weight:bold}#sbo-rt-content td{padding:.3em;text-align:left;vertical-align:baseline;font-size:80%}#sbo-rt-content div.informaltable table{margin:10px auto !important}#sbo-rt-content div.informaltable table tr{border-bottom:none}#sbo-rt-content div.informaltable table tr:nth-of-type(even){background-color:transparent}#sbo-rt-content div.informaltable td,#sbo-rt-content div.informaltable th{border:#9d9d9d 1px solid}#sbo-rt-content div.table-title{font-weight:normal;font-style:italic;font-family:serif,"DejaVuSerif";margin:20px 0 0 0 !important;text-align:center;padding:0}#sbo-rt-content table code{font-size:smaller}#sbo-rt-content div.equation{margin:10px 0 15px 0 !important}#sbo-rt-content div.equation-title{font-style:italic;font-weight:normal;font-family:serif,"DejaVuSerif";margin:20px 0 10px 0 !important;page-break-after:avoid}#sbo-rt-content div.equation-contents{margin-left:20px}#sbo-rt-content span.inlinemediaobject{height:.85em;display:inline-block;margin-bottom:.2em}#sbo-rt-content span.inlinemediaobject img{margin:0;height:.85em}#sbo-rt-content div.informalequation{margin:20px 0 20px 20px;width:75%}#sbo-rt-content div.informalequation img{width:75%}#sbo-rt-content div.index{font-weight:bold}#sbo-rt-content div.index dt{line-height:140%}#sbo-rt-content div.index a.indexterm{color:#8e0012}#sbo-rt-content code.boolean,#sbo-rt-content .navy{color:rgb(0,0,128);}#sbo-rt-content code.character,#sbo-rt-content .olive{color:rgb(128,128,0);}#sbo-rt-content code.comment,#sbo-rt-content .blue{color:rgb(0,0,255);}#sbo-rt-content code.conditional,#sbo-rt-content .limegreen{color:rgb(50,205,50);}#sbo-rt-content code.constant,#sbo-rt-content .darkorange{color:rgb(255,140,0);}#sbo-rt-content code.debug,#sbo-rt-content .darkred{color:rgb(139,0,0);}#sbo-rt-content code.define,#sbo-rt-content .darkgoldenrod,#sbo-rt-content .gold{color:rgb(184,134,11);}#sbo-rt-content code.delimiter,#sbo-rt-content .dimgray{color:rgb(105,105,105);}#sbo-rt-content code.error,#sbo-rt-content .red{color:rgb(255,0,0);}#sbo-rt-content code.exception,#sbo-rt-content .salmon{color:rgb(250,128,11);}#sbo-rt-content code.float,#sbo-rt-content .steelblue{color:rgb(70,130,180);}#sbo-rt-content pre code.function,#sbo-rt-content .green{color:rgb(0,128,0);}#sbo-rt-content code.identifier,#sbo-rt-content .royalblue{color:rgb(65,105,225);}#sbo-rt-content code.ignore,#sbo-rt-content .gray{color:rgb(128,128,128);}#sbo-rt-content code.include,#sbo-rt-content .purple{color:rgb(128,0,128);}#sbo-rt-content code.keyword,#sbo-rt-content .sienna{color:rgb(160,82,45);}#sbo-rt-content code.label,#sbo-rt-content .deeppink{color:rgb(255,20,147);}#sbo-rt-content code.macro,#sbo-rt-content .orangered{color:rgb(255,69,0);}#sbo-rt-content code.number,#sbo-rt-content .brown{color:rgb(165,42,42);}#sbo-rt-content code.operator,#sbo-rt-content .black{color:#000;}#sbo-rt-content code.preCondit,#sbo-rt-content .teal{color:rgb(0,128,128);}#sbo-rt-content code.preProc,#sbo-rt-content .fuschia{color:rgb(255,0,255);}#sbo-rt-content code.repeat,#sbo-rt-content .indigo{color:rgb(75,0,130);}#sbo-rt-content code.special,#sbo-rt-content .saddlebrown{color:rgb(139,69,19);}#sbo-rt-content code.specialchar,#sbo-rt-content .magenta{color:rgb(255,0,255);}#sbo-rt-content code.specialcomment,#sbo-rt-content .seagreen{color:rgb(46,139,87);}#sbo-rt-content code.statement,#sbo-rt-content .forestgreen{color:rgb(34,139,34);}#sbo-rt-content code.storageclass,#sbo-rt-content .plum{color:rgb(221,160,221);}#sbo-rt-content code.string,#sbo-rt-content .darkred{color:rgb(139,0,0);}#sbo-rt-content code.structure,#sbo-rt-content .chocolate{color:rgb(210,106,30);}#sbo-rt-content code.tag,#sbo-rt-content .darkcyan{color:rgb(0,139,139);}#sbo-rt-content code.todo,#sbo-rt-content .black{color:#000;}#sbo-rt-content code.type,#sbo-rt-content .mediumslateblue{color:rgb(123,104,238);}#sbo-rt-content code.typedef,#sbo-rt-content .darkgreen{color:rgb(0,100,0);}#sbo-rt-content code.underlined{text-decoration:underline;}#sbo-rt-content pre code.hll{background-color:#ffc}#sbo-rt-content pre code.c{color:#09F;font-style:italic}#sbo-rt-content pre code.err{color:#A00}#sbo-rt-content pre code.k{color:#069;font-weight:bold}#sbo-rt-content pre code.o{color:#555}#sbo-rt-content pre code.cm{color:#35586C;font-style:italic}#sbo-rt-content pre code.cp{color:#099}#sbo-rt-content pre code.c1{color:#35586C;font-style:italic}#sbo-rt-content pre code.cs{color:#35586C;font-weight:bold;font-style:italic}#sbo-rt-content pre code.gd{background-color:#FCC}#sbo-rt-content pre code.ge{font-style:italic}#sbo-rt-content pre code.gr{color:#F00}#sbo-rt-content pre code.gh{color:#030;font-weight:bold}#sbo-rt-content pre code.gi{background-color:#CFC}#sbo-rt-content pre code.go{color:#000}#sbo-rt-content pre code.gp{color:#009;font-weight:bold}#sbo-rt-content pre code.gs{font-weight:bold}#sbo-rt-content pre code.gu{color:#030;font-weight:bold}#sbo-rt-content pre code.gt{color:#9C6}#sbo-rt-content pre code.kc{color:#069;font-weight:bold}#sbo-rt-content pre code.kd{color:#069;font-weight:bold}#sbo-rt-content pre code.kn{color:#069;font-weight:bold}#sbo-rt-content pre code.kp{color:#069}#sbo-rt-content pre code.kr{color:#069;font-weight:bold}#sbo-rt-content pre code.kt{color:#078;font-weight:bold}#sbo-rt-content pre code.m{color:#F60}#sbo-rt-content pre code.s{color:#C30}#sbo-rt-content pre code.na{color:#309}#sbo-rt-content pre code.nb{color:#366}#sbo-rt-content pre code.nc{color:#0A8;font-weight:bold}#sbo-rt-content pre code.no{color:#360}#sbo-rt-content pre code.nd{color:#99F}#sbo-rt-content pre code.ni{color:#999;font-weight:bold}#sbo-rt-content pre code.ne{color:#C00;font-weight:bold}#sbo-rt-content pre code.nf{color:#C0F}#sbo-rt-content pre code.nl{color:#99F}#sbo-rt-content pre code.nn{color:#0CF;font-weight:bold}#sbo-rt-content pre code.nt{color:#309;font-weight:bold}#sbo-rt-content pre code.nv{color:#033}#sbo-rt-content pre code.ow{color:#000;font-weight:bold}#sbo-rt-content pre code.w{color:#bbb}#sbo-rt-content pre code.mf{color:#F60}#sbo-rt-content pre code.mh{color:#F60}#sbo-rt-content pre code.mi{color:#F60}#sbo-rt-content pre code.mo{color:#F60}#sbo-rt-content pre code.sb{color:#C30}#sbo-rt-content pre code.sc{color:#C30}#sbo-rt-content pre code.sd{color:#C30;font-style:italic}#sbo-rt-content pre code.s2{color:#C30}#sbo-rt-content pre code.se{color:#C30;font-weight:bold}#sbo-rt-content pre code.sh{color:#C30}#sbo-rt-content pre code.si{color:#A00}#sbo-rt-content pre code.sx{color:#C30}#sbo-rt-content pre code.sr{color:#3AA}#sbo-rt-content pre code.s1{color:#C30}#sbo-rt-content pre code.ss{color:#A60}#sbo-rt-content pre code.bp{color:#366}#sbo-rt-content pre code.vc{color:#033}#sbo-rt-content pre code.vg{color:#033}#sbo-rt-content pre code.vi{color:#033}#sbo-rt-content pre code.il{color:#F60}#sbo-rt-content pre code.g{color:#050}#sbo-rt-content pre code.l{color:#C60}#sbo-rt-content pre code.l{color:#F90}#sbo-rt-content pre code.n{color:#008}#sbo-rt-content pre code.nx{color:#008}#sbo-rt-content pre code.py{color:#96F}#sbo-rt-content pre code.p{color:#000}#sbo-rt-content pre code.x{color:#F06}#sbo-rt-content div.blockquote_sampler_toc{width:95%;margin:5px 5px 5px 10px !important}#sbo-rt-content div{font-family:serif,"DejaVuSerif";text-align:left}
+    </style>
+  
+
+
+
+    <style>
+    header.global {
+      top:26px;
+    }
+    .orm-topbar {
+      width: 100%;
+      height: 26px;
+      padding: 0 17px;
+      line-height: 26px;
+      background: #d3002d;
+      color: #fff;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 9;
+      font-size: 13px;
+    }
+    .orm-topbar svg {
+      width: 78px;
+      height: 13px;
+      fill: #fff;
+      vertical-align: middle;
+    }
+    .orm-topbar span {
+      vertical-align: middle;
+      float: right;
+      color: #fff;
+      font-weight: bold;
+    }
+    .orm-topbar:hover span {
+      text-decoration: underline;
+    }
+    </style>
+
+    
+</head>
+<body class="js-preview-content  ">
+
+
+<header class="global">
+    <a href="//www.oreilly.com/go/oreilly" class="orm-topbar"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 59.13 9.88"><desc>O'Reilly logo</desc><polygon points="28.09 1.96 28.09 0.42 21.68 0.42 21.68 9.64 28.09 9.64 28.09 8.11 23.22 8.11 23.22 5.8 27.86 5.8 27.86 4.27 23.22 4.27 23.22 1.96 28.09 1.96"/><polygon points="32.85 9.64 32.85 0.42 34.39 0.42 34.39 8.11 38.82 8.11 38.82 9.64 32.85 9.64"/><polygon points="40.07 9.64 40.07 0.42 41.61 0.42 41.61 8.11 46.04 8.11 46.04 9.64 40.07 9.64"/><rect x="29.71" y="0.42" width="1.54" height="9.22"/><path d="M1.59,6.28a4.8,4.8,0,1,1,4.8,4.8,4.8,4.8,0,0,1-4.8-4.8M4.09,4A3.27,3.27,0,1,0,6.4,3,3.27,3.27,0,0,0,4.09,4" transform="translate(-1.59 -1.2)"/><path d="M19.82,6.89A2.69,2.69,0,0,0,19,1.62H14.41v9.22h1.54V7h2.14l2.32,3.84H22.2ZM15.95,5.47V3.16H19a1.15,1.15,0,0,1,0,2.31h-3.1Z" transform="translate(-1.59 -1.2)"/><path d="M13.32,2.61a1.13,1.13,0,1,1-1.13-1.13,1.13,1.13,0,0,1,1.13,1.13" transform="translate(-1.59 -1.2)"/><polygon points="52.9 0.42 51.03 0.42 48.66 3.85 46.3 0.42 44.43 0.42 47.89 5.44 47.89 9.64 49.43 9.64 49.43 5.44 52.9 0.42"/><path d="M58.31,1.2a2.41,2.41,0,1,0,2.41,2.42A2.42,2.42,0,0,0,58.31,1.2m0,4.44a2,2,0,1,1,2-2,2,2,0,0,1-2,2" transform="translate(-1.59 -1.2)"/><path d="M59.4,3.09a0.72,0.72,0,0,0-.72-0.72H57.32V4.83h0.41v-1h0.69l0.49,1h0.46l-0.51-1a0.71,0.71,0,0,0,.54-0.69m-1.67-.31h0.95a0.31,0.31,0,0,1,.31.31,0.31,0.31,0,0,1-.31.3H57.73V2.78Z" transform="translate(-1.59 -1.2)"/></svg></a>
+    <div class="header-top">
+        <nav class="main-nav">
+            <a href="/" class="logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 125.46 36" class="home-logo"><desc>Safari Logo</desc><path d="M27.85,7.25a1.4,1.4,0,1,1,2.75,0V15.6a1.44,1.44,0,0,1-1.4,1.71A1.49,1.49,0,0,1,28,16.64,13.56,13.56,0,0,1,27.54,14c-0.62-3.89-4.15-6.54-8.66-6.54S11,10.16,11,14c0,3,1.66,4.56,6.8,6.28l5.29,1.82c5.86,2,8.14,4.46,8.14,9,0,5.76-4.36,9.6-10.84,9.6-5,0-8.3-1.87-9.91-5.6v3.42a1.4,1.4,0,1,1-2.75,0V29.71A1.44,1.44,0,0,1,9.18,28c1,0,1.35.52,1.45,2A10.59,10.59,0,0,0,13,35.63a9.05,9.05,0,0,0,6.8,2.7c5,0,8.3-2.8,8.3-7a5.45,5.45,0,0,0-2.54-4.82,18.52,18.52,0,0,0-3.89-1.71l-4.51-1.56c-3.58-1.24-5.24-2-6.54-3a7.46,7.46,0,0,1-2.75-6c0-5.45,4.36-9.13,10.69-9.13,4.46,0,7.63,1.71,9.29,5.08V7.25Z" transform="translate(-7.78 -4.92)"/><path d="M51.81,35.11c-1.82,4.1-4.51,5.81-9.28,5.81-5.39,0-8.71-2.75-8.71-7.31A6.88,6.88,0,0,1,38.11,27c1.87-.83,4.62-1.19,8.92-1.19,0.93,0,2,0,2.8.05a7,7,0,0,0,.93.05,0.89,0.89,0,0,0,1-.88V24.84c0-3.37-.31-4.46-1.71-5.71-1.19-1.09-2.8-1.56-5.24-1.56-4.15,0-6.64,1.71-7.11,4.88a1.45,1.45,0,0,1-2.9-.16c0-2.13,1.82-4.67,4.15-5.81a13.94,13.94,0,0,1,6-1.09c3.63,0,6.22.88,7.83,2.75,1.4,1.56,1.82,3.16,1.82,6.64V37a0.89,0.89,0,0,0,1,1h1.76a1.08,1.08,0,1,1,0,2.13H53.05a1.06,1.06,0,0,1-1.24-1.24V35.11Zm-15-1.61c0,3.32,2.33,5.24,6.33,5.24,3.27,0,5.76-1.24,7.16-3.58a16.08,16.08,0,0,0,1.45-6.38A0.8,0.8,0,0,0,51.24,28a34,34,0,0,0-4.62-.21C39.93,27.79,36.76,29.66,36.76,33.5Z" transform="translate(-7.78 -4.92)"/><path d="M67.91,37a0.89,0.89,0,0,0,1,1H71.8a1.08,1.08,0,1,1,0,2.13H62a1.09,1.09,0,1,1,0-2.13h2.07a0.89,0.89,0,0,0,1-1V19.29a0.89,0.89,0,0,0-1-1H61.63a1.08,1.08,0,1,1,0-2.13h2.44a0.89,0.89,0,0,0,1-1V13.48c0-3.16.78-5.39,2.39-6.8a8.56,8.56,0,0,1,5.19-1.76,10.85,10.85,0,0,1,3.58.62,1.83,1.83,0,0,1,.52,1,1.23,1.23,0,0,1-.88,1,2.74,2.74,0,0,1-.67-0.1,12.61,12.61,0,0,0-2.28-.31,5.41,5.41,0,0,0-4,2c-0.73,1-1,2.18-1,4.56v1.35a0.89,0.89,0,0,0,1,1h3.58a1.09,1.09,0,1,1,0,2.13H68.95a0.89,0.89,0,0,0-1,1V37Z" transform="translate(-7.78 -4.92)"/><path d="M93.68,35.11c-1.82,4.1-4.51,5.81-9.28,5.81-5.39,0-8.71-2.75-8.71-7.31A6.88,6.88,0,0,1,80,27c1.87-.83,4.62-1.19,8.92-1.19,0.93,0,2,0,2.8.05a7,7,0,0,0,.93.05,0.89,0.89,0,0,0,1-.88V24.84c0-3.37-.31-4.46-1.71-5.71-1.19-1.09-2.8-1.56-5.24-1.56-4.15,0-6.64,1.71-7.11,4.88a1.45,1.45,0,0,1-2.9-.16c0-2.13,1.82-4.67,4.15-5.81a13.94,13.94,0,0,1,6-1.09c3.63,0,6.22.88,7.83,2.75,1.4,1.56,1.82,3.16,1.82,6.64V37a0.89,0.89,0,0,0,1,1h1.76a1.08,1.08,0,1,1,0,2.13H94.92a1.06,1.06,0,0,1-1.24-1.24V35.11Zm-15-1.61c0,3.32,2.33,5.24,6.33,5.24,3.27,0,5.76-1.24,7.16-3.58a16.07,16.07,0,0,0,1.45-6.38A0.8,0.8,0,0,0,93.11,28a34,34,0,0,0-4.62-.21C81.8,27.79,78.64,29.66,78.64,33.5Z" transform="translate(-7.78 -4.92)"/><path d="M109.44,21.05a6.5,6.5,0,0,1,2-3.53,8.68,8.68,0,0,1,5.71-2.13c1.35,0,2.13.52,2.13,1.35a0.83,0.83,0,0,1-.78,1,3.75,3.75,0,0,1-.67-0.05,2.45,2.45,0,0,0-.78-0.1,11.52,11.52,0,0,0-3.63.88c-2.59,1.19-4,4-4,8.2V37a0.89,0.89,0,0,0,1,1h3a1.08,1.08,0,1,1,0,2.13h-10a1.09,1.09,0,1,1,0-2.13h2.13a0.89,0.89,0,0,0,1-1V19.29a0.89,0.89,0,0,0-1-1h-2.13a1.09,1.09,0,1,1,0-2.13h4.72a1.06,1.06,0,0,1,1.24,1.24v3.68Z" transform="translate(-7.78 -4.92)"/><path d="M129.09,37a0.89,0.89,0,0,0,1,1h1.82a1.08,1.08,0,1,1,0,2.13h-8.82a1.09,1.09,0,1,1,0-2.13h2.13a0.89,0.89,0,0,0,1-1V19.29a0.89,0.89,0,0,0-1-1h-2.13a1.09,1.09,0,1,1,0-2.13h4.72a1.06,1.06,0,0,1,1.24,1.24V37ZM129.55,8.5a2.08,2.08,0,0,1-2.07,2.07,2.17,2.17,0,0,1-2.13-2.13,2.08,2.08,0,0,1,2.07-2.08A2.1,2.1,0,0,1,129.55,8.5Z" transform="translate(-7.78 -4.92)"/></svg></a>
+        </nav>
+
+        <nav class="right-nav">
+          <ul>
+            <li class="callout mobile-link">
+              <a class="t-register t-navigation-link cta-link" data-ga-label="Nav Bar" href="https://www.safaribooksonline.com/public/free-trial/">Start Free Trial</a>
+            </li>
+            
+  <li class="mobile-link"><a class="t-sign-in" href="https://www.safaribooksonline.com/accounts/login/?next=/library/view/mongodb-the-definitive/9781449344795/ch04.html">Sign In</a></li>
+
+
+            <li><a class="t-navigation-link" href="https://www.safaribooksonline.com/pricing/">Pricing</a></li>
+            <li><a class="t-navigation-link" href="https://www.safaribooksonline.com/enterprise/">Enterprise</a></li>
+            <li class="search-field">
+              <form id="js-search-form" class="t-navigation-form" action="https://www.safaribooksonline.com/search/">
+                
+                <script type="application/ld+json">
+                {
+                  "@context": "http://schema.org",
+                  "@type": "WebSite",
+                  "url": "https://www.safaribooksonline.com/",
+                  "potentialAction": {
+                    "@type": "SearchAction",
+                    "target": "https://www.safaribooksonline.com/search/?q={search_term_string}",
+                    "query-input": "required name=search_term_string"
+                  }
+                }
+                </script>
+                <input data-search-text-focus= "Search books and videos..." data-search-text-idle = "Search..." id="search" type="search" name="q" placeholder="Search..." autocomplete="off" required />
+                <input type="submit" value="search" class="search-submit" />
+              </form>
+            </li>
+          </ul>
+        </nav>
+    </div>
+
+    
+    
+        <div class="sbo-menu-top">
+           
+            <section class="sbo-toc-container">
+                <a href="https://www.safaribooksonline.com/library/view/mongodb-the-definitive/9781449344795/" class="sbo-toc-thumb">
+                    <span class="sbo-title ss-list">
+                        <h1 class="t-title">MongoDB: The Definitive Guide, 2nd Edition by Kristina Chodorow</h1>
+                    </span>
+                </a>
+            </section>
+             
+        </div>
+    
+
+
+</header>
+
+
+<section id="trial-overlay">
+  <div class="trial-overlay-content">
+  
+    <h2 class="trial-modal-title">
+        Stay ahead with the world's most comprehensive technology and business learning platform.
+    </h2>
+
+    <h2>
+        With Safari, you learn the way you learn best. Get unlimited access to videos, live online training,
+        learning paths, books, tutorials, and more.
+    </h2>
+
+    <div class="controls">
+        <a href="https://www.safaribooksonline.com/public/free-trial/" class="button" data-ga-label="Modal" >Start Free Trial</a>
+        <p>No credit card required</p>
+    </div>
+  
+    <a class="modal-dismiss" aria-label="modal dismiss"></a>
+  </div>
+</section>
+
+<section role="document">
+	
+<section id="sbo-reader">
+    
+    
+
+<div class="sbo-reader-content sbo-sample-reader ">
+    
+    <div id='sbo-rt-content'>
+    <div id="test-content-id"><section class="chapter" title="Chapter 4. Querying" epub:type="chapter" id="chapter_d1e3559"><div class="titlepage"><div><div><h2 class="title">Chapter 4. Querying</h2></div></div></div><p>This chapter looks at querying in detail. The main areas covered are
+  as follows:<a id="ch04_querying" class="indexterm"></a></p><div class="itemizedlist"><ul class="itemizedlist"><li class="listitem"><p>You can perform ad hoc queries on the database using the <code class="function">find</code> or <code class="function">findOne</code> functions and a query
+      document.</p></li><li class="listitem"><p>You can query for ranges, set inclusion, inequalities, and more by
+      using <code class="literal">$</code>-conditionals.</p></li><li class="listitem"><p>Queries return a database cursor, which lazily returns batches of
+      documents as you need them.</p></li><li class="listitem"><p>There are a lot of metaoperations you can perform on a cursor,
+      including skipping a certain number of results, limiting the number of
+      results returned, and sorting results.</p></li></ul></div><div class="sect1" title="Introduction to find"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="sect1_d1e3612">Introduction to find</h2></div></div></div><p>The <code class="function">find</code> method is used to
+    perform queries in MongoDB. Querying returns a subset of documents in a
+    collection, from no documents at all to the entire collection. Which
+    documents get returned is determined by the first argument to <code class="function">find</code>, which is a document specifying the query
+    criteria.<a id="ch04_queryingfind" class="indexterm"></a><a id="ch04_find" class="indexterm"></a></p><p>An empty query document (i.e., <code class="literal">{}</code>) matches everything in the collection. If
+    <code class="function">find</code> isn’t given a query document, it
+    defaults to <code class="literal">{}</code>. For example, the
+    following:</p><a id="I_programlisting4_d1e3721"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">c</code><code class="p">.</code><code class="nx">find</code><code class="p">()</code></pre><p>matches every document in the collection <span class="emphasis"><em>c</em></span> (and
+    returns these documents in batches).</p><p>When we start adding key/value pairs to the query document, we begin
+    restricting our search. This works in a straightforward way for most
+    types: numbers match numbers, booleans match booleans, and strings match
+    strings. Querying for a simple type is as easy as specifying the value
+    that you are looking for. For example, to find all documents where the
+    value for <code class="literal">"age"</code> is 27, we can add that
+    key/value pair to the query document:</p><a id="I_programlisting4_d1e3733"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">users</code><code class="p">.</code><code class="nx">find</code><code class="p">({</code><code class="s2">"age"</code> <code class="o">:</code> <code class="mi">27</code><code class="p">})</code></pre><p>If we have a string we want to match, such as a <code class="literal">"username"</code> key with the value <code class="literal">"joe"</code>, we use that key/value pair
+    instead:</p><a id="I_programlisting4_d1e3743"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">users</code><code class="p">.</code><code class="nx">find</code><code class="p">({</code><code class="s2">"username"</code> <code class="o">:</code> <code class="s2">"joe"</code><code class="p">})</code></pre><p>Multiple conditions can be strung together by adding more key/value
+    pairs to the query document, which gets interpreted as
+    “<em class="replaceable"><code>condition1</code></em> AND
+    <em class="replaceable"><code>condition2</code></em> AND … AND <em class="replaceable"><code>conditionN</code></em>.” For
+    instance, to get all users who are 27-year-olds with the username “joe,”
+    we can query for the following:</p><a id="I_programlisting4_d1e3750"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">users</code><code class="p">.</code><code class="nx">find</code><code class="p">({</code><code class="s2">"username"</code> <code class="o">:</code> <code class="s2">"joe"</code><code class="p">,</code> <code class="s2">"age"</code> <code class="o">:</code> <code class="mi">27</code><code class="p">})</code></pre><div class="sect2" title="Specifying Which Keys to Return"><div class="titlepage"><div><div><h3 class="title" id="sect2_d1e3675">Specifying Which Keys to Return</h3></div></div></div><p>Sometimes you do not need all of the key/value pairs in a document
+      returned. If this is the case, you can pass a second argument to
+      <code class="literal">find</code> (or <code class="literal">findOne</code>) specifying the keys you want. This
+      reduces both the amount of data sent over the wire and the time and
+      memory used to decode documents on the client side.<a id="id490998" class="indexterm"></a><a id="id742317" class="indexterm"></a><a id="id742329" class="indexterm"></a></p><p>For example, if you have a user collection and you are interested
+      only in the <code class="literal">"username"</code> and <code class="literal">"email"</code> keys, you could return just those keys
+      with the following query:</p><a id="I_programlisting4_d1e3789"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">users</code><code class="p">.</code><code class="nx">find</code><code class="p">({},</code> <code class="p">{</code><code class="s2">"username"</code> <code class="o">:</code> <code class="mi">1</code><code class="p">,</code> <code class="s2">"email"</code> <code class="o">:</code> <code class="mi">1</code><code class="p">})</code>
+<code class="p">{</code>
+    <code class="s2">"_id"</code> <code class="o">:</code> <code class="nx">ObjectId</code><code class="p">(</code><code class="s2">"4ba0f0dfd22aa494fd523620"</code><code class="p">),</code>
+    <code class="s2">"username"</code> <code class="o">:</code> <code class="s2">"joe"</code><code class="p">,</code>
+    <code class="s2">"email"</code> <code class="o">:</code> <code class="s2">"joe@example.com"</code>
+<code class="p">}</code></pre><p>As you can see from the previous output, the <code class="literal">"_id"</code> key is returned by default, even if it
+      isn’t specifically requested.<a id="id584098" class="indexterm"></a></p><p>You can also use this second parameter to exclude specific
+      key/value pairs from the results of a query. For instance, you may have
+      documents with a variety of keys, and the only thing you know is that
+      you never want to return the <code class="literal">"fatal_weakness"</code> key:</p><a id="I_programlisting4_d1e3801"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">users</code><code class="p">.</code><code class="nx">find</code><code class="p">({},</code> <code class="p">{</code><code class="s2">"fatal_weakness"</code> <code class="o">:</code> <code class="mi">0</code><code class="p">})</code></pre><p>This can also prevent <code class="literal">"_id"</code>
+      from being returned:</p><a id="I_programlisting4_d1e3808"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">users</code><code class="p">.</code><code class="nx">find</code><code class="p">({},</code> <code class="p">{</code><code class="s2">"username"</code> <code class="o">:</code> <code class="mi">1</code><code class="p">,</code> <code class="s2">"_id"</code> <code class="o">:</code> <code class="mi">0</code><code class="p">})</code>
+<code class="p">{</code>
+    <code class="s2">"username"</code> <code class="o">:</code> <code class="s2">"joe"</code><code class="p">,</code>
+<code class="p">}</code></pre></div><div class="sect2" title="Limitations"><div class="titlepage"><div><div><h3 class="title" id="sect2_d1e3727">Limitations</h3></div></div></div><p>There are some restrictions on queries. The value of a query
+      document must be a constant as far as the database is concerned. (It can
+      be a normal variable in your own code.) That is, it cannot refer to the
+      value of another key in the document. For example, if we were keeping
+      inventory and we had both <code class="literal">"in_stock"</code>
+      and <code class="literal">"num_sold"</code> keys, we couldn’t
+      compare their values by querying the following:<a id="id534058" class="indexterm"></a></p><a id="I_programlisting4_d1e3826"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">stock</code><code class="p">.</code><code class="nx">find</code><code class="p">({</code><code class="s2">"in_stock"</code> <code class="o">:</code> <code class="s2">"this.num_sold"</code><code class="p">})</code> <code class="c1">// doesn't work</code></pre><p>There are ways to do this (see <a class="xref" href="ch04.html#sect1_d1e4429" title="$where Queries">$where Queries</a>),
+      but you will usually get better performance by restructuring your
+      document slightly, such that a “normal” query will suffice. In this
+      example, we could instead use the keys <code class="literal">"initial_stock"</code> and <code class="literal">"in_stock"</code>. Then, every time someone buys an
+      item, we decrement the value of the <code class="literal">"in_stock"</code> key by one. Finally, we can do a
+      simple query to check which items are out of stock:</p><a id="I_programlisting4_d1e3841"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">stock</code><code class="p">.</code><code class="nx">find</code><code class="p">({</code><code class="s2">"in_stock"</code> <code class="o">:</code> <code class="mi">0</code><code class="p">})</code></pre></div></div><div class="sect1" title="Query Criteria"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="sect1_d1e3761">Query Criteria</h2></div></div></div><p>Queries can go beyond the exact matching described in the previous
+    section; they can match more complex criteria, such as ranges, OR-clauses,
+    and negation.<a id="ch04_queryingcriteria" class="indexterm"></a><a id="id668057" class="indexterm"></a><a id="id586955" class="indexterm"></a></p><div class="sect2" title="Query Conditionals"><div class="titlepage"><div><div><h3 class="title" id="sect2_d1e3766">Query Conditionals</h3></div></div></div><p><code class="literal">"$lt"</code>, <code class="literal">"$lte"</code>, <code class="literal">"$gt"</code>, and <code class="literal">"$gte"</code> are all comparison operators,
+      corresponding to &lt;, &lt;=, &gt;, and &gt;=, respectively. They can be
+      combined to look for a range of values. For example, to look for users
+      who are between the ages of 18 and 30, we can do this:<a id="id599264" class="indexterm"></a><a id="id599270" class="indexterm"></a><a id="id599281" class="indexterm"></a><a id="id599291" class="indexterm"></a><a id="id599306" class="indexterm"></a><a id="id599316" class="indexterm"></a><a id="id599324" class="indexterm"></a></p><a id="I_programlisting4_d1e3895"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">users</code><code class="p">.</code><code class="nx">find</code><code class="p">({</code><code class="s2">"age"</code> <code class="o">:</code> <code class="p">{</code><code class="s2">"$gte"</code> <code class="o">:</code> <code class="mi">18</code><code class="p">,</code> <code class="s2">"$lte"</code> <code class="o">:</code> <code class="mi">30</code><code class="p">}})</code></pre><p>This would find all documents where the "<code class="literal">age</code>" field was greater than or equal to 18 AND
+      less than or equal to 30.<a id="id604416" class="indexterm"></a></p><p>These types of range queries are often useful for dates. For
+      example, to find people who registered before January 1, 2007, we can do
+      this:<a id="id744352" class="indexterm"></a></p><a id="I_programlisting4_d1e3899"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">start</code> <code class="o">=</code> <code class="k">new</code> <code class="nb">Date</code><code class="p">(</code><code class="s2">"01/01/2007"</code><code class="p">)</code>
+<code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">users</code><code class="p">.</code><code class="nx">find</code><code class="p">({</code><code class="s2">"registered"</code> <code class="o">:</code> <code class="p">{</code><code class="s2">"$lt"</code> <code class="o">:</code> <code class="nx">start</code><code class="p">}})</code></pre><p>An exact match on a date is less useful, since dates are only
+      stored with millisecond precision. Often you want a whole day, week, or
+      month, making a range query necessary.</p><p>To query for documents where a key’s value is not equal to a
+      certain value, you must use another conditional operator, <code class="literal">"$ne"</code>, which stands for “not equal.” If you
+      want to find all users who do not have the username “joe,” you can query
+      for them using this:<a id="id490366" class="indexterm"></a></p><a id="I_programlisting4_d1e3914"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">users</code><code class="p">.</code><code class="nx">find</code><code class="p">({</code><code class="s2">"username"</code> <code class="o">:</code> <code class="p">{</code><code class="s2">"$ne"</code> <code class="o">:</code> <code class="s2">"joe"</code><code class="p">}})</code></pre><p><code class="literal">"$ne"</code> can be used with any
+      type.</p></div><div class="sect2" title="OR Queries"><div class="titlepage"><div><div><h3 class="title" id="sect2_d1e3813">OR Queries</h3></div></div></div><p>There are two ways to do an OR query in MongoDB. <code class="literal">"$in"</code> can be used to query for a variety of
+      values for a single key. <code class="literal">"$or"</code> is
+      more general; it can be used to query for any of the given values across
+      multiple keys.<a id="id751999" class="indexterm"></a><a id="id751986" class="indexterm"></a><a id="id752003" class="indexterm"></a></p><p>If you have more than one possible value to match for a single
+      key, use an array of criteria with <code class="literal">"$in"</code>. For instance, suppose we were running a
+      raffle and the winning ticket numbers were 725, 542, and 390. To find
+      all three of these documents, we can construct the following
+      query:</p><a id="I_programlisting4_d1e3956"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">raffle</code><code class="p">.</code><code class="nx">find</code><code class="p">({</code><code class="s2">"ticket_no"</code> <code class="o">:</code> <code class="p">{</code><code class="s2">"$in"</code> <code class="o">:</code> <code class="p">[</code><code class="mi">725</code><code class="p">,</code> <code class="mi">542</code><code class="p">,</code> <code class="mi">390</code><code class="p">]}})</code></pre><p><code class="literal">"$in"</code> is very flexible and
+      allows you to specify criteria of different types as well as values. For
+      example, if we are gradually migrating our schema to use usernames
+      instead of user ID numbers, we can query for either by using
+      this:</p><a id="I_programlisting4_d1e3962"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">users</code><code class="p">.</code><code class="nx">find</code><code class="p">({</code><code class="s2">"user_id"</code> <code class="o">:</code> <code class="p">{</code><code class="s2">"$in"</code> <code class="o">:</code> <code class="p">[</code><code class="mi">12345</code><code class="p">,</code> <code class="s2">"joe"</code><code class="p">]})</code></pre><p>This matches documents with a <code class="literal">"user_id"</code> equal to 12345, and documents with a
+      <code class="literal">"user_id"</code> equal to <code class="literal">"joe"</code>.<a id="id685895" class="indexterm"></a></p><p>If <code class="literal">"$in"</code> is given an array with
+      a single value, it behaves the same as directly matching the value. For
+      instance, <code class="literal">{ticket_no : {$in : [725]}}</code>
+      matches the same documents as <code class="literal">{ticket_no :
+      725}</code>.</p><p>The opposite of <code class="literal">"$in"</code> is
+      <code class="literal">"$nin"</code>, which returns documents that
+      don’t match any of the criteria in the array. If we want to return all
+      of the people who didn’t win anything in the raffle, we can query for
+      them with this:</p><a id="I_programlisting4_d1e3997"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">raffle</code><code class="p">.</code><code class="nx">find</code><code class="p">({</code><code class="s2">"ticket_no"</code> <code class="o">:</code> <code class="p">{</code><code class="s2">"$nin"</code> <code class="o">:</code> <code class="p">[</code><code class="mi">725</code><code class="p">,</code> <code class="mi">542</code><code class="p">,</code> <code class="mi">390</code><code class="p">]}})</code></pre><p>This query returns everyone who did not have tickets with those
+      numbers.</p><p><code class="literal">"$in"</code> gives you an OR query for
+      a single key, but what if we need to find documents where <code class="literal">"ticket_no"</code> is 725 or <code class="literal">"winner"</code> is <code class="literal">true</code>? For this type of query, we’ll need to
+      use the <code class="literal">"$or"</code> conditional. <code class="literal">"$or"</code> takes an array of possible criteria. In
+      the raffle case, using <code class="literal">"$or"</code> would
+      look like this:</p><a id="I_programlisting4_d1e4025"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">raffle</code><code class="p">.</code><code class="nx">find</code><code class="p">({</code><code class="s2">"$or"</code> <code class="o">:</code> <code class="p">[{</code><code class="s2">"ticket_no"</code> <code class="o">:</code> <code class="mi">725</code><code class="p">},</code> <code class="p">{</code><code class="s2">"winner"</code> <code class="o">:</code> <code class="kc">true</code><code class="p">}]})</code></pre><p><code class="literal">"$or"</code> can contain other
+      conditionals. If, for example, we want to match any of the three
+      <code class="literal">"ticket_no"</code> values or the <code class="literal">"winner"</code> key, we can use this:<a id="id569809" class="indexterm"></a></p><a id="I_programlisting4_d1e4037"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">raffle</code><code class="p">.</code><code class="nx">find</code><code class="p">({</code><code class="s2">"$or"</code> <code class="o">:</code> <code class="p">[{</code><code class="s2">"ticket_no"</code> <code class="o">:</code> <code class="p">{</code><code class="s2">"$in"</code> <code class="o">:</code> <code class="p">[</code><code class="mi">725</code><code class="p">,</code> <code class="mi">542</code><code class="p">,</code> <code class="mi">390</code><code class="p">]}},</code> 
+                           <code class="p">{</code><code class="s2">"winner"</code> <code class="o">:</code> <code class="kc">true</code><code class="p">}]})</code></pre><p>With a normal AND-type query, you want to narrow down your results
+      as far as possible in as few arguments as possible. OR-type queries are
+      the opposite: they are most efficient if the first arguments match as
+      many documents as possible.</p><p>While <code class="literal">"$or"</code> will always work,
+      use <code class="literal">"$in"</code> whenever possible as the
+      query optimizer handles it more efficiently.</p></div><div class="sect2" title="$not"><div class="titlepage"><div><div><h3 class="title" id="sect2_d1e3927">$not</h3></div></div></div><p><code class="literal">"$not"</code> is a metaconditional: it
+      can be applied on top of any other criteria. As an example, let’s
+      consider the modulus operator, <code class="literal">"$mod"</code>. <code class="literal">"$mod"</code> queries for keys whose values, when
+      divided by the first value given, have a remainder of the second
+      value:<a id="id736263" class="indexterm"></a><a id="id721872" class="indexterm"></a></p><a id="I_programlisting4_d1e4069"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">users</code><code class="p">.</code><code class="nx">find</code><code class="p">({</code><code class="s2">"id_num"</code> <code class="o">:</code> <code class="p">{</code><code class="s2">"$mod"</code> <code class="o">:</code> <code class="p">[</code><code class="mi">5</code><code class="p">,</code> <code class="mi">1</code><code class="p">]}})</code></pre><p>The previous query returns users with <code class="literal">"id_num"</code>s of 1, 6, 11, 16, and so on. If we
+      want, instead, to return users with <code class="literal">"id_num"</code>s of 2, 3, 4, 5, 7, 8, 9, 10, 12,
+      etc., we can use <code class="literal">"$not"</code>:</p><a id="I_programlisting4_d1e4082"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">users</code><code class="p">.</code><code class="nx">find</code><code class="p">({</code><code class="s2">"id_num"</code> <code class="o">:</code> <code class="p">{</code><code class="s2">"$not"</code> <code class="o">:</code> <code class="p">{</code><code class="s2">"$mod"</code> <code class="o">:</code> <code class="p">[</code><code class="mi">5</code><code class="p">,</code> <code class="mi">1</code><code class="p">]}}})</code></pre><p><code class="literal">"$not"</code> can be particularly
+      useful in conjunction with regular expressions to find all documents
+      that don’t match a given pattern (regular expression usage is described
+      in the section <a class="xref" href="ch04.html#sect2_d1e4085" title="Regular Expressions">Regular Expressions</a>).</p></div><div class="sect2" title="Conditional Semantics"><div class="titlepage"><div><div><h3 class="title" id="sect2_d1e3969">Conditional Semantics</h3></div></div></div><p>If you look at the update modifiers in the previous chapter and
+      previous query documents, you’ll notice that the $-prefixed keys are in
+      different positions. In the query, <code class="literal">"$lt"</code> is in the inner document; in the update,
+      <code class="literal">"$inc"</code> is the key for the outer
+      document. This generally holds true: conditionals are an inner document
+      key, and modifiers are always a key in the outer document.<a id="id736751" class="indexterm"></a><a id="id736718" class="indexterm"></a><a id="id736762" class="indexterm"></a></p><p>Multiple conditions can be put on a single key. For example, to
+      find all users between the ages of 20 and 30, we can query for both
+      <code class="literal">"$gt"</code> and <code class="literal">"$lt"</code> on the <code class="literal">"age"</code> key:</p><a id="I_programlisting4_d1e4124"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">users</code><code class="p">.</code><code class="nx">find</code><code class="p">({</code><code class="s2">"age"</code> <code class="o">:</code> <code class="p">{</code><code class="s2">"$lt"</code> <code class="o">:</code> <code class="mi">30</code><code class="p">,</code> <code class="s2">"$gt"</code> <code class="o">:</code> <code class="mi">20</code><code class="p">}})</code></pre><p>Any number of conditionals can be used with a single key. Multiple
+      update modifiers <span class="emphasis"><em>cannot</em></span> be used on a single key,
+      however. For example, you cannot have a modifier document such as
+      <code class="literal">{"$inc" : {"age" : 1}, "$set" : {age :
+      40}}</code> because it modifies <code class="literal">"age"</code> twice. With query conditionals,
+      no such rule applies.<a id="id672636" class="indexterm"></a></p><p>There are a few “meta-operators” that go in the outer document:
+      "<code class="literal">$and</code>“, "<code class="literal">$or</code>“, and "<code class="literal">$nor</code>“. They all have a similar form:<a id="id483889" class="indexterm"></a><a id="id483901" class="indexterm"></a><a id="id483912" class="indexterm"></a></p><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">users</code><code class="p">.</code><code class="nx">find</code><code class="p">({</code><code class="s2">"$and"</code> <code class="o">:</code> <code class="p">[{</code><code class="s2">"x"</code> <code class="o">:</code> <code class="p">{</code><code class="s2">"$lt"</code> <code class="o">:</code> <code class="mi">1</code><code class="p">}},</code> <code class="p">{</code><code class="s2">"x"</code> <code class="o">:</code> <code class="mi">4</code><code class="p">}]})</code></pre><p>This query would match documents with an "<code class="literal">x</code>" field both less than 1 and equal to 4.
+      Although these seem like contradictory conditions, it is possible to
+      fulfill if the "<code class="literal">x</code>" field is an array:
+      <code class="literal">{"x" : [0, 4]}</code> would match. Note that
+      the query optimizer does not optimize "<code class="literal">$and</code>" as well as other operators. This query
+      would be more efficient to structure as:</p><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">users</code><code class="p">.</code><code class="nx">find</code><code class="p">({</code><code class="s2">"x"</code> <code class="o">:</code> <code class="p">{</code><code class="s2">"$lt"</code> <code class="o">:</code> <code class="mi">1</code><code class="p">,</code> <code class="s2">"$in"</code> <code class="o">:</code> <code class="p">[</code><code class="mi">4</code><code class="p">]}})</code></pre></div></div><div class="sect1" title="Type-Specific Queries"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="sect1_d1e4013">Type-Specific Queries</h2></div></div></div><p>As covered in <a class="xref" href="ch02.html" title="Chapter 2. Getting Started">Chapter 2</a>, MongoDB has a wide
+    variety of types that can be used in a document. Some of these types have
+    special behavior when querying.<a id="ch04_datatypesquery" class="indexterm"></a><a id="ch04_queryingtype" class="indexterm"></a><a id="id503664" class="indexterm"></a></p><div class="sect2" title="null"><div class="titlepage"><div><div><h3 class="title" id="sect2_d1e4021">null</h3></div></div></div><p><code class="literal">null</code> behaves a bit strangely.
+      It does match itself, so if we have a collection with the following
+      documents:<a id="id503690" class="indexterm"></a><a id="id623303" class="indexterm"></a><a id="id623328" class="indexterm"></a></p><a id="I_programlisting4_d1e4176"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">c</code><code class="p">.</code><code class="nx">find</code><code class="p">()</code>
+<code class="p">{</code> <code class="s2">"_id"</code> <code class="o">:</code> <code class="nx">ObjectId</code><code class="p">(</code><code class="s2">"4ba0f0dfd22aa494fd523621"</code><code class="p">),</code> <code class="s2">"y"</code> <code class="o">:</code> <code class="kc">null</code> <code class="p">}</code>
+<code class="p">{</code> <code class="s2">"_id"</code> <code class="o">:</code> <code class="nx">ObjectId</code><code class="p">(</code><code class="s2">"4ba0f0dfd22aa494fd523622"</code><code class="p">),</code> <code class="s2">"y"</code> <code class="o">:</code> <code class="mi">1</code> <code class="p">}</code>
+<code class="p">{</code> <code class="s2">"_id"</code> <code class="o">:</code> <code class="nx">ObjectId</code><code class="p">(</code><code class="s2">"4ba0f148d22aa494fd523623"</code><code class="p">),</code> <code class="s2">"y"</code> <code class="o">:</code> <code class="mi">2</code> <code class="p">}</code></pre><p>we can query for documents whose <code class="literal">"y"</code> key is <code class="literal">null</code> in the expected way:</p><a id="I_programlisting4_d1e4186"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">c</code><code class="p">.</code><code class="nx">find</code><code class="p">({</code><code class="s2">"y"</code> <code class="o">:</code> <code class="kc">null</code><code class="p">})</code>
+<code class="p">{</code> <code class="s2">"_id"</code> <code class="o">:</code> <code class="nx">ObjectId</code><code class="p">(</code><code class="s2">"4ba0f0dfd22aa494fd523621"</code><code class="p">),</code> <code class="s2">"y"</code> <code class="o">:</code> <code class="kc">null</code> <code class="p">}</code></pre><p>However, <code class="literal">null</code> not only matches
+      itself but also matches “does not exist.” Thus, querying for a key with
+      the value <code class="literal">null</code> will return all
+      documents lacking that key:</p><a id="I_programlisting4_d1e4196"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">c</code><code class="p">.</code><code class="nx">find</code><code class="p">({</code><code class="s2">"z"</code> <code class="o">:</code> <code class="kc">null</code><code class="p">})</code>
+<code class="p">{</code> <code class="s2">"_id"</code> <code class="o">:</code> <code class="nx">ObjectId</code><code class="p">(</code><code class="s2">"4ba0f0dfd22aa494fd523621"</code><code class="p">),</code> <code class="s2">"y"</code> <code class="o">:</code> <code class="kc">null</code> <code class="p">}</code>
+<code class="p">{</code> <code class="s2">"_id"</code> <code class="o">:</code> <code class="nx">ObjectId</code><code class="p">(</code><code class="s2">"4ba0f0dfd22aa494fd523622"</code><code class="p">),</code> <code class="s2">"y"</code> <code class="o">:</code> <code class="mi">1</code> <code class="p">}</code>
+<code class="p">{</code> <code class="s2">"_id"</code> <code class="o">:</code> <code class="nx">ObjectId</code><code class="p">(</code><code class="s2">"4ba0f148d22aa494fd523623"</code><code class="p">),</code> <code class="s2">"y"</code> <code class="o">:</code> <code class="mi">2</code> <code class="p">}</code></pre><p>If we only want to find keys whose value is <code class="literal">null</code>, we can check that the key is <code class="literal">null</code> and exists using the <code class="literal">"$exists"</code> conditional:</p><a id="I_programlisting4_d1e4212"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">c</code><code class="p">.</code><code class="nx">find</code><code class="p">({</code><code class="s2">"z"</code> <code class="o">:</code> <code class="p">{</code><code class="s2">"$in"</code> <code class="o">:</code> <code class="p">[</code><code class="kc">null</code><code class="p">],</code> <code class="s2">"$exists"</code> <code class="o">:</code> <code class="kc">true</code><code class="p">}})</code></pre><p>Unfortunately, there is no <code class="literal">"$eq"</code> operator, which makes this a little
+      awkward, but <code class="literal">"$in"</code> with one element
+      is equivalent.</p></div><div class="sect2" title="Regular Expressions"><div class="titlepage"><div><div><h3 class="title" id="sect2_d1e4085">Regular Expressions</h3></div></div></div><p>Regular expressions are useful for flexible string matching. For
+      example, if we want to find all users with the name Joe or joe, we can
+      use a regular expression to do case-insensitive matching:<a id="id552454" class="indexterm"></a><a id="id552463" class="indexterm"></a><a id="id552441" class="indexterm"></a></p><a id="I_programlisting4_d1e4247"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">users</code><code class="p">.</code><code class="nx">find</code><code class="p">({</code><code class="s2">"name"</code> <code class="o">:</code> <code class="sr">/joe/i</code><code class="p">})</code></pre><p>Regular expression flags (for example, <code class="literal">i</code>) are allowed but not required. If we want to
+      match not only various capitalizations of joe, but also joey, we can
+      continue to improve our regular expression:</p><a id="I_programlisting4_d1e4254"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">users</code><code class="p">.</code><code class="nx">find</code><code class="p">({</code><code class="s2">"name"</code> <code class="o">:</code> <code class="sr">/joey?/i</code><code class="p">})</code></pre><p>MongoDB uses the Perl Compatible Regular Expression (PCRE) library
+      to match regular expressions; any regular expression syntax allowed by
+      PCRE is allowed in MongoDB. It is
+      a good idea to check your syntax with the JavaScript shell before using
+      it in a query to make sure it matches what you think it
+      matches.<a id="id665803" class="indexterm"></a></p><div class="note" title="Note"><h3 class="title">Note</h3><p>MongoDB can leverage an index for queries on prefix regular
+        expressions (e.g., <code class="literal">/^joey/</code>).
+        Indexes <span class="emphasis"><em>cannot</em></span> be used for case-insensitive
+        searches (<code class="literal">/^joey/i</code>).</p></div><p>Regular expressions can also match themselves. Very few people
+      insert regular expressions into the database, but if you insert one, you
+      can match it with itself:</p><a id="I_programlisting4_d1e4274"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">foo</code><code class="p">.</code><code class="nx">insert</code><code class="p">({</code><code class="s2">"bar"</code> <code class="o">:</code> <code class="sr">/baz/</code><code class="p">})</code>
+<code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">foo</code><code class="p">.</code><code class="nx">find</code><code class="p">({</code><code class="s2">"bar"</code> <code class="o">:</code> <code class="sr">/baz/</code><code class="p">})</code>
+<code class="p">{</code>
+    <code class="s2">"_id"</code> <code class="o">:</code> <code class="nx">ObjectId</code><code class="p">(</code><code class="s2">"4b23c3ca7525f35f94b60a2d"</code><code class="p">),</code>
+    <code class="s2">"bar"</code> <code class="o">:</code> <code class="sr">/baz/</code>
+<code class="p">}</code></pre></div><div class="sect2" title="Querying Arrays"><div class="titlepage"><div><div><h3 class="title" id="sect2_d1e4125">Querying Arrays</h3></div></div></div><p>Querying for elements of an array is designed to behave the way
+      querying for scalars does. For example, if the array is a list of
+      fruits, like this:<a id="ch04_datatypesqueryarray" class="indexterm"></a><a id="ch04_querytypearray" class="indexterm"></a><a id="ch04_arraysquery" class="indexterm"></a></p><a id="I_programlisting4_d1e4293"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">food</code><code class="p">.</code><code class="nx">insert</code><code class="p">({</code><code class="s2">"fruit"</code> <code class="o">:</code> <code class="p">[</code><code class="s2">"apple"</code><code class="p">,</code> <code class="s2">"banana"</code><code class="p">,</code> <code class="s2">"peach"</code><code class="p">]})</code></pre><p>the following query:</p><a id="I_programlisting4_d1e4297"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">food</code><code class="p">.</code><code class="nx">find</code><code class="p">({</code><code class="s2">"fruit"</code> <code class="o">:</code> <code class="s2">"banana"</code><code class="p">})</code></pre><p>will successfully match the document. We can query for it in much
+      the same way as we would if we had a document that looked like the
+      (illegal) document: <code class="literal">{"fruit" : "apple", "fruit"
+      : "banana", "fruit" : "peach"}</code>.</p><div class="sect3" title="$all"><div class="titlepage"><div><div><h4 class="title" id="sect3_d1e4149">$all</h4></div></div></div><p>If you need to match arrays by more than one element, you can
+        use <code class="literal">"$all"</code>. This allows you to
+        match a list of elements. For example, suppose we created a collection
+        with three elements:<a id="id685508" class="indexterm"></a><a id="id685487" class="indexterm"></a></p><a id="I_programlisting4_d1e4322"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">food</code><code class="p">.</code><code class="nx">insert</code><code class="p">({</code><code class="s2">"_id"</code> <code class="o">:</code> <code class="mi">1</code><code class="p">,</code> <code class="s2">"fruit"</code> <code class="o">:</code> <code class="p">[</code><code class="s2">"apple"</code><code class="p">,</code> <code class="s2">"banana"</code><code class="p">,</code> <code class="s2">"peach"</code><code class="p">]})</code>
+<code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">food</code><code class="p">.</code><code class="nx">insert</code><code class="p">({</code><code class="s2">"_id"</code> <code class="o">:</code> <code class="mi">2</code><code class="p">,</code> <code class="s2">"fruit"</code> <code class="o">:</code> <code class="p">[</code><code class="s2">"apple"</code><code class="p">,</code> <code class="s2">"kumquat"</code><code class="p">,</code> <code class="s2">"orange"</code><code class="p">]})</code>
+<code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">food</code><code class="p">.</code><code class="nx">insert</code><code class="p">({</code><code class="s2">"_id"</code> <code class="o">:</code> <code class="mi">3</code><code class="p">,</code> <code class="s2">"fruit"</code> <code class="o">:</code> <code class="p">[</code><code class="s2">"cherry"</code><code class="p">,</code> <code class="s2">"banana"</code><code class="p">,</code> <code class="s2">"apple"</code><code class="p">]})</code></pre><p>Then we can find all documents with both <code class="literal">"apple"</code> and <code class="literal">"banana"</code> elements by querying with <code class="literal">"$all"</code>:</p><a id="I_programlisting4_d1e4335"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">food</code><code class="p">.</code><code class="nx">find</code><code class="p">({</code><code class="nx">fruit</code> <code class="o">:</code> <code class="p">{</code><code class="nx">$all</code> <code class="o">:</code> <code class="p">[</code><code class="s2">"apple"</code><code class="p">,</code> <code class="s2">"banana"</code><code class="p">]}})</code>
+      <code class="p">{</code><code class="s2">"_id"</code> <code class="o">:</code> <code class="mi">1</code><code class="p">,</code> <code class="s2">"fruit"</code> <code class="o">:</code> <code class="p">[</code><code class="s2">"apple"</code><code class="p">,</code> <code class="s2">"banana"</code><code class="p">,</code> <code class="s2">"peach"</code><code class="p">]}</code>
+      <code class="p">{</code><code class="s2">"_id"</code> <code class="o">:</code> <code class="mi">3</code><code class="p">,</code> <code class="s2">"fruit"</code> <code class="o">:</code> <code class="p">[</code><code class="s2">"cherry"</code><code class="p">,</code> <code class="s2">"banana"</code><code class="p">,</code> <code class="s2">"apple"</code><code class="p">]}</code></pre><p>Order does not matter. Notice <code class="literal">"banana"</code> comes before <code class="literal">"apple"</code> in the second result. Using a
+        one-element array with <code class="literal">"$all"</code> is
+        equivalent to not using <code class="literal">"$all"</code>. For
+        instance, <code class="literal">{fruit : {$all :
+        ['apple']}</code> will match the same documents as <code class="literal">{fruit : 'apple'}</code>.</p><p>You can also query by exact match using the entire array.
+        However, exact match will not match a document if any elements are
+        missing or superfluous. For example, this will match the first
+        document above:</p><a id="I_programlisting4_d1e4360"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">food</code><code class="p">.</code><code class="nx">find</code><code class="p">({</code><code class="s2">"fruit"</code> <code class="o">:</code> <code class="p">[</code><code class="s2">"apple"</code><code class="p">,</code> <code class="s2">"banana"</code><code class="p">,</code> <code class="s2">"peach"</code><code class="p">]})</code></pre><p>But this will not:</p><a id="I_programlisting4_d1e4364"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">food</code><code class="p">.</code><code class="nx">find</code><code class="p">({</code><code class="s2">"fruit"</code> <code class="o">:</code> <code class="p">[</code><code class="s2">"apple"</code><code class="p">,</code> <code class="s2">"banana"</code><code class="p">]})</code></pre><p>and neither will this:</p><a id="I_programlisting4_d1e4369"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">food</code><code class="p">.</code><code class="nx">find</code><code class="p">({</code><code class="s2">"fruit"</code> <code class="o">:</code> <code class="p">[</code><code class="s2">"banana"</code><code class="p">,</code> <code class="s2">"apple"</code><code class="p">,</code> <code class="s2">"peach"</code><code class="p">]})</code></pre><p>If you want to query for a specific element of an array, you can
+        specify an index using the syntax
+        <em class="replaceable"><code>key</code></em>.<em class="replaceable"><code>index</code></em>:</p><a id="I_programlisting4_d1e4379"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">food</code><code class="p">.</code><code class="nx">find</code><code class="p">({</code><code class="s2">"fruit.2"</code> <code class="o">:</code> <code class="s2">"peach"</code><code class="p">})</code></pre><p>Arrays are always 0-indexed, so this would match the third array
+        element against the string <code class="literal">"peach"</code>.</p></div><div class="sect3" title="$size"><div class="titlepage"><div><div><h4 class="title" id="sect3_d1e4224">$size</h4></div></div></div><p>A useful conditional for querying arrays is <code class="literal">"$size"</code>, which allows you to query for
+        arrays of a given size. Here’s an example:<a id="id502708" class="indexterm"></a><a id="id502719" class="indexterm"></a></p><a id="I_programlisting4_d1e4401"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">food</code><code class="p">.</code><code class="nx">find</code><code class="p">({</code><code class="s2">"fruit"</code> <code class="o">:</code> <code class="p">{</code><code class="s2">"$size"</code> <code class="o">:</code> <code class="mi">3</code><code class="p">}})</code></pre><p>One common query is to get a range of sizes. <code class="literal">"$size"</code> cannot be combined with another $
+        conditional (in this example, <code class="literal">"$gt"</code>), but this query can be accomplished
+        by adding a <code class="literal">"size"</code> key to the
+        document. Then, every time you add an element to the array, increment
+        the value of <code class="literal">"size"</code>. If the
+        original update looked like this:</p><a id="I_programlisting4_d1e4417"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">food</code><code class="p">.</code><code class="nx">update</code><code class="p">(</code><code class="nx">criteria</code><code class="p">,</code> <code class="p">{</code><code class="s2">"$push"</code> <code class="o">:</code> <code class="p">{</code><code class="s2">"fruit"</code> <code class="o">:</code> <code class="s2">"strawberry"</code><code class="p">}})</code></pre><p>it can simply be changed to this:</p><a id="I_programlisting4_d1e4421"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">food</code><code class="p">.</code><code class="nx">update</code><code class="p">(</code><code class="nx">criteria</code><code class="p">,</code> 
+<code class="p">...</code> <code class="p">{</code><code class="s2">"$push"</code> <code class="o">:</code> <code class="p">{</code><code class="s2">"fruit"</code> <code class="o">:</code> <code class="s2">"strawberry"</code><code class="p">},</code> <code class="s2">"$inc"</code> <code class="o">:</code> <code class="p">{</code><code class="s2">"size"</code> <code class="o">:</code> <code class="mi">1</code><code class="p">}})</code></pre><p>Incrementing is extremely fast, so any performance penalty is
+        negligible. Storing documents like this allows you to do queries such
+        as this:</p><a id="I_programlisting4_d1e4425"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">food</code><code class="p">.</code><code class="nx">find</code><code class="p">({</code><code class="s2">"size"</code> <code class="o">:</code> <code class="p">{</code><code class="s2">"$gt"</code> <code class="o">:</code> <code class="mi">3</code><code class="p">}})</code></pre><p>Unfortunately, this technique doesn’t work as well with the
+        <code class="literal">"$addToSet"</code> operator.</p></div><div class="sect3" title="The $slice operator"><div class="titlepage"><div><div><h4 class="title" id="sect3_d1e4277">The $slice operator</h4></div></div></div><p>As mentioned earlier in this chapter, the optional second
+        argument to <code class="function">find</code> specifies the
+        keys to be returned. The special <code class="literal">"$slice"</code> operator can be used to return a
+        subset of elements for an array key.<a id="id611112" class="indexterm"></a><a id="id611123" class="indexterm"></a></p><p>For example, suppose we had a blog post document and we wanted
+        to return the first 10 comments:</p><a id="I_programlisting4_d1e4455"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">blog</code><code class="p">.</code><code class="nx">posts</code><code class="p">.</code><code class="nx">findOne</code><code class="p">(</code><code class="nx">criteria</code><code class="p">,</code> <code class="p">{</code><code class="s2">"comments"</code> <code class="o">:</code> <code class="p">{</code><code class="s2">"$slice"</code> <code class="o">:</code> <code class="mi">10</code><code class="p">}})</code></pre><p>Alternatively, if we wanted the last 10 comments, we could use
+        −10:</p><a id="I_programlisting4_d1e4459"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">blog</code><code class="p">.</code><code class="nx">posts</code><code class="p">.</code><code class="nx">findOne</code><code class="p">(</code><code class="nx">criteria</code><code class="p">,</code> <code class="p">{</code><code class="s2">"comments"</code> <code class="o">:</code> <code class="p">{</code><code class="s2">"$slice"</code> <code class="o">:</code> <code class="o">-</code><code class="mi">10</code><code class="p">}})</code></pre><p><code class="literal">"$slice"</code> can also return
+        pages in the middle of the results by taking an offset and the number
+        of elements to return:</p><a id="I_programlisting4_d1e4465"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">blog</code><code class="p">.</code><code class="nx">posts</code><code class="p">.</code><code class="nx">findOne</code><code class="p">(</code><code class="nx">criteria</code><code class="p">,</code> <code class="p">{</code><code class="s2">"comments"</code> <code class="o">:</code> <code class="p">{</code><code class="s2">"$slice"</code> <code class="o">:</code> <code class="p">[</code><code class="mi">23</code><code class="p">,</code> <code class="mi">10</code><code class="p">]}})</code></pre><p>This would skip the first 23 elements and return the 24th
+        through 33th. If there were fewer than 33 elements in the array, it
+        would return as many as possible.</p><p>Unless otherwise specified, all keys in a document are returned
+        when <code class="literal">"$slice"</code> is used. This is
+        unlike the other key specifiers, which suppress unmentioned keys from
+        being returned. For instance, if we had a blog post document that
+        looked like this:</p><a id="I_programlisting4_d1e4474"></a><pre class="programlisting"><code class="p">{</code>
+    <code class="s2">"_id"</code> <code class="o">:</code> <code class="nx">ObjectId</code><code class="p">(</code><code class="s2">"4b2d75476cc613d5ee930164"</code><code class="p">),</code>
+    <code class="s2">"title"</code> <code class="o">:</code> <code class="s2">"A blog post"</code><code class="p">,</code>
+    <code class="s2">"content"</code> <code class="o">:</code> <code class="s2">"..."</code><code class="p">,</code>
+    <code class="s2">"comments"</code> <code class="o">:</code> <code class="p">[</code>
+        <code class="p">{</code>
+            <code class="s2">"name"</code> <code class="o">:</code> <code class="s2">"joe"</code><code class="p">,</code>
+            <code class="s2">"email"</code> <code class="o">:</code> <code class="s2">"joe@example.com"</code><code class="p">,</code>
+            <code class="s2">"content"</code> <code class="o">:</code> <code class="s2">"nice post."</code>
+        <code class="p">},</code>
+        <code class="p">{</code>
+            <code class="s2">"name"</code> <code class="o">:</code> <code class="s2">"bob"</code><code class="p">,</code>
+            <code class="s2">"email"</code> <code class="o">:</code> <code class="s2">"bob@example.com"</code><code class="p">,</code>
+            <code class="s2">"content"</code> <code class="o">:</code> <code class="s2">"good post."</code>
+        <code class="p">}</code>
+    <code class="p">]</code>
+<code class="p">}</code></pre><p>and we did a <code class="literal">"$slice"</code> to get
+        the last comment, we’d get this:</p><a id="I_programlisting4_d1e4482"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">blog</code><code class="p">.</code><code class="nx">posts</code><code class="p">.</code><code class="nx">findOne</code><code class="p">(</code><code class="nx">criteria</code><code class="p">,</code> <code class="p">{</code><code class="s2">"comments"</code> <code class="o">:</code> <code class="p">{</code><code class="s2">"$slice"</code> <code class="o">:</code> <code class="o">-</code><code class="mi">1</code><code class="p">}})</code>
+<code class="p">{</code>
+    <code class="s2">"_id"</code> <code class="o">:</code> <code class="nx">ObjectId</code><code class="p">(</code><code class="s2">"4b2d75476cc613d5ee930164"</code><code class="p">),</code>
+    <code class="s2">"title"</code> <code class="o">:</code> <code class="s2">"A blog post"</code><code class="p">,</code>
+    <code class="s2">"content"</code> <code class="o">:</code> <code class="s2">"..."</code><code class="p">,</code>
+    <code class="s2">"comments"</code> <code class="o">:</code> <code class="p">[</code>
+        <code class="p">{</code>
+            <code class="s2">"name"</code> <code class="o">:</code> <code class="s2">"bob"</code><code class="p">,</code>
+            <code class="s2">"email"</code> <code class="o">:</code> <code class="s2">"bob@example.com"</code><code class="p">,</code>
+            <code class="s2">"content"</code> <code class="o">:</code> <code class="s2">"good post."</code>
+        <code class="p">}</code>
+    <code class="p">]</code>
+<code class="p">}</code></pre><p>Both <code class="literal">"title"</code> and <code class="literal">"content"</code> are still returned, even though
+        they weren’t explicitly included in the key specifier.</p></div><div class="sect3" title="Returning a matching array element"><div class="titlepage"><div><div><h4 class="title" id="id611092">Returning a matching array element</h4></div></div></div><p>"<code class="literal">$slice</code>" is helpful when you
+        know the index of the element, but sometimes you want whichever array
+        element matched your criteria. You can return the matching element
+        with the <code class="literal">$</code>-operator. Given the blog
+        example above, you could get Bob’s comment back with:<a id="id582418" class="indexterm"></a><a id="id582398" class="indexterm"></a></p><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">blog</code><code class="p">.</code><code class="nx">posts</code><code class="p">.</code><code class="nx">find</code><code class="p">({</code><code class="s2">"comments.name"</code> <code class="o">:</code> <code class="s2">"bob"</code><code class="p">},</code> <code class="p">{</code><code class="s2">"comments.$"</code> <code class="o">:</code> <code class="mi">1</code><code class="p">})</code>
+<code class="p">{</code>
+    <code class="s2">"_id"</code> <code class="o">:</code> <code class="nx">ObjectId</code><code class="p">(</code><code class="s2">"4b2d75476cc613d5ee930164"</code><code class="p">),</code>
+    <code class="s2">"comments"</code> <code class="o">:</code> <code class="p">[</code>
+        <code class="p">{</code>
+            <code class="s2">"name"</code> <code class="o">:</code> <code class="s2">"bob"</code><code class="p">,</code>
+            <code class="s2">"email"</code> <code class="o">:</code> <code class="s2">"bob@example.com"</code><code class="p">,</code>
+            <code class="s2">"content"</code> <code class="o">:</code> <code class="s2">"good post."</code>
+        <code class="p">}</code>
+    <code class="p">]</code>
+<code class="p">}</code></pre><p>Note that this only returns the first match for each document:
+        if Bob had left multiple comments on this post, only the first one in
+        the "<code class="literal">comments</code>" array would be
+        returned.</p></div><div class="sect3" title="Array and range query interactions"><div class="titlepage"><div><div><h4 class="title" id="id636605">Array and range query interactions</h4></div></div></div><p>Scalars (non-array elements) in documents must match each clause
+        of a query’s criteria. For example, if you queried for <code class="literal">{"x" : {"$gt" : 10, "$lt" : 20}}</code>, "<code class="literal">x</code>" would have to be both greater than 10 and
+        less than 20. However, if a document’s "<code class="literal">x</code>" field is an array, the document matches
+        if there is an element of "<code class="literal">x</code>" that
+        matches each part of the criteria <span class="emphasis"><em>but each query clause can
+        match a different array element</em></span>.<a id="id636618" class="indexterm"></a><a id="id636648" class="indexterm"></a></p><p>The best way to understand this behavior is to see an example.
+        Suppose we have the following documents:</p><pre class="programlisting"><code class="p">{</code><code class="s2">"x"</code> <code class="o">:</code> <code class="mi">5</code><code class="p">}</code>
+<code class="p">{</code><code class="s2">"x"</code> <code class="o">:</code> <code class="mi">15</code><code class="p">}</code>
+<code class="p">{</code><code class="s2">"x"</code> <code class="o">:</code> <code class="mi">25</code><code class="p">}</code>
+<code class="p">{</code><code class="s2">"x"</code> <code class="o">:</code> <code class="p">[</code><code class="mi">5</code><code class="p">,</code> <code class="mi">25</code><code class="p">]}</code></pre><p>If we wanted to find all documents where "<code class="literal">x</code>" is between 10 and 20, one might naively
+        structure a query as <code class="literal">db.test.find({"x" :
+        {"$gt" : 10, "$lt" : 20}})</code> and expect to get back one
+        document: <code class="literal">{"x" : 15}</code>. However,
+        running this, we get two:</p><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">test</code><code class="p">.</code><code class="nx">find</code><code class="p">({</code><code class="s2">"x"</code> <code class="o">:</code> <code class="p">{</code><code class="s2">"$gt"</code> <code class="o">:</code> <code class="mi">10</code><code class="p">,</code> <code class="s2">"$lt"</code> <code class="o">:</code> <code class="mi">20</code><code class="p">}})</code>
+<code class="p">{</code><code class="s2">"x"</code> <code class="o">:</code> <code class="mi">15</code><code class="p">}</code>
+<code class="p">{</code><code class="s2">"x"</code> <code class="o">:</code> <code class="p">[</code><code class="mi">5</code><code class="p">,</code> <code class="mi">25</code><code class="p">]}</code></pre><p>Neither 5 nor 25 is between 10 and 20, but the document is
+        returned because 25 matches the first clause (it is greater than 10)
+        and 5 matches the second clause (it is less than 20).</p><p>This makes range queries against arrays essentially useless: a
+        range will match any multi-element array. There are a couple of ways
+        to get the expected behavior.</p><p>First, you can use "<code class="literal">$elemMatch</code>" to force MongoDB to compare both
+        clauses with a single array element. However, the catch is that
+        "<code class="literal">$elemMatch</code>" won’t match non-array
+        elements:<a id="id762823" class="indexterm"></a></p><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">test</code><code class="p">.</code><code class="nx">find</code><code class="p">({</code><code class="s2">"x"</code> <code class="o">:</code> <code class="p">{</code><code class="s2">"$elemMatch"</code> <code class="o">:</code> <code class="p">{</code><code class="s2">"$gt"</code> <code class="o">:</code> <code class="mi">10</code><code class="p">,</code> <code class="s2">"$lt"</code> <code class="o">:</code> <code class="mi">20</code><code class="p">}})</code>
+<code class="o">&gt;</code> <code class="c1">// no results</code></pre><p>The document <code class="literal">{"x" : 15}</code> no
+        longer matches the query, because the "<code class="literal">x</code>" field is not an array.<a id="id510632" class="indexterm"></a><a id="id510639" class="indexterm"></a></p><p>If you have an index over the field that you’re querying on (see
+        <a class="xref" href="ch05.html" title="Chapter 5. Indexing">Chapter 5</a>), you can use <code class="function">min()</code> and <code class="function">max()</code> to limit the index range traversed by
+        the query to your "<code class="literal">$gt</code>" and
+        "<code class="literal">$lt</code>" values:</p><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">test</code><code class="p">.</code><code class="nx">find</code><code class="p">({</code><code class="s2">"x"</code> <code class="o">:</code> <code class="p">{</code><code class="s2">"$gt"</code> <code class="o">:</code> <code class="mi">10</code><code class="p">,</code> <code class="s2">"$lt"</code> <code class="o">:</code> <code class="mi">20</code><code class="p">}).</code><code class="nx">min</code><code class="p">({</code><code class="s2">"x"</code> <code class="o">:</code> <code class="mi">10</code><code class="p">}).</code><code class="nx">max</code><code class="p">({</code><code class="s2">"x"</code> <code class="o">:</code> <code class="mi">20</code><code class="p">})</code>
+<code class="p">{</code><code class="s2">"x"</code> <code class="o">:</code> <code class="mi">15</code><code class="p">}</code></pre><p>Now this will only traverse the index from 10 to 20, missing the
+        5 and 25 entries. You can only use <code class="function">min()</code> and <code class="function">max()</code> when you have an index on the field
+        you are querying for, though, and you must pass all fields of the
+        index to <code class="function">min()</code> and <code class="function">max()</code>.</p><p>Using <code class="function">min()</code> and <code class="function">max()</code> when querying for ranges over
+        documents that may include arrays is generally a good idea: if you
+        look at the index bounds for a "<code class="literal">$gt</code>“/”<code class="literal">$lt</code>" query over an array, you can see that
+        it’s horribly inefficient. It basically accepts any value, so it will
+        search every index entry, not just those in the range.<a id="id487199" class="indexterm"></a><a id="id487184" class="indexterm"></a><a id="id487197" class="indexterm"></a></p></div></div><div class="sect2" title="Querying on Embedded Documents"><div class="titlepage"><div><div><h3 class="title" id="sect2_d1e4349">Querying on Embedded Documents</h3></div></div></div><p>There are two ways of querying for an embedded document: querying
+      for the whole document or querying for its individual key/value
+      pairs.<a id="id487224" class="indexterm"></a><a id="id487218" class="indexterm"></a><a id="id487243" class="indexterm"></a></p><p>Querying for an entire embedded document works identically to a
+      normal query. For example, if we have a document that looks like
+      this:</p><a id="I_programlisting4_d1e4513"></a><pre class="programlisting"><code class="p">{</code>
+    <code class="s2">"name"</code> <code class="o">:</code> <code class="p">{</code>
+        <code class="s2">"first"</code> <code class="o">:</code> <code class="s2">"Joe"</code><code class="p">,</code>
+        <code class="s2">"last"</code> <code class="o">:</code> <code class="s2">"Schmoe"</code>
+    <code class="p">},</code>
+    <code class="s2">"age"</code> <code class="o">:</code> <code class="mi">45</code>
+<code class="p">}</code></pre><p>we can query for someone named Joe Schmoe with the
+      following:</p><a id="I_programlisting4_d1e4517"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">people</code><code class="p">.</code><code class="nx">find</code><code class="p">({</code><code class="s2">"name"</code> <code class="o">:</code> <code class="p">{</code><code class="s2">"first"</code> <code class="o">:</code> <code class="s2">"Joe"</code><code class="p">,</code> <code class="s2">"last"</code> <code class="o">:</code> <code class="s2">"Schmoe"</code><code class="p">}})</code></pre><p>However, a query for a full subdocument must exactly match the
+      subdocument. If Joe decides to add a middle name field, suddenly this
+      query won’t work anymore; it doesn’t match the entire embedded document!
+      This type of query is also order-sensitive: <code class="literal">{"last" : "Schmoe", "first" : "Joe"}</code> would not
+      be a match.</p><p>If possible, it’s usually a good idea to query for just a specific
+      key or keys of an embedded document. Then, if your schema changes, all
+      of your queries won’t suddenly break because they’re no longer exact
+      matches. You can query for embedded keys using dot-notation:</p><a id="I_programlisting4_d1e4526"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">people</code><code class="p">.</code><code class="nx">find</code><code class="p">({</code><code class="s2">"name.first"</code> <code class="o">:</code> <code class="s2">"Joe"</code><code class="p">,</code> <code class="s2">"name.last"</code> <code class="o">:</code> <code class="s2">"Schmoe"</code><code class="p">})</code></pre><p>Now, if Joe adds more keys, this query will still match his first
+      and last names.</p><p>This dot notation is the main difference between query documents
+      and other document types. Query documents can contain dots, which mean
+      “reach into an embedded document.” Dot notation is also the reason that
+      documents to be inserted cannot contain the . character. Oftentimes
+      people run into this limitation when trying to save URLs as keys. One
+      way to get around it is to always perform a global replace before
+      inserting or after retrieving, substituting a character that isn’t legal
+      in URLs for the dot character.</p><p>Embedded document matches can get a little tricky as the document
+      structure gets more complicated. For example, suppose we are storing
+      blog posts and we want to find comments by Joe that were scored at least
+      a 5. We could model the post as follows:</p><a id="I_programlisting4_d1e4546"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">blog</code><code class="p">.</code><code class="nx">find</code><code class="p">()</code>
+<code class="p">{</code>
+    <code class="s2">"content"</code> <code class="o">:</code> <code class="s2">"..."</code><code class="p">,</code>
+    <code class="s2">"comments"</code> <code class="o">:</code> <code class="p">[</code>
+        <code class="p">{</code>
+            <code class="s2">"author"</code> <code class="o">:</code> <code class="s2">"joe"</code><code class="p">,</code>
+            <code class="s2">"score"</code> <code class="o">:</code> <code class="mi">3</code><code class="p">,</code>
+            <code class="s2">"comment"</code> <code class="o">:</code> <code class="s2">"nice post"</code>
+        <code class="p">},</code>
+        <code class="p">{</code>
+            <code class="s2">"author"</code> <code class="o">:</code> <code class="s2">"mary"</code><code class="p">,</code>
+            <code class="s2">"score"</code> <code class="o">:</code> <code class="mi">6</code><code class="p">,</code>
+            <code class="s2">"comment"</code> <code class="o">:</code> <code class="s2">"terrible post"</code>
+        <code class="p">}</code>
+    <code class="p">]</code>
+<code class="p">}</code></pre><p>Now, we can’t query using <code class="literal">db.blog.find({"comments" : {"author" : "joe", "score" :
+      {"$gte" : 5}}})</code>. Embedded document matches have to match the
+      whole document, and this doesn’t match the <code class="literal">"comment"</code> key. It also wouldn’t work to do
+      <code class="literal">db.blog.find({"comments.author" : "joe",
+      "comments.score" : {"$gte" : 5}})</code>, because the author criteria could match a
+      different comment than the score criteria. That is, it would return the
+      document shown above: it would match <code class="literal">"author" :
+      "joe"</code> in the first comment and <code class="literal">"score" : 6</code> in the second comment.</p><p>To correctly group criteria without needing to specify every key,
+      use <code class="literal">"$elemMatch"</code>. This vaguely-named
+      conditional allows you to partially specify criteria to match a single
+      embedded document in an array. The correct query looks like
+      this:<a id="id737363" class="indexterm"></a></p><a id="I_programlisting4_d1e4577"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">blog</code><code class="p">.</code><code class="nx">find</code><code class="p">({</code><code class="s2">"comments"</code> <code class="o">:</code> <code class="p">{</code><code class="s2">"$elemMatch"</code> <code class="o">:</code> <code class="p">{</code><code class="s2">"author"</code> <code class="o">:</code> <code class="s2">"joe"</code><code class="p">,</code> 
+                                              <code class="s2">"score"</code> <code class="o">:</code> <code class="p">{</code><code class="s2">"$gte"</code> <code class="o">:</code> <code class="mi">5</code><code class="p">}}}})</code></pre><p><code class="literal">"$elemMatch"</code> allows us to
+      “group” our criteria. As such, it’s only needed when you have more than
+      one key you want to match on in an embedded document.<a id="id685996" class="indexterm"></a><a id="id685988" class="indexterm"></a></p></div></div><div class="sect1" title="$where Queries"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="sect1_d1e4429">$where Queries</h2></div></div></div><p>Key/value pairs are a fairly expressive way to query, but there are
+    some queries that they cannot represent. For queries that cannot be done
+    any other way, there are <code class="literal">"$where"</code>
+    clauses, which allow you to execute arbitrary JavaScript as part of your
+    query. This allows you to do (almost) anything within a query. For
+    security, use of "<code class="literal">$where</code>" clauses
+    should be highly restricted or eliminated. End users should never be
+    allowed to execute arbitrary "<code class="literal">$where</code>"
+    clauses.<a id="id479172" class="indexterm"></a><a id="id479184" class="indexterm"></a><a id="id479213" class="indexterm"></a></p><p>The most common case for using "<code class="literal">$where</code>" is to compare the values for two keys in
+    a document. For instance, suppose we have documents that look like
+    this:</p><a id="I_programlisting4_d1e4606"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">foo</code><code class="p">.</code><code class="nx">insert</code><code class="p">({</code><code class="s2">"apple"</code> <code class="o">:</code> <code class="mi">1</code><code class="p">,</code> <code class="s2">"banana"</code> <code class="o">:</code> <code class="mi">6</code><code class="p">,</code> <code class="s2">"peach"</code> <code class="o">:</code> <code class="mi">3</code><code class="p">})</code>
+<code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">foo</code><code class="p">.</code><code class="nx">insert</code><code class="p">({</code><code class="s2">"apple"</code> <code class="o">:</code> <code class="mi">8</code><code class="p">,</code> <code class="s2">"spinach"</code> <code class="o">:</code> <code class="mi">4</code><code class="p">,</code> <code class="s2">"watermelon"</code> <code class="o">:</code> <code class="mi">4</code><code class="p">})</code></pre><p>We’d like to return documents where any two of the fields are equal.
+    For example, in the second document, <code class="literal">"spinach"</code> and <code class="literal">"watermelon"</code> have the same value, so we’d like
+    that document returned. It’s unlikely MongoDB will ever have a
+    $-conditional for this, so we can use a <code class="literal">"$where"</code> clause to do it with JavaScript:</p><a id="I_programlisting4_d1e4619"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">foo</code><code class="p">.</code><code class="nx">find</code><code class="p">({</code><code class="s2">"$where"</code> <code class="o">:</code> <code class="kd">function</code> <code class="p">()</code> <code class="p">{</code>
+<code class="p">...</code> <code class="k">for</code> <code class="p">(</code><code class="kd">var</code> <code class="nx">current</code> <code class="k">in</code> <code class="k">this</code><code class="p">)</code> <code class="p">{</code>
+<code class="p">...</code>     <code class="k">for</code> <code class="p">(</code><code class="kd">var</code> <code class="nx">other</code> <code class="k">in</code> <code class="k">this</code><code class="p">)</code> <code class="p">{</code>
+<code class="p">...</code>         <code class="k">if</code> <code class="p">(</code><code class="nx">current</code> <code class="o">!=</code> <code class="nx">other</code> <code class="o">&amp;&amp;</code> <code class="k">this</code><code class="p">[</code><code class="nx">current</code><code class="p">]</code> <code class="o">==</code> <code class="k">this</code><code class="p">[</code><code class="nx">other</code><code class="p">])</code> <code class="p">{</code>
+<code class="p">...</code>             <code class="k">return</code> <code class="kc">true</code><code class="p">;</code>
+<code class="p">...</code>         <code class="p">}</code>
+<code class="p">...</code>     <code class="p">}</code>
+<code class="p">...</code> <code class="p">}</code>
+<code class="p">...</code> <code class="k">return</code> <code class="kc">false</code><code class="p">;</code>
+<code class="p">...</code> <code class="p">}});</code></pre><p>If the function returns <code class="literal">true</code>, the
+    document will be part of the result set; if it returns <code class="literal">false</code>, it won’t be.</p><p><code class="literal">"$where"</code> queries should not be
+    used unless strictly necessary: they are much slower than regular queries.
+    Each document has to be converted from BSON to a JavaScript object and
+    then run through the <code class="literal">"$where"</code>
+    expression. Indexes cannot be used to satisfy a <code class="literal">"$where"</code>, either. Hence, you should use <code class="literal">"$where"</code> only when there is no other way of
+    doing the query. You can cut down on the penalty by using other query
+    filters in combination with <code class="literal">"$where"</code>.
+    If possible, an index will be used to filter based on the non-<code class="literal">$where</code> clauses; the <code class="literal">"$where"</code> expression will be used only to
+    fine-tune the results.</p><p>Another way of doing complex queries is to use one of the
+    aggregation tools, which are covered in <a class="xref" href="ch07.html" title="Chapter 7. Aggregation">Chapter 7</a>.</p><div class="sect2" title="Server-Side Scripting"><div class="titlepage"><div><div><h3 class="title" id="sect1_d1e7998">Server-Side Scripting</h3></div></div></div><p>You must be very careful with security when executing JavaScript
+      on the server. If done incorrectly, server-side JavaScript is
+      susceptible to injection attacks similar to those that occur in a
+      relational database. However, by following certain rules around
+      accepting input, you can use JavaScript safely. Alternatively, you can
+      turn off JavaScript execution altogether by running <em class="filename">mongod</em> with the
+      <code class="option">--noscripting</code> option.<a id="id553019" class="indexterm"></a><a id="id553003" class="indexterm"></a><a id="id553066" class="indexterm"></a><a id="id553077" class="indexterm"></a><a id="id553027" class="indexterm"></a></p><p>The security issues with JavaScript are all related to executing
+      user-provided programs on the server. You want to avoid doing that, so
+      make sure you aren’t accepting user input and passing it directly to
+      <em class="filename">mongod</em>. For example, suppose you
+      want to print “Hello, <em class="replaceable"><code>name</code></em>!”, where
+      <code class="varname">name</code> is provided by the user. A naive approach might
+      be to write a JavaScript function such as the following:</p><a id="I_programlisting7_d1e8497"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">func</code> <code class="o">=</code> <code class="s2">"function() { print('Hello, "</code><code class="o">+</code><code class="nx">name</code><code class="o">+</code><code class="s2">"!'); }"</code></pre><p>If <code class="varname">name</code> is a user-defined variable, it could be
+      the string <code class="literal">"'); db.dropDatabase();
+      print('"</code>, which would turn the code into this:</p><a id="I_programlisting7_d1e8507"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">func</code> <code class="o">=</code> <code class="s2">"function() { print('Hello, '); db.dropDatabase(); print('!'); }"</code></pre><p>Now, if you run this code, your entire database will be
+      dropped!</p><p>To prevent this, you should use a <em class="firstterm">scope</em> to
+      pass in the name. In Python, for example, this looks like
+      this:<a id="id774896" class="indexterm"></a><a id="id774904" class="indexterm"></a></p><a id="I_programlisting7_d1e8516"></a><pre class="programlisting"><code class="n">func</code> <code class="o">=</code> <code class="n">pymongo</code><code class="o">.</code><code class="n">code</code><code class="o">.</code><code class="n">Code</code><code class="p">(</code><code class="s">"function() { print('Hello, '+username+'!'); }"</code><code class="p">,</code>
+            <code class="p">{</code><code class="s">"username"</code><code class="p">:</code> <code class="n">name</code><code class="p">})</code></pre><p>Now the database will harmlessly print this:</p><a id="I_programlisting7_d1e8520"></a><pre class="programlisting"><code class="nx">Hello</code><code class="p">,</code> <code class="s1">'); db.dropDatabase(); print('</code><code class="o">!</code></pre><p>Most drivers have a special type for sending code to the database,
+      since code can actually be a composite of a string and a
+      <em class="firstterm">scope</em>. A scope is a document that maps variable
+      names to values. This mapping becomes a local scope for the JavaScript
+      function being executed. Thus, in
+      the example above, the function would have access to a variable called
+      <code class="literal">username</code>, whose value would be the
+      string that the user gave.<a id="id607908" class="indexterm"></a><a id="id607892" class="indexterm"></a><a id="id608666" class="indexterm"></a></p><div class="note" title="Note"><h3 class="title">Note</h3><p>The shell does not have a code type that includes scope; you can
+        only use strings or JavaScript functions with it.</p></div></div></div><div class="sect1" title="Cursors"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="sect1_d1e4513">Cursors</h2></div></div></div><p>The database returns results from <code class="function">find</code> using a <span class="emphasis"><em>cursor</em></span>. The
+    client-side implementations of cursors generally allow you to control a
+    great deal about the eventual output of a query. You can limit the number
+    of results, skip over some number of results, sort results by any
+    combination of keys in any direction, and perform a number of other
+    powerful operations.<a id="ch04_queryingcursors" class="indexterm"></a><a id="ch04_cursors" class="indexterm"></a></p><p>To create a cursor with the shell, put some documents into a
+    collection, do a query on them, and assign the results to a local variable
+    (variables defined with <code class="literal">"var"</code> are
+    local). Here, we create a very simple collection and query it, storing the
+    results in the <code class="varname">cursor</code> variable:<a id="id647473" class="indexterm"></a><a id="id608725" class="indexterm"></a></p><a id="I_programlisting4_d1e4698"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="k">for</code><code class="p">(</code><code class="nx">i</code><code class="o">=</code><code class="mi">0</code><code class="p">;</code> <code class="nx">i</code><code class="o">&lt;</code><code class="mi">100</code><code class="p">;</code> <code class="nx">i</code><code class="o">++</code><code class="p">)</code> <code class="p">{</code>
+<code class="p">...</code>     <code class="nx">db</code><code class="p">.</code><code class="nx">collection</code><code class="p">.</code><code class="nx">insert</code><code class="p">({</code><code class="nx">x</code> <code class="o">:</code> <code class="nx">i</code><code class="p">});</code>
+<code class="p">...</code> <code class="p">}</code>
+<code class="o">&gt;</code> <code class="kd">var</code> <code class="nx">cursor</code> <code class="o">=</code> <code class="nx">db</code><code class="p">.</code><code class="nx">collection</code><code class="p">.</code><code class="nx">find</code><code class="p">();</code></pre><p>The advantage of doing this is that you can look at one result at a
+    time. If you store the results in a global variable or no variable at all,
+    the MongoDB shell will automatically iterate through and display the first
+    couple of documents. This is what we’ve been seeing up until this point,
+    and it is often the behavior you want for seeing what’s in a collection
+    but not for doing actual programming with the shell.<a id="id647496" class="indexterm"></a><a id="id505909" class="indexterm"></a><a id="id508748" class="indexterm"></a></p><p>To iterate through the results, you can use the <code class="function">next</code> method on the cursor. You can use
+    <code class="function">hasNext</code> to check whether there is
+    another result. A typical loop through results looks like the
+    following:</p><a id="I_programlisting4_d1e4722"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="k">while</code> <code class="p">(</code><code class="nx">cursor</code><code class="p">.</code><code class="nx">hasNext</code><code class="p">())</code> <code class="p">{</code>
+<code class="p">...</code>     <code class="nx">obj</code> <code class="o">=</code> <code class="nx">cursor</code><code class="p">.</code><code class="nx">next</code><code class="p">();</code>
+<code class="p">...</code>     <code class="c1">// do stuff</code>
+<code class="p">...</code> <code class="p">}</code></pre><p><code class="literal">cursor.hasNext()</code> checks that the
+    next result exists, and <code class="literal">cursor.next()</code>
+    fetches it.</p><p>The <code class="literal">cursor</code> class also implements
+    JavaScript’s iterator interface, so you can use it in a <code class="function">forEach</code> loop:<a id="id524308" class="indexterm"></a></p><a id="I_programlisting4_d1e4742"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="kd">var</code> <code class="nx">cursor</code> <code class="o">=</code> <code class="nx">db</code><code class="p">.</code><code class="nx">people</code><code class="p">.</code><code class="nx">find</code><code class="p">();</code>
+<code class="o">&gt;</code> <code class="nx">cursor</code><code class="p">.</code><code class="nx">forEach</code><code class="p">(</code><code class="kd">function</code><code class="p">(</code><code class="nx">x</code><code class="p">)</code> <code class="p">{</code>
+<code class="p">...</code>     <code class="nx">print</code><code class="p">(</code><code class="nx">x</code><code class="p">.</code><code class="nx">name</code><code class="p">);</code>
+<code class="p">...</code> <code class="p">});</code>
+<code class="nx">adam</code>
+<code class="nx">matt</code>
+<code class="nx">zak</code></pre><p>When you call <code class="function">find</code>, the shell
+    does not query the database immediately. It waits until you start
+    requesting results to send the query, which allows you to chain additional
+    options onto a query before it is performed. Almost every method on a
+    cursor object returns the cursor itself so that you can chain options in
+    any order. For instance, all of the following are equivalent:</p><a id="I_programlisting4_d1e4750"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="kd">var</code> <code class="nx">cursor</code> <code class="o">=</code> <code class="nx">db</code><code class="p">.</code><code class="nx">foo</code><code class="p">.</code><code class="nx">find</code><code class="p">().</code><code class="nx">sort</code><code class="p">({</code><code class="s2">"x"</code> <code class="o">:</code> <code class="mi">1</code><code class="p">}).</code><code class="nx">limit</code><code class="p">(</code><code class="mi">1</code><code class="p">).</code><code class="nx">skip</code><code class="p">(</code><code class="mi">10</code><code class="p">);</code>
+<code class="o">&gt;</code> <code class="kd">var</code> <code class="nx">cursor</code> <code class="o">=</code> <code class="nx">db</code><code class="p">.</code><code class="nx">foo</code><code class="p">.</code><code class="nx">find</code><code class="p">().</code><code class="nx">limit</code><code class="p">(</code><code class="mi">1</code><code class="p">).</code><code class="nx">sort</code><code class="p">({</code><code class="s2">"x"</code> <code class="o">:</code> <code class="mi">1</code><code class="p">}).</code><code class="nx">skip</code><code class="p">(</code><code class="mi">10</code><code class="p">);</code>
+<code class="o">&gt;</code> <code class="kd">var</code> <code class="nx">cursor</code> <code class="o">=</code> <code class="nx">db</code><code class="p">.</code><code class="nx">foo</code><code class="p">.</code><code class="nx">find</code><code class="p">().</code><code class="nx">skip</code><code class="p">(</code><code class="mi">10</code><code class="p">).</code><code class="nx">limit</code><code class="p">(</code><code class="mi">1</code><code class="p">).</code><code class="nx">sort</code><code class="p">({</code><code class="s2">"x"</code> <code class="o">:</code> <code class="mi">1</code><code class="p">});</code></pre><p>At this point, the query has not been executed yet. All of these
+    functions merely build the query. Now, suppose we call the
+    following:</p><a id="I_programlisting4_d1e4754"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">cursor</code><code class="p">.</code><code class="nx">hasNext</code><code class="p">()</code></pre><p>At this point, the query will be sent to the server. The shell
+    fetches the first 100 results or first 4 MB of results (whichever is
+    smaller) at once so that the next calls to <code class="function">next</code> or <code class="function">hasNext</code> will not have to make trips to the
+    server. After the client has run through the first set of results, the
+    shell will again contact the database and ask for more results with a
+    <em class="firstterm">getMore</em> request. getMore requests basically contain
+    an identifier for the query and ask the database if there are any more
+    results, returning the next batch if there are. This process continues
+    until the cursor is exhausted and all results have been returned.</p><div class="sect2" title="Limits, Skips, and Sorts"><div class="titlepage"><div><div><h3 class="title" id="sect2_d1e4594">Limits, Skips, and Sorts</h3></div></div></div><p>The most common query options are limiting the number of results
+      returned, skipping a number of results, and sorting. All these options
+      must be added before a query is sent to the database.<a id="id699813" class="indexterm"></a><a id="id699818" class="indexterm"></a><a id="id551650" class="indexterm"></a><a id="id551658" class="indexterm"></a></p><p>To set a limit, chain the <code class="function">limit</code> function onto your call to <code class="literal">find</code>. For example, to only return three
+      results, use this:<a id="id699866" class="indexterm"></a></p><a id="I_programlisting4_d1e4797"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">c</code><code class="p">.</code><code class="nx">find</code><code class="p">().</code><code class="nx">limit</code><code class="p">(</code><code class="mi">3</code><code class="p">)</code></pre><p>If there are fewer than three documents matching your query in the
+      collection, only the number of matching documents will be returned;
+      <code class="function">limit</code> sets an upper limit, not a
+      lower limit.</p><p><code class="function">skip</code> works similarly to
+      <code class="function">limit</code>:<a id="id759877" class="indexterm"></a></p><a id="I_programlisting4_d1e4821"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">c</code><code class="p">.</code><code class="nx">find</code><code class="p">().</code><code class="nx">skip</code><code class="p">(</code><code class="mi">3</code><code class="p">)</code></pre><p>This will skip the first three matching documents and return the
+      rest of the matches. If there are fewer than three documents in your
+      collection, it will not return any documents.</p><p><code class="function">sort</code> takes an object: a set
+      of key/value pairs where the keys are key names and the values are the
+      sort directions. Sort direction can be 1 (ascending) or −1 (descending).
+      If multiple keys are given, the results will be sorted in that order.
+      For instance, to sort the results by <code class="literal">"username"</code> ascending and <code class="literal">"age"</code> descending, we do the
+      following:<a id="id628505" class="indexterm"></a><a id="id543594" class="indexterm"></a></p><a id="I_programlisting4_d1e4851"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">c</code><code class="p">.</code><code class="nx">find</code><code class="p">().</code><code class="nx">sort</code><code class="p">({</code><code class="nx">username</code> <code class="o">:</code> <code class="mi">1</code><code class="p">,</code> <code class="nx">age</code> <code class="o">:</code> <code class="o">-</code><code class="mi">1</code><code class="p">})</code></pre><p>These three methods can be combined. This is often handy for
+      pagination. For example, suppose that you are running an online store
+      and someone searches for <span class="emphasis"><em>mp3</em></span>. If you want 50
+      results per page sorted by price from high to low, you can do the
+      following:</p><a id="I_programlisting4_d1e4864"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">stock</code><code class="p">.</code><code class="nx">find</code><code class="p">({</code><code class="s2">"desc"</code> <code class="o">:</code> <code class="s2">"mp3"</code><code class="p">}).</code><code class="nx">limit</code><code class="p">(</code><code class="mi">50</code><code class="p">).</code><code class="nx">sort</code><code class="p">({</code><code class="s2">"price"</code> <code class="o">:</code> <code class="o">-</code><code class="mi">1</code><code class="p">})</code></pre><p>If that person clicks Next Page to see more results, you can
+      simply add a skip to the query, which will skip over the first 50
+      matches (which the user already saw on page 1):</p><a id="I_programlisting4_d1e4868"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">stock</code><code class="p">.</code><code class="nx">find</code><code class="p">({</code><code class="s2">"desc"</code> <code class="o">:</code> <code class="s2">"mp3"</code><code class="p">}).</code><code class="nx">limit</code><code class="p">(</code><code class="mi">50</code><code class="p">).</code><code class="nx">skip</code><code class="p">(</code><code class="mi">50</code><code class="p">).</code><code class="nx">sort</code><code class="p">({</code><code class="s2">"price"</code> <code class="o">:</code> <code class="o">-</code><code class="mi">1</code><code class="p">})</code></pre><p>However, large skips are not very performant; there are
+      suggestions for how to avoid them in the next section.</p><div class="sect3" title="Comparison order"><div class="titlepage"><div><div><h4 class="title" id="sect3_d1e4662">Comparison order</h4></div></div></div><p>MongoDB has a hierarchy as to how types compare. Sometimes you
+        will have a single key with multiple types: for instance, integers and
+        booleans, or strings and nulls. If you do a sort on a key with a mix
+        of types, there is a predefined order that they will be sorted in.
+        From least to greatest value, this ordering is as follows:<a id="id737793" class="indexterm"></a><a id="id737847" class="indexterm"></a></p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>Minimum value</p></li><li class="listitem"><p><code class="literal">null</code></p></li><li class="listitem"><p>Numbers (integers, longs, doubles)</p></li><li class="listitem"><p>Strings</p></li><li class="listitem"><p>Object/document</p></li><li class="listitem"><p>Array</p></li><li class="listitem"><p>Binary data</p></li><li class="listitem"><p>Object ID</p></li><li class="listitem"><p>Boolean</p></li><li class="listitem"><p>Date</p></li><li class="listitem"><p>Timestamp</p></li><li class="listitem"><p>Regular expression</p></li><li class="listitem"><p>Maximum value</p></li></ol></div></div></div><div class="sect2" title="Avoiding Large Skips"><div class="titlepage"><div><div><h3 class="title" id="sect2_d1e4756">Avoiding Large Skips</h3></div></div></div><p>Using <code class="function">skip</code> for a small number
+      of documents is fine. For a large number of results, <code class="function">skip</code> can be slow, since it has to find and
+      then discard all the skipped results. Most databases keep more metadata
+      in the index to help with skips, but MongoDB does not yet support this,
+      so large skips should be avoided. Often you can calculate the next query
+      based on the result from the previous one.<a id="ch04_queryingcursorsskips" class="indexterm"></a><a id="ch04_cursoravoidskip" class="indexterm"></a><a id="id670218" class="indexterm"></a></p><div class="sect3" title="Paginating results without skip"><div class="titlepage"><div><div><h4 class="title" id="sect3_d1e4770">Paginating results without skip</h4></div></div></div><p>The easiest way to do pagination is to return the first page of
+        results using limit and then return each subsequent page as an offset
+        from the beginning:<a id="id738389" class="indexterm"></a><a id="id738378" class="indexterm"></a></p><a id="I_programlisting4_d1e4965"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="c1">// do not use: slow for large skips</code>
+<code class="o">&gt;</code> <code class="kd">var</code> <code class="nx">page1</code> <code class="o">=</code> <code class="nx">db</code><code class="p">.</code><code class="nx">foo</code><code class="p">.</code><code class="nx">find</code><code class="p">(</code><code class="nx">criteria</code><code class="p">).</code><code class="nx">limit</code><code class="p">(</code><code class="mi">100</code><code class="p">)</code>
+<code class="o">&gt;</code> <code class="kd">var</code> <code class="nx">page2</code> <code class="o">=</code> <code class="nx">db</code><code class="p">.</code><code class="nx">foo</code><code class="p">.</code><code class="nx">find</code><code class="p">(</code><code class="nx">criteria</code><code class="p">).</code><code class="nx">skip</code><code class="p">(</code><code class="mi">100</code><code class="p">).</code><code class="nx">limit</code><code class="p">(</code><code class="mi">100</code><code class="p">)</code>
+<code class="o">&gt;</code> <code class="kd">var</code> <code class="nx">page3</code> <code class="o">=</code> <code class="nx">db</code><code class="p">.</code><code class="nx">foo</code><code class="p">.</code><code class="nx">find</code><code class="p">(</code><code class="nx">criteria</code><code class="p">).</code><code class="nx">skip</code><code class="p">(</code><code class="mi">200</code><code class="p">).</code><code class="nx">limit</code><code class="p">(</code><code class="mi">100</code><code class="p">)</code>
+<code class="p">...</code></pre><p>However, depending on your query, you can usually find a way to
+        paginate without <code class="function">skip</code>s. For
+        example, suppose we want to display documents in descending order
+        based on <code class="literal">"date"</code>. We can get the
+        first page of results with the following:</p><a id="I_programlisting4_d1e4975"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="kd">var</code> <code class="nx">page1</code> <code class="o">=</code> <code class="nx">db</code><code class="p">.</code><code class="nx">foo</code><code class="p">.</code><code class="nx">find</code><code class="p">().</code><code class="nx">sort</code><code class="p">({</code><code class="s2">"date"</code> <code class="o">:</code> <code class="o">-</code><code class="mi">1</code><code class="p">}).</code><code class="nx">limit</code><code class="p">(</code><code class="mi">100</code><code class="p">)</code></pre><p>Then, assuming the date is unique, we can use the <code class="literal">"date"</code> value of the last document as the
+        criteria for fetching the next page:</p><a id="I_programlisting4_d1e4982"></a><pre class="programlisting"><code class="kd">var</code> <code class="nx">latest</code> <code class="o">=</code> <code class="kc">null</code><code class="p">;</code>
+
+<code class="c1">// display first page</code>
+<code class="k">while</code> <code class="p">(</code><code class="nx">page1</code><code class="p">.</code><code class="nx">hasNext</code><code class="p">())</code> <code class="p">{</code>
+   <code class="nx">latest</code> <code class="o">=</code> <code class="nx">page1</code><code class="p">.</code><code class="nx">next</code><code class="p">();</code>
+   <code class="nx">display</code><code class="p">(</code><code class="nx">latest</code><code class="p">);</code>
+<code class="p">}</code>
+
+<code class="c1">// get next page</code>
+<code class="kd">var</code> <code class="nx">page2</code> <code class="o">=</code> <code class="nx">db</code><code class="p">.</code><code class="nx">foo</code><code class="p">.</code><code class="nx">find</code><code class="p">({</code><code class="s2">"date"</code> <code class="o">:</code> <code class="p">{</code><code class="s2">"$lt"</code> <code class="o">:</code> <code class="nx">latest</code><code class="p">.</code><code class="nx">date</code><code class="p">}});</code>
+<code class="nx">page2</code><code class="p">.</code><code class="nx">sort</code><code class="p">({</code><code class="s2">"date"</code> <code class="o">:</code> <code class="o">-</code><code class="mi">1</code><code class="p">}).</code><code class="nx">limit</code><code class="p">(</code><code class="mi">100</code><code class="p">);</code></pre><p>Now the query does not need to include a <code class="function">skip</code>.</p></div><div class="sect3" title="Finding a random document"><div class="titlepage"><div><div><h4 class="title" id="sect3_d1e4812">Finding a random document</h4></div></div></div><p>One fairly common problem is how to get a random document from a
+        collection. The naive (and slow) solution is to count the number of
+        documents and then do a <code class="function">find</code>,
+        skipping a random number of documents between 0 and the size of the
+        collection:<a id="id605089" class="indexterm"></a></p><a id="I_programlisting4_d1e5004"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="c1">// do not use</code>
+<code class="o">&gt;</code> <code class="kd">var</code> <code class="nx">total</code> <code class="o">=</code> <code class="nx">db</code><code class="p">.</code><code class="nx">foo</code><code class="p">.</code><code class="nx">count</code><code class="p">()</code>
+<code class="o">&gt;</code> <code class="kd">var</code> <code class="nx">random</code> <code class="o">=</code> <code class="nb">Math</code><code class="p">.</code><code class="nx">floor</code><code class="p">(</code><code class="nb">Math</code><code class="p">.</code><code class="nx">random</code><code class="p">()</code><code class="o">*</code><code class="nx">total</code><code class="p">)</code>
+<code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">foo</code><code class="p">.</code><code class="nx">find</code><code class="p">().</code><code class="nx">skip</code><code class="p">(</code><code class="nx">random</code><code class="p">).</code><code class="nx">limit</code><code class="p">(</code><code class="mi">1</code><code class="p">)</code></pre><p>It is actually highly inefficient to get a random element this
+        way: you have to do a count (which can be expensive if you are using
+        criteria), and skipping large numbers of elements can be
+        time-consuming.</p><p>It takes a little forethought, but if you know you’ll be looking
+        up a random element on a collection, there’s a much more efficient way
+        to do so. The trick is to add an extra random key to each document
+        when it is inserted. For instance, if we’re using the shell, we could
+        use the <code class="literal">Math.random()</code> function
+        (which creates a random number between 0 and 1):</p><a id="I_programlisting4_d1e5019"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">people</code><code class="p">.</code><code class="nx">insert</code><code class="p">({</code><code class="s2">"name"</code> <code class="o">:</code> <code class="s2">"joe"</code><code class="p">,</code> <code class="s2">"random"</code> <code class="o">:</code> <code class="nb">Math</code><code class="p">.</code><code class="nx">random</code><code class="p">()})</code>
+<code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">people</code><code class="p">.</code><code class="nx">insert</code><code class="p">({</code><code class="s2">"name"</code> <code class="o">:</code> <code class="s2">"john"</code><code class="p">,</code> <code class="s2">"random"</code> <code class="o">:</code> <code class="nb">Math</code><code class="p">.</code><code class="nx">random</code><code class="p">()})</code>
+<code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">people</code><code class="p">.</code><code class="nx">insert</code><code class="p">({</code><code class="s2">"name"</code> <code class="o">:</code> <code class="s2">"jim"</code><code class="p">,</code> <code class="s2">"random"</code> <code class="o">:</code> <code class="nb">Math</code><code class="p">.</code><code class="nx">random</code><code class="p">()})</code></pre><p>Now, when we want to find a random document from the collection,
+        we can calculate a random number and use that as query criteria,
+        instead of doing a <code class="function">skip</code>:</p><a id="I_programlisting4_d1e5026"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="kd">var</code> <code class="nx">random</code> <code class="o">=</code> <code class="nb">Math</code><code class="p">.</code><code class="nx">random</code><code class="p">()</code>
+<code class="o">&gt;</code> <code class="nx">result</code> <code class="o">=</code> <code class="nx">db</code><code class="p">.</code><code class="nx">foo</code><code class="p">.</code><code class="nx">findOne</code><code class="p">({</code><code class="s2">"random"</code> <code class="o">:</code> <code class="p">{</code><code class="s2">"$gt"</code> <code class="o">:</code> <code class="nx">random</code><code class="p">}})</code></pre><p>There is a slight chance that <code class="varname">random</code> will be
+        greater than any of the <code class="literal">"random"</code>
+        values in the collection, and no results will be returned. We can
+        guard against this by simply returning a document in the other
+        direction:</p><a id="I_programlisting4_d1e5036"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="k">if</code> <code class="p">(</code><code class="nx">result</code> <code class="o">==</code> <code class="kc">null</code><code class="p">)</code> <code class="p">{</code>
+<code class="p">...</code>     <code class="nx">result</code> <code class="o">=</code> <code class="nx">db</code><code class="p">.</code><code class="nx">foo</code><code class="p">.</code><code class="nx">findOne</code><code class="p">({</code><code class="s2">"random"</code> <code class="o">:</code> <code class="p">{</code><code class="s2">"$lte"</code> <code class="o">:</code> <code class="nx">random</code><code class="p">}})</code>
+<code class="p">...</code> <code class="p">}</code></pre><p>If there aren’t any documents in the collection, this technique
+        will end up returning <code class="literal">null</code>, which
+        makes sense.</p><p>This technique can be used with arbitrarily complex queries;
+        just make sure to have an index that includes the random key. For
+        example, if we want to find a random plumber in California, we can
+        create an index on <code class="literal">"profession"</code>,
+        <code class="literal">"state"</code>, and <code class="literal">"random"</code>:</p><a id="I_programlisting4_d1e5055"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">people</code><code class="p">.</code><code class="nx">ensureIndex</code><code class="p">({</code><code class="s2">"profession"</code> <code class="o">:</code> <code class="mi">1</code><code class="p">,</code> <code class="s2">"state"</code> <code class="o">:</code> <code class="mi">1</code><code class="p">,</code> <code class="s2">"random"</code> <code class="o">:</code> <code class="mi">1</code><code class="p">})</code></pre><p>This allows us to quickly find a random result (see <a class="xref" href="ch05.html" title="Chapter 5. Indexing">Chapter 5</a> for more information on
+        indexing).<a id="id671488" class="indexterm"></a><a id="id671495" class="indexterm"></a></p></div></div><div class="sect2" title="Advanced Query Options"><div class="titlepage"><div><div><h3 class="title" id="sect2_d1e4888">Advanced Query Options</h3></div></div></div><p>There are two types of queries: <span class="emphasis"><em>wrapped</em></span> and
+      <span class="emphasis"><em>plain</em></span>. A plain query is something like
+      this:<a id="id671523" class="indexterm"></a><a id="id671538" class="indexterm"></a><a id="id588246" class="indexterm"></a></p><a id="I_programlisting4_d1e5090"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="kd">var</code> <code class="nx">cursor</code> <code class="o">=</code> <code class="nx">db</code><code class="p">.</code><code class="nx">foo</code><code class="p">.</code><code class="nx">find</code><code class="p">({</code><code class="s2">"foo"</code> <code class="o">:</code> <code class="s2">"bar"</code><code class="p">})</code></pre><p>There are a couple options that “wrap” the query. For example,
+      suppose we perform a sort:<a id="id600558" class="indexterm"></a></p><a id="I_programlisting4_d1e5097"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="kd">var</code> <code class="nx">cursor</code> <code class="o">=</code> <code class="nx">db</code><code class="p">.</code><code class="nx">foo</code><code class="p">.</code><code class="nx">find</code><code class="p">({</code><code class="s2">"foo"</code> <code class="o">:</code> <code class="s2">"bar"</code><code class="p">}).</code><code class="nx">sort</code><code class="p">({</code><code class="s2">"x"</code> <code class="o">:</code> <code class="mi">1</code><code class="p">})</code></pre><p>Instead of sending <code class="literal">{"foo" :
+      "bar"}</code> to the database as the query, the query gets wrapped in
+      a larger document. The shell converts the query from <code class="literal">{"foo" : "bar"}</code> to <code class="literal">{"$query" : {"foo" : "bar"}, "$orderby" : {"x" :
+      1}}</code>.</p><p>Most drivers provide helpers for adding arbitrary options to
+      queries. Other helpful options include the following:</p><div class="variablelist"><dl><dt><span class="term"><code class="literal">$maxScan :
+          <em class="replaceable"><code>integer</code></em></code></span></dt><dd><p>Specify the maximum number of documents that should be
+            scanned for the query.</p><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">foo</code><code class="p">.</code><code class="nx">find</code><code class="p">(</code><code class="nx">criteria</code><code class="p">).</code><code class="nx">_addSpecial</code><code class="p">(</code><code class="s2">"$maxScan"</code><code class="p">,</code> <code class="mi">20</code><code class="p">)</code></pre><p>This can be useful if you want a query to not take too long
+            but are not sure how much of a collection will need to be scanned.
+            This will limit your results to whatever was found in the part of
+            the collection that was scanned (i.e., you may miss other
+            documents that match).</p></dd><dt><span class="term"><code class="literal">$min :
+          <em class="replaceable"><code>document</code></em></code></span></dt><dd><p>Start criteria for querying. <code class="literal"><em class="replaceable"><code>document</code></em></code> must
+            exactly match the keys of an index used for the query. This forces
+            the given index to be used for the query.</p><p>This is used internally and you should generally use
+            <code class="literal">"$gt"</code> instead of <code class="literal">"$min"</code>. You can use <code class="literal">"$min"</code> to force the lower bound on an
+            index scan, which may be helpful for complex queries.</p></dd><dt><span class="term"><code class="literal">$max :
+          <em class="replaceable"><code>document</code></em></code></span></dt><dd><p>End criteria for querying. <code class="literal"><em class="replaceable"><code>document</code></em></code> must
+            exactly match the keys of an index used for the query. This forces
+            the given index to be used for the query.</p><p>If this is used internally, you should generally use
+            <code class="literal">"$lt"</code> instead of <code class="literal">"$max"</code>. You can use <code class="literal">"$max"</code> to force bounds on an index scan,
+            which may be helpful for complex queries.</p></dd><dt><span class="term"><code class="literal">$showDiskLoc : true</code></span></dt><dd><p>Adds a "<code class="literal">$diskLoc</code>" field
+            to the results that shows where on disk that particular result
+            lives. For example:</p><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">foo</code><code class="p">.</code><code class="nx">find</code><code class="p">().</code><code class="nx">_addSpecial</code><code class="p">(</code><code class="s1">'$showDiskLoc'</code><code class="p">,</code><code class="kc">true</code><code class="p">)</code>
+<code class="p">{</code> <code class="s2">"_id"</code> <code class="o">:</code> <code class="mi">0</code><code class="p">,</code> <code class="s2">"$diskLoc"</code> <code class="o">:</code> <code class="p">{</code> <code class="s2">"file"</code> <code class="o">:</code> <code class="mi">2</code><code class="p">,</code> <code class="s2">"offset"</code> <code class="o">:</code> <code class="mi">154812592</code> <code class="p">}</code> <code class="p">}</code>
+<code class="p">{</code> <code class="s2">"_id"</code> <code class="o">:</code> <code class="mi">1</code><code class="p">,</code> <code class="s2">"$diskLoc"</code> <code class="o">:</code> <code class="p">{</code> <code class="s2">"file"</code> <code class="o">:</code> <code class="mi">2</code><code class="p">,</code> <code class="s2">"offset"</code> <code class="o">:</code> <code class="mi">154812628</code> <code class="p">}</code> <code class="p">}</code></pre><p>The file number shows which file the document is in. In this
+            case, if we’re using the <em class="filename">test</em>
+            database, the document is in <em class="filename">test.2</em>. The second field gives the byte
+            offset of each document within the file.</p></dd></dl></div></div><div class="sect2" title="Getting Consistent Results"><div class="titlepage"><div><div><h3 class="title" id="sect2_d1e5023">Getting Consistent Results</h3></div></div></div><p>A fairly common way of processing data is to pull it out of
+      MongoDB, change it in some way, and then save it again:<a id="ch04_queryingcursorsconsistent" class="indexterm"></a><a id="ch04_cursorsconsistent" class="indexterm"></a></p><a id="I_programlisting4_d1e5185"></a><pre class="programlisting"><code class="nx">cursor</code> <code class="o">=</code> <code class="nx">db</code><code class="p">.</code><code class="nx">foo</code><code class="p">.</code><code class="nx">find</code><code class="p">();</code>
+
+<code class="k">while</code> <code class="p">(</code><code class="nx">cursor</code><code class="p">.</code><code class="nx">hasNext</code><code class="p">())</code> <code class="p">{</code>
+    <code class="kd">var</code> <code class="nx">doc</code> <code class="o">=</code> <code class="nx">cursor</code><code class="p">.</code><code class="nx">next</code><code class="p">();</code>
+    <code class="nx">doc</code> <code class="o">=</code> <code class="nx">process</code><code class="p">(</code><code class="nx">doc</code><code class="p">);</code>
+    <code class="nx">db</code><code class="p">.</code><code class="nx">foo</code><code class="p">.</code><code class="nx">save</code><code class="p">(</code><code class="nx">doc</code><code class="p">);</code>
+<code class="p">}</code></pre><p>This is fine for a small number of results, but MongoDB can return
+      the same result multiple times for a large result set. To see why,
+      imagine how the documents are being stored. You can picture a collection
+      as a list of documents that looks something like <a class="xref" href="ch04.html#figure_d1e5037" title="Figure 4-1. A collection being queried">Figure 4-1</a>. Snowflakes represent documents, since every
+      document is beautiful and unique.</p><div class="figure-float"><div class="figure"><a id="figure_d1e5037"></a><div class="figure-contents"><div class="mediaobject"><a id="I_mediaobject4_d1e5194"></a><img src="/library/view/mongodb-the-definitive/9781449344795/images/mdb2_0401.png" alt="A collection being queried" width="1000" height="294"></div></div><div class="figure-title">Figure 4-1. A collection being queried</div></div></div><p>Now, when we do a <code class="function">find</code>, the
+      cursor starts returning results from the beginning of the collection and
+      moves right. Your program grabs the first 100 documents and processes
+      them. When you save them back to the database, if a document does not
+      have the padding available to grow to its new size, like in <a class="xref" href="ch04.html#figure_d1e5056" title="Figure 4-2. An enlarged document may not fit where it did before">Figure 4-2</a>, it needs to be relocated. Usually, a
+      document will be relocated to the end of a collection (<a class="xref" href="ch04.html#figure_d1e5068" title="Figure 4-3. MongoDB relocates updated documents that don’t fit in their original position">Figure 4-3</a>).<a id="id577678" class="indexterm"></a><a id="id531204" class="indexterm"></a></p><div class="figure"><a id="figure_d1e5056"></a><div class="figure-contents"><div class="mediaobject"><a id="I_mediaobject4_d1e5211"></a><img src="/library/view/mongodb-the-definitive/9781449344795/images/mdb2_0402.png" alt="An enlarged document may not fit where it did before" width="1000" height="519"></div></div><div class="figure-title">Figure 4-2. An enlarged document may not fit where it did before</div></div><div class="figure"><a id="figure_d1e5068"></a><div class="figure-contents"><div class="mediaobject"><a id="I_mediaobject4_d1e5219"></a><img src="/library/view/mongodb-the-definitive/9781449344795/images/mdb2_0403.png" alt="MongoDB relocates updated documents that don’t fit in their original position" width="1000" height="224"></div></div><div class="figure-title">Figure 4-3. MongoDB relocates updated documents that don’t fit in their
+        original position</div></div><p>Now our program continues to fetch batches of documents. When it
+      gets toward the end, it will return the relocated documents again (<a class="xref" href="ch04.html#figure_d1e5083" title="Figure 4-4. A cursor may return these relocated documents again in a later batch">Figure 4-4</a>)!</p><div class="figure-float"><div class="figure"><a id="figure_d1e5083"></a><div class="figure-contents"><div class="mediaobject"><a id="I_mediaobject4_d1e5231"></a><img src="/library/view/mongodb-the-definitive/9781449344795/images/mdb2_0404.png" alt="A cursor may return these relocated documents again in a later batch" width="1000" height="307"></div></div><div class="figure-title">Figure 4-4. A cursor may return these relocated documents again in a later
+        batch</div></div></div><p>The solution to this problem is to <span class="emphasis"><em>snapshot</em></span>
+      your query. If you add the option, the query will be run by traversing
+      the "<code class="literal">_id</code>" index, which guarantees
+      that you’ll only return each document once. For example, instead of
+      <code class="literal">db.foo.find()</code>, you’d run:<a id="id769900" class="indexterm"></a></p><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">foo</code><code class="p">.</code><code class="nx">find</code><code class="p">().</code><code class="nx">snapshot</code><code class="p">()</code></pre><p>Snapshotting makes queries slower, so only use snapshotted queries
+      when necessary. For example, <em class="filename">mongodump</em> (a backup utility covered in <a class="xref" href="ch22.html" title="Chapter 22. Making Backups">Chapter 22</a>) uses snapshotted queries by default.</p><p>All queries that return a single batch of results are effectively
+      snapshotted. Inconsistencies arise only when the collection changes
+      under a cursor while it is waiting to get another batch of
+      results.<a id="id769961" class="indexterm"></a><a id="id518549" class="indexterm"></a></p></div><div class="sect2" title="Immortal Cursors"><div class="titlepage"><div><div><h3 class="title" id="id561360">Immortal Cursors</h3></div></div></div><p>There are two sides to a cursor: the client-facing cursor and the
+      database cursor that the client-side one represents. We have been
+      talking about the client-side one up until now, but we are going to take
+      a brief look at what’s happening on the server.<a id="id518562" class="indexterm"></a><a id="id518571" class="indexterm"></a></p><p>On the server side, a cursor takes up memory and resources. Once a
+      cursor runs out of results or the client sends a message telling it to
+      die, the database can free the resources it was using. Freeing these
+      resources lets the database use them for other things, which is good, so
+      we want to make sure that cursors can be freed quickly (within
+      reason).</p><p>There are a couple of conditions that can cause the death (and
+      subsequent cleanup) of a cursor. First, when a cursor finishes iterating
+      through the matching results, it will clean itself up. Another way is
+      that, when a cursor goes out of scope on the client side, the drivers
+      send the database a special message to let it know that it can kill that
+      cursor. Finally, even if the user hasn’t iterated through all the
+      results and the cursor is still in scope, after 10 minutes of
+      inactivity, a database cursor will automatically “die.” This way, if a
+      client crashes or is buggy, MongoDB will not be left with thousands of
+      open cursors.</p><p>This “death by timeout” is usually the desired behavior: very few
+      applications expect their users to sit around for minutes at a time
+      waiting for results. However, sometimes you might know that you need a
+      cursor to last for a long time. In that case, many drivers have
+      implemented a function called <code class="function">immortal</code>, or a similar mechanism, which tells
+      the database not to time out the cursor. If you turn off a cursor’s
+      timeout, you must iterate through all of its results or kill it to make
+      sure it gets closed. Otherwise, it will sit around in the database
+      hogging resources until the server is restarted.<a id="id518592" class="indexterm"></a><a id="id518604" class="indexterm"></a><a id="id518612" class="indexterm"></a></p></div></div><div class="sect1" title="Database Commands"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="sect1_d1e7055">Database Commands</h2></div></div></div><p>There is one very special type of query called a <em class="firstterm">database
+    command</em>. We’ve covered creating, updating, deleting, and
+    finding documents. Database commands do “everything else,” from
+    administrative tasks like shutting down the server and cloning databases
+    to counting documents in a collection and performing
+    aggregations.<a id="ch04_dbcommands" class="indexterm"></a><a id="ch04_queryingdbcommand" class="indexterm"></a></p><p>Commands are mentioned throughout this text, as they are useful for
+    data manipulation, administration, and monitoring. For example, dropping a
+    collection is done via the "<code class="literal">drop</code>"
+    database command:</p><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">runCommand</code><code class="p">({</code><code class="s2">"drop"</code> <code class="o">:</code> <code class="s2">"test"</code><code class="p">});</code>
+<code class="p">{</code>
+    <code class="s2">"nIndexesWas"</code> <code class="o">:</code> <code class="mi">1</code><code class="p">,</code>
+    <code class="s2">"msg"</code> <code class="o">:</code> <code class="s2">"indexes dropped for collection"</code><code class="p">,</code>
+    <code class="s2">"ns"</code> <code class="o">:</code> <code class="s2">"test.test"</code><code class="p">,</code>
+    <code class="s2">"ok"</code> <code class="o">:</code> <code class="kc">true</code>
+<code class="p">}</code></pre><p>You might be more familiar with the <em class="firstterm">shell
+    helper</em>, which wraps the command and provides a simpler
+    interface:<a id="id564107" class="indexterm"></a></p><a id="I_programlisting7_d1e7393"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">test</code><code class="p">.</code><code class="nx">drop</code><code class="p">()</code></pre><p>Often you can just use the shell helpers, but knowing the underlying
+    commands can be helpful if you’re stuck on a box with an old version of
+    the shell and connected to a new version of the database: the shell might
+    not have the wrappers for new database commands, but you can still run
+    them with <code class="function">runCommand()</code>.<a id="id677143" class="indexterm"></a></p><p>We’ve already seen a couple of commands in the previous chapters;
+    for instance, we used the <code class="literal">getLastError</code>
+    command in <a class="xref" href="ch03.html" title="Chapter 3. Creating, Updating, and Deleting Documents">Chapter 3</a> to check the number of documents
+    affected by an update:</p><a id="I_programlisting7_d1e7364"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">count</code><code class="p">.</code><code class="nx">update</code><code class="p">({</code><code class="nx">x</code> <code class="o">:</code> <code class="mi">1</code><code class="p">},</code> <code class="p">{</code><code class="nx">$inc</code> <code class="o">:</code> <code class="p">{</code><code class="nx">x</code> <code class="o">:</code> <code class="mi">1</code><code class="p">}},</code> <code class="kc">false</code><code class="p">,</code> <code class="kc">true</code><code class="p">)</code>
+<code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">runCommand</code><code class="p">({</code><code class="nx">getLastError</code> <code class="o">:</code> <code class="mi">1</code><code class="p">})</code>
+<code class="p">{</code>
+    <code class="s2">"err"</code> <code class="o">:</code> <code class="kc">null</code><code class="p">,</code>
+    <code class="s2">"updatedExisting"</code> <code class="o">:</code> <code class="kc">true</code><code class="p">,</code>
+    <code class="s2">"n"</code> <code class="o">:</code> <code class="mi">5</code><code class="p">,</code>
+    <code class="s2">"ok"</code> <code class="o">:</code> <code class="kc">true</code>
+<code class="p">}</code></pre><p>In this section, we’ll take a closer look at commands to see exactly
+    what they are and how they’re implemented. We’ll also describe some of the
+    most useful commands that are supported by MongoDB. You can see all
+    commands by running the <code class="function">db.listCommands()</code> command.<a id="id763576" class="indexterm"></a></p><div class="sect2" title="How Commands Work"><div class="titlepage"><div><div><h3 class="title" id="sect2_d1e7079">How Commands Work</h3></div></div></div><p>A database command always returns a document containing the key
+      <code class="literal">"ok"</code>. If <code class="literal">"ok"</code> is a true value (<code class="literal">1</code>, <code class="literal">1.0</code>, or
+      <code class="literal">true</code>), the command was successful; if it is <code class="literal">false</code>, then the command failed for some
+      reason.<a id="id763603" class="indexterm"></a></p><p>If <code class="literal">"ok"</code> is <code class="literal">0</code>
+      then an additional key will be present, <code class="literal">"errmsg"</code>. The value of <code class="literal">"errmsg"</code> is a string explaining why the
+      command failed. As an example, let’s try running the <code class="literal">drop</code> command again, on the collection that was
+      dropped in the previous section:<a id="id543808" class="indexterm"></a></p><a id="I_programlisting7_d1e7451"></a><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">runCommand</code><code class="p">({</code><code class="s2">"drop"</code> <code class="o">:</code> <code class="s2">"test"</code><code class="p">});</code>
+<code class="p">{</code> <code class="s2">"errmsg"</code> <code class="o">:</code> <code class="s2">"ns not found"</code><code class="p">,</code> <code class="s2">"ok"</code> <code class="o">:</code> <code class="kc">false</code> <code class="p">}</code></pre><p>Commands in MongoDB are implemented as a special type of query
+      that gets performed on the <span class="emphasis"><em>$cmd</em></span> collection.
+      <code class="function">runCommand</code> just takes a command
+      document and performs the equivalent query, so our drop call becomes the
+      following:<a id="id698575" class="indexterm"></a></p><a id="I_programlisting7_d1e7469"></a><pre class="programlisting"><code class="nx">db</code><code class="p">.</code><code class="nx">$cmd</code><code class="p">.</code><code class="nx">findOne</code><code class="p">({</code><code class="s2">"drop"</code> <code class="o">:</code> <code class="s2">"test"</code><code class="p">});</code></pre><p>When the MongoDB server gets a query on the
+      <span class="emphasis"><em>$cmd</em></span> collection, it handles it using special logic,
+      rather than the normal code for handling queries. Almost all MongoDB
+      drivers provide a helper method like <code class="function">runCommand</code> for running commands, but commands
+      can always be run using a simple query.</p><p>Some commands require administrator access and must be run on the
+      <span class="emphasis"><em>admin</em></span> database. If such a command is run on any
+      other database, it will return an <code class="literal">"access denied"</code>
+      error. If you’re working on another database and you need to run an
+      admin command, you can use the <code class="function">adminCommand</code> function, instead of <code class="function">runCommand</code>:<a id="id724806" class="indexterm"></a><a id="id724817" class="indexterm"></a></p><pre class="programlisting"><code class="o">&gt;</code> <code class="nx">use</code> <code class="nx">temp</code>
+<code class="nx">switched</code> <code class="nx">to</code> <code class="nx">db</code> <code class="nx">temp</code>
+<code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">runCommand</code><code class="p">({</code><code class="nx">shutdown</code><code class="o">:</code><code class="mi">1</code><code class="p">})</code>
+<code class="p">{</code> <code class="s2">"errmsg"</code> <code class="o">:</code> <code class="s2">"access denied; use admin db"</code><code class="p">,</code> <code class="s2">"ok"</code> <code class="o">:</code> <code class="mi">0</code> <code class="p">}</code>
+<code class="o">&gt;</code> <code class="nx">db</code><code class="p">.</code><code class="nx">adminCommand</code><code class="p">({</code><code class="s2">"shutdown"</code> <code class="o">:</code> <code class="mi">1</code><code class="p">})</code></pre><p>Commands are one of the few places that are field-order-sensitive:
+      the command name must always be the first field in the command. Thus,
+      <code class="literal">{"getLastError" : 1, "w" : 2}</code> will
+      work, but <code class="literal">{"w" : 2, "getLastError" :
+      1}</code> will not.<a id="id499548" class="indexterm"></a><a id="id499557" class="indexterm"></a><a id="id499572" class="indexterm"></a><a id="id499580" class="indexterm"></a></p></div></div></section></div>
+    </div>
+    
+    <section class="t-bottom-cta bottom-cta bottom-cta-book free-chapter">
+    
+        <h2>
+            With Safari, you learn the way you learn best. Get unlimited access to videos, live online training,
+            learning paths, books, interactive tutorials, and more.
+        </h2>
+
+        <div class="controls">
+            <a href="https://www.safaribooksonline.com/public/free-trial/" class="button" data-ga-label="Bottom CTA">Start Free Trial</a>
+            <p>No credit card required</p>
+        </div>
+    
+</section>
+
+</div>
+
+
+</section>
+
+
+
+</section>
+
+<footer class="anybird-footer">
+    <nav class="grid">
+        <ul class="footer-nav col">
+            <li><a href="https://www.safaribooksonline.com/explore/"><span>Explore</span></a></li>
+            <li><a href="https://www.safaribooksonline.com/our-library/"><span>Tour</span></a></li>
+            <li><a href="https://www.safaribooksonline.com/pricing/"><span>Pricing</span></a></li>
+            <li><a href="https://www.safaribooksonline.com/enterprise/"><span>Enterprise</span></a></li>
+            <li><a href="https://www.safaribooksonline.com/government/"><span>Government</span></a></li>
+            <li><a href="https://www.safaribooksonline.com/academic-public-library/"><span>Education</span></a></li>
+            <li><a href="https://www.safaribooksonline.com/your-experience/#queue"><span>Queue App</span></a></li>
+        </ul>
+        <ul class="footer-contact col">
+            <li><a href="https://www.safaribooksonline.com/learn/"><span>Learn</span></a></li>
+            <li><a href="https://www.safaribooksonline.com/blog/"><span>Blog</span></a></li>
+            <li><a href="https://www.safaribooksonline.com/contact/"><span>Contact</span></a></li>
+            <li><a href="https://www.safaribooksonline.com/careers/"><span>Careers</span></a></li>
+            <li><a href="https://www.safaribooksonline.com/press-resources/"><span>Press Resources</span></a></li>
+            <li><a href="https://www.safaribooksonline.com/public/support/"><span>Support</span></a></li>
+        </ul>
+        <ul class="footer-social col">
+            <li id="footer-twitter"><a href="https://twitter.com/safari"><span>Twitter</span></a></li>
+            <li id="footer-github"><a href="http://github.com/safarijv"><span>GitHub</span></a></li>
+            <li id="footer-facebook"><a href="http://www.facebook.com/safaribooksonline"><span>Facebook</span></a></li>
+            <li id="footer-linkedin"><a
+                    href="https://www.linkedin.com/company/safari-books-online"><span>LinkedIn</span></a></li>
+        </ul>
+        <ul class="footer-legal col">
+            <li><a href="https://www.safaribooksonline.com/terms/"><span>Terms of Service</span></a></li>
+            <li><a href="https://www.safaribooksonline.com/membership-agreement/"><span>Membership Agreement</span></a></li>
+            <li><a href="https://www.safaribooksonline.com/privacy/"><span>Privacy Policy</span></a></li>
+        </ul>
+    </nav>
+    <div class="footer-copyright">
+        Copyright &copy; 2018 Safari Books Online.
+    </div>
+</footer>
+
+
+
+
+<script>
+  var g = {
+    
+    position_cache: {},
+    title: "MongoDB: The Definitive Guide, 2nd Edition",
+    author_list: "Kristina Chodorow",
+    format: "book",
+    source: "application/epub+zip",
+    is_system_book: true,
+    is_public: true,
+    loaded_from_server: true,
+    allow_scripts: false,
+    has_mathml: false
+    
+  };
+</script>
+
+<script type="text/javascript" src="/library/view/static/CACHE/js/e8fffa6815a1.js"></script>
+
+
+<noscript> 
+  <iframe src="//www.googletagmanager.com/ns.html?id=GTM-5P4V6Z"
+          height="0" width="0"
+          style="display:none;visibility:hidden">
+  </iframe>
+</noscript>
+
+
+<script async defer src="/library/view/pageview.js"></script>
+
+
+
+
+<!-- MARC Intercept Support -->
+<script type="text/javascript" src="/library/view/static/CACHE/js/4c68f6d055c9.js"></script>
+
+
+
+
+</body>
+</html>
