@@ -1,0 +1,536 @@
+<!DOCTYPE html><html><head>
+<title>.htaccess Cheat Sheet - All Rules You Will Ever Need, Listed On One Page for Apache .htaccess Server Rules</title>
+<link rel="stylesheet" href="/style.min.css">
+</head>
+<body>
+<div id='outer'>
+<div id='bodycontent' class='clearfix'>
+<h1>.htaccess Cheat Sheet</h1>
+<h2>All the important Apache .htaccess web server rules and config options</h2>
+<h3>Welcome to our fast loading one page .htaccess cheat sheet with all major .htaccess rules listed.</h3>
+<p style='font-size:0.8em;'>We have no ads, no javascript. Just plain HTML (and a .css file), so it should load super fast. Coming here and a quick cmd+f/ctrl+f should be faster than finding the answer on stackexchange :) Also check out our <a href='/PHP-DomDocument-cheatsheet'>PHP's DomDocument Cheatsheet</a></p>
+
+
+<p style='background:yellow; padding:10px; margin: 15px;' ><big>Remember that for most rules you must have the <strong><code>RewriteEngine on</code></strong> rule in your .htaccess file!!!</big></p>
+
+<ul  class='clearfix' id='tableofcontents'><li style='width: 50%; float:left;'><a href='#rewrite-and-redirection''><strong>Rewrite and Redirection</strong></a>
+      <ul style='max-height:400px; overflow:auto;'><li><a href='#serve-all-requests-with-one-php-file'>Serve All Requests With One PHP File</a></li><li><a href='#wordpress-htaccess-for-permalinks'>WordPress .htaccess for permalinks</a></li><li><a href='#force-www'>Force www</a></li><li><a href='#force-www-in-generic-way'>Force www in a Generic Way</a></li><li><a href='#force-non-www'>Force non-www</a></li><li><a href='#force-non-www-in-generic-way'>Force non-www in a Generic Way</a></li><li><a href='#force-https'>Force HTTPS</a></li><li><a href='#force-https-behind-proxy'>Force HTTPS Behind a Proxy</a></li><li><a href='#force-trailing-slash'>Force Trailing Slash</a></li><li><a href='#remove-trailing-slash'>Remove Trailing Slash</a></li><li><a href='#redirect-single-page'>Redirect a Single Page</a></li><li><a href='#alias-single-directory'>Alias a Single Directory</a></li><li><a href='#alias-paths-to-script'>Alias Paths To Script</a></li><li><a href='#redirect-an-entire-site'>Redirect an Entire Site</a></li><li><a href='#alias-clean-urls'>Alias "Clean" URLs</a></li></ul>
+    </li><li style='width: 50%; float:left;'><a href='#security''><strong>Security</strong></a>
+      <ul style='max-height:400px; overflow:auto;'><li><a href='#deny-all-access'>Deny All Access</a></li><li><a href='#deny-all-access-except-yours-only-allow-certain-ips'>Deny All Access Except Yours (Only allow certain IPs)</a></li><li><a href='#block-ip-address'>Block IP Address</a></li><li><a href='#allow-access-only-from-lan'>Allow access only from LAN</a></li><li><a href='#deny-access-to-certain-user-agents-bots'>Deny Access To Certain User Agents (bots)</a></li><li><a href='#deny-access-to-hidden-files-and-directories'>Deny Access to Hidden Files and Directories</a></li><li><a href='#deny-access-to-certain-files'>Deny Access To Certain Files</a></li><li><a href='#deny-access-to-backup-and-source-files'>Deny Access to Backup and Source Files</a></li><li><a href='#disable-directory-browsing'>Disable Directory Browsing</a></li><li><a href='#enable-directory-listings'>Enable Directory Listings</a></li><li><a href='#disable-listing-of-certain-filetypes-if-indexes-is-not-disabled'>Disable Listing Of Certain Filetypes (if Indexes is not disabled)</a></li><li><a href='#disable-image-hotlinking'>Disable Image Hotlinking</a></li><li><a href='#redirect-hotlinkers-and-show-different-image'>Redirect hotlinkers and show a different image</a></li><li><a href='#deny-access-from-certain-referrers'>Deny Access from certain referrers</a></li><li><a href='#password-protect-directory'>Password Protect a Directory</a></li><li><a href='#password-protect-file-or-several-files'>Password Protect a File or Several Files</a></li></ul>
+    </li><li style='width: 50%; float:left;'><a href='#performance''><strong>Performance</strong></a>
+      <ul style='max-height:400px; overflow:auto;'><li><a href='#compress-text-files-gzipdeflate-output'>Compress Text Files (gzip/deflate output)</a></li><li><a href='#set-expires-headers'>Set Expires Headers</a></li><li><a href='#turn-etags-off'>Turn eTags Off</a></li><li><a href='#limit-upload-file-size'>Limit Upload File Size</a></li></ul>
+    </li><li style='width: 50%; float:left;'><a href='#miscellaneous''><strong>Miscellaneous</strong></a>
+      <ul style='max-height:400px; overflow:auto;'><li><a href='#server-variables-for-mod_rewrite'>Server Variables for mod_re­write </a></li><li><a href='#set-php-variables'>Set PHP Variables</a></li><li><a href='#custom-error-pages'>Custom Error Pages</a></li><li><a href='#redirect-users-to-maintenance-page-while-you-update'>Redirect users to a maintenance page while you update</a></li><li><a href='#force-downloading'>Force Downloading</a></li><li><a href='#disable-showing-server-info-server-signature'>Disable Showing Server Info (Server Signature)</a></li><li><a href='#prevent-downloading'>Prevent Downloading</a></li><li><a href='#allow-cross-domain-fonts'>Allow Cross-Domain Fonts</a></li><li><a href='#auto-utf-8-encode'>Auto UTF-8 Encode</a></li><li><a href='#set-server-timezone-to-utc-or-other-time-zone'>Set Server Timezone (to UTC, or other time zone)</a></li><li><a href='#switch-to-another-php-version'>Switch to Another PHP Version</a></li><li><a href='#execute-php-with-different-file-extension'>Execute PHP with a different file extension </a></li></ul>
+    </li></ul><center>
+
+
+
+
+
+
+</center>
+
+<p>Please remember to double check and verify any rules that you use. If you do not understand a rule please consult someone who does. We accept no responsibility for your use of these rules - use them at your own risk. Please get in touch if you want us to add a rule!</p> 
+
+<div id='contents'><h4 id='rewrite-and-redirection''><a href='#rewrite-and-redirection'>Rewrite and Redirection Rules</a></h4><p>(Note: It is assumed that you have `mod_rewrite` installed and enabled. The first line should be 'RewriteEngine on' to enable this)</p><div class='big_section'><h5 id='serve-all-requests-with-one-php-file'><a href='#serve-all-requests-with-one-php-file'><em>Serve All Requests With One PHP File</em> with .htaccess</a> <a href='htaccess.php?tip=serve-all-requests-with-one-php-file' style='font-size:12px; color: blue; text-decoration:underline; float:right;' title="Apache .htaccess Serve All Requests With One PHP File">perm link</a></h5><pre><code>RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([^?]*)$ /index.php [NC,L,QSA]
+</code></pre>
+<hr /><h5 id='wordpress-htaccess-for-permalinks'><a href='#wordpress-htaccess-for-permalinks'><em>WordPress .htaccess for permalinks</em> with .htaccess</a> <a href='htaccess.php?tip=wordpress-htaccess-for-permalinks' style='font-size:12px; color: blue; text-decoration:underline; float:right;' title="Apache .htaccess WordPress .htaccess for permalinks">perm link</a></h5><p>(This is the only rule in this section that includes the RewriteEngine on rule)</p>
+
+<pre><code># BEGIN WordPress
+&lt;IfModule mod_rewrite.c&gt;
+ RewriteEngine On
+ RewriteBase /
+ RewriteCond %{REQUEST_FILENAME} !-f
+ RewriteCond %{REQUEST_FILENAME} !-d
+ RewriteRule . /index.php [L]
+&lt;/IfModule&gt;
+# END WordPress
+</code></pre>
+<hr /><h5 id='force-www'><a href='#force-www'><em>Force www</em> with .htaccess</a> <a href='htaccess.php?tip=force-www' style='font-size:12px; color: blue; text-decoration:underline; float:right;' title="Apache .htaccess Force www">perm link</a></h5><pre><code>RewriteEngine on
+RewriteCond %{HTTP_HOST} ^example\.com [NC]
+RewriteRule ^(.*)$ http://www.example.com/$1 [L,R=301,NC]
+</code></pre>
+<hr /><h5 id='force-www-in-generic-way'><a href='#force-www-in-generic-way'><em>Force www in a Generic Way</em> with .htaccess</a> <a href='htaccess.php?tip=force-www-in-generic-way' style='font-size:12px; color: blue; text-decoration:underline; float:right;' title="Apache .htaccess Force www in a Generic Way">perm link</a></h5><pre><code>RewriteCond %{HTTP_HOST} !^$
+RewriteCond %{HTTP_HOST} !^www\. [NC]
+RewriteCond %{HTTPS}s ^on(s)|
+RewriteRule ^ http%1://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+</code></pre>
+
+<p>This works for <em>any</em> domain. <a href="https://stackoverflow.com/questions/4916222/htaccess-how-to-force-www-in-a-generic-way">Source</a></p>
+<hr /><h5 id='force-non-www'><a href='#force-non-www'><em>Force non-www</em> with .htaccess</a> <a href='htaccess.php?tip=force-non-www' style='font-size:12px; color: blue; text-decoration:underline; float:right;' title="Apache .htaccess Force non-www">perm link</a></h5><p>It's <a href="http://www.sitepoint.com/domain-www-or-no-www/">still</a> <a href="https://devcenter.heroku.com/articles/apex-domains">open</a> <a href="http://yes-www.org/">for</a> <a href="http://no-www.org/">debate</a> whether www or non-www is the master race, so if you happen to be a fan or bare domains, here you go:</p>
+
+<pre><code>RewriteEngine on
+RewriteCond %{HTTP_HOST} ^www\.example\.com [NC]
+RewriteRule ^(.*)$ http://example.com/$1 [L,R=301]
+</code></pre>
+<hr /><h5 id='force-non-www-in-generic-way'><a href='#force-non-www-in-generic-way'><em>Force non-www in a Generic Way</em> with .htaccess</a> <a href='htaccess.php?tip=force-non-www-in-generic-way' style='font-size:12px; color: blue; text-decoration:underline; float:right;' title="Apache .htaccess Force non-www in a Generic Way">perm link</a></h5><pre><code>RewriteEngine on
+RewriteCond %{HTTP_HOST} ^www\.
+RewriteCond %{HTTPS}s ^on(s)|off
+RewriteCond http%1://%{HTTP_HOST} ^(https?://)(www\.)?(.+)$
+RewriteRule ^ %1%3%{REQUEST_URI} [R=301,L]
+</code></pre>
+<hr /><h5 id='force-https'><a href='#force-https'><em>Force HTTPS</em> with .htaccess</a> <a href='htaccess.php?tip=force-https' style='font-size:12px; color: blue; text-decoration:underline; float:right;' title="Apache .htaccess Force HTTPS">perm link</a></h5><p>Use this to redirect non HTTPS requests to a HTTPS request. I.e. if you go to http://example.com/ it will redirect to https://example.com.</p>
+
+<pre><code>RewriteEngine on
+RewriteCond %{HTTPS} !on
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
+</code></pre>
+
+<p>It is recommended to use HSTS (<a href='https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security'>read about it on Wikipedia</a>) though.</p>
+
+<blockquote>
+  <blockquote>
+    <p>"HTTP Strict Transport Security (HSTS) is a web security policy mechanism which is necessary to protect secure HTTPS websites against downgrade attacks, and which greatly simplifies protection against cookie hijacking. It allows web servers to declare that web browsers (or other complying user agents) should only interact with it using secure HTTPS connections, and never via the insecure HTTP protocol. HSTS is an IETF standards track protocol and is specified in RFC 6797."</p>
+  </blockquote>
+</blockquote>
+<hr /><h5 id='force-https-behind-proxy'><a href='#force-https-behind-proxy'><em>Force HTTPS Behind a Proxy</em> with .htaccess</a> <a href='htaccess.php?tip=force-https-behind-proxy' style='font-size:12px; color: blue; text-decoration:underline; float:right;' title="Apache .htaccess Force HTTPS Behind a Proxy">perm link</a></h5><p>Useful if you have a proxy in front of your server performing TLS termination.</p>
+
+<pre><code>RewriteCond %{HTTP:X-Forwarded-Proto} !https
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
+</code></pre>
+<hr /><h5 id='force-trailing-slash'><a href='#force-trailing-slash'><em>Force Trailing Slash</em> with .htaccess</a> <a href='htaccess.php?tip=force-trailing-slash' style='font-size:12px; color: blue; text-decoration:underline; float:right;' title="Apache .htaccess Force Trailing Slash">perm link</a></h5><p>Use the follow .htaccess rule to redirect any urls to the same url (but with a trailing slash) for any requests that do not end with a trailing slash. I.e. redirect from http://example.com/your-page to http://example.com/your-page/</p>
+
+<pre><code>RewriteCond %{REQUEST_URI} /+[^\.]+$
+RewriteRule ^(.+[^/])$ %{REQUEST_URI}/ [R=301,L]
+</code></pre>
+<hr /><h5 id='remove-trailing-slash'><a href='#remove-trailing-slash'><em>Remove Trailing Slash</em> with .htaccess</a> <a href='htaccess.php?tip=remove-trailing-slash' style='font-size:12px; color: blue; text-decoration:underline; float:right;' title="Apache .htaccess Remove Trailing Slash">perm link</a></h5><p>Use this to remove any trailing slash (it will 301 redirect to the non trailing slash url)</p>
+
+<pre><code>RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)/$ /$1 [R=301,L]
+</code></pre>
+<hr /><h5 id='redirect-single-page'><a href='#redirect-single-page'><em>Redirect a Single Page</em> with .htaccess</a> <a href='htaccess.php?tip=redirect-single-page' style='font-size:12px; color: blue; text-decoration:underline; float:right;' title="Apache .htaccess Redirect a Single Page">perm link</a></h5><p>Redirect a single URL to a new location</p>
+
+<pre><code>Redirect 301 /oldpage.html http://www.yoursite.com/newpage.html
+Redirect 301 /oldpage2.html http://www.yoursite.com/folder/
+</code></pre>
+
+<p><a href="http://css-tricks.com/snippets/htaccess/301-redirects/">Source</a></p>
+<hr /><h5 id='alias-single-directory'><a href='#alias-single-directory'><em>Alias a Single Directory</em> with .htaccess</a> <a href='htaccess.php?tip=alias-single-directory' style='font-size:12px; color: blue; text-decoration:underline; float:right;' title="Apache .htaccess Alias a Single Directory">perm link</a></h5><pre><code>RewriteEngine On
+RewriteRule ^source-directory/(.*) target-directory/$1
+</code></pre>
+<hr /><h5 id='alias-paths-to-script'><a href='#alias-paths-to-script'><em>Alias Paths To Script</em> with .htaccess</a> <a href='htaccess.php?tip=alias-paths-to-script' style='font-size:12px; color: blue; text-decoration:underline; float:right;' title="Apache .htaccess Alias Paths To Script">perm link</a></h5><pre><code>RewriteEngine On
+RewriteRule ^$ index.fcgi/ [QSA,L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.fcgi/$1 [QSA,L]
+</code></pre>
+
+<p>This example has an <code>index.fcgi</code> file in some directory, and any requests within that directory that fail to resolve a filename/directory will be sent to the <code>index.fcgi</code> script. It's good if you want <code>baz.foo/some/cool/path</code> to be handled by <code>baz.foo/index.fcgi</code> (which also supports requests to <code>baz.foo</code>) while maintaining <code>baz.foo/css/style.css</code> and the like.</p>
+<hr /><h5 id='redirect-an-entire-site'><a href='#redirect-an-entire-site'><em>Redirect an Entire Site</em> with .htaccess</a> <a href='htaccess.php?tip=redirect-an-entire-site' style='font-size:12px; color: blue; text-decoration:underline; float:right;' title="Apache .htaccess Redirect an Entire Site">perm link</a></h5><p>Use the following .htaccess rule to redirect an entire site to a new location/domain</p>
+
+<pre><code>Redirect 301 / http://newsite.com/
+</code></pre>
+
+<p>This way does it with links intact. That is <code>www.oldsite.com/some/crazy/link.html</code> will become <code>www.newsite.com/some/crazy/link.html</code>. This is extremely helpful when you are just "moving" a site to a new domain.</p>
+
+<p><a href="http://css-tricks.com/snippets/htaccess/301-redirects/">Source</a></p>
+<hr /><h5 id='alias-clean-urls'><a href='#alias-clean-urls'><em>Alias "Clean" URLs</em> with .htaccess</a> <a href='htaccess.php?tip=alias-clean-urls' style='font-size:12px; color: blue; text-decoration:underline; float:right;' title="Apache .htaccess Alias &quot;Clean&quot; URLs">perm link</a></h5><p>This snippet lets you use "clean URLs" -- those without a PHP extension, e.g. <code>example.com/users</code> instead of <code>example.com/users.php</code>.</p>
+
+<pre><code>RewriteEngine On
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteRule ^([^.]+)$ $1.php [NC,L]
+</code></pre>
+
+<p><a href="http://www.abeautifulsite.net/access-pages-without-the-php-extension-using-htaccess/">Source</a></p>
+<hr /></div><h4 id='security''><a href='#security'>Security Rules</a></h4><div class='big_section'><h5 id='deny-all-access'><a href='#deny-all-access'><em>Deny All Access</em> with .htaccess</a> <a href='htaccess.php?tip=deny-all-access' style='font-size:12px; color: blue; text-decoration:underline; float:right;' title="Apache .htaccess Deny All Access">perm link</a></h5><p>If you want to prevent apache serving any files at all, use the following. </p>
+
+<h6>Apache 2.2:</h6>
+
+<pre><code>Deny from all
+</code></pre>
+
+<h6>Apache 2.2:</h6>
+
+<pre><code># Require all denied
+</code></pre>
+
+<p>This will stop you from accessing your website. If you want to deny all access but still be able to view it yourself please read the next rule:</p>
+<hr /><h5 id='deny-all-access-except-yours-only-allow-certain-ips'><a href='#deny-all-access-except-yours-only-allow-certain-ips'><em>Deny All Access Except Yours (Only allow certain IPs)</em> with .htaccess</a> <a href='htaccess.php?tip=deny-all-access-except-yours-only-allow-certain-ips' style='font-size:12px; color: blue; text-decoration:underline; float:right;' title="Apache .htaccess Deny All Access Except Yours (Only allow certain IPs)">perm link</a></h5><p>Use this to ONLY allow certain IP addresses to access your website.</p>
+
+<h6>Apache 2.2</h6>
+
+<pre><code>Order deny,allow
+Deny from all
+Allow from xxx.xxx.xxx.xxx
+</code></pre>
+
+<h6>Apache 2.4</h6>
+
+<pre><code># Require all denied
+# Require ip xxx.xxx.xxx.xxx
+</code></pre>
+
+<p><code>xxx.xxx.xxx.xxx</code> is your IP. If you replace the last three digits with 0/12 for example, this will specify a range of IPs within the same network, thus saving you the trouble to list all allowed IPs separately. <a href="http://speckyboy.com/2013/01/08/useful-htaccess-snippets-and-hacks/">Source</a></p>
+
+<p>Please see the next rule for the 'opposite' of this rule!</p>
+<hr /><h5 id='block-ip-address'><a href='#block-ip-address'><em>Block IP Address</em> with .htaccess</a> <a href='htaccess.php?tip=block-ip-address' style='font-size:12px; color: blue; text-decoration:underline; float:right;' title="Apache .htaccess Block IP Address">perm link</a></h5><p>This will allow access to all IPs EXCEPT the ones listed. You can use this to allow all access Except Spammer's IP addresses.</p>
+
+<p>Replace xxx.xxx.xxx.xxx and xxx.xxx.xxx.xxy with the IP addresses you want to block.</p>
+
+<h6>Apache 2.2</h6>
+
+<pre><code>Order deny,allow
+Allow from all
+Deny from xxx.xxx.xxx.xxx
+Deny from xxx.xxx.xxx.xxy
+</code></pre>
+
+<h6>Apache 2.4</h6>
+
+<pre><code># Require all granted
+# Require not ip xxx.xxx.xxx.xxx
+# Require not ip xxx.xxx.xxx.xxy
+</code></pre>
+<hr /><h5 id='allow-access-only-from-lan'><a href='#allow-access-only-from-lan'><em>Allow access only from LAN</em> with .htaccess</a> <a href='htaccess.php?tip=allow-access-only-from-lan' style='font-size:12px; color: blue; text-decoration:underline; float:right;' title="Apache .htaccess Allow access only from LAN">perm link</a></h5><pre><code>order deny,allow
+deny from all
+allow from 192.168.0.0/24
+</code></pre>
+<hr /><h5 id='deny-access-to-certain-user-agents-bots'><a href='#deny-access-to-certain-user-agents-bots'><em>Deny Access To Certain User Agents (bots)</em> with .htaccess</a> <a href='htaccess.php?tip=deny-access-to-certain-user-agents-bots' style='font-size:12px; color: blue; text-decoration:underline; float:right;' title="Apache .htaccess Deny Access To Certain User Agents (bots)">perm link</a></h5><p>Use this .htaccess rule to block/ban certain user agents</p>
+
+<pre><code>RewriteCond %{HTTP_USER_AGENT} ^User\ Agent\ 1 [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Another\ Bot\ You\ Want\ To\ Block [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Another\ UA
+RewriteRule ^.* - [F,L]
+</code></pre>
+<hr /><h5 id='deny-access-to-hidden-files-and-directories'><a href='#deny-access-to-hidden-files-and-directories'><em>Deny Access to Hidden Files and Directories</em> with .htaccess</a> <a href='htaccess.php?tip=deny-access-to-hidden-files-and-directories' style='font-size:12px; color: blue; text-decoration:underline; float:right;' title="Apache .htaccess Deny Access to Hidden Files and Directories">perm link</a></h5><p>Hidden files and directories (those whose names start with a dot <code>.</code>) should most, if not all, of the time be secured. For example: <code>.htaccess</code>, <code>.htpasswd</code>, <code>.git</code>, <code>.hg</code>...</p>
+
+<pre><code>RewriteCond %{SCRIPT_FILENAME} -d [OR]
+RewriteCond %{SCRIPT_FILENAME} -f
+RewriteRule "(^|/)\." - [F]
+</code></pre>
+
+<p>Alternatively, you can just raise a <code>Not Found</code> error, giving the attacker dude no clue:</p>
+
+<pre><code>RedirectMatch 404 /\..*$
+</code></pre>
+<hr /><h5 id='deny-access-to-certain-files'><a href='#deny-access-to-certain-files'><em>Deny Access To Certain Files</em> with .htaccess</a> <a href='htaccess.php?tip=deny-access-to-certain-files' style='font-size:12px; color: blue; text-decoration:underline; float:right;' title="Apache .htaccess Deny Access To Certain Files">perm link</a></h5><p>Use this to block or deny access to certain files</p>
+
+<pre><code>&lt;files your-file-name.txt&gt;
+order allow,deny
+deny from all
+&lt;/files&gt;
+</code></pre>
+<hr /><h5 id='deny-access-to-backup-and-source-files'><a href='#deny-access-to-backup-and-source-files'><em>Deny Access to Backup and Source Files</em> with .htaccess</a> <a href='htaccess.php?tip=deny-access-to-backup-and-source-files' style='font-size:12px; color: blue; text-decoration:underline; float:right;' title="Apache .htaccess Deny Access to Backup and Source Files">perm link</a></h5><p>These files may be left by some text/html editors (like Vi/Vim) and pose a great security danger, when anyone can access them.</p>
+
+<pre><code>&lt;FilesMatch "(\.(bak|config|dist|fla|inc|ini|log|psd|sh|sql|swp)|~)$"&gt;
+    ## Apache 2.2
+    Order allow,deny
+    Deny from all
+    Satisfy All
+
+    ## Apache 2.4
+    # Require all denied
+&lt;/FilesMatch&gt;
+</code></pre>
+
+<p><a href="https://github.com/h5bp/server-configs-apache">Source</a></p>
+<hr /><h5 id='disable-directory-browsing'><a href='#disable-directory-browsing'><em>Disable Directory Browsing</em> with .htaccess</a> <a href='htaccess.php?tip=disable-directory-browsing' style='font-size:12px; color: blue; text-decoration:underline; float:right;' title="Apache .htaccess Disable Directory Browsing">perm link</a></h5><pre><code>Options All -Indexes
+</code></pre>
+<hr /><h5 id='enable-directory-listings'><a href='#enable-directory-listings'><em>Enable Directory Listings</em> with .htaccess</a> <a href='htaccess.php?tip=enable-directory-listings' style='font-size:12px; color: blue; text-decoration:underline; float:right;' title="Apache .htaccess Enable Directory Listings">perm link</a></h5><pre><code>Options All +Indexes
+</code></pre>
+<hr /><h5 id='disable-listing-of-certain-filetypes-if-indexes-is-not-disabled'><a href='#disable-listing-of-certain-filetypes-if-indexes-is-not-disabled'><em>Disable Listing Of Certain Filetypes (if Indexes is not disabled)</em> with .htaccess</a> <a href='htaccess.php?tip=disable-listing-of-certain-filetypes-if-indexes-is-not-disabled' style='font-size:12px; color: blue; text-decoration:underline; float:right;' title="Apache .htaccess Disable Listing Of Certain Filetypes (if Indexes is not disabled)">perm link</a></h5><p>Use this to exclude certain file types from being listed in Apache directory listing. You could use this to stop .pdf files, or video files showing up.</p>
+
+<pre><code>IndexIgnore *.zip *.mp4 *.pdf
+</code></pre>
+<hr /><h5 id='disable-image-hotlinking'><a href='#disable-image-hotlinking'><em>Disable Image Hotlinking</em> with .htaccess</a> <a href='htaccess.php?tip=disable-image-hotlinking' style='font-size:12px; color: blue; text-decoration:underline; float:right;' title="Apache .htaccess Disable Image Hotlinking">perm link</a></h5><pre><code>RewriteEngine on
+RewriteCond %{HTTP_REFERER} !^$
+RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?yourdomain.com [NC]
+RewriteRule \.(jpg|jpeg|png|gif)$ - [NC,F,L]
+</code></pre>
+<hr /><h5 id='redirect-hotlinkers-and-show-different-image'><a href='#redirect-hotlinkers-and-show-different-image'><em>Redirect hotlinkers and show a different image</em> with .htaccess</a> <a href='htaccess.php?tip=redirect-hotlinkers-and-show-different-image' style='font-size:12px; color: blue; text-decoration:underline; float:right;' title="Apache .htaccess Redirect hotlinkers and show a different image">perm link</a></h5><pre><code>RewriteCond %{HTTP_REFERER} !^$
+RewriteCond %{HTTP_REFERER} !^http://(www\.)?your-website.com/.*$ [NC]
+RewriteRule \.(gif|jpg|png)$ http://www.your-website.com/do-not-hotlink-our-content.jpg [R,L]
+</code></pre>
+<hr /><h5 id='deny-access-from-certain-referrers'><a href='#deny-access-from-certain-referrers'><em>Deny Access from certain referrers</em> with .htaccess</a> <a href='htaccess.php?tip=deny-access-from-certain-referrers' style='font-size:12px; color: blue; text-decoration:underline; float:right;' title="Apache .htaccess Deny Access from certain referrers">perm link</a></h5><p>Use this rule to block access to requests that include a referrer from a certain domain.</p>
+
+<pre><code>RewriteCond %{HTTP_REFERER} block-this-referer\.com [NC,OR]
+RewriteCond %{HTTP_REFERER} and-block-traffic-that-this-site-sends\.com [NC]
+RewriteRule .* - [F]
+</code></pre>
+<hr /><h5 id='password-protect-directory'><a href='#password-protect-directory'><em>Password Protect a Directory</em> with .htaccess</a> <a href='htaccess.php?tip=password-protect-directory' style='font-size:12px; color: blue; text-decoration:underline; float:right;' title="Apache .htaccess Password Protect a Directory">perm link</a></h5><p>First you need to create a <code>.htpasswd</code> file somewhere in the system. Run the following command at the command line:</p>
+
+<pre><code>htpasswd -c /home/hidden/directory/here/.htpasswd the_username
+</code></pre>
+
+<p>Then you can use it for authentication. In your .htaccess file you need something like the following code, but make sure the AuthUserFile is the file path to the .htpasswd you just created. You should keep the .htpasswd in a directory not accesible via the web. So don't put it in your /public_html/ or /www/ directory.</p>
+
+<pre><code>AuthType Basic
+AuthName "Password Protected Dir Title"
+AuthUserFile /home/hidden/directory/here/.htpasswd
+Require valid-user
+</code></pre>
+<hr /><h5 id='password-protect-file-or-several-files'><a href='#password-protect-file-or-several-files'><em>Password Protect a File or Several Files</em> with .htaccess</a> <a href='htaccess.php?tip=password-protect-file-or-several-files' style='font-size:12px; color: blue; text-decoration:underline; float:right;' title="Apache .htaccess Password Protect a File or Several Files">perm link</a></h5><pre><code>AuthName "Password Protected Directory Title"
+AuthType Basic
+AuthUserFile /home/hidden/directory/here/.htpasswd
+
+&lt;Files "a-private-file.txt"&gt;
+Require valid-user
+&lt;/Files&gt;
+
+&lt;FilesMatch ^((one|two|three)-rings?\.o)$&gt;
+Require valid-user
+&lt;/FilesMatch&gt;
+</code></pre>
+<hr /></div><h4 id='performance''><a href='#performance'>Performance Rules</a></h4><div class='big_section'><h5 id='compress-text-files-gzipdeflate-output'><a href='#compress-text-files-gzipdeflate-output'><em>Compress Text Files (gzip/deflate output)</em> with .htaccess</a> <a href='htaccess.php?tip=compress-text-files-gzipdeflate-output' style='font-size:12px; color: blue; text-decoration:underline; float:right;' title="Apache .htaccess Compress Text Files (gzip/deflate output)">perm link</a></h5><pre><code>&lt;IfModule mod_deflate.c&gt;
+
+        # Force compression for mangled headers.
+        # http://developer.yahoo.com/blogs/ydn/posts/2010/12/pushing-beyond-gzipping
+        &lt;IfModule mod_setenvif.c&gt;
+                &lt;IfModule mod_headers.c&gt;
+                        SetEnvIfNoCase ^(Accept-EncodXng|X-cept-Encoding|X{15}|~{15}|-{15})$ ^((gzip|deflate)\s*,?\s*)+|[X~-]{4,13}$ HAVE_Accept-Encoding
+                        RequestHeader append Accept-Encoding "gzip,deflate" env=HAVE_Accept-Encoding
+                &lt;/IfModule&gt;
+        &lt;/IfModule&gt;
+
+        # Compress all output labeled with one of the following MIME-types
+        # (for Apache versions below 2.3.7, you don't need to enable `mod_filter`
+        #    and can remove the `&lt;IfModule mod_filter.c&gt;` and `&lt;/IfModule&gt;` lines
+        #    as `AddOutputFilterByType` is still in the core directives).
+        &lt;IfModule mod_filter.c&gt;
+            AddOutputFilterByType DEFLATE application/atom+xml \
+              application/javascript \
+              application/json \
+              application/rss+xml \
+              application/vnd.ms-fontobject \
+              application/x-font-ttf \
+              application/x-web-app-manifest+json \
+              application/xhtml+xml \
+              application/xml \
+              font/opentype \
+              image/svg+xml \
+              image/x-icon \
+              text/css \
+              text/html \
+              text/plain \
+              text/x-component \
+              text/xml
+        &lt;/IfModule&gt;
+
+&lt;/IfModule&gt;
+</code></pre>
+
+<p><a href="https://github.com/h5bp/server-configs-apache">Source</a></p>
+<hr /><h5 id='set-expires-headers'><a href='#set-expires-headers'><em>Set Expires Headers</em> with .htaccess</a> <a href='htaccess.php?tip=set-expires-headers' style='font-size:12px; color: blue; text-decoration:underline; float:right;' title="Apache .htaccess Set Expires Headers">perm link</a></h5><p><em>Expires headers</em> tell the browser whether they should request a specific file from the server or just grab it from the cache. It is advisable to set static content's expires headers to something far in the future. </p>
+
+<p>If you don't control versioning with filename-based cache busting, consider lowering the cache time for resources like CSS and JS to something like 1 week. <a href="https://github.com/h5bp/server-configs-apache">Source</a></p>
+
+<pre><code>&lt;IfModule mod_expires.c&gt;
+        ExpiresActive on
+        ExpiresDefault                                    "access plus 1 month"
+
+    # CSS
+        ExpiresByType text/css                            "access plus 1 year"
+
+    # Data interchange
+        ExpiresByType application/json                    "access plus 0 seconds"
+        ExpiresByType application/xml                     "access plus 0 seconds"
+        ExpiresByType text/xml                            "access plus 0 seconds"
+
+    # Favicon (cannot be renamed!)
+        ExpiresByType image/x-icon                        "access plus 1 week"
+
+    # HTML components (HTCs)
+        ExpiresByType text/x-component                    "access plus 1 month"
+
+    # HTML
+        ExpiresByType text/html                           "access plus 0 seconds"
+
+    # JavaScript
+        ExpiresByType application/javascript              "access plus 1 year"
+
+    # Manifest files
+        ExpiresByType application/x-web-app-manifest+json "access plus 0 seconds"
+        ExpiresByType text/cache-manifest                 "access plus 0 seconds"
+
+    # Media
+        ExpiresByType audio/ogg                           "access plus 1 month"
+        ExpiresByType image/gif                           "access plus 1 month"
+        ExpiresByType image/jpeg                          "access plus 1 month"
+        ExpiresByType image/png                           "access plus 1 month"
+        ExpiresByType video/mp4                           "access plus 1 month"
+        ExpiresByType video/ogg                           "access plus 1 month"
+        ExpiresByType video/webm                          "access plus 1 month"
+
+    # Web feeds
+        ExpiresByType application/atom+xml                "access plus 1 hour"
+        ExpiresByType application/rss+xml                 "access plus 1 hour"
+
+    # Web fonts
+        ExpiresByType application/font-woff2              "access plus 1 month"
+        ExpiresByType application/font-woff               "access plus 1 month"
+        ExpiresByType application/vnd.ms-fontobject       "access plus 1 month"
+        ExpiresByType application/x-font-ttf              "access plus 1 month"
+        ExpiresByType font/opentype                       "access plus 1 month"
+        ExpiresByType image/svg+xml                       "access plus 1 month"
+&lt;/IfModule&gt;
+</code></pre>
+<hr /><h5 id='turn-etags-off'><a href='#turn-etags-off'><em>Turn eTags Off</em> with .htaccess</a> <a href='htaccess.php?tip=turn-etags-off' style='font-size:12px; color: blue; text-decoration:underline; float:right;' title="Apache .htaccess Turn eTags Off">perm link</a></h5><p>By removing the ETag header, you disable caches and browsers from being able to validate files, so they are forced to rely on your Cache-Control and Expires header. <a href="http://www.askapache.com/htaccess/apache-speed-etags.html">Source</a></p>
+
+<pre><code>&lt;IfModule mod_headers.c&gt;
+        Header unset ETag
+&lt;/IfModule&gt;
+FileETag None
+</code></pre>
+<hr /><h5 id='limit-upload-file-size'><a href='#limit-upload-file-size'><em>Limit Upload File Size</em> with .htaccess</a> <a href='htaccess.php?tip=limit-upload-file-size' style='font-size:12px; color: blue; text-decoration:underline; float:right;' title="Apache .htaccess Limit Upload File Size">perm link</a></h5><p>Put the file size in bytes. <a href='http://www.matisse.net/bitcalc/?input_amount=1&input_units=megabytes&notation=legacy'>See here for a conversion tool</a>. The code below limits it to 1mb.</p>
+
+<pre><code>LimitRequestBody 1048576
+</code></pre>
+<hr /></div><h4 id='miscellaneous''><a href='#miscellaneous'>Miscellaneous Rules</a></h4><div class='big_section'><h5 id='server-variables-for-mod_rewrite'><a href='#server-variables-for-mod_rewrite'><em>Server Variables for mod_re­write </em> with .htaccess</a> <a href='htaccess.php?tip=server-variables-for-mod_rewrite' style='font-size:12px; color: blue; text-decoration:underline; float:right;' title="Apache .htaccess Server Variables for mod_re&shy;write ">perm link</a></h5><pre><code>%{API_VERSION}
+%{DOCUMENT_ROOT}
+%{HTTP_ACCEPT}
+%{HTTP_COOKIE}
+%{HTTP_FORWARDED}
+%{HTTP_HOST}
+%{HTTP_PROXY_CONNECTION}
+%{HTTP_REFERER}
+%{HTTP_USER_AGENT}
+%{HTTPS}
+%{IS_SUBREQ}
+%{REQUEST_FILENAME}
+%{REQUEST_URI}
+%{SERVER_ADDR}
+%{SERVER_ADMIN}
+%{SERVER_NAME}
+%{SERVER_PORT}
+%{SERVER_PROTOCOL}
+%{SERVER_SOFTWARE}
+%{THE_REQUEST}
+</code></pre>
+<hr /><h5 id='set-php-variables'><a href='#set-php-variables'><em>Set PHP Variables</em> with .htaccess</a> <a href='htaccess.php?tip=set-php-variables' style='font-size:12px; color: blue; text-decoration:underline; float:right;' title="Apache .htaccess Set PHP Variables">perm link</a></h5><pre><code>php_value &lt;key&gt; &lt;val&gt;
+</code></pre>
+
+<h6>For example:</h6>
+
+<pre><code>php_value upload_max_filesize 50M
+php_value max_execution_time 240
+</code></pre>
+<hr /><h5 id='custom-error-pages'><a href='#custom-error-pages'><em>Custom Error Pages</em> with .htaccess</a> <a href='htaccess.php?tip=custom-error-pages' style='font-size:12px; color: blue; text-decoration:underline; float:right;' title="Apache .htaccess Custom Error Pages">perm link</a></h5><pre><code>ErrorDocument 500 "Houston, we have a problem."
+ErrorDocument 401 http://error.yourdomain.com/mordor.html
+ErrorDocument 404 /errors/halflife3.html
+</code></pre>
+<hr /><h5 id='redirect-users-to-maintenance-page-while-you-update'><a href='#redirect-users-to-maintenance-page-while-you-update'><em>Redirect users to a maintenance page while you update</em> with .htaccess</a> <a href='htaccess.php?tip=redirect-users-to-maintenance-page-while-you-update' style='font-size:12px; color: blue; text-decoration:underline; float:right;' title="Apache .htaccess Redirect users to a maintenance page while you update">perm link</a></h5><p>This will redirect users to a maintenance page but allow access to your IP address. Change 555.555.555.555 to your IP, and YourMaintenancePageFilenameOrFullUrlUrl.html to your error page (or a whole URL, on a different domain).</p>
+
+<pre><code>ErrorDocument 403 YourMaintenancePageFilenameOrFullUrlUrl.html
+Order deny,allow
+Deny from all
+Allow from 555.555.555.555
+</code></pre>
+<hr /><h5 id='force-downloading'><a href='#force-downloading'><em>Force Downloading</em> with .htaccess</a> <a href='htaccess.php?tip=force-downloading' style='font-size:12px; color: blue; text-decoration:underline; float:right;' title="Apache .htaccess Force Downloading">perm link</a></h5><p>Sometimes you want to force the browser to download some content instead of displaying it. The following snippet will help.</p>
+
+<pre><code>&lt;Files *.md&gt;
+        ForceType application/octet-stream
+        Header set Content-Disposition attachment
+&lt;/Files&gt;
+</code></pre>
+<hr /><h5 id='disable-showing-server-info-server-signature'><a href='#disable-showing-server-info-server-signature'><em>Disable Showing Server Info (Server Signature)</em> with .htaccess</a> <a href='htaccess.php?tip=disable-showing-server-info-server-signature' style='font-size:12px; color: blue; text-decoration:underline; float:right;' title="Apache .htaccess Disable Showing Server Info (Server Signature)">perm link</a></h5><p>While many people consider this pointless (especially with regards to security), if you want to stop your server from giving away server info (the sever OS etc), use this:</p>
+
+<pre><code>ServerSignature Off
+</code></pre>
+<hr /><h5 id='prevent-downloading'><a href='#prevent-downloading'><em>Prevent Downloading</em> with .htaccess</a> <a href='htaccess.php?tip=prevent-downloading' style='font-size:12px; color: blue; text-decoration:underline; float:right;' title="Apache .htaccess Prevent Downloading">perm link</a></h5><p>Sometimes you want to force the browser to display some content instead of downloading it. The following snippet will help.</p>
+
+<pre><code>&lt;FilesMatch "\.(tex|log|aux)$"&gt;
+        Header set Content-Type text/plain
+&lt;/FilesMatch&gt;
+</code></pre>
+<hr /><h5 id='allow-cross-domain-fonts'><a href='#allow-cross-domain-fonts'><em>Allow Cross-Domain Fonts</em> with .htaccess</a> <a href='htaccess.php?tip=allow-cross-domain-fonts' style='font-size:12px; color: blue; text-decoration:underline; float:right;' title="Apache .htaccess Allow Cross-Domain Fonts">perm link</a></h5><p>CDN-served webfonts might not work in Firefox or IE due to <a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing">CORS</a>. The following snippet from <a href="https://github.com/h5bp/server-configs-apache/issues/32">alrra</a> should make it happen.</p>
+
+<pre><code>&lt;IfModule mod_headers.c&gt;
+        &lt;FilesMatch "\.(eot|otf|ttc|ttf|woff|woff2)$"&gt;
+                Header set Access-Control-Allow-Origin "*"
+        &lt;/FilesMatch&gt;
+&lt;/IfModule&gt;
+</code></pre>
+<hr /><h5 id='auto-utf-8-encode'><a href='#auto-utf-8-encode'><em>Auto UTF-8 Encode</em> with .htaccess</a> <a href='htaccess.php?tip=auto-utf-8-encode' style='font-size:12px; color: blue; text-decoration:underline; float:right;' title="Apache .htaccess Auto UTF-8 Encode">perm link</a></h5><p>To have Apache automatically encode your content in UTF-8, use the following code. You can also swap the utf-8 for another character set if required:</p>
+
+<pre><code># Use UTF-8 encoding for anything served text/plain or text/html
+AddDefaultCharset utf-8
+
+# Force UTF-8 for a number of file formats
+AddCharset utf-8 .atom .css .js .json .rss .vtt .xml
+</code></pre>
+
+<p><a href="https://github.com/h5bp/server-configs-apache">Source</a></p>
+<hr /><h5 id='set-server-timezone-to-utc-or-other-time-zone'><a href='#set-server-timezone-to-utc-or-other-time-zone'><em>Set Server Timezone (to UTC, or other time zone)</em> with .htaccess</a> <a href='htaccess.php?tip=set-server-timezone-to-utc-or-other-time-zone' style='font-size:12px; color: blue; text-decoration:underline; float:right;' title="Apache .htaccess Set Server Timezone (to UTC, or other time zone)">perm link</a></h5><pre><code>SetEnv TZ UTC
+</code></pre>
+
+<p>See a list of time zones <a href='http://en.wikipedia.org/wiki/List_of_tz_database_time_zones'>here</a>. To set it to Los Angeles time zone:</p>
+
+<pre><code>SetEnv TZ America/Los_Angeles
+</code></pre>
+<hr /><h5 id='switch-to-another-php-version'><a href='#switch-to-another-php-version'><em>Switch to Another PHP Version</em> with .htaccess</a> <a href='htaccess.php?tip=switch-to-another-php-version' style='font-size:12px; color: blue; text-decoration:underline; float:right;' title="Apache .htaccess Switch to Another PHP Version">perm link</a></h5><p>If you're on a shared host, chances are there are more than one version of PHP installed, and sometimes you want a specific version for your website. For example, <a href="https://github.com/laravel/laravel">Laravel</a> requires PHP >= 5.4. The following snippet should switch the PHP version for you.</p>
+
+<pre><code>AddHandler application/x-httpd-php55 .php
+</code></pre>
+
+<h6>Alternatively, you can use AddType</h6>
+
+<pre><code>AddType application/x-httpd-php55 .php
+</code></pre>
+
+<h3>Disable Internet Explorer Compatibility View</h3>
+
+<p>Compatibility View in IE may affect how some websites are displayed. The following snippet should force IE to use the Edge Rendering Engine and disable the Compatibility View.</p>
+
+<pre><code>&lt;IfModule mod_headers.c&gt;
+    BrowserMatch MSIE is-msie
+    Header set X-UA-Compatible IE=edge env=is-msie
+&lt;/IfModule&gt;
+</code></pre>
+<hr /><h5 id='execute-php-with-different-file-extension'><a href='#execute-php-with-different-file-extension'><em>Execute PHP with a different file extension </em> with .htaccess</a> <a href='htaccess.php?tip=execute-php-with-different-file-extension' style='font-size:12px; color: blue; text-decoration:underline; float:right;' title="Apache .htaccess Execute PHP with a different file extension ">perm link</a></h5><p>The following code will run files ending in .ext with php:</p>
+
+<pre><code>AddType application/x-httpd-php .ext
+</code></pre>
+
+<h3>Serve WebP Images Automatically If They Exist</h3>
+
+<p>If WebP images are supported and an image with a .webp extension and the same name is found at the same place as the jpg/png image that is going to be served, then the WebP image is served instead.</p>
+
+<pre><code>RewriteEngine On
+RewriteCond %{HTTP_ACCEPT} image/webp
+RewriteCond %{DOCUMENT_ROOT}/$1.webp -f
+RewriteRule (.+)\.(jpe?g|png)$ $1.webp [T=image/webp,E=accept:1]
+</code></pre>
+<hr /></div></div>
+<h2>Additional Resources: Other .htaccess Cheatsheets From Around the Web</h2>
+<style>
+#resources li {
+
+list-style-type:disc;
+padding-left:5px;
+margin-left:25px;
+
+}
+</style>
+<ul id='resources'>
+<li><a href='https://httpd.apache.org/docs/current/mod/mod_rewrite.html'>Apache Docs for mod_rewrite</a></li><li><a href='http://cote.cc/blog/apache-2-htaccess-cheat-sheet'>Another cheatsheet - but in .pdf format</a></li><li><a href='http://mod-rewrite-cheatsheet.com/#'>Mod Rewrite Cheatsheet</a></li><li><a href='http://borkweb.com/story/apache-rewrite-cheatsheet'>Apache Rewrite Cheatsheet</a></li><li><a href='http://www.lockstockmods.net/2008/04/11/htaccess-cheat-sheet/'>Another htaccess cheatsheet</a></li><li><a href='http://www.thejackol.com/htaccess-cheatsheet/'>htaccess cheatsheet on The Jackol</a></li></ul>
+
+<hr />
+
+
+<div id='credits'>
+This website is 100% free and one of the fastest loading <strong>Apache .htaccess cheatsheet</strong> webpages on the web. It is all on one page, and optimised to help it quickly  load and for you to easily find the .htaccess rules you need. Please get in touch if you have any questions. We will soon offer this page as a pdf download.
+<br /><br />
+If you use this please consider linking back to http://htaccesscheatsheet.com/<br /><br />
+Based heavily (on its first version) from <a href='https://github.com/phanan/htaccess'>phanan/htaccess</a>.
+<br />
+<br />
+Snippets with specified source belong to their respective owners and have
+their own license(s), whenever appropriate.<br /><br />
+Other content belongs to the public domain. Refer to <a href='http://unlicense.org'>Unlicense</a> 
+for more information.
+</div>
+
+
+<center style='clear:both;'>
+<a href='/'>Home</a> &bullet;
+<a href='/contact.php'>Contact/About us</a> &bullet; <a href='/PHP-DomDocument-cheatsheet'>PHP's DomDocument Cheatsheet</a>
+&bullet; <a href='terms.php'>Terms and Conditions</a> &bullet;
+
+We do not set any cookies on our website. Please refer to our <a href='/privacy.php'>privacy policy</a> for more details about our cookies.
+</center>
+</div>
+</div>
+</body>
+</html>
