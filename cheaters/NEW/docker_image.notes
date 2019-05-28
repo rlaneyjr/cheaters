@@ -1,0 +1,313 @@
+ubuntu
+alpine - really small linux container
+	- use 'apk' for package management
+rabbitmq - message broker
+redis - key/value data
+nodejs - async event driven javascript runtime
+flask - python micro framework
+sinatra - ruby web framework
+django - python web framework
+couchdb - document-oriented NoSQL (http interface with json as data)
+ELK stack:
+- elasticsearch
+- logstash - collect logs and send to elastic search
+- kibana - user interface to elastic search to visualize data
+- beats - not apart of orig stack but add-on for light weight data shipper
+key/value storage , eg for docker-swarm, service discovery
+- etcd
+- consul 
+- zookeeper 
+Continuous Delivery/Continuous Integration
+- jenkins
+- team city
+- bamboo
+- circleci
+nginx
+- mesos, kubernetes, nomad
+- monitoring: consul, sensu, influxdb, opentsdb, prometheus
+Security?
+- vault
+- amazon kms
+- keywiz
+
+
+
+--
+'docker ps' vs 'docker ps -a'
+docker search <string> (dockerhub)
+docker login  (hub.docker.com -> 'brough')
+
+# interactive = -i, tty = -t
+docker run -it --name name image-name 
+# daemon -d
+docker run -d image-name
+
+
+# with 'Dockerfile' in local dir
+docker build -t ping .
+
+# see images
+docker images
+
+# manage
+docker stop <4 char id>
+docker kill <4 char id>  (start,restart,etc)
+
+# copy a docker hub image to local
+docker pull alpine
+
+# tag image with name and version
+docker tag 4d79 brough/hello-dockerhub:1.0
+
+# pushing images to docker hub
+docker push brough/hello-dockerhub
+
+# logging, -f tails logs
+docker logs -f <container id>
+
+# interact with existing container
+docker exec -it <container id> /bin/bash
+
+# docker networking
+docker network ls
+NETWORK ID          NAME                DRIVER              SCOPE
+34575a3454a9        bridge              bridge              local  < DEFAULT
+6f4b3c6b3506        host                host                local
+62586118d69c        none                null                local
+
+172.17.0.1/16 is docker0 host if
+containers increment 172.17.0.2,3,4...
+
+# specify net type
+docker run --net none -it alpline
+
+# create new network
+docker network create --driver bridge my-network
+docker network ls
+NETWORK ID          NAME                DRIVER              SCOPE
+34575a3454a9        bridge              bridge              local
+6f4b3c6b3506        host                host                local
+c789c6103790        my-network          bridge              local
+62586118d69c        none                null                local
+
+# network dns feature
+docker network create --driver bridge dns-test
+docker network ls
+NETWORK ID          NAME                DRIVER              SCOPE
+34575a3454a9        bridge              bridge              local
+dd98e9b9494b        dns-test            bridge              local
+6f4b3c6b3506        host                host                local
+62586118d69c        none                null                local
+
+docker run -d --net dns-test --name dns-app brough/hello-dockerhub
+->can refer to name from other container now
+docker run --net dns-test alpine wget -qO- dns-app
+OR using 'net-alias'
+docker run -d --net dns-test --name dns-app --net-alias dns-alias brough/hello-dockerhub
+docker run --net dns-test alpine wget -qO- dns-alias
+
+# stateful data - mounts container to localhost host ./data
+docker run -d -p 5984:5984 -v $(pwd)/data:/usr/local/var/lib/couchdb --name couchdb klaemo/couchdb
+# send data to db:  curl -X PUT http://localhost:5984/db
+# verify data on host moutn: ls data -> *.couch files
+
+# share data between 2 containers - db1 and db2
+# create volume db-data first and tie to each container
+docker create -v /usr/local/var/lib/couchdb --name db-data debian:jessie /bin/true
+docker run -d -p 5984:5984 -v /usr/local/var/lib/couchdb --name db1 --volumes-from db-data klaemo/couchdb
+docker run -d -p 5985:5984 -v /usr/local/var/lib/couchdb --name db2 --volumes-from db-data klaemo/couchdb
+# initialized db1 data and populate
+curl -X PUT http://localhost:5984/db
+ {"ok":true}
+curl -H 'Content-Type: application/json' -X POST http://localhost:5984/db -d '{"value":"Hello Oreilly"}'
+ {"ok":true,"id":"2b2e518125d94d332473116618000d42","rev":"1-aa8767457c3c8ea35765738db454d001"}
+# pull same data from db2
+curl http://localhost:5985/db/2b2e518125d94d332473116618000d42
+
+
+# managing multiple containers through docker-compose  yml file
+sudo apt-get install docker-compose
+# in dir with docker-compose.yml, ref multiple containers and -d for daemonize
+docker-compose up -d
+# example use the ELK stack, elasticsearch, logstash, kibana
+
+# Docker Swarm - Running containers across multiple hosts, swarm container on docker hub
+# create swarm on server
+docker swarm init --advertise-addr 192.168.161.129
+# add worker from other host
+docker swarm join --token SWMTKN-1-1l0xqzbq0z47wf7sugy8k0wfk365r2t4mdjl53ilpdbylpxnj2-ewxrraphtr2gkuslklfbjua6d 192.168.161.129:2377
+# list node status , leader or worker
+dockerer node ls
+ID                            HOSTNAME            STATUS              AVAILABILITY        MANAGER STATUS
+ibyb300h1txt46sllt1ausuep *   ubuntu              Ready               Active              Leader
+
+# deploy a service to swarp
+docker service create --replicas 1 --name helloworld alpine ping docker.com
+docker service ls
+
+ID            NAME        SCALE  IMAGE   COMMAND
+9uk4639qpg7n  helloworld  1/1    alpine  ping docker.com
+
+docker service inspect --pretty helloworld
+# Change scale of service
+docker service scale helloworld=5
+docker service ps helloworld
+NAME                                    IMAGE   NODE      DESIRED STATE  CURRENT STATE
+helloworld.1.8p1vev3fq5zm0mi8g0as41w35  alpine  worker2   Running        Running 7 minutes
+helloworld.2.c7a7tcdq5s0uk3qr88mf8xco6  alpine  worker1   Running        Running 24 seconds
+helloworld.3.6crl09vdcalvtfehfh69ogfb1  alpine  worker1   Running        Running 24 seconds
+helloworld.4.auky6trawmdlcne8ad8phb0f1  alpine  manager1  Running        Running 24 seconds
+helloworld.5.ba19kca06l18zujfwxyc5lkyn  alpine  worker2   Running        Running 24 second
+
+# delete service
+docker service rm helloworld
+
+
+# log driver, example using splunk driver to send logs to a splunk system
+docker run --name splunk -p 8000:8000 -p 8088:8088 -d outcoldman/splunk:6.3.3
+# log into splunk and get splunk token, then run new container with splunk log settings
+docker run --name hello --log-driver=splunk --log-opt splunk-token=XXXXXXXX --log-opt splunk-url=http://127.0.0.1:8088 --log-opt splunk-sourcetype=Docker rickfast/hello-oreilly
+
+# other log drivers gelf = logstash,  aws = amazon cloudwatch, syslog 
+
+# Running a private docker hub register...use the registry:2 container
+docker run -d -p 5000:5000 --name registry registry:2
+
+#docker cloud  github scripts for helping automate tasks. example is "dockup" which
+# backs up a mysql db container data to aws s3 bucket.
+
+# continuous testing using CircleCI
+- go to github and add circleci as an addon hook that has access to your repo
+- login to circleci.com and add a github repo, trigger a build
+- make sure a circle.yml file is in your repo
+- when a new github push is done a build is triggered 
+
+# continuous deployment: production servers always running code from master branch in git repo
+# makes rollbacks easier, no confusion about which version is running in prod
+# add docker hub credentials and docker host ssh key to circleci so deploy script can be triggered (docker build, push , ssh to docker host and docker pull and run)
+
+etcd
+docker run -d --name etcd -p 2379:2379 elcolio/etcd
+# use web browser http://localhost:2379 and postman to put and delete for key/value pairs
+# can also shell into etcd container to use etcdctl cli to add/delete key/value pairs
+docker exec -it etcd /bin/sh
+/ # etcdctl set web/upstream/1 222.222.22.2
+222.222.22.2
+/ # etcdctl get web/upstream/1
+222.222.22.2
+/ # exit
+
+consul
+docker run -d --name consul -p 8500:8500 gliderlabs/consul -server -bootstrap
+# nice web ui. more focused on service registry in addition to key/value tracking
+# can add key/value, services, nodes, and datacenters objects
+
+#####
+# Docker swarm
+#####
+# example setup: 2 docker swarm manager hosts, 2 loadbalancer hosts(pub access), 2 app hosts
+# on docker swarm manager run consul container (server and bootstrap mode)
+docker run -d --name consul -p 8500:8500 gliderlabs/consul -server -bootstrap
+# run swarm manager container and link to consul container
+docker run -d -p 4000:4000 --name swarm-manager swarm manage -H :4000 --replication --advertise 127.0.0.1:4000 consul://127.0.0.1:85
+# run a swarm container on each of the other 4 hosts (2xlb,2xapp) to talk with swarm managers. Also edit docker config file to connect to mgr and advertise 2375. SECURITY WARNING:LOCK DOWN 2375 via iptables 
+docker run -d --name swarm --restart always swarm join --advertise=<local ip>:2375 consul://<swarm mgr/consul ip>:8500
+vi /etc/default/docker
+DOCKER_OPTS="--cluster-advertise eth1:2376 --cluster-store consul://<consul mgr>:8500 -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock"
+# inspect docker manager and check health of swarm clients
+docker -H :4000 info
+docker -H :4000 ps # will show all containers across all nodes
+# running containers
+docker -H :4000 run -d --name hello1 dockercloud/hello-world
+docker -H :4000 run -d --name hello2 dockercloud/hello-world
+docker -H :4000 run -d --name hello3 dockercloud/hello-world
+docker -H :4000 run -d --name hello4 dockercloud/hello-world
+docker -H :4000 ps # shows 4 containers are running across 4 different swarm clients
+# connect network driver with overlay to connect all containers to eachother across hosts
+docker -H :4000 network create --driver overlay --internal --subnet=10.0.9.0/24 apps
+docker -H :4000 network ls  # will show networks across all swarm clients
+# creat the containers on each swarm client with new network, containers will talk across overlay
+docker -H :4000 run -d --net apps --name hello5 dockercloud/hello-world
+docker -H :4000 run -d --net apps --name hello6 dockercloud/hello-world
+docker -H :4000 exec -it hello5 /bin/sh  # connects into hello5 container
+# ping hello6 # hello5 can ping hello6 by name across overlay
+
+# adding tags to containers to control which containers are deployed to specific hosts
+# good for hosts with diff specs ; hi-speed storage, more core's,etc
+vi /etc/default/docker # add lable info to docker host service
+# on production host
+DOCKER_OPTS="--lable type=apps --lable environment=production --cluster-advertise eth1:2376 --cluster-store consul://<consul mgr>:8500 -H tcp://0.0.0.0:2375 -
+# on staging host
+DOCKER_OPTS="--lable type=apps --lable environment=staging --cluster-advertise eth1:2376 --cluster-store consul://<consul mgr>:8500 -H tcp://0.0.0.0:2375 -
+H unix:///var/run/docker.sock"
+# config tags on hosts
+docker -H :4000 info  # wait a few minutes
+# schedule containers with tag requirements
+docker -H :4000 run -d -e constraint:type==apps -e constraint:environment==production --name hello1 dockercloud/hello-world
+docker -H :4000 ps # will see container running on production host  
+
+# Security
+- restrict ssh; restrict root login for app/docker usage
+- restrict port 4000 (swarm clients and mgrs)
+- restrict consul port 8500 (swarm clients and mgrs)
+- restrict port 2375 (docker daemon port)
+- aws inside private network more secure
+- use persistent iptables package "apt-get install iptables-persistent"
+iptalbes -N DOCKER-SECURITY  # Add security group
+iptables -I FORWARD -o docker0 -j DOCKER-SECURITY # insert rule
+# allow connections to consul/8500 on internal eth1 port
+iptables -A DOCKER-SECURITY -i eth1 -p tcp --dport 8500 -m state --state NEW, ESTABLISTED -j ACCEPT
+iptables -A DOCKER-SECURITY -p tcp --dport 1025:65535 -j DROP  # drop connects on all other ports
+invoke-rc.d iptables-persistent save
+# now remote docker connections should fail from outside boxes ; docker -H x.x.x.x:4000 info,etc
+# repeat for docker daemon port access
+iptables -A INPUT -i eth1 -p tcp -dport 2375 -m state --state NEW,ESTABLISHED -j ACCEPT
+iptables -A INPUT -p tcp --dport 2375 -j DROP
+invoke-rc.d iptables-persistent save
+
+#Load balancing
+- web apps talk with  registry, registry updates ngnix
+- side-kick containers can be built to monitor apps to register for them...overly complicated
+- can create a separate registrator per LB node
+
+#registry - putting it together
+docker -H :4000 network create apps
+docker -H :4000 run -d --restart always --name etcd --name etcd --net apps -e contraint:type==apps ecolio/etc
+docker -H :4000 run --rm -it --net apps alpine /bin/sh
+/# curl etcd:4001/v2/keys
+/# curl -X PUT etcd:4001/v2/keys/test -d value=success
+/# curl etcd:4001/v2/keys/test
+
+web:
+  port: 80
+  upstreams:
+    - 10.0.4.1
+    - web2
+  ssl: true
+  sslCert: "----cert----\nlong\nstring\ndelimited"
+  nginx: prod
+  hostname: test.com
+
+#container app server.js will have a etcd library in nodejs to register to etcd
+
+#side kick containers need to run with an affinity (tag like) to run on same host as watched container
+docker -H :4000 run -d --net apps --name web1register -e affininty:container==web1 -e CONTAINER=web1 sample-sidekick
+
+- 
+/var/run/docker.sock => host docker daemon, can mount a container to socket to give docker privs
+docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock ubuntu /bin/bash
+/# apt-get update && apt-get install -y docker.io
+# now container can see containers on host; docker ps 
+
+# turn up a ngnix container with etcd to check app containters
+docker -H :4000 run -d --net apps --name lb1 -p 80:80 \
+  -e affinity:container!=lb* \   # inverse affinity .don't load next to another lb container
+  -e constraint:type=lb \ # run on a lb host
+  -e NGINX_NAME=production \
+  blah/nginx-etcd
+
+# setting up smart DNS to point to different LB's.  Like using DynDNS
+
+# passing cert information as an environment variable. replace \n with \\n and wrap in single quotes.
+
+# siege tool can be run across website to test for downtime
