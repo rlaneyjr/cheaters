@@ -1,0 +1,158 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>3. VIRL-CLIENTS package &#8212; VIRL 0.10.35.35 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.10.35.35',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="4. Projects, Users and Special Networks" href="concepts.html" />
+    <link rel="prev" title="2. Terminology and Overview" href="overview.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="concepts.html" title="4. Projects, Users and Special Networks"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="overview.html" title="2. Terminology and Overview"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">VIRL 0.10.35.35 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="README.html" accesskey="U">README</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="virl-clients-package">
+<h1>3. VIRL-CLIENTS package<a class="headerlink" href="#virl-clients-package" title="Permalink to this headline">¶</a></h1>
+<p>The VIRL-CLIENTS contains the following programs:</p>
+<dl class="docutils">
+<dt>virl_openstack_client</dt>
+<dd>Thin interface to the OpenStack client API, not needed by the typical user</dd>
+<dt>virl_std_client</dt>
+<dd>Allows the control of the functionality available to the GUI application
+even from the command line; this is the designated tool for automation
+and the only script a typical VIRL end-user might want to use</dd>
+<dt>virl_uwm_client</dt>
+<dd>Provides a programmable CLI interface covering the functionality that is
+available to the user of the UWM rest interface, a subset of the available
+web interface that isn’t better covered by the STD API.</dd>
+</dl>
+<div class="section" id="install-clients">
+<h2>3.1. Install Clients<a class="headerlink" href="#install-clients" title="Permalink to this headline">¶</a></h2>
+<p>Login to your VIRL server. The VIRL clients package is available under
+/var/www/download/.
+You can also download the package from your VIRL server’s home page, clicking
+on the clients link.</p>
+<p>To install clients run command:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>sudo pip install VIRL_CLIENTS_*.whl
+</pre></div>
+</div>
+</div>
+<div class="section" id="using-clients">
+<h2>3.2. Using Clients<a class="headerlink" href="#using-clients" title="Permalink to this headline">¶</a></h2>
+<p>Examples:</p>
+<p>Get UWM server status.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>virl_uwm_client --url http://ip-of-my-virl-server:19400 <span class="se">\</span>
+                --username quest --password quest status
+</pre></div>
+</div>
+<p>Get STD server status:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>virl_std_client --url http://ip-of-my-virl-server:19399 <span class="se">\</span>
+                --username quest --password quest status
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">3. VIRL-CLIENTS package</a><ul>
+<li><a class="reference internal" href="#install-clients">3.1. Install Clients</a></li>
+<li><a class="reference internal" href="#using-clients">3.2. Using Clients</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="overview.html"
+                        title="previous chapter">2. Terminology and Overview</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="concepts.html"
+                        title="next chapter">4. Projects, Users and Special Networks</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/clients.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="concepts.html" title="4. Projects, Users and Special Networks"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="overview.html" title="2. Terminology and Overview"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">VIRL 0.10.35.35 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="README.html" >README</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Cisco Systems, Inc.
+All rights reserved..
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
+    </div>
+  </body>
+</html>

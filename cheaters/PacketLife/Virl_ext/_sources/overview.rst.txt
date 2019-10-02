@@ -1,0 +1,118 @@
+Terminology and Overview
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+The chief aim of the VIRL system is simulating virtual network topologies using
+network nodes run as virtual machines inside an OpenStack VM orchestration
+platform. To this end, each user of the VIRL services is bound to a single
+OpenStack user within an OpenStack project(tenant). This and other information
+pertaining to a user capable of running simulation is called that user's
+endpoint. Some users, notably uwmadmin, do no posess an endpoint, and can only
+be used for administrative and status-gathering tasks on the system.
+
+In each endpoint, several Sessions may be created. Each session represents one
+network topology deployed to the orchestration system. It has a unique name and
+is configured by a single VIRL file. This file is sourced on various occasions
+and cannot be changed nor removed while the given session is defined.
+
+A VIRL file contains all information pertaining to the active networking nodes
+within it, the connections between them, as well as connections to the
+outside of the simulated environment. Moreover, the initial configuration that
+is to be passed onto each node when it is started (i.e. deployed to OpenStack),
+and any other information associated with the topology can be stored
+as extension entries available for all major elements of the file.
+
+The session creation process makes some initial validations against the running
+OpenStack system, but does not start the topology, meaning no resources are
+deployed to the OpenStack system initially. Session nodes must be started, and
+can be stopped, individually. The start operation will deploy the necessary
+OpenStack networks, ports, and the VM nodes requested to be started. A stop
+operation will destroy the deployed resources, including networks that are no
+longer needed.
+
+A session may be exported to a new VIRL file, possibly along with downloaded
+router configurations for all or selected nodes. Finally, a session delete will
+stop and then remove all traces of a session, both in OpenStack and endpoint.
+
+The OpenStack client API and CLI covers all communication used by the VIRL-CORE
+package. It may be useful for direct interaction with, and troubleshooting of,
+OpenStack, replacing the various clients distributed alongside OpenStack for
+an arguably more consistent interface.
+
+A pair of Web servers provides an API for remote management of a set of
+endpoints, one for each end-user. They provide all the functionality a typical
+VIRL user might need, leaving the OpenStack CLIs for use only
+in special circumstances.
+
+The STD server (Service Topology Director) defines simple and straightforward
+workflow for session (simulation) launch, use and teardown, either through
+the GUI application, or using the provided STD client Python API and/or CLI.
+A launched simulation is scheduled to start all nodes not excluded from this
+by a flag settable for each individual node, just after the session creation.
+
+The node start and stop operations are performed separately from the calls
+to the web service that initiate them. Moreover, a node may take a while to
+become provisioned by the orchestration sytem (i.e. the node becomes ACTIVE),
+which may merely mean that the particular node started its internal booting,
+initialization and configuration process.
+
+The UWM server can be used by administrators for project and user management,
+as well as management of VM disk images and other resources consumed by user
+simulations.
+
+An interface for the management of software licenses, VIRL software upgrades,
+and a control panel for manipulation of system configuration and deployment
+is also available in this admin interface.
+
+UWM also presents a general overview and allows for interaction with running
+simulations of all users. A statistics display, health status check and log
+message collection can be performed as well.
+
+Individual users may use UWM to maintain their own simulations, including
+launching new simulation using imported VIRL files. To aid with VIRL file
+management, external git repositories may be attached to each user, allowing
+the previewing, as well as launching of simulations defined by these files.
+
+CLI Overview
+============
+
+Contained within the VIRL-CORE package are the following programs:
+
+virl_openstack_client
+  Thin interface to the OpenStack client API, not needed by the typical user
+
+virl_std_server
+  Simulation server exposing remote management of a set of VIRL endpoints
+  for use by the Graphical User Interface application
+
+virl_std_client
+  Allows the control of the functionality available to the GUI application
+  even from the command line; this is the designated tool for automation
+  and the only script a typical VIRL end-user might want to use
+
+virl_uwm_server
+  A web-based project, user, image, and flavor management application,
+  controlling access to and retrieving information on the state of the STD
+  server
+
+virl_uwm_client
+  Provides a programmable CLI interface covering the functionality that is
+  available to the user of the UWM rest interface, a subset of the available
+  web interface that isn't better covered by the STD API.
+
+Each program can display help on its subcommands using:
+
+.. code-block:: bash
+
+    virl_program_name [subcommand] -h
+
+Each command has a set of script-global options, and is divided up into several
+subcommands with their own options. The global options precede the subcommand.
+
+Each program also has a --debug mode (the option is script-global)
+that enables (very) verbose logging and full reporting in case of a failure.
+Some logging is enabled by default, controlled by configuration; the --quiet
+flag can be used to supress all logging.
+
+An other program included with the package, virl_webmuxd, is another server
+facilitating SSH-based terminal connections into simulation nodes. In a typical
+VIRL deployment, this service is launched together with the uwm_server.

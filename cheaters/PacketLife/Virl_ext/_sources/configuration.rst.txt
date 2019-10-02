@@ -1,0 +1,99 @@
+Configuration
+~~~~~~~~~~~~~
+
+CLI runtime variables
+=====================
+
+The root configuration is located in the "virl_pkg_data/conf/builtin.cfg" file.
+
+This file specifies pathd to the user global and local configuration files.
+Either path may start with "~/" to indicate a current user's home directory.
+
+The "/etc/virl/common.cfg" file may be used to override the builtin values
+shipping with VIRL-CORE. Many of these configurations are mostly of no
+concern to a user and should be left intact unless instructed otherwise.
+
+The location of the common, global, local and builtin configuration files
+can be obtained by the command::
+
+    virl_config location [--global|--local|--common|--builtin]
+
+The most important section of the VIRL user configuration files is called env.
+It contains the defaults for some common CLI arguments, so that they don't have
+to be entered in each invocation.
+
+The configuration is an ini-style text file. Local configuration overrides
+global configuration, which in turn may be overridden by the shell environment
+of a running script. Finally, each variable used by a CLI script or its
+subcommand has an option for overriding the value. The VIRL-CORE package ships
+with suitable defaults for all confgurable values, thus no configuration file
+needs to actually exist.
+
+The configuration file can be created and/or edited using the command::
+
+    virl_config update [--global] [--variable [value]]...
+
+A variable can be set to default by not providing a value for it.
+The variable assignment used by a CLI script can be displayed by running the
+env subcommand of that CLI script.
+
+Note that the LLI's virl CLI needs the VIRL_OPENSTACK_PASSWORD value for most
+of its operations; it is not stored with the endpoint-create command.
+
+Used configuration variables without the required VIRL\_ prefix are as follows:
+
++---------------------------+-------------------------------------------------+
+| VIRL_VARIABLE_NAME        | Comments and programs/subcommands using it      |
++===========================+=================================================+
+| OPENSTACK_TENANT_NAME     | Openstack credentials. Optional service token   |
+| OPENSTACK_PASSWORD        | overrides authentication of identity operations |
+| OPENSTACK_USER_NAME       |                                                 |
+| OPENSTACK_AUTH_URL        | virl_openstack_client, virl endpoint-create,    |
+| OPENSTACK_SERVICE_TOKEN   | virl_uwm_server init, user-add                  |
++---------------------------+-------------------------------------------------+
+| ENDPOINT                  | LLI endpoint directory; virl (all subcommands)  |
++---------------------------+-------------------------------------------------+
+| SESSION                   | LLI session name; virl (session-*, node-*)      |
++---------------------------+-------------------------------------------------+
+| STD_DIR                   | Directory for server endpoints, sessions, logs; |
+|                           | virl_std_server, virl_uwm_server                |
++---------------------------+-------------------------------------------------+
+| STD_HOST                  | IP address and port where server is bound and   |
+| STD_PORT                  | number of request handler processes;            |
+| STD_PROCESS_COUNT         | virl_std_server run                             |
++---------------------------+-------------------------------------------------+
+| UWM_HOST                  | IP address and port where server is bound and   |
+| UWM_PORT                  | number of request handler processes;            |
+| UWM_PROCESS_COUNT         | virl_uwm_server run                             |
++---------------------------+-------------------------------------------------+
+| STD_URL                   | STD server URL used by virl_std_client          |
+| UWM_URL                   | UWM server URL used by virl_uwm_client stub     |
++---------------------------+-------------------------------------------------+
+| STD_USER_NAME             | STD user credentials; virl_std_client           |
+| STD_PASSWORD              | virl_uwm_server init, user-add, user-del        |
++---------------------------+-------------------------------------------------+
+| STD_ENDPOINT              | STD endpoint, ignored. One endpoint per user    |
++---------------------------+-------------------------------------------------+
+| STD_SESSION               | Launched STD session name; virl_std_client only |
++---------------------------+-------------------------------------------------+
+| LOCAL_IP                  | IP address reported as the address where STD    |
+|                           | and UWM are publicly accessible, e.g. in roster |
++---------------------------+-------------------------------------------------+
+
+UWM configuration
+=================
+
+The User Workspace Management application has configuration pertaining to the
+values of project-specific management and internal L3 SNAT network parameters,
+currently limited to IPv4 addresses of the subnet range, gateway IP and DNS IP.
+
+The user configuration also allows setting quotas for newly-created projects.
+
+Host system configuration
+=========================
+
+The UWM System configuration page allows an admin user to modify configuration
+and execute appropriate commands that apply these changes to the VIRL system.
+The description of these configuration items, residing in the /etc/virl.ini
+file, are beyond the scope of this document.
+

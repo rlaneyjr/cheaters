@@ -1,0 +1,1916 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>9. VIRL User Workspace Management Server &#8212; VIRL 0.10.35.35 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.10.35.35',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="10. VIRL Service Topology Director Server" href="std_server.html" />
+    <link rel="prev" title="8. OpenStack Client" href="openstack_client.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="std_server.html" title="10. VIRL Service Topology Director Server"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="openstack_client.html" title="8. OpenStack Client"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">VIRL 0.10.35.35 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="README.html" accesskey="U">README</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="virl-user-workspace-management-server">
+<h1>9. VIRL User Workspace Management Server<a class="headerlink" href="#virl-user-workspace-management-server" title="Permalink to this headline">¶</a></h1>
+<p>This server takes care of project and user management in the VM orchestration
+layer, as well as user management for the STD server described in the next
+section.</p>
+<p>It provides a web-based interface for administrators and users alike, providing
+information on the sessions they run, their quotas and usage information.</p>
+<p>It also provides a means to manage project-specific VM disk images, and shared
+images (both OpenStack and LXC), OpenStack flavors and LXC templates.</p>
+<p>The Connectivity tab enables users to see and administrators to manage outside
+connections. The connections are of three types: L2 Flat, L3 Snat and Project
+Management.</p>
+<p>There is a VM Control section that allows an admin user to tear down individual
+and groups of OpenStack artefacts without intermediate processing by the STD.
+This feature is meant for troubleshooting purposes, to assist with stale assets
+left behind for any reason.</p>
+<div class="section" id="user-mode">
+<h2>9.1. User mode<a class="headerlink" href="#user-mode" title="Permalink to this headline">¶</a></h2>
+<p>User mode is available to all users defined in the system. It provides a view
+into the system that is more suitable for workflows using the VIRL GUI than
+OpenStack Dashboard itself, which need not be available to users.</p>
+<div class="section" id="project-view">
+<h3>9.1.1. Project view<a class="headerlink" href="#project-view" title="Permalink to this headline">¶</a></h3>
+<p>The project view summarizes the list of sessions running by all users belonging
+to the same project. It also provides an overview on the resource utilization
+within the project with respect to quota constraints set on the project.</p>
+</div>
+<div class="section" id="sessions-view">
+<h3>9.1.2. Sessions view<a class="headerlink" href="#sessions-view" title="Permalink to this headline">¶</a></h3>
+<p>This view provides information on the sessions the user has currently running.</p>
+<p>A new session can be launched by providing a VIRL file defining the simulation.
+The launched simulation may be previewed, and the use of management network
+and management LXC configuration tweaked before launching the simulation.</p>
+<p>Each session has a detailed page listing the nodes and their special interfaces
+connected to management or external networks, along with their IP addresses.</p>
+<p>It also makes available a web-based interface to connect to a router node’s
+serial console, as well as a server’s VNC display. SSH connections are made
+available for the jumphost and management LXC nodes, which in turn can be used
+to connect further into each simulation node over the management network.</p>
+<p>Each node, or a group of nodes may be started or stopped individually, and
+a configuration extraction operation can be initiated, retrieving the current
+configuration on all supported and running Cisco routers in the form of an
+updated VIRL file.</p>
+<p>A live visualization can be launched, capable of retrieving various information
+about the running simulation, especially routing protocols’ status.</p>
+<p>An interface table lists all interfaces in the simulation, along with external
+and management IP addresses set on each interface. Each interface’s link state
+may be set to up or down, making the connectivity to that interface unavailable
+and traffic not forwarded. The link state may be detected and acted upon by
+the OpenStack VM nodes, with notable exception of IOS XRv.</p>
+<p>On any individual interface, a traffic capture may be initiated, collecting
+the traffic passing that interface in the PCAP format, viewable with tools such
+as Wireshark. The captures may be filtered (using tcpdump’s syntax) in order to
+only capture interesting traffic.</p>
+<p>There are two modes of traffic capture. The first and preferred mode, offline,
+captures the traffic into a file which may be downloaded at any and multiple
+times. The online mode opens a TCP port, which upon each connection to it
+starts a new traffic capture, streaming the captured file data. The stream is
+best stored into a file on the client’s system, which will fill up as traffic
+is encountered. Wireshark reload feature can be used to see the updates.
+Note that the wireshark pipe feed mechanism only works once per TCP connection
+as PCAP header data is only sent at the beginning of the stream.</p>
+<p>Please note that e.g. status updates will not be refreshed automatically, and
+the page needs to be reloaded in order to view the latest information.</p>
+</div>
+<div class="section" id="images-view">
+<h3>9.1.3. Images view<a class="headerlink" href="#images-view" title="Permalink to this headline">¶</a></h3>
+<p>The images view provides each user a means to review the list and properties
+of all images available to them, either owned by the project they are part of,
+or images shared between projects.</p>
+<p>Any user may add, modify or delete all project-owned images. Additionally, the
+user may review the image’s attributes in the image detail view.</p>
+<p>Images whose names match the subtype of a node will be selected by default when
+the node starts, if the node does not select another.</p>
+<p>Images whose names are prefixed with a project name (and a dash) will be used
+in favor of images not prefixed in this manner, as if they matched the node’s
+selection exactly. Additionally, images owned by the user’s project will be
+preferred over other images with the same name.</p>
+<p>Note that having images with the same name is allowed in OpenStack; which image
+will be selected when a node starts if there are multiple with equal properties
+outlined above is undefined (one of them will be selected without error).</p>
+</div>
+<div class="section" id="create-image-view">
+<h3>9.1.4. Create image view<a class="headerlink" href="#create-image-view" title="Permalink to this headline">¶</a></h3>
+<p>A user may add a new image by clicking on the “Add” image in the images view.
+The name of the created image is composed from the project name, the subtype
+selected in the form, and optionally the version provided in the text field.</p>
+<p>The user may upload the image using the browser, but since it’s common that the
+image located nearer to the VIRL server than the user, the http[s] or [t]ftp
+address for the image may be provided instead.
+In both cases the file size is limited to 10GB (configurable in common.cfg).
+Additionally, a path local to the VIRL server may be the source - this method
+has no file size limit.</p>
+<p>All images will be converted to the QCOW2 format before upload to OpenStack.
+Moreover, no RAW (unknown-format) images are accepted to prevent errors. Even
+an QCOW2 file will be processed this way; thus, the checksum for the image as
+presented in the image details will differ from the source image’s in almost
+all cases.</p>
+<p>The added image will be private and only available to users in the same project
+as the adding user.</p>
+<p>Final element of the form is the properties text area. Here, the user may put
+any key = value pairs, one per line. It’s primary use is to override the value
+for hw_vif_model or hw_disk_bus, if it’s known to differ from the defaults as
+outlined in the section “Supported node subtypes”. In general, the user need
+not put anything into this field.</p>
+</div>
+<div class="section" id="modify-image-view">
+<h3>9.1.5. Modify image view<a class="headerlink" href="#modify-image-view" title="Permalink to this headline">¶</a></h3>
+<p>The images owned by a user’s project may be modified. The subtype cannot be
+changed (even by editing the properties view), but the version, and thus the
+final image name can be modified. The image properties can be edited at will,
+the same rules apply as when the image is created.</p>
+</div>
+<div class="section" id="lxc-settings-view">
+<h3>9.1.6. LXC Settings view<a class="headerlink" href="#lxc-settings-view" title="Permalink to this headline">¶</a></h3>
+<p>This view may be used to display and manage images and templates usable by the
+LXC node subtypes. The mechanics are very similar to the OpenStack VM images.</p>
+<p>As discussed elsewhere, LXC images are .tar.gz files containing an archive
+of files to include in the LXC node. A template is a script performing the
+necessary steps to create, configure and start the applications in the node.</p>
+</div>
+<div class="section" id="flavors-view">
+<h3>9.1.7. Flavors view<a class="headerlink" href="#flavors-view" title="Permalink to this headline">¶</a></h3>
+<p>In this view, the users get an overview of all flavors they may select for any
+node in their topologies. The flavor selects how much resources, notably RAM
+and Virtual CPUs will be reserved for the node.</p>
+<p>Flavors whose names match the subtype of a node will be selected by default.
+Flavors whose names are prefixed with a project name (and a dash) will be used
+in favor of flavors not prefixed in this manner, as if they matched the node’s
+flavor name exactly. Unlike images, flavors do not have owners.</p>
+</div>
+<div class="section" id="connectivity">
+<h3>9.1.8. Connectivity<a class="headerlink" href="#connectivity" title="Permalink to this headline">¶</a></h3>
+<p>This view displays the outside connections created for the project of this
+user. Some connections are created automatically when the user was created or
+when a simulation was started, others are configured manually by admin users.</p>
+</div>
+<div class="section" id="repositories">
+<h3>9.1.9. Repositories<a class="headerlink" href="#repositories" title="Permalink to this headline">¶</a></h3>
+<p>In this view, each user can manage a set of (remote) attached git repositories
+preferably containing VIRL files. The HTTP(S) and SSH methods of connecting to
+remote repositories are supported.</p>
+<p>For repositories requiring authentication, a password may be provided when the
+repository is cloned, as well as updated. VIRL does not store this password.</p>
+<p>Files can be browsed and previewed in each repository, and VIRL files may be
+previewed and launched as new simulations by the user.</p>
+<p>No modifications to the repository are supported, users should make use of
+tools dedicated to git repository management for populating the repositories.</p>
+</div>
+<div class="section" id="settings-and-password">
+<h3>9.1.10. Settings and password<a class="headerlink" href="#settings-and-password" title="Permalink to this headline">¶</a></h3>
+<p>This view allows each user to see the names, roles, ID’s and other useful data
+the system maintains with regards to it. Also, the user password can be changed
+- it changes the password in OpenStack too.</p>
+<p>Another configuration option is setting the SSH public key which can be made
+available to server nodes using cloud-init-based initial configuration.</p>
+</div>
+</div>
+<div class="section" id="admin-mode">
+<h2>9.2. Admin mode<a class="headerlink" href="#admin-mode" title="Permalink to this headline">¶</a></h2>
+<p>The admin mode is available to users with the “admin” role. The admin mode’s
+overview allows to see the sessions of all users of all projects.</p>
+<div class="section" id="overview">
+<h3>9.2.1. Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h3>
+<p>The main page of the admin interface provides a view into all users and running
+simulations on the system. An admin may stop any simulation, and see its status
+in a details page. The launch features are not provided for administrators.</p>
+</div>
+<div class="section" id="salt-configuration-and-status-view">
+<h3>9.2.2. Salt configuration and status view<a class="headerlink" href="#salt-configuration-and-status-view" title="Permalink to this headline">¶</a></h3>
+<p>This view is used to set up the salt-based licensing of the VIRL product.
+Each user is provided a unique product key as a PEM-formated RSA key, along
+with a unique name for the key. This key is used to authenticate against
+Cisco master servers providing the licensing authorization, as well as software
+upgrade and configuration features.</p>
+</div>
+<div class="section" id="system-configuration-controls-view">
+<h3>9.2.3. System configuration controls view<a class="headerlink" href="#system-configuration-controls-view" title="Permalink to this headline">¶</a></h3>
+<p>This view provides a way to reconfigure the /etc/virl.ini file, which is used
+by the installation and configuration system to set up the VIRL host system.</p>
+<p>Each change, when applied, causes a process in the installation system to be
+executed. A reboot of the host system must be initiated by the administrator
+of the system after a rehost operation is performed, which it is whenever e.g.
+system-wide network configuration changes need to be applied.</p>
+<p>Note that the UWM may be restarted itself if particular modifications are
+made affecting it. Status of the processes involved can be viewed when changes
+are applied to the system.</p>
+</div>
+<div class="section" id="system-tools-view">
+<h3>9.2.4. System tools view<a class="headerlink" href="#system-tools-view" title="Permalink to this headline">¶</a></h3>
+<p>This view has three features. First is displaying various usage statistics
+as logged by the system.</p>
+<p>The second feature performs a cursory health check, for determining if the
+infrastructure required for correct performance of the VIRL system is in
+place and good shape. This may assist troubleshooting common failure modes
+of the underlying system machinery, which should be then resolvable by the
+VIRL community forums.</p>
+<p>The third feature collects and downloads system logs from the host in a zip
+archive, which may be requested by the community in order to troubleshoot
+if more serious issues arise on the user’s system.</p>
+</div>
+<div class="section" id="virl-software-view">
+<h3>9.2.5. VIRL Software view<a class="headerlink" href="#virl-software-view" title="Permalink to this headline">¶</a></h3>
+<p>This view provides options for upgrading the various sofware components of
+the VIRL system. These include the VIRL-CORE package itself, Autonetkit,
+the VMMaestro clients downloadable from the host, and provided router images.</p>
+<p>The same salt-based installation and configuration system is used to perform
+the upgrades. Different versions on the salt master are compared and offered
+for synchronization.</p>
+</div>
+<div class="section" id="projects-view">
+<h3>9.2.6. Projects view<a class="headerlink" href="#projects-view" title="Permalink to this headline">¶</a></h3>
+<p>This view lists all projects containing users managed by the UWM server.</p>
+<p>Any project can be modified, including disabling, expiring it, or changing
+the shared quota on number of instances, RAM and VCPUs available to users.</p>
+<p>A project may be deleted; everything related to it will be purged from UWM,
+STD, and first and foremost, the OpenStack orchestration.</p>
+</div>
+<div class="section" id="create-project-view">
+<h3>9.2.7. Create project view<a class="headerlink" href="#create-project-view" title="Permalink to this headline">¶</a></h3>
+<p>A new project will be added to the UWM/STD database, as well as OpenStack.
+The management and SNAT networks every project requires are created as well,
+along with a user named the same as the project. This user may be made an
+administrator; this allows the user to control everything, both in UWM and in
+OpenStack.</p>
+</div>
+<div class="section" id="users-view">
+<h3>9.2.8. Users view<a class="headerlink" href="#users-view" title="Permalink to this headline">¶</a></h3>
+<p>In this view, an administrator can see, edit and delete every defined user.
+A deleted user’s simulations and endpoint will be removed as well.</p>
+<p>A user may be disabled; in this case, no operations can be authorized by the
+user, neither in UWM, STD nor OpenStack.</p>
+<p>A user may also expire; in this case, the only available operations are to
+see and stop simulations running using the GUI or virl_std_client.</p>
+</div>
+<div class="section" id="create-user-s-view">
+<h3>9.2.9. Create user(s) view<a class="headerlink" href="#create-user-s-view" title="Permalink to this headline">¶</a></h3>
+<p>New users can be added to a project; the project name will be prefixed to the
+supplied username for all of them. If multiple users are created, they are
+numbered and their passwords are random strings only shown once as a result
+of the creation process. Users may not be renamed afterwards.</p>
+</div>
+<div class="section" id="id1">
+<h3>9.2.10. Images view<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>The images view is essentially the same as the version regular users see, with
+the notable difference that all images from all projects are controllable.</p>
+<p>Behavior differs in that images created in this mode do not have the project’s
+name prefixed to them, and they are created public, i.e. visible to all users.</p>
+</div>
+<div class="section" id="id2">
+<h3>9.2.11. Flavors view<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>Similar to images, flavors can be created and removed if required through this
+view. The mechanics are very similar to the image management views.</p>
+</div>
+<div class="section" id="id3">
+<h3>9.2.12. Lxc settings view<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>The LXC settings manageable in this view are the images and templates used to
+create LXC topology nodes.</p>
+</div>
+<div class="section" id="subtypes-view">
+<h3>9.2.13. Subtypes view<a class="headerlink" href="#subtypes-view" title="Permalink to this headline">¶</a></h3>
+<p>Most of the information contained in a subtype plugin is in the form of a set
+of values used by the LLI. If a subtype can be created by merely adjusting some
+of these values from an existing subtype, this UWM section can assist in doing
+just that.</p>
+</div>
+<div class="section" id="id4">
+<h3>9.2.14. Connectivity<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<p>On these pages admin users can see all the outside connections existing for all
+users in all projects. Connections that are not attached can be deleted.</p>
+<p>New connections of all three types can be manually created with custom or
+automatically picked IP Adresses.</p>
+</div>
+<div class="section" id="vm-control-view">
+<h3>9.2.15. VM Control view<a class="headerlink" href="#vm-control-view" title="Permalink to this headline">¶</a></h3>
+<p>This view allows an admin user to remove broken resources from the system, like
+nodes, networks, ports and floating IPs.</p>
+</div>
+</div>
+<div class="section" id="rest-api-and-virl-uwm-client">
+<h2>9.3. REST API and VIRL UWM client<a class="headerlink" href="#rest-api-and-virl-uwm-client" title="Permalink to this headline">¶</a></h2>
+<p>All the functionality of the web interface is also accessible through a REST
+API and a CLI client.</p>
+<p>By default, UWM listens on port 19400. This can be configured in virl.ini:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_user_management</span><span class="p">:</span> <span class="mi">19400</span>
+</pre></div>
+</div>
+<p>REST API documentation can be found in UWM itself, under “Documentation / UWM API”.</p>
+<p>Currently the UWM API allows a user to manage the following kinds of resources:
+projects, users, images, flavors, subtypes and VM-related resources.</p>
+<p>The services accept arguments in the form of query parameters, form-data, or
+values in a JSON object sent in the request body. The type of parameters used
+is determined by the request content-type (multipart/form-data or
+application/x-www-form-urlencoded means form-data; application/json indicates
+a JSON object; in other cases the query parameters will be used).</p>
+<p>By default, the response contents are parsed to Python objects and printed to
+standard output. The global –json flag is available to convert the output back
+to JSON.</p>
+<p>The following describes the usage of the VIRL UWM client in the form of
+examples. For details of the single commands and their parameters, please refer
+to the help of virl_uwm_client itself. More detailed information in case of an
+error can be obtained with the global –debug flag.</p>
+<div class="section" id="editing-the-settings-of-the-current-user">
+<h3>9.3.1. Editing the settings of the current user<a class="headerlink" href="#editing-the-settings-of-the-current-user" title="Permalink to this headline">¶</a></h3>
+<p>Details of the current user can be retrieved as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_uwm_client</span> <span class="o">--</span><span class="n">quiet</span> <span class="o">--</span><span class="n">json</span> <span class="n">settings</span>
+<span class="p">{</span>
+  <span class="s2">&quot;user&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;guest&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;os-id&quot;</span><span class="p">:</span> <span class="s2">&quot;67ff232a830342c4807fc63f3580308b&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;auth-url&quot;</span><span class="p">:</span> <span class="s2">&quot;http://localhost:5000/v2.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-08-12 11:54:59&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;os-username&quot;</span><span class="p">:</span> <span class="s2">&quot;guest&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;expires&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">&quot;ssh-public-key&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="s2">&quot;guest&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;roles&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">&quot;_member_&quot;</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;has-endpoint&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">null</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Changing password via an admin request:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_uwm_client</span> <span class="o">--</span><span class="n">quiet</span> <span class="o">--</span><span class="n">json</span> <span class="n">change</span><span class="o">-</span><span class="n">password</span> <span class="o">-</span><span class="n">p</span> <span class="n">secret</span>
+<span class="p">{</span>
+  <span class="s2">&quot;password-changed&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;user&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;guest&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;os-id&quot;</span><span class="p">:</span> <span class="s2">&quot;67ff232a830342c4807fc63f3580308b&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;auth-url&quot;</span><span class="p">:</span> <span class="s2">&quot;http://localhost:5000/v2.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-08-12 11:54:59&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;os-username&quot;</span><span class="p">:</span> <span class="s2">&quot;guest&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;expires&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">&quot;ssh-public-key&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="s2">&quot;guest&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;roles&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">&quot;_member_&quot;</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;has-endpoint&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">null</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>When the password of a user is changed, the underlying OpenStack user’s
+password is also modified, to a value derived from the new UWM password.
+This can also be computed with the following command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_uwm_client</span> <span class="o">--</span><span class="n">quiet</span> <span class="n">make</span><span class="o">-</span><span class="n">os</span><span class="o">-</span><span class="n">password</span> <span class="o">-</span><span class="n">p</span> <span class="n">secret</span>
+<span class="mi">5</span><span class="n">en6G6MezRroT3XKqkdPOmY</span><span class="o">/</span><span class="n">BfQ</span><span class="o">=</span>
+</pre></div>
+</div>
+<p>Users with an STD endpoint can also set their SSH public key:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_uwm_client</span> <span class="o">--</span><span class="n">quiet</span> <span class="o">--</span><span class="n">json</span> <span class="o">-</span><span class="n">p</span> <span class="n">secret</span> <span class="n">new</span><span class="o">-</span><span class="n">ssh</span><span class="o">-</span><span class="n">public</span><span class="o">-</span><span class="n">key</span> \
+                <span class="o">-</span><span class="n">k</span> <span class="o">@~/.</span><span class="n">ssh</span><span class="o">/</span><span class="n">id_rsa</span><span class="o">.</span><span class="n">pub</span>
+<span class="p">{</span>
+  <span class="s2">&quot;ssh-public-key-updated&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;user&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;guest&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;os-id&quot;</span><span class="p">:</span> <span class="s2">&quot;67ff232a830342c4807fc63f3580308b&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;auth-url&quot;</span><span class="p">:</span> <span class="s2">&quot;http://localhost:5000/v2.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-08-12 11:54:59&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;os-username&quot;</span><span class="p">:</span> <span class="s2">&quot;guest&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;expires&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">&quot;ssh-public-key&quot;</span><span class="p">:</span> <span class="s2">&quot;ssh-rsa AAAAB3N... virl@virl&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="s2">&quot;guest&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;roles&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">&quot;_member_&quot;</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;has-endpoint&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">null</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>To reset the SSH public key, pass an empty string as the new key:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_uwm_client</span> <span class="o">--</span><span class="n">quiet</span> <span class="o">--</span><span class="n">json</span> <span class="o">-</span><span class="n">p</span> <span class="n">secret</span> <span class="n">new</span><span class="o">-</span><span class="n">ssh</span><span class="o">-</span><span class="n">public</span><span class="o">-</span><span class="n">key</span> <span class="o">-</span><span class="n">k</span> <span class="s1">&#39;&#39;</span>
+<span class="p">{</span>
+  <span class="s2">&quot;ssh-public-key-reset&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;user&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;guest&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;os-id&quot;</span><span class="p">:</span> <span class="s2">&quot;67ff232a830342c4807fc63f3580308b&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;auth-url&quot;</span><span class="p">:</span> <span class="s2">&quot;http://localhost:5000/v2.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-08-12 11:54:59&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;os-username&quot;</span><span class="p">:</span> <span class="s2">&quot;guest&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;expires&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">&quot;ssh-public-key&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="s2">&quot;guest&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;roles&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">&quot;_member_&quot;</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;has-endpoint&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">null</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="user-management-admin-only">
+<h3>9.3.2. User management (admin only)<a class="headerlink" href="#user-management-admin-only" title="Permalink to this headline">¶</a></h3>
+<p>Users can be listed:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_uwm_client</span> <span class="o">--</span><span class="n">quiet</span> <span class="o">--</span><span class="n">json</span> <span class="o">-</span><span class="n">u</span> <span class="n">uwmadmin</span> <span class="o">-</span><span class="n">p</span> <span class="n">password</span> <span class="n">user</span><span class="o">-</span><span class="n">info</span>
+<span class="p">{</span>
+  <span class="s2">&quot;users&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;uwmadmin&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;os-id&quot;</span><span class="p">:</span> <span class="s2">&quot;6ded14f7b8b94ad5953f09aca121efc9&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;auth-url&quot;</span><span class="p">:</span> <span class="s2">&quot;http://localhost:5000/v2.0&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-08-12 11:54:56&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;os-username&quot;</span><span class="p">:</span> <span class="s2">&quot;uwmadmin&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+      <span class="s2">&quot;expires&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">&quot;ssh-public-key&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="s2">&quot;uwmadmin&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;roles&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;admin&quot;</span>
+      <span class="p">],</span>
+      <span class="s2">&quot;has-endpoint&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">null</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;guest&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;os-id&quot;</span><span class="p">:</span> <span class="s2">&quot;67ff232a830342c4807fc63f3580308b&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;auth-url&quot;</span><span class="p">:</span> <span class="s2">&quot;http://localhost:5000/v2.0&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-08-12 11:54:59&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;os-username&quot;</span><span class="p">:</span> <span class="s2">&quot;guest&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+      <span class="s2">&quot;expires&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">&quot;ssh-public-key&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="s2">&quot;guest&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;roles&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;_member_&quot;</span>
+      <span class="p">],</span>
+      <span class="s2">&quot;has-endpoint&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+      <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">null</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Details of a single user can be retrieved by specifying a username:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_uwm_client</span> <span class="o">--</span><span class="n">quiet</span> <span class="o">--</span><span class="n">json</span> <span class="o">-</span><span class="n">u</span> <span class="n">uwmadmin</span> <span class="o">-</span><span class="n">p</span> <span class="n">password</span> <span class="n">user</span><span class="o">-</span><span class="n">info</span> <span class="o">-</span><span class="n">n</span> <span class="n">guest</span>
+<span class="p">{</span>
+  <span class="s2">&quot;user&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;guest&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;os-id&quot;</span><span class="p">:</span> <span class="s2">&quot;67ff232a830342c4807fc63f3580308b&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;auth-url&quot;</span><span class="p">:</span> <span class="s2">&quot;http://localhost:5000/v2.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-08-12 11:54:59&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;os-username&quot;</span><span class="p">:</span> <span class="s2">&quot;guest&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;expires&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">&quot;ssh-public-key&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="s2">&quot;guest&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;roles&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">&quot;_member_&quot;</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;has-endpoint&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">null</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>When creating a user, the name of its project (which must already exist) has to
+be specified. By default the user’s role will be “_member_”, i.e. he/she will
+have no admin privileges. To give the user an admin role, pass the -r/–role
+parameter with the value “admin”. The name of the new user will be prefixed
+by the project name. An STD endpoint will be automatically created for the
+user, so he/she will be able to run simulations if the project also has a
+management network:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_uwm_client</span> <span class="o">--</span><span class="n">quiet</span> <span class="o">--</span><span class="n">json</span> <span class="o">-</span><span class="n">u</span> <span class="n">uwmadmin</span> <span class="o">-</span><span class="n">p</span> <span class="n">password</span> <span class="n">user</span><span class="o">-</span><span class="n">create</span> \
+                <span class="o">-</span><span class="n">n</span> <span class="n">testuser</span> <span class="o">-</span><span class="n">p</span> <span class="n">test</span> <span class="o">-</span><span class="n">t</span> <span class="n">guest</span> <span class="o">-</span><span class="n">r</span> <span class="n">admin</span> <span class="o">-</span><span class="n">x</span> <span class="mi">2015</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">01</span>
+<span class="p">{</span>
+  <span class="s2">&quot;user&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;guest-testuser&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;os-id&quot;</span><span class="p">:</span> <span class="s2">&quot;5a2e0273d4a349cf9accdd5b6e0f0844&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;auth-url&quot;</span><span class="p">:</span> <span class="s2">&quot;http://localhost:5000/v2.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-08-12 13:27:36&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;os-username&quot;</span><span class="p">:</span> <span class="s2">&quot;guest-testuser&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;expires&quot;</span><span class="p">:</span> <span class="s2">&quot;2015-01-01 00:00:00&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ssh-public-key&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="s2">&quot;guest&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;roles&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">&quot;admin&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;_member_&quot;</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;has-endpoint&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">null</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In the web interface of UWM, admins can create multiple users at once. This is
+directly not supported by the UWM API, since the same operation can be achieved
+by a simple script.</p>
+<p>When editing a user, you can reset its expiration by specifying an empty string
+as the new expiration date:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_uwm_client</span> <span class="o">--</span><span class="n">quiet</span> <span class="o">--</span><span class="n">json</span> <span class="o">-</span><span class="n">u</span> <span class="n">uwmadmin</span> <span class="o">-</span><span class="n">p</span> <span class="n">password</span> <span class="n">user</span><span class="o">-</span><span class="n">edit</span> \
+                <span class="o">-</span><span class="n">n</span> <span class="n">guest</span><span class="o">-</span><span class="n">testuser</span> <span class="o">-</span><span class="n">m</span> <span class="n">test</span><span class="nd">@example</span><span class="o">.</span><span class="n">com</span> <span class="o">-</span><span class="n">x</span> <span class="s1">&#39;&#39;</span>
+<span class="p">{</span>
+  <span class="s2">&quot;user&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;guest-testuser&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;os-id&quot;</span><span class="p">:</span> <span class="s2">&quot;5a2e0273d4a349cf9accdd5b6e0f0844&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;auth-url&quot;</span><span class="p">:</span> <span class="s2">&quot;http://localhost:5000/v2.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-08-12 13:27:36&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;os-username&quot;</span><span class="p">:</span> <span class="s2">&quot;guest-testuser&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;expires&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">&quot;ssh-public-key&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="s2">&quot;guest&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;roles&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">&quot;admin&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;_member_&quot;</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;has-endpoint&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;test@example.com&quot;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Users without active simulations can also be deleted:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_uwm_client</span> <span class="o">--</span><span class="n">quiet</span> <span class="o">--</span><span class="n">json</span> <span class="o">-</span><span class="n">u</span> <span class="n">uwmadmin</span> <span class="o">-</span><span class="n">p</span> <span class="n">password</span> <span class="n">user</span><span class="o">-</span><span class="n">delete</span> \
+                <span class="o">-</span><span class="n">n</span> <span class="n">guest</span><span class="o">-</span><span class="n">testuser</span>
+<span class="p">{</span>
+  <span class="s2">&quot;deleted&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;user&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;guest-testuser&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;os-id&quot;</span><span class="p">:</span> <span class="s2">&quot;5a2e0273d4a349cf9accdd5b6e0f0844&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;auth-url&quot;</span><span class="p">:</span> <span class="s2">&quot;http://localhost:5000/v2.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-08-12 13:27:36&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;os-username&quot;</span><span class="p">:</span> <span class="s2">&quot;guest-testuser&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;expires&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">&quot;ssh-public-key&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="s2">&quot;guest&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;roles&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">&quot;admin&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;_member_&quot;</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;has-endpoint&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;test@example.com&quot;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="project-management-admin-only">
+<h3>9.3.3. Project management (admin only)<a class="headerlink" href="#project-management-admin-only" title="Permalink to this headline">¶</a></h3>
+<p>You can list all the projects:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_uwm_client</span> <span class="o">--</span><span class="n">quiet</span> <span class="o">--</span><span class="n">json</span> <span class="o">-</span><span class="n">u</span> <span class="n">uwmadmin</span> <span class="o">-</span><span class="n">p</span> <span class="n">password</span> <span class="n">project</span><span class="o">-</span><span class="n">info</span>
+<span class="p">{</span>
+  <span class="s2">&quot;projects&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;users&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;uwmadmin&quot;</span>
+      <span class="p">],</span>
+      <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-08-12 11:54:56&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">&quot;expires&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+      <span class="s2">&quot;quota&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;instances&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;vcpus&quot;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>
+        <span class="s2">&quot;ram&quot;</span><span class="p">:</span> <span class="mi">5120000</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;os-id&quot;</span><span class="p">:</span> <span class="s2">&quot;098b55d3bc4846b88b3da65908c528fb&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;uwmadmin&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;users&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;guest&quot;</span>
+      <span class="p">],</span>
+      <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-08-12 11:54:58&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">&quot;expires&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+      <span class="s2">&quot;quota&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;instances&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+        <span class="s2">&quot;vcpus&quot;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>
+        <span class="s2">&quot;ram&quot;</span><span class="p">:</span> <span class="mi">5120000</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;os-id&quot;</span><span class="p">:</span> <span class="s2">&quot;c4cba1eea5fe46afbc9a4a01356f7c44&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;guest&quot;</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>or retrieve the details of just a specific one:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_uwm_client</span> <span class="o">--</span><span class="n">quiet</span> <span class="o">--</span><span class="n">json</span> <span class="o">-</span><span class="n">u</span> <span class="n">uwmadmin</span> <span class="o">-</span><span class="n">p</span> <span class="n">password</span> <span class="n">project</span><span class="o">-</span><span class="n">info</span> \
+                <span class="o">-</span><span class="n">n</span> <span class="n">guest</span>
+<span class="p">{</span>
+  <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;users&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">&quot;guest&quot;</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-08-12 11:54:58&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">&quot;expires&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;quota&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;instances&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+      <span class="s2">&quot;vcpus&quot;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>
+      <span class="s2">&quot;ram&quot;</span><span class="p">:</span> <span class="mi">5120000</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;os-id&quot;</span><span class="p">:</span> <span class="s2">&quot;c4cba1eea5fe46afbc9a4a01356f7c44&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;guest&quot;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>When creating a project, a main user will also be created for the project,
+named the same as the project. This user gets a random password, that is
+included in the response. Networks for the project are also automatically set
+up:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_uwm_client</span> <span class="o">--</span><span class="n">quiet</span> <span class="o">--</span><span class="n">json</span> <span class="o">-</span><span class="n">u</span> <span class="n">uwmadmin</span> <span class="o">-</span><span class="n">p</span> <span class="n">password</span> <span class="n">project</span><span class="o">-</span><span class="n">create</span> \
+                <span class="o">-</span><span class="n">n</span> <span class="n">testproj</span> <span class="o">-</span><span class="n">i</span> <span class="mi">50</span> <span class="o">-</span><span class="n">r</span> <span class="mi">2560000</span> <span class="o">-</span><span class="n">c</span> <span class="mi">100</span>
+<span class="p">{</span>
+  <span class="s2">&quot;main-user&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;testproj&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;os-id&quot;</span><span class="p">:</span> <span class="s2">&quot;4f52f199584e4e46aa1f1b2341419b9d&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;auth-url&quot;</span><span class="p">:</span> <span class="s2">&quot;http://virl-ucs-07:5000/v2.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-08-22 10:23:15&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;os-username&quot;</span><span class="p">:</span> <span class="s2">&quot;testproj&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ssh-public-key&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;expires&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="s2">&quot;testproj&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;os-password&quot;</span><span class="p">:</span> <span class="s2">&quot;szdvytx+qxikIYxQv+8nd+TpxAA=&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;roles&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">&quot;_member_&quot;</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;has-endpoint&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;password&quot;</span><span class="p">:</span> <span class="s2">&quot;79bLTf&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">null</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;os-id&quot;</span><span class="p">:</span> <span class="s2">&quot;9332d9d92b9e476e8cf048b6be580f8b&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-08-22 10:23:08&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;expires&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;quota&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;instances&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
+      <span class="s2">&quot;vcpus&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+      <span class="s2">&quot;ram&quot;</span><span class="p">:</span> <span class="mi">2560000</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;testproj&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;users&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">&quot;testproj&quot;</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">null</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>You can edit all the properties of a project, except it’s name:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_uwm_client</span> <span class="o">--</span><span class="n">quiet</span> <span class="o">--</span><span class="n">json</span> <span class="o">-</span><span class="n">u</span> <span class="n">uwmadmin</span> <span class="o">-</span><span class="n">p</span> <span class="n">password</span> <span class="n">project</span><span class="o">-</span><span class="n">edit</span> \
+                <span class="o">-</span><span class="n">n</span> <span class="n">testproj</span> <span class="o">-</span><span class="n">e</span> <span class="kc">False</span> <span class="o">-</span><span class="n">x</span> <span class="mi">2014</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">31</span>
+<span class="p">{</span>
+  <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;os-id&quot;</span><span class="p">:</span> <span class="s2">&quot;9332d9d92b9e476e8cf048b6be580f8b&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-08-22 10:23:08&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;expires&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-10-31 00:00:00&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+    <span class="s2">&quot;quota&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;instances&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
+      <span class="s2">&quot;vcpus&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+      <span class="s2">&quot;ram&quot;</span><span class="p">:</span> <span class="mi">2560000</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;testproj&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;users&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">&quot;testproj&quot;</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">null</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Let’s add a user to the project:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_uwm_client</span> <span class="o">--</span><span class="n">quiet</span> <span class="o">--</span><span class="n">json</span> <span class="o">-</span><span class="n">u</span> <span class="n">uwmadmin</span> <span class="o">-</span><span class="n">p</span> <span class="n">password</span> <span class="n">user</span><span class="o">-</span><span class="n">create</span> \
+                <span class="o">-</span><span class="n">n</span> <span class="n">myuser</span> <span class="o">-</span><span class="n">p</span> <span class="n">secret</span> <span class="o">-</span><span class="n">t</span> <span class="n">testproj</span> <span class="o">-</span><span class="n">r</span> <span class="n">_member_</span>
+<span class="p">{</span>
+  <span class="s2">&quot;user&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;testproj-myuser&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;os-id&quot;</span><span class="p">:</span> <span class="s2">&quot;34cc57289bf3418e850fe0db3f1ea925&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;auth-url&quot;</span><span class="p">:</span> <span class="s2">&quot;http://virl-ucs-07:5000/v2.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-08-22 10:26:55&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;os-username&quot;</span><span class="p">:</span> <span class="s2">&quot;testproj-myuser&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ssh-public-key&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;expires&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="s2">&quot;testproj&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;roles&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">&quot;_member_&quot;</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;has-endpoint&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">null</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>When deleting a project, all its users are also deleted, along with the
+networks that were set up. Note that the project must not have active
+simulations:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_uwm_client</span> <span class="o">--</span><span class="n">quiet</span> <span class="o">--</span><span class="n">json</span> <span class="o">-</span><span class="n">u</span> <span class="n">uwmadmin</span> <span class="o">-</span><span class="n">p</span> <span class="n">password</span> <span class="n">project</span><span class="o">-</span><span class="n">delete</span> \
+                <span class="o">-</span><span class="n">n</span> <span class="n">testproj</span>
+<span class="p">{</span>
+  <span class="s2">&quot;deleted-project&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;os-id&quot;</span><span class="p">:</span> <span class="s2">&quot;9332d9d92b9e476e8cf048b6be580f8b&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-08-22 10:23:08&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;expires&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-10-31 00:00:00&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+    <span class="s2">&quot;quota&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;instances&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
+      <span class="s2">&quot;vcpus&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+      <span class="s2">&quot;ram&quot;</span><span class="p">:</span> <span class="mi">2560000</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;testproj&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;users&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">&quot;testproj&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;testproj-myuser&quot;</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">null</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;deleted-network-resources&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;deleted-users&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">&quot;testproj&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;testproj-myuser&quot;</span>
+  <span class="p">],</span>
+  <span class="s2">&quot;deleted-all-users&quot;</span><span class="p">:</span> <span class="n">true</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="image-management">
+<h3>9.3.4. Image management<a class="headerlink" href="#image-management" title="Permalink to this headline">¶</a></h3>
+<p>Admin users are able to see and manipulate all images in the system.
+Ordinary users see every image that is owned by their project or is public,
+but can only manipulate owned images.</p>
+<p>The response of each image service includes information about the disk usage.</p>
+<p>Listing all images:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_uwm_client</span> <span class="o">--</span><span class="n">quiet</span> <span class="o">--</span><span class="n">json</span> <span class="n">image</span><span class="o">-</span><span class="n">info</span>
+<span class="p">{</span>
+  <span class="s2">&quot;images&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;active&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;_owned&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;IOSv&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;deleted&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">&quot;container_format&quot;</span><span class="p">:</span> <span class="s2">&quot;bare&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-08-12T11:54:32&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;disk_format&quot;</span><span class="p">:</span> <span class="s2">&quot;qcow2&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;updated_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-08-12T11:54:34&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;22c37e1a-c17e-41d0-981e-1cdac3bd7ffd&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;min_disk&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="s2">&quot;protected&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">&quot;min_ram&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="s2">&quot;checksum&quot;</span><span class="p">:</span> <span class="s2">&quot;47e1192b04933168d30863cba2b92aae&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;owner&quot;</span><span class="p">:</span> <span class="s2">&quot;519873d1552c4afca1eec83c6c218c64&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;is_public&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+      <span class="s2">&quot;deleted_at&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;hw_vif_model&quot;</span><span class="p">:</span> <span class="s2">&quot;e1000&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;hw_disk_bus&quot;</span><span class="p">:</span> <span class="s2">&quot;virtio&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;subtype&quot;</span><span class="p">:</span> <span class="s2">&quot;IOSv&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;release&quot;</span><span class="p">:</span> <span class="s2">&quot;vios-15.4T&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;serial&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;config_disk_type&quot;</span><span class="p">:</span> <span class="s2">&quot;disk&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;hw_cdrom_type&quot;</span><span class="p">:</span> <span class="s2">&quot;ide&quot;</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="mi">121700352</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;active&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;_owned&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;server&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;deleted&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">&quot;container_format&quot;</span><span class="p">:</span> <span class="s2">&quot;bare&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-08-12T11:54:37&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;disk_format&quot;</span><span class="p">:</span> <span class="s2">&quot;qcow2&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;updated_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-08-12T11:54:44&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;b2c7c492-7508-45f6-b6f2-2619f3cee997&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;min_disk&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="s2">&quot;protected&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">&quot;min_ram&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="s2">&quot;checksum&quot;</span><span class="p">:</span> <span class="s2">&quot;3b75214936278965eb716449733b105b&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;owner&quot;</span><span class="p">:</span> <span class="s2">&quot;519873d1552c4afca1eec83c6c218c64&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;is_public&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+      <span class="s2">&quot;deleted_at&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;release&quot;</span><span class="p">:</span> <span class="s2">&quot;ubuntu.trusty64&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;subtype&quot;</span><span class="p">:</span> <span class="s2">&quot;server&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;serial&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;hw_disk_bus&quot;</span><span class="p">:</span> <span class="s2">&quot;virtio&quot;</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="mi">252641792</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="s2">&quot;disk-usage&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;used-disk-space-GB&quot;</span><span class="p">:</span> <span class="s2">&quot;3.64&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;percentage-usage&quot;</span><span class="p">:</span> <span class="s2">&quot;11.97&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;total-disk-space-GB&quot;</span><span class="p">:</span> <span class="s2">&quot;30.40&quot;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Specific images are accessible through their IDs:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_uwm_client</span> <span class="o">--</span><span class="n">quiet</span> <span class="o">--</span><span class="n">json</span> <span class="n">image</span><span class="o">-</span><span class="n">info</span> \
+                <span class="o">-</span><span class="n">i</span> <span class="n">b2c7c492</span><span class="o">-</span><span class="mi">7508</span><span class="o">-</span><span class="mi">45</span><span class="n">f6</span><span class="o">-</span><span class="n">b6f2</span><span class="o">-</span><span class="mi">2619</span><span class="n">f3cee997</span>
+<span class="p">{</span>
+  <span class="s2">&quot;image&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;active&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_owned&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;server&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;deleted&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+    <span class="s2">&quot;container_format&quot;</span><span class="p">:</span> <span class="s2">&quot;bare&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-08-12T11:54:37&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;disk_format&quot;</span><span class="p">:</span> <span class="s2">&quot;qcow2&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;updated_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-08-12T11:54:44&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;b2c7c492-7508-45f6-b6f2-2619f3cee997&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;min_disk&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;protected&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+    <span class="s2">&quot;min_ram&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;checksum&quot;</span><span class="p">:</span> <span class="s2">&quot;3b75214936278965eb716449733b105b&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;owner&quot;</span><span class="p">:</span> <span class="s2">&quot;519873d1552c4afca1eec83c6c218c64&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;is_public&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;deleted_at&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;release&quot;</span><span class="p">:</span> <span class="s2">&quot;ubuntu.trusty64&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;subtype&quot;</span><span class="p">:</span> <span class="s2">&quot;server&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;serial&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;hw_disk_bus&quot;</span><span class="p">:</span> <span class="s2">&quot;virtio&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="mi">252641792</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;disk-usage&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;used-disk-space-GB&quot;</span><span class="p">:</span> <span class="s2">&quot;3.64&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;percentage-usage&quot;</span><span class="p">:</span> <span class="s2">&quot;11.98&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;total-disk-space-GB&quot;</span><span class="p">:</span> <span class="s2">&quot;30.40&quot;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Images created by non-admin users are project-specific. Such images are private
+- visible only inside the project -, and are named as project-subtype-version.
+On the other hand, images created by admin users are by default public and
+their name does not get prefixed by the project name. However, admin users also
+can create project-specific images by setting the -s True flag.</p>
+<p>For image creation, the only mandatory parameters are the subtype name (must
+already exist and flagged as visible on GUI) and the source of the image file
+specified by either i) an absolute path on the VIRL server; ii) a URL from
+where the UWM server will download the image (the supported schemes are http,
+https, ftp and tftp); or iii) a path to a local image file which will be sent
+in the request:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_uwm_client</span> <span class="o">--</span><span class="n">quiet</span> <span class="o">--</span><span class="n">json</span> <span class="n">image</span><span class="o">-</span><span class="n">create</span> <span class="o">-</span><span class="n">t</span> <span class="s2">&quot;IOS XRv&quot;</span> <span class="o">-</span><span class="n">v</span> <span class="n">demo</span> \
+                <span class="o">-</span><span class="n">S</span> <span class="s2">&quot;/home/virl/images/iosxrv-k9-demo-5.1.2.vmdk&quot;</span>
+<span class="p">{</span>
+  <span class="s2">&quot;image&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;active&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_owned&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;guest-IOS XRv-demo&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;deleted&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+    <span class="s2">&quot;container_format&quot;</span><span class="p">:</span> <span class="s2">&quot;bare&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-08-12T13:46:35&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;disk_format&quot;</span><span class="p">:</span> <span class="s2">&quot;qcow2&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;updated_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-08-12T13:46:44&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;a3c11dc7-d964-4880-afb2-ec7bd01f8b54&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;min_disk&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;protected&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+    <span class="s2">&quot;min_ram&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;checksum&quot;</span><span class="p">:</span> <span class="s2">&quot;81b00ecd200a34b4c5e1e472e654a5ac&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;owner&quot;</span><span class="p">:</span> <span class="s2">&quot;c4cba1eea5fe46afbc9a4a01356f7c44&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;is_public&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+    <span class="s2">&quot;deleted_at&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;hw_vif_model&quot;</span><span class="p">:</span> <span class="s2">&quot;virtio&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;config_disk_type&quot;</span><span class="p">:</span> <span class="s2">&quot;cdrom&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;subtype&quot;</span><span class="p">:</span> <span class="s2">&quot;IOS XRv&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;demo&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;serial&quot;</span><span class="p">:</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;hw_disk_bus&quot;</span><span class="p">:</span> <span class="s2">&quot;ide&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="mi">527040512</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;disk-usage&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;used-disk-space-GB&quot;</span><span class="p">:</span> <span class="s2">&quot;4.13&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;percentage-usage&quot;</span><span class="p">:</span> <span class="s2">&quot;13.60&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;total-disk-space-GB&quot;</span><span class="p">:</span> <span class="s2">&quot;30.40&quot;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Images can be created also by directly uploading a file, however, this method
+is not recommended since the image files are usually large and performing the
+request can take really long:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_uwm_client</span> <span class="o">--</span><span class="n">quiet</span> <span class="o">--</span><span class="n">json</span> <span class="n">image</span><span class="o">-</span><span class="n">create</span> <span class="o">-</span><span class="n">t</span> <span class="s2">&quot;IOS XRv&quot;</span> <span class="o">-</span><span class="n">v</span> <span class="n">demo</span> \
+                <span class="o">-</span><span class="n">f</span> <span class="s2">&quot;/home/user/Downloads/iosxrv-k9-demo-5.1.2.vmdk&quot;</span>
+<span class="p">{</span>
+  <span class="s2">&quot;image&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;active&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_owned&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;guest-IOS XRv-demo&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;deleted&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+    <span class="s2">&quot;container_format&quot;</span><span class="p">:</span> <span class="s2">&quot;bare&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-08-12T13:48:05&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;disk_format&quot;</span><span class="p">:</span> <span class="s2">&quot;qcow2&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;updated_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-08-12T13:48:14&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;062e5482-a09c-4a59-b507-76a5e5bfa5f7&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;min_disk&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;protected&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+    <span class="s2">&quot;min_ram&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;checksum&quot;</span><span class="p">:</span> <span class="s2">&quot;81b00ecd200a34b4c5e1e472e654a5ac&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;owner&quot;</span><span class="p">:</span> <span class="s2">&quot;c4cba1eea5fe46afbc9a4a01356f7c44&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;is_public&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+    <span class="s2">&quot;deleted_at&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;hw_vif_model&quot;</span><span class="p">:</span> <span class="s2">&quot;virtio&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;config_disk_type&quot;</span><span class="p">:</span> <span class="s2">&quot;cdrom&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;subtype&quot;</span><span class="p">:</span> <span class="s2">&quot;IOS XRv&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;demo&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;serial&quot;</span><span class="p">:</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;hw_disk_bus&quot;</span><span class="p">:</span> <span class="s2">&quot;ide&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="mi">527040512</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;disk-usage&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;used-disk-space-GB&quot;</span><span class="p">:</span> <span class="s2">&quot;5.12&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;percentage-usage&quot;</span><span class="p">:</span> <span class="s2">&quot;16.83&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;total-disk-space-GB&quot;</span><span class="p">:</span> <span class="s2">&quot;30.40&quot;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>After creating an image, you can modify it’s name and other properties. However
+the image contents and its access (public or private) cannot be edited.
+To change the name of the image, specify a version (or pass an empty string).
+The parameter –project-specific/-s will also affect the new image name:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_uwm_client</span> <span class="o">--</span><span class="n">quiet</span> <span class="o">--</span><span class="n">json</span> <span class="n">image</span><span class="o">-</span><span class="n">edit</span> \
+                <span class="o">-</span><span class="n">i</span> <span class="mf">062e5482</span><span class="o">-</span><span class="n">a09c</span><span class="o">-</span><span class="mi">4</span><span class="n">a59</span><span class="o">-</span><span class="n">b507</span><span class="o">-</span><span class="mi">76</span><span class="n">a5e5bfa5f7</span> <span class="o">-</span><span class="n">v</span> <span class="s1">&#39;&#39;</span>
+<span class="p">{</span>
+  <span class="s2">&quot;image&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;active&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_owned&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;guest-IOS XRv&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;deleted&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+    <span class="s2">&quot;container_format&quot;</span><span class="p">:</span> <span class="s2">&quot;bare&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-08-12T13:48:05&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;disk_format&quot;</span><span class="p">:</span> <span class="s2">&quot;qcow2&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;updated_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-08-12T13:49:48&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;062e5482-a09c-4a59-b507-76a5e5bfa5f7&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;min_disk&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;protected&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+    <span class="s2">&quot;min_ram&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;checksum&quot;</span><span class="p">:</span> <span class="s2">&quot;81b00ecd200a34b4c5e1e472e654a5ac&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;owner&quot;</span><span class="p">:</span> <span class="s2">&quot;c4cba1eea5fe46afbc9a4a01356f7c44&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;is_public&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+    <span class="s2">&quot;deleted_at&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;subtype&quot;</span><span class="p">:</span> <span class="s2">&quot;IOS XRv&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;serial&quot;</span><span class="p">:</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;hw_vif_model&quot;</span><span class="p">:</span> <span class="s2">&quot;virtio&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;config_disk_type&quot;</span><span class="p">:</span> <span class="s2">&quot;cdrom&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;hw_disk_bus&quot;</span><span class="p">:</span> <span class="s2">&quot;ide&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="mi">527040512</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;disk-usage&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;used-disk-space-GB&quot;</span><span class="p">:</span> <span class="s2">&quot;4.62&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;percentage-usage&quot;</span><span class="p">:</span> <span class="s2">&quot;15.21&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;total-disk-space-GB&quot;</span><span class="p">:</span> <span class="s2">&quot;30.40&quot;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Deleting an image:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_uwm_client</span> <span class="o">--</span><span class="n">quiet</span> <span class="o">--</span><span class="n">json</span> <span class="n">image</span><span class="o">-</span><span class="n">delete</span> \
+                <span class="o">-</span><span class="n">i</span> <span class="mf">062e5482</span><span class="o">-</span><span class="n">a09c</span><span class="o">-</span><span class="mi">4</span><span class="n">a59</span><span class="o">-</span><span class="n">b507</span><span class="o">-</span><span class="mi">76</span><span class="n">a5e5bfa5f7</span>
+<span class="p">{</span>
+  <span class="s2">&quot;deleted&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;image&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;active&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_owned&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;guest-IOS XRv&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;deleted&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+    <span class="s2">&quot;container_format&quot;</span><span class="p">:</span> <span class="s2">&quot;bare&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-08-12T13:48:05&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;disk_format&quot;</span><span class="p">:</span> <span class="s2">&quot;qcow2&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;updated_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-08-12T13:49:48&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;062e5482-a09c-4a59-b507-76a5e5bfa5f7&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;min_disk&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;protected&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+    <span class="s2">&quot;min_ram&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;checksum&quot;</span><span class="p">:</span> <span class="s2">&quot;81b00ecd200a34b4c5e1e472e654a5ac&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;owner&quot;</span><span class="p">:</span> <span class="s2">&quot;c4cba1eea5fe46afbc9a4a01356f7c44&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;is_public&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+    <span class="s2">&quot;deleted_at&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;subtype&quot;</span><span class="p">:</span> <span class="s2">&quot;IOS XRv&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;serial&quot;</span><span class="p">:</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;hw_vif_model&quot;</span><span class="p">:</span> <span class="s2">&quot;virtio&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;config_disk_type&quot;</span><span class="p">:</span> <span class="s2">&quot;cdrom&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;hw_disk_bus&quot;</span><span class="p">:</span> <span class="s2">&quot;ide&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="mi">527040512</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;disk-usage&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;used-disk-space-GB&quot;</span><span class="p">:</span> <span class="s2">&quot;4.13&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;percentage-usage&quot;</span><span class="p">:</span> <span class="s2">&quot;13.60&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;total-disk-space-GB&quot;</span><span class="p">:</span> <span class="s2">&quot;30.40&quot;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Similar but separate APIs exist also for the LXC images and templates. These
+items have much fewer properties to set, meaning that their management is
+a simpler version of the VM image handling.</p>
+</div>
+<div class="section" id="flavor-management">
+<h3>9.3.5. Flavor management<a class="headerlink" href="#flavor-management" title="Permalink to this headline">¶</a></h3>
+<p>Retrieving all flavors (the output is trimmed):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_uwm_client</span> <span class="o">--</span><span class="n">quiet</span> <span class="o">--</span><span class="n">json</span> <span class="n">flavor</span><span class="o">-</span><span class="n">info</span>
+<span class="p">{</span>
+  <span class="s2">&quot;flavors&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;IOSv&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;links&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;http://127.0.1.1:8774/v2/c4cba1...c9cb9c&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;rel&quot;</span><span class="p">:</span> <span class="s2">&quot;self&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;http://127.0.1.1:8774/c4cba1...c9cb9c&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;rel&quot;</span><span class="p">:</span> <span class="s2">&quot;bookmark&quot;</span>
+        <span class="p">}</span>
+      <span class="p">],</span>
+      <span class="s2">&quot;ram&quot;</span><span class="p">:</span> <span class="mi">512</span><span class="p">,</span>
+      <span class="s2">&quot;OS-FLV-DISABLED:disabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">&quot;vcpus&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">&quot;swap&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;os-flavor-access:is_public&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+      <span class="s2">&quot;rxtx_factor&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+      <span class="s2">&quot;OS-FLV-EXT-DATA:ephemeral&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="s2">&quot;disk&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;07bb4033-2f2c-422c-ad84-a600e0c9cb9c&quot;</span>
+    <span class="p">},</span>
+    <span class="o">...</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;server&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;links&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;http://127.0.1.1:8774/v2/c4cba1...e6fedb&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;rel&quot;</span><span class="p">:</span> <span class="s2">&quot;self&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;http://127.0.1.1:8774/c4cba1...e6fedb&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;rel&quot;</span><span class="p">:</span> <span class="s2">&quot;bookmark&quot;</span>
+        <span class="p">}</span>
+      <span class="p">],</span>
+      <span class="s2">&quot;ram&quot;</span><span class="p">:</span> <span class="mi">512</span><span class="p">,</span>
+      <span class="s2">&quot;OS-FLV-DISABLED:disabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">&quot;vcpus&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">&quot;swap&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;os-flavor-access:is_public&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+      <span class="s2">&quot;rxtx_factor&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+      <span class="s2">&quot;OS-FLV-EXT-DATA:ephemeral&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="s2">&quot;disk&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;edd55945-e8f0-4a80-b8ff-69a0d6e6fedb&quot;</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Specific flavors are accessible by specifying their ID:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_uwm_client</span> <span class="o">--</span><span class="n">quiet</span> <span class="o">--</span><span class="n">json</span> <span class="n">flavor</span><span class="o">-</span><span class="n">info</span> \
+                <span class="o">-</span><span class="n">i</span> <span class="n">edd55945</span><span class="o">-</span><span class="n">e8f0</span><span class="o">-</span><span class="mi">4</span><span class="n">a80</span><span class="o">-</span><span class="n">b8ff</span><span class="o">-</span><span class="mi">69</span><span class="n">a0d6e6fedb</span>
+<span class="p">{</span>
+  <span class="s2">&quot;flavor&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;server&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;links&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;http://127.0.1.1:8774/v2/c4cba1...e6fedb&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;rel&quot;</span><span class="p">:</span> <span class="s2">&quot;self&quot;</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;http://127.0.1.1:8774/c4cba1...e6fedb&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;rel&quot;</span><span class="p">:</span> <span class="s2">&quot;bookmark&quot;</span>
+      <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;ram&quot;</span><span class="p">:</span> <span class="mi">512</span><span class="p">,</span>
+    <span class="s2">&quot;OS-FLV-DISABLED:disabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+    <span class="s2">&quot;vcpus&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;swap&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;os-flavor-access:is_public&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;rxtx_factor&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="s2">&quot;OS-FLV-EXT-DATA:ephemeral&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;disk&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;edd55945-e8f0-4a80-b8ff-69a0d6e6fedb&quot;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Admin users can also create and delete flavors.
+Note that once created flavors can not later be edited:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_uwm_client</span> <span class="o">--</span><span class="n">quiet</span> <span class="o">--</span><span class="n">json</span> <span class="o">-</span><span class="n">u</span> <span class="n">uwmadmin</span> <span class="o">-</span><span class="n">p</span> <span class="n">password</span> <span class="n">flavor</span><span class="o">-</span><span class="n">create</span> \
+                <span class="o">-</span><span class="n">n</span> <span class="n">testflav</span> <span class="o">-</span><span class="n">r</span> <span class="mi">128</span> <span class="o">-</span><span class="n">c</span> <span class="mi">2</span> <span class="o">-</span><span class="n">d</span> <span class="mi">50</span>
+<span class="p">{</span>
+  <span class="s2">&quot;flavor&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;testflav&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;links&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;http://127.0.1.1:8774/v2/098b55...bce92d&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;rel&quot;</span><span class="p">:</span> <span class="s2">&quot;self&quot;</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;http://127.0.1.1:8774/098b55...bce92d&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;rel&quot;</span><span class="p">:</span> <span class="s2">&quot;bookmark&quot;</span>
+      <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;ram&quot;</span><span class="p">:</span> <span class="mi">128</span><span class="p">,</span>
+    <span class="s2">&quot;OS-FLV-DISABLED:disabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+    <span class="s2">&quot;vcpus&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s2">&quot;swap&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;os-flavor-access:is_public&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;rxtx_factor&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="s2">&quot;OS-FLV-EXT-DATA:ephemeral&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;disk&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
+    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;dd097cbf-30fa-4387-9f37-432361bce92d&quot;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Deleting a flavor:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_uwm_client</span> <span class="o">--</span><span class="n">quiet</span> <span class="o">--</span><span class="n">json</span> <span class="o">-</span><span class="n">u</span> <span class="n">uwmadmin</span> <span class="o">-</span><span class="n">p</span> <span class="n">password</span> <span class="n">flavor</span><span class="o">-</span><span class="n">delete</span> \
+                <span class="o">-</span><span class="n">i</span> <span class="n">dd097cbf</span><span class="o">-</span><span class="mi">30</span><span class="n">fa</span><span class="o">-</span><span class="mi">4387</span><span class="o">-</span><span class="mi">9</span><span class="n">f37</span><span class="o">-</span><span class="mi">432361</span><span class="n">bce92d</span>
+<span class="p">{</span>
+  <span class="s2">&quot;deleted&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;flavor&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;testflav&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;links&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;http://127.0.1.1:8774/v2/098b55...bce92d&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;rel&quot;</span><span class="p">:</span> <span class="s2">&quot;self&quot;</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;http://127.0.1.1:8774/098b55...bce92d&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;rel&quot;</span><span class="p">:</span> <span class="s2">&quot;bookmark&quot;</span>
+      <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;ram&quot;</span><span class="p">:</span> <span class="mi">128</span><span class="p">,</span>
+    <span class="s2">&quot;OS-FLV-DISABLED:disabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+    <span class="s2">&quot;vcpus&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s2">&quot;swap&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;os-flavor-access:is_public&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;rxtx_factor&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="s2">&quot;OS-FLV-EXT-DATA:ephemeral&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;disk&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
+    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;dd097cbf-30fa-4387-9f37-432361bce92d&quot;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="subtype-management">
+<h3>9.3.6. Subtype management<a class="headerlink" href="#subtype-management" title="Permalink to this headline">¶</a></h3>
+<p>Retrieving all subtypes (the output is trimmed):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_uwm_client</span> <span class="o">--</span><span class="n">quiet</span> <span class="o">--</span><span class="n">json</span> <span class="n">subtype</span><span class="o">-</span><span class="n">info</span>
+<span class="p">{</span>
+  <span class="s2">&quot;base-subtypes&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;hw_vcpus&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">&quot;plugin_category&quot;</span><span class="p">:</span> <span class="s2">&quot;VM Node Subtype&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;config_file&quot;</span><span class="p">:</span> <span class="s2">&quot;/day0-config&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;config_iso_level&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="s2">&quot;gui_visible&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">&quot;interface_first&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="s2">&quot;interface_management&quot;</span><span class="p">:</span> <span class="s2">&quot;Management0/0&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;hw_ram&quot;</span><span class="p">:</span> <span class="mi">2048</span><span class="p">,</span>
+      <span class="s2">&quot;hw_vif_model&quot;</span><span class="p">:</span> <span class="s2">&quot;e1000&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;plugin_desc&quot;</span><span class="p">:</span> <span class="s2">&quot;(Experimental) ASAv appliance&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;plugin_name&quot;</span><span class="p">:</span> <span class="s2">&quot;ASAv&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;interface_pattern&quot;</span><span class="p">:</span> <span class="s2">&quot;GigabitEthernet0/</span><span class="si">{0}</span><span class="s2">&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;hw_vm_extra&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">&quot;cli_serial&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">&quot;gui_icon&quot;</span><span class="p">:</span> <span class="s2">&quot;asav&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;baseline_image&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">&quot;vnc_available&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+      <span class="s2">&quot;baseline_flavor&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">&quot;interface_range&quot;</span><span class="p">:</span> <span class="mi">27</span><span class="p">,</span>
+      <span class="s2">&quot;hw_disk_bus&quot;</span><span class="p">:</span> <span class="s2">&quot;ide&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;config_disk_type&quot;</span><span class="p">:</span> <span class="s2">&quot;cdrom&quot;</span>
+    <span class="p">},</span>
+    <span class="o">...</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;hw_vcpus&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">&quot;plugin_category&quot;</span><span class="p">:</span> <span class="s2">&quot;VM Node Subtype&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;config_file&quot;</span><span class="p">:</span> <span class="s2">&quot;/iosxr_config.txt&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;config_iso_level&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="s2">&quot;gui_visible&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">&quot;interface_first&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="s2">&quot;interface_management&quot;</span><span class="p">:</span> <span class="s2">&quot;MgmtEth0/0/CPU0/0&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;hw_ram&quot;</span><span class="p">:</span> <span class="mi">3072</span><span class="p">,</span>
+      <span class="s2">&quot;hw_vif_model&quot;</span><span class="p">:</span> <span class="s2">&quot;virtio&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;plugin_desc&quot;</span><span class="p">:</span> <span class="s2">&quot;Cisco IOS XR reference platform&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;plugin_name&quot;</span><span class="p">:</span> <span class="s2">&quot;xrvr&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;interface_pattern&quot;</span><span class="p">:</span> <span class="s2">&quot;GigabitEthernet0/0/0/</span><span class="si">{0}</span><span class="s2">&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;hw_vm_extra&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">&quot;cli_serial&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+      <span class="s2">&quot;gui_icon&quot;</span><span class="p">:</span> <span class="s2">&quot;ios_xrv&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;baseline_image&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">&quot;vnc_available&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">&quot;baseline_flavor&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">&quot;interface_range&quot;</span><span class="p">:</span> <span class="mi">27</span><span class="p">,</span>
+      <span class="s2">&quot;hw_disk_bus&quot;</span><span class="p">:</span> <span class="s2">&quot;ide&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;config_disk_type&quot;</span><span class="p">:</span> <span class="s2">&quot;cdrom&quot;</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="s2">&quot;dynamic-subtypes&quot;</span><span class="p">:</span> <span class="p">[]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Subtype names are located under the key ‘plugin_name’.
+Retrieving a concrete subtype:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_uwm_client</span> <span class="o">--</span><span class="n">quiet</span> <span class="o">--</span><span class="n">json</span> <span class="n">subtype</span><span class="o">-</span><span class="n">info</span> <span class="o">-</span><span class="n">n</span> <span class="n">server</span>
+<span class="p">{</span>
+  <span class="s2">&quot;subtype&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;hw_vcpus&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;plugin_category&quot;</span><span class="p">:</span> <span class="s2">&quot;VM Node Subtype&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;config_file&quot;</span><span class="p">:</span> <span class="s2">&quot;/userdata&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;config_iso_level&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s2">&quot;gui_visible&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;interface_first&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;interface_management&quot;</span><span class="p">:</span> <span class="s2">&quot;eth0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;hw_ram&quot;</span><span class="p">:</span> <span class="mi">2048</span><span class="p">,</span>
+    <span class="s2">&quot;hw_vif_model&quot;</span><span class="p">:</span> <span class="s2">&quot;virtio&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;plugin_desc&quot;</span><span class="p">:</span> <span class="s2">&quot;Cloud-init [linux] server&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;plugin_name&quot;</span><span class="p">:</span> <span class="s2">&quot;server&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;interface_pattern&quot;</span><span class="p">:</span> <span class="s2">&quot;eth</span><span class="si">{0}</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;hw_vm_extra&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">&quot;cli_serial&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;gui_icon&quot;</span><span class="p">:</span> <span class="s2">&quot;app_server&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;baseline_image&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">&quot;vnc_available&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;baseline_flavor&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">&quot;interface_range&quot;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+    <span class="s2">&quot;hw_disk_bus&quot;</span><span class="p">:</span> <span class="s2">&quot;virtio&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;config_disk_type&quot;</span><span class="p">:</span> <span class="s2">&quot;cloud-init&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;dynamic&quot;</span><span class="p">:</span> <span class="n">false</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Admin users can also create, edit and delete dynamic subtypes, and also
+export/import them.</p>
+<p>By creating dynamic subtypes from other subtypes, you can override their
+properties. For example if uwmadmin created an image ‘uwmadmin-server’ that
+needs a big deal of resources, he could create a dynamic subtype that is
+automatically launched with this image and the flavor ‘m1.xlarge’:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_uwm_client</span> <span class="o">--</span><span class="n">quiet</span> <span class="o">--</span><span class="n">json</span> <span class="o">-</span><span class="n">u</span> <span class="n">uwmadmin</span> <span class="o">-</span><span class="n">p</span> <span class="n">password</span> <span class="n">subtype</span><span class="o">-</span><span class="n">create</span> \
+            <span class="o">-</span><span class="n">n</span> <span class="n">bigserver</span> <span class="o">-</span><span class="n">b</span> <span class="n">server</span> \
+            <span class="o">-</span><span class="n">p</span> <span class="s2">&quot;baseline_image=uwmadmin-server&quot;</span> <span class="s2">&quot;baseline_flavor=m1.xlarge&quot;</span>
+<span class="p">{</span>
+  <span class="s2">&quot;subtype&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;plugin_category&quot;</span><span class="p">:</span> <span class="s2">&quot;VM Node Subtype&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;hw_ram&quot;</span><span class="p">:</span> <span class="mi">2048</span><span class="p">,</span>
+    <span class="s2">&quot;interface_management&quot;</span><span class="p">:</span> <span class="s2">&quot;eth0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;gui_icon&quot;</span><span class="p">:</span> <span class="s2">&quot;app_server&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;plugin_base&quot;</span><span class="p">:</span> <span class="s2">&quot;server&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;hw_vcpus&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;interface_first&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;cli_serial&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;baseline_flavor&quot;</span><span class="p">:</span> <span class="s2">&quot;m1.xlarge&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;hw_disk_bus&quot;</span><span class="p">:</span> <span class="s2">&quot;virtio&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;config_iso_level&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s2">&quot;config_file&quot;</span><span class="p">:</span> <span class="s2">&quot;/userdata&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;plugin_desc&quot;</span><span class="p">:</span> <span class="s2">&quot;Cloud-init [linux] server&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;plugin_name&quot;</span><span class="p">:</span> <span class="s2">&quot;bigserver&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;interface_range&quot;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+    <span class="s2">&quot;config_disk_type&quot;</span><span class="p">:</span> <span class="s2">&quot;cloud-init&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;gui_visible&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;hw_vif_model&quot;</span><span class="p">:</span> <span class="s2">&quot;virtio&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;hw_vm_extra&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">&quot;interface_pattern&quot;</span><span class="p">:</span> <span class="s2">&quot;eth</span><span class="si">{0}</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;baseline_image&quot;</span><span class="p">:</span> <span class="s2">&quot;uwmadmin-server&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;vnc_available&quot;</span><span class="p">:</span> <span class="n">true</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Dynamic subtypes can also be edited:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_uwm_client</span> <span class="o">--</span><span class="n">quiet</span> <span class="o">--</span><span class="n">json</span> <span class="o">-</span><span class="n">u</span> <span class="n">uwmadmin</span> <span class="o">-</span><span class="n">p</span> <span class="n">password</span> <span class="n">subtype</span><span class="o">-</span><span class="n">edit</span> \
+                <span class="o">-</span><span class="n">n</span> <span class="n">bigserver</span> <span class="o">-</span><span class="n">p</span> <span class="s2">&quot;baseline_flavor=m1.medium&quot;</span>
+<span class="p">{</span>
+  <span class="s2">&quot;subtype&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;plugin_category&quot;</span><span class="p">:</span> <span class="s2">&quot;VM Node Subtype&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;hw_ram&quot;</span><span class="p">:</span> <span class="mi">2048</span><span class="p">,</span>
+    <span class="s2">&quot;interface_management&quot;</span><span class="p">:</span> <span class="s2">&quot;eth0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;gui_icon&quot;</span><span class="p">:</span> <span class="s2">&quot;app_server&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;plugin_base&quot;</span><span class="p">:</span> <span class="s2">&quot;server&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;hw_vcpus&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;interface_first&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;cli_serial&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;baseline_flavor&quot;</span><span class="p">:</span> <span class="s2">&quot;m1.medium&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;hw_disk_bus&quot;</span><span class="p">:</span> <span class="s2">&quot;virtio&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;config_iso_level&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s2">&quot;config_file&quot;</span><span class="p">:</span> <span class="s2">&quot;/userdata&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;plugin_desc&quot;</span><span class="p">:</span> <span class="s2">&quot;Cloud-init [linux] server&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;plugin_name&quot;</span><span class="p">:</span> <span class="s2">&quot;bigserver&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;interface_range&quot;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+    <span class="s2">&quot;config_disk_type&quot;</span><span class="p">:</span> <span class="s2">&quot;cloud-init&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;gui_visible&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;hw_vif_model&quot;</span><span class="p">:</span> <span class="s2">&quot;virtio&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;hw_vm_extra&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">&quot;interface_pattern&quot;</span><span class="p">:</span> <span class="s2">&quot;eth</span><span class="si">{0}</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;baseline_image&quot;</span><span class="p">:</span> <span class="s2">&quot;uwmadmin-server&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;vnc_available&quot;</span><span class="p">:</span> <span class="n">true</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The export operation will return a list of dynamic subtypes with their custom
+properties. This command always outputs the JSON as it was sent by the server:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_uwm_client</span> <span class="o">--</span><span class="n">quiet</span> <span class="o">--</span><span class="n">json</span> <span class="o">-</span><span class="n">u</span> <span class="n">uwmadmin</span> <span class="o">-</span><span class="n">p</span> <span class="n">password</span> <span class="n">subtype</span><span class="o">-</span><span class="n">export</span>
+<span class="p">{</span>
+  <span class="s2">&quot;dynamic-subtypes&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;plugin_base&quot;</span><span class="p">:</span> <span class="s2">&quot;server&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;baseline_image&quot;</span><span class="p">:</span> <span class="s2">&quot;uwmadmin-server&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;baseline_flavor&quot;</span><span class="p">:</span> <span class="s2">&quot;m1.medium&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;plugin_name&quot;</span><span class="p">:</span> <span class="s2">&quot;bigserver&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;plugin_base&quot;</span><span class="p">:</span> <span class="s2">&quot;IOSv&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;hw_vcpus&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+      <span class="s2">&quot;plugin_desc&quot;</span><span class="p">:</span> <span class="s2">&quot;Cisco IOS reference platform with 3 cores&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;plugin_name&quot;</span><span class="p">:</span> <span class="s2">&quot;custom-IOSv&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;hw_vm_extra&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;baseline_image&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;baseline_flavor&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>It is a good idea to save this to a file:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_uwm_client</span> <span class="o">--</span><span class="n">quiet</span> <span class="o">--</span><span class="n">json</span> <span class="o">-</span><span class="n">u</span> <span class="n">uwmadmin</span> <span class="o">-</span><span class="n">p</span> <span class="n">password</span> \
+                <span class="n">subtype</span><span class="o">-</span><span class="n">export</span> <span class="o">&gt;</span> <span class="o">~/</span><span class="n">subtypes</span><span class="o">.</span><span class="n">json</span>
+</pre></div>
+</div>
+<p>Deleting a subtype:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_uwm_client</span> <span class="o">--</span><span class="n">quiet</span> <span class="o">--</span><span class="n">json</span> <span class="o">-</span><span class="n">u</span> <span class="n">uwmadmin</span> <span class="o">-</span><span class="n">p</span> <span class="n">password</span> <span class="n">subtype</span><span class="o">-</span><span class="n">delete</span> \
+                <span class="o">-</span><span class="n">n</span> <span class="n">bigserver</span>
+<span class="p">{</span>
+  <span class="s2">&quot;deleted&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;subtype&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;plugin_category&quot;</span><span class="p">:</span> <span class="s2">&quot;VM Node Subtype&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;hw_ram&quot;</span><span class="p">:</span> <span class="mi">2048</span><span class="p">,</span>
+    <span class="s2">&quot;interface_management&quot;</span><span class="p">:</span> <span class="s2">&quot;eth0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;gui_icon&quot;</span><span class="p">:</span> <span class="s2">&quot;app_server&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;plugin_base&quot;</span><span class="p">:</span> <span class="s2">&quot;server&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;hw_vcpus&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;interface_first&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;cli_serial&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;baseline_flavor&quot;</span><span class="p">:</span> <span class="s2">&quot;m1.medium&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;hw_disk_bus&quot;</span><span class="p">:</span> <span class="s2">&quot;virtio&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;config_iso_level&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s2">&quot;config_file&quot;</span><span class="p">:</span> <span class="s2">&quot;/userdata&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;plugin_desc&quot;</span><span class="p">:</span> <span class="s2">&quot;Cloud-init [linux] server&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;plugin_name&quot;</span><span class="p">:</span> <span class="s2">&quot;bigserver&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;interface_range&quot;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+    <span class="s2">&quot;config_disk_type&quot;</span><span class="p">:</span> <span class="s2">&quot;cloud-init&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;gui_visible&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;hw_vif_model&quot;</span><span class="p">:</span> <span class="s2">&quot;virtio&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;hw_vm_extra&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">&quot;interface_pattern&quot;</span><span class="p">:</span> <span class="s2">&quot;eth</span><span class="si">{0}</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;baseline_image&quot;</span><span class="p">:</span> <span class="s2">&quot;uwmadmin-server&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;vnc_available&quot;</span><span class="p">:</span> <span class="n">true</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>When importing subtypes, by default the process will stop on the first failure.
+A typical cause of such a failure can be, that the subtype already exists.
+To skip the subtypes that fail to import, pass the -f flag to the command.
+In all cases, the response will contain a boolean under the key ‘imported-all’,
+and a list of error descriptions under key ‘errors’. If some subtypes fail and
+some succeed to import, the status code of the response will be 206 Partial
+Content, and if no subtype gets imported, it will be 500 Internal Server
+Error:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_uwm_client</span> <span class="o">--</span><span class="n">json</span> <span class="o">-</span><span class="n">u</span> <span class="n">uwmadmin</span> <span class="o">-</span><span class="n">p</span> <span class="n">password</span> <span class="n">subtype</span><span class="o">-</span><span class="kn">import</span> \
+                <span class="o">-</span><span class="n">s</span> <span class="o">@~/</span><span class="n">subtypes</span><span class="o">.</span><span class="n">json</span> <span class="o">-</span><span class="n">f</span>
+<span class="n">INFO</span>     <span class="mi">2014</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">12</span> <span class="mi">14</span><span class="p">:</span><span class="mi">14</span><span class="p">:</span><span class="mi">01</span><span class="p">,</span><span class="mi">555</span> <span class="n">virl</span><span class="o">.</span><span class="n">uwm</span><span class="o">.</span><span class="n">client</span> <span class="n">Client</span><span class="o">.</span><span class="n">subtype_import</span> <span class="o">...</span>
+<span class="o">...</span>
+<span class="n">WARNING</span>  <span class="mi">2014</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">12</span> <span class="mi">14</span><span class="p">:</span><span class="mi">14</span><span class="p">:</span><span class="mi">01</span><span class="p">,</span><span class="mi">593</span> <span class="n">virl</span><span class="o">.</span><span class="n">uwm</span><span class="o">.</span><span class="n">client</span> <span class="n">Subtype</span> <span class="kn">import</span> <span class="nn">partially</span> <span class="n">successful</span><span class="o">.</span>
+<span class="p">{</span>
+  <span class="s2">&quot;errors&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">&quot;Subtype </span><span class="se">\&quot;</span><span class="s2">custom-IOSv</span><span class="se">\&quot;</span><span class="s2"> already exists&quot;</span>
+  <span class="p">],</span>
+  <span class="s2">&quot;dynamic-subtypes&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;plugin_category&quot;</span><span class="p">:</span> <span class="s2">&quot;VM Node Subtype&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;hw_ram&quot;</span><span class="p">:</span> <span class="mi">2048</span><span class="p">,</span>
+      <span class="s2">&quot;interface_management&quot;</span><span class="p">:</span> <span class="s2">&quot;eth0&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;gui_icon&quot;</span><span class="p">:</span> <span class="s2">&quot;app_server&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;plugin_base&quot;</span><span class="p">:</span> <span class="s2">&quot;server&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;hw_vcpus&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">&quot;interface_first&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">&quot;cli_serial&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">&quot;baseline_flavor&quot;</span><span class="p">:</span> <span class="s2">&quot;m1.medium&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;hw_disk_bus&quot;</span><span class="p">:</span> <span class="s2">&quot;virtio&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;config_iso_level&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="s2">&quot;config_file&quot;</span><span class="p">:</span> <span class="s2">&quot;/userdata&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;plugin_desc&quot;</span><span class="p">:</span> <span class="s2">&quot;Cloud-init [linux] server&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;plugin_name&quot;</span><span class="p">:</span> <span class="s2">&quot;bigserver&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;interface_range&quot;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+      <span class="s2">&quot;config_disk_type&quot;</span><span class="p">:</span> <span class="s2">&quot;cloud-init&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;gui_visible&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+      <span class="s2">&quot;hw_vif_model&quot;</span><span class="p">:</span> <span class="s2">&quot;virtio&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;hw_vm_extra&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">&quot;interface_pattern&quot;</span><span class="p">:</span> <span class="s2">&quot;eth</span><span class="si">{0}</span><span class="s2">&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;baseline_image&quot;</span><span class="p">:</span> <span class="s2">&quot;uwmadmin-server&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;vnc_available&quot;</span><span class="p">:</span> <span class="n">true</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="s2">&quot;imported-all&quot;</span><span class="p">:</span> <span class="n">false</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="vm-control-admin-only">
+<h3>9.3.7. VM Control (admin only)<a class="headerlink" href="#vm-control-admin-only" title="Permalink to this headline">¶</a></h3>
+<p>Listing deployed nodes (the output is trimmed):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_uwm_client</span> <span class="o">--</span><span class="n">quiet</span> <span class="o">--</span><span class="n">json</span> <span class="o">-</span><span class="n">u</span> <span class="n">uwmadmin</span> <span class="o">-</span><span class="n">p</span> <span class="n">password</span> <span class="n">node</span><span class="o">-</span><span class="nb">list</span>
+<span class="p">{</span>
+  <span class="s2">&quot;nodes&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;OS-EXT-STS:task_state&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">&quot;addresses&quot;</span><span class="p">:</span> <span class="p">{},</span>
+      <span class="s2">&quot;links&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;http://127.0.1.1:8774/v2/098b55...1d32ed&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;rel&quot;</span><span class="p">:</span> <span class="s2">&quot;self&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;http://127.0.1.1:8774/098b55...1d32ed&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;rel&quot;</span><span class="p">:</span> <span class="s2">&quot;bookmark&quot;</span>
+        <span class="p">}</span>
+      <span class="p">],</span>
+      <span class="s2">&quot;image&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;b2c7c492-7508-45f6-b6f2-2619f3cee997&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;links&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="p">{</span>
+            <span class="s2">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;http://127.0.1.1:8774/098b55...cee997&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;rel&quot;</span><span class="p">:</span> <span class="s2">&quot;bookmark&quot;</span>
+          <span class="p">}</span>
+        <span class="p">]</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;OS-EXT-STS:vm_state&quot;</span><span class="p">:</span> <span class="s2">&quot;error&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;OS-EXT-SRV-ATTR:instance_name&quot;</span><span class="p">:</span> <span class="s2">&quot;instance-00000006&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;flavor&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;edd55945-e8f0-4a80-b8ff-69a0d6e6fedb&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;links&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="p">{</span>
+            <span class="s2">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;http://127.0.1.1:8774/098b55...e6fedb&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;rel&quot;</span><span class="p">:</span> <span class="s2">&quot;bookmark&quot;</span>
+          <span class="p">}</span>
+        <span class="p">]</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;37e2ff7a-36b0-4d35-bc9f-243a611d32ed&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;user_id&quot;</span><span class="p">:</span> <span class="s2">&quot;67ff232a830342c4807fc63f3580308b&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;OS-DCF:diskConfig&quot;</span><span class="p">:</span> <span class="s2">&quot;MANUAL&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;accessIPv4&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;accessIPv6&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;OS-EXT-STS:power_state&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="s2">&quot;OS-EXT-AZ:availability_zone&quot;</span><span class="p">:</span> <span class="s2">&quot;nova&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;config_drive&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;ERROR&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;updated&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-08-12T14:23:39Z&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;hostId&quot;</span><span class="p">:</span> <span class="s2">&quot;afa20ec3cea9810fd1ca124b54beebb6953c96a746a90ec4da1ce801&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;OS-EXT-SRV-ATTR:host&quot;</span><span class="p">:</span> <span class="s2">&quot;virl&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;key_name&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">&quot;OS-EXT-SRV-ATTR:hypervisor_hostname&quot;</span><span class="p">:</span> <span class="s2">&quot;virl&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;killswitch_node_A5VG&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-08-12T14:23:22Z&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;tenant_id&quot;</span><span class="p">:</span> <span class="s2">&quot;c4cba1eea5fe46afbc9a4a01356f7c44&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;fault&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;NoValidHost&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;code&quot;</span><span class="p">:</span> <span class="mi">500</span><span class="p">,</span>
+        <span class="s2">&quot;details&quot;</span><span class="p">:</span> <span class="s2">&quot;No valid host was found. ...</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-08-12T14:23:40Z&quot;</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;metadata&quot;</span><span class="p">:</span> <span class="p">{}</span>
+    <span class="p">},</span>
+    <span class="o">...</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Deleting a node:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_uwm_client</span> <span class="o">--</span><span class="n">quiet</span> <span class="o">--</span><span class="n">json</span> <span class="o">-</span><span class="n">u</span> <span class="n">uwmadmin</span> <span class="o">-</span><span class="n">p</span> <span class="n">password</span> <span class="n">node</span><span class="o">-</span><span class="n">delete</span> \
+                <span class="o">-</span><span class="n">i</span> <span class="mf">37e2</span><span class="n">ff7a</span><span class="o">-</span><span class="mi">36</span><span class="n">b0</span><span class="o">-</span><span class="mi">4</span><span class="n">d35</span><span class="o">-</span><span class="n">bc9f</span><span class="o">-</span><span class="mi">243</span><span class="n">a611d32ed</span>
+<span class="p">{</span>
+  <span class="s2">&quot;node&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;OS-EXT-STS:task_state&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">&quot;addresses&quot;</span><span class="p">:</span> <span class="p">{},</span>
+    <span class="s2">&quot;links&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;http://127.0.1.1:8774/v2/098b55...1d32ed&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;rel&quot;</span><span class="p">:</span> <span class="s2">&quot;self&quot;</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;http://127.0.1.1:8774/098b55...1d32ed&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;rel&quot;</span><span class="p">:</span> <span class="s2">&quot;bookmark&quot;</span>
+      <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;image&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;b2c7c492-7508-45f6-b6f2-2619f3cee997&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;links&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;http://127.0.1.1:8774/098b55...cee997&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;rel&quot;</span><span class="p">:</span> <span class="s2">&quot;bookmark&quot;</span>
+        <span class="p">}</span>
+      <span class="p">]</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;OS-EXT-STS:vm_state&quot;</span><span class="p">:</span> <span class="s2">&quot;error&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;OS-EXT-SRV-ATTR:instance_name&quot;</span><span class="p">:</span> <span class="s2">&quot;instance-00000006&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;flavor&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;edd55945-e8f0-4a80-b8ff-69a0d6e6fedb&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;links&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;http://127.0.1.1:8774/098b55...e6fedb&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;rel&quot;</span><span class="p">:</span> <span class="s2">&quot;bookmark&quot;</span>
+        <span class="p">}</span>
+      <span class="p">]</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;37e2ff7a-36b0-4d35-bc9f-243a611d32ed&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;user_id&quot;</span><span class="p">:</span> <span class="s2">&quot;67ff232a830342c4807fc63f3580308b&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;OS-DCF:diskConfig&quot;</span><span class="p">:</span> <span class="s2">&quot;MANUAL&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;accessIPv4&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;accessIPv6&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;OS-EXT-STS:power_state&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;OS-EXT-AZ:availability_zone&quot;</span><span class="p">:</span> <span class="s2">&quot;nova&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;config_drive&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;ERROR&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;updated&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-08-12T14:23:39Z&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;hostId&quot;</span><span class="p">:</span> <span class="s2">&quot;afa20ec3cea9810fd1ca124b54beebb6953c96a746a90ec4da1ce801&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;OS-EXT-SRV-ATTR:host&quot;</span><span class="p">:</span> <span class="s2">&quot;virl&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;key_name&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">&quot;OS-EXT-SRV-ATTR:hypervisor_hostname&quot;</span><span class="p">:</span> <span class="s2">&quot;virl&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;killswitch_node_A5VG&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-08-12T14:23:22Z&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;tenant_id&quot;</span><span class="p">:</span> <span class="s2">&quot;c4cba1eea5fe46afbc9a4a01356f7c44&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;fault&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;NoValidHost&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;code&quot;</span><span class="p">:</span> <span class="mi">500</span><span class="p">,</span>
+      <span class="s2">&quot;details&quot;</span><span class="p">:</span> <span class="s2">&quot;No valid host was found. ...</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-08-12T14:23:40Z&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;metadata&quot;</span><span class="p">:</span> <span class="p">{}</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;deleted&quot;</span><span class="p">:</span> <span class="n">true</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>You can also delete multiple nodes at once, by specifying multiple IDs. In this
+case the deletion will skip nodes that fail to delete or that are not found.
+The response’s status code will be 206 Partial Content if some, or 500 Internal
+Server error if all nodes fail to be deleted:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_uwm_client</span> <span class="o">--</span><span class="n">json</span> <span class="o">-</span><span class="n">u</span> <span class="n">uwmadmin</span> <span class="o">-</span><span class="n">p</span> <span class="n">password</span> <span class="n">node</span><span class="o">-</span><span class="n">delete</span> \
+                <span class="o">-</span><span class="n">i</span> <span class="mf">37e2</span><span class="n">ff7a</span><span class="o">-</span><span class="mi">36</span><span class="n">b0</span><span class="o">-</span><span class="mi">4</span><span class="n">d35</span><span class="o">-</span><span class="n">bc9f</span><span class="o">-</span><span class="mi">243</span><span class="n">a611d32ed</span> \
+                   <span class="n">f927db08</span><span class="o">-</span><span class="mi">52</span><span class="n">b6</span><span class="o">-</span><span class="mi">46</span><span class="n">ef</span><span class="o">-</span><span class="mi">8</span><span class="n">ad6</span><span class="o">-</span><span class="mi">3</span><span class="n">ee4ab9cc04d</span>
+<span class="n">INFO</span>     <span class="mi">2014</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">13</span> <span class="mi">07</span><span class="p">:</span><span class="mi">31</span><span class="p">:</span><span class="mi">18</span><span class="p">,</span><span class="mi">804</span> <span class="n">virl</span><span class="o">.</span><span class="n">uwm</span><span class="o">.</span><span class="n">client</span> <span class="n">Client</span><span class="o">.</span><span class="n">node_delete</span> <span class="o">...</span>
+<span class="o">...</span>
+<span class="n">WARNING</span>  <span class="mi">2014</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">13</span> <span class="mi">07</span><span class="p">:</span><span class="mi">31</span><span class="p">:</span><span class="mi">20</span><span class="p">,</span><span class="mi">289</span> <span class="n">virl</span><span class="o">.</span><span class="n">uwm</span><span class="o">.</span><span class="n">client</span> <span class="n">Deleting</span> <span class="n">nodes</span> <span class="n">partially</span> <span class="n">successful</span><span class="o">.</span>
+<span class="p">{</span>
+  <span class="s2">&quot;deleted&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;OS-EXT-STS:task_state&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">&quot;addresses&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;ext-net&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="p">{</span>
+            <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+            <span class="s2">&quot;addr&quot;</span><span class="p">:</span> <span class="s2">&quot;172.16.2.52&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;OS-EXT-IPS:type&quot;</span><span class="p">:</span> <span class="s2">&quot;fixed&quot;</span>
+          <span class="p">}</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;flat&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="p">{</span>
+            <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+            <span class="s2">&quot;addr&quot;</span><span class="p">:</span> <span class="s2">&quot;172.16.1.51&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;OS-EXT-IPS:type&quot;</span><span class="p">:</span> <span class="s2">&quot;fixed&quot;</span>
+          <span class="p">}</span>
+        <span class="p">]</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;links&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;http://127.0.1.1:8774/v2/098b55...9cc04d&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;rel&quot;</span><span class="p">:</span> <span class="s2">&quot;self&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;http://127.0.1.1:8774/098b55...9cc04d&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;rel&quot;</span><span class="p">:</span> <span class="s2">&quot;bookmark&quot;</span>
+        <span class="p">}</span>
+      <span class="p">],</span>
+      <span class="s2">&quot;image&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;b2c7c492-7508-45f6-b6f2-2619f3cee997&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;links&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="p">{</span>
+            <span class="s2">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;http://127.0.1.1:8774/098b55...cee997&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;rel&quot;</span><span class="p">:</span> <span class="s2">&quot;bookmark&quot;</span>
+          <span class="p">}</span>
+        <span class="p">]</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;OS-EXT-STS:vm_state&quot;</span><span class="p">:</span> <span class="s2">&quot;active&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;OS-EXT-SRV-ATTR:instance_name&quot;</span><span class="p">:</span> <span class="s2">&quot;instance-00000002&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;flavor&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;edd55945-e8f0-4a80-b8ff-69a0d6e6fedb&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;links&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="p">{</span>
+            <span class="s2">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;http://127.0.1.1:8774/098b55...e6fedb&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;rel&quot;</span><span class="p">:</span> <span class="s2">&quot;bookmark&quot;</span>
+          <span class="p">}</span>
+        <span class="p">]</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;f927db08-52b6-46ef-8ad6-3ee4ab9cc04d&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;security_groups&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;default&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;default&quot;</span>
+        <span class="p">}</span>
+      <span class="p">],</span>
+      <span class="s2">&quot;user_id&quot;</span><span class="p">:</span> <span class="s2">&quot;6ded14f7b8b94ad5953f09aca121efc9&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;OS-DCF:diskConfig&quot;</span><span class="p">:</span> <span class="s2">&quot;MANUAL&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;accessIPv4&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;accessIPv6&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;progress&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="s2">&quot;OS-EXT-STS:power_state&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">&quot;OS-EXT-AZ:availability_zone&quot;</span><span class="p">:</span> <span class="s2">&quot;nova&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;config_drive&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;ACTIVE&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;updated&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-08-12T14:23:37Z&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;hostId&quot;</span><span class="p">:</span> <span class="s2">&quot;7061a7a358abb641bea56aa93635f905bd515b0df1acd858d67abcb1&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;OS-EXT-SRV-ATTR:host&quot;</span><span class="p">:</span> <span class="s2">&quot;virl&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;key_name&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">&quot;OS-EXT-SRV-ATTR:hypervisor_hostname&quot;</span><span class="p">:</span> <span class="s2">&quot;virl&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;killswitch_node_78E6&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-08-12T14:22:43Z&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;tenant_id&quot;</span><span class="p">:</span> <span class="s2">&quot;098b55d3bc4846b88b3da65908c528fb&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;metadata&quot;</span><span class="p">:</span> <span class="p">{}</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="s2">&quot;deleted-all&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+  <span class="s2">&quot;errors&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;37e2ff7a-36b0-4d35-bc9f-243a611d32ed&quot;</span><span class="p">:</span> <span class="s2">&quot;Not found&quot;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Networks may have ports attached to them. In this case the network can not be
+deleted until its ports are not deleted also. The output of network-list
+includes the list of attached port IDs for each network under the key
+‘port-ids’. If the ports fail to load for some reason, the response object will
+contain a true value under ‘failed-loading-ports’. An example of network-list
+(the output is trimmed):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_uwm_client</span> <span class="o">--</span><span class="n">quiet</span> <span class="o">--</span><span class="n">json</span> <span class="o">-</span><span class="n">u</span> <span class="n">uwmadmin</span> <span class="o">-</span><span class="n">p</span> <span class="n">password</span> <span class="n">network</span><span class="o">-</span><span class="nb">list</span>
+<span class="p">{</span>
+  <span class="s2">&quot;networks&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;ACTIVE&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;subnets&quot;</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">&quot;port-ids&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;a6bb9555-e113-47d6-8d04-2724872aff9d&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;faf41127-55f4-44da-8597-e0b5efaa869d&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;8fc73620-4dfe-4347-be69-4eb00d6dfceb&quot;</span>
+      <span class="p">],</span>
+      <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;killswitch_net_iikO&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;provider:physical_network&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">&quot;admin_state_up&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">&quot;tenant_id&quot;</span><span class="p">:</span> <span class="s2">&quot;c4cba1eea5fe46afbc9a4a01356f7c44&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;provider:network_type&quot;</span><span class="p">:</span> <span class="s2">&quot;gre&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;router:external&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">&quot;shared&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;11264040-fa2f-4928-ac20-517504a64d98&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;provider:segmentation_id&quot;</span><span class="p">:</span> <span class="mi">4</span>
+    <span class="p">},</span>
+    <span class="o">...</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;ACTIVE&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;subnets&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;2d268876-88d9-42ad-9fe2-b71149740fdc&quot;</span>
+      <span class="p">],</span>
+      <span class="s2">&quot;port-ids&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;fa9313d4-8d13-4d95-babe-0c39e5841aeb&quot;</span>
+      <span class="p">],</span>
+      <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;flat&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;provider:physical_network&quot;</span><span class="p">:</span> <span class="s2">&quot;flat&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;admin_state_up&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+      <span class="s2">&quot;tenant_id&quot;</span><span class="p">:</span> <span class="s2">&quot;519873d1552c4afca1eec83c6c218c64&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;provider:network_type&quot;</span><span class="p">:</span> <span class="s2">&quot;flat&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;router:external&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">&quot;shared&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;e15099f9-2669-45a0-bac7-7c11ce7b995c&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;provider:segmentation_id&quot;</span><span class="p">:</span> <span class="mi">65534</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Deleting multiple networks at the same time works the same as deleting multiple
+nodes (note that in this case one of the networks could not be deleted because
+of the attached ports):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_uwm_client</span> <span class="o">--</span><span class="n">json</span> <span class="o">-</span><span class="n">u</span> <span class="n">uwmadmin</span> <span class="o">-</span><span class="n">p</span> <span class="n">password</span> <span class="n">network</span><span class="o">-</span><span class="n">delete</span> \
+                <span class="o">-</span><span class="n">i</span> <span class="mi">11264040</span><span class="o">-</span><span class="n">fa2f</span><span class="o">-</span><span class="mi">4928</span><span class="o">-</span><span class="n">ac20</span><span class="o">-</span><span class="mi">517504</span><span class="n">a64d98</span> \
+                   <span class="mi">1136</span><span class="n">eccc</span><span class="o">-</span><span class="n">ebec</span><span class="o">-</span><span class="mi">44</span><span class="n">f8</span><span class="o">-</span><span class="mi">8</span><span class="n">ae0</span><span class="o">-</span><span class="mb">0b0</span><span class="n">cb0defecb</span>
+<span class="n">INFO</span>     <span class="mi">2014</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">13</span> <span class="mi">07</span><span class="p">:</span><span class="mi">37</span><span class="p">:</span><span class="mi">36</span><span class="p">,</span><span class="mi">351</span> <span class="n">virl</span><span class="o">.</span><span class="n">uwm</span><span class="o">.</span><span class="n">client</span> <span class="n">Client</span><span class="o">.</span><span class="n">network_delete</span> <span class="o">...</span>
+<span class="o">...</span>
+<span class="n">WARNING</span>  <span class="mi">2014</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">13</span> <span class="mi">07</span><span class="p">:</span><span class="mi">37</span><span class="p">:</span><span class="mi">36</span><span class="p">,</span><span class="mi">741</span> <span class="n">virl</span><span class="o">.</span><span class="n">uwm</span><span class="o">.</span><span class="n">client</span> <span class="n">Deleting</span> <span class="n">networks</span> <span class="n">partially</span> <span class="n">successful</span><span class="o">.</span>
+<span class="p">{</span>
+  <span class="s2">&quot;deleted&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;ACTIVE&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;subnets&quot;</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;killswitch_net_OHlG&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;provider:physical_network&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">&quot;admin_state_up&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">&quot;tenant_id&quot;</span><span class="p">:</span> <span class="s2">&quot;c4cba1eea5fe46afbc9a4a01356f7c44&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;provider:network_type&quot;</span><span class="p">:</span> <span class="s2">&quot;gre&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;router:external&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">&quot;shared&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1136eccc-ebec-44f8-8ae0-0b0cb0defecb&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;provider:segmentation_id&quot;</span><span class="p">:</span> <span class="mi">6</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="s2">&quot;deleted-all&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+  <span class="s2">&quot;errors&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;11264040-fa2f-4928-ac20-517504a64d98&quot;</span><span class="p">:</span>
+        <span class="s2">&quot;OpenStack call to Network2_0.delete_network received invalid</span>
+        <span class="n">response</span> <span class="n">status</span> <span class="mi">409</span> <span class="p">(</span><span class="n">Conflict</span><span class="p">)</span><span class="o">.</span>\<span class="n">nDetails</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Request content&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s1">&#39;Response content&#39;</span><span class="p">:</span> <span class="s1">&#39;{</span><span class="se">\&quot;</span><span class="s1">QuantumError</span><span class="se">\&quot;</span><span class="s1">: </span><span class="se">\&quot;</span><span class="s1">Unable to complete</span>
+        <span class="n">operation</span> <span class="n">on</span> <span class="n">network</span> <span class="mi">11264040</span><span class="o">-</span><span class="n">fa2f</span><span class="o">-</span><span class="mi">4928</span><span class="o">-</span><span class="n">ac20</span><span class="o">-</span><span class="mi">517504</span><span class="n">a64d98</span><span class="o">.</span> <span class="n">There</span>
+        <span class="n">are</span> <span class="n">one</span> <span class="ow">or</span> <span class="n">more</span> <span class="n">ports</span> <span class="n">still</span> <span class="ow">in</span> <span class="n">use</span> <span class="n">on</span> <span class="n">the</span> <span class="n">network</span><span class="o">.</span>\<span class="s2">&quot;}&#39;, &#39;Request</span>
+        <span class="n">URL</span><span class="s1">&#39;: &#39;</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">1.1</span><span class="p">:</span><span class="mi">9696</span><span class="o">/</span><span class="n">v2</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">networks</span><span class="o">/</span><span class="mi">11264040</span><span class="o">-</span><span class="n">fa2f</span><span class="o">-</span><span class="mi">4928</span><span class="o">-</span><span class="n">ac20</span><span class="o">-</span><span class="mi">517504</span><span class="n">a64d98</span><span class="s1">&#39;}&quot;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Listing and deleting ports and floating IPs work identically as nodes, so we
+won’t cover them here. The commands are port-list, port-delete,
+floating-ip-list and floating-ip-delete.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">9. VIRL User Workspace Management Server</a><ul>
+<li><a class="reference internal" href="#user-mode">9.1. User mode</a><ul>
+<li><a class="reference internal" href="#project-view">9.1.1. Project view</a></li>
+<li><a class="reference internal" href="#sessions-view">9.1.2. Sessions view</a></li>
+<li><a class="reference internal" href="#images-view">9.1.3. Images view</a></li>
+<li><a class="reference internal" href="#create-image-view">9.1.4. Create image view</a></li>
+<li><a class="reference internal" href="#modify-image-view">9.1.5. Modify image view</a></li>
+<li><a class="reference internal" href="#lxc-settings-view">9.1.6. LXC Settings view</a></li>
+<li><a class="reference internal" href="#flavors-view">9.1.7. Flavors view</a></li>
+<li><a class="reference internal" href="#connectivity">9.1.8. Connectivity</a></li>
+<li><a class="reference internal" href="#repositories">9.1.9. Repositories</a></li>
+<li><a class="reference internal" href="#settings-and-password">9.1.10. Settings and password</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#admin-mode">9.2. Admin mode</a><ul>
+<li><a class="reference internal" href="#overview">9.2.1. Overview</a></li>
+<li><a class="reference internal" href="#salt-configuration-and-status-view">9.2.2. Salt configuration and status view</a></li>
+<li><a class="reference internal" href="#system-configuration-controls-view">9.2.3. System configuration controls view</a></li>
+<li><a class="reference internal" href="#system-tools-view">9.2.4. System tools view</a></li>
+<li><a class="reference internal" href="#virl-software-view">9.2.5. VIRL Software view</a></li>
+<li><a class="reference internal" href="#projects-view">9.2.6. Projects view</a></li>
+<li><a class="reference internal" href="#create-project-view">9.2.7. Create project view</a></li>
+<li><a class="reference internal" href="#users-view">9.2.8. Users view</a></li>
+<li><a class="reference internal" href="#create-user-s-view">9.2.9. Create user(s) view</a></li>
+<li><a class="reference internal" href="#id1">9.2.10. Images view</a></li>
+<li><a class="reference internal" href="#id2">9.2.11. Flavors view</a></li>
+<li><a class="reference internal" href="#id3">9.2.12. Lxc settings view</a></li>
+<li><a class="reference internal" href="#subtypes-view">9.2.13. Subtypes view</a></li>
+<li><a class="reference internal" href="#id4">9.2.14. Connectivity</a></li>
+<li><a class="reference internal" href="#vm-control-view">9.2.15. VM Control view</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#rest-api-and-virl-uwm-client">9.3. REST API and VIRL UWM client</a><ul>
+<li><a class="reference internal" href="#editing-the-settings-of-the-current-user">9.3.1. Editing the settings of the current user</a></li>
+<li><a class="reference internal" href="#user-management-admin-only">9.3.2. User management (admin only)</a></li>
+<li><a class="reference internal" href="#project-management-admin-only">9.3.3. Project management (admin only)</a></li>
+<li><a class="reference internal" href="#image-management">9.3.4. Image management</a></li>
+<li><a class="reference internal" href="#flavor-management">9.3.5. Flavor management</a></li>
+<li><a class="reference internal" href="#subtype-management">9.3.6. Subtype management</a></li>
+<li><a class="reference internal" href="#vm-control-admin-only">9.3.7. VM Control (admin only)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="openstack_client.html"
+                        title="previous chapter">8. OpenStack Client</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="std_server.html"
+                        title="next chapter">10. VIRL Service Topology Director Server</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/uwm_server.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="std_server.html" title="10. VIRL Service Topology Director Server"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="openstack_client.html" title="8. OpenStack Client"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">VIRL 0.10.35.35 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="README.html" >README</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Cisco Systems, Inc.
+All rights reserved..
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
+    </div>
+  </body>
+</html>

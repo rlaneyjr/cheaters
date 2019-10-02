@@ -1,0 +1,24 @@
+Troubleshooting
+~~~~~~~~~~~~~~~
+
+In case the VIRL system does not work, the virl_health_status script may be
+of some help in determining if some system-level error is preventing VIRL
+or OpenStack services from working properly.
+
+To create a basic status report using this command, use the following::
+
+   sudo virl_health_status | tee status_report.txt
+
+The STD and or UWM log may help troubleshooting if the problem exists on this
+layer. If the problem is a result of an internal error response from OpenStack,
+the logs of the affected OpenStack services (or syslog) should contain error
+information commonly not propagated to service consumers, such as VIRL.
+
+The logs for the VIRL-CORE servers are located at::
+
+    ls -l /var/local/virl/logs/
+
+The logs for openstack services are located under these directories::
+
+    ls -l /var/log/{keystone,nova,neutron,glance,cinder}
+

@@ -1,0 +1,472 @@
+VIRL Nodes
+~~~~~~~~~~
+
+Supported SIMPLE node subtypes
+==============================
+
+Each node subtype in a topology must be known to VIRL-CORE. The differences
+between subtypes are encapsulated in VIRL plugins bundled with the package.
+
+You can list the recognized subtypes in the UWM 'Subtypes' tab.
+
+OpenStack VM node subtypes
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The primary way of launching nodes is in the form of KVM instances managed
+by OpenStack. These include all Cisco router images.
+
+Note that in order to properly start a Cisco router image, it needs to have
+properties attached, namely 'hw_disk_bus', 'hw_vif_model', 'serial' and
+'config_disk_type'.
+
+The 'hw_cdrom_bus' image property may be used for VMs that use a different bus
+on the main drive than on a secondary drive. CSR1000v should use 'ide' here.
+
+These properties are essentially constant, with variations, if any, reserved
+to internal development builds of the VMs. A different value than what the VM
+operating system expects will generally result in a boot failure.
+
+The VM disk images for all subtypes need not be available to all customers.
+
+Supported subtypes, their interface names and recommended parameters include:
+
+========  ======================  ======================  ========  =========
+Subtype      First interface       Management interface    Ram MB    VCPUs
+========  ======================  ======================  ========  =========
+IOSv      GigabitEthernet0/1      GigabitEthernet0/0       512      1
+IOSvL2    GigabitEthernet0/1      Vlan1 (over GE0/0)       768      1
+IOS XRv   GigabitEthernet0/0/0/0  MgmtEth0/0/CPU0/0        3072     1
+NX-OSv    Ethernet2/1             mgmt0                    2048     1
+CSR1000v  GigabitEthernet2        GigabitEthernet1         3072     1
+server    eth1                    eth0                     2048     1
+========  ======================  ======================  ========  =========
+
+The default properties that must be defined in VM disk images are as follows:
+
+========  ====================  ===============  ================  ==========
+Subtype     config_disk_type      hw_disk_bus      hw_vif_model      serial
+========  ====================  ===============  ================  ==========
+IOSv      disk                  virtio           e1000             2
+IOSvL2    disk                  virtio           e1000             2
+IOS XRv   cdrom                 ide              virtio            3
+NX-OSv    cdrom                 ide              e1000             2
+CSR1000v  cdrom                 virtio           e1000             2
+server    cloud-init, iso9660   virtio           virtio            1
+========  ====================  ===============  ================  ==========
+
+The server subtype is mainly geared towards the bundled Ubuntu cloud image.
+A Fedora cloud image can also be successfully deployed using the subtype.
+
+Linux Container subtypes
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Users can extend and connect their simulations with Linux Containers. These
+are meant to be a lightweight yet powerful alternative to servers.
+
+VIRL has out-of the box support for 3 subtypes of LXC's.
+
+The first, lxc, is configured with a template that expects a slightly
+modified Ubuntu LXC image (downloadable via UWM VIRL Software pages).
+This subtype is very similar in operation to the Ubuntu server OpenStack VM,
+including being configured by the same cloud-init structures as that subtype.
+
+Another is the management LXC automatically created for the simulation, which
+is controlled by extensions on the topology element. This subtype is not meant
+to be included by users in topologies.
+
+The final subtype lxc-iperf, serves as an example of a thin layer above the
+host server system. Unlike the Ubuntu LXC, and in common with the management
+LXC, it does not contain a full distribution of packages, opting instead to
+attach (bind-mount) itself to its host's filesystems in read-only mode.
+The iperf image contains only the built iperf (version 2) binary.
+
+Cloud-init is not available to this system, but extensions defined below can
+be used control its setup. For more information on iperf, its features
+and usage, please refer to http://iperf.fr.
+
+LXC images, unlike OpenStack VMs, are simply tar.gz archives of files that
+comprise (part of) the node's filesystem. The management and setup of each
+LXC subtype is governed by its template, a (bash) script executed (twice)
+for each LXC node being first created, then started.
+
+The UWM system allows admins to install their own LXC template scripts,
+allowing for creation of specialized nodes running custom applications.
+In a given subtype, the baseline_flavor attribute is used to name the default
+template to run the LXC. This can be overridden by each node's flavor.
+
+Both the management LXC and lxc-iperf scripts shipped with VIRL are customized
+templates for the SSH server, hence SSH is running in each of them and
+users can log into them (using the username/password of the user in UWM/STD
+in the case of management LXC, or cisco/cisco in lxc-iperf).
+
+Note that sudo is not available to the LXC user, hence any setup requiring
+the root (limited in the LXC) account needs to be executed in the "start"
+mode execution of the template.
+
+The lxc-iperf template is recommended as an example of adding one's own LXC's
+into the VIRL system. An LXC strictly does not need any image at all, if
+all required packages are installed on the host system. Since the usual
+locations where executable files are located on a linux system are read-only
+inside the LXC, the image needs to be extracted in a different location, e.g.
+/lxc. The environment variables PATH and LD_LIBRARY_PATH should be adjusted
+by the template to make searchable the added executables and shared libraries,
+respectively. The actual image to use may be an empty dummy tarball.
+
+The interface setup of the LXC should be left intact for configuration by
+the STD according to the network links of the topology. The network interfaces
+of the LXCs are created in a similar fashion to the interfaces of OpenStack
+VMs, making the networking experience rather seamless. Note that link-state
+changes are not performed on LXC interfaces.
+
+Dynamic subtype plugins
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Some subtypes' behavior may conform entirely to the behavior of an existing
+subtype. A "dynamic" subtype may be defined with these different values.
+The plugin lives as a section in a configuration file named node_subtype.cfg,
+whose location is determined by VIRL package configuration. The ini-style
+configuration section name gives the name of the plugin.
+
+Note that the runtime behavior, e.g. configuration retrieval from a running VM
+node, cannot be adjusted this way.
+
+The values that can be adjusted are as follows:
+
+interface_management
+  Name of management interface, the first interface of each node. Empty value
+  signifies that a management interface is not to be defined for the node;
+  the management network will not be connected to such a node.
+
+interface_dummies
+  Whitespace-separated sequence of interface names to statically inject between
+  the management interface and the first data interface. These interfaces will
+  each reside on a separate network, not being able to send traffic anywhere.
+  This may be used for VMs which expose additional management interfaces used
+  by the users of the nodes.
+
+interface_pattern
+  Pattern for data interface names. A string with a single "{0}" placeholder
+  where the interface number shall be placed. An optional "{1}" placeholder may
+  be used if the interface_wrap is nonzero.
+
+interface_first
+  First data interface number. This number is added to the id of each interface
+  to produce the interface name from the interface_pattern.
+
+interface_range
+  Max count of data interfaces. KVM places a hard limit on interfaces to 28.
+  The management interface is counted towards this limit.
+
+interface_wrap
+  If not zero, the interface number is reset to zero after this number of ports
+  is reached. A second counter is incremented, which starts at 0 and uses the
+  optional {1} marker in the interface_pattern.
+
+cli_serial
+  Number of serial console interfaces to be defined for the node.
+  This value is used by UWM to be placed as a VM image property for images
+  of that subtype. It also determines the allowed range of websocket-proxied
+  serial ports for STD.
+
+cli_protocol
+  Protocol used to connect to the node from the management proxy (jumphost or
+  lxc node). Valid values are "none", "ssh" and "telnet".
+  Note that serial console interfaces use telnet and are not affected by this.
+  
+vnc_available
+  Make VNC access available. This flag indicates whether the VNC console, which
+  is actually created for each VM node, is actually usable. Most Cisco routers
+  cannot make use of the VNC console, leaving remote control to serial ports.
+
+gui_icon
+  Name of icon for GUI. See the subtype configuration dialog of the GUI.
+
+gui_visible
+  Show subtype on GUI palette in the topology design view. Invisible subtypes
+  may still be selected in the GUI with the subtype node property.
+
+config_disk_type
+  Configuration disk type. Placed into VM image properties for consumption by
+  OpenStack when a node is deployed. Also controls the format of configuration
+  data sent to OpenStack with the node deployment request.
+
+config_iso_level
+  ISO 9660 level for cdrom config_disk_type
+
+config_file
+  Name of file for config drive. The processed "config" extension entry content
+  is placed into the file of this name on the configuration drive. A special
+  "/userdata" channel may be used, having meaning in "cloud-init" config drive.
+
+hw_vif_model
+  Virtual interface model to simulate. Placed into VM image properties by UWM.
+
+hw_disk_bus
+  Main disk bus model to simulate. Placed into VM image properties by UWM.
+
+hw_ram
+  RAM (MB) allocated per node. Placed into the default subtype VM flavor.
+
+hw_vcpus
+  Number of CPUs allocated per node. Placed into the default subtype VM flavor.
+
+hw_vm_extra
+  Extra comma-separated VM image properties to be added by UWM.
+
+baseline_image
+  Name of default image. Default (empty) means the subtype name shall be used.
+
+baseline_flavor
+  Name of default flavor. Default (empty) means the subtype name shall be used.
+  For LXC's, this is actually the name of the template to run.
+
+Images and flavors
+==================
+
+The VM disk image contains the bootable operating system disk for the VM.
+A flavor is a collection of resources made available to each running node
+by the OpenStack orchestration. The recommended (expected) flavor attributes
+are described in the previous section. All other attributes should be set to 0.
+
+Each node may select its own image and flavor by name as node attributes.
+By default, the node subtype is used for both attributes. The lookup of the
+concrete image or flavor first matches the item prefixed with user's project
+name (e.g. myproject-IOSv), before trying the plain name. For images, another
+preference is set for images owned by the user's project over any other images,
+as OpenStack allows to name multiple images the same. In case of a tie, newest
+images will be picked.
+
+As noted in the previous section, all VM disk images for a Cisco router must
+have their properties set up, strongly preferred to the values listed there.
+
+Image names are case sensitive, meaning an image will only be selected if its
+name matches the value specified for the node exactly. On the other hand,
+flavor names are case insensitive in OpenStack, hence any spelling will work
+for flavors. It is nonetheless recommended to match character case of flavors.
+
+Please note that LXC images are actually tar.gz archives, not complete file
+systems, and LXC flavors are actually names of templates to execute when the
+node is being created and later started.
+
+Initial node configuration
+==========================
+
+Each VM node can be started with a second disk or cdrom drive containing the
+contents of the "config" node extension entry formatted for that node subtype.
+The nodes' operating system reads that information and applies it to its
+configuration.
+
+In fact, some VM images, such as the Ubuntu Cloud image, may be completely
+unusable without such configuration.
+
+There is a hard limit on the size of such configurations. VIRL will compress
+the configuration data when transferring it into OpenStack; the compressed size
+of all configuration data (gzip) shall not exceed ~60KB. This limitation is set
+by the storage implementation of this data within OpenStack.
+
+Some string constants will be substituted for all VM node subtypes with values
+determined at runtime (all of which are most likely useful for server nodes):
+
+VIRL-USER-NAME
+  The OpenStack username (usually the same as the STD username)
+
+VIRL-USER-PASSWORD-CRYPT
+  An SHA512 hashed and salter OpenStack password of the user. 
+  
+  Note that UWM-created users have OpenStack passwords different from their STD
+  passwords, which can be determined by using this command::
+
+    VIRL_STD_PASSWORD="password" virl_uwm_client make-os-password
+
+  One should not leave password command invocations in the shell history.
+
+VIRL-USER-SSH-PUBLIC-KEY
+  An SSH public key fingerprint, configurable in UWM for each user, which may
+  be placed into the configuration in order to accept the related private key
+  in ssh/sftp/scp operations.
+
+VIRL-SIMULATION-NAME
+  The full string name of the simulation the node is running within.
+
+Cisco router configuration
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Initial configuration for Cisco router VMs may be defined in the VIRL file as
+text in the same format as output by the 'show startup-config' command for that
+VM subtype.
+
+The first, management interface, as well as all interfaces connected to L2 and
+L3 connectors to the outside environment, have their IP addresses assigned
+for the duration of the node's run by the orchestration system. The address
+lines in the "config" for such interfaces are detected and replaced
+with the assigned value when the node starts. It is recommended to leave the
+address line as 'no ip(v4) address' in the configuration text. If the address
+statement is not present, no substitution takes place.
+
+Some control of this IP address injection process can be achieved by putting
+a "REWRITE_IP: interface_name" directive at the end of a "description" line
+before the ip address statement that is to be affected by the directive.
+One ip address line following the directive will be processed as if it belonged
+to that interface.
+
+Hence, the following configuration can suppress the injection for an interface,
+forcing an arbitrary static IP address in the configuration::
+
+    interface GigabitEthernet0/1
+      description to flat-2 REWRITE_IP: none
+      no shutdown
+      ip address 1.2.3.4 255.255.255.0
+    !
+
+The following configuration can achieve IP address injection onto a vlan
+subinterface instead of the main L2 FLAT-connected interface. Note that each
+interface name has only one chance of being rewritten, hence the reversed
+order of the interfaces in the configuration (that will be lost with each
+configuration extraction)::
+
+    interface GigabitEthernet0/2.111
+      description to flat-1 REWRITE_IP: GigabitEthernet0/2
+      encapsulation dot1Q 111
+      no ip address
+      duplex auto
+      speed auto
+      no shutdown
+    !
+    interface GigabitEthernet0/2
+      no ip address
+      duplex auto
+      speed auto
+      no shutdown
+    !
+
+To achieve the same effect without REWRITE_IP, another mechanism may be applied
+by adding an extension entry with key "vlan" to the L2 FLAT node with the value
+set to "111", or equivalently by setting a "subinterface" extension entry on L2
+FLAT with value ".111". If the value of "subinterface" is set to any value that
+produces an interface name not present in the source "config" entry, no match
+for the interface name will be found, and no substitution will be performed.
+
+In addition to the router config, any (textual) data contained in extension
+entries with keys "initial config: filename" will be added to the configuration
+disk for the VM under that same filename (subdirectories are not supported).
+
+Cloud-init server configuration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Unlike router nodes, server VMs may have very different configuration styles.
+One such style is iso9660, which creates a simulated cdrom from all initial
+config files (subdirectories are supported). An enhanced approach is using the
+cloud-init software package on the guest VM, and creation of a cloud-init cdrom
+image from the initial config files.
+
+With cloud-init, the filename from the initial config entry key becomes target
+path for the file in question, copied from the cdrom by the cloud-init program.
+All such files will be owned by the root user, unreadable to any other users.
+
+In the server subtype, the "config" extension entry is mapped to a "/userdata"
+filename as that is the location where OpenStack expects the cloud-init control
+definitions in a YAML-formatted dictionary. The only processing of this
+data by the LLI is to replace the string occurrences as described in the common
+section. No Outside address injection into config takes place;
+the server/non-router VM nodes should employ DHCP to configure such interfaces.
+
+AutoNetkit will generate a basic cloud-init file; for some further examples
+refer to `http://cloudinit.readthedocs.org/en/latest/topics/examples.html`.
+The generated configuration is usable without change by both Ubuntu 13.10+ and
+Fedora 20 cloud-init images.
+
+Please note that Ubuntu-cloud distributions prior to the 13.10 release may
+fail to process all the configuration and become unusable as a result.
+
+Cloud-init is also available for the main lxc subtype using the ubuntu-ci image
+distributed alongside other user images.
+
+The Jumphost session
+^^^^^^^^^^^^^^^^^^^^
+
+The STD server will create and maintain a special session named '~jumphost',
+which contains a single pre-configured node named 'jumphost', with a connection
+to the default L2 FLAT network. It uses bound ports named 'username-jumphost',
+which will be created with random available IP addresses if they don't exist.
+
+This simulation cannot be stopped (destroyed) by normal process; on the other
+hand, stopping its node will free up all resources it holds in OpenStack.
+An administrator user can stop this simulation via UWM and an STD call.
+
+The jumphost node contains the same user as the username, and accepts the same
+password as the STD password of that user. It also accepts the same SSH public
+key as normal servers. After a password/key change, restarting the jumphost
+node (which does not happen automatically) propagates this change.
+
+The jumphost node provides access to simulation nodes using the private project
+management network or an L2 FLAT management network; it cannot reach any
+per-simulation management network.
+
+Simulations employing the new LXC-based management network do not require the
+jumphost session, hence it is not created and maintained for such sessions, and
+the node is torn down despite there being LXC-based sessions deployed.
+
+Similar to the LXC SSH port forwarding, the jumphost node's SSH port is also
+exposed from the VIRL host. The port number can be controlled in the UWM user
+settings dialogs.
+
+LXC Iperf node subtype configuration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The lxc-perf subtype cannot process cloud-init configuration. It ignores the
+"config" node extension completely, using the following extensions instead:
+
+custom_script
+  The value is a bash script which gets executed by a (simulated) root user.
+  By default, VIRL will attempt to generate a script assigning a default
+  route to this system by using an address of a directly connected peer node.
+  Override this script to force a more suitable gateway or other configuration
+  within the system. To set a default route, enter::
+    
+    route add default gw A.B.C.D
+
+iperf_server
+  The value of this extension is a JSON Object (mapping, dict). Each value as
+  well as the entire extension are optional. An iperf server is always started
+  in the node, awaiting client connections. A log is maintained for the server,
+  which can be retrieved by opening a TCP connection on port 5555 of the node.
+
+  The valid keys for the extension are as follows. Each key represents a switch
+  on the command line. Switches marked (F) are applied if the key is false.
+
+  =================  =======  ======  =========================================
+  Key and Type       Default  Switch  Description
+  =================  =======  ======  =========================================
+  server_port int    5001     -p      TCP/UDP port for iperf client connections
+  tcp bool           true     -u (F)  Select whether TCP or UDP traffic is used
+  refresh_interval   1        -i      Refresh interval, 0 for end summary only
+  window_size str    "80K"    -w      Define size of the window
+  length str         "8K"     -l      The length of buffers to read or write
+  =================  =======  ======  =========================================
+
+iperf_client
+  The value of this extension is a JSON Object (mapping, dict). If the value
+  is present, a process listening on port 6666 of the node is created, which,
+  when retrieved (e.g. by curl node_ip_address:5555) runs a preconfigured iperf
+  client, returning the test results on the client side.
+
+  The valid keys for the extension are as follows. Each key represents a switch
+  on the command line. Switches marked (F) are applied if the key is false.
+
+  =================  =======  ======  =========================================
+  Key and Type       Default  Switch  Description
+  =================  =======  ======  =========================================
+  server_ip str      none     -c      IP address of an iperf server
+  server_port int    5001     -p      Port of the listening iperf server
+  client_port int    5002     -L      TCP port if dual_test is true, see below
+  tcp bool           true     -u (F)  Select whether TCP or UDP traffic is used
+  udp_bandwidth      "1M"     -b      Define the speed of UDP connection
+  refresh_interval   1        -i      Refresh interval, 0 for end summary only
+  test_duration int  5        -t      Second to run the test
+  window_size str    "80K"    -w      Define size of the window
+  length str         "8K"     -l      The length of buffers to read or write
+  connections int    1        -p      Number of connections created
+  dual_test bool     false    -d      Traffic will be tested in both directions
+  simultaneously     true     -r (F)  Make dual_test connections simultaneously
+  ttl int            255      -T      Max number of router hops to go through
+  =================  =======  ======  =========================================

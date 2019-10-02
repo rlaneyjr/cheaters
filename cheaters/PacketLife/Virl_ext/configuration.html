@@ -1,0 +1,236 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>6. Configuration &#8212; VIRL 0.10.35.35 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.10.35.35',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="7. Installation" href="installation.html" />
+    <link rel="prev" title="5. VIRL Nodes" href="nodes.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="installation.html" title="7. Installation"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="nodes.html" title="5. VIRL Nodes"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">VIRL 0.10.35.35 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="README.html" accesskey="U">README</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="configuration">
+<h1>6. Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="cli-runtime-variables">
+<h2>6.1. CLI runtime variables<a class="headerlink" href="#cli-runtime-variables" title="Permalink to this headline">¶</a></h2>
+<p>The root configuration is located in the “virl_pkg_data/conf/builtin.cfg” file.</p>
+<p>This file specifies pathd to the user global and local configuration files.
+Either path may start with “~/” to indicate a current user’s home directory.</p>
+<p>The “/etc/virl/common.cfg” file may be used to override the builtin values
+shipping with VIRL-CORE. Many of these configurations are mostly of no
+concern to a user and should be left intact unless instructed otherwise.</p>
+<p>The location of the common, global, local and builtin configuration files
+can be obtained by the command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_config</span> <span class="n">location</span> <span class="p">[</span><span class="o">--</span><span class="k">global</span><span class="o">|--</span><span class="n">local</span><span class="o">|--</span><span class="n">common</span><span class="o">|--</span><span class="n">builtin</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>The most important section of the VIRL user configuration files is called env.
+It contains the defaults for some common CLI arguments, so that they don’t have
+to be entered in each invocation.</p>
+<p>The configuration is an ini-style text file. Local configuration overrides
+global configuration, which in turn may be overridden by the shell environment
+of a running script. Finally, each variable used by a CLI script or its
+subcommand has an option for overriding the value. The VIRL-CORE package ships
+with suitable defaults for all confgurable values, thus no configuration file
+needs to actually exist.</p>
+<p>The configuration file can be created and/or edited using the command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_config</span> <span class="n">update</span> <span class="p">[</span><span class="o">--</span><span class="k">global</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">variable</span> <span class="p">[</span><span class="n">value</span><span class="p">]]</span><span class="o">...</span>
+</pre></div>
+</div>
+<p>A variable can be set to default by not providing a value for it.
+The variable assignment used by a CLI script can be displayed by running the
+env subcommand of that CLI script.</p>
+<p>Note that the LLI’s virl CLI needs the VIRL_OPENSTACK_PASSWORD value for most
+of its operations; it is not stored with the endpoint-create command.</p>
+<p>Used configuration variables without the required VIRL_ prefix are as follows:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="36%" />
+<col width="64%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">VIRL_VARIABLE_NAME</th>
+<th class="head">Comments and programs/subcommands using it</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>OPENSTACK_TENANT_NAME
+OPENSTACK_PASSWORD
+OPENSTACK_USER_NAME
+OPENSTACK_AUTH_URL
+OPENSTACK_SERVICE_TOKEN</td>
+<td><p class="first">Openstack credentials. Optional service token
+overrides authentication of identity operations</p>
+<p class="last">virl_openstack_client, virl endpoint-create,
+virl_uwm_server init, user-add</p>
+</td>
+</tr>
+<tr class="row-odd"><td>ENDPOINT</td>
+<td>LLI endpoint directory; virl (all subcommands)</td>
+</tr>
+<tr class="row-even"><td>SESSION</td>
+<td>LLI session name; virl (session-<em>, node-</em>)</td>
+</tr>
+<tr class="row-odd"><td>STD_DIR</td>
+<td>Directory for server endpoints, sessions, logs;
+virl_std_server, virl_uwm_server</td>
+</tr>
+<tr class="row-even"><td>STD_HOST
+STD_PORT
+STD_PROCESS_COUNT</td>
+<td>IP address and port where server is bound and
+number of request handler processes;
+virl_std_server run</td>
+</tr>
+<tr class="row-odd"><td>UWM_HOST
+UWM_PORT
+UWM_PROCESS_COUNT</td>
+<td>IP address and port where server is bound and
+number of request handler processes;
+virl_uwm_server run</td>
+</tr>
+<tr class="row-even"><td>STD_URL
+UWM_URL</td>
+<td>STD server URL used by virl_std_client
+UWM server URL used by virl_uwm_client stub</td>
+</tr>
+<tr class="row-odd"><td>STD_USER_NAME
+STD_PASSWORD</td>
+<td>STD user credentials; virl_std_client
+virl_uwm_server init, user-add, user-del</td>
+</tr>
+<tr class="row-even"><td>STD_ENDPOINT</td>
+<td>STD endpoint, ignored. One endpoint per user</td>
+</tr>
+<tr class="row-odd"><td>STD_SESSION</td>
+<td>Launched STD session name; virl_std_client only</td>
+</tr>
+<tr class="row-even"><td>LOCAL_IP</td>
+<td>IP address reported as the address where STD
+and UWM are publicly accessible, e.g. in roster</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="uwm-configuration">
+<h2>6.2. UWM configuration<a class="headerlink" href="#uwm-configuration" title="Permalink to this headline">¶</a></h2>
+<p>The User Workspace Management application has configuration pertaining to the
+values of project-specific management and internal L3 SNAT network parameters,
+currently limited to IPv4 addresses of the subnet range, gateway IP and DNS IP.</p>
+<p>The user configuration also allows setting quotas for newly-created projects.</p>
+</div>
+<div class="section" id="host-system-configuration">
+<h2>6.3. Host system configuration<a class="headerlink" href="#host-system-configuration" title="Permalink to this headline">¶</a></h2>
+<p>The UWM System configuration page allows an admin user to modify configuration
+and execute appropriate commands that apply these changes to the VIRL system.
+The description of these configuration items, residing in the /etc/virl.ini
+file, are beyond the scope of this document.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">6. Configuration</a><ul>
+<li><a class="reference internal" href="#cli-runtime-variables">6.1. CLI runtime variables</a></li>
+<li><a class="reference internal" href="#uwm-configuration">6.2. UWM configuration</a></li>
+<li><a class="reference internal" href="#host-system-configuration">6.3. Host system configuration</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="nodes.html"
+                        title="previous chapter">5. VIRL Nodes</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="installation.html"
+                        title="next chapter">7. Installation</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/configuration.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="installation.html" title="7. Installation"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="nodes.html" title="5. VIRL Nodes"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">VIRL 0.10.35.35 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="README.html" >README</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Cisco Systems, Inc.
+All rights reserved..
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,447 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>4. Projects, Users and Special Networks &#8212; VIRL 0.10.35.35 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.10.35.35',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="5. VIRL Nodes" href="nodes.html" />
+    <link rel="prev" title="3. VIRL-CLIENTS package" href="clients.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="nodes.html" title="5. VIRL Nodes"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="clients.html" title="3. VIRL-CLIENTS package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">VIRL 0.10.35.35 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="README.html" accesskey="U">README</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="projects-users-and-special-networks">
+<h1>4. Projects, Users and Special Networks<a class="headerlink" href="#projects-users-and-special-networks" title="Permalink to this headline">¶</a></h1>
+<p>The OpenStack, users are grouped into and share resources within projects,
+also known as tenants. In VIRL, each user is expected to belong to exactly one
+project. Typically, each user has a project of its own, named after the user.</p>
+<p>Each user has a password and a set of roles within the project. Only
+two roles are of any importance to VIRL: automatic _member_, and admin. Admin
+users may use the full range of OpenStack identity operations that are usually
+denied to normal users. Admins may also alter quotas on projects, modify and
+delete all resources associated with any other project. Users should commonly
+not be declared admins.</p>
+<p>One exception is users wishing to define static IP addressing on the shared
+external networks - the default policy in OpenStack neutron restricts such
+an operation to admin users. The UWM Connectivity tab allows an admin to pre-
+create ports to bind to on the external networks for non-admin users, if they
+are not to be made admins themselves.</p>
+<p>At least one admin user, typically named uwmadmin, is required for correct
+operation of both servers. This user is selected for operations concerning
+project and user management in UWM, as well as OpenStack status retrieval
+in both servers.</p>
+<p>Each simulated topology selects a single network to be used for management
+purposes. The management interface of each VM node, unless one is disabled
+for that node’s subtype, will be connected to this network.</p>
+<p>In VIRL, each project has one default management network, named the same as
+the project owning it. This network is used by all simulations that do not
+select a different network to connect to. This is also called the project
+management network. The other options are to create an “exclusive” network,
+with the simulation management separated from every other network, and “flat”,
+where the flat network described below gets used.</p>
+<p>There is also another special network, named by appending “_snat” to the name
+of the project. Both this network and the project management network are routed
+to a shared network named ext-net, which implements L3 (S)NAT functionality.
+Both the management and the snat networks have a gateway, where packets sent-to
+get translated to an address on the ext-net network. For management, the same
+translated IP address is used for all nodes. For the snat network, used by SNAT
+connections in the topology, a floating IP address will be assigned from a pool
+on the ext-net network and mapped to the internal IP address on snat network.</p>
+<p>In current VIRL installations, there is another pair of shared flat networks,
+implementing the L2 FLAT external network connections, named “flat” and “flat1”
+in OpenStack. Each topology node may connect one interface to each of these
+networks. Alternatively, a topology may globally switch the management network
+over to flat, in which case each node’s first (and no other) interface will
+get connectivity to the virtualization host server and beyond.</p>
+<p>Additional flat networks may be configured in OpenStack, leaving an option for
+connecting each node to multiple outside networks. Each new L2 FLAT network
+requires an additional bridge/port on the VIRL host, permanent configuration of
+the neutron (networking) server, as well as defining a FLAT provider network.
+The addition of more L2 FLAT networks is not supported by the installation
+and configuration system used by the VIRL project.</p>
+<p>Note that the ext-net network used for SNAT is also technically created as
+a flat provider network, but only floating IP ports are allowed to be created
+on this network, hence it can only be used with SNAT connectors.</p>
+<p>Both the flat networks, and ext-net, use a separate physical interface of the
+VIRL (OpenStack compute) host to forward traffic into and outside of the host.
+The VIRL host itself has an IP address assigned in each of these networks,
+making it possible for simulations to communicate with their host. A gateway
+IP address can be set to each of these networks, typically on a router outside
+the VIRL host connected to the physical interface. Alternatively, the gateway
+may be set to the VIRL host’s IP address, reusing its own routing setup.</p>
+<div class="section" id="virl-files">
+<h2>4.1. VIRL files<a class="headerlink" href="#virl-files" title="Permalink to this headline">¶</a></h2>
+<p>VIRL file is an XML-based format for encoding networked VM topologies. Several
+revisions of this file format are supported. However, it is recommended to
+author all new topologies to conform to the latest version, 0.9.</p>
+<p>Each revision is defined by an XML schema definition file. The latest revision
+can be obtained internally at <a class="reference external" href="http://cide.cisco.com/vmmaestro/schema/virl.xsd">http://cide.cisco.com/vmmaestro/schema/virl.xsd</a>,
+and externally at <a class="reference external" href="https://raw.github.com/CiscoVIRL/schema/v0.9/virl.xsd">https://raw.github.com/CiscoVIRL/schema/v0.9/virl.xsd</a>.</p>
+<p>Each VIRL file consists of these elements (supported by this implementation):</p>
+<dl class="docutils">
+<dt>topology</dt>
+<dd>Root element of the topology. Contains groups, nodes and connections.</dd>
+<dt>group</dt>
+<dd>Named group of nested groups and nodes. Used to logically group node sets.
+Each group and node must define a name such that the list of names from the
+root topology to each node is unique within a document. A name should not
+contain the substring “::”, as it is used as the separator for the name list
+when referring to nodes by their names.</dd>
+<dt>node type=”SIMPLE”</dt>
+<dd><p class="first">Virtual machine node. It defines interfaces connected to other nodes.
+Each node must specify a subtype defining the platform the node will run,
+and also may specify an OpenStack image and/or flavor (hw parameters).
+Both image and flavor default to the same string value as the node subtype.</p>
+<p class="last">Additionally, a disk volume may be assigned to a node for exclusive use.
+A node will not be automatically started on simulation launch if the value
+of the ‘excludeFromLaunch’ boolean attribute is set to ‘true’.</p>
+</dd>
+<dt>node type=”SIMPLE” subtype=”unmanaged_switch”</dt>
+<dd>A newer representation on a multi-point connection. The image and other
+attributes of the node required for VMs are ignored. This node, and any
+other unmanaged switch or SEGMENT, represent a single OpenStack network,
+where multiple nodes may connect at the same time (at most once), as opposed
+to simple point-to-point connections.</dd>
+<dt>node type=”SEGMENT” (deprecated)</dt>
+<dd>A multi-point connection. This node defines no interfaces. Any SIMPLE nodes
+may be connected directly with this node. A SEGMENT may connect to another,
+both segments comprising a single logical network. An unconnected SEGMENT is
+ignored. This node type is deprecated in favor of the unmanaged_switch node.</dd>
+<dt>node type=”ASSET”</dt>
+<dd><p class="first">A node reserved for actual hardware. Currently used for connecting nodes to
+external networks, determined by value of its subtype attribute. Each outside
+network node has a single interface that may be connected to a single SIMPLE
+node’s interface. An unconnected external network asset is ignored.</p>
+<p>For subtype=”FLAT”, the SIMPLE node’s connected interface will be placed into
+a special pre-created flat provider network, that must have a defined subnet.
+This denotes the L2 FLAT external network connection mechanism.</p>
+<p>For subtype=”SNAT”, the SIMPLE node’s connected interface will be placed into
+a special pre-created network named “&lt;project&gt;_snat”, that must have a subnet
+defined. A floating IP address on a special pre-created network named ext-net
+will be made available to this interface as well, with SNAT routing provided
+between these two networks.
+This denotes the L3 SNAT external network connection mechanism.</p>
+<p>All special and predefined networks are created and configured by the VIRL
+standalone installation process (that also installs OpenStack and other
+software), the details of which are outside the scope for this documentation.
+The networks specific to any new project are automatically configured by UWM.</p>
+<p>For subtype=”EXT-ROUTER”, the node connected is not a SIMPLE node, but a FLAT
+ASSET node. This node may carry configuration options that present the SIMPLE
+node connected via the FLAT mediator that an external router exists outside
+of the simulation. This node merely carries information for the AutoNetkit
+configuration engine and is effectively ignored by the LLI and STD.</p>
+<p>For subtype=”DUMMY”, the node will be ignored completely, but may be drawn
+into the topology to indicate nodes which are not to be simulated.</p>
+<p class="last">No other ASSET subtypes are defined and will be rejected by VIRL.</p>
+</dd>
+<dt>interface</dt>
+<dd><p class="first">An interface is defined for SIMPLE and ASSET nodes. Each interface must have
+a name specific to the node subtype and a matching 0-based integral id.</p>
+<p>ASSET nodes use names “link&lt;id&gt;”, e.g. “link0”. A FLAT or SNAT node must have
+exactly one interface linking it to a SIMPLE node except an unmanaged switch.
+The EXT-ROUTER ASSET node must link to a FLAT node.</p>
+<p>There may be gaps in the names of defined interfaces, and interfaces need not
+be connected to anything. However, a network will still be generated for each
+interface in the sequence of interface id’s from 0 to the largest defined in
+the node due technical details of VM instance creation.</p>
+<p class="last">Each SIMPLE subtype also contains an implicit management interface, which
+is always the first interface in a given instance and is not defined in the
+VIRL file itself. Note that e.g. IOSv uses GigabitEthernet0/0 for management,
+thus it cannot be used for connections within a topology. Management network
+containing all these interfaces is either an exclusive simulation network
+created and configured by STD for each simulation, or a project management
+or a flat network, either of which must be pre-created and contain a single
+OpenStack subnet with DHCP enabled.</p>
+</dd>
+<dt>connection</dt>
+<dd><p class="first">A connection denotes a link between two elements. Permitted connections are:</p>
+<ul class="simple">
+<li>between two SIMPLE node interfaces for a point-to-point network</li>
+<li>between a SIMPLE node and an unmanaged switch interfaces for multi-point</li>
+<li>between any two unmanaged switches’ interfaces to merge them</li>
+<li>between a SIMPLE node interface and an ASSET FLAT/SNAT external interface</li>
+<li>between interfaces of an EXT-ROUTER and a FLAT ASSET node</li>
+<li>between a SIMPLE node interface and a SEGMENT multi-point connection node</li>
+<li>between two SEGMENT nodes to merge them into a single logical SEGMENT node</li>
+</ul>
+<p>SEGMENT nodes are deprecated in favor of unmanaged switched.</p>
+<p>No node may be connected to the same network twice. This means a node cannot
+have two SNAT connections, nor two FLAT connections to the same network, nor
+can the management network use the same FLAT network as a FLAT ASSET node,
+not connect to the same unmanaged switch, even if composed of multiple nodes,
+and no node may connect to itself.</p>
+<p class="last">The connection endpoints are defined using interchangeable “src” and “dst”
+attributes holding an XPath expression resolving to a single node’s interface
+or a single SEGMENT node. The element namespace prefix “virl:” shall be used
+in all XPath expressions.</p>
+</dd>
+<dt>extensions</dt>
+<dd>A container for 0 or more entry elements. May be placed first in a topology,
+group, node, interface or connection element. Note that there should be no
+extensions elements without any entry defined. This relaxation of the XSD
+as published is a VIRL-CORE extension: empty extensions will be accepted by
+the Topology loader, but they will be removed from serialized output for
+compatibility with other VIRL file format consumers.</dd>
+<dt>entry</dt>
+<dd><p class="first">Container for arbitrary extension data. It has attributes “key” and “type”,
+where type is usually “String”. Its text content is the entry value.
+Most entries are used by the AutoNetkit-based configuration generator engine.
+The entry keys recognized by STD/LLI are described in the next subsections.</p>
+<p class="last">Every extension entry key may be optionally prefixed by literal “AutoNetkit.”
+- this entry will only be used by LLI if the non-prefixed entry is missing.
+Some tools may insert that prefix even to extension entries that aren’t
+actually used by the AutoNetkit configuration engine at all.
+Other software need not replicate this behavior, using only the entry with
+or without this prefix.</p>
+</dd>
+</dl>
+<div class="section" id="extension-entries-of-the-topology">
+<h3>4.1.1. Extension entries of the topology<a class="headerlink" href="#extension-entries-of-the-topology" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>management_network</dt>
+<dd><p class="first">This extension may be used to select which OpenStack network will serve as
+the management network for the topology. The first interface of each
+VM node will be connected to this network.</p>
+<p>The special and default values “user” and “project” signify that the project
+management network is used. It is a network created for each project. Both
+values have the same meaning; in practice, most projects contain a single
+user bearing the same name.</p>
+<p>The special value “exclusive” determines that a new network is to be created
+for the management of this simulation; its subnet can be defined by another
+extension, or a configured default will be used.</p>
+<p>Otherwise, the network named in this fashion must be accessible to the
+OpenStack user launching the session, either by being a shared network,
+or by belonging to the project of that user.
+The network must have a single subnet defined.</p>
+<p class="last">The value of the network name is only checked for visibility by the user,
+although it is recommended and only supported that a FLAT provider network
+be used for this purpose.</p>
+</dd>
+<dt>management_subnet</dt>
+<dd>For “exclusive” networks, this is the subnet, specified by a CIDR prefix,
+to be configured on the per-simulation management network. It is ignored
+for all other management network values.</dd>
+<dt>management_lxc</dt>
+<dd><p class="first">This option holds a True/False value (default True), controlling whether
+an additional node will be created for this session. Unlike other VM nodes,
+this node, names ~mgmt-lxc, is implemented as a Linux Container. The node
+runs an SSH server, where the user can log in using the same credentials
+as in the STD/UWM server.</p>
+<p>This node is connected to the simulation’s management network with one
+interface, and to the flat network with another. It can serve as a bridge
+between the outside world and the simulation’s management network, notably
+when using the per-simulation management network.</p>
+<p class="last">If this value is set to False, and the simulation is not using per-simulation
+network, the STD will maintain a separate simulation as long as any such
+simulation is running, named ~jumphost, with a server VM node named jumphost,
+serving basically the same functionality as the LXC.</p>
+</dd>
+<dt>lxc.host.static_ip, lxc.host.bound_port</dt>
+<dd>Serves as the static IP address or bound port for the flat interface of the
+management LXC. See VM node extension entries for further information.</dd>
+<dt>lxc.node.static_ip, lxc.node.bound_port</dt>
+<dd>Serves as the static IP address or bound port for the management interface of
+the management LXC. See VM node extension entries for further information.</dd>
+<dt>lxc.host.tcp_port, lxc.node.tcp_port</dt>
+<dd>For each LXC node, a forwarding process is created that forwards one port on
+the main VIRL host onto the SSH port of the LXC. By default, a random port
+is selected on the VIRL host and the standard port 22 is used for sshd.
+These two extensions can control the exact port numbers in advance.</dd>
+</dl>
+</div>
+<div class="section" id="extension-entries-of-vm-nodes">
+<h3>4.1.2. Extension entries of VM nodes<a class="headerlink" href="#extension-entries-of-vm-nodes" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>config (or deprecated “router config” or “cloud-init”)</dt>
+<dd><p class="first">The initial configuration of a VM node; the contents of this entry depend on
+the node subtype, which also determines how it will be processed and passed
+onto the VM node when it is deployed. The configuration is usually presented
+to the VM node in form of a file on a second disk or cdrom drive.</p>
+<p>Some VM node subtypes may require that some configuration is present in order
+to enable essential functionality, or to even boot up properly.</p>
+<p class="last">The AutoNetkit configuration engine may be employed to generate a suitable
+bootstrap configuration for each VM node of the topology. The input extension
+entries and their behavior are outside the scope of this document.</p>
+</dd>
+<dt>volume (deprecated)</dt>
+<dd><p class="first">If the OpenStack volume service version 2.0 is available, and builtin config
+is overridden to acknowledge this fact, use a volume by this name as the 3rd
+disk image to present to the VM. Only a single node may access a given volume
+at a time.</p>
+<p>Note that OpenStack nova is currently not capable to operate on volume 2.0
+endpoints, hence the volume 1.0 API must be enabled as well. Additionally,
+some deficiencies in OpenStack keystone service catalog resolution require
+that the volume 2.0 endpoint be associated with a “volumev2” service type.</p>
+<p class="last">This value may also be presented as a “vmVolume” attribute on the xml node
+in VIRL XML schema version 0.8. That attribute is the preferred way to set
+this value.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="extension-entries-of-flat-asset-nodes">
+<h3>4.1.3. Extension entries of FLAT ASSET nodes<a class="headerlink" href="#extension-entries-of-flat-asset-nodes" title="Permalink to this headline">¶</a></h3>
+<p>Extensions on the L2 FLAT asset, similar to the node itself, affect the VM node
+interface connected to it.</p>
+<dl class="docutils">
+<dt>host_network</dt>
+<dd>On an L2 FLAT connector node, this extension may be used to pick a network
+other than the default “flat”, connecting the associated VM node interface to
+it. The same considerations and requirements apply as for the non-default
+value of the topology management_network extension.</dd>
+<dt>vlan</dt>
+<dd><p class="first">On an L2 FLAT connector node, this extension may be used to indicate that a
+vlan subinterface will be used by the VM node instead of the main interface.
+This entry only affects the configuration injection behavior for that node;
+no other component makes use of this information currently.</p>
+<p class="last">The value of this entry should be the vlan ID configured on the interface.
+The actual configration of the encapsulation is left to the “config” entry.</p>
+</dd>
+<dt>subinterface</dt>
+<dd>A more general version of the vlan extension; its value is appended to the
+interface name when applying configuration injection.</dd>
+</dl>
+</div>
+<div class="section" id="extension-entries-for-outside-connectivity">
+<h3>4.1.4. Extension entries for outside connectivity<a class="headerlink" href="#extension-entries-for-outside-connectivity" title="Permalink to this headline">¶</a></h3>
+<p>A user may be able to select in advance, what the IP address of an L2 FLAT,
+L3 SNAT or the management interface by setting one of the following two entries
+on the L2 FLAT connector node, the L3 SNAT connector node, or the node itself,
+respectively.</p>
+<p>Please note that using pre-determined ports and static IP addresses makes the
+VIRL file less portable, and almost never launchable multiple times at once.</p>
+<dl class="docutils">
+<dt>bound_port</dt>
+<dd><p class="first">The value of this entry may name a pre-existing port on the L2 FLAT node’s
+host network, L3 SNAT internal network, or the management network.
+The L3 SNAT port must have a floating IP associated to it.</p>
+<p>These ports and floating IPs may be created by an administrator in UWM, and
+users can see what ports are available to them.</p>
+<p>The ports will remain even after the simulation attaching them is destroyed.</p>
+<p class="last">Only one node may be attached to a particular port at a time. Node names need
+not be unique, in that case, the first available port on the network is used.
+The port (and floating IP) must be owned by the launching user’s project.</p>
+</dd>
+<dt>static_ip</dt>
+<dd><p class="first">To pick an IP address manually, it may be put into this extension. For the L3
+SNAT connectivity, the internal IP address is placed first; the external IP
+address may be provided as well, separated by whitespace.</p>
+<p>The IP addresses must be inside of the subnet of the relevant network, but
+may be outside the associated DHCP pool; no other port may use that address.</p>
+<p class="last">By default policy, only administrator users and network owners may preselect
+the IP address of a port (this applies to the floating IP address as well).
+This is controlled by an OpenStack neutron policy configuration file.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">4. Projects, Users and Special Networks</a><ul>
+<li><a class="reference internal" href="#virl-files">4.1. VIRL files</a><ul>
+<li><a class="reference internal" href="#extension-entries-of-the-topology">4.1.1. Extension entries of the topology</a></li>
+<li><a class="reference internal" href="#extension-entries-of-vm-nodes">4.1.2. Extension entries of VM nodes</a></li>
+<li><a class="reference internal" href="#extension-entries-of-flat-asset-nodes">4.1.3. Extension entries of FLAT ASSET nodes</a></li>
+<li><a class="reference internal" href="#extension-entries-for-outside-connectivity">4.1.4. Extension entries for outside connectivity</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="clients.html"
+                        title="previous chapter">3. VIRL-CLIENTS package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="nodes.html"
+                        title="next chapter">5. VIRL Nodes</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/concepts.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="nodes.html" title="5. VIRL Nodes"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="clients.html" title="3. VIRL-CLIENTS package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">VIRL 0.10.35.35 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="README.html" >README</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Cisco Systems, Inc.
+All rights reserved..
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
+    </div>
+  </body>
+</html>

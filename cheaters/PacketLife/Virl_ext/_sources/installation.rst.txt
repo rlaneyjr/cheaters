@@ -1,0 +1,58 @@
+Installation
+~~~~~~~~~~~~
+
+Files under VIRL_STD_DIR
+========================
+
+The variable VIRL_STD_DIR (or --location in CLI) defines where all STD/UWM data
+is stored. This directory must be writable by the user running both STD/UWM.
+If this user is root (which is not necessary), all commands touching files from
+this directory must be run as root as well, e.g. by using the sudo command.
+
+The servers' working directory is configured by the VIRL_STD_DIR variable.
+It contains the endpoints for all users, along with the VIRL files belonging to
+sessions (simulations) running within the server, under the 'users' directory.
+
+The server gets logged into the rotated files std_server.log or uwm_server.log
+within the 'logs' directory. Verbose logging is enabled using the --debug flag
+in front of each server's run command, and disabled entirely using --quiet.
+
+Additionally, there is a subdirectory named 'archive/topologies', where a copy
+of each successfully created session' VIRL file is stored for later reference.
+These files are not removed automatically; end-users may remove them anytime.
+This feature is generally disabled in VIRL installations.
+
+Admin-submitted LXC templates and images reside Under the 'lxc' subdirectory.
+
+Finally, all data pertaining to UWM and STD above the endpoint-stored is placed
+into the servers.db file.
+
+User workspace manager initialization and special user setup
+============================================================
+
+In general, the setup is managed by the VIRL installation system, and users
+should not need to use these commands.
+
+The UWM and STD servers operate over a shared database that is created
+by the UWM init command. This command is dangerous, as it will destroy all
+previous information in the database. Users should never need to run this.
+The command must be given an existing OpenStack administrator account
+information. The init command must be run prior to the STD server starting::
+
+    virl_uwm_server init -u admin -p pass -U OSAdmin -T OSProject -P OSPass
+
+This user can then use the UWM Web-based GUI to add additional projects.
+These projects will have all the networking set up as expected by STD.
+
+To add an existing project and user (admin or not), use the following::
+
+    virl_uwm_server add-user -u user -p pass -U OSUser -T OSProject -P OSPass
+
+Any user's password and OpenStack passwords can be changed from the CLI. If
+an OpenStack password is not specified, it will be computed as a hash of the
+STD/UWM password.
+
+To change user passwords from the server, use::
+
+    virl_uwm_server set-password -u user -p pass -P OSPass
+

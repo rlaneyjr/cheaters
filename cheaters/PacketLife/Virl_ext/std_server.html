@@ -1,0 +1,362 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>10. VIRL Service Topology Director Server &#8212; VIRL 0.10.35.35 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.10.35.35',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="11. Troubleshooting" href="troubleshooting.html" />
+    <link rel="prev" title="9. VIRL User Workspace Management Server" href="uwm_server.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="troubleshooting.html" title="11. Troubleshooting"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="uwm_server.html" title="9. VIRL User Workspace Management Server"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">VIRL 0.10.35.35 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="README.html" accesskey="U">README</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="virl-service-topology-director-server">
+<h1>10. VIRL Service Topology Director Server<a class="headerlink" href="#virl-service-topology-director-server" title="Permalink to this headline">¶</a></h1>
+<p>Service Topology Director server is the main backend of the VIRL project, used
+for remote management of sessions for a set of users, each controlling a single
+VIRL endpoint corresponding to a single OpenStack user.</p>
+<div class="section" id="user-information-and-recovery">
+<h2>10.1. User information and recovery<a class="headerlink" href="#user-information-and-recovery" title="Permalink to this headline">¶</a></h2>
+<p>You can see all users using command (–all circumvents VIRL_STD_USER):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_std_server</span> <span class="n">user</span><span class="o">-</span><span class="n">info</span> <span class="o">--</span><span class="nb">all</span>
+</pre></div>
+</div>
+<p>Running simulations can be cleared using the user-clear command. A best-effort
+attempt will be made to remove all artefacts from OpenStack before clearing the
+session itself. This command should be used as a last resort:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_std_server</span> <span class="o">--</span><span class="n">debug</span> <span class="n">user</span><span class="o">-</span><span class="n">clear</span> <span class="o">-</span><span class="n">u</span> <span class="n">guest</span>
+</pre></div>
+</div>
+<p>A starting std server will attempt to tear down any incompletely started
+and stopping simulations as if a simengine-stop was issued for them.</p>
+<p>An OpenStack services’ restart or reboot of the machine usually allows for a
+subsequent simulation stop request to complete successfully.</p>
+</div>
+<div class="section" id="starting-the-server">
+<h2>10.2. Starting the server<a class="headerlink" href="#starting-the-server" title="Permalink to this headline">¶</a></h2>
+<p>Start the server:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">sudo</span><span class="p">]</span> <span class="n">virl_std_server</span> <span class="p">[</span><span class="o">--</span><span class="n">debug</span><span class="p">]</span> <span class="n">run</span>
+</pre></div>
+</div>
+<p>Now the server is running and ready to communicate with the GUI.</p>
+<p>Upon startup, any simulations that were not finished launching or stopping will
+be stopped again. The launch is finished when the last node start is accepted
+by the orchestration framework; it does not wait for the nodes to become active
+or even finish booting their operating system.</p>
+</div>
+<div class="section" id="virl-std-client">
+<h2>10.3. VIRL STD client<a class="headerlink" href="#virl-std-client" title="Permalink to this headline">¶</a></h2>
+<p>By default, STD listens on port 19399. This can be configured in virl.ini:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_webservices</span><span class="p">:</span> <span class="mi">19399</span>
+</pre></div>
+</div>
+<p>REST API documentation can be found in UWM,  under “Documentation / STD API”.</p>
+<p>The STD REST API is split into 4 logical areas - roster, simengine, ank and
+openstack. This separation is only cosmetic, the same server handles all calls.</p>
+<p>The global options of the script are the STD server user, password and URL.</p>
+<p>By default, the parsed response contents are printed to standard output; the
+global –json flag is available to convert the output back to JSON.</p>
+<div class="section" id="getting-version-information">
+<h3>10.3.1. Getting version information<a class="headerlink" href="#getting-version-information" title="Permalink to this headline">¶</a></h3>
+<p>Each area has a test call, that returns the version of the service, along with
+other version information:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_std_client</span> <span class="n">ank</span><span class="o">-</span><span class="n">version</span>
+<span class="p">{</span><span class="s1">&#39;autonetkit-cisco-version&#39;</span><span class="p">:</span> <span class="s1">&#39;autonetkit_cisco 0.2.25&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;autonetkit-version&#39;</span><span class="p">:</span> <span class="s1">&#39;autonetkit 0.5.20&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;virl-version&#39;</span><span class="p">:</span> <span class="s1">&#39;0.10.5.2&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="using-autonetkit-to-generate-default-configurations">
+<h3>10.3.2. Using AutoNetkit to generate default configurations<a class="headerlink" href="#using-autonetkit-to-generate-default-configurations" title="Permalink to this headline">¶</a></h3>
+<p>Suitable default configurations for Cisco routers can be generated by passing
+a VIRL file through the ANK service. The behavior of ANK is controlled through
+topology and node extension entries:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_std_client</span> <span class="n">ank</span><span class="o">-</span><span class="n">process</span> <span class="o">-</span><span class="n">f</span> <span class="n">original</span><span class="o">.</span><span class="n">virl</span> <span class="o">&gt;</span><span class="n">starter</span><span class="o">.</span><span class="n">virl</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="launching-a-simulation">
+<h3>10.3.3. Launching a simulation<a class="headerlink" href="#launching-a-simulation" title="Permalink to this headline">¶</a></h3>
+<p>Launching a simulation is roughly equivalent to the virl session-create command
+with the distinction that the created session’s name is returned by the service
+instead of being a parameter, and a session-start is executed in a background
+worker process. A copy of the virl file will be stored on the server, thus the
+file used for launch can be safely removed:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_std_client</span> <span class="n">simengine</span><span class="o">-</span><span class="n">launch</span> <span class="o">--</span><span class="n">virl</span><span class="o">-</span><span class="n">file</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">starter</span><span class="o">.</span><span class="n">virl</span>
+<span class="n">Session</span> <span class="n">ID</span> <span class="ow">is</span> <span class="n">starter</span><span class="o">-</span><span class="n">Ewn0Mn</span>
+<span class="n">export</span> <span class="n">STD_SESSION</span><span class="o">=</span><span class="n">starter</span><span class="o">-</span><span class="n">Ewn0Mn</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="retrieving-a-list-of-simulations">
+<h3>10.3.4. Retrieving a list of simulations<a class="headerlink" href="#retrieving-a-list-of-simulations" title="Permalink to this headline">¶</a></h3>
+<p>To retrieve just the list of current simulations and their states, use:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_std_client</span> <span class="n">simengine</span><span class="o">-</span><span class="nb">list</span>
+<span class="p">{</span><span class="s1">&#39;simulations&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;~jumphost&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;ACTIVE&#39;</span><span class="p">}}}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="simulation-status">
+<h3>10.3.5. Simulation status<a class="headerlink" href="#simulation-status" title="Permalink to this headline">¶</a></h3>
+<p>Since the launch REST call returns before the topology is actually started, the
+success of a launch process is not implied by the client returning error-free.</p>
+<p>If the background worker fails, an ERROR message with the cause is added, which
+can be retrieved along with the overall state of the simulation by the status
+call (which would be ‘FAIL’ in that case). Note that the relevant key is state,
+not status which is constant and never used.</p>
+<p>An example successfully completed launch will return:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_std_client</span> <span class="n">simengine</span><span class="o">-</span><span class="n">status</span>
+<span class="p">{</span><span class="s1">&#39;messages&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;(INFO) Found simulation ID: starter-Ewn0Mn status ACTIVE&#39;</span><span class="p">,</span>
+              <span class="s1">&#39;(INFO) Started node &quot;A&quot;&#39;</span><span class="p">,</span>
+              <span class="s1">&#39;(INFO) Launch status: ACTIVE&#39;</span><span class="p">,</span>
+              <span class="s1">&#39;(INFO) Node &quot;A&quot; state changed from ABSENT to ACTIVE&#39;</span><span class="p">],</span>
+ <span class="s1">&#39;state&#39;</span><span class="p">:</span> <span class="s1">&#39;ACTIVE&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;INFO&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;statusID&#39;</span><span class="p">:</span> <span class="mi">173</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Please note that the ‘status’ key does not carry the simulation state, ‘state’
+does.</p>
+</div>
+<div class="section" id="getting-serial-ports">
+<h3>10.3.6. Getting serial ports<a class="headerlink" href="#getting-serial-ports" title="Permalink to this headline">¶</a></h3>
+<p>Serial port connection information can be retrieved for nodes defining them.
+There are at most 3 serial ports. Port 0 is always a CLI console. Port 1 is
+an alternate console connection for the IOS XRv, CSR1000v and NX-OSv subtypes.</p>
+<p>The resulting information can be provided in 3 formats. Telnet mode only works
+if the STD server runs on the same single physical node as the simulation.
+The default mode is a link to a websocket port, with a security token that
+must be provided as the HTTP cookie upon connecting. Final mode is a webpage
+served from the same location, using some JavaScript code for trivial terminal
+emulator in a web browser supporting websockets.</p>
+<p>The output format is a JSON object, with keys being the qualified node names,
+and values a string describing the connection, or null if the node does not
+define the specified port, or it is otherwise not available:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_std_client</span> <span class="n">simengine</span><span class="o">-</span><span class="n">serial</span><span class="o">-</span><span class="n">port</span> <span class="o">-</span><span class="n">s</span> <span class="n">pair</span><span class="o">-</span><span class="n">ciTdl_</span> <span class="o">-</span><span class="n">m</span> <span class="n">websocket</span>
+<span class="p">{</span><span class="s1">&#39;IOSv-1&#39;</span><span class="p">:</span> <span class="s1">&#39;ws://host:6083/websockify?token=11f0a871-bea3-4d6d-...&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;IOS XRv-1&#39;</span><span class="p">:</span> <span class="s1">&#39;ws://host:6083/websockify?token=4e31932a-8171-4d4a-...&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="exporting-a-simulation">
+<h3>10.3.7. Exporting a simulation<a class="headerlink" href="#exporting-a-simulation" title="Permalink to this headline">¶</a></h3>
+<p>Session’s original VIRL file, possibly extended with running and startup config
+for all supported or selected nodes can be retrieved:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">alias</span> <span class="n">std_export</span><span class="o">=</span><span class="s2">&quot;virl_std_client --quiet simengine-export&quot;</span>
+<span class="n">std_export</span> <span class="o">&gt;</span><span class="n">original</span><span class="o">.</span><span class="n">virl</span>
+<span class="n">std_export</span> <span class="o">--</span><span class="n">updated</span> <span class="o">&gt;</span><span class="n">dynamic_ips</span><span class="o">.</span><span class="n">virl</span>
+<span class="n">std_export</span> <span class="o">--</span><span class="n">startup</span><span class="o">-</span><span class="n">configs</span> <span class="o">&gt;</span><span class="n">output_file</span><span class="o">.</span><span class="n">virl</span>
+<span class="n">std_export</span> <span class="o">-</span><span class="n">r</span> <span class="s1">&#39;custom entry&#39;</span> <span class="o">&gt;</span><span class="n">running</span><span class="o">-</span><span class="nb">all</span><span class="o">.</span><span class="n">virl</span>
+<span class="n">std_export</span> <span class="o">-</span><span class="n">r</span> <span class="o">-</span><span class="n">n</span> <span class="n">group</span><span class="o">-</span><span class="mi">1</span><span class="p">::</span><span class="n">one</span><span class="o">-</span><span class="mi">1</span> <span class="n">two</span><span class="o">-</span><span class="mi">2</span> <span class="o">&gt;</span><span class="n">named</span><span class="o">.</span><span class="n">virl</span>
+<span class="n">std_export</span> <span class="o">-</span><span class="n">r</span> <span class="o">-</span><span class="n">n</span> <span class="s1">&#39;//virl:node[@subtype=&quot;CSR1000v&quot;]&#39;</span> <span class="o">&gt;</span><span class="n">paths</span><span class="o">.</span><span class="n">virl</span>
+</pre></div>
+</div>
+<p>Some additional data, currently only the dynamic IP address assignments to
+management and FLAT/SNAT interfaces, can be pushed into the exported file
+with the –updated flag.</p>
+<p>By default, no config downloads take place and the original VIRL file or a
+semantically equivalent version is returned. If either of –running-config or
+–startup-config flags are provided, the specified configs are downloaded and
+put into the corresponding extension entries. The default entry keys can be
+overridden by setting a parameter to -r, or -c, respectively.</p>
+<p>If config downloads are not supported for a platform, or config download fails,
+the node is skipped and its entries not added to the output, error ignored.</p>
+<p>If –nodes is not specified, all nodes in the topology are processed. Otherwise
+the nodes is a list of qualified node names and/or XPath 1.0 expressions using
+the virl: namespace prefix to denote the VIRL XML namespace. Each expression
+may select multiple nodes from the topology file to make up a cumulative set.
+Note that an empty list or expressions selecting nonexistent nodes will result
+in an empty set of processed nodes, which is allowed without issuing an error.</p>
+</div>
+<div class="section" id="stopping-and-starting-nodes">
+<h3>10.3.8. Stopping and starting nodes<a class="headerlink" href="#stopping-and-starting-nodes" title="Permalink to this headline">¶</a></h3>
+<p>The nodes in the simulated topology can be stopped and then started again.
+Note that a node will be stopped only if it’s already running, and started only
+if it is not running at all and has been deleted from orchestration.</p>
+<p>The node selection follows the same conventions as other subcommands:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_std_client</span> <span class="n">simengine</span><span class="o">-</span><span class="n">update</span><span class="o">-</span><span class="n">stop</span> <span class="o">-</span><span class="n">n</span> <span class="n">group</span><span class="o">-</span><span class="mi">1</span><span class="p">::</span><span class="n">one</span><span class="o">-</span><span class="mi">1</span> <span class="n">two</span><span class="o">-</span><span class="mi">2</span>
+<span class="c1"># after confirming that the node isn&#39;t running:</span>
+<span class="n">virl_std_client</span> <span class="n">simengine</span><span class="o">-</span><span class="n">update</span><span class="o">-</span><span class="n">start</span> <span class="o">-</span><span class="n">n</span> <span class="s1">&#39;//virl:node[2]&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="stopping-a-simulation">
+<h3>10.3.9. Stopping a simulation<a class="headerlink" href="#stopping-a-simulation" title="Permalink to this headline">¶</a></h3>
+<p>Stopping a simulation actually means deleting it, thus it’s equivalent to the
+virl session-delete command. This command, similar to launch, runs mainly
+in a background worker process, so that successful completion is indicated
+by the simengine-status command’s state set to “DONE”:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_std_client</span> <span class="n">simengine</span><span class="o">-</span><span class="n">stop</span>
+<span class="n">Simengine</span> <span class="n">server</span> <span class="n">responded</span><span class="p">:</span> <span class="n">SUCCESS</span>
+
+<span class="c1"># wait for this</span>
+<span class="n">virl_std_client</span> <span class="n">simengine</span><span class="o">-</span><span class="n">status</span>
+<span class="p">{</span><span class="s1">&#39;messages&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;(ERROR) Could not find simulation ID: starter-Ewn0Mn&#39;</span><span class="p">],</span>
+<span class="s1">&#39;state&#39;</span><span class="p">:</span> <span class="s1">&#39;DONE&#39;</span><span class="p">,</span>
+<span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;INFO&#39;</span><span class="p">,</span>
+<span class="s1">&#39;statusID&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>To wait for a limited time for a simulation stop, use the –wait parameter. The
+response will be a JSON dict instead of a simple string:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_std_client</span> <span class="n">simengine</span><span class="o">-</span><span class="n">stop</span> <span class="o">--</span><span class="n">json</span> <span class="o">-</span><span class="n">w</span> <span class="mi">30</span> \
+                <span class="o">-</span><span class="n">s</span> <span class="n">My_Topologies</span><span class="nd">@simple</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="n">EfP2gT</span>
+<span class="p">{</span>
+  <span class="s2">&quot;My_Topologies@simple-server-EfP2gT&quot;</span><span class="p">:</span> <span class="s2">&quot;DONE&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="administrative-access">
+<h3>10.3.10. Administrative access<a class="headerlink" href="#administrative-access" title="Permalink to this headline">¶</a></h3>
+<p>To list simulations of another user or all users, admin users can issue the
+simengine-admin list:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_std_client</span> <span class="o">-</span><span class="n">u</span> <span class="n">uwmadmin</span> <span class="o">-</span><span class="n">p</span> <span class="n">password</span> <span class="n">simengine</span><span class="o">-</span><span class="n">admin</span><span class="o">-</span><span class="nb">list</span> <span class="o">--</span><span class="nb">all</span><span class="o">-</span><span class="n">users</span>
+<span class="p">{</span><span class="s1">&#39;simulations&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;guest&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;My_Topologies@simple-server-EfP2gT&#39;</span><span class="p">:</span> <span class="s1">&#39;ACTIVE&#39;</span><span class="p">},</span>
+              <span class="s1">&#39;jumped&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Sample_Topologies@oca-Z5XvvZ&#39;</span><span class="p">:</span> <span class="s1">&#39;ACTIVE&#39;</span><span class="p">,</span>
+                          <span class="s1">&#39;Other_Topologies@mine-34vr5s&#39;</span><span class="p">:</span> <span class="s1">&#39;STOP&#39;</span><span class="p">,</span>
+                          <span class="s1">&#39;~jumphost&#39;</span><span class="p">:</span> <span class="s1">&#39;ACTIVE&#39;</span><span class="p">},</span>
+
+              <span class="s1">&#39;ported&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;~jumphost&#39;</span><span class="p">:</span> <span class="s1">&#39;ACTIVE&#39;</span><span class="p">},</span>
+              <span class="s1">&#39;unused&#39;</span><span class="p">:</span> <span class="p">{},</span>
+              <span class="s1">&#39;uwmadmin&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">}}</span>
+</pre></div>
+</div>
+<p>Similarly, an admin may request a stop on any simulation:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_std_client</span> <span class="o">-</span><span class="n">u</span> <span class="n">uwmadmin</span> <span class="o">-</span><span class="n">p</span> <span class="n">password</span> <span class="n">simengine</span><span class="o">-</span><span class="n">admin</span><span class="o">-</span><span class="n">stop</span> <span class="o">--</span><span class="nb">all</span><span class="o">-</span><span class="n">users</span> \
+                <span class="o">-</span><span class="n">s</span> <span class="o">~</span><span class="n">jumphost</span>
+<span class="p">{</span><span class="s1">&#39;simulations&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;guest&#39;</span><span class="p">:</span> <span class="p">{},</span>
+              <span class="s1">&#39;jumped&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;~jumphost&#39;</span><span class="p">:</span> <span class="s1">&#39;STOP&#39;</span><span class="p">},</span>
+              <span class="s1">&#39;ported&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;~jumphost&#39;</span><span class="p">:</span> <span class="s1">&#39;STOP&#39;</span><span class="p">},</span>
+              <span class="s1">&#39;unused&#39;</span><span class="p">:</span> <span class="p">{},</span>
+              <span class="s1">&#39;uwmadmin&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">}}</span>
+</pre></div>
+</div>
+<p>Administrators may use the simengine-systemlogs STD API call to retireve
+a ZIP-file containing all VIRL-generated log files:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_std_client</span> <span class="o">-</span><span class="n">u</span> <span class="n">uwmadmin</span> <span class="o">-</span><span class="n">p</span> <span class="n">password</span> <span class="n">simengine</span><span class="o">-</span><span class="n">systemlogs</span> <span class="o">&gt;</span><span class="n">logs</span><span class="o">.</span><span class="n">zip</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">10. VIRL Service Topology Director Server</a><ul>
+<li><a class="reference internal" href="#user-information-and-recovery">10.1. User information and recovery</a></li>
+<li><a class="reference internal" href="#starting-the-server">10.2. Starting the server</a></li>
+<li><a class="reference internal" href="#virl-std-client">10.3. VIRL STD client</a><ul>
+<li><a class="reference internal" href="#getting-version-information">10.3.1. Getting version information</a></li>
+<li><a class="reference internal" href="#using-autonetkit-to-generate-default-configurations">10.3.2. Using AutoNetkit to generate default configurations</a></li>
+<li><a class="reference internal" href="#launching-a-simulation">10.3.3. Launching a simulation</a></li>
+<li><a class="reference internal" href="#retrieving-a-list-of-simulations">10.3.4. Retrieving a list of simulations</a></li>
+<li><a class="reference internal" href="#simulation-status">10.3.5. Simulation status</a></li>
+<li><a class="reference internal" href="#getting-serial-ports">10.3.6. Getting serial ports</a></li>
+<li><a class="reference internal" href="#exporting-a-simulation">10.3.7. Exporting a simulation</a></li>
+<li><a class="reference internal" href="#stopping-and-starting-nodes">10.3.8. Stopping and starting nodes</a></li>
+<li><a class="reference internal" href="#stopping-a-simulation">10.3.9. Stopping a simulation</a></li>
+<li><a class="reference internal" href="#administrative-access">10.3.10. Administrative access</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="uwm_server.html"
+                        title="previous chapter">9. VIRL User Workspace Management Server</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="troubleshooting.html"
+                        title="next chapter">11. Troubleshooting</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/std_server.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="troubleshooting.html" title="11. Troubleshooting"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="uwm_server.html" title="9. VIRL User Workspace Management Server"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">VIRL 0.10.35.35 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="README.html" >README</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Cisco Systems, Inc.
+All rights reserved..
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
+    </div>
+  </body>
+</html>

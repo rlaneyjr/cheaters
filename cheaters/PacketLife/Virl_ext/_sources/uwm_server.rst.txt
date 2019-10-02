@@ -1,0 +1,1844 @@
+VIRL User Workspace Management Server
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This server takes care of project and user management in the VM orchestration
+layer, as well as user management for the STD server described in the next
+section.
+
+It provides a web-based interface for administrators and users alike, providing
+information on the sessions they run, their quotas and usage information.
+
+It also provides a means to manage project-specific VM disk images, and shared
+images (both OpenStack and LXC), OpenStack flavors and LXC templates.
+
+The Connectivity tab enables users to see and administrators to manage outside
+connections. The connections are of three types: L2 Flat, L3 Snat and Project
+Management.
+
+There is a VM Control section that allows an admin user to tear down individual
+and groups of OpenStack artefacts without intermediate processing by the STD.
+This feature is meant for troubleshooting purposes, to assist with stale assets
+left behind for any reason.
+
+User mode
+=========
+
+User mode is available to all users defined in the system. It provides a view
+into the system that is more suitable for workflows using the VIRL GUI than
+OpenStack Dashboard itself, which need not be available to users.
+
+Project view
+^^^^^^^^^^^^
+
+The project view summarizes the list of sessions running by all users belonging
+to the same project. It also provides an overview on the resource utilization
+within the project with respect to quota constraints set on the project.
+
+Sessions view
+^^^^^^^^^^^^^
+
+This view provides information on the sessions the user has currently running.
+
+A new session can be launched by providing a VIRL file defining the simulation.
+The launched simulation may be previewed, and the use of management network
+and management LXC configuration tweaked before launching the simulation.
+
+Each session has a detailed page listing the nodes and their special interfaces
+connected to management or external networks, along with their IP addresses.
+
+It also makes available a web-based interface to connect to a router node's
+serial console, as well as a server's VNC display. SSH connections are made
+available for the jumphost and management LXC nodes, which in turn can be used
+to connect further into each simulation node over the management network.
+
+Each node, or a group of nodes may be started or stopped individually, and
+a configuration extraction operation can be initiated, retrieving the current
+configuration on all supported and running Cisco routers in the form of an
+updated VIRL file.
+
+A live visualization can be launched, capable of retrieving various information
+about the running simulation, especially routing protocols' status.
+
+An interface table lists all interfaces in the simulation, along with external
+and management IP addresses set on each interface. Each interface's link state
+may be set to up or down, making the connectivity to that interface unavailable
+and traffic not forwarded. The link state may be detected and acted upon by
+the OpenStack VM nodes, with notable exception of IOS XRv.
+
+On any individual interface, a traffic capture may be initiated, collecting
+the traffic passing that interface in the PCAP format, viewable with tools such
+as Wireshark. The captures may be filtered (using tcpdump's syntax) in order to
+only capture interesting traffic.
+
+There are two modes of traffic capture. The first and preferred mode, offline,
+captures the traffic into a file which may be downloaded at any and multiple
+times. The online mode opens a TCP port, which upon each connection to it 
+starts a new traffic capture, streaming the captured file data. The stream is
+best stored into a file on the client's system, which will fill up as traffic
+is encountered. Wireshark reload feature can be used to see the updates.
+Note that the wireshark pipe feed mechanism only works once per TCP connection
+as PCAP header data is only sent at the beginning of the stream.
+
+Please note that e.g. status updates will not be refreshed automatically, and
+the page needs to be reloaded in order to view the latest information.
+
+Images view
+^^^^^^^^^^^
+
+The images view provides each user a means to review the list and properties
+of all images available to them, either owned by the project they are part of,
+or images shared between projects.
+
+Any user may add, modify or delete all project-owned images. Additionally, the
+user may review the image's attributes in the image detail view.
+
+Images whose names match the subtype of a node will be selected by default when
+the node starts, if the node does not select another.
+
+Images whose names are prefixed with a project name (and a dash) will be used
+in favor of images not prefixed in this manner, as if they matched the node's
+selection exactly. Additionally, images owned by the user's project will be
+preferred over other images with the same name.
+
+Note that having images with the same name is allowed in OpenStack; which image
+will be selected when a node starts if there are multiple with equal properties
+outlined above is undefined (one of them will be selected without error).
+
+Create image view
+^^^^^^^^^^^^^^^^^
+
+A user may add a new image by clicking on the "Add" image in the images view.
+The name of the created image is composed from the project name, the subtype
+selected in the form, and optionally the version provided in the text field.
+
+The user may upload the image using the browser, but since it's common that the
+image located nearer to the VIRL server than the user, the http[s] or [t]ftp
+address for the image may be provided instead.
+In both cases the file size is limited to 10GB (configurable in common.cfg).
+Additionally, a path local to the VIRL server may be the source - this method
+has no file size limit.
+
+All images will be converted to the QCOW2 format before upload to OpenStack.
+Moreover, no RAW (unknown-format) images are accepted to prevent errors. Even
+an QCOW2 file will be processed this way; thus, the checksum for the image as
+presented in the image details will differ from the source image's in almost
+all cases.
+
+The added image will be private and only available to users in the same project
+as the adding user.
+
+Final element of the form is the properties text area. Here, the user may put
+any key = value pairs, one per line. It's primary use is to override the value
+for hw_vif_model or hw_disk_bus, if it's known to differ from the defaults as
+outlined in the section "Supported node subtypes". In general, the user need
+not put anything into this field.
+
+Modify image view
+^^^^^^^^^^^^^^^^^
+
+The images owned by a user's project may be modified. The subtype cannot be
+changed (even by editing the properties view), but the version, and thus the
+final image name can be modified. The image properties can be edited at will,
+the same rules apply as when the image is created.
+
+LXC Settings view
+^^^^^^^^^^^^^^^^^
+
+This view may be used to display and manage images and templates usable by the
+LXC node subtypes. The mechanics are very similar to the OpenStack VM images.
+
+As discussed elsewhere, LXC images are .tar.gz files containing an archive
+of files to include in the LXC node. A template is a script performing the
+necessary steps to create, configure and start the applications in the node.
+
+Flavors view
+^^^^^^^^^^^^
+
+In this view, the users get an overview of all flavors they may select for any
+node in their topologies. The flavor selects how much resources, notably RAM
+and Virtual CPUs will be reserved for the node.
+
+Flavors whose names match the subtype of a node will be selected by default.
+Flavors whose names are prefixed with a project name (and a dash) will be used
+in favor of flavors not prefixed in this manner, as if they matched the node's
+flavor name exactly. Unlike images, flavors do not have owners.
+
+Connectivity
+^^^^^^^^^^^^
+
+This view displays the outside connections created for the project of this
+user. Some connections are created automatically when the user was created or
+when a simulation was started, others are configured manually by admin users.
+
+Repositories
+^^^^^^^^^^^^
+
+In this view, each user can manage a set of (remote) attached git repositories
+preferably containing VIRL files. The HTTP(S) and SSH methods of connecting to
+remote repositories are supported.
+
+For repositories requiring authentication, a password may be provided when the
+repository is cloned, as well as updated. VIRL does not store this password.
+
+Files can be browsed and previewed in each repository, and VIRL files may be
+previewed and launched as new simulations by the user.
+
+No modifications to the repository are supported, users should make use of
+tools dedicated to git repository management for populating the repositories.
+
+Settings and password
+^^^^^^^^^^^^^^^^^^^^^
+
+This view allows each user to see the names, roles, ID's and other useful data
+the system maintains with regards to it. Also, the user password can be changed
+- it changes the password in OpenStack too.
+
+Another configuration option is setting the SSH public key which can be made
+available to server nodes using cloud-init-based initial configuration.
+
+Admin mode
+==========
+
+The admin mode is available to users with the "admin" role. The admin mode's
+overview allows to see the sessions of all users of all projects.
+
+Overview
+^^^^^^^^
+
+The main page of the admin interface provides a view into all users and running
+simulations on the system. An admin may stop any simulation, and see its status
+in a details page. The launch features are not provided for administrators.
+
+Salt configuration and status view
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This view is used to set up the salt-based licensing of the VIRL product.
+Each user is provided a unique product key as a PEM-formated RSA key, along
+with a unique name for the key. This key is used to authenticate against
+Cisco master servers providing the licensing authorization, as well as software
+upgrade and configuration features.
+
+System configuration controls view
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This view provides a way to reconfigure the /etc/virl.ini file, which is used
+by the installation and configuration system to set up the VIRL host system.
+
+Each change, when applied, causes a process in the installation system to be
+executed. A reboot of the host system must be initiated by the administrator
+of the system after a rehost operation is performed, which it is whenever e.g.
+system-wide network configuration changes need to be applied.
+
+Note that the UWM may be restarted itself if particular modifications are
+made affecting it. Status of the processes involved can be viewed when changes
+are applied to the system.
+
+System tools view
+^^^^^^^^^^^^^^^^^^
+
+This view has three features. First is displaying various usage statistics
+as logged by the system.
+
+The second feature performs a cursory health check, for determining if the
+infrastructure required for correct performance of the VIRL system is in
+place and good shape. This may assist troubleshooting common failure modes
+of the underlying system machinery, which should be then resolvable by the
+VIRL community forums.
+
+The third feature collects and downloads system logs from the host in a zip
+archive, which may be requested by the community in order to troubleshoot
+if more serious issues arise on the user's system.
+
+VIRL Software view
+^^^^^^^^^^^^^^^^^^
+
+This view provides options for upgrading the various sofware components of
+the VIRL system. These include the VIRL-CORE package itself, Autonetkit,
+the VMMaestro clients downloadable from the host, and provided router images.
+
+The same salt-based installation and configuration system is used to perform
+the upgrades. Different versions on the salt master are compared and offered
+for synchronization.
+
+Projects view
+^^^^^^^^^^^^^
+
+This view lists all projects containing users managed by the UWM server.
+
+Any project can be modified, including disabling, expiring it, or changing
+the shared quota on number of instances, RAM and VCPUs available to users.
+
+A project may be deleted; everything related to it will be purged from UWM,
+STD, and first and foremost, the OpenStack orchestration.
+
+Create project view
+^^^^^^^^^^^^^^^^^^^
+
+A new project will be added to the UWM/STD database, as well as OpenStack.
+The management and SNAT networks every project requires are created as well,
+along with a user named the same as the project. This user may be made an
+administrator; this allows the user to control everything, both in UWM and in
+OpenStack.
+
+Users view
+^^^^^^^^^^
+
+In this view, an administrator can see, edit and delete every defined user.
+A deleted user's simulations and endpoint will be removed as well.
+
+A user may be disabled; in this case, no operations can be authorized by the
+user, neither in UWM, STD nor OpenStack.
+
+A user may also expire; in this case, the only available operations are to
+see and stop simulations running using the GUI or virl_std_client.
+
+Create user(s) view
+^^^^^^^^^^^^^^^^^^^
+
+New users can be added to a project; the project name will be prefixed to the
+supplied username for all of them. If multiple users are created, they are
+numbered and their passwords are random strings only shown once as a result
+of the creation process. Users may not be renamed afterwards.
+
+Images view
+^^^^^^^^^^^
+
+The images view is essentially the same as the version regular users see, with
+the notable difference that all images from all projects are controllable.
+
+Behavior differs in that images created in this mode do not have the project's
+name prefixed to them, and they are created public, i.e. visible to all users.
+
+Flavors view
+^^^^^^^^^^^^
+
+Similar to images, flavors can be created and removed if required through this
+view. The mechanics are very similar to the image management views.
+
+Lxc settings view
+^^^^^^^^^^^^^^^^^
+
+The LXC settings manageable in this view are the images and templates used to
+create LXC topology nodes.
+
+Subtypes view
+^^^^^^^^^^^^^
+
+Most of the information contained in a subtype plugin is in the form of a set
+of values used by the LLI. If a subtype can be created by merely adjusting some
+of these values from an existing subtype, this UWM section can assist in doing
+just that.
+
+Connectivity
+^^^^^^^^^^^^
+
+On these pages admin users can see all the outside connections existing for all
+users in all projects. Connections that are not attached can be deleted.
+
+New connections of all three types can be manually created with custom or
+automatically picked IP Adresses.
+
+VM Control view
+^^^^^^^^^^^^^^^
+
+This view allows an admin user to remove broken resources from the system, like
+nodes, networks, ports and floating IPs.
+
+REST API and VIRL UWM client
+============================
+
+All the functionality of the web interface is also accessible through a REST
+API and a CLI client.
+
+By default, UWM listens on port 19400. This can be configured in virl.ini::
+
+    virl_user_management: 19400
+
+REST API documentation can be found in UWM itself, under "Documentation / UWM API".
+
+Currently the UWM API allows a user to manage the following kinds of resources:
+projects, users, images, flavors, subtypes and VM-related resources.
+
+..
+   TODO: add volumes
+
+The services accept arguments in the form of query parameters, form-data, or
+values in a JSON object sent in the request body. The type of parameters used
+is determined by the request content-type (multipart/form-data or
+application/x-www-form-urlencoded means form-data; application/json indicates
+a JSON object; in other cases the query parameters will be used).
+
+By default, the response contents are parsed to Python objects and printed to
+standard output. The global --json flag is available to convert the output back
+to JSON.
+
+The following describes the usage of the VIRL UWM client in the form of
+examples. For details of the single commands and their parameters, please refer
+to the help of virl_uwm_client itself. More detailed information in case of an
+error can be obtained with the global --debug flag.
+
+Editing the settings of the current user
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Details of the current user can be retrieved as follows::
+
+    virl_uwm_client --quiet --json settings
+    {
+      "user": {
+        "username": "guest",
+        "os-id": "67ff232a830342c4807fc63f3580308b",
+        "auth-url": "http://localhost:5000/v2.0",
+        "created": "2014-08-12 11:54:59",
+        "os-username": "guest",
+        "enabled": true,
+        "expires": null,
+        "ssh-public-key": "",
+        "project": "guest",
+        "roles": [
+          "_member_"
+        ],
+        "has-endpoint": true,
+        "email": null
+      }
+    }
+
+Changing password via an admin request::
+
+    virl_uwm_client --quiet --json change-password -p secret
+    {
+      "password-changed": true,
+      "user": {
+        "username": "guest",
+        "os-id": "67ff232a830342c4807fc63f3580308b",
+        "auth-url": "http://localhost:5000/v2.0",
+        "created": "2014-08-12 11:54:59",
+        "os-username": "guest",
+        "enabled": true,
+        "expires": null,
+        "ssh-public-key": "",
+        "project": "guest",
+        "roles": [
+          "_member_"
+        ],
+        "has-endpoint": true,
+        "email": null
+      }
+    }
+
+When the password of a user is changed, the underlying OpenStack user's
+password is also modified, to a value derived from the new UWM password.
+This can also be computed with the following command::
+
+    virl_uwm_client --quiet make-os-password -p secret
+    5en6G6MezRroT3XKqkdPOmY/BfQ=
+
+Users with an STD endpoint can also set their SSH public key::
+
+    virl_uwm_client --quiet --json -p secret new-ssh-public-key \
+                    -k @~/.ssh/id_rsa.pub
+    {
+      "ssh-public-key-updated": true,
+      "user": {
+        "username": "guest",
+        "os-id": "67ff232a830342c4807fc63f3580308b",
+        "auth-url": "http://localhost:5000/v2.0",
+        "created": "2014-08-12 11:54:59",
+        "os-username": "guest",
+        "enabled": true,
+        "expires": null,
+        "ssh-public-key": "ssh-rsa AAAAB3N... virl@virl",
+        "project": "guest",
+        "roles": [
+          "_member_"
+        ],
+        "has-endpoint": true,
+        "email": null
+      }
+    }
+
+To reset the SSH public key, pass an empty string as the new key::
+
+    virl_uwm_client --quiet --json -p secret new-ssh-public-key -k ''
+    {
+      "ssh-public-key-reset": true,
+      "user": {
+        "username": "guest",
+        "os-id": "67ff232a830342c4807fc63f3580308b",
+        "auth-url": "http://localhost:5000/v2.0",
+        "created": "2014-08-12 11:54:59",
+        "os-username": "guest",
+        "enabled": true,
+        "expires": null,
+        "ssh-public-key": "",
+        "project": "guest",
+        "roles": [
+          "_member_"
+        ],
+        "has-endpoint": true,
+        "email": null
+      }
+    }
+
+User management (admin only)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Users can be listed::
+
+    virl_uwm_client --quiet --json -u uwmadmin -p password user-info
+    {
+      "users": [
+        {
+          "username": "uwmadmin",
+          "os-id": "6ded14f7b8b94ad5953f09aca121efc9",
+          "auth-url": "http://localhost:5000/v2.0",
+          "created": "2014-08-12 11:54:56",
+          "os-username": "uwmadmin",
+          "enabled": true,
+          "expires": null,
+          "ssh-public-key": null,
+          "project": "uwmadmin",
+          "roles": [
+            "admin"
+          ],
+          "has-endpoint": false,
+          "email": null
+        },
+        {
+          "username": "guest",
+          "os-id": "67ff232a830342c4807fc63f3580308b",
+          "auth-url": "http://localhost:5000/v2.0",
+          "created": "2014-08-12 11:54:59",
+          "os-username": "guest",
+          "enabled": true,
+          "expires": null,
+          "ssh-public-key": "",
+          "project": "guest",
+          "roles": [
+            "_member_"
+          ],
+          "has-endpoint": true,
+          "email": null
+        }
+      ]
+    }
+
+Details of a single user can be retrieved by specifying a username::
+
+    virl_uwm_client --quiet --json -u uwmadmin -p password user-info -n guest
+    {
+      "user": {
+        "username": "guest",
+        "os-id": "67ff232a830342c4807fc63f3580308b",
+        "auth-url": "http://localhost:5000/v2.0",
+        "created": "2014-08-12 11:54:59",
+        "os-username": "guest",
+        "enabled": true,
+        "expires": null,
+        "ssh-public-key": "",
+        "project": "guest",
+        "roles": [
+          "_member_"
+        ],
+        "has-endpoint": true,
+        "email": null
+      }
+    }
+
+When creating a user, the name of its project (which must already exist) has to
+be specified. By default the user's role will be "_member_", i.e. he/she will
+have no admin privileges. To give the user an admin role, pass the -r/--role
+parameter with the value "admin". The name of the new user will be prefixed
+by the project name. An STD endpoint will be automatically created for the
+user, so he/she will be able to run simulations if the project also has a
+management network::
+
+    virl_uwm_client --quiet --json -u uwmadmin -p password user-create \
+                    -n testuser -p test -t guest -r admin -x 2015-01-01
+    {
+      "user": {
+        "username": "guest-testuser",
+        "os-id": "5a2e0273d4a349cf9accdd5b6e0f0844",
+        "auth-url": "http://localhost:5000/v2.0",
+        "created": "2014-08-12 13:27:36",
+        "os-username": "guest-testuser",
+        "enabled": true,
+        "expires": "2015-01-01 00:00:00",
+        "ssh-public-key": "",
+        "project": "guest",
+        "roles": [
+          "admin",
+          "_member_"
+        ],
+        "has-endpoint": true,
+        "email": null
+      }
+    }
+
+In the web interface of UWM, admins can create multiple users at once. This is
+directly not supported by the UWM API, since the same operation can be achieved
+by a simple script.
+
+When editing a user, you can reset its expiration by specifying an empty string
+as the new expiration date::
+
+    virl_uwm_client --quiet --json -u uwmadmin -p password user-edit \
+                    -n guest-testuser -m test@example.com -x ''
+    {
+      "user": {
+        "username": "guest-testuser",
+        "os-id": "5a2e0273d4a349cf9accdd5b6e0f0844",
+        "auth-url": "http://localhost:5000/v2.0",
+        "created": "2014-08-12 13:27:36",
+        "os-username": "guest-testuser",
+        "enabled": true,
+        "expires": null,
+        "ssh-public-key": "",
+        "project": "guest",
+        "roles": [
+          "admin",
+          "_member_"
+        ],
+        "has-endpoint": true,
+        "email": "test@example.com"
+      }
+    }
+
+Users without active simulations can also be deleted::
+
+    virl_uwm_client --quiet --json -u uwmadmin -p password user-delete \
+                    -n guest-testuser
+    {
+      "deleted": true,
+      "user": {
+        "username": "guest-testuser",
+        "os-id": "5a2e0273d4a349cf9accdd5b6e0f0844",
+        "auth-url": "http://localhost:5000/v2.0",
+        "created": "2014-08-12 13:27:36",
+        "os-username": "guest-testuser",
+        "enabled": true,
+        "expires": null,
+        "ssh-public-key": "",
+        "project": "guest",
+        "roles": [
+          "admin",
+          "_member_"
+        ],
+        "has-endpoint": true,
+        "email": "test@example.com"
+      }
+    }
+
+Project management (admin only)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You can list all the projects::
+
+    virl_uwm_client --quiet --json -u uwmadmin -p password project-info
+    {
+      "projects": [
+        {
+          "users": [
+            "uwmadmin"
+          ],
+          "created": "2014-08-12 11:54:56",
+          "description": null,
+          "expires": null,
+          "enabled": true,
+          "quota": {
+            "instances": 1,
+            "vcpus": 1000,
+            "ram": 5120000
+          },
+          "os-id": "098b55d3bc4846b88b3da65908c528fb",
+          "name": "uwmadmin"
+        },
+        {
+          "users": [
+            "guest"
+          ],
+          "created": "2014-08-12 11:54:58",
+          "description": null,
+          "expires": null,
+          "enabled": true,
+          "quota": {
+            "instances": 100,
+            "vcpus": 1000,
+            "ram": 5120000
+          },
+          "os-id": "c4cba1eea5fe46afbc9a4a01356f7c44",
+          "name": "guest"
+        }
+      ]
+    }
+
+or retrieve the details of just a specific one::
+
+    virl_uwm_client --quiet --json -u uwmadmin -p password project-info \
+                    -n guest
+    {
+      "project": {
+        "users": [
+          "guest"
+        ],
+        "created": "2014-08-12 11:54:58",
+        "description": null,
+        "expires": null,
+        "enabled": true,
+        "quota": {
+          "instances": 100,
+          "vcpus": 1000,
+          "ram": 5120000
+        },
+        "os-id": "c4cba1eea5fe46afbc9a4a01356f7c44",
+        "name": "guest"
+      }
+    }
+
+When creating a project, a main user will also be created for the project,
+named the same as the project. This user gets a random password, that is
+included in the response. Networks for the project are also automatically set
+up::
+
+    virl_uwm_client --quiet --json -u uwmadmin -p password project-create \
+                    -n testproj -i 50 -r 2560000 -c 100
+    {
+      "main-user": {
+        "username": "testproj",
+        "os-id": "4f52f199584e4e46aa1f1b2341419b9d",
+        "auth-url": "http://virl-ucs-07:5000/v2.0",
+        "created": "2014-08-22 10:23:15",
+        "os-username": "testproj",
+        "ssh-public-key": "",
+        "expires": null,
+        "enabled": true,
+        "project": "testproj",
+        "os-password": "szdvytx+qxikIYxQv+8nd+TpxAA=",
+        "roles": [
+          "_member_"
+        ],
+        "has-endpoint": true,
+        "password": "79bLTf",
+        "email": null
+      },
+      "project": {
+        "os-id": "9332d9d92b9e476e8cf048b6be580f8b",
+        "created": "2014-08-22 10:23:08",
+        "expires": null,
+        "enabled": true,
+        "quota": {
+          "instances": 50,
+          "vcpus": 100,
+          "ram": 2560000
+        },
+        "name": "testproj",
+        "users": [
+          "testproj"
+        ],
+        "description": null
+      }
+    }
+
+You can edit all the properties of a project, except it's name::
+
+    virl_uwm_client --quiet --json -u uwmadmin -p password project-edit \
+                    -n testproj -e False -x 2014-10-31
+    {
+      "project": {
+        "os-id": "9332d9d92b9e476e8cf048b6be580f8b",
+        "created": "2014-08-22 10:23:08",
+        "expires": "2014-10-31 00:00:00",
+        "enabled": false,
+        "quota": {
+          "instances": 50,
+          "vcpus": 100,
+          "ram": 2560000
+        },
+        "name": "testproj",
+        "users": [
+          "testproj"
+        ],
+        "description": null
+      }
+    }
+
+Let's add a user to the project::
+
+    virl_uwm_client --quiet --json -u uwmadmin -p password user-create \
+                    -n myuser -p secret -t testproj -r _member_
+    {
+      "user": {
+        "username": "testproj-myuser",
+        "os-id": "34cc57289bf3418e850fe0db3f1ea925",
+        "auth-url": "http://virl-ucs-07:5000/v2.0",
+        "created": "2014-08-22 10:26:55",
+        "os-username": "testproj-myuser",
+        "ssh-public-key": "",
+        "expires": null,
+        "enabled": true,
+        "project": "testproj",
+        "roles": [
+          "_member_"
+        ],
+        "has-endpoint": true,
+        "email": null
+      }
+    }
+
+When deleting a project, all its users are also deleted, along with the
+networks that were set up. Note that the project must not have active
+simulations::
+
+    virl_uwm_client --quiet --json -u uwmadmin -p password project-delete \
+                    -n testproj
+    {
+      "deleted-project": true,
+      "project": {
+        "os-id": "9332d9d92b9e476e8cf048b6be580f8b",
+        "created": "2014-08-22 10:23:08",
+        "expires": "2014-10-31 00:00:00",
+        "enabled": false,
+        "quota": {
+          "instances": 50,
+          "vcpus": 100,
+          "ram": 2560000
+        },
+        "name": "testproj",
+        "users": [
+          "testproj",
+          "testproj-myuser"
+        ],
+        "description": null
+      },
+      "deleted-network-resources": true,
+      "deleted-users": [
+        "testproj",
+        "testproj-myuser"
+      ],
+      "deleted-all-users": true
+    }
+
+Image management
+^^^^^^^^^^^^^^^^
+
+Admin users are able to see and manipulate all images in the system.
+Ordinary users see every image that is owned by their project or is public,
+but can only manipulate owned images.
+
+The response of each image service includes information about the disk usage.
+
+Listing all images::
+
+    virl_uwm_client --quiet --json image-info
+    {
+      "images": [
+        {
+          "status": "active",
+          "_owned": false,
+          "name": "IOSv",
+          "deleted": false,
+          "container_format": "bare",
+          "created_at": "2014-08-12T11:54:32",
+          "disk_format": "qcow2",
+          "updated_at": "2014-08-12T11:54:34",
+          "id": "22c37e1a-c17e-41d0-981e-1cdac3bd7ffd",
+          "min_disk": 0,
+          "protected": false,
+          "min_ram": 0,
+          "checksum": "47e1192b04933168d30863cba2b92aae",
+          "owner": "519873d1552c4afca1eec83c6c218c64",
+          "is_public": true,
+          "deleted_at": null,
+          "properties": {
+            "hw_vif_model": "e1000",
+            "hw_disk_bus": "virtio",
+            "subtype": "IOSv",
+            "release": "vios-15.4T",
+            "serial": "2",
+            "config_disk_type": "disk",
+            "hw_cdrom_type": "ide"
+          },
+          "size": 121700352
+        },
+        {
+          "status": "active",
+          "_owned": false,
+          "name": "server",
+          "deleted": false,
+          "container_format": "bare",
+          "created_at": "2014-08-12T11:54:37",
+          "disk_format": "qcow2",
+          "updated_at": "2014-08-12T11:54:44",
+          "id": "b2c7c492-7508-45f6-b6f2-2619f3cee997",
+          "min_disk": 0,
+          "protected": false,
+          "min_ram": 0,
+          "checksum": "3b75214936278965eb716449733b105b",
+          "owner": "519873d1552c4afca1eec83c6c218c64",
+          "is_public": true,
+          "deleted_at": null,
+          "properties": {
+            "release": "ubuntu.trusty64",
+            "subtype": "server",
+            "serial": "1",
+            "hw_disk_bus": "virtio"
+          },
+          "size": 252641792
+        }
+      ],
+      "disk-usage": {
+        "used-disk-space-GB": "3.64",
+        "percentage-usage": "11.97",
+        "total-disk-space-GB": "30.40"
+      }
+    }
+
+Specific images are accessible through their IDs::
+
+    virl_uwm_client --quiet --json image-info \
+                    -i b2c7c492-7508-45f6-b6f2-2619f3cee997
+    {
+      "image": {
+        "status": "active",
+        "_owned": false,
+        "name": "server",
+        "deleted": false,
+        "container_format": "bare",
+        "created_at": "2014-08-12T11:54:37",
+        "disk_format": "qcow2",
+        "updated_at": "2014-08-12T11:54:44",
+        "id": "b2c7c492-7508-45f6-b6f2-2619f3cee997",
+        "min_disk": 0,
+        "protected": false,
+        "min_ram": 0,
+        "checksum": "3b75214936278965eb716449733b105b",
+        "owner": "519873d1552c4afca1eec83c6c218c64",
+        "is_public": true,
+        "deleted_at": null,
+        "properties": {
+          "release": "ubuntu.trusty64",
+          "subtype": "server",
+          "serial": "1",
+          "hw_disk_bus": "virtio"
+        },
+        "size": 252641792
+      },
+      "disk-usage": {
+        "used-disk-space-GB": "3.64",
+        "percentage-usage": "11.98",
+        "total-disk-space-GB": "30.40"
+      }
+    }
+
+Images created by non-admin users are project-specific. Such images are private
+- visible only inside the project -, and are named as project-subtype-version.
+On the other hand, images created by admin users are by default public and
+their name does not get prefixed by the project name. However, admin users also
+can create project-specific images by setting the -s True flag.
+
+For image creation, the only mandatory parameters are the subtype name (must
+already exist and flagged as visible on GUI) and the source of the image file
+specified by either i) an absolute path on the VIRL server; ii) a URL from
+where the UWM server will download the image (the supported schemes are http,
+https, ftp and tftp); or iii) a path to a local image file which will be sent
+in the request::
+
+    virl_uwm_client --quiet --json image-create -t "IOS XRv" -v demo \
+                    -S "/home/virl/images/iosxrv-k9-demo-5.1.2.vmdk"
+    {
+      "image": {
+        "status": "active",
+        "_owned": true,
+        "name": "guest-IOS XRv-demo",
+        "deleted": false,
+        "container_format": "bare",
+        "created_at": "2014-08-12T13:46:35",
+        "disk_format": "qcow2",
+        "updated_at": "2014-08-12T13:46:44",
+        "id": "a3c11dc7-d964-4880-afb2-ec7bd01f8b54",
+        "min_disk": 0,
+        "protected": false,
+        "min_ram": 0,
+        "checksum": "81b00ecd200a34b4c5e1e472e654a5ac",
+        "owner": "c4cba1eea5fe46afbc9a4a01356f7c44",
+        "is_public": false,
+        "deleted_at": null,
+        "properties": {
+          "hw_vif_model": "virtio",
+          "config_disk_type": "cdrom",
+          "subtype": "IOS XRv",
+          "version": "demo",
+          "serial": "3",
+          "hw_disk_bus": "ide"
+        },
+        "size": 527040512
+      },
+      "disk-usage": {
+        "used-disk-space-GB": "4.13",
+        "percentage-usage": "13.60",
+        "total-disk-space-GB": "30.40"
+      }
+    }
+
+Images can be created also by directly uploading a file, however, this method
+is not recommended since the image files are usually large and performing the
+request can take really long::
+
+    virl_uwm_client --quiet --json image-create -t "IOS XRv" -v demo \
+                    -f "/home/user/Downloads/iosxrv-k9-demo-5.1.2.vmdk"
+    {
+      "image": {
+        "status": "active",
+        "_owned": true,
+        "name": "guest-IOS XRv-demo",
+        "deleted": false,
+        "container_format": "bare",
+        "created_at": "2014-08-12T13:48:05",
+        "disk_format": "qcow2",
+        "updated_at": "2014-08-12T13:48:14",
+        "id": "062e5482-a09c-4a59-b507-76a5e5bfa5f7",
+        "min_disk": 0,
+        "protected": false,
+        "min_ram": 0,
+        "checksum": "81b00ecd200a34b4c5e1e472e654a5ac",
+        "owner": "c4cba1eea5fe46afbc9a4a01356f7c44",
+        "is_public": false,
+        "deleted_at": null,
+        "properties": {
+          "hw_vif_model": "virtio",
+          "config_disk_type": "cdrom",
+          "subtype": "IOS XRv",
+          "version": "demo",
+          "serial": "3",
+          "hw_disk_bus": "ide"
+        },
+        "size": 527040512
+      },
+      "disk-usage": {
+        "used-disk-space-GB": "5.12",
+        "percentage-usage": "16.83",
+        "total-disk-space-GB": "30.40"
+      }
+    }
+
+After creating an image, you can modify it's name and other properties. However
+the image contents and its access (public or private) cannot be edited.
+To change the name of the image, specify a version (or pass an empty string).
+The parameter --project-specific/-s will also affect the new image name::
+
+    virl_uwm_client --quiet --json image-edit \
+                    -i 062e5482-a09c-4a59-b507-76a5e5bfa5f7 -v ''
+    {
+      "image": {
+        "status": "active",
+        "_owned": true,
+        "name": "guest-IOS XRv",
+        "deleted": false,
+        "container_format": "bare",
+        "created_at": "2014-08-12T13:48:05",
+        "disk_format": "qcow2",
+        "updated_at": "2014-08-12T13:49:48",
+        "id": "062e5482-a09c-4a59-b507-76a5e5bfa5f7",
+        "min_disk": 0,
+        "protected": false,
+        "min_ram": 0,
+        "checksum": "81b00ecd200a34b4c5e1e472e654a5ac",
+        "owner": "c4cba1eea5fe46afbc9a4a01356f7c44",
+        "is_public": false,
+        "deleted_at": null,
+        "properties": {
+          "subtype": "IOS XRv",
+          "serial": "3",
+          "hw_vif_model": "virtio",
+          "config_disk_type": "cdrom",
+          "hw_disk_bus": "ide"
+        },
+        "size": 527040512
+      },
+      "disk-usage": {
+        "used-disk-space-GB": "4.62",
+        "percentage-usage": "15.21",
+        "total-disk-space-GB": "30.40"
+      }
+    }
+
+Deleting an image::
+
+    virl_uwm_client --quiet --json image-delete \
+                    -i 062e5482-a09c-4a59-b507-76a5e5bfa5f7
+    {
+      "deleted": true,
+      "image": {
+        "status": "active",
+        "_owned": true,
+        "name": "guest-IOS XRv",
+        "deleted": false,
+        "container_format": "bare",
+        "created_at": "2014-08-12T13:48:05",
+        "disk_format": "qcow2",
+        "updated_at": "2014-08-12T13:49:48",
+        "id": "062e5482-a09c-4a59-b507-76a5e5bfa5f7",
+        "min_disk": 0,
+        "protected": false,
+        "min_ram": 0,
+        "checksum": "81b00ecd200a34b4c5e1e472e654a5ac",
+        "owner": "c4cba1eea5fe46afbc9a4a01356f7c44",
+        "is_public": false,
+        "deleted_at": null,
+        "properties": {
+          "subtype": "IOS XRv",
+          "serial": "3",
+          "hw_vif_model": "virtio",
+          "config_disk_type": "cdrom",
+          "hw_disk_bus": "ide"
+        },
+        "size": 527040512
+      },
+      "disk-usage": {
+        "used-disk-space-GB": "4.13",
+        "percentage-usage": "13.60",
+        "total-disk-space-GB": "30.40"
+      }
+    }
+
+Similar but separate APIs exist also for the LXC images and templates. These
+items have much fewer properties to set, meaning that their management is
+a simpler version of the VM image handling.
+
+..
+   TODO: add volumes
+
+Flavor management
+^^^^^^^^^^^^^^^^^
+
+Retrieving all flavors (the output is trimmed)::
+
+    virl_uwm_client --quiet --json flavor-info
+    {
+      "flavors": [
+        {
+          "name": "IOSv",
+          "links": [
+            {
+              "href": "http://127.0.1.1:8774/v2/c4cba1...c9cb9c",
+              "rel": "self"
+            },
+            {
+              "href": "http://127.0.1.1:8774/c4cba1...c9cb9c",
+              "rel": "bookmark"
+            }
+          ],
+          "ram": 512,
+          "OS-FLV-DISABLED:disabled": false,
+          "vcpus": 1,
+          "swap": "",
+          "os-flavor-access:is_public": true,
+          "rxtx_factor": 1.0,
+          "OS-FLV-EXT-DATA:ephemeral": 0,
+          "disk": 0,
+          "id": "07bb4033-2f2c-422c-ad84-a600e0c9cb9c"
+        },
+        ...
+        {
+          "name": "server",
+          "links": [
+            {
+              "href": "http://127.0.1.1:8774/v2/c4cba1...e6fedb",
+              "rel": "self"
+            },
+            {
+              "href": "http://127.0.1.1:8774/c4cba1...e6fedb",
+              "rel": "bookmark"
+            }
+          ],
+          "ram": 512,
+          "OS-FLV-DISABLED:disabled": false,
+          "vcpus": 1,
+          "swap": "",
+          "os-flavor-access:is_public": true,
+          "rxtx_factor": 1.0,
+          "OS-FLV-EXT-DATA:ephemeral": 0,
+          "disk": 0,
+          "id": "edd55945-e8f0-4a80-b8ff-69a0d6e6fedb"
+        }
+      ]
+    }
+
+Specific flavors are accessible by specifying their ID::
+
+    virl_uwm_client --quiet --json flavor-info \
+                    -i edd55945-e8f0-4a80-b8ff-69a0d6e6fedb
+    {
+      "flavor": {
+        "name": "server",
+        "links": [
+          {
+            "href": "http://127.0.1.1:8774/v2/c4cba1...e6fedb",
+            "rel": "self"
+          },
+          {
+            "href": "http://127.0.1.1:8774/c4cba1...e6fedb",
+            "rel": "bookmark"
+          }
+        ],
+        "ram": 512,
+        "OS-FLV-DISABLED:disabled": false,
+        "vcpus": 1,
+        "swap": "",
+        "os-flavor-access:is_public": true,
+        "rxtx_factor": 1.0,
+        "OS-FLV-EXT-DATA:ephemeral": 0,
+        "disk": 0,
+        "id": "edd55945-e8f0-4a80-b8ff-69a0d6e6fedb"
+      }
+    }
+
+Admin users can also create and delete flavors.
+Note that once created flavors can not later be edited::
+
+    virl_uwm_client --quiet --json -u uwmadmin -p password flavor-create \
+                    -n testflav -r 128 -c 2 -d 50
+    {
+      "flavor": {
+        "name": "testflav",
+        "links": [
+          {
+            "href": "http://127.0.1.1:8774/v2/098b55...bce92d",
+            "rel": "self"
+          },
+          {
+            "href": "http://127.0.1.1:8774/098b55...bce92d",
+            "rel": "bookmark"
+          }
+        ],
+        "ram": 128,
+        "OS-FLV-DISABLED:disabled": false,
+        "vcpus": 2,
+        "swap": "",
+        "os-flavor-access:is_public": true,
+        "rxtx_factor": 1.0,
+        "OS-FLV-EXT-DATA:ephemeral": 0,
+        "disk": 50,
+        "id": "dd097cbf-30fa-4387-9f37-432361bce92d"
+      }
+    }
+
+Deleting a flavor::
+
+    virl_uwm_client --quiet --json -u uwmadmin -p password flavor-delete \
+                    -i dd097cbf-30fa-4387-9f37-432361bce92d
+    {
+      "deleted": true,
+      "flavor": {
+        "name": "testflav",
+        "links": [
+          {
+            "href": "http://127.0.1.1:8774/v2/098b55...bce92d",
+            "rel": "self"
+          },
+          {
+            "href": "http://127.0.1.1:8774/098b55...bce92d",
+            "rel": "bookmark"
+          }
+        ],
+        "ram": 128,
+        "OS-FLV-DISABLED:disabled": false,
+        "vcpus": 2,
+        "swap": "",
+        "os-flavor-access:is_public": true,
+        "rxtx_factor": 1.0,
+        "OS-FLV-EXT-DATA:ephemeral": 0,
+        "disk": 50,
+        "id": "dd097cbf-30fa-4387-9f37-432361bce92d"
+      }
+    }
+
+Subtype management
+^^^^^^^^^^^^^^^^^^
+
+Retrieving all subtypes (the output is trimmed)::
+
+    virl_uwm_client --quiet --json subtype-info
+    {
+      "base-subtypes": [
+        {
+          "hw_vcpus": 1,
+          "plugin_category": "VM Node Subtype",
+          "config_file": "/day0-config",
+          "config_iso_level": 2,
+          "gui_visible": false,
+          "interface_first": 0,
+          "interface_management": "Management0/0",
+          "hw_ram": 2048,
+          "hw_vif_model": "e1000",
+          "plugin_desc": "(Experimental) ASAv appliance",
+          "plugin_name": "ASAv",
+          "interface_pattern": "GigabitEthernet0/{0}",
+          "hw_vm_extra": null,
+          "cli_serial": 1,
+          "gui_icon": "asav",
+          "baseline_image": null,
+          "vnc_available": true,
+          "baseline_flavor": null,
+          "interface_range": 27,
+          "hw_disk_bus": "ide",
+          "config_disk_type": "cdrom"
+        },
+        ...
+        {
+          "hw_vcpus": 1,
+          "plugin_category": "VM Node Subtype",
+          "config_file": "/iosxr_config.txt",
+          "config_iso_level": 2,
+          "gui_visible": null,
+          "interface_first": 0,
+          "interface_management": "MgmtEth0/0/CPU0/0",
+          "hw_ram": 3072,
+          "hw_vif_model": "virtio",
+          "plugin_desc": "Cisco IOS XR reference platform",
+          "plugin_name": "xrvr",
+          "interface_pattern": "GigabitEthernet0/0/0/{0}",
+          "hw_vm_extra": null,
+          "cli_serial": 3,
+          "gui_icon": "ios_xrv",
+          "baseline_image": null,
+          "vnc_available": false,
+          "baseline_flavor": null,
+          "interface_range": 27,
+          "hw_disk_bus": "ide",
+          "config_disk_type": "cdrom"
+        }
+      ],
+      "dynamic-subtypes": []
+    }
+
+Subtype names are located under the key 'plugin_name'.
+Retrieving a concrete subtype::
+
+    virl_uwm_client --quiet --json subtype-info -n server
+    {
+      "subtype": {
+        "hw_vcpus": 1,
+        "plugin_category": "VM Node Subtype",
+        "config_file": "/userdata",
+        "config_iso_level": 2,
+        "gui_visible": true,
+        "interface_first": 1,
+        "interface_management": "eth0",
+        "hw_ram": 2048,
+        "hw_vif_model": "virtio",
+        "plugin_desc": "Cloud-init [linux] server",
+        "plugin_name": "server",
+        "interface_pattern": "eth{0}",
+        "hw_vm_extra": null,
+        "cli_serial": 1,
+        "gui_icon": "app_server",
+        "baseline_image": null,
+        "vnc_available": true,
+        "baseline_flavor": null,
+        "interface_range": 25,
+        "hw_disk_bus": "virtio",
+        "config_disk_type": "cloud-init"
+      },
+      "dynamic": false
+    }
+
+Admin users can also create, edit and delete dynamic subtypes, and also
+export/import them.
+
+By creating dynamic subtypes from other subtypes, you can override their
+properties. For example if uwmadmin created an image 'uwmadmin-server' that
+needs a big deal of resources, he could create a dynamic subtype that is
+automatically launched with this image and the flavor 'm1.xlarge'::
+
+    virl_uwm_client --quiet --json -u uwmadmin -p password subtype-create \
+                -n bigserver -b server \
+                -p "baseline_image=uwmadmin-server" "baseline_flavor=m1.xlarge"
+    {
+      "subtype": {
+        "plugin_category": "VM Node Subtype",
+        "hw_ram": 2048,
+        "interface_management": "eth0",
+        "gui_icon": "app_server",
+        "plugin_base": "server",
+        "hw_vcpus": 1,
+        "interface_first": 1,
+        "cli_serial": 1,
+        "baseline_flavor": "m1.xlarge",
+        "hw_disk_bus": "virtio",
+        "config_iso_level": 2,
+        "config_file": "/userdata",
+        "plugin_desc": "Cloud-init [linux] server",
+        "plugin_name": "bigserver",
+        "interface_range": 25,
+        "config_disk_type": "cloud-init",
+        "gui_visible": true,
+        "hw_vif_model": "virtio",
+        "hw_vm_extra": null,
+        "interface_pattern": "eth{0}",
+        "baseline_image": "uwmadmin-server",
+        "vnc_available": true
+      }
+    }
+
+Dynamic subtypes can also be edited::
+
+    virl_uwm_client --quiet --json -u uwmadmin -p password subtype-edit \
+                    -n bigserver -p "baseline_flavor=m1.medium"
+    {
+      "subtype": {
+        "plugin_category": "VM Node Subtype",
+        "hw_ram": 2048,
+        "interface_management": "eth0",
+        "gui_icon": "app_server",
+        "plugin_base": "server",
+        "hw_vcpus": 1,
+        "interface_first": 1,
+        "cli_serial": 1,
+        "baseline_flavor": "m1.medium",
+        "hw_disk_bus": "virtio",
+        "config_iso_level": 2,
+        "config_file": "/userdata",
+        "plugin_desc": "Cloud-init [linux] server",
+        "plugin_name": "bigserver",
+        "interface_range": 25,
+        "config_disk_type": "cloud-init",
+        "gui_visible": true,
+        "hw_vif_model": "virtio",
+        "hw_vm_extra": null,
+        "interface_pattern": "eth{0}",
+        "baseline_image": "uwmadmin-server",
+        "vnc_available": true
+      }
+    }
+
+The export operation will return a list of dynamic subtypes with their custom
+properties. This command always outputs the JSON as it was sent by the server::
+
+    virl_uwm_client --quiet --json -u uwmadmin -p password subtype-export
+    {
+      "dynamic-subtypes": [
+        {
+          "plugin_base": "server",
+          "baseline_image": "uwmadmin-server",
+          "baseline_flavor": "m1.medium",
+          "plugin_name": "bigserver"
+        },
+        {
+          "plugin_base": "IOSv",
+          "hw_vcpus": 3,
+          "plugin_desc": "Cisco IOS reference platform with 3 cores",
+          "plugin_name": "custom-IOSv",
+          "hw_vm_extra": "",
+          "baseline_image": "",
+          "baseline_flavor": ""
+        }
+      ]
+    }
+
+It is a good idea to save this to a file::
+
+    virl_uwm_client --quiet --json -u uwmadmin -p password \
+                    subtype-export > ~/subtypes.json
+
+Deleting a subtype::
+
+    virl_uwm_client --quiet --json -u uwmadmin -p password subtype-delete \
+                    -n bigserver
+    {
+      "deleted": true,
+      "subtype": {
+        "plugin_category": "VM Node Subtype",
+        "hw_ram": 2048,
+        "interface_management": "eth0",
+        "gui_icon": "app_server",
+        "plugin_base": "server",
+        "hw_vcpus": 1,
+        "interface_first": 1,
+        "cli_serial": 1,
+        "baseline_flavor": "m1.medium",
+        "hw_disk_bus": "virtio",
+        "config_iso_level": 2,
+        "config_file": "/userdata",
+        "plugin_desc": "Cloud-init [linux] server",
+        "plugin_name": "bigserver",
+        "interface_range": 25,
+        "config_disk_type": "cloud-init",
+        "gui_visible": true,
+        "hw_vif_model": "virtio",
+        "hw_vm_extra": null,
+        "interface_pattern": "eth{0}",
+        "baseline_image": "uwmadmin-server",
+        "vnc_available": true
+      }
+    }
+
+When importing subtypes, by default the process will stop on the first failure.
+A typical cause of such a failure can be, that the subtype already exists.
+To skip the subtypes that fail to import, pass the -f flag to the command.
+In all cases, the response will contain a boolean under the key 'imported-all',
+and a list of error descriptions under key 'errors'. If some subtypes fail and
+some succeed to import, the status code of the response will be 206 Partial
+Content, and if no subtype gets imported, it will be 500 Internal Server
+Error::
+
+    virl_uwm_client --json -u uwmadmin -p password subtype-import \
+                    -s @~/subtypes.json -f
+    INFO     2014-08-12 14:14:01,555 virl.uwm.client Client.subtype_import ...
+    ...
+    WARNING  2014-08-12 14:14:01,593 virl.uwm.client Subtype import partially successful.
+    {
+      "errors": [
+        "Subtype \"custom-IOSv\" already exists"
+      ],
+      "dynamic-subtypes": [
+        {
+          "plugin_category": "VM Node Subtype",
+          "hw_ram": 2048,
+          "interface_management": "eth0",
+          "gui_icon": "app_server",
+          "plugin_base": "server",
+          "hw_vcpus": 1,
+          "interface_first": 1,
+          "cli_serial": 1,
+          "baseline_flavor": "m1.medium",
+          "hw_disk_bus": "virtio",
+          "config_iso_level": 2,
+          "config_file": "/userdata",
+          "plugin_desc": "Cloud-init [linux] server",
+          "plugin_name": "bigserver",
+          "interface_range": 25,
+          "config_disk_type": "cloud-init",
+          "gui_visible": true,
+          "hw_vif_model": "virtio",
+          "hw_vm_extra": null,
+          "interface_pattern": "eth{0}",
+          "baseline_image": "uwmadmin-server",
+          "vnc_available": true
+        }
+      ],
+      "imported-all": false
+    }
+
+VM Control (admin only)
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Listing deployed nodes (the output is trimmed)::
+
+    virl_uwm_client --quiet --json -u uwmadmin -p password node-list
+    {
+      "nodes": [
+        {
+          "OS-EXT-STS:task_state": null,
+          "addresses": {},
+          "links": [
+            {
+              "href": "http://127.0.1.1:8774/v2/098b55...1d32ed",
+              "rel": "self"
+            },
+            {
+              "href": "http://127.0.1.1:8774/098b55...1d32ed",
+              "rel": "bookmark"
+            }
+          ],
+          "image": {
+            "id": "b2c7c492-7508-45f6-b6f2-2619f3cee997",
+            "links": [
+              {
+                "href": "http://127.0.1.1:8774/098b55...cee997",
+                "rel": "bookmark"
+              }
+            ]
+          },
+          "OS-EXT-STS:vm_state": "error",
+          "OS-EXT-SRV-ATTR:instance_name": "instance-00000006",
+          "flavor": {
+            "id": "edd55945-e8f0-4a80-b8ff-69a0d6e6fedb",
+            "links": [
+              {
+                "href": "http://127.0.1.1:8774/098b55...e6fedb",
+                "rel": "bookmark"
+              }
+            ]
+          },
+          "id": "37e2ff7a-36b0-4d35-bc9f-243a611d32ed",
+          "user_id": "67ff232a830342c4807fc63f3580308b",
+          "OS-DCF:diskConfig": "MANUAL",
+          "accessIPv4": "",
+          "accessIPv6": "",
+          "OS-EXT-STS:power_state": 0,
+          "OS-EXT-AZ:availability_zone": "nova",
+          "config_drive": "",
+          "status": "ERROR",
+          "updated": "2014-08-12T14:23:39Z",
+          "hostId": "afa20ec3cea9810fd1ca124b54beebb6953c96a746a90ec4da1ce801",
+          "OS-EXT-SRV-ATTR:host": "virl",
+          "key_name": null,
+          "OS-EXT-SRV-ATTR:hypervisor_hostname": "virl",
+          "name": "killswitch_node_A5VG",
+          "created": "2014-08-12T14:23:22Z",
+          "tenant_id": "c4cba1eea5fe46afbc9a4a01356f7c44",
+          "fault": {
+            "message": "NoValidHost",
+            "code": 500,
+            "details": "No valid host was found. ...\n",
+            "created": "2014-08-12T14:23:40Z"
+          },
+          "metadata": {}
+        },
+        ...
+      ]
+    }
+
+Deleting a node::
+
+    virl_uwm_client --quiet --json -u uwmadmin -p password node-delete \
+                    -i 37e2ff7a-36b0-4d35-bc9f-243a611d32ed
+    {
+      "node": {
+        "OS-EXT-STS:task_state": null,
+        "addresses": {},
+        "links": [
+          {
+            "href": "http://127.0.1.1:8774/v2/098b55...1d32ed",
+            "rel": "self"
+          },
+          {
+            "href": "http://127.0.1.1:8774/098b55...1d32ed",
+            "rel": "bookmark"
+          }
+        ],
+        "image": {
+          "id": "b2c7c492-7508-45f6-b6f2-2619f3cee997",
+          "links": [
+            {
+              "href": "http://127.0.1.1:8774/098b55...cee997",
+              "rel": "bookmark"
+            }
+          ]
+        },
+        "OS-EXT-STS:vm_state": "error",
+        "OS-EXT-SRV-ATTR:instance_name": "instance-00000006",
+        "flavor": {
+          "id": "edd55945-e8f0-4a80-b8ff-69a0d6e6fedb",
+          "links": [
+            {
+              "href": "http://127.0.1.1:8774/098b55...e6fedb",
+              "rel": "bookmark"
+            }
+          ]
+        },
+        "id": "37e2ff7a-36b0-4d35-bc9f-243a611d32ed",
+        "user_id": "67ff232a830342c4807fc63f3580308b",
+        "OS-DCF:diskConfig": "MANUAL",
+        "accessIPv4": "",
+        "accessIPv6": "",
+        "OS-EXT-STS:power_state": 0,
+        "OS-EXT-AZ:availability_zone": "nova",
+        "config_drive": "",
+        "status": "ERROR",
+        "updated": "2014-08-12T14:23:39Z",
+        "hostId": "afa20ec3cea9810fd1ca124b54beebb6953c96a746a90ec4da1ce801",
+        "OS-EXT-SRV-ATTR:host": "virl",
+        "key_name": null,
+        "OS-EXT-SRV-ATTR:hypervisor_hostname": "virl",
+        "name": "killswitch_node_A5VG",
+        "created": "2014-08-12T14:23:22Z",
+        "tenant_id": "c4cba1eea5fe46afbc9a4a01356f7c44",
+        "fault": {
+          "message": "NoValidHost",
+          "code": 500,
+          "details": "No valid host was found. ...\n",
+          "created": "2014-08-12T14:23:40Z"
+        },
+        "metadata": {}
+      },
+      "deleted": true
+    }
+
+You can also delete multiple nodes at once, by specifying multiple IDs. In this
+case the deletion will skip nodes that fail to delete or that are not found.
+The response's status code will be 206 Partial Content if some, or 500 Internal
+Server error if all nodes fail to be deleted::
+
+    virl_uwm_client --json -u uwmadmin -p password node-delete \
+                    -i 37e2ff7a-36b0-4d35-bc9f-243a611d32ed \
+                       f927db08-52b6-46ef-8ad6-3ee4ab9cc04d
+    INFO     2014-08-13 07:31:18,804 virl.uwm.client Client.node_delete ...
+    ...
+    WARNING  2014-08-13 07:31:20,289 virl.uwm.client Deleting nodes partially successful.
+    {
+      "deleted": [
+        {
+          "OS-EXT-STS:task_state": null,
+          "addresses": {
+            "ext-net": [
+              {
+                "version": 4,
+                "addr": "172.16.2.52",
+                "OS-EXT-IPS:type": "fixed"
+              }
+            ],
+            "flat": [
+              {
+                "version": 4,
+                "addr": "172.16.1.51",
+                "OS-EXT-IPS:type": "fixed"
+              }
+            ]
+          },
+          "links": [
+            {
+              "href": "http://127.0.1.1:8774/v2/098b55...9cc04d",
+              "rel": "self"
+            },
+            {
+              "href": "http://127.0.1.1:8774/098b55...9cc04d",
+              "rel": "bookmark"
+            }
+          ],
+          "image": {
+            "id": "b2c7c492-7508-45f6-b6f2-2619f3cee997",
+            "links": [
+              {
+                "href": "http://127.0.1.1:8774/098b55...cee997",
+                "rel": "bookmark"
+              }
+            ]
+          },
+          "OS-EXT-STS:vm_state": "active",
+          "OS-EXT-SRV-ATTR:instance_name": "instance-00000002",
+          "flavor": {
+            "id": "edd55945-e8f0-4a80-b8ff-69a0d6e6fedb",
+            "links": [
+              {
+                "href": "http://127.0.1.1:8774/098b55...e6fedb",
+                "rel": "bookmark"
+              }
+            ]
+          },
+          "id": "f927db08-52b6-46ef-8ad6-3ee4ab9cc04d",
+          "security_groups": [
+            {
+              "name": "default"
+            },
+            {
+              "name": "default"
+            }
+          ],
+          "user_id": "6ded14f7b8b94ad5953f09aca121efc9",
+          "OS-DCF:diskConfig": "MANUAL",
+          "accessIPv4": "",
+          "accessIPv6": "",
+          "progress": 0,
+          "OS-EXT-STS:power_state": 1,
+          "OS-EXT-AZ:availability_zone": "nova",
+          "config_drive": "",
+          "status": "ACTIVE",
+          "updated": "2014-08-12T14:23:37Z",
+          "hostId": "7061a7a358abb641bea56aa93635f905bd515b0df1acd858d67abcb1",
+          "OS-EXT-SRV-ATTR:host": "virl",
+          "key_name": null,
+          "OS-EXT-SRV-ATTR:hypervisor_hostname": "virl",
+          "name": "killswitch_node_78E6",
+          "created": "2014-08-12T14:22:43Z",
+          "tenant_id": "098b55d3bc4846b88b3da65908c528fb",
+          "metadata": {}
+        }
+      ],
+      "deleted-all": false,
+      "errors": {
+        "37e2ff7a-36b0-4d35-bc9f-243a611d32ed": "Not found"
+      }
+    }
+
+Networks may have ports attached to them. In this case the network can not be
+deleted until its ports are not deleted also. The output of network-list
+includes the list of attached port IDs for each network under the key
+'port-ids'. If the ports fail to load for some reason, the response object will
+contain a true value under 'failed-loading-ports'. An example of network-list
+(the output is trimmed)::
+
+    virl_uwm_client --quiet --json -u uwmadmin -p password network-list
+    {
+      "networks": [
+        {
+          "status": "ACTIVE",
+          "subnets": [],
+          "port-ids": [
+            "a6bb9555-e113-47d6-8d04-2724872aff9d",
+            "faf41127-55f4-44da-8597-e0b5efaa869d",
+            "8fc73620-4dfe-4347-be69-4eb00d6dfceb"
+          ],
+          "name": "killswitch_net_iikO",
+          "provider:physical_network": null,
+          "admin_state_up": false,
+          "tenant_id": "c4cba1eea5fe46afbc9a4a01356f7c44",
+          "provider:network_type": "gre",
+          "router:external": false,
+          "shared": false,
+          "id": "11264040-fa2f-4928-ac20-517504a64d98",
+          "provider:segmentation_id": 4
+        },
+        ...
+        {
+          "status": "ACTIVE",
+          "subnets": [
+            "2d268876-88d9-42ad-9fe2-b71149740fdc"
+          ],
+          "port-ids": [
+            "fa9313d4-8d13-4d95-babe-0c39e5841aeb"
+          ],
+          "name": "flat",
+          "provider:physical_network": "flat",
+          "admin_state_up": true,
+          "tenant_id": "519873d1552c4afca1eec83c6c218c64",
+          "provider:network_type": "flat",
+          "router:external": false,
+          "shared": true,
+          "id": "e15099f9-2669-45a0-bac7-7c11ce7b995c",
+          "provider:segmentation_id": 65534
+        }
+      ]
+    }
+
+Deleting multiple networks at the same time works the same as deleting multiple
+nodes (note that in this case one of the networks could not be deleted because
+of the attached ports)::
+
+    virl_uwm_client --json -u uwmadmin -p password network-delete \
+                    -i 11264040-fa2f-4928-ac20-517504a64d98 \
+                       1136eccc-ebec-44f8-8ae0-0b0cb0defecb
+    INFO     2014-08-13 07:37:36,351 virl.uwm.client Client.network_delete ...
+    ...
+    WARNING  2014-08-13 07:37:36,741 virl.uwm.client Deleting networks partially successful.
+    {
+      "deleted": [
+        {
+          "status": "ACTIVE",
+          "subnets": [],
+          "name": "killswitch_net_OHlG",
+          "provider:physical_network": null,
+          "admin_state_up": false,
+          "tenant_id": "c4cba1eea5fe46afbc9a4a01356f7c44",
+          "provider:network_type": "gre",
+          "router:external": false,
+          "shared": false,
+          "id": "1136eccc-ebec-44f8-8ae0-0b0cb0defecb",
+          "provider:segmentation_id": 6
+        }
+      ],
+      "deleted-all": false,
+      "errors": {
+        "11264040-fa2f-4928-ac20-517504a64d98":
+            "OpenStack call to Network2_0.delete_network received invalid
+            response status 409 (Conflict).\nDetails: {'Request content': None,
+            'Response content': '{\"QuantumError\": \"Unable to complete
+            operation on network 11264040-fa2f-4928-ac20-517504a64d98. There
+            are one or more ports still in use on the network.\"}', 'Request
+            URL': 'http://127.0.1.1:9696/v2.0/networks/11264040-fa2f-4928-ac20-517504a64d98'}"
+      }
+    }
+
+Listing and deleting ports and floating IPs work identically as nodes, so we
+won't cover them here. The commands are port-list, port-delete,
+floating-ip-list and floating-ip-delete.

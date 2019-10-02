@@ -1,0 +1,166 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>7. Installation &#8212; VIRL 0.10.35.35 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.10.35.35',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="8. OpenStack Client" href="openstack_client.html" />
+    <link rel="prev" title="6. Configuration" href="configuration.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="openstack_client.html" title="8. OpenStack Client"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="configuration.html" title="6. Configuration"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">VIRL 0.10.35.35 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="README.html" accesskey="U">README</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="installation">
+<h1>7. Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="files-under-virl-std-dir">
+<h2>7.1. Files under VIRL_STD_DIR<a class="headerlink" href="#files-under-virl-std-dir" title="Permalink to this headline">¶</a></h2>
+<p>The variable VIRL_STD_DIR (or –location in CLI) defines where all STD/UWM data
+is stored. This directory must be writable by the user running both STD/UWM.
+If this user is root (which is not necessary), all commands touching files from
+this directory must be run as root as well, e.g. by using the sudo command.</p>
+<p>The servers’ working directory is configured by the VIRL_STD_DIR variable.
+It contains the endpoints for all users, along with the VIRL files belonging to
+sessions (simulations) running within the server, under the ‘users’ directory.</p>
+<p>The server gets logged into the rotated files std_server.log or uwm_server.log
+within the ‘logs’ directory. Verbose logging is enabled using the –debug flag
+in front of each server’s run command, and disabled entirely using –quiet.</p>
+<p>Additionally, there is a subdirectory named ‘archive/topologies’, where a copy
+of each successfully created session’ VIRL file is stored for later reference.
+These files are not removed automatically; end-users may remove them anytime.
+This feature is generally disabled in VIRL installations.</p>
+<p>Admin-submitted LXC templates and images reside Under the ‘lxc’ subdirectory.</p>
+<p>Finally, all data pertaining to UWM and STD above the endpoint-stored is placed
+into the servers.db file.</p>
+</div>
+<div class="section" id="user-workspace-manager-initialization-and-special-user-setup">
+<h2>7.2. User workspace manager initialization and special user setup<a class="headerlink" href="#user-workspace-manager-initialization-and-special-user-setup" title="Permalink to this headline">¶</a></h2>
+<p>In general, the setup is managed by the VIRL installation system, and users
+should not need to use these commands.</p>
+<p>The UWM and STD servers operate over a shared database that is created
+by the UWM init command. This command is dangerous, as it will destroy all
+previous information in the database. Users should never need to run this.
+The command must be given an existing OpenStack administrator account
+information. The init command must be run prior to the STD server starting:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_uwm_server</span> <span class="n">init</span> <span class="o">-</span><span class="n">u</span> <span class="n">admin</span> <span class="o">-</span><span class="n">p</span> <span class="k">pass</span> <span class="o">-</span><span class="n">U</span> <span class="n">OSAdmin</span> <span class="o">-</span><span class="n">T</span> <span class="n">OSProject</span> <span class="o">-</span><span class="n">P</span> <span class="n">OSPass</span>
+</pre></div>
+</div>
+<p>This user can then use the UWM Web-based GUI to add additional projects.
+These projects will have all the networking set up as expected by STD.</p>
+<p>To add an existing project and user (admin or not), use the following:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_uwm_server</span> <span class="n">add</span><span class="o">-</span><span class="n">user</span> <span class="o">-</span><span class="n">u</span> <span class="n">user</span> <span class="o">-</span><span class="n">p</span> <span class="k">pass</span> <span class="o">-</span><span class="n">U</span> <span class="n">OSUser</span> <span class="o">-</span><span class="n">T</span> <span class="n">OSProject</span> <span class="o">-</span><span class="n">P</span> <span class="n">OSPass</span>
+</pre></div>
+</div>
+<p>Any user’s password and OpenStack passwords can be changed from the CLI. If
+an OpenStack password is not specified, it will be computed as a hash of the
+STD/UWM password.</p>
+<p>To change user passwords from the server, use:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_uwm_server</span> <span class="nb">set</span><span class="o">-</span><span class="n">password</span> <span class="o">-</span><span class="n">u</span> <span class="n">user</span> <span class="o">-</span><span class="n">p</span> <span class="k">pass</span> <span class="o">-</span><span class="n">P</span> <span class="n">OSPass</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">7. Installation</a><ul>
+<li><a class="reference internal" href="#files-under-virl-std-dir">7.1. Files under VIRL_STD_DIR</a></li>
+<li><a class="reference internal" href="#user-workspace-manager-initialization-and-special-user-setup">7.2. User workspace manager initialization and special user setup</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="configuration.html"
+                        title="previous chapter">6. Configuration</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="openstack_client.html"
+                        title="next chapter">8. OpenStack Client</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/installation.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="openstack_client.html" title="8. OpenStack Client"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="configuration.html" title="6. Configuration"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">VIRL 0.10.35.35 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="README.html" >README</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Cisco Systems, Inc.
+All rights reserved..
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
+    </div>
+  </body>
+</html>

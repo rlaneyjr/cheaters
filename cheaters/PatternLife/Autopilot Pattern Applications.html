@@ -1,0 +1,298 @@
+
+  Autopilot Pattern Applications
+
+The autopilot pattern automates in code the repetitive and boring
+operational tasks of an application, including startup, shutdown,
+scaling, and recovery from anticipated failure conditions for
+reliability, ease of use, and improved productivity.
+
+  * Why do we need to do this? <#why-do-we-need-to-do-this>
+  * Who is this for? <#who-is-this-for>
+  * How do we do it? <#how-do-we-do-it>
+  * How does this differ from previous approaches to automation?
+    <#how-does-this-differ-from-previous-approaches-to-automation>
+  * How does this differ from scheduler-backed container automation?
+    <#how-does-this-differ-from-scheduler-backed-container-automation>
+  * What infrastructure do we need to do this?
+    <#what-infrastructure-do-we-need>
+  * Example apps using this pattern <#example-apps-using-this-pattern>
+
+
+      Why do we need to do this?
+
+We need to make the applications not yet developed and those we already
+have easier to build, test, deploy, and scale. Consider the applications
+we see in science fiction and in our devops dreams:
+
+  * Apps that can be deployed and scaled with a single click.
+  * Apps and workflows that can be tested and automated in CI/CD.
+  * Apps and workflows that work the same on our laptops as in the cloud
+    (public /and/ private cloud).
+  * Apps and workflows that aren't married to any specific
+    infrastructure or scheduler.
+
+Applications like this have been possible for years, but they're still
+rare. However, modern tools and infrastructure, as well as repeatable
+patterns are emerging to make these applications easy to build and
+available to all, regardless of scale.
+
+By starting with a pattern that automates application operations where
+we develop: on our laptops or other location of the developer's choice,
+we can gain the ability to scale in production and automate testing and
+deployment in a way that accelerates development and eliminates the pain
+we often experience in turning our application dreams into a production
+reality.
+
+Consider the benefits of the autopilot pattern:
+
+  * Easy deploys and scaling.
+  * We’ve automated the boring stuff, use time you save with that
+    however you want.
+  * By automating those operational tasks in code, we’ve made the app
+    self-documenting.
+  * And by keeping that automation code in the same repo with the
+    application, we’ve increased visibility and the opportunity for
+    participation to all.
+  * Most importantly, however, these apps work the same on our laptops
+    as in the cloud.
+
+
+      Who is this for?
+
+The autopilot pattern is for both developers and operators. It's
+designed to be easy enough to use that we can use it early in
+development but robust enough to work at the largest scale we can
+imagine for our apps.
+
+The autopilot pattern is for solo developers, startups, and large
+enterprises. It's for operators that want to bring sanity to their lives
+and for developers who want to make their apps easy to use. It's for
+microservices applications with dozens of components, it's for tiered
+applications, it even works with applications that run in a single
+container. It's for people building apps for distribution and re-use,
+and for in-house teams working on apps that will never leave the
+organization.
+
+The autopilot pattern is ideal for:
+
+  * Developers who want to work on their laptops, on a plane, without
+    needing internet access.
+  * Operators who want to deploy in public or private clouds.
+  * Site reliability engineers who want automated and repeatable
+    workflows from development to deploy.
+  * Startups and enterprises that want *aaS convenience without *aaS
+    lock-in.
+  * Applications running in a single container.
+  * Tiered, traditional applications.
+  * Microservices applications with any number of components.
+
+Most importantly, it's designed to live and grow with our apps at all
+stages of development and operations.
+
+
+      How do we do it?
+
+The autopilot pattern automates the lifecycle of each component of the
+application. Whether we architect our application as a single container,
+in tiers, or as microservices, each container that makes up the
+application has its own lifecycle, and its own set of actions that are
+necessary during that lifecycle. Each of these application components
+are often applications in themselves, like a database server, in-memory
+cache, or the reverse proxy that fronts our application, in addition to
+the Node.js, Python, Ruby, or other code that makes the set of
+components a complete application.
+
+Most autopilot pattern implementations embrace the Docker ideal of
+single-purpose, or single-service containers, but this is not strictly
+required. The autopilot pattern does require us (both developers and
+operators) to think about how we operate our applications at critical
+points in the lifecycle of each component. The following questions may
+help uncover the details we need to consider:
+
+ 1. What resources does the container have to connect to?
+      * How does the Node.js code connect to its database, for example?
+        Or, how does Nginx connect to its back ends?
+ 2. How is the container configured?
+      * Does the application have a configuration file? Do we start it
+        with arguments? Does it use environment variables?
+ 3. Does anything have to be done before the application in the
+    container starts?
+      * This can include injecting the resources identified in #1 into
+        the configuration file from #2 before we start the application.
+        Or it could require finding the application's peers, such as
+        when starting an HA raft of Consul or cluster of database instances.
+ 4. How is the application in the container started?
+      * This is commonly what we use for the |docker run| command or
+        |CMD| argument in the Dockerfile.
+ 5. How will other containers discover this container?
+      * The application should self-register in a service catalog like
+        Consul so that it can be discovered. This is how our Python or
+        Node.js (or other) application can discover its database, and
+        how Nginx or HAproxy can discover our app server.
+ 6. How do we know if the application in the container is healthy?
+      * Is this a Dockerized database? Let's run a query to check if
+        it's working correctly. Each app probably has one or more unique
+        tests we can do to see if it's working.
+ 7. What are the key metrics that indicate the container's load?
+      * Just as our health checks are often unique to each application,
+        so are our performance metrics. Is our Nginx instance
+        overloaded? Check connection stats in |stub_status|. Is MySQL
+        running at capacity? Look for queries in a wait state.
+ 8. If the resources the container connects to change, how do we update
+    the application in the container with those new resources?
+      * What happens if the resources from #1 change? Do we simply
+        rewrite the config file? Do we need to signal the app? How do we
+        tell Nginx about new upstreams, or our Python app about a change
+        in the database hosts?
+ 9. Does the container create any data on disk that needs to be shared
+    by other instances or backed up in any way?
+      * Some databases and a few applications require special handling
+        of data on disk. User uploads in WordPress are one example.
+10. Does anything have to be done /before/ or /after/ shutting down the
+    container?
+      * Scaling down a database like Couchbase may require removing the
+        instance from the cluster before stopping it so that data can be
+        safely rebalanced to other nodes.
+
+The start of each container marks the start of that container's
+lifecycle. Just as the documentation for many applications must tell us
+how to configure and start the application, we can write code that
+automates those activities as we start the container for that
+application. The same goes for other events throughout the application's
+lifecycle as well.
+
+Some applications are emerging with at least some of this logic built
+in. Traefik is a proxy server with automatic discovery of its back ends
+using Consul or other service catalogs (however, Traefik does not
+self-register in those service catalogs so that it can be used by other
+applications, like one that automatically updates the DNS and CDN with
+the proxy instances as the origin
+<https://github.com/tgross/triton-cloudflare>). ContainerPilot
+<https://github.com/joyent/containerpilot>, a helper written in Golang
+that lives inside the container can help with this. Using a small
+configuration file, ContainerPilot can trigger events inside the
+container that we can use to automate operations on these events,
+including |preStart| (formerly |onStart|), |health|, |onChange|,
+|preStop|, and |postStop|.
+
+Events inside the container that drive the autopilot pattern.
+
+There appears to be great commonality about the events in each
+application's lifecycle. Not every application requires specific
+attention on each of the events identified above, but the operations of
+most (if not all) applications can be automated based on those events.
+Those operational details, however, are likely unique for each application.
+
+See the autopilot pattern example <http://autopilotpattern.io/example>
+for detailed instructions on how to apply the autopilot pattern, and
+list of implementations below <#example-apps-using-this-pattern> for
+practical implementations.
+
+
+      How does this differ from previous approaches to automation?
+
+Automation is not new, but the approach to automation in the autopilot
+pattern has some significant differences when compared to previous
+approaches to automation based on configuration management tools.
+
+Configuration management tools are very helpful in managing the
+configuration of a compute node, but tying container configuration to
+those CM tools creates dependencies that require infrastructure
+preparation prior to app deploys and make it difficult to re-use
+application containers across different infrastructure and in different
+contexts. This barrier to re-use within a single organization is even
+more remarkable between organizations. The autopilot pattern is designed
+to be infrastructure independent for more reusability and easy deploys.
+
+Very few of us who are lucky enough to work in environments with full
+configuration management in production use the same CM strategy when
+developing on our laptops. Instead, the application is configured
+differently and often behaves differently. Those differences exacerbate
+the "works on my machine" problem, but also slow our progress in more
+completely automating application operations. The autopilot pattern is
+designed to work on our laptops and in the cloud, keeping both the
+operational details and behaviors the same across all environments.
+
+Setting up configuration management solutions is complex. We all dream
+of doing it, but it’s a step too far for so many of us to complete. The
+autopilot pattern, meanwhile, leverages what we’re already using, just
+adds operational logic to it.
+
+Configuration management solutions often depend on repositories of
+cookbooks and configuration details separate from the application,
+making it hard for developers to know how the application is configured
+in production, and difficult for operators to recognize when changes
+need to be made to the configuration as the application is changed. The
+autopilot pattern keeps the operational code and configuration templates
+in the same repo with the application itself, increasing visibility and
+participation for all. In fact, because the application is operated and
+configured the same way everywhere, from development to CI to QA, and
+finally deploy, we're testing it thoroughly and experiencing the
+behavior and any changes at every step.
+
+
+      How does this differ from scheduler-backed container automation?
+
+Some approaches to application automation depend on deep integration
+with the scheduler. This approach to automation moves the automation
+logic out of the application, which violates one of the key values of
+the autopilot pattern: keep the automation for each application
+component in the same repo with that component's code. The separation of
+application logic from its lifecycle automation unnecessarily separates
+operations from development and, because developers often don't run
+complex schedulers on their laptops, exacerbates the "works on my
+machine" problem.
+
+
+      What infrastructure do we need?
+
+A new class of infrastructure is emerging that supports these modern
+apps. This infrastructure puts containers first and provides convenient,
+straightforward networking:
+
+  * Focused on containers.
+  * Provisioning APIs that combine infrastructure provisioning arguments
+    with application execution arguments.
+  * The ability to deploy containers across multiple compute nodes using
+    that provisioning API.
+  * Some form of service discovery built-in.
+  * Network virtualization that gives each container its own VNIC,
+    eliminates port conflicts, and simplifies communication between
+    containers across different compute nodes.
+
+This infrastructure makes it possible to deploy autopilot pattern
+applications without preparation. The hosts do not need to be prepared
+with special configuration files or additional software to run the
+applications. These features are critical to making the one-click
+deploys and scaling possible, and it's necessary to preserve
+compatibility of the application and workflow from development to
+production.
+
+Solutions that provide this autopilot pattern infrastructure include:
+
+  * Cisco Mantl <https://mantl.io/>
+  * Docker Swarm <https://www.docker.com/products/docker-swarm>
+  * Joyent Triton <https://joyent.com/triton>
+
+
+      Example apps using this pattern
+
+  * Example of building an Autopilot Pattern application
+    <http://autopilotpattern.io/example>
+  * CloudFlare DNS and CDN with dynamic origins
+    <https://github.com/autopilotpattern/cloudflare>
+  * Consul, running as an HA raft
+    <https://github.com/autopilotpattern/consul>
+  * Couchbase <https://www.joyent.com/blog/couchbase-in-docker-containers>
+  * ELK stack <https://github.com/autopilotpattern/elk>
+  * Mesos on Joyent Triton <https://www.joyent.com/blog/mesos-by-the-pound>
+  * Nginx with dynamic upstreams
+    <https://www.joyent.com/blog/dynamic-nginx-upstreams-with-containerbuddy>
+  * MySQL (Percona Server) with auto scaling and fail-over
+    <https://www.joyent.com/blog/dbaas-simplicity-no-lock-in>
+  * Node.js + Nginx + Couchbase
+    <https://www.joyent.com/blog/docker-nodejs-nginx-nosql-autopilot>
+  * Jenkins in Docker <https://github.com/autopilotpattern/jenkins>
+
+©2019 Joyent, Inc. <https://www.joyent.com/>
+

@@ -1,0 +1,34 @@
+OpenStack Client
+~~~~~~~~~~~~~~~~
+
+The OpenStack client is an API that VIRL uses exclusively when communicating
+with an OpenStack install. It covers required portions of the OpenStack
+identity, compute, image and network API. The CLI script virl_openstack_client
+exposes all supported commands to shell scripting.
+
+Using the CLI - upload a new image to OpenStack
+===============================================
+
+You can add new router and server images to the OpenStack install easily.
+This is especially true for very large image files.
+Prepare the VM image in the QCOW2 format - kvm-img can be used for conversions.
+
+Please note that VIRL selects the image based on name only, and OpenStack
+allows multiple images with the same name to be present at once. Image creation
+does not replace an existing image of the same name, thus the previous version
+needs to be removed in order to ensure the correct image is loaded.
+
+As discussed above in the introduction, Cisco router images need properties
+set in order to function properly, so they must be provided as well.
+
+For example, to add a new CSR1000v image, this command may be used::
+
+    virl_openstack_client --json image-create --access private \
+        --file CSR1000v.myversion.qcow2 --name myproject-CSR1000v-mine \
+        --properties serial=2 config_disk_type=cdrom \
+        hw_disk_bus=virtio hw_vif_model=virtio hw_cdrom_bus=ide
+
+The output on success is the parsed image information as returned by OpenStack.
+The global --json flag will convert the retrieved data back into JSON before
+being output to stdout, enabling further automated processing of this data.
+

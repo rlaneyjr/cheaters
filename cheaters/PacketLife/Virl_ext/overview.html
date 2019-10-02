@@ -1,0 +1,213 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>2. Terminology and Overview &#8212; VIRL 0.10.35.35 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.10.35.35',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="3. VIRL-CLIENTS package" href="clients.html" />
+    <link rel="prev" title="1. Introduction" href="introduction.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="clients.html" title="3. VIRL-CLIENTS package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="introduction.html" title="1. Introduction"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">VIRL 0.10.35.35 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="README.html" accesskey="U">README</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="terminology-and-overview">
+<h1>2. Terminology and Overview<a class="headerlink" href="#terminology-and-overview" title="Permalink to this headline">¶</a></h1>
+<p>The chief aim of the VIRL system is simulating virtual network topologies using
+network nodes run as virtual machines inside an OpenStack VM orchestration
+platform. To this end, each user of the VIRL services is bound to a single
+OpenStack user within an OpenStack project(tenant). This and other information
+pertaining to a user capable of running simulation is called that user’s
+endpoint. Some users, notably uwmadmin, do no posess an endpoint, and can only
+be used for administrative and status-gathering tasks on the system.</p>
+<p>In each endpoint, several Sessions may be created. Each session represents one
+network topology deployed to the orchestration system. It has a unique name and
+is configured by a single VIRL file. This file is sourced on various occasions
+and cannot be changed nor removed while the given session is defined.</p>
+<p>A VIRL file contains all information pertaining to the active networking nodes
+within it, the connections between them, as well as connections to the
+outside of the simulated environment. Moreover, the initial configuration that
+is to be passed onto each node when it is started (i.e. deployed to OpenStack),
+and any other information associated with the topology can be stored
+as extension entries available for all major elements of the file.</p>
+<p>The session creation process makes some initial validations against the running
+OpenStack system, but does not start the topology, meaning no resources are
+deployed to the OpenStack system initially. Session nodes must be started, and
+can be stopped, individually. The start operation will deploy the necessary
+OpenStack networks, ports, and the VM nodes requested to be started. A stop
+operation will destroy the deployed resources, including networks that are no
+longer needed.</p>
+<p>A session may be exported to a new VIRL file, possibly along with downloaded
+router configurations for all or selected nodes. Finally, a session delete will
+stop and then remove all traces of a session, both in OpenStack and endpoint.</p>
+<p>The OpenStack client API and CLI covers all communication used by the VIRL-CORE
+package. It may be useful for direct interaction with, and troubleshooting of,
+OpenStack, replacing the various clients distributed alongside OpenStack for
+an arguably more consistent interface.</p>
+<p>A pair of Web servers provides an API for remote management of a set of
+endpoints, one for each end-user. They provide all the functionality a typical
+VIRL user might need, leaving the OpenStack CLIs for use only
+in special circumstances.</p>
+<p>The STD server (Service Topology Director) defines simple and straightforward
+workflow for session (simulation) launch, use and teardown, either through
+the GUI application, or using the provided STD client Python API and/or CLI.
+A launched simulation is scheduled to start all nodes not excluded from this
+by a flag settable for each individual node, just after the session creation.</p>
+<p>The node start and stop operations are performed separately from the calls
+to the web service that initiate them. Moreover, a node may take a while to
+become provisioned by the orchestration sytem (i.e. the node becomes ACTIVE),
+which may merely mean that the particular node started its internal booting,
+initialization and configuration process.</p>
+<p>The UWM server can be used by administrators for project and user management,
+as well as management of VM disk images and other resources consumed by user
+simulations.</p>
+<p>An interface for the management of software licenses, VIRL software upgrades,
+and a control panel for manipulation of system configuration and deployment
+is also available in this admin interface.</p>
+<p>UWM also presents a general overview and allows for interaction with running
+simulations of all users. A statistics display, health status check and log
+message collection can be performed as well.</p>
+<p>Individual users may use UWM to maintain their own simulations, including
+launching new simulation using imported VIRL files. To aid with VIRL file
+management, external git repositories may be attached to each user, allowing
+the previewing, as well as launching of simulations defined by these files.</p>
+<div class="section" id="cli-overview">
+<h2>2.1. CLI Overview<a class="headerlink" href="#cli-overview" title="Permalink to this headline">¶</a></h2>
+<p>Contained within the VIRL-CORE package are the following programs:</p>
+<dl class="docutils">
+<dt>virl_openstack_client</dt>
+<dd>Thin interface to the OpenStack client API, not needed by the typical user</dd>
+<dt>virl_std_server</dt>
+<dd>Simulation server exposing remote management of a set of VIRL endpoints
+for use by the Graphical User Interface application</dd>
+<dt>virl_std_client</dt>
+<dd>Allows the control of the functionality available to the GUI application
+even from the command line; this is the designated tool for automation
+and the only script a typical VIRL end-user might want to use</dd>
+<dt>virl_uwm_server</dt>
+<dd>A web-based project, user, image, and flavor management application,
+controlling access to and retrieving information on the state of the STD
+server</dd>
+<dt>virl_uwm_client</dt>
+<dd>Provides a programmable CLI interface covering the functionality that is
+available to the user of the UWM rest interface, a subset of the available
+web interface that isn’t better covered by the STD API.</dd>
+</dl>
+<p>Each program can display help on its subcommands using:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>virl_program_name <span class="o">[</span>subcommand<span class="o">]</span> -h
+</pre></div>
+</div>
+<p>Each command has a set of script-global options, and is divided up into several
+subcommands with their own options. The global options precede the subcommand.</p>
+<p>Each program also has a –debug mode (the option is script-global)
+that enables (very) verbose logging and full reporting in case of a failure.
+Some logging is enabled by default, controlled by configuration; the –quiet
+flag can be used to supress all logging.</p>
+<p>An other program included with the package, virl_webmuxd, is another server
+facilitating SSH-based terminal connections into simulation nodes. In a typical
+VIRL deployment, this service is launched together with the uwm_server.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">2. Terminology and Overview</a><ul>
+<li><a class="reference internal" href="#cli-overview">2.1. CLI Overview</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="introduction.html"
+                        title="previous chapter">1. Introduction</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="clients.html"
+                        title="next chapter">3. VIRL-CLIENTS package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/overview.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="clients.html" title="3. VIRL-CLIENTS package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="introduction.html" title="1. Introduction"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">VIRL 0.10.35.35 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="README.html" >README</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Cisco Systems, Inc.
+All rights reserved..
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
+    </div>
+  </body>
+</html>

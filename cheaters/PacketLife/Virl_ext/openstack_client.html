@@ -1,0 +1,145 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>8. OpenStack Client &#8212; VIRL 0.10.35.35 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.10.35.35',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="9. VIRL User Workspace Management Server" href="uwm_server.html" />
+    <link rel="prev" title="7. Installation" href="installation.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="uwm_server.html" title="9. VIRL User Workspace Management Server"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="installation.html" title="7. Installation"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">VIRL 0.10.35.35 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="README.html" accesskey="U">README</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="openstack-client">
+<h1>8. OpenStack Client<a class="headerlink" href="#openstack-client" title="Permalink to this headline">¶</a></h1>
+<p>The OpenStack client is an API that VIRL uses exclusively when communicating
+with an OpenStack install. It covers required portions of the OpenStack
+identity, compute, image and network API. The CLI script virl_openstack_client
+exposes all supported commands to shell scripting.</p>
+<div class="section" id="using-the-cli-upload-a-new-image-to-openstack">
+<h2>8.1. Using the CLI - upload a new image to OpenStack<a class="headerlink" href="#using-the-cli-upload-a-new-image-to-openstack" title="Permalink to this headline">¶</a></h2>
+<p>You can add new router and server images to the OpenStack install easily.
+This is especially true for very large image files.
+Prepare the VM image in the QCOW2 format - kvm-img can be used for conversions.</p>
+<p>Please note that VIRL selects the image based on name only, and OpenStack
+allows multiple images with the same name to be present at once. Image creation
+does not replace an existing image of the same name, thus the previous version
+needs to be removed in order to ensure the correct image is loaded.</p>
+<p>As discussed above in the introduction, Cisco router images need properties
+set in order to function properly, so they must be provided as well.</p>
+<p>For example, to add a new CSR1000v image, this command may be used:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virl_openstack_client</span> <span class="o">--</span><span class="n">json</span> <span class="n">image</span><span class="o">-</span><span class="n">create</span> <span class="o">--</span><span class="n">access</span> <span class="n">private</span> \
+    <span class="o">--</span><span class="n">file</span> <span class="n">CSR1000v</span><span class="o">.</span><span class="n">myversion</span><span class="o">.</span><span class="n">qcow2</span> <span class="o">--</span><span class="n">name</span> <span class="n">myproject</span><span class="o">-</span><span class="n">CSR1000v</span><span class="o">-</span><span class="n">mine</span> \
+    <span class="o">--</span><span class="n">properties</span> <span class="n">serial</span><span class="o">=</span><span class="mi">2</span> <span class="n">config_disk_type</span><span class="o">=</span><span class="n">cdrom</span> \
+    <span class="n">hw_disk_bus</span><span class="o">=</span><span class="n">virtio</span> <span class="n">hw_vif_model</span><span class="o">=</span><span class="n">virtio</span> <span class="n">hw_cdrom_bus</span><span class="o">=</span><span class="n">ide</span>
+</pre></div>
+</div>
+<p>The output on success is the parsed image information as returned by OpenStack.
+The global –json flag will convert the retrieved data back into JSON before
+being output to stdout, enabling further automated processing of this data.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">8. OpenStack Client</a><ul>
+<li><a class="reference internal" href="#using-the-cli-upload-a-new-image-to-openstack">8.1. Using the CLI - upload a new image to OpenStack</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="installation.html"
+                        title="previous chapter">7. Installation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="uwm_server.html"
+                        title="next chapter">9. VIRL User Workspace Management Server</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/openstack_client.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="uwm_server.html" title="9. VIRL User Workspace Management Server"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="installation.html" title="7. Installation"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">VIRL 0.10.35.35 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="README.html" >README</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Cisco Systems, Inc.
+All rights reserved..
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
+    </div>
+  </body>
+</html>

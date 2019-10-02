@@ -1,0 +1,51 @@
+VIRL-CLIENTS package
+~~~~~~~~~~~~~~~~~~~~
+
+The VIRL-CLIENTS contains the following programs:
+
+virl_openstack_client
+  Thin interface to the OpenStack client API, not needed by the typical user
+
+virl_std_client
+  Allows the control of the functionality available to the GUI application
+  even from the command line; this is the designated tool for automation
+  and the only script a typical VIRL end-user might want to use
+
+virl_uwm_client
+  Provides a programmable CLI interface covering the functionality that is
+  available to the user of the UWM rest interface, a subset of the available
+  web interface that isn't better covered by the STD API.
+
+Install Clients
+===============
+
+Login to your VIRL server. The VIRL clients package is available under
+/var/www/download/.
+You can also download the package from your VIRL server's home page, clicking
+on the clients link.
+
+To install clients run command:
+
+.. code-block:: bash
+
+    sudo pip install VIRL_CLIENTS_*.whl
+
+Using Clients
+=============
+
+Examples:
+
+Get UWM server status.
+
+.. code-block:: bash
+
+    virl_uwm_client --url http://ip-of-my-virl-server:19400 \
+                    --username quest --password quest status
+
+Get STD server status:
+
+.. code-block:: bash
+
+    virl_std_client --url http://ip-of-my-virl-server:19399 \
+                    --username quest --password quest status
+
